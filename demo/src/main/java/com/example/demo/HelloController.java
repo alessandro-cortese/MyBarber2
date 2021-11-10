@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class HelloController {
+
     private FXMLLoader root;
     private Stage stage;
     private Scene scene;
