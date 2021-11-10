@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.RegisterScreen">
+   <children>
+      <VBox layoutX="26.0" layoutY="61.0" spacing="75.0">
+         <children>
+            <VBox spacing="25.0">
+               <children>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label minWidth="125.0" text="Nome" />
+                        <TextField />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label prefWidth="125.0" text="Cognome" />
+                        <TextField />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label prefWidth="125.0" text="Indirizzo eMail" />
+                        <TextField />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox spacing="25.0">
+               <children>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label prefWidth="125.0" text="Password" />
+                        <PasswordField />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label prefWidth="125.0" text="Conferma Password" />
+                        <PasswordField />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
