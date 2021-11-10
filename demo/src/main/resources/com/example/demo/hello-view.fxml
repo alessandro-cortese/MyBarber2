@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
             <children>
@@ -30,7 +30,7 @@
                                 <AnchorPane prefHeight="96.0" prefWidth="267.0">
                                     <children>
                                         <Button layoutX="65.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="137.0" text="Accedi" />
-                                        <Button layoutX="66.0" layoutY="49.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="137.0" text="Registrati" />
+                                        <Button layoutX="66.0" layoutY="49.0" mnemonicParsing="false" onAction="#switchToRegister" prefHeight="26.0" prefWidth="137.0" text="Registrati" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="230.0" prefWidth="267.0">
