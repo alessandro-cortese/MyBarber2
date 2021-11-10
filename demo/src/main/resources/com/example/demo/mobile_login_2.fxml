@@ -41,7 +41,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="20.0" layoutY="249.0" spacing="20.0">
@@ -73,32 +72,30 @@
                   <Insets left="10.0" />
                </opaqueInsets>
             </HBox>
-            <VBox maxWidth="-Infinity" spacing="20.0">
+            <VBox alignment="CENTER" maxWidth="-Infinity" spacing="20.0">
                <children>
                   <HBox maxWidth="-Infinity">
                      <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@ISPW%20Images/facebook_logo.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Button mnemonicParsing="false" text="Accedi con Facebook" />
+                        <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Accedi con Facebook">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../images/facebook_logo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </HBox>
                   <HBox maxWidth="-Infinity">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" text="Accedi con Google" />
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@ISPW%20Images/Google__G__Logo.svg.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </ImageView>
+                        <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Accedi con Google">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../images/google_logo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </HBox>
                </children>
@@ -108,7 +105,7 @@
       </VBox>
       <ImageView fitHeight="225.0" fitWidth="225.0" layoutX="58.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@ISPW%20Images/AppLogo.jpeg" />
+            <Image url="@../../../../../../../images/AppLogo.jpeg" />
          </image>
       </ImageView>
    </children>
