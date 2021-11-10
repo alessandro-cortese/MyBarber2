@@ -53,20 +53,16 @@
             <TextField prefHeight="26.0" prefWidth="294.0" text="Password" />
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="11.0" layoutY="358.0" spacing="35.0">
+      <VBox alignment="TOP_CENTER" layoutX="11.0" layoutY="356.0" spacing="35.0">
          <children>
             <HBox alignment="CENTER" maxWidth="-Infinity" spacing="170.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" text="Accedi">
+                  <Button mnemonicParsing="false" prefWidth="70.0" text="Accedi">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" text="Registrati">
-                     <padding>
-                        <Insets left="50.0" />
-                     </padding>
-                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefWidth="70.0" text="Registrati" />
                </children>
                <opaqueInsets>
                   <Insets left="10.0" />
@@ -76,7 +72,7 @@
                <children>
                   <HBox maxWidth="-Infinity">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Accedi con Facebook">
+                        <Button mnemonicParsing="false" text="Accedi con Facebook">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -88,7 +84,7 @@
                   </HBox>
                   <HBox maxWidth="-Infinity">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Accedi con Google">
+                        <Button mnemonicParsing="false" text="Accedi con Google">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
