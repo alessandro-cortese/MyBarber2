@@ -47,11 +47,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< Updated upstream
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-=======
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.BackController">
->>>>>>> Stashed changes
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="502.0" prefWidth="900.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
       <children>
@@ -97,14 +93,15 @@
               </rowConstraints>
             </GridPane>
             <Button layoutX="452.0" layoutY="550.0" mnemonicParsing="false" text="Iscriviti come barbiere" />
-<<<<<<< Updated upstream
-=======
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="18.0" onMouseClicked="#onBackClick" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../../Desktop/ISPW%20Images/back_button.png" />
-               </image>
-            </ImageView>
->>>>>>> Stashed changes
+            <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#onBackClick">
+               <graphic>
+                  <ImageView fitHeight="47.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../images/back_button.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
       </children>
     </AnchorPane>
   </children>

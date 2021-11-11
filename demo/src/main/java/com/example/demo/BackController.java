@@ -18,7 +18,7 @@ public class BackController {
     private Stage stage ;
     private Scene scene ;
 
-    private BackController() {
+    public BackController() {
         prevSceneName = "com/example/demo/open_screen.fxml" ;
     }
 
