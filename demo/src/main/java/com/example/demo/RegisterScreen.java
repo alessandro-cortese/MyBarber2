@@ -13,7 +13,7 @@ public class RegisterScreen {
 
     @FXML
     public void onBackPressed(ActionEvent event) throws IOException {
-            FXMLLoader nextScene = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/hello-view.fxml")) ;
+            FXMLLoader nextScene = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/open_screen.fxml")) ;
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(nextScene.load());
             stage.setScene(scene);

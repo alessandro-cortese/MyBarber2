@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class HelloController {
+public class OpenScreenController {
 
     private FXMLLoader root;
     private Stage stage;
@@ -22,11 +22,8 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    public void switchToRegister(ActionEvent event) throws Exception{
-        root = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/register_screen.fxml")) ;
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root.load());
-        stage.setScene(scene);
-        stage.show();
+    @FXML
+    public void onStartClick(ActionEvent event) {
+        
     }
 }
