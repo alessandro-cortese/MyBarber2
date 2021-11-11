@@ -5,7 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<<<<<<< Updated upstream
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.OpenScreenController">
+=======
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.OpenScreenController">
+>>>>>>> Stashed changes
    <children>
       <ImageView fitHeight="498.0" fitWidth="450.0" layoutX="28.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,7 +28,11 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
+<<<<<<< Updated upstream
             <Button mnemonicParsing="false" onAction="#onStartClick" text="Inizia" />
+=======
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartClick" text="Inizia" />
+>>>>>>> Stashed changes
          </children>
       </VBox>
    </children>
