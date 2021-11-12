@@ -10,9 +10,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.OpenScreenController">
    <children>
-      <ImageView fitHeight="498.0" fitWidth="450.0" layoutX="28.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="498.0" fitWidth="450.0" layoutX="28.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../images/AppLogo.jpeg" />
+            <Image url="@../../../../../../../images/AppLogo.png" />
          </image>
       </ImageView>
       <VBox alignment="CENTER" layoutX="521.0" layoutY="74.0" spacing="75.0">
