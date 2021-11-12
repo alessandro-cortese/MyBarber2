@@ -104,9 +104,9 @@
          </children>
       </VBox>
       <Text layoutX="68.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ragionare su utilizzo di due bottoni di Registrazione anzichè di unico bottone" />
-      <ImageView fitHeight="436.0" fitWidth="439.0" layoutX="14.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="436.0" fitWidth="439.0" layoutX="14.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../images/AppLogo.jpeg" />
+            <Image url="@../../../../../../../images/AppLogo.png" />
          </image>
       </ImageView>
       <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBackClicked" style="-fx-background-color: white;">
