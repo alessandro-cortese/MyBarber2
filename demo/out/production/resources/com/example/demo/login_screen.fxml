@@ -93,7 +93,7 @@
               </rowConstraints>
             </GridPane>
             <Button layoutX="452.0" layoutY="550.0" mnemonicParsing="false" text="Iscriviti come barbiere" />
-            <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#onBackClick">
+            <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#onBackClick" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="47.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
