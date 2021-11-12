@@ -8,23 +8,25 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BackController {
 
     private static BackController backController ;
-    private String prevSceneName ;
+    private final ArrayList<String> prevSceneStack;
 
     private FXMLLoader root ;
     private Stage stage ;
     private Scene scene ;
 
     public BackController() {
-        prevSceneName = "com/example/demo/open_screen.fxml" ;
+        prevSceneStack = new ArrayList<>() ;
+        prevSceneStack.add("com/example/demo/open_screen.fxml") ;
     }
 
     @FXML
     public void onBackClick(ActionEvent event) throws IOException {
-        root = new FXMLLoader(getClass().getClassLoader().getResource(prevSceneName)) ;
+        root = new FXMLLoader(getClass().getClassLoader().getResource(prevSceneStack.remove(prevSceneStack.size() - 1))) ;
         stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
         scene = new Scene(root.load()) ;
         stage.setScene(scene) ;
@@ -37,11 +39,7 @@ public class BackController {
         return backController ;
     }
 
-    public void setPrevScene(String prevSceneName) {
-        this.prevSceneName = prevSceneName ;
-    }
-
-    public String getPrevSceneName() {
-        return this.prevSceneName ;
+    public void pushPrevScene(String prevSceneName) {
+        this.prevSceneStack.add(prevSceneName) ;
     }
 }
