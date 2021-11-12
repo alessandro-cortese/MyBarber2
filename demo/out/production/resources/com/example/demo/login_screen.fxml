@@ -46,12 +46,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.BackController">
    <children>
-      <ImageView fitHeight="407.0" fitWidth="381.0" layoutX="22.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="240.0" fitWidth="305.0" layoutX="330.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../images/AppLogo.jpeg" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" layoutX="472.0" layoutY="58.0" spacing="75.0">
+      <VBox alignment="CENTER" layoutX="263.0" layoutY="242.0" spacing="75.0">
          <children>
             <VBox spacing="25.0">
                <children>
@@ -60,46 +60,24 @@
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="100.0" text="Email" />
-                              <TextField prefHeight="24.0" prefWidth="200.0" />
+                              <TextField prefHeight="24.0" prefWidth="250.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="100.0" text="Password" />
-                              <PasswordField prefHeight="26.0" prefWidth="200.0" />
+                              <PasswordField prefHeight="26.0" prefWidth="250.0" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="Entra" />
+                        <Button mnemonicParsing="false" prefWidth="100.0" text="Accedi" />
                         <Hyperlink text="Hai dimenticato la passord?" />
+                        <Button mnemonicParsing="false" text="Continua senza Accedere" />
                      </children>
                   </VBox>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" spacing="10.0">
-               <children>
-                  <Label text="Oppure" />
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Accedi con Google">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../images/google_logo.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Accedi con Facebook">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../images/facebook_logo.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
             </VBox>
             <VBox alignment="CENTER" spacing="5.0">
