@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
@@ -41,6 +40,7 @@
                         <MenuItem mnemonicParsing="false" text="Le Tue Notifiche" />
                         <MenuItem mnemonicParsing="false" text="La tua Zona Personale" />
                         <MenuItem mnemonicParsing="false" text="Carte Fedeltà" />
+                        <MenuItem mnemonicParsing="false" text="Disconnettiti" />
                      </items>
                   </Menu>
               </menus>
