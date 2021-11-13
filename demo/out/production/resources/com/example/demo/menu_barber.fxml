@@ -20,39 +20,39 @@
                </image>
             </ImageView>
             <MenuBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="1163.0" style="-fx-background-color: white;">
-              <menus>
-                <Menu mnemonicParsing="false" text="Gestisci Appuntamento">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Prenota Appuntamento" />
-                        <MenuItem mnemonicParsing="false" text="Vedi i tuoi appuntramenti" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Prodotti">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Compra Prodotto" />
-                        <MenuItem mnemonicParsing="false" text="Storico Acquisti" />
-                  </items>
-                </Menu>
+               <menus>
+                  <Menu mnemonicParsing="false" text="Gestisci Centro">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="I tuoi Centri" />
+                        <MenuItem mnemonicParsing="false" text="Aggiungi Centro" />
+                        <MenuItem mnemonicParsing="false" text="Aggiungi Servizio" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Vedi Appuntamenti">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Aggiungi" />
+                        <MenuItem mnemonicParsing="false" text="Ordini" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Vendi Prodotto" />
                   <Menu mnemonicParsing="false" text="Help" />
                   <Menu mnemonicParsing="false" text="Il Mio Profilo">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="I Tuoi Preferiti" />
+                        <MenuItem mnemonicParsing="false" text="La Tua Area Personale" />
                         <MenuItem mnemonicParsing="false" text="Le Tue Notifiche" />
-                        <MenuItem mnemonicParsing="false" text="La tua Zona Personale" />
-                        <MenuItem mnemonicParsing="false" text="Carte Fedeltà" />
-                        <MenuItem mnemonicParsing="false" text="Disconnettiti" />
+                        <MenuItem mnemonicParsing="false" text="Logout" />
                      </items>
                   </Menu>
-              </menus>
+               </menus>
             </MenuBar>
          </children>
       </HBox>
    </top>
    <center>
       <SubScene height="729.0" width="1278.0" BorderPane.alignment="CENTER">
-        <root>
-          <Region />
-        </root>
+         <root>
+            <Region />
+         </root>
       </SubScene>
    </center>
 </BorderPane>
