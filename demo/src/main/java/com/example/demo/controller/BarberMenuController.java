@@ -10,6 +10,9 @@ public class BarberMenuController {
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
-        BackController.getInstance().onBackClick((Node)event.getSource());
+        Node sourceNode = (Node) event.getSource() ;
+        if (sourceNode.getId().equals("logoutButton")) {
+            BackController.getInstance().onBackClick((Node) event.getSource());
+        }
     }
 }
