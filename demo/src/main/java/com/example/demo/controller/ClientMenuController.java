@@ -28,6 +28,7 @@ public class ClientMenuController {
             BackController.getInstance().onBackClick(sourceNode);
         }
         else {
+            //Gestione Home
             clientScreenChanger.getChildren().removeAll(clientScreenChanger.getChildren());
             FXMLLoader seeAppointmentsLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_HOME_SCREEN_NAME));
             clientScreenChanger.getChildren().add(seeAppointmentsLoader.load());
