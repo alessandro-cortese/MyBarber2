@@ -9,14 +9,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1280.0" spacing="260.0">
          <children>
             <VBox prefHeight="700.0" prefWidth="185.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="246.0" prefWidth="193.0" style="-fx-background-color: grau;" text="Descrizione che fa figo" textAlignment="CENTER" />
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="246.0" prefWidth="193.0" text="Descrizione che fa figo" textAlignment="CENTER" />
                   <ImageView fitHeight="150.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../images/google_logo.png" />

@@ -1,6 +1,5 @@
-package com.example.demo;
+package com.example.demo.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,15 +18,15 @@ public class BackController {
     private Stage stage ;
     private Scene scene ;
 
-    public BackController() {
+    private BackController() {
         prevSceneStack = new ArrayList<>() ;
         prevSceneStack.add("com/example/demo/open_screen.fxml") ;
     }
 
     @FXML
-    public void onBackClick(ActionEvent event) throws IOException {
+    public void onBackClick(Node sourceNode) throws IOException {
         root = new FXMLLoader(getClass().getClassLoader().getResource(prevSceneStack.remove(prevSceneStack.size() - 1))) ;
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+        stage = (Stage)(sourceNode).getScene().getWindow() ;
         scene = new Scene(root.load()) ;
         stage.setScene(scene) ;
     }

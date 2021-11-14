@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.RegisterScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.RegisterScreenController">
    <children>
       <VBox alignment="CENTER" layoutX="472.0" layoutY="60.0" spacing="30.0">
          <children>
@@ -62,15 +62,15 @@
             </VBox>
             <HBox alignment="CENTER" spacing="100.0">
                <children>
-                  <RadioButton mnemonicParsing="false" selected="true" text="Cliente">
+                  <RadioButton fx:id="clientTypeRadioButton" mnemonicParsing="false" selected="true" text="Cliente">
                      <toggleGroup>
                         <ToggleGroup fx:id="userTypeRadioGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Barbiere" toggleGroup="$userTypeRadioGroup" />
+                  <RadioButton fx:id="barberTypeRadioButton" mnemonicParsing="false" text="Barbiere" toggleGroup="$userTypeRadioGroup" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Registrati">
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" text="Registrati">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

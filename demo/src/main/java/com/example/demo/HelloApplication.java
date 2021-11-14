@@ -12,6 +12,9 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/open_screen.fxml")) ;
         Scene scene = new Scene(root.load());
+
+        stage.setResizable(false);
+
         stage.setTitle("MyBarber");
         stage.setScene(scene);
         stage.show();
