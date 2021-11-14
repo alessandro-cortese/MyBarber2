@@ -24,7 +24,7 @@ public class RegisterScreenController {
     private String THIS_SCENE_NAME = "com/example/demo/register_screen.fxml" ;
 
     public static final String CLIENT_MENU_SCREEN_NAME = "com/example/demo/client_menu.fxml" ;
-    public static final String BARBER_MENU_SCREEN_NAME = "com/example/demo/barber_menu.fxml" ;
+    public static final String BARBER_MENU_SCREEN_NAME = "com/example/demo/barber_menu.fxml" ; //con final indico la variabile è costante
 
     @FXML
     private Button registerButton;
