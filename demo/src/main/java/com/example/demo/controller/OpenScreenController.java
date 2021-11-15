@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,10 +17,14 @@ public class OpenScreenController {
 
     @FXML
     public void onStartClick(ActionEvent event) throws IOException {
+        //Aggiunta sul BackStack
+        Node sourceNode = (Node) event.getSource() ;
         BackController backController = BackController.getInstance() ;
-        backController.pushPrevScene("com/example/demo/open_screen.fxml");
+        backController.pushPrevScene(sourceNode.getScene());
+
+        //Cambio Scena
         root = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/login_screen.fxml")) ;
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+        stage = (Stage)(sourceNode.getScene().getWindow()) ;
         scene = new Scene(root.load()) ;
         stage.setScene(scene) ;
     }

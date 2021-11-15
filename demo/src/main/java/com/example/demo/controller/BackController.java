@@ -1,44 +1,54 @@
 package com.example.demo.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class BackController {
 
     private static BackController backController ;
-    private final ArrayList<String> prevSceneStack;
+    private final ArrayList<Scene> prevSceneStack;
 
-    private FXMLLoader root ;
     private Stage stage ;
     private Scene scene ;
 
     private BackController() {
+        /*
+            Creazione dello stack di gestione del back.
+            Stack di Scene che vengono riaggiunte direttamente sullo Stage nella onBackClick
+         */
         prevSceneStack = new ArrayList<>() ;
-        prevSceneStack.add("com/example/demo/open_screen.fxml") ;
     }
 
     @FXML
-    public void onBackClick(Node sourceNode) throws IOException {
-        root = new FXMLLoader(getClass().getClassLoader().getResource(prevSceneStack.remove(prevSceneStack.size() - 1))) ;
+    public void onBackClick(Node sourceNode) {
+        /*
+            1. Prendo lo Stage dove si trova il nodo che ha causato l'evento
+            2. Prendo la scena sulla cima dello stack che è la scena che devo reinserire sullo Stage
+            3. Reinserisco la Scena prelevata sullo Stage
+         */
         stage = (Stage)(sourceNode).getScene().getWindow() ;
-        scene = new Scene(root.load()) ;
+        scene = prevSceneStack.remove(prevSceneStack.size() - 1) ;
         stage.setScene(scene) ;
     }
 
     public static BackController getInstance() {
+        //Pattern Singleton
         if (backController == null) {
             backController = new BackController() ;
         }
         return backController ;
     }
 
-    public void pushPrevScene(String prevSceneName) {
+    public void pushPrevScene(Scene prevSceneName) {
+        /*
+            Invocata quando c'è il cambio schermata da una Scena verso l'altra;
+            Il controller della schermata attuale aggiunge la Scena e naviga verso la successiva
+         */
+
         this.prevSceneStack.add(prevSceneName) ;
     }
 }

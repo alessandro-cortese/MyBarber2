@@ -26,15 +26,17 @@ public class LoginScreenController {
 
 
     @FXML
-    public void onBackClicked(ActionEvent event) throws IOException {
+    public void onBackClicked(ActionEvent event) {
         BackController.getInstance().onBackClick((Node)event.getSource());
     }
 
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws  IOException {
-        BackController.getInstance().pushPrevScene(THIS_SCENE_NAME);
         Node eventSource = (Node)event.getSource() ;
+        BackController.getInstance().pushPrevScene(eventSource.getScene());
+
+        //Scelta Prossima Scena su base bottone cliccato
         String nextSceneName ;
         nextSceneName = switch (eventSource.getId()) {
             case "registerButton" ->  REGISTER_SCREEN_NAME;
@@ -42,10 +44,15 @@ public class LoginScreenController {
             default -> THIS_SCENE_NAME ;
         } ;
 
+        //Caricamento prossima Scena
         root = new FXMLLoader(getClass().getClassLoader().getResource(nextSceneName)) ;
         stage = (Stage)(eventSource).getScene().getWindow() ;
         scene = new Scene(root.load()) ;
-        (new EnterAsUserTypeController()).enterAsUser(EnterAsUserTypeController.CLIENT_TYPE, scene);
+
+        if (nextSceneName.equals(CLIENT_MENU_SCREEN_NAME)) {
+            //Imposto la home della menu_screen
+            (new EnterAsUserTypeController()).enterAsUser(EnterAsUserTypeController.CLIENT_TYPE, scene);
+        }
         stage.setScene(scene) ;
     }
 

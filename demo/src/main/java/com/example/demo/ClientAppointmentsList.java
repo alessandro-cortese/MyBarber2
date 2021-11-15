@@ -2,7 +2,6 @@ package com.example.demo;
 
 import javafx.collections.ObservableListBase;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
 
 public class ClientAppointmentsList extends ObservableListBase<Node> {
 

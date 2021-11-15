@@ -40,7 +40,7 @@ public class RegisterScreenController {
 
 
     @FXML
-    public void onBackClicked(ActionEvent event) throws IOException {
+    public void onBackClicked(ActionEvent event) {
         BackController.getInstance().onBackClick((Node)event.getSource());
     }
 
@@ -54,15 +54,19 @@ public class RegisterScreenController {
     }
 
     private void onRegisterButtonClicked(Node sourceNode) throws IOException {
-        BackController.getInstance().pushPrevScene(THIS_SCENE_NAME);
+        BackController.getInstance().pushPrevScene(sourceNode.getScene());
+        //BackController.getInstance().pushPrevScene(sourceNode.getScene());
 
+        //Vedo tipo di utente selezionato in base al RadioButton
         int userType = clientTypeRadioButton.isSelected() ? CLIENT_TYPE : BARBER_TYPE ;
-
         String nextSceneName = clientTypeRadioButton.isSelected() ? CLIENT_MENU_SCREEN_NAME : BARBER_MENU_SCREEN_NAME ;
 
+        //Scelgo prossima scena e la imposto nello Stage
         root = new FXMLLoader(getClass().getClassLoader().getResource(nextSceneName)) ;
         stage = (Stage)(sourceNode).getScene().getWindow() ;
         scene = new Scene(root.load()) ;
+
+        //Carico la HomeCorretta nella VBox del MenuScreen
         (new EnterAsUserTypeController()).enterAsUser(userType, scene);
         stage.setScene(scene) ;
     }
