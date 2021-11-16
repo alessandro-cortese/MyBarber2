@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="TOP_CENTER" layoutY="91.0" prefHeight="634.0" prefWidth="1280.0" spacing="50.0">
          <children>
-            <VBox prefHeight="634.0" prefWidth="402.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
+            <VBox alignment="CENTER" prefHeight="634.0" prefWidth="402.0" spacing="25.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
                <children>
-                  <Label prefHeight="66.0" prefWidth="383.0" text="Prenota un &#10;Appuntamento">
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="RIGHT" prefHeight="66.0" prefWidth="390.0" text="Prenota un &#10;Appuntamento" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -30,7 +30,7 @@
                         <Image url="@../../../../../../../images/prenota_taglio.jpg" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="434.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Prenota Appuntamento">
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="56.0" prefWidth="295.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Prenota Appuntamento">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -43,9 +43,9 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <VBox prefHeight="656.0" prefWidth="308.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
+            <VBox alignment="CENTER" prefHeight="656.0" prefWidth="308.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
                <children>
-                  <Label prefHeight="51.0" prefWidth="388.0" text="Carte Fedeltà">
+                  <Label alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="388.0" text="Carte Fedeltà">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -59,16 +59,16 @@
                         <Image url="@../../../../../../../images/carte_fedeltà.jpeg" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="381.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Vedi Carte Fedeltà">
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="228.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Vedi Carte Fedeltà">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                </children>
             </VBox>
-            <VBox prefHeight="690.0" prefWidth="337.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
+            <VBox alignment="CENTER" prefHeight="655.0" prefWidth="351.0" spacing="25.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
                <children>
-                  <Label prefHeight="51.0" prefWidth="388.0" text="Compra un Prodotto">
+                  <Label alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="388.0" text="Compra un Prodotto">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -77,12 +77,12 @@
                      <font>
                         <Font size="24.0" />
                      </font></Label>
-                  <ImageView fitHeight="312.0" fitWidth="349.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="221.0" fitWidth="349.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../images/prodotti_barbiere.jpg" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="435.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Compra Prodotti">
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Compra Prodotti">
                      <font>
                         <Font size="18.0" />
                      </font>
