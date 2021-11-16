@@ -11,15 +11,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.text.Font?>
 
 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" spacing="15.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="800.0" prefWidth="266.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" text="Back">
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
                <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../images/back_button.png" />
+                     </image></ImageView>
                </graphic>
             </Button>
             <HBox alignment="CENTER" prefHeight="36.0" prefWidth="216.0" spacing="10.0">
@@ -29,7 +32,7 @@
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@search_icon.png" />
+                              <Image url="@../../../../../../../images/search_icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -44,12 +47,31 @@
       </VBox>
       <AnchorPane prefHeight="800.0" prefWidth="998.0">
          <children>
-            <ImageView fitHeight="218.0" fitWidth="307.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="431.0" layoutY="29.0" prefHeight="75.0" prefWidth="406.0" text="Label" />
-            <ChoiceBox layoutX="559.0" layoutY="139.0" prefWidth="150.0" />
-            <Label layoutX="21.0" layoutY="433.0" prefHeight="346.0" prefWidth="950.0" text="Label" />
-            <Button layoutX="437.0" layoutY="300.0" mnemonicParsing="false" text="Aggiungi a Carrello" />
-            <Label layoutX="437.0" layoutY="240.0" text="Label" />
+            <HBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="370.0" prefWidth="970.0" spacing="100.0">
+               <children>
+                  <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../images/pruduct_image_example.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER_LEFT" spacing="75.0">
+                     <children>
+                        <Label prefHeight="75.0" prefWidth="556.0" text="Nome Prodotto">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox prefWidth="150.0" />
+                        <Label text="Prezzo prodotto" />
+                        <Button mnemonicParsing="false" text="Aggiungi a Carrello" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label alignment="TOP_LEFT" layoutX="24.0" layoutY="431.0" prefHeight="346.0" prefWidth="960.0" text="&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut&#10;labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris &#10;nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit &#10;esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in &#10;culpa qui officia deserunt mollit anim id est laborum.&quot;&#10;" textOverrun="CLIP">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
          </children>
       </AnchorPane>
    </children>
