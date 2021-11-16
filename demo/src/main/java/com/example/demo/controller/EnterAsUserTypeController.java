@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -18,19 +19,17 @@ public class EnterAsUserTypeController {
     public static final String BARBER_SCREEN_CHANGER = "barberScreenChanger" ;
 
     public void enterAsUser(int userType, Scene mainScene) throws IOException {
-        VBox container ;
+        BorderPane container = (BorderPane) mainScene.getRoot() ; ;
         String mainScreen ;
         if (userType == CLIENT_TYPE) {
-            container = (VBox) mainScene.lookup("#" + CLIENT_SCREEN_CHANGER) ;
             mainScreen = CLIENT_HOME_SCREEN ;
         }
         else {
-            container = (VBox) mainScene.lookup("#" + BARBER_SCREEN_CHANGER) ;
             mainScreen = BARBER_HOME_SCREEN ;
         }
         if (container != null) {
             FXMLLoader userHomeScreen = new FXMLLoader(getClass().getClassLoader().getResource(mainScreen)) ;
-            container.getChildren().add(userHomeScreen.load()) ;
+            container.setCenter(userHomeScreen.load());
         }
     }
 }
