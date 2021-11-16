@@ -37,7 +37,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Prodotti">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Compra Prodotto" />
+                    <MenuItem fx:id="buyProductItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Compra Prodotto" />
                         <MenuItem mnemonicParsing="false" text="Carrello" />
                         <MenuItem mnemonicParsing="false" text="Storico Acquisti" />
                   </items>
