@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1289.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox layoutX="28.0" layoutY="167.0" prefHeight="552.0" prefWidth="1206.0" spacing="50.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="167.0">
+      <HBox layoutX="63.0" layoutY="89.0" prefHeight="552.0" prefWidth="1206.0" spacing="50.0" AnchorPane.bottomAnchor="159.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="89.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="590.0" spacing="20.0" style="-fx-border-color: black; -fx-border-radius: 25; -fx-background-color: white;">
                <padding>
