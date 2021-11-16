@@ -27,12 +27,12 @@
                   </ImageView>
                </graphic>
             </Button>
-            <MenuBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="1163.0" style="-fx-background-color: white;">
+            <MenuBar fx:id="barberMenuBar" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="1163.0" style="-fx-background-color: white;">
                <menus>
                   <Menu mnemonicParsing="false" text="Gestisci Centro">
                      <items>
                         <MenuItem mnemonicParsing="false" text="I tuoi Centri" />
-                        <MenuItem mnemonicParsing="false" text="Aggiungi Centro" />
+                        <MenuItem fx:id="addCenter" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Aggiungi Centro" />
                         <MenuItem mnemonicParsing="false" text="Aggiungi Servizio" />
                      </items>
                   </Menu>
