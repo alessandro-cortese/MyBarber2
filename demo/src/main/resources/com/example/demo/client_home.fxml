@@ -12,20 +12,20 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1280.0" spacing="50.0">
+      <HBox alignment="TOP_CENTER" layoutY="91.0" prefHeight="634.0" prefWidth="1280.0" spacing="50.0">
          <children>
-            <VBox prefHeight="700.0" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
+            <VBox prefHeight="634.0" prefWidth="402.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
                <children>
-                  <Label prefHeight="73.0" prefWidth="346.0" text="Prenota un &#10;Appuntamento">
+                  <Label prefHeight="66.0" prefWidth="383.0" text="Prenota un &#10;Appuntamento">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="357.0" prefWidth="346.0" text="prenota un taglio nei saloni &#10;della tua zona oppure cerca &#10;in base al servizio disponibile!&#10;&#10;" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="144.0" prefWidth="393.0" text="prenota un taglio nei saloni &#10;della tua zona oppure cerca &#10;in base al servizio disponibile!&#10;&#10;" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
-                  <ImageView fitHeight="223.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="225.0" fitWidth="430.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../images/prenota_taglio.jpg" />
                      </image>
@@ -43,18 +43,18 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <VBox prefHeight="700.0" prefWidth="166.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
+            <VBox prefHeight="656.0" prefWidth="308.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
                <children>
                   <Label prefHeight="51.0" prefWidth="388.0" text="Carte Fedeltà">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="349.0" prefWidth="322.0" text="Vedi le tue carte fedeltà&#10;presso i centri salone &#10;di fiducia!&#10;">
+                  <Label alignment="CENTER" prefHeight="166.0" prefWidth="339.0" text="Vedi le tue carte fedeltà&#10;presso i centri salone &#10;di fiducia!&#10;">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
-                  <ImageView fitHeight="241.0" fitWidth="335.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="229.0" fitWidth="357.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../images/carte_fedeltà.jpeg" />
                      </image>
@@ -66,18 +66,18 @@
                   </Button>
                </children>
             </VBox>
-            <VBox prefHeight="700.0" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
+            <VBox prefHeight="690.0" prefWidth="337.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;">
                <children>
                   <Label prefHeight="51.0" prefWidth="388.0" text="Compra un Prodotto">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="349.0" prefWidth="348.0" text="Entra nella sezione &#10;Prodotti e scopri &#10;tutte le offerte per te!">
+                  <Label alignment="CENTER" prefHeight="153.0" prefWidth="425.0" text="Entra nella sezione &#10;Prodotti e scopri &#10;tutte le offerte per te!">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
-                  <ImageView fitHeight="485.0" fitWidth="348.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="312.0" fitWidth="349.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../images/barber_product.jpeg" />
                      </image>
