@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.ObservableListNode;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ public class ClientMenuController {
     private final String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/buy_product.fxml";
     private final String CLIENT_HOME_SCREEN_NAME = "com/example/demo/client_home.fxml" ;
     private final String CLIENT_CART_SCREEN_NAME = "com/example/demo/client_cart.fxml";
+    private final String USER_AREA_SCREEN_NAME = "com/example/demo/user_area.fxml" ;
 
     private final String CLIENT_APPOINTMENT_ITEM = "com/example/demo/client_see_appointments_list_item.fxml" ;
     private final String BUY_PRODUCT_ITEM = "com/example/demo/buy_product_list_item.fxml";
@@ -27,7 +30,8 @@ public class ClientMenuController {
     @FXML
     private MenuBar clientMenuBar ;
 
-    @FXML MenuItem clientCartItem ;
+    @FXML private MenuItem clientCartItem ;
+    @FXML private MenuItem userAreaItem ;
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
@@ -67,9 +71,11 @@ public class ClientMenuController {
             onLoadListItems(listView, CART_PRODUCT_ITEM);
         }
 
+        else if (userAreaItem == sourceItem) {
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(USER_AREA_SCREEN_NAME))).load();
+        }
+
         clientBorderPane.setCenter(newCenterNode);
-
-
     }
 
     private void onLoadListItems(ListView listView, String itemResource) throws IOException {

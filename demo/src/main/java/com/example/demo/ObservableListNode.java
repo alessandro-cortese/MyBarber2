@@ -3,20 +3,28 @@ package com.example.demo;
 import javafx.collections.ObservableListBase;
 import javafx.scene.Node;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class ObservableListNode extends ObservableListBase<Node> {
 
-    private Node[] list ;
+    private ArrayList<Node> list ;
     public ObservableListNode(Node...arrayParam) {
-        this.list = arrayParam ;
+        list = new ArrayList<Node>() ;
+        Collections.addAll(list, arrayParam);
     }
 
     @Override
     public Node get(int index) {
-        return list[index];
+        return list.get(index);
     }
 
     @Override
     public int size() {
-        return list.length;
+        return list.size();
+    }
+
+    public void removeItem(Node removeNode) {
+        list.remove(removeNode) ;
     }
 }
