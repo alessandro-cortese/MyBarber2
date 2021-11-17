@@ -65,11 +65,6 @@ public class ClientMenuController {
             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCREEN_NAME))).load();
             listView = (ListView) newCenterNode.lookup("#cartListView");
             onLoadListItems(listView, CART_PRODUCT_ITEM);
-
-            Scene myScene = new Scene((new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/prova_time_picker.fxml"))).load()) ;
-            Stage myStage = new Stage() ;
-            myStage.setScene(myScene);
-            myStage.show();
         }
 
         clientBorderPane.setCenter(newCenterNode);

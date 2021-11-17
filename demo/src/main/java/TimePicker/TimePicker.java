@@ -1,4 +1,4 @@
-package com.example.demo;
+package TimePicker;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class TimePicker extends TextInputDialog {
 
-    private String TIME_PICKER_RES = "com/example/demo/time_picker.fxml" ;
+    private String TIME_PICKER_RES = "TimePicker/time_picker.fxml";
     private String HOUR_SLIDER_ID = "hourSlider" ;
     private String MINUTE_SLIDER_ID = "minuteSlider" ;
 

@@ -1,17 +1,16 @@
-package com.example.demo.controller;
+package TimePicker;
 
-import com.example.demo.TimePicker;
-import javafx.event.ActionEvent;
+import TimePicker.TimePicker;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
-public class ProvaTimePicker {
+public class TimePickerProvaController {
 
     @FXML
     public void onChangeTime(MouseEvent event) throws IOException {
-        ((TextField) event.getSource()).setText((new TimePicker(7,12)).getTime());
+        ((TextField) event.getSource()).setText((new TimePicker(0,23)).getTime());
     }
 }
