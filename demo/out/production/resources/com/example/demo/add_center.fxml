@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1289.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1289.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.AddBarberCenterController">
    <children>
       <Label layoutX="51.0" layoutY="65.0" prefHeight="39.0" prefWidth="270.0" text="Aggiungi Centro">
          <font>
@@ -102,7 +102,7 @@
             </HBox>
          </children>
       </HBox>
-      <Button layoutX="1033.0" layoutY="589.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="191.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Continua">
+      <Button fx:id="continueButton" layoutX="1033.0" layoutY="589.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="74.0" prefWidth="191.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Continua">
          <font>
             <Font size="18.0" />
          </font>
