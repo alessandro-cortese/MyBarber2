@@ -1,15 +1,15 @@
 package com.example.demo.controller;
 
-import com.example.demo.ClientAppointmentsList;
+import com.example.demo.ObservableListNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -65,9 +65,16 @@ public class ClientMenuController {
             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCREEN_NAME))).load();
             listView = (ListView) newCenterNode.lookup("#cartListView");
             onLoadListItems(listView, CART_PRODUCT_ITEM);
+
+            Scene myScene = new Scene((new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/prova_time_picker.fxml"))).load()) ;
+            Stage myStage = new Stage() ;
+            myStage.setScene(myScene);
+            myStage.show();
         }
 
         clientBorderPane.setCenter(newCenterNode);
+
+
     }
 
     private void onLoadListItems(ListView listView, String itemResource) throws IOException {
@@ -75,7 +82,7 @@ public class ClientMenuController {
         for (int i = 0 ; i < 10 ; i++) {
             nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(itemResource))).load() ;
         }
-        ClientAppointmentsList clientAppointmentsList = new ClientAppointmentsList(nodesList);
+        ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
         listView.setItems(clientAppointmentsList);
     }
 }

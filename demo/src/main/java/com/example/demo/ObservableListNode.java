@@ -3,10 +3,10 @@ package com.example.demo;
 import javafx.collections.ObservableListBase;
 import javafx.scene.Node;
 
-public class ClientAppointmentsList extends ObservableListBase<Node> {
+public class ObservableListNode extends ObservableListBase<Node> {
 
     private Node[] list ;
-    public ClientAppointmentsList(Node...arrayParam) {
+    public ObservableListNode(Node...arrayParam) {
         this.list = arrayParam ;
     }
 
