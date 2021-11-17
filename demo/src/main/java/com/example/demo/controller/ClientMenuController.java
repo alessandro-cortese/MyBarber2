@@ -6,12 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
@@ -20,7 +18,7 @@ public class ClientMenuController {
     private final String SEE_APPOINTMENTS_SCREEN_NAME = "com/example/demo/client_see_appointments.fxml" ;
     private final String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/buy_product.fxml";
     private final String CLIENT_HOME_SCREEN_NAME = "com/example/demo/client_home.fxml" ;
-    private final String CLIENT_CART_SCREEN_NAME = "com/example/demo/client_cart.fxml" ;
+    private final String CLIENT_CART_SCREEN_NAME = "com/example/demo/client_cart.fxml";
 
     private final String CLIENT_APPOINTMENT_ITEM = "com/example/demo/client_see_appointments_list_item.fxml" ;
     private final String BUY_PRODUCT_ITEM = "com/example/demo/buy_product_list_item.fxml";
@@ -28,6 +26,8 @@ public class ClientMenuController {
 
     @FXML
     private MenuBar clientMenuBar ;
+
+    @FXML MenuItem clientCartItem ;
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
@@ -61,7 +61,7 @@ public class ClientMenuController {
             onLoadListItems(listView, BUY_PRODUCT_ITEM);
         }
 
-        else if ("clientCartItem".equals(sourceItem.getId())) {
+        else if (clientCartItem == sourceItem) {
             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCREEN_NAME))).load();
             listView = (ListView) newCenterNode.lookup("#cartListView");
             onLoadListItems(listView, CART_PRODUCT_ITEM);
