@@ -46,7 +46,7 @@ public class BarberMenuController {
         MenuItem sourceItem = (MenuItem) event.getSource() ;
         BorderPane barberBorderPane = (BorderPane) barberMenuBar.getScene().getRoot() ;
         Parent newCenterNode = switch (sourceItem.getId()) {
-            case "addCenter" -> (new FXMLLoader(getClass().getClassLoader().getResource(ADD_BARBER_SCREEN_NAME))).load();
+            case "addCenterItem" -> (new FXMLLoader(getClass().getClassLoader().getResource(ADD_BARBER_SCREEN_NAME))).load();
             case "userAreaItem" -> (new FXMLLoader(getClass().getClassLoader().getResource(USER_AREA_SCREEN_NAME))).load();
             case "manageProductsItem" -> (new FXMLLoader(getClass().getClassLoader().getResource(BARBER_ADD_PRODUCT_SCREEN_NAME))).load();
             default -> null;
