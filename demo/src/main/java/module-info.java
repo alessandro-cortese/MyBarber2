@@ -16,4 +16,6 @@ module com.example.demo {
     opens com.example.demo.controller to javafx.fxml;
     exports TimePicker;
     opens TimePicker to javafx.fxml;
+    exports com.example.demo.OtherBarberScheduler;
+    opens com.example.demo.OtherBarberScheduler to javafx.fxml;
 }
