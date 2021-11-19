@@ -1,17 +1,16 @@
 package com.example.demo.controller;
 
 import com.example.demo.ObservableListNode;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -23,10 +22,6 @@ public class ClientMenuController {
     private final String CLIENT_CART_SCREEN_NAME = "com/example/demo/client_cart.fxml";
     private final String USER_AREA_SCREEN_NAME = "com/example/demo/user_area.fxml" ;
 
-    private final String CLIENT_APPOINTMENT_ITEM = "com/example/demo/client_see_appointments_list_item.fxml" ;
-    private final String SALOON_ITEM = "com/example/demo/take_saloon_item.fxml";
-    private final String BUY_PRODUCT_ITEM = "com/example/demo/buy_product_list_item.fxml";
-    private final String CART_PRODUCT_ITEM = "com/example/demo/buy_product_list_item.fxml" ;
 
     private final String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/take_appointment_client.fxml";
     private final String TAKE_SALOON_SCREEN_NAME ="com/example/demo/take_saloon.fxml";
@@ -36,12 +31,18 @@ public class ClientMenuController {
 
     @FXML private MenuItem clientCartItem ;
     @FXML private MenuItem userAreaItem ;
+    @FXML private MenuItem seeAppointmentsItem ;
+    @FXML private MenuItem buyProductItem ;
+    @FXML private MenuItem takeAppointmentItem ;
+
+    @FXML private Button logoutButton ;
+
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Node sourceNode = (Node)event.getSource() ;
         BorderPane clientBorderPane = (BorderPane) clientMenuBar.getScene().getRoot();
-        if (sourceNode.getId().equals("logoutButton")) {
+        if (sourceNode == logoutButton) {
             BackController.getInstance().onBackClick(sourceNode);
         }
         else {
@@ -55,35 +56,32 @@ public class ClientMenuController {
     public void onMenuItemSelected(ActionEvent event) throws IOException {
         MenuItem sourceItem = (MenuItem) event.getSource() ;
         BorderPane clientBorderPane = (BorderPane) clientMenuBar.getScene().getRoot();
-        ListView listView ;
-        Parent newCenterNode = null ;
-        switch (sourceItem.getId()) {
-            case "seeAppointmentsItem":
-                newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(SEE_APPOINTMENTS_SCREEN_NAME))).load();
-                listView = (ListView) newCenterNode.lookup("#appointmentsListView");
-                onLoadListItems(listView, CLIENT_APPOINTMENT_ITEM);
-                break;
-            case "buyProductItem":
-                newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(BUY_PRODUCT_SCREEN_NAME))).load();
-                listView = (ListView) newCenterNode.lookup("#buyProductListView");
-                onLoadListItems(listView, BUY_PRODUCT_ITEM);
-                break;
-            case "takeAppointmentItem":
-                newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(TAKE_APPOINTMENT_SCREEN_NAME))).load();
-                break;
 
-
-                case "clientCartItem":
-                    newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCREEN_NAME))).load();
-                    listView = (ListView) newCenterNode.lookup("#cartListView");
-                    onLoadListItems(listView, CART_PRODUCT_ITEM);
-                    break;
-
-                 case "userAreaItem ":
-                        newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(USER_AREA_SCREEN_NAME))).load();
-                        break;
+        String newCenterNodeResName ;
+        //Notare il confronto tra oggetti piuttosto che tra stringhe
+        if (sourceItem == seeAppointmentsItem) {
+            newCenterNodeResName = SEE_APPOINTMENTS_SCREEN_NAME ;
         }
-        clientBorderPane.setCenter(newCenterNode);
+        else if (sourceItem == buyProductItem) {
+            newCenterNodeResName = BUY_PRODUCT_SCREEN_NAME;
+        }
+        else if (sourceItem == takeAppointmentItem) {
+            newCenterNodeResName = TAKE_APPOINTMENT_SCREEN_NAME ;
+        }
+        else if (sourceItem == clientCartItem) {
+            newCenterNodeResName = CLIENT_CART_SCREEN_NAME;
+        }
+        else if (sourceItem == userAreaItem) {
+            newCenterNodeResName = USER_AREA_SCREEN_NAME;
+        }
+        else {
+            newCenterNodeResName = null ;
+        }
+
+        if (newCenterNodeResName != null) {
+            Parent newCenterNode = new FXMLLoader(getClass().getClassLoader().getResource(newCenterNodeResName)).load() ;
+            clientBorderPane.setCenter(newCenterNode);
+        }
     }
 
     private void onLoadListItems(ListView listView, String itemResource) throws IOException {
