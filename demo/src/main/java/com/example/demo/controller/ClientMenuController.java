@@ -1,15 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.ClientAppointmentsList;
+import com.example.demo.ObservableListNode;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -18,16 +20,22 @@ public class ClientMenuController {
     private final String SEE_APPOINTMENTS_SCREEN_NAME = "com/example/demo/client_see_appointments.fxml" ;
     private final String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/buy_product.fxml";
     private final String CLIENT_HOME_SCREEN_NAME = "com/example/demo/client_home.fxml" ;
+    private final String CLIENT_CART_SCREEN_NAME = "com/example/demo/client_cart.fxml";
+    private final String USER_AREA_SCREEN_NAME = "com/example/demo/user_area.fxml" ;
 
     private final String CLIENT_APPOINTMENT_ITEM = "com/example/demo/client_see_appointments_list_item.fxml" ;
     private final String SALOON_ITEM = "com/example/demo/take_saloon_item.fxml";
     private final String BUY_PRODUCT_ITEM = "com/example/demo/buy_product_list_item.fxml";
+    private final String CART_PRODUCT_ITEM = "com/example/demo/buy_product_list_item.fxml" ;
 
     private final String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/take_appointment_client.fxml";
     private final String TAKE_SALOON_SCREEN_NAME ="com/example/demo/take_saloon.fxml";
 
     @FXML
     private MenuBar clientMenuBar ;
+
+    @FXML private MenuItem clientCartItem ;
+    @FXML private MenuItem userAreaItem ;
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
@@ -65,6 +73,16 @@ public class ClientMenuController {
                 break;
         }
 
+        else if (clientCartItem == sourceItem) {
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCREEN_NAME))).load();
+            listView = (ListView) newCenterNode.lookup("#cartListView");
+            onLoadListItems(listView, CART_PRODUCT_ITEM);
+        }
+
+        else if (userAreaItem == sourceItem) {
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(USER_AREA_SCREEN_NAME))).load();
+        }
+
         clientBorderPane.setCenter(newCenterNode);
     }
 
@@ -73,7 +91,7 @@ public class ClientMenuController {
         for (int i = 0 ; i < 10 ; i++) {
             nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(itemResource))).load() ;
         }
-        ClientAppointmentsList clientAppointmentsList = new ClientAppointmentsList(nodesList);
+        ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
         listView.setItems(clientAppointmentsList);
     }
 

@@ -26,26 +26,29 @@
                      </cursor>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <MenuBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="1163.0" style="-fx-background-color: white;">
+            <MenuBar fx:id="barberMenuBar" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="1163.0" style="-fx-background-color: white;">
                <menus>
                   <Menu mnemonicParsing="false" text="Gestisci Centro">
                      <items>
                         <MenuItem mnemonicParsing="false" text="I tuoi Centri" />
-                        <MenuItem mnemonicParsing="false" text="Aggiungi Centro" />
+                        <MenuItem fx:id="addCenterItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Aggiungi Centro" />
                         <MenuItem mnemonicParsing="false" text="Aggiungi Servizio" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Vedi Appuntamenti" />
                   <Menu mnemonicParsing="false" text="Vendi Prodotto">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Gestisci Prodotti" />
+                        <MenuItem fx:id="manageProductsItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Gestisci Prodotti" />
                         <MenuItem mnemonicParsing="false" text="Ordini" />
                      </items></Menu>
                   <Menu mnemonicParsing="false" text="Help" />
                   <Menu mnemonicParsing="false" text="Il Mio Profilo">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="La Tua Area Personale" />
+                        <MenuItem fx:id="userAreaItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="La Tua Area Personale" />
                         <MenuItem mnemonicParsing="false" text="Le Tue Notifiche" />
                      </items>
                   </Menu>

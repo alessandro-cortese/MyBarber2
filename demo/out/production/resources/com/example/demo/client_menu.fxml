@@ -38,7 +38,7 @@
                 <Menu mnemonicParsing="false" text="Prodotti">
                   <items>
                     <MenuItem fx:id="buyProductItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Compra Prodotto" />
-                        <MenuItem mnemonicParsing="false" text="Carrello" />
+                        <MenuItem fx:id="clientCartItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Carrello" />
                         <MenuItem mnemonicParsing="false" text="Storico Acquisti" />
                   </items>
                 </Menu>
@@ -47,7 +47,7 @@
                      <items>
                         <MenuItem mnemonicParsing="false" text="I Tuoi Preferiti" />
                         <MenuItem mnemonicParsing="false" text="Le Tue Notifiche" />
-                        <MenuItem mnemonicParsing="false" text="La tua Zona Personale" />
+                        <MenuItem fx:id="userAreaItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="La tua Zona Personale" />
                         <MenuItem mnemonicParsing="false" text="Carte Fedeltà" />
                      </items>
                   </Menu>
