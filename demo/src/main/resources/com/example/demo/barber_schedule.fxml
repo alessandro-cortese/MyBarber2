@@ -141,19 +141,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayTwoMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayTwoMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="dayTwoMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -164,19 +164,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayThreeMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayThreeMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="dayThreeMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -187,19 +187,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayFourMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayFourMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="dayFourMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -210,19 +210,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayFiveMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayFiveMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="dayFiveMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -233,19 +233,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="daySixMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="daySixMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="daySixMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -302,19 +302,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayTwoAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayTwoAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="dayTwoAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -325,19 +325,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayThreeAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayThreeAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="dayThreeAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -348,19 +348,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayFourAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayFourAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="dayFourAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -371,19 +371,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayFiveAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="dayFiveAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="dayFiveAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -394,19 +394,19 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
                            <children>
-                              <TextField editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="daySixAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
-                              <TextField editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                              <TextField fx:id="daySixAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" text="Chiuso">
+                        <CheckBox fx:id="daySixAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
                            <font>
                               <Font size="15.0" />
                            </font>
