@@ -37,7 +37,7 @@
                               <TextField alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
                               <TextField alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
                               <TextField alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
-                              <Button fx:id="treatmentNextButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
+                              <Button fx:id="treatmentNextButton" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
                            </children>
                         </VBox>
                         <Label layoutX="136.0" layoutY="110.0" text=" Nome Trattamento" />
