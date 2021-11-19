@@ -20,7 +20,11 @@ public class ClientMenuController {
     private final String CLIENT_HOME_SCREEN_NAME = "com/example/demo/client_home.fxml" ;
 
     private final String CLIENT_APPOINTMENT_ITEM = "com/example/demo/client_see_appointments_list_item.fxml" ;
+    private final String SALOON_ITEM = "com/example/demo/take_saloon_item.fxml";
     private final String BUY_PRODUCT_ITEM = "com/example/demo/buy_product_list_item.fxml";
+
+    private final String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/take_appointment_client.fxml";
+    private final String TAKE_SALOON_SCREEN_NAME ="com/example/demo/take_saloon.fxml";
 
     @FXML
     private MenuBar clientMenuBar ;
@@ -45,16 +49,20 @@ public class ClientMenuController {
         BorderPane clientBorderPane = (BorderPane) clientMenuBar.getScene().getRoot();
         ListView listView ;
         Parent newCenterNode = null ;
-        if ("seeAppointmentsItem".equals(sourceItem.getId())) {
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(SEE_APPOINTMENTS_SCREEN_NAME))).load();
-            listView = (ListView) newCenterNode.lookup("#appointmentsListView");
-            onLoadListItems(listView, CLIENT_APPOINTMENT_ITEM);
-        }
-
-        else if ("buyProductItem".equals(sourceItem.getId())) {
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(BUY_PRODUCT_SCREEN_NAME))).load();
-            listView = (ListView) newCenterNode.lookup("#buyProductListView");
-            onLoadListItems(listView, BUY_PRODUCT_ITEM);
+        switch (sourceItem.getId()) {
+            case "seeAppointmentsItem":
+                newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(SEE_APPOINTMENTS_SCREEN_NAME))).load();
+                listView = (ListView) newCenterNode.lookup("#appointmentsListView");
+                onLoadListItems(listView, CLIENT_APPOINTMENT_ITEM);
+                break;
+            case "buyProductItem":
+                newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(BUY_PRODUCT_SCREEN_NAME))).load();
+                listView = (ListView) newCenterNode.lookup("#buyProductListView");
+                onLoadListItems(listView, BUY_PRODUCT_ITEM);
+                break;
+            case "takeAppointmentItem":
+                newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(TAKE_APPOINTMENT_SCREEN_NAME))).load();
+                break;
         }
 
         clientBorderPane.setCenter(newCenterNode);
@@ -68,4 +76,5 @@ public class ClientMenuController {
         ClientAppointmentsList clientAppointmentsList = new ClientAppointmentsList(nodesList);
         listView.setItems(clientAppointmentsList);
     }
+
 }

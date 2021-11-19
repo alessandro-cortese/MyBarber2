@@ -8,4 +8,6 @@ public class ClientSeeAppointmentsController {
 
     @FXML ListView<Node> appointmentsListView ;
 
+
+
 }
