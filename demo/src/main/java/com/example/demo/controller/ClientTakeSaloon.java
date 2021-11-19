@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.ClientAppointmentsList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
