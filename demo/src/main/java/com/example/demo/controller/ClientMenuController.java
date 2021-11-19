@@ -71,18 +71,18 @@ public class ClientMenuController {
             case "takeAppointmentItem":
                 newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(TAKE_APPOINTMENT_SCREEN_NAME))).load();
                 break;
-        }
 
-        else if (clientCartItem == sourceItem) {
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCREEN_NAME))).load();
-            listView = (ListView) newCenterNode.lookup("#cartListView");
-            onLoadListItems(listView, CART_PRODUCT_ITEM);
-        }
 
-        else if (userAreaItem == sourceItem) {
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(USER_AREA_SCREEN_NAME))).load();
-        }
+                case "clientCartItem":
+                    newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCREEN_NAME))).load();
+                    listView = (ListView) newCenterNode.lookup("#cartListView");
+                    onLoadListItems(listView, CART_PRODUCT_ITEM);
+                    break;
 
+                 case "userAreaItem ":
+                        newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(USER_AREA_SCREEN_NAME))).load();
+                        break;
+        }
         clientBorderPane.setCenter(newCenterNode);
     }
 
