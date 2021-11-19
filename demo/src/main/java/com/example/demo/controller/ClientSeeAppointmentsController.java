@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,8 +17,13 @@ public class ClientSeeAppointmentsController implements Initializable {
 
     @FXML private ListView<Node> appointmentsListView ;
 
+    @FXML private Button goToSaloonButton ;
+    @FXML private Button cancelAppointmentButton ;
+
     private String LIST_ITEM_RES = "com/example/demo/client_see_appointments_list_item.fxml" ;
 
+
+    private String[] dateArray = {""} ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,6 +48,22 @@ public class ClientSeeAppointmentsController implements Initializable {
             }
         }
         ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
+        //ObservableList<String> couples = FXCollections.observableArrayList("Alla vita non è concesso in sorte di riveder se stessa nella morte".split(" ")) ;
         appointmentsListView.setItems(clientAppointmentsList);
+        //appointmentsListView.setCellFactory(param -> new ListCellFactory());
+
+        cancelAppointmentButtonManage(false) ;
     }
+
+    private void cancelAppointmentButtonManage(boolean isActive) {
+        cancelAppointmentButton.setDisable(!isActive);
+        goToSaloonButton.setDisable(!isActive);
+    }
+
+
+    @FXML
+    private void onListItemSelected(MouseEvent event) {
+
+    }
+
 }
