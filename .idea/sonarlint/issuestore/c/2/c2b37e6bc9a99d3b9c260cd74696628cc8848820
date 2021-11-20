@@ -1,0 +1,8 @@
+
+m	java:S116"XRename this field "LIST_ITEM_RES" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â»
+œ
+java:S1186@"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÚÒï¼ùÿÿÿÿ
+Q	java:S1253"<This block of commented-out lines of code should be removed.(î·ÖÎ
+Q	java:S1255"<This block of commented-out lines of code should be removed.(àŒù´
+H
+java:S1068"-Remove this unused "dateArray" private field.(ß·Ã‹ùÿÿÿÿ

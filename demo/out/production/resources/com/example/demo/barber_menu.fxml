@@ -36,7 +36,7 @@
                      <items>
                         <MenuItem fx:id="barberCenterItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="I tuoi Centri" />
                         <MenuItem fx:id="addCenterItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Aggiungi Centro" />
-                        <MenuItem mnemonicParsing="false" text="Aggiungi Servizio" />
+                        <MenuItem fx:id="addServiceItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Aggiungi Servizio" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Vedi Appuntamenti" />

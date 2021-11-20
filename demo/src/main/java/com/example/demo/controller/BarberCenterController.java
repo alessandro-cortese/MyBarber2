@@ -21,10 +21,10 @@ public class BarberCenterController implements Initializable {
 
     @FXML private Button addCenterButton;
     @FXML private Button modifyButton;
-    @FXML private String CENTER_LIST_ITEM = "com/example/demo/center_list_item.fxml";
+    @FXML private String BARBER_CENTER_LIST_ITEM = "com/example/demo/center_list_item.fxml";
 
-    private final String ADD_BARBER_CENTER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml";
-    private final String BARBER_MODIFY_SCREEN_NAME =   "com/example/demo/barber_modify_center.fxml";
+    private static final String ADD_BARBER_CENTER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml";
+    private static final String BARBER_MODIFY_SCREEN_NAME =   "com/example/demo/barber_modify_center.fxml";
 
 
     @Override
@@ -33,7 +33,7 @@ public class BarberCenterController implements Initializable {
         Node[] nodes = new Node[5];
         for (int i = 0 ; i < nodes.length ; i++) {
             try {
-                nodes[i] = (new FXMLLoader(getClass().getClassLoader().getResource(CENTER_LIST_ITEM))).load() ;
+                nodes[i] = (new FXMLLoader(getClass().getClassLoader().getResource(BARBER_CENTER_LIST_ITEM))).load() ;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -46,7 +46,6 @@ public class BarberCenterController implements Initializable {
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
-        FXMLLoader fxmlLoader;
 
         if(sourceButton == addCenterButton){
             this.changeBorderPane(sourceButton.getScene(), ADD_BARBER_CENTER_SCREEN_NAME);
