@@ -47,7 +47,7 @@ public class BackController {
         /*
             Invocata quando c'è il cambio schermata da una Scena verso l'altra;
             Il controller della schermata attuale aggiunge la Scena e naviga verso la successiva
-         */
+        */
 
         this.prevSceneStack.add(prevSceneName) ;
     }

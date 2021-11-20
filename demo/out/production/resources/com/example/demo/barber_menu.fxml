@@ -34,7 +34,7 @@
                <menus>
                   <Menu mnemonicParsing="false" text="Gestisci Centro">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="I tuoi Centri" />
+                        <MenuItem fx:id="barberCenterItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="I tuoi Centri" />
                         <MenuItem fx:id="addCenterItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Aggiungi Centro" />
                         <MenuItem mnemonicParsing="false" text="Aggiungi Servizio" />
                      </items>

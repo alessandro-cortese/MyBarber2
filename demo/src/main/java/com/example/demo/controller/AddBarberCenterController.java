@@ -18,7 +18,7 @@ public class AddBarberCenterController {
         Button sourceEvent = (Button) event.getSource();
         FXMLLoader fxmlLoader;
         if(sourceEvent.getId().equals("continueButton")){
-            Scene myScene = (Scene) sourceEvent.getScene() ;
+            Scene myScene = sourceEvent.getScene() ;
             fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/barber_schedule.fxml"));
             BorderPane myBorderPane = (BorderPane) myScene.getRoot();
             myBorderPane.setCenter(fxmlLoader.load());

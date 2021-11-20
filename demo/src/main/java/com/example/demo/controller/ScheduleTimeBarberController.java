@@ -19,10 +19,6 @@ public class ScheduleTimeBarberController {
 
     private CheckBox[] arrayCheckBox;
 
-    {
-        extractedCheckBox();
-    }
-
     private void extractedCheckBox() {
         arrayCheckBox = new CheckBox[]{
                 mondayMorningCheckBox,
@@ -42,9 +38,6 @@ public class ScheduleTimeBarberController {
 
     private TextField[][] arrayTextFiled;
 
-    {
-        extractedTextField();
-    }
 
     private void extractedTextField(){
 
@@ -168,7 +161,7 @@ public class ScheduleTimeBarberController {
         FXMLLoader fxmlLoader;
 
         if(sourceButton.getId().equals("saveButton")){
-            Scene myScene = (Scene) sourceButton.getScene();
+            Scene myScene = sourceButton.getScene();
             fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/barber_home.fxml"));
             BorderPane myBorderPane = (BorderPane) myScene.getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
@@ -188,7 +181,6 @@ public class ScheduleTimeBarberController {
         for(i = 0; i < arrayCheckBox.length && flag; i++) {
             if(localCheckBox == arrayCheckBox[i]) {
                 index = i;
-                System.out.println(index);
                 flag = false;
             }
         }
@@ -214,14 +206,12 @@ public class ScheduleTimeBarberController {
         int i = 0;
         int j = 0;
         int rawIndex = 0;
-        int columnIndex = 0;
         boolean flag = true;
 
         for(i = 0; i < arrayTextFiled.length && flag; i++) {
             for(j = 0; j < arrayTextFiled[i].length && flag; j++) {
                 if(textField == arrayTextFiled[i][j]){
                     rawIndex = i;
-                    columnIndex = j;
                     flag = false;
                 }
             }

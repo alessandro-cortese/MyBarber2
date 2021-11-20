@@ -51,7 +51,6 @@ public class ClientSeeAppointmentsController implements Initializable {
         //ObservableList<String> couples = FXCollections.observableArrayList("Alla vita non è concesso in sorte di riveder se stessa nella morte".split(" ")) ;
         appointmentsListView.setItems(clientAppointmentsList);
         //appointmentsListView.setCellFactory(param -> new ListCellFactory());
-
         cancelAppointmentButtonManage(false) ;
     }
 
