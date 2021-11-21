@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1289.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.AddBarberCenterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1289.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.AddBarberCenterController">
    <children>
-      <Label layoutX="51.0" layoutY="65.0" prefHeight="39.0" prefWidth="270.0" text="Aggiungi Centro">
+      <Label layoutX="100.0" layoutY="25.0" prefHeight="39.0" prefWidth="270.0" text="Aggiungi Centro">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <HBox layoutX="173.0" layoutY="163.0" prefHeight="370.0" prefWidth="890.0">
+      <HBox layoutX="199.0" layoutY="177.0" prefHeight="370.0" prefWidth="890.0">
          <children>
             <VBox alignment="CENTER" prefHeight="370.0" prefWidth="490.0">
                <children>

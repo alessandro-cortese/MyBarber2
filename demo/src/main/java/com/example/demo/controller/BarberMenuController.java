@@ -28,11 +28,10 @@ public class BarberMenuController {
 
     private static final String ADD_BARBER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml";
     private static final String BARBER_HOME_SCREEN_NAME = "com/example/demo/barber_home.fxml" ;
-    private static final String BARBER_ADD_PRODUCT_SCREEN_NAME = "com/example/demo/barber_add_product.fxml" ;
     private static final String BARBER_CENTER_SCREEN_NAME = "com/example/demo/barber_centers.fxml";
     private static final String ADD_SERVICE_BARBER_SCREEN_NAME = "com/example/demo/barber_add_service.fxml";
-
     private static final String USER_AREA_SCREEN_NAME = "com/example/demo/user_area.fxml" ;
+    private static final String BARBER_MANAGE_PRODUCT_SCREEN_NAME = "com/example/demo/barber_manage_products.fxml" ;
 
 
 
@@ -62,7 +61,7 @@ public class BarberMenuController {
             newCenterNodeResName = USER_AREA_SCREEN_NAME;
         }
         else if (sourceItem == manageProductsItem) {
-            newCenterNodeResName = BARBER_ADD_PRODUCT_SCREEN_NAME;
+            newCenterNodeResName = BARBER_MANAGE_PRODUCT_SCREEN_NAME;
         }
         else if (sourceItem == barberCenterItem){
             newCenterNodeResName = BARBER_CENTER_SCREEN_NAME;
