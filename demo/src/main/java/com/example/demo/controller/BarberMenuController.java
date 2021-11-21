@@ -22,17 +22,20 @@ public class BarberMenuController {
     @FXML private MenuItem manageProductsItem ;
     @FXML private MenuItem barberCenterItem;
     @FXML private MenuItem addServiceItem;
+    @FXML private MenuItem listAppointmentsItem;
+    @FXML private MenuItem historyAppointmentsItem;
+
 
     @FXML private Button logoutButton ;
 
 
-    private static final String ADD_BARBER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml";
+    private static final String ADD_BARBER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml" ;
     private static final String BARBER_HOME_SCREEN_NAME = "com/example/demo/barber_home.fxml" ;
-    private static final String BARBER_CENTER_SCREEN_NAME = "com/example/demo/barber_centers.fxml";
-    private static final String ADD_SERVICE_BARBER_SCREEN_NAME = "com/example/demo/barber_add_service.fxml";
+    private static final String BARBER_CENTER_SCREEN_NAME = "com/example/demo/barber_centers.fxml" ;
+    private static final String ADD_SERVICE_BARBER_SCREEN_NAME = "com/example/demo/barber_add_service.fxml" ;
     private static final String USER_AREA_SCREEN_NAME = "com/example/demo/user_area.fxml" ;
     private static final String BARBER_MANAGE_PRODUCT_SCREEN_NAME = "com/example/demo/barber_manage_products.fxml" ;
-
+    private static final String BARBER_APPOINTMENTS_LIST_VIEW_SCREEN_NAME = "com/example/demo/barber_appointments.fxml" ;
 
 
     @FXML
@@ -68,6 +71,9 @@ public class BarberMenuController {
         }
         else if (sourceItem == addServiceItem){
             newCenterNodeResName = ADD_SERVICE_BARBER_SCREEN_NAME;
+        }
+        else if (sourceItem == listAppointmentsItem){
+            newCenterNodeResName = BARBER_APPOINTMENTS_LIST_VIEW_SCREEN_NAME;
         }
         else {
             newCenterNodeResName = null ;

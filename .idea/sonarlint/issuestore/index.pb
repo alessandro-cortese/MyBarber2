@@ -31,10 +31,6 @@ x
 Hdemo/src/main/java/com/example/demo/controller/BuyProductController.java,6\b\6b615fe4e22ae162dd525c61d614aa60257cb739
 ‚
 Rdemo/src/main/java/com/example/demo/controller/BarberManageProductsController.java,f\a\fa25b680f29a1046518abff6626c4fa1e1b35d90
-x
-Hdemo/src/main/java/com/example/demo/controller/BarberMenuController.java,1\f\1f56e7114dc3c269919df44cb0da7f747c578ef4
-i
-9demo/src/main/java/com/example/demo/HelloApplication.java,d\3\d3cc260e41697ed28209eb0fec513663850e766d
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 <
