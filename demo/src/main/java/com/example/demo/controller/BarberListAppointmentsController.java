@@ -13,7 +13,8 @@ import java.util.ResourceBundle;
 
 public class BarberListAppointmentsController implements Initializable {
 
-    @FXML private ListView<Node> barberAppointmentsListView;
+    @FXML private ListView<Node> appointmentsListView;
+
     private static final String BARBER_APPOINTMENTS_LIST_ITEM = "com/example/demo/barber_appointments_item.fxml" ;
 
     @Override
@@ -28,7 +29,7 @@ public class BarberListAppointmentsController implements Initializable {
             }
         }
         ObservableListNode barberCenterObservableListNode = new ObservableListNode(nodes);
-        barberAppointmentsListView.setItems(barberCenterObservableListNode);
+        appointmentsListView.setItems(barberCenterObservableListNode);
 
     }
 
