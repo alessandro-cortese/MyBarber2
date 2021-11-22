@@ -13,10 +13,6 @@ Ddemo/src/main/java/com/example/demo/controller/ClientTakeSaloon.java,a/f/af1ca
 Pdemo/src/main/java/com/example/demo/controller/ScheduleTimeBarberController.java,3/e/3eee944fb97494a1b975d853f29f3ef75615d2fa
 ƒ
 Sdemo/src/main/java/com/example/demo/controller/ClientSeeAppointmentsController.java,c/2/c2b37e6bc9a99d3b9c260cd74696628cc8848820
-v
-Fdemo/src/main/java/com/example/demo/controller/ModifyBarberCenter.java,6/0/60e6d54d55e8987f27e3fba7e2b98e697adb3c19
-}
-Mdemo/src/main/java/com/example/demo/controller/AddBarberCenterController.java,7\d\7d571be5c4417c8106de69734cf9aa08a671c33f
 r
 Bdemo/src/main/java/com/example/demo/controller/BackController.java,b\3\b3b8cfcd827b3f7a95e8f11415651842b5f189f9
 p
@@ -25,8 +21,6 @@ A
 demo/build.gradle,a\8\a87c716152d4b33e3db68ff4f083dd356a569c51
 h
 8demo/src/main/java/com/example/demo/ListCellFactory.java,f\c\fccd5e6c28c180dcd795e692deb1f8dbc40ca025
-k
-;demo/src/main/java/com/example/demo/ObservableListNode.java,c\d\cd71afe9b0775b5425d8bb0aa0d4e8d0e39a806e
 x
 Hdemo/src/main/java/com/example/demo/controller/BuyProductController.java,6\b\6b615fe4e22ae162dd525c61d614aa60257cb739
 ‚
@@ -35,3 +29,11 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 <
 demo/gradlew,5\d\5dc415f63e7c9a629467705d17ffa88b88988d7f
+~
+Ndemo/src/main/java/com/example/demo/controller/BarberAddProductController.java,c/5/c5bba6b6b3f5c375e383ecae21de571dd33125e2
+~
+Ndemo/src/main/java/com/example/demo/controller/BarberAddServiceController.java,f/2/f25c85259ecdd60da308876b700b5c58f789e024
+z
+Jdemo/src/main/java/com/example/demo/controller/BarberCenterController.java,2/9/29886117816c258e308433301ac07a1f8e52490a
+x
+Hdemo/src/main/java/com/example/demo/controller/BarberMenuController.java,1/f/1f56e7114dc3c269919df44cb0da7f747c578ef4

@@ -17,7 +17,7 @@
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutX="42.0" layoutY="103.0" prefHeight="518.0" prefWidth="1204.0" spacing="35.0" style="-fx-background-color: white;">
+      <HBox alignment="CENTER" layoutX="42.0" layoutY="103.0" prefHeight="482.0" prefWidth="1204.0" spacing="35.0" style="-fx-background-color: white;">
          <children>
             <VBox alignment="CENTER" prefHeight="466.0" prefWidth="287.0" spacing="5.0">
                <children>

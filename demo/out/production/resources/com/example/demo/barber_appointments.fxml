@@ -1,164 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.BarberListAppointmentsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.BarberListAppointmentsController">
    <children>
-      <HBox alignment="CENTER" layoutX="27.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="1243.0">
-         <children>
-            <VBox prefHeight="692.0" prefWidth="313.0" spacing="15.0">
-               <children>
-                  <Label prefHeight="43.0" prefWidth="292.0" text="Appuntamenti">
-                     <font>
-                        <Font name="Arial" size="38.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" prefHeight="36.0" spacing="10.0">
-                     <children>
-                        <TextField prefHeight="36.0" prefWidth="346.0" />
-                        <Button mnemonicParsing="false" prefHeight="38.0">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../../../images/search_icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <ListView fx:id="barberAppointmentsListView" maxWidth="1.7976931348623157E308" prefHeight="465.0" prefWidth="317.0" />
-               </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" top="10.0" />
-               </padding>
-            </VBox>
-            <AnchorPane prefHeight="637.0" prefWidth="970.0">
-               <children>
-                  <VBox alignment="CENTER" layoutX="69.0" layoutY="14.0" prefHeight="562.0" prefWidth="901.0" spacing="20.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="370.0" spacing="100.0">
-                           <children>
-                              <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../../../images/user_image_placeholder.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox alignment="CENTER_LEFT" spacing="15.0">
-                                 <children>
-                                    <Label prefHeight="75.0" prefWidth="556.0" text="Cliente">
-                                       <font>
-                                          <Font size="38.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox prefHeight="46.0" prefWidth="556.0">
-                                       <children>
-                                          <Label prefHeight="100.0" prefWidth="302.0" text="Nome:">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="302.0" text="&lt;&lt;Nome Cliente&gt;&gt;">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox layoutX="10.0" layoutY="220.0" prefHeight="46.0" prefWidth="556.0">
-                                       <children>
-                                          <Label prefHeight="100.0" prefWidth="302.0" text="Cognome:">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="302.0" text="&lt;&lt;Cognome Cliente&gt;&gt;">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox layoutX="10.0" layoutY="248.0" prefHeight="46.0" prefWidth="556.0">
-                                       <children>
-                                          <Label prefHeight="100.0" prefWidth="302.0" text="email:">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="302.0" text="&lt;&lt;email Cliente&gt;&gt;">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox layoutX="10.0" layoutY="309.0" prefHeight="46.0" prefWidth="556.0">
-                                       <children>
-                                          <Label prefHeight="100.0" prefWidth="302.0" text="Via Centro:">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="302.0" text="&lt;&lt;Via Centro Prenotazione&gt;&gt;">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox layoutX="10.0" layoutY="300.0" prefHeight="46.0" prefWidth="556.0">
-                                       <children>
-                                          <Label prefHeight="100.0" prefWidth="302.0" text="ora:">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="302.0" text="&lt;&lt;ora appuntamento&gt;&gt;">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <Label prefHeight="23.0" prefWidth="901.0" text="Note prenotazione:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="TOP_LEFT" prefHeight="163.0" prefWidth="901.0" text="&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut&#10;labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris &#10;nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit &#10;esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in &#10;culpa qui officia deserunt mollit anim id est laborum.&quot;&#10;" textOverrun="CLIP">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </children>
-         <effect>
-            <Blend />
-         </effect>
-      </HBox>
-      <Button layoutX="1067.0" layoutY="645.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="149.0" text="Contatta Cliente">
+      <Label layoutX="100.0" layoutY="25.0" prefHeight="57.0" prefWidth="334.0" text="Vedi Appuntamenti">
          <font>
-            <Font size="18.0" />
+            <Font size="36.0" />
          </font>
-      </Button>
+      </Label>
+      <VBox alignment="CENTER" layoutX="429.0" layoutY="153.0" spacing="100.0">
+         <children>
+            <SplitMenuButton mnemonicParsing="false" prefHeight="35.0" prefWidth="286.0" text="Seleziona Centro">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </SplitMenuButton>
+            <DatePicker prefHeight="35.0" prefWidth="286.0" promptText="Seleziona Giorno" />
+            <SplitMenuButton mnemonicParsing="false" prefHeight="35.0" prefWidth="286.0" text="Selezionea Slot">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </SplitMenuButton>
+         </children>
+      </VBox>
+      <ImageView fitHeight="217.0" fitWidth="288.0" layoutX="114.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../images/barber_chain_logo.jpeg" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER_RIGHT" layoutX="844.0" layoutY="123.0" spacing="35.0">
+         <children>
+            <ListView fx:id="appointmentsListView" prefHeight="412.0" prefWidth="386.0" />
+            <Label alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="391.0" textOverrun="CLIP">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="199.0" text="Cancella Prenotazione">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
