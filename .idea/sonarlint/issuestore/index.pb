@@ -28,4 +28,18 @@ Ddemo/src/main/java/com/example/demo/controller/ClientTakeSaloon.java,a/f/af1ca
 p
 @demo/src/main/java/com/example/demo/controller/ClientBooked.java,7/1/71a2d25a312b520d1ec3dba9c5db28a42c54eeff
 x
+<<<<<<< Updated upstream
 Hdemo/src/main/java/com/example/demo/controller/SaloonItemController.java,9/1/91aea9c481f71dc04112747c15069d974ec469cf
+=======
+Hdemo/src/main/java/com/example/demo/controller/BarberMenuController.java,1/f/1f56e7114dc3c269919df44cb0da7f747c578ef4
+i
+9demo/src/main/java/com/example/demo/HelloApplication.java,d/3/d3cc260e41697ed28209eb0fec513663850e766d
+}
+Mdemo/src/main/java/com/example/demo/controller/AddBarberCenterController.java,7/d/7d571be5c4417c8106de69734cf9aa08a671c33f
+k
+;demo/src/main/java/com/example/demo/ObservableListNode.java,c/d/cd71afe9b0775b5425d8bb0aa0d4e8d0e39a806e
+„
+Tdemo/src/main/java/com/example/demo/controller/BarberListAppointmentsController.java,1/c/1c9de2be515eb8b4cdd366310b39b2925753b8e5
+v
+Fdemo/src/main/java/com/example/demo/controller/ModifyBarberCenter.java,6/0/60e6d54d55e8987f27e3fba7e2b98e697adb3c19
+>>>>>>> Stashed changes
