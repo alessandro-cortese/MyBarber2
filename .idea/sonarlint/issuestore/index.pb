@@ -4,6 +4,7 @@
 „
 Tdemo/src/main/java/com/example/demo/OtherBarberScheduler/SchedulerRowController.java,b/4/b41752ef0e0650c17126e2aca1039dbc76373e16
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 x
 Hdemo/src/main/java/com/example/demo/controller/BuyProductController.java,6/b/6b615fe4e22ae162dd525c61d614aa60257cb739
 k
@@ -42,6 +43,9 @@ Fdemo/src/main/java/com/example/demo/controller/ModifyBarberCenter.java,6/0/60e
 >>>>>>> Stashed changes
 =======
 r
+=======
+r
+>>>>>>> Stashed changes
 Bdemo/src/main/java/com/example/demo/controller/BackController.java,b\3\b3b8cfcd827b3f7a95e8f11415651842b5f189f9
 A
 demo/build.gradle,a\8\a87c716152d4b33e3db68ff4f083dd356a569c51
@@ -50,5 +54,9 @@ h
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 <
+<<<<<<< Updated upstream
+demo/gradlew,5\d\5dc415f63e7c9a629467705d17ffa88b88988d7f
+>>>>>>> Stashed changes
+=======
 demo/gradlew,5\d\5dc415f63e7c9a629467705d17ffa88b88988d7f
 >>>>>>> Stashed changes
