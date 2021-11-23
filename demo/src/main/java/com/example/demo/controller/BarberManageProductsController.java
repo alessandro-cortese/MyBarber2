@@ -55,7 +55,5 @@ public class BarberManageProductsController implements Initializable {
             Alert deleteAlert = new Alert(Alert.AlertType.WARNING, "Sei sicuro di voler eliminare questo prodotto?", ButtonType.OK, ButtonType.NO) ;
             deleteAlert.showAndWait() ;
         }
-
-        InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
     }
 }
