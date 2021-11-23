@@ -21,6 +21,7 @@ public class BarberCenterController implements Initializable {
 
     @FXML private Button addCenterButton;
     @FXML private Button modifyButton;
+    @FXML private Button removeCenterButton;
     @FXML private String BARBER_CENTER_LIST_ITEM = "com/example/demo/center_list_item.fxml";
 
     private static final String ADD_BARBER_CENTER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml";
@@ -56,9 +57,8 @@ public class BarberCenterController implements Initializable {
     }
 
     private void changeBorderPane(Scene scene, String string) throws IOException {
-        Scene localScene = scene;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(string));
-        BorderPane myBorderPane = (BorderPane) localScene.getRoot();
+        BorderPane myBorderPane = (BorderPane) scene.getRoot();
         myBorderPane.setCenter(fxmlLoader.load());
     }
 

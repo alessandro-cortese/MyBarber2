@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/open_screen.fxml")) ;
         Scene scene = new Scene(root.load());
-        Image icon = new Image(new File("images/AppLogo_inverted.png").toURI().toString());
+        Image icon = new Image(new File("images/AppLogo_icon.png").toURI().toString());
         stage.getIcons().add(icon);
 
         stage.setResizable(false);

@@ -14,7 +14,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class take_appointment_clientController {
+public class TakeAppointmentClientController {
 
     final static String APPOINTMENT_SALOON_ITEM = "com/example/demo/take_saloon_item.fxml";
 

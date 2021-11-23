@@ -39,12 +39,16 @@
                         <MenuItem fx:id="addServiceItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Aggiungi Servizio" />
                      </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Vedi Appuntamenti" />
+                  <Menu mnemonicParsing="false" text="Vedi Appuntamenti">
+                     <items>
+                        <MenuItem fx:id="listAppointmentsItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Lista Appuntamenti" />
+                     </items></Menu>
                   <Menu mnemonicParsing="false" text="Vendi Prodotto">
                      <items>
                         <MenuItem fx:id="manageProductsItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Gestisci Prodotti" />
                         <MenuItem mnemonicParsing="false" text="Ordini" />
                      </items></Menu>
+                  <Menu mnemonicParsing="false" text="Catalogo Premi" />
                   <Menu mnemonicParsing="false" text="Help" />
                   <Menu mnemonicParsing="false" text="Il Mio Profilo">
                      <items>

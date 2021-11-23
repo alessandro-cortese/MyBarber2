@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1289.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.ScheduleTimeBarberController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1289.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.ScheduleTimeBarberController">
    <children>
-      <Label layoutX="51.0" layoutY="65.0" prefHeight="39.0" prefWidth="233.0" text="Modifica Orari">
+      <Label layoutX="100.0" layoutY="25.0" prefHeight="39.0" prefWidth="233.0" text="Modifica Orari">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutX="-5.0" layoutY="124.0" prefHeight="402.0" prefWidth="1290.0" spacing="35.0" style="-fx-background-color: white;">
+      <HBox alignment="CENTER" layoutX="42.0" layoutY="103.0" prefHeight="482.0" prefWidth="1204.0" spacing="35.0" style="-fx-background-color: white;">
          <children>
             <VBox alignment="CENTER" prefHeight="466.0" prefWidth="287.0" spacing="5.0">
                <children>
@@ -51,7 +51,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="193.0" prefHeight="28.0" prefWidth="96.0" text="Mercoledì">
+                  <Label layoutX="10.0" layoutY="193.0" prefHeight="32.0" prefWidth="110.0" text="Mercoledì">
                      <font>
                         <Font size="22.0" />
                      </font>

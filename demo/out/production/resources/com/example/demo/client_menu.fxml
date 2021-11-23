@@ -37,8 +37,22 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Prodotti">
                   <items>
-                    <MenuItem fx:id="buyProductItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Compra Prodotto" />
-                        <MenuItem fx:id="clientCartItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Carrello" />
+                    <MenuItem fx:id="buyProductItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Compra Prodotto">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../images/buy_product_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                        <MenuItem fx:id="clientCartItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Carrello">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../images/shopping_cart_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
                         <MenuItem mnemonicParsing="false" text="Storico Acquisti" />
                   </items>
                 </Menu>
