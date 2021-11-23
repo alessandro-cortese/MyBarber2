@@ -18,26 +18,14 @@ public class BarberAddServiceController {
     @FXML private Button saveButton;
     @FXML private TextField priceTextField;
 
-    private static final String HOME_BARBER_SCREEN_NAME = "com/example/demo/barber_home.fxml";
 
     @FXML
-    public void onButtonClicked(ActionEvent event) throws IOException {
+    public void onButtonClicked(ActionEvent event) {
         Node sourceNode = (Node) event.getSource();
-        String nextScreenName ;
         if(sourceNode == saveButton){
-            nextScreenName = HOME_BARBER_SCREEN_NAME ;
-        }
-        else {
-            nextScreenName = null ;
+            InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
         }
 
-        InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
-
-        if (nextScreenName != null) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(nextScreenName));
-            BorderPane myBorderPane = (BorderPane) (sourceNode.getScene()).getRoot();
-            myBorderPane.setCenter(fxmlLoader.load());
-        }
     }
 
 

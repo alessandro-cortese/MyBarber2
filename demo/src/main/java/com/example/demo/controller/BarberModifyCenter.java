@@ -15,17 +15,19 @@ public class BarberModifyCenter {
     @FXML private Button saveButton;
     @FXML private Button modifyCenterSchedule;
 
-    private static final String HOME_BARBER_SCREEN_NAME = "com/example/demo/barber_home.fxml" ;
     private static final String BARBER_SCHEDULE_SCREEN_NAME = "com/example/demo/barber_schedule.fxml" ;
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Node sourceNode = (Node) event.getSource();
-        String nextScreenName ;
+
         if(sourceNode == saveButton){
-            nextScreenName = HOME_BARBER_SCREEN_NAME ;
+            InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
+            return ;
         }
-        else if( sourceNode == modifyCenterSchedule){
+
+        String nextScreenName ;
+        if( sourceNode == modifyCenterSchedule){
             nextScreenName = BARBER_SCHEDULE_SCREEN_NAME ;
         }
         else {
