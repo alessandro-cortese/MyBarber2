@@ -22,7 +22,8 @@ public class BarberCenterController implements Initializable {
     @FXML private Button addCenterButton;
     @FXML private Button modifyButton;
     @FXML private Button removeCenterButton;
-    @FXML private String BARBER_CENTER_LIST_ITEM = "com/example/demo/center_list_item.fxml";
+
+    private String BARBER_CENTER_LIST_ITEM = "com/example/demo/center_list_item.fxml";
 
     private static final String ADD_BARBER_CENTER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml";
     private static final String BARBER_MODIFY_SCREEN_NAME =   "com/example/demo/barber_modify_center.fxml";
@@ -48,18 +49,28 @@ public class BarberCenterController implements Initializable {
     public void onButtonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
 
-        if(sourceButton == addCenterButton){
-            this.changeBorderPane(sourceButton.getScene(), ADD_BARBER_CENTER_SCREEN_NAME);
-        } else if(sourceButton == modifyButton) {
-            this.changeBorderPane(sourceButton.getScene(), BARBER_MODIFY_SCREEN_NAME);
+
+        String nextScreenName ;
+
+        if (sourceButton == addCenterButton){
+            nextScreenName = ADD_BARBER_CENTER_SCREEN_NAME ;
+        }
+        else if(sourceButton == modifyButton) {
+            nextScreenName = BARBER_MODIFY_SCREEN_NAME ;
+        }
+        else {
+            nextScreenName = null ;
+        }
+
+        if (nextScreenName != null) {
+            InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(nextScreenName));
+            BorderPane myBorderPane = (BorderPane) (sourceButton.getScene()).getRoot();
+            myBorderPane.setCenter(fxmlLoader.load());
         }
 
     }
 
-    private void changeBorderPane(Scene scene, String string) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(string));
-        BorderPane myBorderPane = (BorderPane) scene.getRoot();
-        myBorderPane.setCenter(fxmlLoader.load());
-    }
 
 }

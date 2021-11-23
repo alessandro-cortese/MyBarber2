@@ -5,6 +5,7 @@ import TimePicker.TimePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -15,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
 
-public class ScheduleTimeBarberController {
+public class BarberScheduleTimeController {
 
     private CheckBox[] arrayCheckBox;
 
@@ -161,11 +162,10 @@ public class ScheduleTimeBarberController {
         FXMLLoader fxmlLoader;
 
         if(sourceButton.getId().equals("saveButton")){
-            Scene myScene = sourceButton.getScene();
-            fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/barber_home.fxml"));
-            BorderPane myBorderPane = (BorderPane) myScene.getRoot();
-            myBorderPane.setCenter(fxmlLoader.load());
+            InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());
         }
+
+
 
     }
 

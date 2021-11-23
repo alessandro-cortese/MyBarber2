@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -15,12 +16,9 @@ public class ClientBooked {
     private Button bookedButton;
 
     @FXML
-    void onButtonClicked(ActionEvent event) throws IOException {
-        Button sourceButton = (Button) event.getSource();
-        FXMLLoader node = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/client_home.fxml"));
-        Scene myScene = (Scene) sourceButton.getScene();
-        BorderPane borderPane = (BorderPane) myScene.getRoot();
-        borderPane.setCenter(node.load());
+    void onButtonClicked(ActionEvent event) {
+        Node sourceButton = (Node) event.getSource();
+        InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
     }
 
 }

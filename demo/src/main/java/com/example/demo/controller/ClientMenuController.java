@@ -36,6 +36,7 @@ public class ClientMenuController {
     @FXML private MenuItem takeAppointmentItem ;
 
     @FXML private Button logoutButton ;
+    @FXML private Button homeButton ;
 
 
     @FXML
@@ -43,12 +44,16 @@ public class ClientMenuController {
         Node sourceNode = (Node)event.getSource() ;
         BorderPane clientBorderPane = (BorderPane) clientMenuBar.getScene().getRoot();
         if (sourceNode == logoutButton) {
+            InternalBackController.getInternalBackControllerInstance().emptyStack();
             BackController.getInstance().onBackClick(sourceNode);
         }
-        else {
+        else if (sourceNode == homeButton){
             //Gestione Home
-            FXMLLoader clientHomeScreen = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_HOME_SCREEN_NAME));
-            clientBorderPane.setCenter(clientHomeScreen.load());
+            InternalBackController.getInternalBackControllerInstance().backToHome(homeButton);
+        }
+        else {
+            //Gestione Back
+            InternalBackController.getInternalBackControllerInstance().onBackClicked(event);
         }
     }
 
@@ -56,7 +61,7 @@ public class ClientMenuController {
     public void onMenuItemSelected(ActionEvent event) throws IOException {
         MenuItem sourceItem = (MenuItem) event.getSource() ;
         BorderPane clientBorderPane = (BorderPane) clientMenuBar.getScene().getRoot();
-
+        InternalBackController.getInternalBackControllerInstance().onNextScreen(clientBorderPane);
         String newCenterNodeResName ;
         //Notare il confronto tra oggetti piuttosto che tra stringhe
         if (sourceItem == seeAppointmentsItem) {
@@ -81,16 +86,11 @@ public class ClientMenuController {
         if (newCenterNodeResName != null) {
             Parent newCenterNode = new FXMLLoader(getClass().getClassLoader().getResource(newCenterNodeResName)).load() ;
             clientBorderPane.setCenter(newCenterNode);
+
+            //Svuoto stack lasciando solo la home sulla cima
+            InternalBackController.getInternalBackControllerInstance().onMenuItemClicked();
         }
     }
 
-    private void onLoadListItems(ListView listView, String itemResource) throws IOException {
-        Node[] nodesList = new Node[10] ;
-        for (int i = 0 ; i < 10 ; i++) {
-            nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(itemResource))).load() ;
-        }
-        ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
-        listView.setItems(clientAppointmentsList);
-    }
 
 }

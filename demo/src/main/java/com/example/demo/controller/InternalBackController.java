@@ -17,7 +17,7 @@ public class InternalBackController {
         this.internalNodeStack = new ArrayList<Node>() ;
     }
 
-    public InternalBackController getInternalBackControllerInstance() {
+    public static InternalBackController getInternalBackControllerInstance() {
         if (internalBackController == null) {
             internalBackController = new InternalBackController() ;
         }
@@ -29,8 +29,9 @@ public class InternalBackController {
     }
 
 
-    public void backToHome(ActionEvent event) {
-        BorderPane sceneRoot = getBorderPane(event) ;
+    public void backToHome(Node sourceNode) {
+
+        BorderPane sceneRoot = getBorderPane(sourceNode) ;
         Node homeNode = null ;
         while (!internalNodeStack.isEmpty()) {
             homeNode = internalNodeStack.remove(internalNodeStack.size() - 1) ;
@@ -41,18 +42,29 @@ public class InternalBackController {
     }
 
     public void onBackClicked(ActionEvent event) {
-        BorderPane sceneRoot = getBorderPane(event) ;
-        Node nextNode = internalNodeStack.remove(internalNodeStack.size() - 1) ;
-        sceneRoot.setCenter(nextNode);
-    }
-
-    public void onNextScreen(ActionEvent event) {
-        BorderPane borderPane = getBorderPane(event) ;
-        this.internalNodeStack.add(borderPane.getCenter()) ;
-    }
-
-    private BorderPane getBorderPane(ActionEvent event) {
         Node sourceNode = (Node) event.getSource() ;
+        BorderPane sceneRoot = getBorderPane(sourceNode) ;
+        if (!internalNodeStack.isEmpty()) {
+            Node nextNode = internalNodeStack.remove(internalNodeStack.size() - 1);
+            sceneRoot.setCenter(nextNode);
+        }
+    }
+
+    public void onNextScreen(Node sourceNode) {
+        this.internalNodeStack.add(getBorderPane(sourceNode).getCenter()) ;
+    }
+
+    public void onMenuItemClicked() {
+        Node homeNode = null ;
+        while (!internalNodeStack.isEmpty()) {
+            homeNode = internalNodeStack.remove(internalNodeStack.size() - 1) ;
+        }
+        if (homeNode != null) {
+            internalNodeStack.add(homeNode);
+        }
+    }
+
+    private BorderPane getBorderPane(Node sourceNode) {
         Scene nodeScene = sourceNode.getScene() ;
         return (BorderPane) nodeScene.getRoot();
     }

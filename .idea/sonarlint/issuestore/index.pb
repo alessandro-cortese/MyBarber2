@@ -1,12 +1,9 @@
 
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-}
-Mdemo/src/main/java/com/example/demo/controller/EnterAsUserTypeController.java,1/4/14160153ce959f5c89e5869f234f6093a707cf73
-€
-Pdemo/src/main/java/com/example/demo/controller/ClientSaloonCenterController.java,f/4/f4c25a54f4287024365e7b31a059353b97a98005
 „
 Tdemo/src/main/java/com/example/demo/OtherBarberScheduler/SchedulerRowController.java,b/4/b41752ef0e0650c17126e2aca1039dbc76373e16
+<<<<<<< Updated upstream
 x
 Hdemo/src/main/java/com/example/demo/controller/BuyProductController.java,6/b/6b615fe4e22ae162dd525c61d614aa60257cb739
 k
@@ -42,4 +39,16 @@ k
 Tdemo/src/main/java/com/example/demo/controller/BarberListAppointmentsController.java,1/c/1c9de2be515eb8b4cdd366310b39b2925753b8e5
 v
 Fdemo/src/main/java/com/example/demo/controller/ModifyBarberCenter.java,6/0/60e6d54d55e8987f27e3fba7e2b98e697adb3c19
+>>>>>>> Stashed changes
+=======
+r
+Bdemo/src/main/java/com/example/demo/controller/BackController.java,b\3\b3b8cfcd827b3f7a95e8f11415651842b5f189f9
+A
+demo/build.gradle,a\8\a87c716152d4b33e3db68ff4f083dd356a569c51
+h
+8demo/src/main/java/com/example/demo/ListCellFactory.java,f\c\fccd5e6c28c180dcd795e692deb1f8dbc40ca025
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+<
+demo/gradlew,5\d\5dc415f63e7c9a629467705d17ffa88b88988d7f
 >>>>>>> Stashed changes

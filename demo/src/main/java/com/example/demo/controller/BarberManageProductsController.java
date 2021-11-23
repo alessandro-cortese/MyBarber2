@@ -45,6 +45,8 @@ public class BarberManageProductsController implements Initializable {
     public void onButtonClicked(ActionEvent event) throws IOException {
         Node sourceNode = (Node) event.getSource() ;
         if (sourceNode == addProductButton || sourceNode == editProductButton) {
+            InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
+
             Parent nextParent = (new FXMLLoader(getClass().getClassLoader().getResource(MODIFY_PRODUCT_SCREEN_NAME))).load() ;
             BorderPane scenePane = (BorderPane) sourceNode.getScene().getRoot() ;
             scenePane.setCenter(nextParent);
@@ -53,5 +55,7 @@ public class BarberManageProductsController implements Initializable {
             Alert deleteAlert = new Alert(Alert.AlertType.WARNING, "Sei sicuro di voler eliminare questo prodotto?", ButtonType.OK, ButtonType.NO) ;
             deleteAlert.showAndWait() ;
         }
+
+        InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
     }
 }

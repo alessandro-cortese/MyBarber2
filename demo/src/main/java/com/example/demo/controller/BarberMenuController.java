@@ -27,6 +27,8 @@ public class BarberMenuController {
 
 
     @FXML private Button logoutButton ;
+    @FXML private Button homeButton ;
+    @FXML private Button backButton ;
 
 
     private static final String ADD_BARBER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml" ;
@@ -44,10 +46,15 @@ public class BarberMenuController {
         BorderPane clientBorderPane = (BorderPane) barberMenuBar.getScene().getRoot();
         if (sourceNode == logoutButton) {
             BackController.getInstance().onBackClick((Node) event.getSource());
+            InternalBackController.getInternalBackControllerInstance().emptyStack();
         }
-        else{
-            FXMLLoader clientHomeScreen = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_HOME_SCREEN_NAME));
-            clientBorderPane.setCenter(clientHomeScreen.load());
+        else if (sourceNode == homeButton){
+            //Gestione Home
+            InternalBackController.getInternalBackControllerInstance().backToHome(homeButton);
+        }
+        else {
+            //Gestione back
+            InternalBackController.getInternalBackControllerInstance().onBackClicked(event);
         }
     }
 
@@ -56,6 +63,8 @@ public class BarberMenuController {
         MenuItem sourceItem = (MenuItem) event.getSource() ;
         BorderPane barberBorderPane = (BorderPane) barberMenuBar.getScene().getRoot() ;
         String newCenterNodeResName ;
+        InternalBackController.getInternalBackControllerInstance().onNextScreen(barberBorderPane);
+
 
         if (sourceItem == addCenterItem) {
             newCenterNodeResName = ADD_BARBER_SCREEN_NAME;
@@ -82,6 +91,8 @@ public class BarberMenuController {
         if (newCenterNodeResName != null) {
             Parent newCenterNode = new FXMLLoader(getClass().getClassLoader().getResource(newCenterNodeResName)).load() ;
             barberBorderPane.setCenter(newCenterNode);
+
+            InternalBackController.getInternalBackControllerInstance().onMenuItemClicked();
         }
 
 
