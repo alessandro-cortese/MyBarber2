@@ -15,7 +15,7 @@ public class BarberModifyCenter {
     @FXML private Button saveButton;
     @FXML private Button modifyCenterSchedule;
 
-    private static final String BARBER_SCHEDULE_SCREEN_NAME = "com/example/demo/barber_schedule.fxml" ;
+    private static final String BARBER_SCHEDULE_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_schedule.fxml";
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {

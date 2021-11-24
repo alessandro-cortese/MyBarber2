@@ -21,10 +21,10 @@ public class RegisterScreenController {
     private Stage stage;
     private Scene scene;
 
-    private String THIS_SCENE_NAME = "com/example/demo/register_screen.fxml" ;
+    private String THIS_SCENE_NAME = "com/example/demo/MyBarber_1/General/register_screen.fxml";
 
-    public static final String CLIENT_MENU_SCREEN_NAME = "com/example/demo/client_menu.fxml" ;
-    public static final String BARBER_MENU_SCREEN_NAME = "com/example/demo/barber_menu.fxml" ; //con final indico la variabile è costante
+    public static final String CLIENT_MENU_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_menu.fxml";
+    public static final String BARBER_MENU_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_menu.fxml"; //con final indico la variabile è costante
 
     @FXML
     private Button registerButton;

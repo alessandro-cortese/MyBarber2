@@ -15,6 +15,8 @@ public class BarberAddCenterController {
     @FXML Button backButton ;
     @FXML Button continueButton ;
 
+    private static final String BARBER_SCHEDULE_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_schedule.fxml" ;
+
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
 
@@ -23,7 +25,7 @@ public class BarberAddCenterController {
         if(sourceNode == continueButton){
             InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
             Scene myScene = sourceNode.getScene() ;
-            fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/barber_schedule.fxml"));
+            fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_SCHEDULE_SCREEN_NAME));
             BorderPane myBorderPane = (BorderPane) myScene.getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
 

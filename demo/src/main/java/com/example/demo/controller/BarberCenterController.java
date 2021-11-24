@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.Node;
@@ -23,10 +22,10 @@ public class BarberCenterController implements Initializable {
     @FXML private Button modifyButton;
     @FXML private Button removeCenterButton;
 
-    private String BARBER_CENTER_LIST_ITEM = "com/example/demo/center_list_item.fxml";
+    private String BARBER_CENTER_LIST_ITEM = "com/example/demo/MyBarber_1/Client/center_list_item.fxml";
 
-    private static final String ADD_BARBER_CENTER_SCREEN_NAME = "com/example/demo/barber_add_center.fxml";
-    private static final String BARBER_MODIFY_SCREEN_NAME =   "com/example/demo/barber_modify_center.fxml";
+    private static final String ADD_BARBER_CENTER_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_add_center.fxml";
+    private static final String BARBER_MODIFY_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_modify_center.fxml";
 
 
     @Override

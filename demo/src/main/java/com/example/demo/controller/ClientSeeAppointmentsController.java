@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.ObservableListNode;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +20,7 @@ public class ClientSeeAppointmentsController implements Initializable {
     @FXML private Button goToSaloonButton ;
     @FXML private Button cancelAppointmentButton ;
 
-    private String LIST_ITEM_RES = "com/example/demo/client_see_appointments_list_item.fxml" ;
+    private String LIST_ITEM_RES = "com/example/demo/MyBarber_1/ListItem/client_see_appointments_list_item.fxml";
 
 
     private String[] dateArray = {""} ;

@@ -18,8 +18,8 @@ public class LoginScreenController {
     private Stage stage;
     private Scene scene;
 
-    private final String THIS_SCENE_NAME = "com/example/demo/login_screen.fxml" ;
-    private final String REGISTER_SCREEN_NAME = "com/example/demo/register_screen.fxml" ;
+    private final String THIS_SCENE_NAME = "com/example/demo/MyBarber_1/General/login_screen.fxml";
+    private final String REGISTER_SCREEN_NAME = "com/example/demo/MyBarber_1/General/register_screen.fxml";
 
     @FXML Button loginButton ;
     @FXML Button registerButton ;

@@ -16,9 +16,10 @@ import java.io.IOException;
 
 public class TakeAppointmentClientController {
 
-    final static String APPOINTMENT_SALOON_ITEM = "com/example/demo/take_saloon_item.fxml";
+    private static final String APPOINTMENT_SALOON_ITEM = "com/example/demo/MyBarber_1/ListItem/take_saloon_item.fxml";
+    private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_saloon.fxml" ;
 
-    ListView listView;
+    private ListView listView;
 
     @FXML
     private Button saloonNextButton;
@@ -35,8 +36,8 @@ public class TakeAppointmentClientController {
     @FXML
     public void onButtonSaloonClicked(ActionEvent actionEvent) throws IOException {
         Button sourceButton = (Button) actionEvent.getSource();
-        Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/take_saloon.fxml"))).load();
-        // FXMLLoader node = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/take_saloon.fxml"));
+        Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
+        // FXMLLoader node = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/client_take_saloon.fxml"));
         listView = (ListView) newCenterNode.lookup("#saloonListView");
         onLoadListItems(listView, APPOINTMENT_SALOON_ITEM);
         Scene myScene = (Scene) sourceButton.getScene();

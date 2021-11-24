@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.ObservableListNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
@@ -16,15 +14,15 @@ import java.io.IOException;
 
 public class ClientMenuController {
 
-    private final String SEE_APPOINTMENTS_SCREEN_NAME = "com/example/demo/client_see_appointments.fxml" ;
-    private final String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/buy_product.fxml";
-    private final String CLIENT_HOME_SCREEN_NAME = "com/example/demo/client_home.fxml" ;
-    private final String CLIENT_CART_SCREEN_NAME = "com/example/demo/client_cart.fxml";
-    private final String USER_AREA_SCREEN_NAME = "com/example/demo/user_area.fxml" ;
+    private final String SEE_APPOINTMENTS_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_see_appointments.fxml";
+    private final String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_buy_product.fxml";
+    private final String CLIENT_HOME_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_home.fxml";
+    private final String CLIENT_CART_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_cart.fxml";
+    private final String USER_AREA_SCREEN_NAME = "com/example/demo/MyBarber_1/General/user_area.fxml";
 
 
-    private final String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/take_appointment_client.fxml";
-    private final String TAKE_SALOON_SCREEN_NAME ="com/example/demo/take_saloon.fxml";
+    private final String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_appointment.fxml";
+    private final String TAKE_SALOON_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_saloon.fxml";
 
     @FXML
     private MenuBar clientMenuBar ;

@@ -10,9 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
+    private static final String OPEN_SCREEN_NAME = "com/example/demo/MyBarber_1/General/open_screen.fxml" ;
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/open_screen.fxml")) ;
+        FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource(OPEN_SCREEN_NAME)) ;
         Scene scene = new Scene(root.load());
         Image icon = new Image(new File("images/AppLogo_icon.png").toURI().toString());
         stage.getIcons().add(icon);

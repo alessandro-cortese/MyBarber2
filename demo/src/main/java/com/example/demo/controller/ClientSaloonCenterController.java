@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class ClientSaloonCenterController {
 
-    private static final String CLIENT_BOOKED_SCREEN_NAME = "com/example/demo/client_booked.fxml" ;
+    private static final String CLIENT_BOOKED_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_booked.fxml";
 
     @FXML
     private Button bookedButton;

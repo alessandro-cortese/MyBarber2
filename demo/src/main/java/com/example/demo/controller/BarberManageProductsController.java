@@ -19,8 +19,8 @@ import java.util.ResourceBundle;
 
 public class BarberManageProductsController implements Initializable {
 
-    private static final String LIST_ITEM_RES = "com/example/demo/buy_product_list_item.fxml" ;
-    private static final String MODIFY_PRODUCT_SCREEN_NAME = "com/example/demo/barber_add_product.fxml" ;
+    private static final String LIST_ITEM_RES = "com/example/demo/MyBarber_1/ListItem/client_buy_product_list_item.fxml";
+    private static final String MODIFY_PRODUCT_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_add_product.fxml";
 
     @FXML ListView<Node> sellProductListView ;
     @FXML Button addProductButton ;

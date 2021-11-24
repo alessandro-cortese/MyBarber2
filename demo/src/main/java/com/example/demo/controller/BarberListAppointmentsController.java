@@ -15,7 +15,7 @@ public class BarberListAppointmentsController implements Initializable {
 
     @FXML private ListView<Node> appointmentsListView;
 
-    private static final String BARBER_APPOINTMENTS_LIST_ITEM = "com/example/demo/barber_appointments_item.fxml" ;
+    private static final String BARBER_APPOINTMENTS_LIST_ITEM = "com/example/demo/MyBarber_1/ListItem/barber_appointments_item.fxml";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

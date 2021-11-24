@@ -15,6 +15,8 @@ public class OpenScreenController {
     private Stage stage;
     private Scene scene;
 
+    private static final String LOGIN_SCREEN_NAME = "com/example/demo/MyBarber_1/General/login_screen.fxml" ;
+
     @FXML
     public void onStartClick(ActionEvent event) throws IOException {
         //Aggiunta sul BackStack
@@ -23,7 +25,7 @@ public class OpenScreenController {
         backController.pushPrevScene(sourceNode.getScene());
 
         //Cambio Scena
-        root = new FXMLLoader(getClass().getClassLoader().getResource("com/example/demo/login_screen.fxml")) ;
+        root = new FXMLLoader(getClass().getClassLoader().getResource(LOGIN_SCREEN_NAME)) ;
         stage = (Stage)(sourceNode.getScene().getWindow()) ;
         scene = new Scene(root.load()) ;
         stage.setScene(scene) ;

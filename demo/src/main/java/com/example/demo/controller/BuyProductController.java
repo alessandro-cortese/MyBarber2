@@ -15,7 +15,7 @@ public class BuyProductController implements Initializable {
 
     @FXML private ListView buyProductListView ;
 
-    private static final String LIST_ITEM_RES = "com/example/demo/buy_product_list_item.fxml" ;
+    private static final String LIST_ITEM_RES = "com/example/demo/MyBarber_1/ListItem/client_buy_product_list_item.fxml";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
