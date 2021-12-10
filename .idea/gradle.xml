@@ -7,11 +7,30 @@
         <option name="delegatedBuild" value="false" />
         <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/View2" />
+        <option name="gradleJvm" value="temurin-16" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ApplicationController" />
+            <option value="$PROJECT_DIR$/Model" />
+            <option value="$PROJECT_DIR$/View2" />
+            <option value="$PROJECT_DIR$/demo" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/demo" />
         <option name="gradleJvm" value="temurin-16" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ApplicationController" />
+            <option value="$PROJECT_DIR$/Model" />
+            <option value="$PROJECT_DIR$/View2" />
             <option value="$PROJECT_DIR$/demo" />
           </set>
         </option>

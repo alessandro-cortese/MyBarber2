@@ -1,4 +1,4 @@
-module com.example.demo {
+module it.barbergroup.view1 {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -9,6 +9,8 @@ module com.example.demo {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+
+    requires it.barbergroup.applicationcontroller;
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;

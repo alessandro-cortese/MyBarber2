@@ -1,2 +1,5 @@
 rootProject.name = 'MyBarber2'
 include 'demo'
+include 'Model'
+include 'ApplicationController'
+include 'View2'

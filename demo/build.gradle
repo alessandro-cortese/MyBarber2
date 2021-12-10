@@ -44,6 +44,9 @@ dependencies {
         exclude(group: 'org.openjfx')
     }
 
+    //Import del modulo ApplicationController
+    implementation project(':ApplicationController')
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
