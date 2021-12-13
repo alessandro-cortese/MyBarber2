@@ -13,4 +13,6 @@ module it.barbergroup.view2 {
 
     opens it.barbergroup.view2 to javafx.fxml;
     exports it.barbergroup.view2;
+    exports it.barbergroup.view2.General;
+    opens it.barbergroup.view2.General to javafx.fxml;
 }
