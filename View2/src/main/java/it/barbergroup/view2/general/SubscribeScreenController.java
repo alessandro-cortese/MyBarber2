@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.util.Map;
+import java.util.Map.Entry;
 
 public class SubscribeScreenController {
 
@@ -30,7 +30,7 @@ public class SubscribeScreenController {
                 "set type", userTypeField) ;
     }
 
-    private final String registerString = "register" ;
+    private final static String registerString = "register" ;
 
 
     @FXML
@@ -42,7 +42,7 @@ public class SubscribeScreenController {
 
 
         if (commandText.startsWith("set")) {
-            for (Map.Entry<String, TextField> entry : textFieldMap.entrySet()) {
+            for (Entry<String, TextField> entry : textFieldMap) {
                 String command = entry.getKey();
                 if (commandText.startsWith(command)) {
                     String input = commandText.replace(command + " ", "") ;

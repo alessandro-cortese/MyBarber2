@@ -10,9 +10,9 @@ import java.io.IOException;
 
 public class TimePicker extends TextInputDialog {
 
-    private final static String TIME_PICKER_RES = "timepicker/time_picker.fxml";
-    private final static String HOUR_SLIDER_ID = "hourSlider" ;
-    private final static String MINUTE_SLIDER_ID = "minuteSlider" ;
+    private static final String TIME_PICKER_RES = "timepicker/time_picker.fxml";
+    private static final String HOUR_SLIDER_ID = "hourSlider" ;
+    private static final String MINUTE_SLIDER_ID = "minuteSlider" ;
 
     public TimePicker(int firstHour, int lastHour) throws IOException {
         super();

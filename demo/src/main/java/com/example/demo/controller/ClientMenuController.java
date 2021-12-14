@@ -14,10 +14,10 @@ import java.io.IOException;
 
 public class ClientMenuController {
 
-    private final static String SEE_APPOINTMENTS_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_see_appointments.fxml";
-    private final static String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_buy_product.fxml";
-    private final static String CLIENT_CART_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_cart.fxml";
-    private final static String USER_AREA_SCREEN_NAME = "com/example/demo/MyBarber_1/General/user_area.fxml";
+    private static final String SEE_APPOINTMENTS_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_see_appointments.fxml";
+    private static final String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_buy_product.fxml";
+    private static final String CLIENT_CART_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_cart.fxml";
+    private static final String USER_AREA_SCREEN_NAME = "com/example/demo/MyBarber_1/General/user_area.fxml";
 
 
     private final static String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_appointment.fxml";

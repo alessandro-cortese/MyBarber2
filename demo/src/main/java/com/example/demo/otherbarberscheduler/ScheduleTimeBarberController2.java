@@ -51,8 +51,8 @@ public class ScheduleTimeBarberController2 {
 
         for (SchedulerRowController schedulerRowControllerController : schedulerRowControllerArray) {
 
-            System.out.println(schedulerRowControllerController.getOpenStatus().getKey());
-            System.out.println(schedulerRowControllerController.getOpenStatus().getValue());
+            System.err.println(schedulerRowControllerController.getOpenStatus().getKey());
+            System.err.println(schedulerRowControllerController.getOpenStatus().getValue());
         }
     }
 
