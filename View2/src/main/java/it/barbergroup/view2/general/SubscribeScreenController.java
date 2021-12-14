@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class SubscribeScreenController {
@@ -30,60 +31,75 @@ public class SubscribeScreenController {
                 "set type", userTypeField) ;
     }
 
-    private final static String registerString = "register" ;
 
 
     @FXML
     public void onCommand() {
         String commandText = subscribeCommandLine.getText();
+
         subscribeCommandLine.setStyle(null);
         subscribeCommandLine.setText("");
-        initMap();
-
 
         if (commandText.startsWith("set")) {
-            for (Entry<String, TextField> entry : textFieldMap) {
-                String command = entry.getKey();
-                if (commandText.startsWith(command)) {
-                    String input = commandText.replace(command + " ", "") ;
-                    if(input.compareTo(command) != 0) {
-                        entry.getValue().setText(input);
-                        return ;
-                    }
-                }
-            }
-
+            if (setCommand(commandText)) return;
         }
+
         else if (commandText.startsWith("type")) {
-            String input = commandText.replace("type ", "") ;
-            if (input.compareTo("B") == 0 || input.compareTo("C") == 0) {
-                userTypeField.setText(input);
-                return ;
-            }
-
+            if (typeCommand(commandText)) return ;
         }
-        else if (commandText.startsWith(registerString)) {
-            String output = "";
-            if (commandText.compareTo(registerString) == 0) {
-                output = "normalRegister" ;
-            }
-            else if (commandText.compareTo(registerString + " google") == 0) {
-                output = "googleRegister" ;
-            }
-            else if (commandText.compareTo(registerString + " facebook") == 0) {
-                output = "facebookRegister" ;
-            }
-            else {
-                subscribeCommandLine.setStyle("-fx-border-color: red");
-                return ;
-            }
-            System.out.println(output);
-            return;
+        else if (commandText.startsWith("register")) {
+            if (registerCommand(commandText)) return ;
         }
 
         subscribeCommandLine.setStyle("-fx-border-color: red");
+    }
 
+    private boolean setCommand(String insertedCommand) {
+        initMap();
+        for (Entry<String, TextField> entry : textFieldMap.entrySet()) {
+            System.out.println(entry.getKey());
+            String command = entry.getKey();
+            if (insertedCommand.startsWith(command)) {
+                System.out.println("entrato");
+                String input = insertedCommand.replace(command + " ", "");
+                System.out.println(input + "***" + command);
+                if (input.compareTo(command) != 0) {
+                    System.out.println("entrato2");
+                    entry.getValue().setText(input);
+                    return true;
+                }
+            }
+        }
+        return false ;
+    }
 
+    private boolean typeCommand(String command) {
+        String input = command.replace("type ", "") ;
+        if (input.compareTo("B") == 0 || input.compareTo("C") == 0) {
+            userTypeField.setText(input);
+            return true;
+        }
+        return false ;
+    }
+
+    private boolean registerCommand(String command) {
+        String registerString = "register" ;
+        String output = "";
+        boolean handled = false ;
+        if (command.compareTo(registerString) == 0) {
+            output = "normalRegister" ;
+            handled = true ;
+        }
+        else if (command.compareTo(registerString + " google") == 0) {
+            output = "googleRegister" ;
+            handled = true ;
+        }
+        else if (command.compareTo(registerString + " facebook") == 0) {
+            output = "facebookRegister" ;
+            handled = true ;
+        }
+        System.err.println(output);
+        return handled;
     }
 
 

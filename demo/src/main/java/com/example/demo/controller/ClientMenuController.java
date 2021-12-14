@@ -20,7 +20,7 @@ public class ClientMenuController {
     private static final String USER_AREA_SCREEN_NAME = "com/example/demo/MyBarber_1/General/user_area.fxml";
 
 
-    private final static String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_appointment.fxml";
+    private static final String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_appointment.fxml";
 
     @FXML
     private MenuBar clientMenuBar ;
