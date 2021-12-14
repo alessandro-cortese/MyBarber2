@@ -20,10 +20,8 @@ public class ClientSeeAppointmentsController implements Initializable {
     @FXML private Button goToSaloonButton ;
     @FXML private Button cancelAppointmentButton ;
 
-    private String LIST_ITEM_RES = "com/example/demo/MyBarber_1/ListItem/client_see_appointments_list_item.fxml";
+    private static final String LIST_ITEM_RES = "com/example/demo/MyBarber_1/ListItem/client_see_appointments_list_item.fxml";
 
-
-    private String[] dateArray = {""} ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,9 +46,7 @@ public class ClientSeeAppointmentsController implements Initializable {
             }
         }
         ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
-        //ObservableList<String> couples = FXCollections.observableArrayList("Alla vita non è concesso in sorte di riveder se stessa nella morte".split(" ")) ;
         appointmentsListView.setItems(clientAppointmentsList);
-        //appointmentsListView.setCellFactory(param -> new ListCellFactory());
         cancelAppointmentButtonManage(false) ;
     }
 

@@ -1,4 +1,4 @@
-package PricePicker;
+package pricepicker;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class PricePicker extends TextInputDialog {
 
-    private static final String PRICE_PICKER_RES = "PricePicker/price_picker.fxml" ;
+    private static final String PRICE_PICKER_RES = "pricepicker/price_picker.fxml";
     private static final String INTEGER_SPINNER_ID = "integerSpinner";
     private static final String CENTS_SPINNER_ID = "centsSpinner";
 

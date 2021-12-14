@@ -17,11 +17,7 @@ import static com.example.demo.controller.EnterAsUserTypeController.CLIENT_TYPE;
 
 public class RegisterScreenController {
 
-    private FXMLLoader root;
-    private Stage stage;
-    private Scene scene;
 
-    private String THIS_SCENE_NAME = "com/example/demo/MyBarber_1/General/register_screen.fxml";
 
     public static final String CLIENT_MENU_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_menu.fxml";
     public static final String BARBER_MENU_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_menu.fxml"; //con final indico la variabile è costante
@@ -55,16 +51,15 @@ public class RegisterScreenController {
 
     private void onRegisterButtonClicked(Node sourceNode) throws IOException {
         BackController.getInstance().pushPrevScene(sourceNode.getScene());
-        //BackController.getInstance().pushPrevScene(sourceNode.getScene());
 
         //Vedo tipo di utente selezionato in base al RadioButton
         int userType = clientTypeRadioButton.isSelected() ? CLIENT_TYPE : BARBER_TYPE ;
         String nextSceneName = clientTypeRadioButton.isSelected() ? CLIENT_MENU_SCREEN_NAME : BARBER_MENU_SCREEN_NAME ;
 
         //Scelgo prossima scena e la imposto nello Stage
-        root = new FXMLLoader(getClass().getClassLoader().getResource(nextSceneName)) ;
-        stage = (Stage)(sourceNode).getScene().getWindow() ;
-        scene = new Scene(root.load()) ;
+        FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource(nextSceneName));
+        Stage stage = (Stage) (sourceNode).getScene().getWindow();
+        Scene scene = new Scene(root.load());
 
         //Carico la HomeCorretta nella VBox del MenuScreen
         (new EnterAsUserTypeController()).enterAsUser(userType, scene);

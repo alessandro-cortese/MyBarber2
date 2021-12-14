@@ -14,11 +14,8 @@ public class EnterAsUserTypeController {
     public static final String BARBER_HOME_SCREEN = "com/example/demo/MyBarber_1/Barber/barber_home.fxml";
     public static final String CLIENT_HOME_SCREEN = "com/example/demo/MyBarber_1/Client/client_home.fxml";
 
-    public static final String CLIENT_SCREEN_CHANGER = "clientScreenChanger" ;
-    public static final String BARBER_SCREEN_CHANGER = "barberScreenChanger" ;
-
     public void enterAsUser(int userType, Scene mainScene) throws IOException {
-        BorderPane container = (BorderPane) mainScene.getRoot() ; ;
+        BorderPane container = (BorderPane) mainScene.getRoot() ;
         String mainScreen ;
         if (userType == CLIENT_TYPE) {
             mainScreen = CLIENT_HOME_SCREEN ;

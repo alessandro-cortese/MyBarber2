@@ -1,6 +1,6 @@
-package com.example.demo.OtherBarberScheduler;
+package com.example.demo.otherbarberscheduler;
 
-import TimePicker.TimePicker;
+import timepicker.TimePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;

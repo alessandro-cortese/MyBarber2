@@ -1,17 +1,13 @@
-package com.example.demo.OtherBarberScheduler;
+package com.example.demo.otherbarberscheduler;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
 
-public class ScheduleTimeBarberController_2 {
+public class ScheduleTimeBarberController2 {
 
     /*
         Si prendono le righe che sono state incluse e a cui è stato dato id, vedere il codice FXML per

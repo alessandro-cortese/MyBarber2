@@ -11,10 +11,6 @@ import java.io.IOException;
 
 public class OpenScreenController {
 
-    private FXMLLoader root;
-    private Stage stage;
-    private Scene scene;
-
     private static final String LOGIN_SCREEN_NAME = "com/example/demo/MyBarber_1/General/login_screen.fxml" ;
 
     @FXML
@@ -25,9 +21,9 @@ public class OpenScreenController {
         backController.pushPrevScene(sourceNode.getScene());
 
         //Cambio Scena
-        root = new FXMLLoader(getClass().getClassLoader().getResource(LOGIN_SCREEN_NAME)) ;
-        stage = (Stage)(sourceNode.getScene().getWindow()) ;
-        scene = new Scene(root.load()) ;
+        FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource(LOGIN_SCREEN_NAME));
+        Stage stage = (Stage) (sourceNode.getScene().getWindow());
+        Scene scene = new Scene(root.load());
         stage.setScene(scene) ;
     }
 }

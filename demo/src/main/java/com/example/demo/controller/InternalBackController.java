@@ -14,7 +14,7 @@ public class InternalBackController {
     private static InternalBackController internalBackController ;
 
     private InternalBackController() {
-        this.internalNodeStack = new ArrayList<Node>() ;
+        this.internalNodeStack = new ArrayList<>() ;
     }
 
     public static InternalBackController getInternalBackControllerInstance() {

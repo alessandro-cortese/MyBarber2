@@ -12,9 +12,6 @@ public class BackController {
     private static BackController backController ;
     private final ArrayList<Scene> prevSceneStack;
 
-    private Stage stage ;
-    private Scene scene ;
-
     private BackController() {
         /*
             Creazione dello stack di gestione del back.
@@ -30,8 +27,8 @@ public class BackController {
             2. Prendo la scena sulla cima dello stack che è la scena che devo reinserire sullo Stage
             3. Reinserisco la Scena prelevata sullo Stage
          */
-        stage = (Stage)(sourceNode).getScene().getWindow() ;
-        scene = prevSceneStack.remove(prevSceneStack.size() - 1) ;
+        Stage stage = (Stage) (sourceNode).getScene().getWindow();
+        Scene scene = prevSceneStack.remove(prevSceneStack.size() - 1);
         stage.setScene(scene) ;
     }
 

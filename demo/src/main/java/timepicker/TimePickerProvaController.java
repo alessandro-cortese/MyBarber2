@@ -1,4 +1,4 @@
-package TimePicker;
+package timepicker;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

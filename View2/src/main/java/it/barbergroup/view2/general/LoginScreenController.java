@@ -1,4 +1,4 @@
-package it.barbergroup.view2.General;
+package it.barbergroup.view2.general;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

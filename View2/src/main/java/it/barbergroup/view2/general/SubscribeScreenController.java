@@ -1,4 +1,4 @@
-package it.barbergroup.view2.General;
+package it.barbergroup.view2.general;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -7,18 +7,6 @@ import javafx.scene.control.TextField;
 import java.util.Map;
 
 public class SubscribeScreenController {
-
-    private static final String[] subscribeCommands = {
-            "set name",
-            "set surname",
-            "set email",
-            "set address",
-            "set password",
-            "type",
-            "register",
-            "google register",
-            "facebook register",
-            "back"} ;
 
 
     @FXML TextField subscribeCommandLine;
@@ -41,6 +29,8 @@ public class SubscribeScreenController {
                 "set password", subscribePasswordField,
                 "set type", userTypeField) ;
     }
+
+    private final String registerString = "register" ;
 
 
     @FXML
@@ -72,15 +62,15 @@ public class SubscribeScreenController {
             }
 
         }
-        else if (commandText.startsWith("register")) {
+        else if (commandText.startsWith(registerString)) {
             String output = "";
-            if (commandText.compareTo("register") == 0) {
+            if (commandText.compareTo(registerString) == 0) {
                 output = "normalRegister" ;
             }
-            else if (commandText.compareTo("register google") == 0) {
+            else if (commandText.compareTo(registerString + " google") == 0) {
                 output = "googleRegister" ;
             }
-            else if (commandText.compareTo("register facebook") == 0) {
+            else if (commandText.compareTo(registerString + " facebook") == 0) {
                 output = "facebookRegister" ;
             }
             else {

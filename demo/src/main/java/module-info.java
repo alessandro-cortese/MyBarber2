@@ -17,9 +17,9 @@ module it.barbergroup.view1 {
     exports com.example.demo.controller;
     opens com.example.demo.controller to javafx.fxml;
 
-    exports TimePicker;
-    opens TimePicker to javafx.fxml;
+    exports timepicker;
+    opens timepicker to javafx.fxml;
 
-    exports com.example.demo.OtherBarberScheduler;
-    opens com.example.demo.OtherBarberScheduler to javafx.fxml;
+    exports com.example.demo.otherbarberscheduler;
+    opens com.example.demo.otherbarberscheduler to javafx.fxml;
 }

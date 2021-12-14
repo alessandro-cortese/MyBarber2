@@ -1,17 +1,15 @@
 package com.example.demo.controller;
 
-import TimePicker.TimePicker;
+import timepicker.TimePicker;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
@@ -159,7 +157,6 @@ public class BarberScheduleTimeController {
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
-        FXMLLoader fxmlLoader;
 
         if(sourceButton.getId().equals("saveButton")){
             InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());
@@ -174,7 +171,7 @@ public class BarberScheduleTimeController {
         CheckBox localCheckBox = (CheckBox) event.getSource();
         this.extractedCheckBox();
         this.extractedTextField();
-        int i = 0;
+        int i;
         boolean flag = true;
         int index = 0;
 
@@ -203,8 +200,8 @@ public class BarberScheduleTimeController {
     public void onChangeTime(MouseEvent event) throws IOException {
         TextField textField = (TextField) event.getSource();
         this.extractedTextField();
-        int i = 0;
-        int j = 0;
+        int i;
+        int j;
         int rawIndex = 0;
         boolean flag = true;
 

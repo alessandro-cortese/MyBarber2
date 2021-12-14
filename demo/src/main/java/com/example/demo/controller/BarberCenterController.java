@@ -22,7 +22,7 @@ public class BarberCenterController implements Initializable {
     @FXML private Button modifyButton;
     @FXML private Button removeCenterButton;
 
-    private String BARBER_CENTER_LIST_ITEM = "com/example/demo/MyBarber_1/Client/center_list_item.fxml";
+    private static final String BARBER_CENTER_LIST_ITEM = "com/example/demo/MyBarber_1/Client/center_list_item.fxml";
 
     private static final String ADD_BARBER_CENTER_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_add_center.fxml";
     private static final String BARBER_MODIFY_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_modify_center.fxml";

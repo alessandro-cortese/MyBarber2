@@ -41,10 +41,4 @@ public class BarberModifyCenter {
         }
     }
 
-    private void changeBorderPane(Scene scene, String string) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(string));
-        BorderPane myBorderPane = (BorderPane) scene.getRoot();
-        myBorderPane.setCenter(fxmlLoader.load());
-    }
-
 }

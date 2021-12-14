@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    private static final String LOGIN_SCREEN = "it/barbergroup/view2/General/login_screen.fxml";
+    private static final String LOGIN_SCREEN = "it/barbergroup/view2/general/login_screen.fxml";
 
     @Override
     public void start(Stage stage) throws IOException {

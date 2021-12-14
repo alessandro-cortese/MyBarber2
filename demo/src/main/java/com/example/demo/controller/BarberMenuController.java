@@ -32,7 +32,6 @@ public class BarberMenuController {
 
 
     private static final String ADD_BARBER_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_add_center.fxml";
-    private static final String BARBER_HOME_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_home.fxml";
     private static final String BARBER_CENTER_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_centers.fxml";
     private static final String ADD_SERVICE_BARBER_SCREEN_NAME = "com/example/demo/MyBarber_1/Barber/barber_add_service.fxml";
     private static final String USER_AREA_SCREEN_NAME = "com/example/demo/MyBarber_1/General/user_area.fxml";
@@ -43,7 +42,6 @@ public class BarberMenuController {
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Node sourceNode = (Node) event.getSource() ;
-        BorderPane clientBorderPane = (BorderPane) barberMenuBar.getScene().getRoot();
         if (sourceNode == logoutButton) {
             BackController.getInstance().onBackClick((Node) event.getSource());
             InternalBackController.getInternalBackControllerInstance().emptyStack();

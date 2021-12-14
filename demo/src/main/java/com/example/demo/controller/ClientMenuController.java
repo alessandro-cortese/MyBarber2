@@ -14,15 +14,13 @@ import java.io.IOException;
 
 public class ClientMenuController {
 
-    private final String SEE_APPOINTMENTS_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_see_appointments.fxml";
-    private final String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_buy_product.fxml";
-    private final String CLIENT_HOME_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_home.fxml";
-    private final String CLIENT_CART_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_cart.fxml";
-    private final String USER_AREA_SCREEN_NAME = "com/example/demo/MyBarber_1/General/user_area.fxml";
+    private final static String SEE_APPOINTMENTS_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_see_appointments.fxml";
+    private final static String BUY_PRODUCT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_buy_product.fxml";
+    private final static String CLIENT_CART_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_cart.fxml";
+    private final static String USER_AREA_SCREEN_NAME = "com/example/demo/MyBarber_1/General/user_area.fxml";
 
 
-    private final String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_appointment.fxml";
-    private final String TAKE_SALOON_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_saloon.fxml";
+    private final static String TAKE_APPOINTMENT_SCREEN_NAME = "com/example/demo/MyBarber_1/Client/client_take_appointment.fxml";
 
     @FXML
     private MenuBar clientMenuBar ;
@@ -40,7 +38,6 @@ public class ClientMenuController {
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Node sourceNode = (Node)event.getSource() ;
-        BorderPane clientBorderPane = (BorderPane) clientMenuBar.getScene().getRoot();
         if (sourceNode == logoutButton) {
             InternalBackController.getInternalBackControllerInstance().emptyStack();
             BackController.getInstance().onBackClick(sourceNode);
