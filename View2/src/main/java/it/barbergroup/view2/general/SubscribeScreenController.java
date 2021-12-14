@@ -40,15 +40,14 @@ public class SubscribeScreenController {
         subscribeCommandLine.setStyle(null);
         subscribeCommandLine.setText("");
 
-        if (commandText.startsWith("set")) {
-            if (setCommand(commandText)) return;
+        if (commandText.startsWith("set") && setCommand(commandText)) {
+            return;
         }
-
-        else if (commandText.startsWith("type")) {
-            if (typeCommand(commandText)) return ;
+        else if (commandText.startsWith("type") && typeCommand(commandText)) {
+            return ;
         }
-        else if (commandText.startsWith("register")) {
-            if (registerCommand(commandText)) return ;
+        else if (commandText.startsWith("register") && registerCommand(commandText)) {
+            return ;
         }
 
         subscribeCommandLine.setStyle("-fx-border-color: red");
@@ -57,14 +56,10 @@ public class SubscribeScreenController {
     private boolean setCommand(String insertedCommand) {
         initMap();
         for (Entry<String, TextField> entry : textFieldMap.entrySet()) {
-            System.out.println(entry.getKey());
             String command = entry.getKey();
             if (insertedCommand.startsWith(command)) {
-                System.out.println("entrato");
                 String input = insertedCommand.replace(command + " ", "");
-                System.out.println(input + "***" + command);
                 if (input.compareTo(command) != 0) {
-                    System.out.println("entrato2");
                     entry.getValue().setText(input);
                     return true;
                 }
@@ -84,21 +79,16 @@ public class SubscribeScreenController {
 
     private boolean registerCommand(String command) {
         String registerString = "register" ;
-        String output = "";
         boolean handled = false ;
         if (command.compareTo(registerString) == 0) {
-            output = "normalRegister" ;
             handled = true ;
         }
         else if (command.compareTo(registerString + " google") == 0) {
-            output = "googleRegister" ;
             handled = true ;
         }
         else if (command.compareTo(registerString + " facebook") == 0) {
-            output = "facebookRegister" ;
             handled = true ;
         }
-        System.err.println(output);
         return handled;
     }
 
