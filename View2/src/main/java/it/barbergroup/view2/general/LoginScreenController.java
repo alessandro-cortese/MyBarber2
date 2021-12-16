@@ -2,13 +2,9 @@ package it.barbergroup.view2.general;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -28,22 +24,26 @@ public class LoginScreenController {
         String commandText = commandLine.getText() ;
         commandLine.setStyle(null);
         commandLine.setText("");
-        if (commandText.startsWith(commands[0])) {
+        if (commandText.startsWith("set email")) {
             String username = commandText.replace(commands[0] + " ", "") ;
-            emailField.setText(username);
+            if (username.compareTo(commands[0]) != 0) {
+                emailField.setText(username);
+            }
         }
-        else if (commandText.startsWith(commands[1])){
+        else if (commandText.startsWith("set password")) {
             String password = commandText.replace(commands[1] + " ", "") ;
-            passwordField.setText(password);
+            if (password.compareTo(commands[0]) != 0) {
+                passwordField.setText(password);
+            }
         }
-        else if (commandText.startsWith(commands[2])) {
-
+        else if (commandText.compareTo("not login") == 0) {
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_HOME_SCREEN);
         }
-        else if (commandText.startsWith(commands[3])) {
-            Stage myStage = (Stage)((Node) event.getSource()).getScene().getWindow() ;
-            FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource("it/barbergroup/view2/General/subscribe_screen.fxml")) ;
-            Scene myScene = new Scene(root.load()) ;
-            myStage.setScene(myScene);
+        else if (commandText.compareTo("subscribe") == 0) {
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.SUBSCRIBE_SCREEN);
+        }
+        else if (commandText.compareTo("submit") == 0) {
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_HOME_SCREEN);
         }
 
         else {

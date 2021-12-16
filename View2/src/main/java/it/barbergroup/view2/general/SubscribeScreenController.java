@@ -1,5 +1,6 @@
 package it.barbergroup.view2.general;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -27,14 +28,13 @@ public class SubscribeScreenController {
                 "set surname", surnameField,
                 "set email", subscribeEmailField,
                 "set address", addressField,
-                "set password", subscribePasswordField,
-                "set type", userTypeField) ;
+                "set password", subscribePasswordField) ;
     }
 
 
 
     @FXML
-    public void onCommand() {
+    public void onCommand(ActionEvent event) {
         String commandText = subscribeCommandLine.getText();
 
         subscribeCommandLine.setStyle(null);
@@ -47,6 +47,10 @@ public class SubscribeScreenController {
             return ;
         }
         else if (commandText.startsWith("register") && registerCommand(commandText)) {
+            return ;
+        }
+        else if (commandText.compareTo("back") == 0) {
+            ScreenChanger.getInstance().onBack(event);
             return ;
         }
 
