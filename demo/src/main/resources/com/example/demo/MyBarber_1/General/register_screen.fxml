@@ -40,12 +40,6 @@
                               <TextField prefWidth="200.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER">
-                           <children>
-                              <Label prefWidth="200.0" text="Indirizzo" />
-                              <TextField prefWidth="200.0" />
-                           </children>
-                        </HBox>
                      </children>
                   </VBox>
                   <VBox spacing="15.0">
