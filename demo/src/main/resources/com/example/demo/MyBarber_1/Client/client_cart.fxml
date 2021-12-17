@@ -71,7 +71,7 @@
                   </HBox>
                   <HBox spacing="25.0">
                      <children>
-                        <Label prefWidth="100.0" text="Civicio" />
+                        <Label prefWidth="100.0" text="Civico" />
                         <TextField prefHeight="26.0" prefWidth="279.0" />
                      </children>
                   </HBox>
