@@ -18,7 +18,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(LOGIN_SCREEN));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("MyBarber");
 
         Image icon = new Image(new File("images/AppLogo_icon.png").toURI().toString());
         stage.getIcons().add(icon);

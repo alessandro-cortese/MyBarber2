@@ -5,19 +5,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class SubscribeScreenController {
 
 
-    @FXML TextField subscribeCommandLine;
-    @FXML TextField nameField ;
-    @FXML TextField surnameField ;
-    @FXML TextField addressField ;
-    @FXML TextField subscribeEmailField ;
-    @FXML PasswordField subscribePasswordField ;
-    @FXML TextField userTypeField ;
+    @FXML private TextField subscribeCommandLine;
+    @FXML private TextField nameField ;
+    @FXML private TextField surnameField ;
+    @FXML private TextField addressField ;
+    @FXML private TextField subscribeEmailField ;
+    @FXML private PasswordField subscribePasswordField ;
+    @FXML private TextField userTypeField ;
+    @FXML private TextField usernameField;
 
 
     private Map<String, TextField> textFieldMap ;
@@ -28,13 +30,14 @@ public class SubscribeScreenController {
                 "set surname", surnameField,
                 "set email", subscribeEmailField,
                 "set address", addressField,
-                "set password", subscribePasswordField) ;
+                "set password", subscribePasswordField,
+                "set username", usernameField) ;
     }
 
 
 
     @FXML
-    public void onCommand(ActionEvent event) {
+    public void onCommand(ActionEvent event) throws IOException {
         String commandText = subscribeCommandLine.getText();
 
         subscribeCommandLine.setStyle(null);
@@ -47,7 +50,10 @@ public class SubscribeScreenController {
             return ;
         }
         else if (commandText.startsWith("register") && registerCommand(commandText)) {
-            return ;
+            if (userTypeField.getText().compareTo("B") == 0) {
+                ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_HOME_SCREEN);
+                return ;
+            }
         }
         else if (commandText.compareTo("back") == 0) {
             ScreenChanger.getInstance().onBack(event);

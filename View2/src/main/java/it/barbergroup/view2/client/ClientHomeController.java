@@ -10,7 +10,7 @@ import java.io.IOException;
 public class ClientHomeController {
 
     @FXML
-    TextField commandLine ;
+    private TextField commandLine ;
 
     @FXML
     public void onCommand(ActionEvent event) throws IOException {
