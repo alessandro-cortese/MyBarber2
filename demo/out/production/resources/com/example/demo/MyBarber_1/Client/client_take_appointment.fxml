@@ -23,7 +23,7 @@
                               <Button fx:id="saloonNextButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
                            </children>
                         </VBox>
-                        <Label layoutX="157.0" layoutY="164.0" text=" Nome Salone" />
+                        <Label layoutX="172.0" layoutY="164.0" text=" Nome Salone" />
                      </children>
                   </AnchorPane>
             </content>
@@ -35,14 +35,10 @@
                         <VBox alignment="CENTER" layoutX="275.0" prefHeight="314.0" prefWidth="301.0" spacing="30.0" AnchorPane.topAnchor="40.0">
                            <children>
                               <TextField alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
-                              <TextField alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
-                              <TextField alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
                               <Button fx:id="treatmentNextButton" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
                            </children>
                         </VBox>
-                        <Label layoutX="136.0" layoutY="110.0" text=" Nome Trattamento" />
-                        <Label layoutX="228.0" layoutY="164.0" text="Luogo" />
-                        <Label layoutX="232.0" layoutY="219.0" text="Data" />
+                        <Label layoutX="235.0" layoutY="165.0" text="Città" />
                      </children>
                   </AnchorPane>
                </content>
