@@ -11,26 +11,26 @@ module it.barbergroup {
     requires eu.hansolo.tilesfx;
 
 
-    exports firstview;
-    exports firstview.pickers;
-    exports firstview.otherbarberscheduler;
-    exports firstview.general;
-    exports firstview.barber;
-    exports firstview.client;
-    opens firstview to javafx.fxml;
-    opens firstview.client to javafx.fxml;
-    opens firstview.barber to javafx.fxml;
-    opens firstview.general to javafx.fxml;
-    opens firstview.otherbarberscheduler to javafx.fxml;
-    opens firstview.pickers to javafx.fxml;
+    exports first_view;
+    exports first_view.pickers;
+    exports first_view.otherbarberscheduler;
+    exports first_view.general;
+    exports first_view.barber;
+    exports first_view.client;
+    opens first_view to javafx.fxml;
+    opens first_view.client to javafx.fxml;
+    opens first_view.barber to javafx.fxml;
+    opens first_view.general to javafx.fxml;
+    opens first_view.otherbarberscheduler to javafx.fxml;
+    opens first_view.pickers to javafx.fxml;
 
 
 
-    opens secondview to javafx.fxml;
-    exports secondview;
-    opens secondview.general to javafx.fxml;
-    opens secondview.barber to javafx.fxml;
-    opens secondview.client to javafx.fxml;
+    opens second_view to javafx.fxml;
+    exports second_view;
+    opens second_view.general to javafx.fxml;
+    opens second_view.barber to javafx.fxml;
+    opens second_view.client to javafx.fxml;
 
 
 }
