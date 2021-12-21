@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="729.0" spacing="25.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.otherbarberscheduler.SchedulerRowController">
+   <children>
+      <VBox prefHeight="66.0" prefWidth="362.0" spacing="5.0">
+         <children>
+            <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+               <children>
+                  <TextField fx:id="morningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </TextField>
+                  <TextField fx:id="morningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </HBox>
+            <CheckBox fx:id="morningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+               <children>
+                  <TextField fx:id="afternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </TextField>
+                  <TextField fx:id="afternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </HBox>
+            <CheckBox fx:id="afternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>
