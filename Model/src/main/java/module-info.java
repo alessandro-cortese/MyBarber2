@@ -1,2 +1,0 @@
-module it.barbergroup.model {
-}
