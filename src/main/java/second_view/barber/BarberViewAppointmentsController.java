@@ -9,6 +9,7 @@ public class BarberViewAppointmentsController {
     @FXML
     public void onCommand(ActionEvent event) {
 
+        System.out.println("Prova");
 
 
     }
