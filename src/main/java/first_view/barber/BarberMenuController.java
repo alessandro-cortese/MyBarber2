@@ -33,7 +33,7 @@ public class BarberMenuController {
     @FXML private Button backButton ;
 
 
-    private static final String ADD_BARBER_SCREEN_NAME = "first_view/barber/barber_add_center.fxml";
+    private static final String ADD_BARBER_SCREEN_NAME = "first_view/barber/barber_modify_center.fxml";
     private static final String BARBER_CENTER_SCREEN_NAME = "first_view/barber/barber_centers.fxml";
     private static final String ADD_SERVICE_BARBER_SCREEN_NAME = "first_view/barber/barber_add_service.fxml";
     private static final String USER_AREA_SCREEN_NAME = "first_view/general/user_area.fxml";
