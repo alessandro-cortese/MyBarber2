@@ -1,4 +1,4 @@
-package logic;
+package model;
 
 public class Service {
     private String name;

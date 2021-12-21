@@ -1,4 +1,4 @@
-package logic;
+package model;
 
 public class Saloon {
     private String name;

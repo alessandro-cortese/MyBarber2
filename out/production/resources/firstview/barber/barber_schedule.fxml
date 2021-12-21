@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1289.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="firstview.barber.BarberScheduleTimeController">
+   <children>
+      <Label layoutX="100.0" layoutY="25.0" prefHeight="39.0" prefWidth="233.0" text="Modifica Orari">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="42.0" layoutY="103.0" prefHeight="482.0" prefWidth="1204.0" spacing="35.0" style="-fx-background-color: white;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="466.0" prefWidth="287.0" spacing="5.0">
+               <children>
+                  <Label text="Giorno">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="20.0" prefWidth="86.0" text=" ">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="71.0" text="Lunedì">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="64.0" prefHeight="20.0" prefWidth="86.0" text=" ">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="107.0" prefHeight="28.0" prefWidth="77.0" text="Martedì">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="150.0" prefHeight="20.0" prefWidth="86.0" text=" ">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="193.0" prefHeight="32.0" prefWidth="110.0" text="Mercoledì">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="236.0" prefHeight="20.0" prefWidth="86.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="279.0" prefHeight="20.0" prefWidth="86.0" text="Giovedì">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="322.0" prefHeight="20.0" prefWidth="86.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="365.0" prefHeight="20.0" prefWidth="86.0" text="Venerdì">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="408.0" prefHeight="20.0" prefWidth="86.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="451.0" prefHeight="28.0" prefWidth="75.0" text="Sabato">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="494.0" prefHeight="20.0" prefWidth="86.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="465.0" prefWidth="372.0" spacing="10.0">
+               <children>
+                  <Label text="Mattina">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="28.0" prefWidth="372.0" spacing="15.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="183.0" text="Orario di Apertura">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="17.0" prefWidth="210.0" text="Orario di Chiusura">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="mondayMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="mondayMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="mondayMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="92.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="dayTwoMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="dayTwoMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="dayTwoMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="159.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="dayThreeMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="dayThreeMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="dayThreeMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="225.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="dayFourMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="dayFourMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="dayFourMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="292.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="dayFiveMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="dayFiveMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="dayFiveMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="358.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="daySixMorningOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="daySixMorningClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="daySixMorningCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox layoutX="630.0" layoutY="10.0" prefHeight="465.0" prefWidth="372.0" spacing="10.0">
+               <children>
+                  <Label text="Pomeriggio">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="28.0" prefWidth="372.0" spacing="15.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="183.0" text="Orario di Apertura">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="17.0" prefWidth="210.0" text="Orario di Chiusura">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="mondayAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="mondayAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="mondayAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="92.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="dayTwoAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="dayTwoAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="dayTwoAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="159.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="dayThreeAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="dayThreeAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="dayThreeAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="225.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="dayFourAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="dayFourAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="dayFourAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="292.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="dayFiveAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="dayFiveAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="dayFiveAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="358.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="372.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="daySixAfternoonOpen" editable="false" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="daySixAfternoonClose" editable="false" layoutX="10.0" layoutY="10.0" onAction="#onChangeTime" onMouseClicked="#onChangeTime">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="daySixAfternoonCheckBox" mnemonicParsing="false" onAction="#onCheckSelected" text="Chiuso">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button fx:id="saveButton" layoutX="1078.0" layoutY="633.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="44.0" prefWidth="131.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Salva">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
