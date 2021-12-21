@@ -25,10 +25,11 @@ public class ClientHomeController {
         }
         else if (command.startsWith(appointmentString)) {
             if (command.compareTo(appointmentString + " " + "take") == 0) {
+                ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_SEARCH_SALOON_SCREEN);
                 return ;
             }
             else if (command.compareTo(appointmentString + " " + "see") == 0) {
-                ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_SEE_APPOINTMENT);
+                ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_SEE_APPOINTMENT_SCREEN);
                 return ;
             }
         }
@@ -38,7 +39,7 @@ public class ClientHomeController {
                 return ;
             }
             else if (command.compareTo(productString + " " + "cart") == 0) {
-                ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_CART);
+                ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_CART_SCREEN);
                 return ;
             }
 

@@ -17,11 +17,16 @@ public class ScreenChanger {
     public static final String SUBSCRIBE_SCREEN = "second_view/general/subscribe_screen.fxml";
     public static final String CLIENT_BUY_PRODUCT_SCREEN = "second_view/client/client_buy_product.fxml";
     public static final String CLIENT_SEE_PRODUCT_SCREEN = "second_view/client/client_see_product.fxml";
-    public static final String CLIENT_CART = "second_view/client/client_cart.fxml";
-    public static final String CLIENT_SEE_APPOINTMENT = "second_view/client/client_see_appointment.fxml";
+    public static final String CLIENT_CART_SCREEN = "second_view/client/client_cart.fxml";
+    public static final String CLIENT_SEE_APPOINTMENT_SCREEN = "second_view/client/client_see_appointment.fxml";
     public static final String BARBER_USER_AREA_SCREEN = "second_view/barber/barber_userarea.fxml";
+
     public static final String BARBER_ADD_SERVICE_SCREEN_NAME = "second_view/barber/barber_add_service.fxml";
     public static final String BARBER_VIEW_APPOINTMENTS_SCREEN_NAME = "second_view/barber/barber_view_appointments.fxml" ;
+
+    public static final String CLIENT_SEARCH_SALOON_SCREEN = "second_view/client/client_search_saloon.fxml" ;
+    public static final String CLIENT_BOOK_APPOINTMENT_SCREEN = "second_view/client/client_book_appointment.fxml" ;
+
 
     ArrayList<Scene> backSceneStack ;
 
@@ -43,7 +48,7 @@ public class ScreenChanger {
         myStage.setScene(backSceneStack.remove(backSceneStack.size() - 1));
     }
 
-    public void setPrevScene(Scene prevScene) {
+    private void setPrevScene(Scene prevScene) {
         backSceneStack.add(prevScene) ;
     }
 
@@ -54,4 +59,6 @@ public class ScreenChanger {
         ScreenChanger.getInstance().setPrevScene(((Node) event.getSource()).getScene());
         myStage.setScene(myScene);
     }
+
+
 }
