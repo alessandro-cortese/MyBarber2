@@ -4,7 +4,15 @@ public class Saloon {
     private String name;
     private String city;
     private String address;
-    private int phone;
+    private String phone;
+
+    public Saloon(String name, String city, String address, String phone){
+        this.name=name;
+        this.address=address;
+        this.phone=phone;
+        this.city=city;
+
+    }
 
     public String getName(){
         return name;
@@ -24,10 +32,10 @@ public class Saloon {
     public  void  setAddress(String address){
         this.address = address;
     }
-    public int getPhone(){
+    public String getPhone(){
         return phone;
     }
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 }

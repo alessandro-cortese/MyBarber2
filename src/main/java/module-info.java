@@ -9,6 +9,7 @@ module it.barbergroup {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
 
     exports first_view;
