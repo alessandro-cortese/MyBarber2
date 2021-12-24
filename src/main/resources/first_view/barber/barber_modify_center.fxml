@@ -17,7 +17,7 @@
          <children>
             <VBox prefHeight="561.0" prefWidth="372.0" spacing="20.0">
                <children>
-                  <Label prefHeight="97.0" prefWidth="383.0" text="Modifica Centro">
+                  <Label prefHeight="97.0" prefWidth="383.0" text="Centro">
                      <font>
                         <Font size="38.0" />
                      </font>

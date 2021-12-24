@@ -17,7 +17,7 @@
          <children>
             <VBox prefHeight="561.0" prefWidth="372.0" spacing="20.0">
                <children>
-                  <Label prefHeight="97.0" prefWidth="383.0" text="Modifica Centro">
+                  <Label prefHeight="97.0" prefWidth="383.0" text="Centro">
                      <font>
                         <Font size="38.0" />
                      </font>
@@ -31,7 +31,6 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="561.0" prefWidth="508.0" spacing="5.0">
                <children>
-<<<<<<< Updated upstream
                   <Label prefHeight="132.0" prefWidth="149.0" />
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="129.0" prefHeight="80.0" prefWidth="508.0">
                      <children>
@@ -43,13 +42,6 @@
                         <TextField prefHeight="38.0" prefWidth="244.0" />
                      </children>
                   </HBox>
-=======
-                  <Label prefHeight="138.0" prefWidth="289.0" text="Nome Catena">
-                     <font>
-                        <Font size="32.0" />
-                     </font>
-                  </Label>
->>>>>>> Stashed changes
                   <HBox alignment="CENTER" prefHeight="80.0" prefWidth="508.0">
                      <children>
                         <Label prefHeight="37.0" prefWidth="189.0" text="Via:">
@@ -102,11 +94,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="471.0" prefHeight="80.0" prefWidth="508.0">
                      <children>
-<<<<<<< Updated upstream
                         <Label prefHeight="37.0" prefWidth="189.0" text="durata slot:">
-=======
-                        <Label prefHeight="37.0" prefWidth="189.0" text="numero slot:">
->>>>>>> Stashed changes
                            <font>
                               <Font size="28.0" />
                            </font>

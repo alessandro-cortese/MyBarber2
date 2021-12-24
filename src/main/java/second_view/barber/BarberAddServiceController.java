@@ -41,7 +41,7 @@ public class BarberAddServiceController {
 
     private boolean handlerSetCommand(String insertCommand){
 
-        String addServiceNewField = "";
+        String addServiceNewField;
         boolean flag = false;
 
         if(insertCommand.startsWith("set name")) {
