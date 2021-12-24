@@ -3,6 +3,7 @@ package model;
 public abstract class User {
     private  String email;
     private  String pass;
+    private int pointsCard;
 
     protected User(String email, String pass){
         this.email = email;
@@ -20,5 +21,11 @@ public abstract class User {
     }
     public void setPass(String pass){
         this.pass = pass;
+    }
+    public int getPointsCard(){
+        return pointsCard;
+    }
+    public void setPointsCard(int pointsCard){
+        this.pointsCard = pointsCard;
     }
 }
