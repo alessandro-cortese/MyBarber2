@@ -10,7 +10,14 @@ public class SaloonBean {
 
     public SaloonBean(){} //CONSTRUCTOR-NO ARGS MUST BE EMPTY!
 
-    public SaloonBean(String name,String address,String city, String phone, String slotTime, int seatNumber){
+    public SaloonBean(String name, String city){
+        if(city=="")
+            this.name=name;
+        else
+            this.city=city;
+    }
+
+        public SaloonBean(String name,String address,String city, String phone, String slotTime, int seatNumber){
         this.address=address;
         this.name=name;
         this.phone=phone;

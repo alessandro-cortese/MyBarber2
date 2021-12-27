@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.client.ClientBooked">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.BookingGraphicController">
    <children>
       <Label layoutX="23.0" layoutY="61.0" prefHeight="103.0" prefWidth="855.0" text="La tua prenotazione è stata eseguita con successo!">
          <font>
@@ -17,6 +17,6 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="bookedButton" layoutX="368.0" layoutY="399.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Torna alla Home" />
+      <Button fx:id="bookedButton" layoutX="368.0" layoutY="399.0" mnemonicParsing="false" onAction="#onBookedButton" text="Torna alla Home" />
    </children>
 </AnchorPane>

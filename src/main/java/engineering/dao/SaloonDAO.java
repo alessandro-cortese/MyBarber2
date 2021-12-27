@@ -17,8 +17,9 @@ public class SaloonDAO {
 
     public SaloonDAO(){ //CONSTRUCTOR NO_ARGS --> prendo la connessione dal Connector (che è la singleton class)
         try {
+            System.out.println("cerco di ottenere la conn");
             conn = connection.getConnectorInstance();
-            if (connection == null)
+            if (conn == null)
                 System.out.println("unable to create a connection with DBMS");
         }
         catch (Exception se){
@@ -50,7 +51,7 @@ public class SaloonDAO {
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String phone = rs.getString("telephone");
-                String slotTime = rs.getString("slotTime");
+                int slotTime = rs.getInt("slotTime");
                 int seatNumber = rs.getInt("seatNumber");
 
                 Saloon s = new Saloon(SaloonName, city,address, phone, slotTime, seatNumber);

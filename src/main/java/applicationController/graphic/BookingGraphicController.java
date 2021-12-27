@@ -1,5 +1,7 @@
 package applicationController.graphic;
 
+import applicationController.logic.BookingController;
+import engineering.bean.SaloonBean;
 import first_view.ObservableListNode;
 import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
@@ -8,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -44,11 +43,40 @@ public class BookingGraphicController {
     @FXML
     private TextField searchCity;
 
+    @FXML
+    private Button bookedButton;
 
+    @FXML
+    Label showErr;
+    @FXML
+    Label showErr2;
+
+    @FXML
+    public void onBookedButton(ActionEvent event) throws IOException{
+        Button sourceButton = (Button) event.getSource();
+        InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
+    }
 
 
     @FXML
-    public void onButtonSaloonClicked(ActionEvent actionEvent) throws IOException {
+    public void onButtonSaloonClicked(ActionEvent actionEvent) throws Exception {
+        String saloon = searchSaloonName.getText();
+        String saloonCity = searchCity.getText();
+        if(saloon == "" ){
+            showErr.setText("inserire un nome valido!");
+            return;
+        }
+        if(saloonCity == ""){
+            showErr2.setText("Inserire una cittò valida!");
+            return;
+        }
+
+        SaloonBean saloonBean = new SaloonBean(saloon,saloonCity);
+
+        BookingController bookingController = new BookingController();
+        bookingController.searchByNameSaloon(saloonBean);
+
+
         Button sourceButton = (Button) actionEvent.getSource();
         Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
         ListView listView = (ListView) newCenterNode.lookup("#saloonListView");
@@ -58,8 +86,6 @@ public class BookingGraphicController {
         borderPane.setCenter(newCenterNode);
 
     }
-
-
 
     @FXML
     void onButtonClicked(ActionEvent event) throws IOException {
@@ -76,8 +102,8 @@ public class BookingGraphicController {
         for (int i = 0 ; i < 10 ; i++) {
             nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(itemResource))).load() ;
         }
-        ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
-        listView.setItems(clientAppointmentsList);
+        ObservableListNode saloonList = new ObservableListNode(nodesList);
+        listView.setItems(saloonList);
     }
 
 

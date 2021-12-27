@@ -5,10 +5,10 @@ public class Saloon {
     private String city;
     private String address;
     private String phone;
-    private String slotTime;
+    private int slotTime;
     private int seatNumber;
 
-    public Saloon(String name, String city, String address, String phone,String slotTime, int seatNumber){
+    public Saloon(String name, String city, String address, String phone,int slotTime, int seatNumber){
         this.name=name;
         this.address=address;
         this.phone=phone;
@@ -42,10 +42,10 @@ public class Saloon {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public String getSlotTime(){
+    public int getSlotTime(){
         return slotTime;
     }
-    public void setSlotTime(String slotTime) {
+    public void setSlotTime(int slotTime) {
         this.slotTime = slotTime;
     }
 

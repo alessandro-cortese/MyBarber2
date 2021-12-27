@@ -21,9 +21,10 @@
                            <children>
                               <TextField fx:id="searchSaloonName" alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
                               <Button fx:id="saloonNextButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
+                              <Label fx:id="showErr" prefHeight="14.0" prefWidth="301.0" textAlignment="CENTER" />
                            </children>
                         </VBox>
-                        <Label layoutX="172.0" layoutY="164.0" text=" Nome Salone" />
+                        <Label layoutX="171.0" layoutY="140.0" text=" Nome Salone" />
                      </children>
                   </AnchorPane>
             </content>
@@ -36,9 +37,10 @@
                            <children>
                               <TextField fx:id="searchCity" alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
                               <Button fx:id="placeNextButton" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
+                              <Label fx:id="showErr2" prefHeight="16.0" prefWidth="383.0" textAlignment="CENTER" />
                            </children>
                         </VBox>
-                        <Label layoutX="235.0" layoutY="165.0" text="Città" />
+                        <Label layoutX="236.0" layoutY="144.0" text="Città" />
                      </children>
                   </AnchorPane>
                </content>

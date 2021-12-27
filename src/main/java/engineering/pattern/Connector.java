@@ -10,7 +10,7 @@ public class Connector { //SINGLETON CLASS
             //if (System.getenv("RDS_HOSTNAME") != null) {
                 try {
                     System.out.println("Loading driver...");
-                    Class.forName("com.mysql.jdbc.Driver.");
+                    Class.forName("com.mysql.jdbc.Driver");
                     System.out.println("Driver loaded!");
                     /*String dbName = System.getenv("RDS_DB_NAME");
                     String userName = System.getenv("RDS_USERNAME");
@@ -18,7 +18,7 @@ public class Connector { //SINGLETON CLASS
                     String hostname = System.getenv("RDS_HOSTNAME");
                     String port = System.getenv("RDS_PORT");*/
 
-                    String dbName = "my_db";
+                    String dbName = "mydb";
                     String userName="admin";
                     String password="Alessandro99";
                     String port ="3306";
@@ -28,6 +28,8 @@ public class Connector { //SINGLETON CLASS
                     Connection con = DriverManager.getConnection(jdbcUrl);
 
                     this.connection =  con;
+                    if(con==null)
+                        System.out.println("pd");
 
                 }
                 catch (ClassNotFoundException e) {
