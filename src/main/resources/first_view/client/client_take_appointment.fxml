@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.client.TakeAppointmentClientController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.BookingGraphicController">
    <children>
       <TabPane layoutX="-5.0" layoutY="78.0" prefHeight="524.0" prefWidth="906.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -19,7 +19,7 @@
                      <children>
                         <VBox alignment="CENTER" layoutX="275.0" prefHeight="314.0" prefWidth="301.0" spacing="30.0" AnchorPane.topAnchor="40.0">
                            <children>
-                              <TextField alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
+                              <TextField fx:id="searchSaloonName" alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
                               <Button fx:id="saloonNextButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
                            </children>
                         </VBox>
@@ -28,14 +28,14 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab id="treatmentTab" fx:id="treatmentTab" text="Trattamento">
+          <Tab id="placeTab" fx:id="placeTab" text="Trattamento">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="183.0" prefWidth="225.0">
                      <children>
                         <VBox alignment="CENTER" layoutX="275.0" prefHeight="314.0" prefWidth="301.0" spacing="30.0" AnchorPane.topAnchor="40.0">
                            <children>
-                              <TextField alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
-                              <Button fx:id="treatmentNextButton" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
+                              <TextField fx:id="searchCity" alignment="CENTER" prefHeight="9.0" prefWidth="460.0" />
+                              <Button fx:id="placeNextButton" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="24.0" prefWidth="101.0" text="Avanti" />
                            </children>
                         </VBox>
                         <Label layoutX="235.0" layoutY="165.0" text="Città" />

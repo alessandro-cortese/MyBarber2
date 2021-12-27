@@ -1,10 +1,8 @@
 package engineering.dao;
 
-
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 import model.Saloon;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class SaloonDAO {
      private Connector connection;
      static Connection conn;
+
     public SaloonDAO(){ //CONSTRUCTOR NO_ARGS --> prendo la connessione dal Connector (che è la singleton class)
         try {
             conn = connection.getConnectorInstance();
@@ -50,8 +50,10 @@ public class SaloonDAO {
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String phone = rs.getString("telephone");
+                String slotTime = rs.getString("slotTime");
+                int seatNumber = rs.getInt("seatNumber");
 
-                Saloon s = new Saloon(SaloonName, city,address, phone);
+                Saloon s = new Saloon(SaloonName, city,address, phone, slotTime, seatNumber);
                 listOfSaloon.add(s);
             }while (rs.next());
             //chiudo rs

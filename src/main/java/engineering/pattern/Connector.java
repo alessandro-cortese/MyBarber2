@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class Connector { //SINGLETON CLASS
 
-        private static Connection connection = null; //di classe
+    static Connection connection = null; //di classe
 
         protected Connector() {
-            if (System.getenv("RDS_HOSTNAME") != null) {
+            //if (System.getenv("RDS_HOSTNAME") != null) {
                 try {
                     System.out.println("Loading driver...");
                     Class.forName("com.mysql.jdbc.Driver.");
@@ -27,7 +27,7 @@ public class Connector { //SINGLETON CLASS
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
                     Connection con = DriverManager.getConnection(jdbcUrl);
 
-                    this.connection =  con; // lo posso fare?? BOH
+                    this.connection =  con;
 
                 }
                 catch (ClassNotFoundException e) {
@@ -39,12 +39,12 @@ public class Connector { //SINGLETON CLASS
                     System.out.println("SQLState: " + e.getSQLState());
                     System.out.println("VendorError: " + e.getErrorCode());
                 }
-            }
+           // }
         }
 
         public static Connection getConnectorInstance() { //di classe
-            if (Connector.connection == null)
-                Connector.connection = (Connection) new Connector();
+            if ( connection == null)
+                new Connector();
             return connection;
         }
 

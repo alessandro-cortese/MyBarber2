@@ -5,12 +5,16 @@ public class Saloon {
     private String city;
     private String address;
     private String phone;
+    private String slotTime;
+    private int seatNumber;
 
-    public Saloon(String name, String city, String address, String phone){
+    public Saloon(String name, String city, String address, String phone,String slotTime, int seatNumber){
         this.name=name;
         this.address=address;
         this.phone=phone;
         this.city=city;
+        this.seatNumber = seatNumber;
+        this.slotTime = slotTime;
 
     }
 
@@ -37,5 +41,19 @@ public class Saloon {
     }
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    public String getSlotTime(){
+        return slotTime;
+    }
+    public void setSlotTime(String slotTime) {
+        this.slotTime = slotTime;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
     }
 }
