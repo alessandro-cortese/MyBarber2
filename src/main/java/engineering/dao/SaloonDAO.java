@@ -18,7 +18,7 @@ public class SaloonDAO {
     public SaloonDAO(){ //CONSTRUCTOR NO_ARGS --> prendo la connessione dal Connector (che è la singleton class)
         try {
             System.out.println("cerco di ottenere la conn");
-            conn = connection.getConnectorInstance();
+            conn = Connector.getConnectorInstance().getConnection();
             if (conn == null)
                 System.out.println("unable to create a connection with DBMS");
         }

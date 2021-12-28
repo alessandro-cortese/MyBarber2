@@ -10,6 +10,7 @@ module it.barbergroup {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires mysql.connector.java;
 
 
     exports first_view;

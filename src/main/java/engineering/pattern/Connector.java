@@ -4,13 +4,14 @@ import java.sql.*;
 
 public class Connector { //SINGLETON CLASS
 
-    static Connection connection = null; //di classe
+    private Connection connection; //di classe
+    private static Connector myConnector ;
 
         protected Connector() {
             //if (System.getenv("RDS_HOSTNAME") != null) {
                 try {
                     System.out.println("Loading driver...");
-                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Class.forName("com.mysql.jdbc.Driver");
                     System.out.println("Driver loaded!");
                     /*String dbName = System.getenv("RDS_DB_NAME");
                     String userName = System.getenv("RDS_USERNAME");
@@ -25,12 +26,11 @@ public class Connector { //SINGLETON CLASS
                     String hostname="mybarberdb.cvgybcfusiqr.eu-west-2.rds.amazonaws.com";
 
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
-                    Connection con = DriverManager.getConnection(jdbcUrl);
+                    connection = DriverManager.getConnection(jdbcUrl);
 
-                    this.connection =  con;
-                    if(con==null)
+                    //this.connection =  con;
+                    if(connection==null)
                         System.out.println("pd");
-
                 }
                 catch (ClassNotFoundException e) {
                     throw new RuntimeException("Cannot find the driver in the classpath!", e);
@@ -44,11 +44,14 @@ public class Connector { //SINGLETON CLASS
            // }
         }
 
-        public static Connection getConnectorInstance() { //di classe
-            if ( connection == null)
-                new Connector();
-            return connection;
+        public static Connector getConnectorInstance() { //di classe
+            if ( myConnector == null)
+                myConnector = new Connector();
+            return myConnector ;
         }
 
+    public Connection getConnection() {
+        return connection;
     }
+}
 
