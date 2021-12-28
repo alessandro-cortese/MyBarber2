@@ -1,4 +1,4 @@
-package applicationController.logic;
+package applicationController;
 
 import java.io.IOException;
 import java.util.*;

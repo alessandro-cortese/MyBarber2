@@ -28,8 +28,9 @@ public class Connector { //SINGLETON CLASS
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
                     connection = DriverManager.getConnection(jdbcUrl);
 
-                    //this.connection =  con;
+
                     if(connection==null)
+
                         System.out.println("pd");
                 }
                 catch (ClassNotFoundException e) {
