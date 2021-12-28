@@ -11,7 +11,7 @@ public class Connector { //SINGLETON CLASS
             //if (System.getenv("RDS_HOSTNAME") != null) {
                 try {
                     System.out.println("Loading driver...");
-                    Class.forName("com.mysql.jdbc.Driver");
+                    Class.forName("com.mysql.cj.jdbc.Driver");
                     System.out.println("Driver loaded!");
                     /*String dbName = System.getenv("RDS_DB_NAME");
                     String userName = System.getenv("RDS_USERNAME");
