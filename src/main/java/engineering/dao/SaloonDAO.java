@@ -3,10 +3,8 @@ package engineering.dao;
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 import model.Saloon;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +49,7 @@ public class SaloonDAO {
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String phone = rs.getString("telephone");
-                int slotTime = rs.getInt("slotTime");
+                Time slotTime = rs.getTime("slotTime");
                 int seatNumber = rs.getInt("seatNumber");
 
                 Saloon s = new Saloon(SaloonName, city,address, phone, slotTime, seatNumber);

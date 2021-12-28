@@ -1,14 +1,16 @@
 package model;
 
+import java.sql.Time;
+
 public class Saloon {
     private String name;
     private String city;
     private String address;
     private String phone;
-    private int slotTime;
+    private Time slotTime;
     private int seatNumber;
 
-    public Saloon(String name, String city, String address, String phone,int slotTime, int seatNumber){
+    public Saloon(String name, String city, String address, String phone,Time slotTime, int seatNumber){
         this.name=name;
         this.address=address;
         this.phone=phone;
@@ -42,10 +44,10 @@ public class Saloon {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public int getSlotTime(){
+    public Time getSlotTime(){
         return slotTime;
     }
-    public void setSlotTime(int slotTime) {
+    public void setSlotTime(Time slotTime) {
         this.slotTime = slotTime;
     }
 

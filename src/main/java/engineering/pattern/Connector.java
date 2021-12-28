@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Connector { //SINGLETON CLASS
 
-    private Connection connection; //di classe
+    private Connection connection ; //di classe
     private static Connector myConnector ;
 
         protected Connector() {
@@ -28,9 +28,7 @@ public class Connector { //SINGLETON CLASS
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
                     connection = DriverManager.getConnection(jdbcUrl);
 
-
                     if(connection==null)
-
                         System.out.println("pd");
                 }
                 catch (ClassNotFoundException e) {
@@ -46,7 +44,7 @@ public class Connector { //SINGLETON CLASS
         }
 
         public static Connector getConnectorInstance() { //di classe
-            if ( myConnector == null)
+            if (myConnector == null)
                 myConnector = new Connector();
             return myConnector ;
         }
