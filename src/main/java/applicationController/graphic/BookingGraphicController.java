@@ -1,6 +1,6 @@
 package applicationController.graphic;
 
-import applicationController.logic.BookingController;
+import applicationController.BookingController;
 import engineering.bean.SaloonBean;
 import first_view.ObservableListNode;
 import first_view.general.InternalBackController;

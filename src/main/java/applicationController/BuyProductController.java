@@ -1,4 +1,4 @@
-package applicationController.logic;
+package applicationController;
 
 public class BuyProductController {
 }

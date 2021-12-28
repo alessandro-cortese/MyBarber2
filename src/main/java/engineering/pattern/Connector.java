@@ -27,7 +27,8 @@ public class Connector { //SINGLETON CLASS
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
                     Connection con = DriverManager.getConnection(jdbcUrl);
 
-                    this.connection =  con;
+                    this.connection =  con; //passo cosi la connessione
+
                     if(con==null)
                         System.out.println("pd");
 
