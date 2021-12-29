@@ -8,20 +8,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="360.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../images/pruduct_image_example.png" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" prefHeight="113.0" prefWidth="261.0">
+      <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="204.0" spacing="25.0">
          <children>
-            <Label text="Nome Prodotto">
+            <Label fx:id="productNameLabel" text="Nome Prodotto">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+            <Label fx:id="productPriceLabel" text="Label" />
          </children>
          <padding>
             <Insets bottom="20.0" top="20.0" />

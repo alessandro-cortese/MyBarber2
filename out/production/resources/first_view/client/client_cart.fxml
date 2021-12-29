@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,69 +19,48 @@
                   <Font size="48.0" />
                </font>
             </Label>
-            <ListView fx:id="cartListView" prefHeight="582.0" prefWidth="710.0" />
+            <ListView fx:id="cartListView" prefHeight="582.0" prefWidth="493.0" />
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutX="817.0" layoutY="547.0" prefHeight="104.0" prefWidth="401.0" spacing="30.0">
+      <VBox alignment="CENTER" layoutX="851.0" layoutY="265.0" spacing="50.0">
          <children>
-            <Label text="Totale Acquisto">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER" spacing="25.0">
+            <HBox spacing="25.0">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="175.0" text="Paga con PayPal">
+                  <Button fx:id="minusButton" mnemonicParsing="false" onAction="#onButtonClicked">
                      <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../images/paypal_logo.png" />
+                              <Image url="@../../../../../images/minus_icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefWidth="175.0" text="Paga con GooglePay">
+                  <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onButtonClicked">
                      <graphic>
-                        <ImageView fitHeight="126.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../images/google_pay_logo.png" />
+                              <Image url="@../../../../../images/delete_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="plusButton" mnemonicParsing="false" onAction="#onButtonClicked">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../images/add_icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                </children>
             </HBox>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" layoutX="817.0" layoutY="152.0" spacing="25.0">
-         <children>
-            <Label text="Informazioni di Consegna">
+            <Label fx:id="totalAmount" text="Totale Carrello">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <VBox prefHeight="178.0" prefWidth="402.0" spacing="50.0">
-               <children>
-                  <HBox spacing="25.0">
-                     <children>
-                        <Label prefWidth="100.0" text="Indirizzo" />
-                        <TextField prefHeight="26.0" prefWidth="281.0" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="25.0">
-                     <children>
-                        <Label prefWidth="100.0" text="Civico" />
-                        <TextField prefHeight="26.0" prefWidth="279.0" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="25.0">
-                     <children>
-                        <Label prefWidth="100.0" text="Telefono" />
-                        <TextField prefHeight="26.0" prefWidth="281.0" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+            <Button mnemonicParsing="false" text="Termina Acquisto" />
          </children>
       </VBox>
    </children>

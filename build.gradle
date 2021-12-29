@@ -46,6 +46,8 @@ dependencies {
         exclude(group: 'org.openjfx')
     }
 
+    implementation(group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0')
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
