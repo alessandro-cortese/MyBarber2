@@ -1,9 +1,13 @@
 package model.buyProduct;
 
+import engineering.pattern.decorator.Price;
+import engineering.pattern.decorator.Priceable;
+import engineering.pattern.observer.Subject;
+
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Order {
+public class Order extends Subject {
 
     private Cart cart ;
     private String address ;
@@ -13,16 +17,26 @@ public class Order {
 
     private ArrayList<Coupon> couponArrayList ;
 
-    //private Price total ;
+    private Priceable price ;
 
 
     public Order(Cart cart){
-        this.cart = cart ;
+        setCart(cart);
         couponArrayList = new ArrayList<>() ;
+        price = new Price(cart.getTotal()) ;
     }
 
     public void addCoupon(Coupon coupon) {
         couponArrayList.add(coupon) ;
+        applyDiscount(coupon) ;
+        notifyObservers();
+        System.out.println("Ciao");
+    }
+
+    private void applyDiscount(Coupon coupon) {
+        coupon.setAppliedPrice(price);
+        this.price = coupon ;
+        System.out.println(coupon.getPrice());
     }
 
     public void removeCoupon(Coupon toRemoveCoupon) {
@@ -59,5 +73,17 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Double getPrice() {
+        return this.price.getPrice() ;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

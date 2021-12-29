@@ -77,10 +77,4 @@ public class Cart extends Subject {
         }
         return null ;
     }
-
-    @Override
-    public void attach(Observer observer) {
-        super.attach(observer);
-        super.notifyObservers();
-    }
 }

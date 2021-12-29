@@ -4,18 +4,23 @@ import applicationController.BuyProductController;
 import engineering.bean.buyProduct.CartBean;
 import engineering.bean.buyProduct.CartRowBean;
 import engineering.bean.buyProduct.ProductBean;
+import first_view.general.InternalBackController;
 import first_view.listCellFactories.CartRowListCellFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,11 +31,12 @@ public class ClientCartController implements Initializable {
     @FXML private Button plusButton ;
     @FXML private Button minusButton ;
     @FXML private Button deleteButton ;
+    @FXML private Button addOrderInfoButton ;
 
     private BuyProductController buyProductController ;
     private CartBean cartBean ;
 
-    private static final String LIST_ITEM_RES = "first_view/listitem/client_buy_product_list_item.fxml";
+    public static final String COMPLETE_ORDER_SCENE_RES = "first_view/client/client_complete_order.fxml" ;
 
 
     @Override
@@ -38,13 +44,10 @@ public class ClientCartController implements Initializable {
 
         cartListView.setCellFactory(param -> new CartRowListCellFactory());
 
-        cartListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CartRowBean>() {
-            @Override
-            public void changed(ObservableValue<? extends CartRowBean> observable, CartRowBean oldValue, CartRowBean newValue) {
-                plusButton.setDisable(newValue == null);
-                deleteButton.setDisable(newValue == null);
-                minusButton.setDisable(newValue == null);
-            }
+        cartListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            plusButton.setDisable(newValue == null);
+            deleteButton.setDisable(newValue == null);
+            minusButton.setDisable(newValue == null);
         });
 
         plusButton.setDisable(true);
@@ -54,9 +57,10 @@ public class ClientCartController implements Initializable {
 
     public void setApplicationController(BuyProductController buyProductController) {
         this.buyProductController = buyProductController ;
+        viewCart();
     }
 
-    public void viewCart() {
+    private void viewCart() {
         cartBean = buyProductController.showCart();
         updateInfo() ;
     }
@@ -68,26 +72,50 @@ public class ClientCartController implements Initializable {
 
     public void onButtonClicked(ActionEvent event) {
         Node sourceNode = (Node) event.getSource() ;
-
+        CartRowBean cartRow = cartListView.getSelectionModel().getSelectedItem() ;
         if (sourceNode == plusButton) {
-            addProduct() ;
+            addProduct(cartRow) ;
         }
         else if (sourceNode == minusButton) {
-            removeProduct() ;
+            removeProduct(cartRow) ;
+        }
+        else if (sourceNode == deleteButton) {
+            deleteProduct(cartRow) ;
+        }
+        else if (sourceNode == addOrderInfoButton){
+            InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
+            FXMLLoader newCenterNodeLoader = new FXMLLoader(getClass().getClassLoader().getResource("first_view/client/client_complete_order.fxml"));
+            Scene myScene = sourceNode.getScene();
+            BorderPane borderPane = (BorderPane) myScene.getRoot();
+
+            try {
+                borderPane.setCenter(newCenterNodeLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            ClientCompleteOrderController completeOrderController = newCenterNodeLoader.getController();
+            completeOrderController.setApplicationController(buyProductController);
+
+            return ;
+        }
+        updateInfo();
+    }
+
+    private void deleteProduct(CartRowBean cartRow) {
+        Integer quantity = cartRow.getQuantity() ;
+        for (int i = 0 ; i < quantity ; i++) {
+            removeProduct(cartRow);
         }
     }
 
-    private void removeProduct() {
-        CartRowBean cartRow = cartListView.getSelectionModel().getSelectedItem() ;
+    private void removeProduct(CartRowBean cartRow) {
         ProductBean productBean = new ProductBean(cartRow.getIsbn()) ;
         buyProductController.removeProductFromCart(productBean);
-        updateInfo();
     }
 
-    private void addProduct() {
-        CartRowBean cartRow = cartListView.getSelectionModel().getSelectedItem() ;
+    private void addProduct(CartRowBean cartRow) {
         ProductBean productBean = new ProductBean(cartRow.getIsbn()) ;
         buyProductController.insertProductToCart(productBean);
-        updateInfo();
     }
 }
