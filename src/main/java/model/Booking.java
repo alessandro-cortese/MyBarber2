@@ -1,12 +1,26 @@
 package model;
 
+import engineering.container.CatalogueService;
+
+import java.sql.Time;
 import java.util.Date;
 
 public class Booking {
     private Date dateBooking = new Date();
-    private String saloon;
-    private String city;
-    private String address;
+    private Time hourBooking;
+    private double priceBooking;
+    private CatalogueService services;
+    private Customer customer;
+
+    public Booking(){
+        services = new CatalogueService();
+    }
+    public Booking(Customer customer){
+        this.customer=customer;
+    }
+    public Booking(String email, String pass, String name, String surname,String creditCard, String phone ){
+        customer = new Customer(email, pass, name, surname, creditCard, phone);
+    }
 
     public Date getDateBooking() {
         return dateBooking;
@@ -14,22 +28,17 @@ public class Booking {
     public  void setDateBooking(Date dateBooking){
         this.dateBooking=dateBooking;
     }
-    public String getSaloon(){
-        return saloon;
+    public Time getHourBooking(){
+        return hourBooking;
     }
-    public  void setSaloon(String saloon){
-        this.saloon=saloon;
+    public void setHourBooking(Time hourBooking) {
+        this.hourBooking = hourBooking;
     }
-    public String getCity(){
-        return city;
+
+    public double getPriceBooking() {
+        return priceBooking;
     }
-    public void setCity(String city){
-        this.city=city;
-    }
-    public String getAddress(){
-        return address;
-    }
-    public  void setAddress(String address){
-        this.address = address;
+    public void setPriceBooking(double priceBooking) {
+        this.priceBooking = priceBooking;
     }
 }

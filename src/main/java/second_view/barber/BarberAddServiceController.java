@@ -1,5 +1,7 @@
 package second_view.barber;
 
+import applicationController.AddServiceController;
+import engineering.bean.ServiceBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -7,6 +9,8 @@ import second_view.general.ScreenChanger;
 
 
 import java.io.IOException;
+
+import static second_view.barber.BarberViewAppointmentsController.isNumeric;
 
 public class BarberAddServiceController {
 
@@ -31,6 +35,15 @@ public class BarberAddServiceController {
         }
         else if(addServiceCommand.startsWith("set")){
             if(handlerSetCommand(addServiceCommand)){
+                return ;
+            }
+        }
+        else if(addServiceCommand.compareTo("add service") == 0){
+
+            if(nameAddServiceField.getText() != null && addServicePriceField.getText() != null && descriptionAddServiceField.getText() != null ) {
+                ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
+                AddServiceController addServiceController = new AddServiceController(serviceBean);
+                System.out.println(addServiceController);
                 return ;
             }
         }
@@ -60,7 +73,7 @@ public class BarberAddServiceController {
         }
         else if(insertCommand.startsWith("set price")) {
             addServiceNewField = insertCommand.replace("set price" + " ", "") ;
-            if(addServiceNewField.compareTo("set price") != 0){
+            if(addServiceNewField.compareTo("set price") != 0 && isNumeric(addServiceNewField)){
                 addServicePriceField.setText(addServiceNewField);
                 flag =  true;
             }

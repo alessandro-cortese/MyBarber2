@@ -1,11 +1,13 @@
 package engineering.bean;
 
+import java.sql.Time;
+
 public class SaloonBean {
     private String name;
     private String address;
     private String phone;
     private String city;
-    private String slotTime;
+    private Time slotTime;
     private  int seatNumber;
 
     public SaloonBean(){} //CONSTRUCTOR-NO ARGS MUST BE EMPTY!
@@ -17,7 +19,7 @@ public class SaloonBean {
             this.city=city;
     }
 
-        public SaloonBean(String name,String address,String city, String phone, String slotTime, int seatNumber){
+        public SaloonBean(String name,String address,String city, String phone, Time slotTime, int seatNumber){
         this.address=address;
         this.name=name;
         this.phone=phone;
@@ -58,11 +60,11 @@ public class SaloonBean {
         this.seatNumber = seatNumber;
     }
 
-    public String getSlotTime() {
+    public Time getSlotTime() {
         return slotTime;
     }
 
-    public void setSlotTime(String slotTime) {
+    public void setSlotTime(Time slotTime) {
         this.slotTime = slotTime;
     }
 

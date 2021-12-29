@@ -1,5 +1,6 @@
 package first_view.barber;
 
+import engineering.bean.ServiceBean;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;
@@ -17,9 +18,11 @@ public class BarberAddServiceController {
 
     private static final String BARBER_CONFIRM_ADD_SERVICE_SCREEN_NAME = "first_view/barber/barber_confirm_add_service.fxml" ;
 
-    @FXML private Button continueButton;
-    @FXML private TextField priceTextField;
-
+    @FXML private Button continueButton ;
+    @FXML private TextField priceTextField ;
+    @FXML private TextField nameAddServiceTextField ;
+    @FXML private TextField descriptionTextFiledAddService ;
+    @FXML private TextField nameOfUsedProductTextField ;
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
@@ -29,6 +32,15 @@ public class BarberAddServiceController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_CONFIRM_ADD_SERVICE_SCREEN_NAME));
             BorderPane myBorderPane = (BorderPane) sourceNode.getScene().getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
+
+            ServiceBean serviceBean = new ServiceBean(nameAddServiceTextField.getText(),
+                    descriptionTextFiledAddService.getText(),
+                    nameOfUsedProductTextField.getText(),
+                    Double.parseDouble(priceTextField.getText())) ;
+
+            BarberConfirmAddServiceController barberConfirmAddServiceController = fxmlLoader.getController() ;
+            barberConfirmAddServiceController.display(serviceBean) ;
+
         }
 
     }
