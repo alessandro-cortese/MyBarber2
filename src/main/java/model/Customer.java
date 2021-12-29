@@ -4,13 +4,15 @@ public class Customer extends User{
 
     private String name;
     private String surname;
-    private long creditCard;
+    private String creditCard;
+    private String phone;
 
-    public Customer(String email, String pass, String name, String surname, long creditCard){
+    public Customer(String email, String pass, String name, String surname, String creditCard, String phone){
         super(email, pass);
         this.name = name;
         this.surname = surname;
         this.creditCard = creditCard;
+        this.phone=phone;
     }
 
     public String getName(){
@@ -25,11 +27,16 @@ public class Customer extends User{
     public void setSurname(String surname){
         this.surname=surname;
     }
-
-    public long getCreditCard(){
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public String getCreditCard(){
         return creditCard;
     }
-    public void setCreditCard(long creditCard){
+    public void setCreditCard(String creditCard){
         this.creditCard = creditCard;
     }
 

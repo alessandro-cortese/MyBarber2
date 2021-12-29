@@ -10,8 +10,7 @@ import java.util.List;
 
 
 public class SaloonDAO {
-     private Connector connection;
-     static Connection conn;
+    static Connection conn;
 
     public SaloonDAO(){ //CONSTRUCTOR NO_ARGS --> prendo la connessione dal Connector (che è la singleton class)
         try {

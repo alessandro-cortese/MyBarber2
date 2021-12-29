@@ -1,29 +1,35 @@
 package applicationController;
 
-import java.io.IOException;
 import java.util.*;
-
 import engineering.bean.SaloonBean;
 import engineering.dao.SaloonDAO;
 import model.Saloon;
 
 public class BookingController {
     private SaloonDAO saloonDAO;
+    private List<Saloon> listSaloon;
+    private  List<SaloonBean> saloonBeanList;
+    private String saloonName;
 
+    public List<SaloonBean> searchByNameSaloon(SaloonBean saloonBean) throws Exception {
 
-    public List<Saloon> searchByNameSaloon(SaloonBean saloonBean) throws Exception {
-        List<Saloon> listSaloon = new ArrayList<>();
+        saloonBeanList = new ArrayList<>();
 
-        String saloonName = saloonBean.getName();
-        String saloonCity = saloonBean.getCity();
-
-        SaloonDAO saloonDAO = new SaloonDAO();
+        saloonName = saloonBean.getName();
+        saloonDAO = new SaloonDAO();
 
         listSaloon= saloonDAO.retreiveBySaloonName(saloonName);
 
-
-
-        return listSaloon;
+        for (Saloon saloon: listSaloon){ //imposto il saloonBean
+            saloonBean.setName(saloon.getName());
+            saloonBean.setAddress(saloon.getAddress());
+            saloonBean.setCity(saloon.getCity());
+            saloonBean.setPhone(saloon.getPhone());
+            saloonBean.setSeatNumber(saloon.getSeatNumber());
+            saloonBean.setSlotTime(saloon.getSlotTime());
+            saloonBeanList.add(saloonBean); //aggiungo al vettore saloonbeanList il saloonBean precedentemente impostato
+        }
+        return saloonBeanList;
     }
 
 }

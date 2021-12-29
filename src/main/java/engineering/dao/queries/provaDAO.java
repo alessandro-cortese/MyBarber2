@@ -10,9 +10,9 @@ import java.util.List;
 
 public class provaDAO { //Classe "Conteiner per provare se le DAO funzionano"
     public static void main(String args[]){
-        Saloon saloonIstance = new Saloon("fossa","Velletri","fontana,32","0660", Time.valueOf(LocalTime.NOON),2);
+      //  Saloon saloonIstance = new Saloon("fossa","Velletri","fontana,32","0660", Time.valueOf(LocalTime.NOON),2);
         try {
-            System.out.println("looking for saloon named fossa" );
+            System.out.println("looking for saloon named TagliaX" );
             new SaloonDAO();
             List<Saloon> list = SaloonDAO.retreiveBySaloonName("TagliaX");
 

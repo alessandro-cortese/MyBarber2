@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.List;
 
 public class BookingGraphicController {
 
@@ -50,6 +51,10 @@ public class BookingGraphicController {
     Label showErr;
     @FXML
     Label showErr2;
+    @FXML
+    private Label nameSaloonItem;
+    @FXML
+    private Label placeSaloonItem;
 
     @FXML
     public void onBookedButton(ActionEvent event) throws IOException{
@@ -62,25 +67,25 @@ public class BookingGraphicController {
     public void onButtonSaloonClicked(ActionEvent actionEvent) throws Exception {
         String saloon = searchSaloonName.getText();
         String saloonCity = searchCity.getText();
-        if(saloon == "" ){
+        /*if(saloon == "" ){
             showErr.setText("inserire un nome valido!");
             return;
         }
-        if(saloonCity == ""){
+        if(saloonCity == "" ){
             showErr2.setText("Inserire una cittò valida!");
             return;
         }
-
+        */
         SaloonBean saloonBean = new SaloonBean(saloon,saloonCity);
 
         BookingController bookingController = new BookingController();
-        bookingController.searchByNameSaloon(saloonBean);
+        List<SaloonBean> saloonBeanList = bookingController.searchByNameSaloon(saloonBean);
 
 
         Button sourceButton = (Button) actionEvent.getSource();
         Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
         ListView listView = (ListView) newCenterNode.lookup("#saloonListView");
-        onLoadListItems(listView, APPOINTMENT_SALOON_ITEM);
+        onLoadListItems(listView, APPOINTMENT_SALOON_ITEM, saloonBeanList);
         Scene myScene = (Scene) sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
@@ -97,10 +102,17 @@ public class BookingGraphicController {
         borderPane.setCenter(node.load());
     }
 
-    private void onLoadListItems(ListView listView, String itemResource) throws IOException {
-        Node[] nodesList = new Node[10] ;
-        for (int i = 0 ; i < 10 ; i++) {
+    private void onLoadListItems(ListView listView, String itemResource, List<SaloonBean> list) throws IOException {
+        Node[] nodesList = new Node[list.size()] ;
+        for (int i = 0 ; i < list.size() ; i++) {
             nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(itemResource))).load() ;
+            String address = list.get(i).getAddress();
+            String city = list.get(i).getCity();
+            System.out.println(address);
+
+            
+            nameSaloonItem.setText("eeee");
+            //nameSaloonItem.setText("porc");
         }
         ObservableListNode saloonList = new ObservableListNode(nodesList);
         listView.setItems(saloonList);
