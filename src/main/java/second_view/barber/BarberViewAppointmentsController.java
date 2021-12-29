@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
+import static engineering.otherclasses.NumericVerify.isNumeric;
+
 public class BarberViewAppointmentsController {
 
     @FXML private TextField viewAppointmentsCommandLine;
@@ -77,15 +79,6 @@ public class BarberViewAppointmentsController {
 
         return handled;
 
-    }
-
-    public static boolean isNumeric(String insertString) {
-        try{
-            Double.parseDouble(insertString);
-            return true;
-        }catch (NumberFormatException e){
-            return false;
-        }
     }
 
     private boolean manageInsertDate(String date) {

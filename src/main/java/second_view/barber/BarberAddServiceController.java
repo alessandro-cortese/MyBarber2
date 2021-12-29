@@ -10,7 +10,7 @@ import second_view.general.ScreenChanger;
 
 import java.io.IOException;
 
-import static second_view.barber.BarberViewAppointmentsController.isNumeric;
+import static engineering.otherclasses.NumericVerify.isNumeric;
 
 public class BarberAddServiceController {
 

@@ -20,7 +20,7 @@ public class AddServiceController {
 
     @Override
     public String toString() {
-        return service.getName();
+        return service.getName() + service.getDescription();
     }
 
 }
