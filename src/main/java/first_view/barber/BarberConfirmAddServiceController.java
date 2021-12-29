@@ -1,12 +1,22 @@
 package first_view.barber;
 
+import engineering.bean.buyProduct.ServiceBean;
 import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 public class BarberConfirmAddServiceController {
+
+    @FXML private TextField nameConfirmedAddService ;
+
+    @FXML private TextField priceConfirmedAddService ;
+
+    @FXML private TextField descriptionConfirmedAddService ;
+
+    @FXML private TextField nameOfUsedProductConfirmedAddService ;
 
     @FXML private Button saveConfirmButton;
 
@@ -19,9 +29,15 @@ public class BarberConfirmAddServiceController {
             InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
         }
 
-
     }
 
+    public void display(ServiceBean serviceBean) {
 
+        nameConfirmedAddService.setText(serviceBean.getName()) ;
+        priceConfirmedAddService.setText(Double.toString(serviceBean.getPrice())) ;
+        descriptionConfirmedAddService.setText(serviceBean.getDescription()) ;
+        nameOfUsedProductConfirmedAddService.setText(serviceBean.getNameOfUsedProduct());
+
+    }
 
 }
