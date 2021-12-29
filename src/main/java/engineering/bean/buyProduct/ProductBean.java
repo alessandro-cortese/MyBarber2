@@ -2,12 +2,26 @@ package engineering.bean.buyProduct;
 
 public class ProductBean {
 
-    private Integer productIndex ;
+    private Integer isbn ;
     private String name ;
     private String description ;
     private Double price ;
     //private Barber vendor ;
 
+    public ProductBean() {
+        this(0,"","",0.0) ;
+    }
+
+    public ProductBean(Integer isbn) {
+        this(isbn, "", "", 0.0) ;
+    }
+
+    public ProductBean(Integer isbn, String name, String description, Double price) {
+        setIsbn(isbn);
+        setName(name);
+        setDescription(description);
+        setPrice(price);
+    }
 
     public String getName() {
         return name;
@@ -33,11 +47,12 @@ public class ProductBean {
         this.price = price;
     }
 
-    public Integer getProductIndex() {
-        return productIndex;
+
+    public Integer getIsbn() {
+        return isbn;
     }
 
-    public void setProductIndex(Integer productIndex) {
-        this.productIndex = productIndex;
+    public void setIsbn(Integer isbn) {
+        this.isbn = isbn;
     }
 }

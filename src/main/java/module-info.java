@@ -11,6 +11,7 @@ module it.barbergroup {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires mysql.connector.java;
+    requires jsr305;
 
 
     exports first_view;

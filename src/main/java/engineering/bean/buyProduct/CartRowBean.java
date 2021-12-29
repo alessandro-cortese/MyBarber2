@@ -3,12 +3,17 @@ package engineering.bean.buyProduct;
 public class CartRowBean {
 
     private Integer quantity ;
-    private ProductBean productBean ;
+    //private ProductBean productBean ;
+    private Integer isbn ;
+    private String name ;
+    private Double price ;
 
 
-    public CartRowBean(Integer quantity, ProductBean productBean) {
+    public CartRowBean(Integer quantity, Integer isbn, String name, Double price) {
         setQuantity(quantity);
-        setProductBean(productBean) ;
+        setIsbn(isbn);
+        setName(name);
+        setPrice(price);
     }
 
     public Integer getQuantity() {
@@ -19,11 +24,28 @@ public class CartRowBean {
         this.quantity = quantity;
     }
 
-    public ProductBean getProductBean() {
-        return productBean;
+
+    public Integer getIsbn() {
+        return isbn;
     }
 
-    public void setProductBean(ProductBean productBean) {
-        this.productBean = productBean;
+    public void setIsbn(Integer isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

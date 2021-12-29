@@ -1,32 +1,21 @@
-package model.buyProduct;
+package engineering.bean.buyProduct;
 
-import java.util.ArrayList;
+import model.buyProduct.Order;
+
 import java.util.Date;
 
-public class Order {
+public class OrderInfoBean {
 
-    private Cart cart ;
     private String address ;
     private String telephone ;
     private String paymentOption ;
     private Date date ;
 
-    private ArrayList<Coupon> couponArrayList ;
-
-    //private Price total ;
-
-
-    public Order(Cart cart){
-        this.cart = cart ;
-        couponArrayList = new ArrayList<>() ;
-    }
-
-    public void addCoupon(Coupon coupon) {
-        couponArrayList.add(coupon) ;
-    }
-
-    public void removeCoupon(Coupon toRemoveCoupon) {
-        couponArrayList.removeIf(coupon -> coupon.getCouponCode().compareTo(toRemoveCoupon.getCouponCode()) == 0);
+    public OrderInfoBean(String address, String telephone, String paymentOption, Date date) {
+        setAddress(address);
+        setTelephone(telephone);
+        setPaymentOption(paymentOption);
+        setDate(date);
     }
 
     public String getAddress() {
