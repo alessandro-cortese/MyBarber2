@@ -1,6 +1,6 @@
 package first_view.barber;
 
-import engineering.bean.buyProduct.ServiceBean;
+import engineering.bean.ServiceBean;
 import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class BarberConfirmAddServiceController {
+
+    private ServiceBean serviceBean ;
 
     @FXML private TextField nameConfirmedAddService ;
 
@@ -31,8 +33,9 @@ public class BarberConfirmAddServiceController {
 
     }
 
-    public void display(ServiceBean serviceBean) {
+    public void display(ServiceBean localServiceBean) {
 
+        this.serviceBean = localServiceBean;
         nameConfirmedAddService.setText(serviceBean.getName()) ;
         priceConfirmedAddService.setText(Double.toString(serviceBean.getPrice())) ;
         descriptionConfirmedAddService.setText(serviceBean.getDescription()) ;

@@ -1,4 +1,4 @@
-package engineering.bean.buyProduct;
+package engineering.bean;
 
 public class ServiceBean {
 

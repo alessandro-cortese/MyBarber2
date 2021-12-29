@@ -79,9 +79,9 @@ public class BarberViewAppointmentsController {
 
     }
 
-    private boolean isNumeric(String insertString) {
+    public static boolean isNumeric(String insertString) {
         try{
-            Integer.parseInt(insertString);
+            Double.parseDouble(insertString);
             return true;
         }catch (NumberFormatException e){
             return false;

@@ -1,6 +1,6 @@
 package first_view.barber;
 
-import engineering.bean.buyProduct.ServiceBean;
+import engineering.bean.ServiceBean;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;
@@ -30,15 +30,17 @@ public class BarberAddServiceController {
         if(sourceNode == continueButton){
             InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_CONFIRM_ADD_SERVICE_SCREEN_NAME));
+            BorderPane myBorderPane = (BorderPane) sourceNode.getScene().getRoot();
+            myBorderPane.setCenter(fxmlLoader.load());
 
-        /*    ServiceBean serviceBean = new ServiceBean(nameAddServiceTextField.getText(),
+            ServiceBean serviceBean = new ServiceBean(nameAddServiceTextField.getText(),
                     descriptionTextFiledAddService.getText(),
                     nameOfUsedProductTextField.getText(),
                     Double.parseDouble(priceTextField.getText())) ;
-        */
 
-            BorderPane myBorderPane = (BorderPane) sourceNode.getScene().getRoot();
-            myBorderPane.setCenter(fxmlLoader.load());
+            BarberConfirmAddServiceController barberConfirmAddServiceController = fxmlLoader.getController() ;
+            barberConfirmAddServiceController.display(serviceBean) ;
+
         }
 
     }
