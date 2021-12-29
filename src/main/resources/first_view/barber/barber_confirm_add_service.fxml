@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -11,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberAddServiceController">
+<AnchorPane prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberConfirmAddServiceController">
    <children>
       <HBox layoutX="68.0" layoutY="46.0" prefHeight="501.0" prefWidth="1146.0" spacing="10.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="525.0" prefWidth="388.0" spacing="30.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="390.0" text="Aggingi un Servizio">
+                  <Label prefHeight="39.0" prefWidth="383.0" text="Conferma aggiunta Serivzio">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -31,7 +30,7 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="525.0" prefWidth="388.0" spacing="15.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="390.0" text="Nome Catena">
+                  <Label prefHeight="39.0" prefWidth="390.0" text="Nome Centro">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -43,21 +42,17 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="26.0" prefWidth="261.0" />
+                        <TextField editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="173.0" prefHeight="64.0" prefWidth="388.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="177.0" prefHeight="64.0" prefWidth="388.0">
                      <children>
                         <Label prefHeight="23.0" prefWidth="200.0" text="Prezzo:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="priceTextField" editable="false" onMouseClicked="#onPricePicked" prefHeight="26.0" prefWidth="261.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </TextField>
+                        <TextField editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="79.0" prefHeight="64.0" prefWidth="388.0">
@@ -67,7 +62,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="26.0" prefWidth="261.0" />
+                        <TextField editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="335.0" prefHeight="64.0" prefWidth="388.0">
@@ -77,7 +72,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="26.0" prefWidth="257.0" />
+                        <TextField editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                </children>
@@ -98,7 +93,7 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="continueButton" layoutX="1044.0" layoutY="606.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="97.0" text="Continua">
+      <Button fx:id="saveConfirmButton" layoutX="1044.0" layoutY="606.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="97.0" text="Salva">
          <font>
             <Font size="18.0" />
          </font>

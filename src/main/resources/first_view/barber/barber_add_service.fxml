@@ -38,7 +38,7 @@
                   </Label>
                   <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="388.0">
                      <children>
-                        <Label prefHeight="23.0" prefWidth="126.0" text="Nome:">
+                        <Label prefHeight="23.0" prefWidth="200.0" text="Nome:">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -48,12 +48,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="173.0" prefHeight="64.0" prefWidth="388.0">
                      <children>
-                        <Label prefHeight="23.0" prefWidth="126.0" text="Prezzo:">
+                        <Label prefHeight="23.0" prefWidth="200.0" text="Prezzo:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="priceTextField" editable="false" onMouseClicked="#onPricePicked" prefHeight="26.0" prefWidth="261.0" promptText="Inserisci Prezzo">
+                        <TextField fx:id="priceTextField" editable="false" onMouseClicked="#onPricePicked" prefHeight="26.0" prefWidth="261.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -62,12 +62,22 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="79.0" prefHeight="64.0" prefWidth="388.0">
                      <children>
-                        <Label prefHeight="23.0" prefWidth="126.0" text="Descrizione:">
+                        <Label prefHeight="23.0" prefWidth="200.0" text="Descrizione:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
                         <TextField prefHeight="26.0" prefWidth="261.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="335.0" prefHeight="64.0" prefWidth="388.0">
+                     <children>
+                        <Label prefHeight="23.0" prefWidth="200.0" text="Prodotto Utilizzato:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="26.0" prefWidth="257.0" />
                      </children>
                   </HBox>
                </children>
@@ -76,7 +86,7 @@
                <children>
                   <ImageView fitHeight="191.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../../images/add_photo.png" />
+                        <Image url="@../../../../../images/add_photo.png" />
                      </image>
                   </ImageView>
                   <Button mnemonicParsing="false" text="Aggiungi Foto">
@@ -88,7 +98,7 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="saveButton" layoutX="1044.0" layoutY="606.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="97.0" text="Salva">
+      <Button fx:id="continueButton" layoutX="1044.0" layoutY="606.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="97.0" text="Continua">
          <font>
             <Font size="18.0" />
          </font>
