@@ -42,4 +42,8 @@ public class CartRow {
     public Double getProductPrice() {
         return product.getPrice() ;
     }
+
+    public String getProductVendor() {
+        return product.getVendor() ;
+    }
 }

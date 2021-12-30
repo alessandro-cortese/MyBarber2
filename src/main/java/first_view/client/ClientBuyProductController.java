@@ -89,6 +89,7 @@ public class ClientBuyProductController implements Initializable {
     private void searchProduct(String productName) {
         ProductSearchInfoBean searchInfoBean = new ProductSearchInfoBean(productName) ;
         productBeans = buyProductController.filterProductList(searchInfoBean) ;
+        buyProductListView.getItems().clear();
         buyProductListView.setItems(FXCollections.observableList(productBeans));
     }
 

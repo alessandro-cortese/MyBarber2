@@ -1,8 +1,12 @@
 package applicationController;
 
+import boundary.buyProduct.BuyProductEMailSystemBoundary;
+import boundary.buyProduct.BuyProductPaypalBoundary;
 import engineering.bean.buyProduct.*;
 import engineering.dao.CouponDAO;
+import engineering.dao.OrderDAO;
 import engineering.dao.ProductDAO;
+import engineering.exception.CouponNotFoundException;
 import model.buyProduct.Cart;
 import model.buyProduct.Coupon;
 import model.buyProduct.Order;
@@ -10,14 +14,18 @@ import model.buyProduct.Product;
 import model.buyProduct.containers.ProductCatalog;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class BuyProductController {
 
     private ProductDAO productDAO ;
     private CouponDAO couponDAO ;
+
     private ProductCatalog productCatalog ;
     private Cart cart ;
     private Order order ;
+
+    private CartBean cartBean ;
 
     public BuyProductController() {
         productDAO = new ProductDAO() ;
@@ -47,21 +55,51 @@ public class BuyProductController {
     }
 
     public CartBean showCart() {
-        return new CartBean(cart);
+        cartBean = new CartBean(cart);
+        return cartBean ;
     }
 
     public void removeProductFromCart(ProductBean productBean) {
         cart.removeProduct(productBean.getIsbn());
     }
 
-    public void applyCoupon(CouponBean couponBean) {
+    public void applyCoupon(CouponBean couponBean) throws CouponNotFoundException {
+
         Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode());
-        if (myCoupon != null) {
-            order.addCoupon(myCoupon);
+        order.addCoupon(myCoupon);
+
+    }
+
+    public void completeOrder(OrderInfoBean orderInfoBean) {
+        order.setAddress(orderInfoBean.getAddress());
+        order.setTelephone(orderInfoBean.getTelephone());
+        order.setPaymentOption(orderInfoBean.getPaymentOption());
+        order.setDate(orderInfoBean.getDate());
+
+        OrderDAO orderDAO = new OrderDAO() ;
+        orderDAO.saveOrder(order);
+
+        BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
+        paypalBoundary.pay(new OrderTotalBean(order));
+
+        BuyProductEMailSystemBoundary eMailSystemBoundary = new BuyProductEMailSystemBoundary() ;
+        ArrayList<String> vendorsInfo = cart.getVendorsInfo();
+        for (String vendor : vendorsInfo) {
+            eMailSystemBoundary.notifyVendors(createNotificationInfo(vendor, orderInfoBean));
         }
     }
 
-    public void completeOrder(OrderInfoBean orderInfoBean) {}
+    private VendorOrderBean createNotificationInfo(String vendor, OrderInfoBean orderInfoBean) {
+        //VendorOrderBean orderBean = new VendorOrderBean(vendor);
+        CartBean cartBean = new CartBean() ;
+        ArrayList<CartRowBean> cartRowBeans = new ArrayList<>() ;
+
+        for (Map<String,String> cartRowInfo : cart.getRowsInfoByVendor(vendor)) {
+            cartRowBeans.add(cartBean.createRowBean(cartRowInfo)) ;
+        }
+        return new VendorOrderBean(vendor, cartRowBeans, orderInfoBean.getAddress(), orderInfoBean.getTelephone(), orderInfoBean.getDate()) ;
+
+    }
 
     public OrderTotalBean showOrder(){
         order = new Order(cart) ;

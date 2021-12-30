@@ -1,5 +1,7 @@
 package engineering.otherclasses;
 
+import javafx.scene.Node;
+
 public class NumericVerify {
 
     public static boolean isNumeric(String insertString) {
@@ -9,6 +11,7 @@ public class NumericVerify {
         }catch (NumberFormatException e){
             return false;
         }
+
     }
 
 }

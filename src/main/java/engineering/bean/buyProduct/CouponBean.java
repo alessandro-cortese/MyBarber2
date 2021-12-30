@@ -15,4 +15,9 @@ public class CouponBean {
     public void setCouponCode(String couponCode) {
         this.couponCode = couponCode;
     }
+
+    @Override
+    public String toString() {
+        return couponCode ;
+    }
 }

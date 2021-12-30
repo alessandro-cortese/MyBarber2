@@ -14,6 +14,7 @@ public class Cart extends Subject {
     public static final String ISBN_KEY = "isbn" ;
     public static final String NAME_KEY = "name" ;
     public static final String PRICE_KEY = "price" ;
+    public static final String VENDOR_KEY = "vendor" ;
 
     private ArrayList<CartRow> cartRowArrayList ;
 
@@ -65,7 +66,8 @@ public class Cart extends Subject {
         return Map.of(QUANTITY_KEY, String.valueOf(cartRow.getQuantity()),
                 ISBN_KEY, String.valueOf(cartRow.getProductIsbn()),
                 NAME_KEY, String.valueOf(cartRow.getProductName()),
-                PRICE_KEY, String.valueOf(cartRow.getProductPrice())) ;
+                PRICE_KEY, String.valueOf(cartRow.getProductPrice()) ,
+                VENDOR_KEY, cartRow.getProductVendor()) ;
     }
 
     @Nullable
@@ -76,5 +78,25 @@ public class Cart extends Subject {
             }
         }
         return null ;
+    }
+
+    public ArrayList<String> getVendorsInfo() {
+        ArrayList<String> vendorsInfo = new ArrayList<>() ;
+        for (CartRow cartRow : cartRowArrayList) {
+            if (!vendorsInfo.contains(cartRow.getProductVendor())) {
+                vendorsInfo.add(cartRow.getProductVendor()) ;
+            }
+        }
+        return vendorsInfo ;
+    }
+
+    public ArrayList<Map<String,String>> getRowsInfoByVendor(String vendor) {
+        ArrayList<Map<String,String>> rowsInfo = new ArrayList<>() ;
+        for (CartRow cartRow : cartRowArrayList) {
+            if (cartRow.getProductVendor().compareTo(vendor) == 0) {
+                rowsInfo.add(createRowInfo(cartRow)) ;
+            }
+        }
+        return rowsInfo ;
     }
 }
