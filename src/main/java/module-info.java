@@ -12,6 +12,7 @@ module it.barbergroup {
     requires java.sql;
     requires mysql.connector.java;
     requires jsr305;
+    requires java.mail;
 
 
     exports first_view;

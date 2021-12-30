@@ -3,12 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<VBox fx:id="o" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="407.0" spacing="25.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.SaloonItemController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="407.0" spacing="25.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.BookingGraphicController">
    <children>
-      <Label fx:id="labelSaloon" text="Label" />
-      <Text fx:id="nameSaloonItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Label fx:id="placeSaloonItem" text="Label" />
+      <Label fx:id="labelSaloonItem" text="Label" />
       <Button fx:id="saloonButton" mnemonicParsing="false" onAction="#onButtonClicked" style="-fx-background-color: red;" text="Vai al Salone" textFill="WHITE" />
    </children>
 </VBox>
