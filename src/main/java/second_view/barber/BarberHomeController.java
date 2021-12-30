@@ -41,6 +41,9 @@ public class BarberHomeController {
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_VIEW_APPOINTMENTS_SCREEN_NAME);
             return ;
         }
+        else if (commandLine.compareTo("manage service") == 0) {
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_MANAGE_SERVICE) ;
+        }
 
         barberHomeCommandLine.setStyle("-fx-border-color: red");
 
