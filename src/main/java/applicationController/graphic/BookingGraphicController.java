@@ -4,25 +4,35 @@ import applicationController.BookingController;
 import engineering.bean.SaloonBean;
 import first_view.ObservableListNode;
 import first_view.general.InternalBackController;
+import first_view.listCellFactories.SaloonListCellFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import org.w3c.dom.NodeList;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class BookingGraphicController {
+public class BookingGraphicController{
 
     private static final String APPOINTMENT_SALOON_ITEM = "first_view/listitem/take_saloon_item.fxml";
     private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
-
     private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
+    private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
 
+    @FXML
+    private ListView<SaloonBean> saloonListView;
     @FXML
     private Button saloonButton;
 
@@ -52,12 +62,16 @@ public class BookingGraphicController {
     @FXML
     Label showErr2;
     @FXML
-    private Label nameSaloonItem;
+    private Label NameSaloonItem;
     @FXML
     private Label placeSaloonItem;
 
+    private SaloonBean saloonBean;
+    private BookingController bookingController;
+    private List<SaloonBean> saloonBeanList;
+
     @FXML
-    public void onBookedButton(ActionEvent event) throws IOException{
+    public void onBookedButton(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
         InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
     }
@@ -65,8 +79,9 @@ public class BookingGraphicController {
 
     @FXML
     public void onButtonSaloonClicked(ActionEvent actionEvent) throws Exception {
-        String saloon = searchSaloonName.getText();
-        String saloonCity = searchCity.getText();
+        Parent newCenterNode=null;
+       // String saloon = searchSaloonName.getText();
+        //String saloonCity = searchCity.getText();
         /*if(saloon == "" ){
             showErr.setText("inserire un nome valido!");
             return;
@@ -76,47 +91,22 @@ public class BookingGraphicController {
             return;
         }
         */
-        SaloonBean saloonBean = new SaloonBean(saloon,saloonCity);
 
-        BookingController bookingController = new BookingController();
-        List<SaloonBean> saloonBeanList = bookingController.searchByNameSaloon(saloonBean);
-
-
+       // saloonBean = new SaloonBean(saloon, saloonCity);
+        bookingController = new BookingController();
+        //saloonBeanList = bookingController.searchByNameSaloon(saloonBean); //recupero i saloni
         Button sourceButton = (Button) actionEvent.getSource();
-        Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
-        ListView listView = (ListView) newCenterNode.lookup("#saloonListView");
-        onLoadListItems(listView, APPOINTMENT_SALOON_ITEM, saloonBeanList);
-        Scene myScene = (Scene) sourceButton.getScene();
+        if(sourceButton == saloonNextButton) {
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME))).load();
+        }
+        if(sourceButton == placeNextButton)
+            return;
+        if(sourceButton == bookedButton)
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME ))).load();
+        Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
 
     }
-
-    @FXML
-    void onButtonClicked(ActionEvent event) throws IOException {
-        Node sourceButton = (Node) event.getSource();
-        InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
-        FXMLLoader node = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME));
-        Scene myScene =  sourceButton.getScene();
-        BorderPane borderPane = (BorderPane) myScene.getRoot();
-        borderPane.setCenter(node.load());
-    }
-
-    private void onLoadListItems(ListView listView, String itemResource, List<SaloonBean> list) throws IOException {
-        Node[] nodesList = new Node[list.size()] ;
-        for (int i = 0 ; i < list.size() ; i++) {
-            nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(itemResource))).load() ;
-            String address = list.get(i).getAddress();
-            String city = list.get(i).getCity();
-            System.out.println(address);
-
-            
-            nameSaloonItem.setText("eeee");
-            //nameSaloonItem.setText("porc");
-        }
-        ObservableListNode saloonList = new ObservableListNode(nodesList);
-        listView.setItems(saloonList);
-    }
-
 
 }
