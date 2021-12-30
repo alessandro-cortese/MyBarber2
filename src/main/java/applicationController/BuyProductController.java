@@ -4,6 +4,7 @@ import engineering.bean.buyProduct.*;
 import engineering.dao.CouponDAO;
 import engineering.dao.ProductDAO;
 import model.buyProduct.Cart;
+import model.buyProduct.Coupon;
 import model.buyProduct.Order;
 import model.buyProduct.Product;
 import model.buyProduct.containers.ProductCatalog;
@@ -20,6 +21,7 @@ public class BuyProductController {
 
     public BuyProductController() {
         productDAO = new ProductDAO() ;
+        couponDAO = new CouponDAO() ;
         productCatalog = productDAO.loadAllProducts() ;
         cart = new Cart() ;
         order = new Order(cart) ;
@@ -45,16 +47,24 @@ public class BuyProductController {
     }
 
     public CartBean showCart() {
-        CartBean cartBean = new CartBean(cart) ;
-        cart.attach(cartBean);
-        return cartBean ;
+        return new CartBean(cart);
     }
 
     public void removeProductFromCart(ProductBean productBean) {
         cart.removeProduct(productBean.getIsbn());
     }
 
-    public void applyCoupon(CouponBean couponBean) {}
+    public void applyCoupon(CouponBean couponBean) {
+        Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode());
+        if (myCoupon != null) {
+            order.addCoupon(myCoupon);
+        }
+    }
 
     public void completeOrder(OrderInfoBean orderInfoBean) {}
+
+    public OrderTotalBean showOrder(){
+        order = new Order(cart) ;
+        return new OrderTotalBean(order) ;
+    }
 }

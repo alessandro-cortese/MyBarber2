@@ -34,7 +34,7 @@ public class ClientBuyProductController implements Initializable {
     private BuyProductController buyProductController;
     private ArrayList<ProductBean> productBeans ;
 
-    private static final String LIST_ITEM_RES = "first_view/listitem/client_buy_product_list_item.fxml";
+    public static final String CLIENT_CART_SCENE_RES = "first_view/client/client_cart.fxml" ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,15 +70,14 @@ public class ClientBuyProductController implements Initializable {
 
             try {
                 InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
-                FXMLLoader newCenterNodeLoader = new FXMLLoader(getClass().getClassLoader().getResource("first_view/client/client_cart.fxml"));
+                FXMLLoader newCenterNodeLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCENE_RES));
 
 
                 Scene myScene = sourceNode.getScene();
                 BorderPane borderPane = (BorderPane) myScene.getRoot();
                 borderPane.setCenter(newCenterNodeLoader.load());
-                ClientCartController cartController = ((ClientCartController) newCenterNodeLoader.getController()) ;
+                ClientCartController cartController = newCenterNodeLoader.getController();
                 cartController.setApplicationController(buyProductController);
-                cartController.viewCart() ;
 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -27,7 +27,7 @@ public class BarberHomeController {
             return ;
         }
         else if (commandLine.compareTo("logout") == 0) {
-            System.exit(0);
+            return ;
         }
         else if (commandLine.compareTo("userarea") == 0) {
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_USER_AREA_SCREEN);

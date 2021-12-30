@@ -19,7 +19,8 @@ public class CartBean implements Observer {
         setTotal(0.0);
         setCartRowBeanArrayList(new ArrayList<>()) ;
         setObservedCart(observedCart);
-
+        observedCart.attach(this);
+        update();
     }
 
     public Double getTotal() {

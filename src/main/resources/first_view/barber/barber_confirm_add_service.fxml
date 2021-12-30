@@ -42,7 +42,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField editable="false" prefHeight="26.0" prefWidth="261.0" />
+                        <TextField fx:id="nameConfirmedAddService" editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="177.0" prefHeight="64.0" prefWidth="388.0">
@@ -52,7 +52,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField editable="false" prefHeight="26.0" prefWidth="261.0" />
+                        <TextField fx:id="priceConfirmedAddService" editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="79.0" prefHeight="64.0" prefWidth="388.0">
@@ -62,7 +62,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField editable="false" prefHeight="26.0" prefWidth="261.0" />
+                        <TextField fx:id="descriptionConfirmedAddService" editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="335.0" prefHeight="64.0" prefWidth="388.0">
@@ -72,7 +72,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField editable="false" prefHeight="26.0" prefWidth="261.0" />
+                        <TextField fx:id="nameOfUsedProductConfirmedAddService" editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                </children>
