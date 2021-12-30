@@ -81,7 +81,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="561.0" prefWidth="396.0" spacing="50.0">
                <children>
-                  <ListView prefHeight="470.0" prefWidth="348.0" />
+                  <ListView fx:id="barberServiceListView" prefHeight="470.0" prefWidth="348.0" />
                </children>
             </VBox>
          </children>

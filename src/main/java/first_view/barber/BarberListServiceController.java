@@ -1,18 +1,25 @@
 package first_view.barber;
+import first_view.ObservableListNode;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class BarberListServiceController {
+public class BarberListServiceController implements Initializable {
+
+    @FXML private ListView<Node> barberServiceListView;
 
     @FXML private TextField nameServiceTextField;
     @FXML private TextField descriptionServiceTextField;
@@ -23,6 +30,8 @@ public class BarberListServiceController {
     @FXML private Button addServiceButton;
     @FXML private Button deleteServiceButton;
 
+    private static final String BARBER_SERVICE_LIST_ITEM = "first_view/listitem/barber_service_list_item.fxml";
+
     @FXML
     public void onPricePicked(MouseEvent event) throws IOException {
         TextField sourceTextField = (TextField) event.getSource();
@@ -30,6 +39,22 @@ public class BarberListServiceController {
             PricePicker pricePicker = new PricePicker(0, 0.0);
             priceServiceTextField.setText(pricePicker.getPrice());
         }
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        Node[] nodes = new Node[5];
+        for (int i = 0 ; i < nodes.length ; i++) {
+            try {
+                nodes[i] = (new FXMLLoader(getClass().getClassLoader().getResource(BARBER_SERVICE_LIST_ITEM))).load() ;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        ObservableListNode barberCenterObservableListNode = new ObservableListNode(nodes);
+        barberServiceListView.setItems(barberCenterObservableListNode);
 
     }
 
