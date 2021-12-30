@@ -23,20 +23,18 @@ public class Order extends Subject {
     public Order(Cart cart){
         setCart(cart);
         couponArrayList = new ArrayList<>() ;
-        price = new Price(cart.getTotal()) ;
+        price = new Price(getCartTotal()) ;
     }
 
     public void addCoupon(Coupon coupon) {
         couponArrayList.add(coupon) ;
         applyDiscount(coupon) ;
         notifyObservers();
-        System.out.println("Ciao");
     }
 
     private void applyDiscount(Coupon coupon) {
         coupon.setAppliedPrice(price);
         this.price = coupon ;
-        System.out.println(coupon.getPrice());
     }
 
     public void removeCoupon(Coupon toRemoveCoupon) {
@@ -75,12 +73,24 @@ public class Order extends Subject {
         this.date = date;
     }
 
-    public Double getPrice() {
+    public Double getFinalPrice() {
         return this.price.getPrice() ;
+    }
+
+    public ArrayList<String> getCouponsState() {
+        ArrayList<String> couponCodeArray = new ArrayList<>() ;
+        for (Coupon coupon : couponArrayList) {
+            couponCodeArray.add(coupon.getCouponCode()) ;
+        }
+        return couponCodeArray ;
     }
 
     public Cart getCart() {
         return cart;
+    }
+
+    public Double getCartTotal() {
+        return cart.getTotal() ;
     }
 
     public void setCart(Cart cart) {

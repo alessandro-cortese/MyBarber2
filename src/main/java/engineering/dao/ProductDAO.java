@@ -8,6 +8,7 @@ public class ProductDAO {
     public ProductCatalog loadAllProducts() {
         ProductCatalog catalog = new ProductCatalog() ;
         catalog.addProduct(1,"Dopobarba","ciao a tutti", 22.0, "ciao");
+        catalog.addProduct(2,"Shampoo", "Antigiallo", 11.25, "Simo");
         return catalog ;
     }
 

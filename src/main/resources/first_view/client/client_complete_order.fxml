@@ -36,7 +36,7 @@
                   <Label text="Concludi Ordine" />
                   <HBox spacing="25.0">
                      <children>
-                        <Button fx:id="payWithPaypalButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" text="Paga con Paypal">
+                        <Button fx:id="payWithPaypalButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="175.0" text="Paga con Paypal">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -45,7 +45,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" text="Paga con GooglePay">
+                        <Button fx:id="payWithGooglePayButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="175.0" text="Paga con GooglePay">
                            <graphic>
                               <ImageView fitHeight="126.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -83,6 +83,11 @@
                </children>
             </VBox>
             <Label fx:id="orderTotalAmountLabel" text="Totale Ordine">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="acquiredPointsLabel" text="Punti Raccolti">
                <font>
                   <Font size="14.0" />
                </font>

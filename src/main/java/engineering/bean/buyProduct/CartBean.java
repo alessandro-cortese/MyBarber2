@@ -14,6 +14,8 @@ public class CartBean implements Observer {
     private ArrayList<CartRowBean> cartRowBeanArrayList ;
     private Cart observedCart ;
 
+    public CartBean() {}
+
 
     public CartBean(Cart observedCart) {
         setTotal(0.0);
@@ -49,7 +51,7 @@ public class CartBean implements Observer {
         }
     }
 
-    private CartRowBean createRowBean(Map<String, String> rowInfo) {
+    public CartRowBean createRowBean(Map<String, String> rowInfo) {
         return new CartRowBean(Integer.parseInt(rowInfo.get(QUANTITY_KEY)),
                 Integer.parseInt(rowInfo.get(ISBN_KEY)),
                 rowInfo.get(NAME_KEY),
