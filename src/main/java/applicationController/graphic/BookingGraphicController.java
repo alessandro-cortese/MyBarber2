@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class BookingGraphicController{
+public class BookingGraphicController implements  Initializable{
 
     private static final String APPOINTMENT_SALOON_ITEM = "first_view/listitem/take_saloon_item.fxml";
     private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
@@ -32,7 +32,7 @@ public class BookingGraphicController{
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
 
     @FXML
-    private ListView<SaloonBean> saloonListView;
+    private ListView<Node> saloonListView= new ListView<>();
     @FXML
     private Button saloonButton;
 
@@ -68,7 +68,7 @@ public class BookingGraphicController{
 
     private SaloonBean saloonBean;
     private BookingController bookingController;
-    private List<SaloonBean> saloonBeanList;
+    private List<SaloonBean> saloonBeanList= new ArrayList<>();
 
     @FXML
     public void onBookedButton(ActionEvent event) throws IOException {
@@ -100,7 +100,7 @@ public class BookingGraphicController{
             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME))).load();
         }
         if(sourceButton == placeNextButton)
-            return;
+            newCenterNode =(new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
         if(sourceButton == bookedButton)
             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME ))).load();
         Scene myScene = sourceButton.getScene();
@@ -108,5 +108,18 @@ public class BookingGraphicController{
         borderPane.setCenter(newCenterNode);
 
     }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Node[] nodesList = new Node[saloonBeanList.size()] ;
+        for (int i = 0 ; i < saloonBeanList.size() ; i++) {
+            try {
+                nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(APPOINTMENT_SALOON_ITEM ))).load() ;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        ObservableListNode saloonListNode = new ObservableListNode(nodesList);
+        saloonListView.setItems(saloonListNode);
 
+    }
 }
