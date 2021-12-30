@@ -12,8 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import org.w3c.dom.NodeList;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookingGraphicController {
@@ -22,6 +26,8 @@ public class BookingGraphicController {
     private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
 
     private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
+
+
 
     @FXML
     private Button saloonButton;
@@ -51,10 +57,7 @@ public class BookingGraphicController {
     Label showErr;
     @FXML
     Label showErr2;
-    @FXML
-    private Label nameSaloonItem;
-    @FXML
-    private Label placeSaloonItem;
+
 
     @FXML
     public void onBookedButton(ActionEvent event) throws IOException{
@@ -104,18 +107,22 @@ public class BookingGraphicController {
 
     private void onLoadListItems(ListView listView, String itemResource, List<SaloonBean> list) throws IOException {
         Node[] nodesList = new Node[list.size()] ;
+        List<Text> textList = new ArrayList<>();
         for (int i = 0 ; i < list.size() ; i++) {
             nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(itemResource))).load() ;
             String address = list.get(i).getAddress();
             String city = list.get(i).getCity();
-            System.out.println(address);
-
-            
-            nameSaloonItem.setText("eeee");
-            //nameSaloonItem.setText("porc");
+            SaloonItemController saloonItemController = new SaloonItemController();
+            VBox v = (VBox) nodesList[i].getScene().lookup("#o");
+            Text t = (Text) v.getChildren();
+            t.setText("d");
+            //saloonItemController.setNameSaloonItem(address);
+            //System.out.println(t);
         }
         ObservableListNode saloonList = new ObservableListNode(nodesList);
         listView.setItems(saloonList);
+
+
     }
 
 
