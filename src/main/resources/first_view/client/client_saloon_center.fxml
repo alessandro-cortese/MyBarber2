@@ -24,7 +24,7 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="serviceListVIew" prefHeight="435.0" prefWidth="316.0" />
+                  <ListView fx:id="serviceListVIew" prefHeight="612.0" prefWidth="324.0" />
                </children>
             </VBox>
             <VBox prefHeight="600.0" prefWidth="119.0">
