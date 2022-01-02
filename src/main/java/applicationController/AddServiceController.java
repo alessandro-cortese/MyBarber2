@@ -5,22 +5,25 @@ import engineering.container.CatalogueService;
 import model.Service;
 import model.buyProduct.Product;
 
+import java.util.ArrayList;
+
 public class AddServiceController {
 
-    private Service service;
-    private CatalogueService catalogueService;
+    public AddServiceController(){
+        ;
+    }
 
-    public AddServiceController(ServiceBean serviceBean) {
+    public void addService(ServiceBean serviceBean) {
 
+        Service service;
         Product localProduct = new Product();
         localProduct.setName(serviceBean.getNameOfUsedProduct());
         service = new Service(serviceBean.getName(), serviceBean.getDescription(), serviceBean.getPrice(), localProduct);
+        CatalogueService catalogueService = new CatalogueService();
+        catalogueService.addService(service);
+        System.out.println("Added");
 
     }
 
-    @Override
-    public String toString() {
-        return service.getName() + service.getDescription();
-    }
 
 }

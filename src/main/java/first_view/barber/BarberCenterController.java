@@ -25,7 +25,7 @@ public class BarberCenterController implements Initializable {
 
     private static final String BARBER_CENTER_LIST_ITEM = "first_view/listitem/center_list_item.fxml";
 
-    private static final String ADD_BARBER_CENTER_SCREEN_NAME = "first_view/barber/barber_add_center.fxml";
+    private static final String ADD_BARBER_CENTER_SCREEN_NAME = "first_view/barber/barber_modify_center.fxml";
     private static final String BARBER_MODIFY_SCREEN_NAME = "first_view/barber/barber_modify_center.fxml";
 
 
@@ -64,7 +64,6 @@ public class BarberCenterController implements Initializable {
 
         if (nextScreenName != null) {
             InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
-
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(nextScreenName));
             BorderPane myBorderPane = (BorderPane) (sourceButton.getScene()).getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
