@@ -1,5 +1,7 @@
 package engineering.bean;
 
+import engineering.exception.NegativePriceException;
+
 public class ServiceBean {
 
     private String name;
@@ -7,13 +9,13 @@ public class ServiceBean {
     private String nameOfUsedProduct;
     private Double price;
 
-    public ServiceBean() {
+    public ServiceBean() throws NegativePriceException{
 
         this("", "", "", 0.0D);
 
     }
 
-    public ServiceBean (String name, String description, String nameOfUsedProduct, Double price) {
+    public ServiceBean (String name, String description, String nameOfUsedProduct, Double price) throws NegativePriceException{
 
         this.setName(name);
         this.setDescription(description);
@@ -38,8 +40,12 @@ public class ServiceBean {
         return description;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setPrice(Double price) throws NegativePriceException{
+
+        if (controlPrice(price)){
+            this.price = price;
+        }
+
     }
 
     public Double getPrice() {
@@ -52,6 +58,19 @@ public class ServiceBean {
 
     public void setNameOfUsedProduct(String nameOfUsedProduct) {
         this.nameOfUsedProduct = nameOfUsedProduct;
+    }
+
+    private boolean controlPrice(Double localPrice) throws NegativePriceException {
+        boolean flag = false;
+        if(localPrice <= 0.0D){
+            throw new NegativePriceException();
+        }
+        else if(localPrice > 0.0D) {
+            flag = true;
+        }
+
+        return flag;
+
     }
 
 }
