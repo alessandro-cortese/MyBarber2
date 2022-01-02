@@ -53,6 +53,7 @@ public class ClientCartController implements Initializable {
         plusButton.setDisable(true);
         deleteButton.setDisable(true);
         minusButton.setDisable(true);
+
     }
 
     public void setApplicationController(BuyProductController buyProductController) {

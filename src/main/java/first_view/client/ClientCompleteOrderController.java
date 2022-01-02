@@ -4,7 +4,7 @@ import applicationController.BuyProductController;
 import engineering.bean.buyProduct.CouponBean;
 import engineering.bean.buyProduct.OrderInfoBean;
 import engineering.bean.buyProduct.OrderTotalBean;
-import engineering.exception.CouponNotFoundException;
+import engineering.exception.InvalidCouponException;
 import first_view.general.InternalBackController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -57,8 +57,8 @@ public class ClientCompleteOrderController {
         CouponBean couponBean = new CouponBean(couponCodeField.getText()) ;
         try {
             buyProductController.applyCoupon(couponBean);
-        } catch (CouponNotFoundException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Coupon non trovato, riprovare") ;
+        } catch (InvalidCouponException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
             alert.showAndWait() ;
         }
     }

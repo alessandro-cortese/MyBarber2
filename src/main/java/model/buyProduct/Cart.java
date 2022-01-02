@@ -1,6 +1,6 @@
 package model.buyProduct;
 
-import engineering.pattern.observer.Observer;
+import engineering.pattern.decorator.Priceable;
 import engineering.pattern.observer.Subject;
 import model.buyProduct.containers.ProductCatalog;
 
@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Cart extends Subject {
+public class Cart extends Subject implements Priceable {
 
     public static final String QUANTITY_KEY = "quantity" ;
     public static final String ISBN_KEY = "isbn" ;
@@ -23,10 +23,10 @@ public class Cart extends Subject {
         cartRowArrayList = new ArrayList<>() ;
     }
 
-    public void insertProduct(ProductCatalog catalog, Integer productIsbn) {
-        CartRow productRow = verifyPresent(productIsbn) ;
+    public void insertProduct(Product newProduct) {
+        CartRow productRow = verifyPresent(newProduct) ;
         if (productRow == null) {
-            cartRowArrayList.add(new CartRow(catalog.getProductByIsbn(productIsbn), 1)) ;
+            cartRowArrayList.add(new CartRow(newProduct, 1)) ;
         }
         else {
             productRow.setQuantity(productRow.getQuantity() + 1);
@@ -34,8 +34,8 @@ public class Cart extends Subject {
         super.notifyObservers();
     }
 
-    public void removeProduct(Integer productIsbn) {
-        CartRow productRow = verifyPresent(productIsbn) ;
+    public void removeProduct(Product rmvProduct) {
+        CartRow productRow = verifyPresent(rmvProduct) ;
         if (productRow != null) {
             productRow.setQuantity(productRow.getQuantity() - 1);
             if (productRow.getQuantity() == 0) {
@@ -71,9 +71,9 @@ public class Cart extends Subject {
     }
 
     @Nullable
-    private CartRow verifyPresent(Integer productIsbn) {
+    private CartRow verifyPresent(Product verifyProduct) {
         for (CartRow row : cartRowArrayList) {
-            if (row.getProductIsbn() == productIsbn) {
+            if (row.getProduct() == verifyProduct) {
                 return row ;
             }
         }
@@ -98,5 +98,10 @@ public class Cart extends Subject {
             }
         }
         return rowsInfo ;
+    }
+
+    @Override
+    public Double getPrice() {
+        return getTotal();
     }
 }

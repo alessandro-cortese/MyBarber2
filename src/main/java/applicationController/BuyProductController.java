@@ -6,7 +6,7 @@ import engineering.bean.buyProduct.*;
 import engineering.dao.CouponDAO;
 import engineering.dao.OrderDAO;
 import engineering.dao.ProductDAO;
-import engineering.exception.CouponNotFoundException;
+import engineering.exception.InvalidCouponException;
 import model.buyProduct.Cart;
 import model.buyProduct.Coupon;
 import model.buyProduct.Order;
@@ -51,7 +51,8 @@ public class BuyProductController {
     }
 
     public void insertProductToCart(ProductBean productBean) {
-        cart.insertProduct(productCatalog, productBean.getIsbn());
+        Product product = productCatalog.getProductByIsbn(productBean.getIsbn()) ;
+        cart.insertProduct(product);
     }
 
     public CartBean showCart() {
@@ -60,10 +61,11 @@ public class BuyProductController {
     }
 
     public void removeProductFromCart(ProductBean productBean) {
-        cart.removeProduct(productBean.getIsbn());
+        Product rmvProduct = productCatalog.getProductByIsbn(productBean.getIsbn()) ;
+        cart.removeProduct(rmvProduct);
     }
 
-    public void applyCoupon(CouponBean couponBean) throws CouponNotFoundException {
+    public void applyCoupon(CouponBean couponBean) throws InvalidCouponException {
 
         Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode());
         order.addCoupon(myCoupon);

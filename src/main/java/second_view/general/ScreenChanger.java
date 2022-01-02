@@ -53,12 +53,14 @@ public class ScreenChanger {
         backSceneStack.add(prevScene) ;
     }
 
-    public void changeScreen(ActionEvent event, String scenePath) throws IOException {
+    public Object changeScreen(ActionEvent event, String scenePath) throws IOException {
         Stage myStage = (Stage)((Node) event.getSource()).getScene().getWindow() ;
         FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource(scenePath)) ;
         Scene myScene = new Scene(root.load()) ;
         ScreenChanger.getInstance().setPrevScene(((Node) event.getSource()).getScene());
         myStage.setScene(myScene);
+
+        return root.getController() ;
     }
 
 

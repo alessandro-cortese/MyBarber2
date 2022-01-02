@@ -1,44 +1,54 @@
 package model.buyProduct;
 
-import engineering.pattern.decorator.Price;
+import engineering.exception.InvalidCouponException;
 import engineering.pattern.decorator.Priceable;
 import engineering.pattern.observer.Subject;
+import model.buyProduct.containers.CouponContainer;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Order extends Subject {
 
-    private Cart cart ;
     private String address ;
     private String telephone ;
     private String paymentOption ;
     private Date date ;
 
-    private ArrayList<Coupon> couponArrayList ;
 
-    private Priceable price ;
+    private Cart cart ;
+    private CouponContainer couponContainer;
+    private Priceable finalPrice;
 
 
     public Order(Cart cart){
         setCart(cart);
-        couponArrayList = new ArrayList<>() ;
-        price = new Price(getCartTotal()) ;
+        couponContainer = new CouponContainer() ;
+        finalPrice = cart ;
     }
 
-    public void addCoupon(Coupon coupon) {
-        couponArrayList.add(coupon) ;
-        applyDiscount(coupon) ;
+    public void addCoupon(Coupon coupon) throws InvalidCouponException {
+        couponContainer.addCoupon(coupon);
+        applyDiscount() ;
         notifyObservers();
     }
 
-    private void applyDiscount(Coupon coupon) {
-        coupon.setAppliedPrice(price);
-        this.price = coupon ;
+    private void applyDiscount() {
+        finalPrice = cart ;
+        for (int i = 0 ; i < couponContainer.getSize() ; i++) {
+            Coupon currentCoupon = couponContainer.getCouponByIndex(i) ;
+            if (currentCoupon != null) {
+                currentCoupon.setAppliedPrice(finalPrice);
+                if (currentCoupon.getPrice() < 0) {
+                    //throw NegativePriceException
+                }
+                finalPrice = currentCoupon ;
+            }
+        }
     }
 
     public void removeCoupon(Coupon toRemoveCoupon) {
-        couponArrayList.removeIf(coupon -> coupon.getCouponCode().compareTo(toRemoveCoupon.getCouponCode()) == 0);
+        couponContainer.removeCoupon(toRemoveCoupon);
     }
 
     public String getAddress() {
@@ -74,13 +84,16 @@ public class Order extends Subject {
     }
 
     public Double getFinalPrice() {
-        return this.price.getPrice() ;
+        return this.finalPrice.getPrice() ;
     }
 
     public ArrayList<String> getCouponsState() {
         ArrayList<String> couponCodeArray = new ArrayList<>() ;
-        for (Coupon coupon : couponArrayList) {
-            couponCodeArray.add(coupon.getCouponCode()) ;
+        for (int i = 0 ; i < couponContainer.getSize() ; i++) {
+            Coupon currentCoupon = couponContainer.getCouponByIndex(i) ;
+            if (currentCoupon != null) {
+                couponCodeArray.add(currentCoupon.getCouponCode());
+            }
         }
         return couponCodeArray ;
     }
@@ -89,8 +102,8 @@ public class Order extends Subject {
         return cart;
     }
 
-    public Double getCartTotal() {
-        return cart.getTotal() ;
+    public Integer getOrderPoints() {
+        return (int) Math.round(cart.getPrice()) ;
     }
 
     public void setCart(Cart cart) {

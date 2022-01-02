@@ -42,7 +42,7 @@ public class OrderTotalBean implements Observer {
             couponBeans.add(new CouponBean(couponCode)) ;
         }
 
-        setPoints((int) Math.round(observedOrder.getCartTotal()));
+        setPoints(observedOrder.getOrderPoints());
     }
 
     public ArrayList<CouponBean> getCouponBeans() {
