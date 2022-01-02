@@ -3,17 +3,21 @@ package engineering.container;
 import model.Service;
 import model.buyProduct.Product;
 import javax.annotation.Nullable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class CatalogueService {
-    private List<Service> service;
+    private ArrayList<Service> serviceArrayList;
 
-    public CatalogueService(List<Service> service){
-        this.service=service;
+    public CatalogueService(ArrayList<Service> service){
+        this.serviceArrayList = service;
     }
 
     public CatalogueService(){
-        this.service=null;
+        this.serviceArrayList = new ArrayList<>();
+    }
+
+    public ArrayList<Service> getServices(){
+        return this.serviceArrayList;
     }
 
     public Service createService(String name, String description, double price, Product usedProduct) {
@@ -21,17 +25,17 @@ public class CatalogueService {
     }
 
     public void addService(Service newService) {
-        service.add(newService);
+        serviceArrayList.add(newService);
     }
 
     public void addService(String name, String description, double price, Product usedProduct) {
         Service localService = new Service(name, description, price, usedProduct);
-        service.add(localService);
+        serviceArrayList.add(localService);
     }
 
     @Nullable
     public Service getServiceByName (String serviceName) {
-        for(Service service : service) {
+        for(Service service : serviceArrayList) {
             if(service.getName().compareTo(serviceName) == 0) {
                 return service;
             }
@@ -40,9 +44,9 @@ public class CatalogueService {
     }
 
     public boolean removeService (String serviceName) {
-        for (Service localService : service) {
+        for (Service localService : serviceArrayList) {
             if(localService.getName().compareTo(serviceName) == 0) {
-                service.remove(localService);
+                serviceArrayList.remove(localService);
                 return true;
             }
         }

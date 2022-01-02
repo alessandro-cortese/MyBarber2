@@ -38,12 +38,12 @@ public class BarberAddServiceController {
                 return ;
             }
         }
-        else if(addServiceCommand.compareTo("add service") == 0){
+        else if(addServiceCommand.compareTo("add") == 0){
 
             if(nameAddServiceField.getText() != null && addServicePriceField.getText() != null && descriptionAddServiceField.getText() != null ) {
                 ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
-                AddServiceController addServiceController = new AddServiceController(serviceBean);
-                System.out.println(addServiceController);
+                AddServiceController addServiceController = new AddServiceController();
+                addServiceController.addService(serviceBean);
                 return ;
             }
         }
