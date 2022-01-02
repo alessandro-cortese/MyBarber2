@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.BookingGraphicController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.ScheduleBookingGraphicController">
    <children>
-      <Label layoutX="289.0" layoutY="22.0" prefHeight="66.0" prefWidth="292.0" text="Nome Salone">
+      <Label fx:id="saloonName" layoutX="289.0" layoutY="22.0" prefHeight="66.0" prefWidth="292.0" text="Nome Salone">
          <font>
             <Font size="28.0" />
          </font>
@@ -26,7 +27,7 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <SplitMenuButton layoutX="14.0" layoutY="100.0" mnemonicParsing="false" prefHeight="7.0" prefWidth="170.0" text="Catalogo Servizi">
+                        <SplitMenuButton fx:id="catalogueBooking" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#selectService" prefHeight="7.0" prefWidth="170.0" text="Catalogo Servizi">
                           <items>
                             <MenuItem mnemonicParsing="false" text="Action 1" />
                             <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -47,7 +48,7 @@
             </VBox>
             <VBox prefHeight="509.0" prefWidth="306.0">
                <children>
-                  <ImageView fitHeight="238.0" fitWidth="306.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="saloonImage" fitHeight="238.0" fitWidth="306.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../images/barber_center.jpeg" />
                      </image>
@@ -57,9 +58,12 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <DatePicker prefHeight="24.0" prefWidth="161.0" />
-                  <Label prefHeight="56.0" prefWidth="161.0" text="posti disponibili: " />
-                  <Label prefHeight="91.0" prefWidth="229.0" text="Prezzo totale: " />
+                  <DatePicker fx:id="dateBooking" prefHeight="24.0" prefWidth="161.0" />
+                  <Label prefHeight="56.0" prefWidth="321.0" text="Scegli un ora del giorno">
+                     <font>
+                        <Font size="19.0" />
+                     </font></Label>
+                  <TextField fx:id="textTime" alignment="TOP_LEFT" onAction="#onChangeTime" onMouseClicked="#onChangeTime" prefHeight="24.0" prefWidth="142.0" />
                </children>
             </VBox>
          </children>

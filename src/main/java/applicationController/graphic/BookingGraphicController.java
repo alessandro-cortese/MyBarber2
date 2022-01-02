@@ -29,7 +29,7 @@ public class BookingGraphicController implements  Initializable{
     private static final String APPOINTMENT_SALOON_ITEM = "first_view/listitem/take_saloon_item.fxml";
     private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
     private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
-    private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
+
 
     @FXML
     private ListView<Node> saloonListView= new ListView<>();
@@ -101,8 +101,6 @@ public class BookingGraphicController implements  Initializable{
         }
         if(sourceButton == placeNextButton)
             newCenterNode =(new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
-        if(sourceButton == bookedButton)
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME ))).load();
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
