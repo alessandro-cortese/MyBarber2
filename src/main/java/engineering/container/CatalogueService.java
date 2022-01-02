@@ -2,7 +2,7 @@ package engineering.container;
 
 import model.Service;
 import model.buyProduct.Product;
-
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class CatalogueService {
@@ -29,6 +29,7 @@ public class CatalogueService {
         service.add(localService);
     }
 
+    @Nullable
     public Service getServiceByName (String serviceName) {
         for(Service service : service) {
             if(service.getName().compareTo(serviceName) == 0) {
@@ -38,4 +39,27 @@ public class CatalogueService {
         return null;
     }
 
+    public boolean removeService (String serviceName) {
+        for (Service localService : service) {
+            if(localService.getName().compareTo(serviceName) == 0) {
+                service.remove(localService);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean modifyService(String nameOfServiceToModify, String newName, String newDescription, double newPrice, Product newUsedProduct) {
+        boolean flag = false;
+        Service localService = getServiceByName(nameOfServiceToModify);
+        if(localService != null) {
+            localService.setName(newName);
+            localService.setDescription(newDescription);
+            localService.setPrice(newPrice);
+            localService.setUsedProduct(newUsedProduct);
+            flag = true;
+        }
+        return flag;
+    }
 }

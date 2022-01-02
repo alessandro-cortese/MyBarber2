@@ -46,4 +46,14 @@ public class ProductCatalog {
         }
         return null ;
     }
+
+    @Nullable
+    public Product getProductByName(String nameOfProduct) {
+        for (Product product : productArrayList) {
+            if (product.getName().compareTo(nameOfProduct) == 0) {
+                return product;
+            }
+        }
+        return null;
+    }
 }

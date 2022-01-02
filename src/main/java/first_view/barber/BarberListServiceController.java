@@ -31,6 +31,8 @@ public class BarberListServiceController implements Initializable {
     @FXML private Button deleteServiceButton;
 
     private static final String BARBER_SERVICE_LIST_ITEM = "first_view/listitem/barber_service_list_item.fxml";
+    private static final String BARBER_MODIFY_SERVICE_SCREEN_NAME = "first_view/barber/barber_modify_service.fxml";
+    private static final String BARBER_ADD_SERVICE_SCREEN_NAME = "first_view/barber/barber_add_service.fxml";
 
     @FXML
     public void onPricePicked(MouseEvent event) throws IOException {
@@ -63,14 +65,14 @@ public class BarberListServiceController implements Initializable {
         Node serviceNode = (Node) event.getSource();
 
         if(serviceNode == modifyServiceButton) {
-            nameOfProductTextField.setEditable(true);
-            nameServiceTextField.setEditable(true);
-            priceServiceTextField.setEditable(true);
-            descriptionServiceTextField.setEditable(true);
+            InternalBackController.getInternalBackControllerInstance().onNextScreen(serviceNode);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_MODIFY_SERVICE_SCREEN_NAME));
+            BorderPane myBorderPane = (BorderPane) serviceNode.getScene().getRoot();
+            myBorderPane.setCenter(fxmlLoader.load());
         }
         else if(serviceNode == addServiceButton) {
             InternalBackController.getInternalBackControllerInstance().onNextScreen(serviceNode);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("first_view/barber/barber_add_service.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_ADD_SERVICE_SCREEN_NAME));
             BorderPane myBorderPane = (BorderPane) serviceNode.getScene().getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
         }
