@@ -9,11 +9,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.ScheduleBookingGraphicController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.BookingGraphicController">
    <children>
       <HBox layoutX="-1.0" layoutY="-1.0" prefHeight="600.0" prefWidth="974.0" spacing="80.0">
          <children>
@@ -24,34 +27,38 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="serviceListVIew" prefHeight="612.0" prefWidth="324.0" />
+                  <ListView fx:id="serviceListVIew" prefHeight="517.0" prefWidth="322.0" />
                </children>
             </VBox>
             <VBox prefHeight="600.0" prefWidth="119.0">
                <children>
                   <AnchorPane prefHeight="575.0" prefWidth="253.0">
                      <children>
-                        <Button fx:id="bookedButton" layoutX="1.0" layoutY="478.0" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: black;" text="Prenota" textFill="WHITE" />
-                        <HBox alignment="TOP_RIGHT" layoutY="133.0" prefHeight="237.0" prefWidth="253.0">
+                        <Button fx:id="bookedButton" layoutX="-68.0" layoutY="485.0" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: black;" text="Prenota" textFill="WHITE" />
+                        <HBox alignment="TOP_RIGHT" layoutX="-76.0" layoutY="226.0" prefHeight="221.0" prefWidth="238.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
                                  <children>
                                     <Label text="Nome">
                                        <font>
                                           <Font size="19.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                     <Label text="Indirizzo">
                                        <font>
                                           <Font size="19.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                     <Label text="Città">
                                        <font>
                                           <Font size="19.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                     <Label text="Telefono">
                                        <font>
                                           <Font size="19.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                  </children>
                               </VBox>
                               <VBox prefHeight="237.0" prefWidth="122.0" spacing="15.0">
@@ -59,19 +66,23 @@
                                     <Label text="Label">
                                        <font>
                                           <Font size="19.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                     <Label text="Label">
                                        <font>
                                           <Font size="19.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                     <Label text="Label">
                                        <font>
                                           <Font size="19.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                     <Label text="Label">
                                        <font>
                                           <Font size="19.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                  </children>
                               </VBox>
                            </children>
@@ -82,13 +93,14 @@
                               <Insets top="80.0" />
                            </padding>
                         </HBox>
+                        <ListView layoutX="-76.0" layoutY="84.0" prefHeight="204.0" prefWidth="258.0" />
                      </children>
                   </AnchorPane>
                </children>
             </VBox>
             <VBox prefHeight="174.0" prefWidth="69.0">
                <children>
-                  <ImageView fx:id="saloonImage" fitHeight="180.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="saloonImage" fitHeight="194.0" fitWidth="351.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../images/barber_center.jpeg" />
                      </image>
@@ -98,13 +110,24 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dateBooking" prefHeight="24.0" prefWidth="161.0" />
+                  <DatePicker fx:id="dateBooking" prefHeight="24.0" prefWidth="162.0" />
                   <Label prefHeight="62.0" prefWidth="306.0" text="Scegli un ora del giorno">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textTime" alignment="TOP_LEFT" onAction="#onChangeTime" onMouseClicked="#onChangeTime" prefHeight="24.0" prefWidth="113.0" />
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="textTime" alignment="TOP_LEFT" onAction="#onChangeTime" onMouseClicked="#onChangeTime" prefHeight="24.0" prefWidth="341.0" />
+                     </children>
+                  </GridPane>
                   <Label fx:id="seatNumberLabel" prefHeight="24.0" prefWidth="194.0" text="Posti Disponibili:">
                      <VBox.margin>
                         <Insets top="40.0" />

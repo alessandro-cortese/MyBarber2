@@ -5,6 +5,7 @@ import engineering.bean.SaloonBean;
 import first_view.ObservableListNode;
 import first_view.general.InternalBackController;
 import first_view.listCellFactories.SaloonListCellFactory;
+import first_view.pickers.TimePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -29,7 +32,35 @@ public class BookingGraphicController implements  Initializable{
     private static final String APPOINTMENT_SALOON_ITEM = "first_view/listitem/take_saloon_item.fxml";
     private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
     private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
+    private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
+    private static final String SERVICE_ITEM ="first_view/listitem/barber_service_list_item.fxml";
 
+    @FXML
+    private Button bookedButton;
+
+    @FXML
+    private SplitMenuButton catalogueBooking;
+
+    @FXML
+    private DatePicker dateBooking;
+
+    @FXML
+    private ImageView saloonImage;
+
+    @FXML
+    private Label saloonName;
+
+    @FXML
+    private TextField textTime;
+
+    @FXML
+    private Button confirmDateHourButton;
+
+    @FXML
+    private ListView serviceListView;
+
+    @FXML
+    private Label seatNumberLabel;
 
     @FXML
     private ListView<Node> saloonListView= new ListView<>();
@@ -53,9 +84,6 @@ public class BookingGraphicController implements  Initializable{
 
     @FXML
     private TextField searchCity;
-
-    @FXML
-    private Button bookedButton;
 
     @FXML
     Label showErr;
@@ -101,13 +129,30 @@ public class BookingGraphicController implements  Initializable{
         }
         if(sourceButton == placeNextButton)
             newCenterNode =(new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
+        if (sourceButton == bookedButton )
+             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME ))).load();
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
 
     }
+
+    @FXML
+    void onChangeTime(MouseEvent event) throws IOException {
+        ((TextField) event.getSource()).setText((new TimePicker(0, 24)).getTime());
+    }
+
+    @FXML
+    void selectService(ActionEvent event) throws IOException {
+
+    }
+    @FXML
+    void ConfirmDateHour(ActionEvent event) throws IOException{ //qui chiamo la BookingDAO
+
+    }
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) { //GESTIRE LE LIST VIEW CON GLI IF
         Node[] nodesList = new Node[saloonBeanList.size()] ;
         for (int i = 0 ; i < saloonBeanList.size() ; i++) {
             try {
@@ -118,6 +163,8 @@ public class BookingGraphicController implements  Initializable{
         }
         ObservableListNode saloonListNode = new ObservableListNode(nodesList);
         saloonListView.setItems(saloonListNode);
+
+
 
     }
 }
