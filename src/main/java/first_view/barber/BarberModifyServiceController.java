@@ -1,5 +1,6 @@
 package first_view.barber;
 
+import engineering.bean.ServiceBean;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;
@@ -37,6 +38,7 @@ public class BarberModifyServiceController {
             BorderPane myBorderPane = (BorderPane) (sourceButton.getScene()).getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
         }
+
     }
 
     @FXML
@@ -46,6 +48,13 @@ public class BarberModifyServiceController {
             PricePicker pricePicker = new PricePicker(0, 0.0);
             modifyServicePriceTextField.setText(pricePicker.getPrice());
         }
+    }
+
+    public void displayServiceToModify(ServiceBean serviceBean) {
+        nameModifyServiceTextField.setText(serviceBean.getName());
+        modifyServiceNameOfUsedProductTextField.setText(serviceBean.getNameOfUsedProduct());
+        descriptionTextFieldModifyService.setText(serviceBean.getDescription());
+        modifyServicePriceTextField.setText(Double.toString(serviceBean.getPrice()));
     }
 
 

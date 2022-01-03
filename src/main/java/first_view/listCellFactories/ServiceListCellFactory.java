@@ -1,6 +1,5 @@
 package first_view.listCellFactories;
 
-import applicationController.AddServiceController;
 import engineering.bean.ServiceBean;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import static first_view.listCellFactories.BuyProductListCellFactory.EURO_SYMBOL;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ServiceListCellFactory extends ListCell<ServiceBean> {
 
