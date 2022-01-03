@@ -8,28 +8,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="360.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="125.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../images/pruduct_image_example.png" />
-         </image>
-      </ImageView>
-      <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="204.0" spacing="25.0">
+      <HBox alignment="CENTER" prefHeight="103.0" prefWidth="326.0" spacing="10.0">
          <children>
-            <Label fx:id="productNameLabel" text="Nome Prodotto">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="productPriceLabel" text="Label" />
+            <ImageView fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/pruduct_image_example.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER" prefHeight="122.0" prefWidth="231.0" spacing="10.0">
+               <children>
+                  <Label fx:id="productNameLabel" text="Nome Prodotto">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="productPriceLabel" text="Label" />
+                  <Label fx:id="productIndexLabel">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+            </VBox>
          </children>
-         <padding>
-            <Insets bottom="20.0" top="20.0" />
-         </padding>
-      </VBox>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </VBox.margin>
+      </HBox>
    </children>
-   <padding>
-      <Insets left="10.0" />
-   </padding>
-</HBox>
+</VBox>

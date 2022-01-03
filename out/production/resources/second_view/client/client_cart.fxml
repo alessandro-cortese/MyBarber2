@@ -23,7 +23,7 @@
                   </Label>
                   <ScrollPane prefHeight="261.0" prefWidth="306.0">
                      <content>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- remove &lt;productIndex&gt; &lt;productQuantity&gt;&#10;- goto &lt;product index&gt;&#10;- back">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- increment &lt;productIndex&gt;&#10;- decrement &lt;productIndex&gt;&#10;- delete &lt;productIndex&gt;&#10;- goto &lt;product index&gt;&#10;- back">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -36,6 +36,11 @@
             <Button fx:id="enterButton" defaultButton="true" mnemonicParsing="false" onAction="#onCommand" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: transparent;" />
          </children>
       </VBox>
-      <ListView layoutX="462.0" layoutY="50.0" prefHeight="500.0" prefWidth="400.0" />
+      <ListView fx:id="cartListView" layoutX="462.0" layoutY="50.0" prefHeight="434.0" prefWidth="400.0" />
+      <Label fx:id="cartTotalLabel" layoutX="646.0" layoutY="525.0" text="Totale">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

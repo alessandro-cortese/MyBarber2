@@ -7,6 +7,7 @@ import engineering.dao.CouponDAO;
 import engineering.dao.OrderDAO;
 import engineering.dao.ProductDAO;
 import engineering.exception.InvalidCouponException;
+import model.User;
 import model.buyProduct.Cart;
 import model.buyProduct.Coupon;
 import model.buyProduct.Order;
@@ -26,6 +27,8 @@ public class BuyProductController {
     private Order order ;
 
     private CartBean cartBean ;
+
+    private User user ;
 
     public BuyProductController() {
         productDAO = new ProductDAO() ;
@@ -67,7 +70,7 @@ public class BuyProductController {
 
     public void applyCoupon(CouponBean couponBean) throws InvalidCouponException {
 
-        Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode());
+        Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode(), user);
         order.addCoupon(myCoupon);
 
     }
@@ -79,7 +82,7 @@ public class BuyProductController {
         order.setDate(orderInfoBean.getDate());
 
         OrderDAO orderDAO = new OrderDAO() ;
-        orderDAO.saveOrder(order);
+        //orderDAO.saveOrder(order, user);
 
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
         paypalBoundary.pay(new OrderTotalBean(order));

@@ -15,7 +15,7 @@
             <Image url="@../../../../../images/pruduct_image_example.png" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="204.0" spacing="25.0">
+      <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="204.0" spacing="10.0">
          <children>
             <Label fx:id="productNameLabel" text="Nome Prodotto">
                <font>
@@ -28,6 +28,7 @@
                   <Label fx:id="productRowQuantity" text="Label" />
                </children>
             </HBox>
+            <Label fx:id="cartRowIndexLabel" />
          </children>
          <padding>
             <Insets bottom="20.0" top="20.0" />

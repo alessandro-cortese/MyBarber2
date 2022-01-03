@@ -9,7 +9,7 @@ import javafx.scene.control.ListCell;
 
 import java.io.IOException;
 
-import static first_view.listCellFactories.BuyProductListCellFactory.EURO_SYMBOL;
+import static first_view.listCellFactories.BuyProductListCellFactory.*;
 
 public class CartRowListCellFactory extends ListCell<CartRowBean> {
 
@@ -19,6 +19,17 @@ public class CartRowListCellFactory extends ListCell<CartRowBean> {
     private static final String NAME_LABEL_ID = "productNameLabel" ;
     private static final String PRICE_LABEL_ID = "productPriceLabel" ;
     private static final String QUANTITY_LABEL_ID = "productRowQuantity" ;
+    private static final String INDEX_LABEL_ID = "cartRowIndexLabel" ;
+
+    private final Integer caller ;
+
+    public CartRowListCellFactory() {
+        this(FIRST_VIEW) ;
+    }
+
+    public CartRowListCellFactory(Integer caller) {
+        this.caller = caller ;
+    }
 
     @Override
     protected void updateItem(CartRowBean item, boolean empty) {
@@ -34,6 +45,11 @@ public class CartRowListCellFactory extends ListCell<CartRowBean> {
                 productNameLabel.setText(item.getName());
                 productPriceLabel.setText(EURO_SYMBOL + " " + item.getPrice());
                 productQuantityLabel.setText(Integer.toString(item.getQuantity()));
+
+                if (caller == SECOND_VIEW) {
+                    Label indexLabel = (Label) parentNode.lookup("#" + INDEX_LABEL_ID) ;
+                    indexLabel.setText("Index " + this.getIndex());
+                }
 
                 setGraphic(parentNode);
 

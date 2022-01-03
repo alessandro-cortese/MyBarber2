@@ -6,11 +6,13 @@ public class Coupon implements Priceable {
 
     //Supposto che nel codice del coupon ci sia scritto lo sconto si può fare un parsing
     private String couponCode ;
+    private String ownerUser ;
     private Priceable appliedPrice ;
 
 
-    public Coupon(String couponCode) {
+    public Coupon(String couponCode, String ownerUser) {
         setCouponCode(couponCode);
+        setOwnerUser(ownerUser);
     }
 
     public String getCouponCode() {
@@ -28,5 +30,14 @@ public class Coupon implements Priceable {
 
     public void setAppliedPrice(Priceable appliedPrice) {
         this.appliedPrice = appliedPrice;
+    }
+
+
+    public String getOwnerUser() {
+        return ownerUser;
+    }
+
+    public void setOwnerUser(String ownerUser) {
+        this.ownerUser = ownerUser;
     }
 }

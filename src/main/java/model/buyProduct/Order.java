@@ -47,6 +47,10 @@ public class Order extends Subject {
         }
     }
 
+    public CouponContainer getCouponContainer() {
+        return couponContainer;
+    }
+
     public void removeCoupon(Coupon toRemoveCoupon) {
         couponContainer.removeCoupon(toRemoveCoupon);
     }

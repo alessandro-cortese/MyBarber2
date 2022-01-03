@@ -30,7 +30,7 @@ public class ProductCatalog {
     public ArrayList<Product> filterByName(String productName) {
         ArrayList<Product> filteredProductArray = new ArrayList<>() ;
         for (Product product : productArrayList) {
-            if (product.getName().contains(productName)) {
+            if (product.getName().contains( productName)) {
                 filteredProductArray.add(product) ;
             }
         }

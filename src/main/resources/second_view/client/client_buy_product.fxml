@@ -23,7 +23,7 @@
                   </Label>
                   <ScrollPane prefHeight="261.0" prefWidth="306.0">
                      <content>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- search &lt;searchText&gt;&#10;- goto &lt;product index&gt;&#10;- back">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- search &lt;searchText&gt;&#10;- goto &lt;product index&gt;&#10;- cart&#10;- back">
                            <font>
                               <Font size="14.0" />
                            </font>

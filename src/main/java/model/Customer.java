@@ -9,10 +9,16 @@ public class Customer extends User{
 
     public Customer(String email, String pass, String name, String surname, String creditCard, String phone){
         super(email, pass);
-        this.name = name;
-        this.surname = surname;
-        this.creditCard = creditCard;
-        this.phone=phone;
+        setName(name);
+        setSurname(surname);
+        setCreditCard(creditCard);
+        setPhone(phone);
+    }
+
+    public Customer(String email, String pass, String name, String surname) {
+        super(email, pass) ;
+        setName(name);
+        setSurname(surname);
     }
 
     public String getName(){
