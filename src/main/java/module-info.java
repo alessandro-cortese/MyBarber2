@@ -37,6 +37,8 @@ module it.barbergroup {
     opens second_view.client to javafx.fxml;
     exports applicationController.graphic;
     opens applicationController.graphic to javafx.fxml;
+    exports applicationController;
+    opens applicationController to javafx.fxml;
 
 
 }

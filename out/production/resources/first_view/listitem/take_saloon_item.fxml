@@ -8,6 +8,6 @@
    <children>
       <Label fx:id="placeSaloonItem" text="Label" />
       <Label fx:id="labelSaloonItem" text="Label" />
-      <Button fx:id="saloonButton" mnemonicParsing="false" onAction="#onButtonClicked" style="-fx-background-color: red;" text="Vai al Salone" textFill="WHITE" />
+      <Button fx:id="saloonButton" mnemonicParsing="false" onAction="#onButtonSaloonClicked" style="-fx-background-color: red;" text="Vai al Salone" textFill="WHITE" />
    </children>
 </VBox>
