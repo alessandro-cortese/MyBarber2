@@ -110,19 +110,9 @@ public class BookingGraphicController{
         Parent newCenterNode=null;
        // String saloon = searchSaloonName.getText();
         //String saloonCity = searchCity.getText();
-        /*if(saloon == "" ){
-            showErr.setText("inserire un nome valido!");
-            return;
-        }
-        if(saloonCity == "" ){
-            showErr2.setText("Inserire una cittò valida!");
-            return;
-        }
-        */
-
        // saloonBean = new SaloonBean(saloon, saloonCity);
         bookingController = new BookingController();
-        //saloonBeanList = bookingController.searchByNameSaloon(saloonBean); //recupero i saloni
+        //saloonBeanList = bookingController.searchByNameSaloon(saloonBean); //ATT: POSSO COMUNICARE LL'ALTRO CONTROLLER GRAFICO IL SALOONBEANLIST?
         Button sourceButton = (Button) actionEvent.getSource();
         if(sourceButton == saloonNextButton) {
             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME))).load();

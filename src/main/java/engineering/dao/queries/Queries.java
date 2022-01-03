@@ -6,6 +6,8 @@ import model.buyProduct.Order;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.time.LocalDate;
 
 public class Queries { //qui vanno messe tutte le query per essere più compatti
 
@@ -51,4 +53,9 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
 
     }
+    //-+-+-+-+-+-+-+-+-+-+- SaloonTime -+-+-+-+-+-+-+-+-+-+-//
+    public  static ResultSet SelectAvalaibleSaloonDateANDHour(Statement statement, Time time, LocalDate date) throws SQLException {
+        String select = String.format("SELECT FROM SaloonTime where hourBooking = '%s' AND dateBooking ='%s'", time,date);
+        return statement.executeQuery(select);
+    }// DA fare insieme ad alessandro per chiarire
 }

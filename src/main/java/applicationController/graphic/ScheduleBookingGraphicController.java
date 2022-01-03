@@ -1,5 +1,7 @@
 package applicationController.graphic;
 
+import applicationController.BookingController;
+import engineering.bean.BookingBean;
 import first_view.ObservableListNode;
 import first_view.pickers.TimePicker;
 import javafx.collections.FXCollections;
@@ -18,6 +20,12 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ScheduleBookingGraphicController implements Initializable {
@@ -73,7 +81,15 @@ public class ScheduleBookingGraphicController implements Initializable {
 
     }
     @FXML
-    void ConfirmDateHour(ActionEvent event) throws IOException{ //qui chiamo la BookingDAO
+    void ConfirmDateHour(ActionEvent event) throws IOException, ParseException { //qui chiamo la BookingDAO
+       String bookingTime = textTime.getText()+":00";
+        LocalDate date = dateBooking.getValue();
+        Time time = Time.valueOf(bookingTime);
+        //BookingBean bookingBean = new BookingBean(time, date);
+        //BookingController bookingController = new BookingController().VerifyBooking(bookingBean);
+
+        System.out.println(date);
+        System.out.println(time);
 
     }
     @Override

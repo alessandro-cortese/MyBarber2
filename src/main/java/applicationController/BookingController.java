@@ -1,6 +1,8 @@
 package applicationController;
 
 import java.util.*;
+
+import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
 import engineering.dao.SaloonDAO;
 import model.Saloon;
@@ -30,6 +32,12 @@ public class BookingController {
             saloonBeanList.add(saloonBean); //aggiungo al vettore saloonbeanList il saloonBean precedentemente impostato
         }
         return saloonBeanList;
+    }
+
+    public BookingController VerifyBooking(BookingBean bookingBean){
+
+
+        return null;
     }
 
 }
