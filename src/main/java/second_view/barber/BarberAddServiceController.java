@@ -2,8 +2,10 @@ package second_view.barber;
 
 import applicationController.AddServiceController;
 import engineering.bean.ServiceBean;
+import engineering.exception.NegativePriceException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
@@ -19,12 +21,14 @@ public class BarberAddServiceController {
     @FXML private TextField descriptionAddServiceField;
     @FXML private TextField addServicePriceField;
     @FXML private TextField addServiceUsedProductNameField;
+    @FXML private Label addServiceExceptionLabelSecondView;
 
 
     @FXML
     public void onCommand(ActionEvent event) throws IOException {
 
         String addServiceCommand = addServiceCommandLine.getText();
+        addServiceExceptionLabelSecondView.setText("");
         addServiceCommandLine.setText("");
         addServiceCommandLine.setStyle(null);
 
@@ -41,9 +45,13 @@ public class BarberAddServiceController {
         else if(addServiceCommand.compareTo("add") == 0){
 
             if(nameAddServiceField.getText() != null && addServicePriceField.getText() != null && descriptionAddServiceField.getText() != null ) {
-                ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
-                AddServiceController addServiceController = new AddServiceController();
-                addServiceController.addService(serviceBean);
+                try {
+                    ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
+                    AddServiceController addServiceController = new AddServiceController();
+                    addServiceController.addService(serviceBean);
+                }catch(NegativePriceException e){
+                    addServiceExceptionLabelSecondView.setText("Insert price is negative!");
+                }
                 return ;
             }
         }

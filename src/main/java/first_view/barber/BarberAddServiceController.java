@@ -1,6 +1,7 @@
 package first_view.barber;
 
 import engineering.bean.ServiceBean;
+import engineering.exception.NegativePriceException;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +25,7 @@ public class BarberAddServiceController {
     @FXML private TextField nameAddServiceTextField ;
     @FXML private TextField descriptionTextFiledAddService ;
     @FXML private TextField nameOfUsedProductTextField ;
+    @FXML private Label exceptionAddServiceLabel;
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
@@ -33,13 +36,19 @@ public class BarberAddServiceController {
             BorderPane myBorderPane = (BorderPane) sourceNode.getScene().getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
 
-            ServiceBean serviceBean = new ServiceBean(nameAddServiceTextField.getText(),
-                    descriptionTextFiledAddService.getText(),
-                    nameOfUsedProductTextField.getText(),
-                    Double.parseDouble(priceTextField.getText())) ;
+            try {
 
-            BarberConfirmAddServiceController barberConfirmAddServiceController = fxmlLoader.getController() ;
-            barberConfirmAddServiceController.display(serviceBean) ;
+                ServiceBean serviceBean = new ServiceBean(nameAddServiceTextField.getText(),
+                        descriptionTextFiledAddService.getText(),
+                        nameOfUsedProductTextField.getText(),
+                        Double.parseDouble(priceTextField.getText()));
+
+                BarberConfirmAddServiceController barberConfirmAddServiceController = fxmlLoader.getController() ;
+                barberConfirmAddServiceController.display(serviceBean) ;
+
+            }catch(NegativePriceException e){
+                exceptionAddServiceLabel.setText("Insert Price is negative!");
+            }
 
         }
 

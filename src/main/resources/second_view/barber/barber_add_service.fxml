@@ -71,6 +71,7 @@
                         <TextField fx:id="addServiceUsedProductNameField" editable="false" onAction="#onCommand" prefWidth="200.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="addServiceExceptionLabelSecondView" prefHeight="17.0" prefWidth="384.0" />
                </children>
             </VBox>
          </children>
