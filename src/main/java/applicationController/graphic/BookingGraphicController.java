@@ -27,9 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class BookingGraphicController implements  Initializable{
+public class BookingGraphicController{
 
-    private static final String APPOINTMENT_SALOON_ITEM = "first_view/listitem/take_saloon_item.fxml";
+
     private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
     private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
@@ -131,40 +131,12 @@ public class BookingGraphicController implements  Initializable{
             newCenterNode =(new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
         if (sourceButton == bookedButton )
              newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME ))).load();
+        if(sourceButton == saloonButton)
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME))).load();
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
 
     }
 
-    @FXML
-    void onChangeTime(MouseEvent event) throws IOException {
-        ((TextField) event.getSource()).setText((new TimePicker(0, 24)).getTime());
-    }
-
-    @FXML
-    void selectService(ActionEvent event) throws IOException {
-
-    }
-    @FXML
-    void ConfirmDateHour(ActionEvent event) throws IOException{ //qui chiamo la BookingDAO
-
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) { //GESTIRE LE LIST VIEW CON GLI IF
-        Node[] nodesList = new Node[saloonBeanList.size()] ;
-        for (int i = 0 ; i < saloonBeanList.size() ; i++) {
-            try {
-                nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(APPOINTMENT_SALOON_ITEM ))).load() ;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        ObservableListNode saloonListNode = new ObservableListNode(nodesList);
-        saloonListView.setItems(saloonListNode);
-
-
-
-    }
 }
