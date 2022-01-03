@@ -2,6 +2,8 @@ package applicationController.graphic;
 
 import first_view.ObservableListNode;
 import first_view.pickers.TimePicker;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,10 +46,13 @@ public class ScheduleBookingGraphicController implements Initializable {
     private Button confirmDateHourButton;
 
     @FXML
-    private ListView serviceListVIew;
+    private ListView serviceListView;
 
     @FXML
     private Label seatNumberLabel;
+
+    @FXML
+    private ListView<String> serviceSelectedListView;
 
     @FXML
     void onButtonSaloonClicked(ActionEvent event) throws IOException {
@@ -73,17 +78,28 @@ public class ScheduleBookingGraphicController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        Node[] nodeService = new Node[10];
         Node[] nodesList = new Node[10] ;
         for (int i = 0 ; i < 10 ; i++) {
+
             try {
                 nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(SERVICE_ITEM))).load() ;
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
         ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
-        serviceListVIew.setItems(clientAppointmentsList);
+        serviceListView.setItems(clientAppointmentsList);
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+        for (int j=0; j< nodeService.length;j++){
+            list.add("e");
+        }
+        serviceSelectedListView.setItems(list);
+
+
+
 
     }
 
