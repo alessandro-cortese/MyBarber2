@@ -44,8 +44,8 @@ public class BookingController {
 
     public SaloonBean searchByNameSaloon(SaloonBean saloonBean) throws Exception {
 
-        saloonName = saloonBean.getName();
-        SaloonDAO saloonDAO = new SaloonDAO();
+        //saloonName = saloonBean.getName();
+        //SaloonDAO saloonDAO = new SaloonDAO();
 
         saloonByName = saloonDAO.retreiveByNameSaloon(saloonName);
 

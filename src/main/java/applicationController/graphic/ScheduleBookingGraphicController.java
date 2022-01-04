@@ -43,9 +43,6 @@ public class ScheduleBookingGraphicController implements Initializable {
     private SplitMenuButton catalogueBooking;
 
     @FXML
-    private DatePicker dateBooking;
-
-    @FXML
     private ImageView saloonImage;
 
     @FXML
@@ -55,20 +52,12 @@ public class ScheduleBookingGraphicController implements Initializable {
     private TextField textTime;
 
     @FXML
-    private Button confirmDateHourButton;
-
-    @FXML
     private ListView serviceListView;
 
-    @FXML
-    private Label seatNumberLabel;
+
 
     @FXML
     private ListView<String> serviceSelectedListView;
-
-    public ScheduleBookingGraphicController(SaloonBean saloon){
-
-    }
 
     @FXML
     void onButtonSaloonClicked(ActionEvent event) throws IOException {
@@ -80,26 +69,10 @@ public class ScheduleBookingGraphicController implements Initializable {
     }
 
     @FXML
-    void onChangeTime(MouseEvent event) throws IOException {
-        ((TextField) event.getSource()).setText((new TimePicker(0, 24)).getTime());
-    }
-
-    @FXML
     void selectService(ActionEvent event) throws IOException {
 
     }
-    @FXML
-    void ConfirmDateHour(ActionEvent event) throws IOException, ParseException { //qui chiamo la BookingDAO
-       String bookingTime = textTime.getText()+":00";
-        LocalDate date = dateBooking.getValue();
-        Time time = Time.valueOf(bookingTime);
-        //BookingBean bookingBean = new BookingBean(time, date);
-        //BookingController bookingController = new BookingController().VerifyBooking(bookingBean);
 
-        System.out.println(date);
-        System.out.println(time);
-
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Node[] nodeService = new Node[10];
@@ -121,10 +94,6 @@ public class ScheduleBookingGraphicController implements Initializable {
             list.add("e");
         }
         serviceSelectedListView.setItems(list);
-
-
-
-
     }
 
 }

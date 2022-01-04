@@ -31,9 +31,10 @@ public class BookingGraphicController{
 
 
     private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
-    private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
+
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
-    private static final String SERVICE_ITEM ="first_view/listitem/barber_service_list_item.fxml";
+    private static final String CLIENT_DATEHOUR= "first_view/client/client_appointment_Hour&Date.fxml";
+
 
     @FXML
     private Button bookedButton;
@@ -111,19 +112,19 @@ public class BookingGraphicController{
        // String saloon = searchSaloonName.getText();
         //String saloonCity = searchCity.getText();
        // saloonBean = new SaloonBean(saloon, saloonCity);
-        bookingController = new BookingController();
+        //bookingController = new BookingController();
         //saloonBeanList = bookingController.searchByCitySaloon(saloonBean); //ATT: POSSO COMUNICARE LL'ALTRO CONTROLLER GRAFICO IL SALOONBEANLIST? PER LA CITTÀ
-        saloonBeanName = bookingController.searchByNameSaloon(saloonBean);
+        //saloonBeanName = bookingController.searchByNameSaloon(saloonBean);
         Button sourceButton = (Button) actionEvent.getSource();
         if(sourceButton == saloonNextButton) {
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME))).load();
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR))).load();
         }
         if(sourceButton == placeNextButton)
             newCenterNode =(new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
         if (sourceButton == bookedButton )
              newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME ))).load();
         if(sourceButton == saloonButton)
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME))).load();
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR))).load();
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
