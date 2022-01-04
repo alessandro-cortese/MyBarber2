@@ -86,7 +86,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="716.0" layoutY="575.0" spacing="50.0">
+      <HBox layoutX="896.0" layoutY="573.0" spacing="50.0">
          <children>
             <Button fx:id="modifyServiceButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="50.0" prefWidth="130.0" text="Modifica ">
                <font>
@@ -94,11 +94,6 @@
                </font>
             </Button>
             <Button fx:id="addServiceButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="50.0" prefWidth="130.0" text="Aggiungi">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="deleteServiceButton" layoutX="190.0" layoutY="10.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="50.0" prefWidth="130.0" text="Cancella">
                <font>
                   <Font size="18.0" />
                </font>

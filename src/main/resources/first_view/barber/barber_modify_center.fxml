@@ -94,12 +94,16 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="471.0" prefHeight="80.0" prefWidth="508.0">
                      <children>
-                        <Label prefHeight="37.0" prefWidth="189.0" text="durata slot:">
+                        <Label prefHeight="37.0" prefWidth="250.0" text="durata slot:">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <Spinner prefHeight="38.0" prefWidth="244.0" />
+                        <Label layoutX="146.0" layoutY="17.0" prefHeight="37.0" prefWidth="300.0" text="30 minuti">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="482.0" prefHeight="80.0" prefWidth="508.0">

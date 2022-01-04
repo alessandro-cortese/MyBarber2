@@ -28,7 +28,7 @@ public class BarberListServiceController implements Initializable {
     @FXML private TextField nameOfProductTextField;
     @FXML private Button modifyServiceButton;
     @FXML private Button addServiceButton;
-    @FXML private Button deleteServiceButton;
+
 
     private ArrayList<ServiceBean> arrayList ;
 
@@ -51,7 +51,6 @@ public class BarberListServiceController implements Initializable {
         barberServiceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             modifyServiceButton.setDisable(newValue == null);
             addServiceButton.setDisable(newValue == null);
-            deleteServiceButton.setDisable(newValue == null);
             assert newValue != null;
             nameServiceTextField.setText(newValue.getName());
             descriptionServiceTextField.setText(newValue.getDescription());
@@ -61,7 +60,6 @@ public class BarberListServiceController implements Initializable {
 
         modifyServiceButton.setDisable(true);
         addServiceButton.setDisable(true);
-        deleteServiceButton.setDisable(true);
 
         barberServiceListView.getItems().clear();
         barberServiceListView.setItems(FXCollections.observableList(arrayList));
@@ -91,10 +89,6 @@ public class BarberListServiceController implements Initializable {
             BorderPane myBorderPane = (BorderPane) serviceNode.getScene().getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
         }
-        else if(serviceNode == deleteServiceButton) {
-            System.out.println("Delete");
-        }
-
 
     }
 

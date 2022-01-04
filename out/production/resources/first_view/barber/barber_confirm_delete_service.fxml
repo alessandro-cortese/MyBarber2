@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberModifyServiceController">
+<AnchorPane prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberConfirmDeleteServiceController">
    <children>
       <HBox layoutX="68.0" layoutY="46.0" prefHeight="501.0" prefWidth="1146.0" spacing="10.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="525.0" prefWidth="388.0" spacing="30.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="390.0" text="Modifica Servizio">
+                  <Label prefHeight="39.0" prefWidth="390.0" text="Cancella Servizio">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -43,7 +43,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nameModifyServiceTextField" prefHeight="26.0" prefWidth="261.0" />
+                        <TextField fx:id="nameDeleteServiceTextField" editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="173.0" prefHeight="64.0" prefWidth="388.0">
@@ -53,7 +53,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="modifyServicePriceTextField" onMouseClicked="#onPricePicked" prefHeight="26.0" prefWidth="261.0">
+                        <TextField fx:id="priceDeleteServiceTextField" prefHeight="26.0" prefWidth="261.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -67,7 +67,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="descriptionTextFieldModifyService" prefHeight="26.0" prefWidth="261.0" />
+                        <TextField fx:id="descriptionDeleteServiceTextField" editable="false" prefHeight="26.0" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="335.0" prefHeight="64.0" prefWidth="388.0">
@@ -77,7 +77,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="modifyServiceNameOfUsedProductTextField" prefHeight="26.0" prefWidth="257.0" />
+                        <TextField fx:id="nameOfServiceToDeleteTextField" editable="false" prefHeight="26.0" prefWidth="257.0" />
                      </children>
                   </HBox>
                </children>
@@ -98,19 +98,10 @@
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="822.0" layoutY="603.0" spacing="75.0">
-         <children>
-            <Button fx:id="deleteServiceButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="85.0" text="Cancella">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <Button fx:id="saveChangesButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="166.0" text="Salva Modifiche">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
+      <Button fx:id="deleteConfirmButton" layoutX="902.0" layoutY="586.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="217.0" text="Conferma Cancellazione">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
