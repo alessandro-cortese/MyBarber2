@@ -1,8 +1,8 @@
 package engineering.dao;
 
 import engineering.dao.queries.Queries;
+import engineering.exception.ProductNotFoundException;
 import engineering.pattern.Connector;
-import model.User;
 import model.buyProduct.Product;
 import model.buyProduct.containers.ProductCatalog;
 
@@ -47,14 +47,17 @@ public class ProductDAO {
         return catalog ;
     }
 
-    public Product loadProductByIsbn(Integer isbn) {
+    public Product loadProductByName(String name) throws ProductNotFoundException{
         Product product = null;
         Connection connection = Connector.getConnectorInstance().getConnection();
         try (Statement statement = connection.createStatement() ;
-             ResultSet resultSet = Queries.loadProductByIsbn(statement, isbn) ;)
+             ResultSet resultSet = Queries.loadProductByName(statement, name) )
         {
             if (resultSet.isFirst()) {
                 product = createProduct(resultSet) ;
+            }
+            else{
+                throw new ProductNotFoundException();
             }
         }
         catch (SQLException sqlException) {

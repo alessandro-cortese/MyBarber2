@@ -26,7 +26,6 @@ public class BarberModifyServiceController {
 
     private ServiceBean serviceBean;
 
-    private static final String BARBER_HOME_SCREEN_NAME = "first_view/barber/barber_home.fxml";
     private static final String BARBER_DELETE_SERVICE_SCREEN_NAME = "first_view/barber/barber_confirm_delete_service.fxml" ;
 
     @FXML
@@ -38,10 +37,8 @@ public class BarberModifyServiceController {
 
             System.out.println("Modify");
 
-            InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_HOME_SCREEN_NAME));
-            BorderPane myBorderPane = (BorderPane) (sourceButton.getScene()).getRoot();
-            myBorderPane.setCenter(fxmlLoader.load());
+            InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
+
         }
         else if(sourceButton == deleteServiceButton) {
 
@@ -54,8 +51,6 @@ public class BarberModifyServiceController {
             barberConfirmDeleteServiceController.displayServiceToDelete(this.serviceBean);
 
         }
-
-
 
     }
 
