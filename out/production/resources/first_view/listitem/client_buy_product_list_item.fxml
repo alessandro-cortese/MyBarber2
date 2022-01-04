@@ -12,10 +12,13 @@
    <children>
       <HBox alignment="CENTER" prefHeight="103.0" prefWidth="326.0" spacing="10.0">
          <children>
-            <ImageView fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="productImageView" fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../images/pruduct_image_example.png" />
                </image>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
             </ImageView>
             <VBox alignment="CENTER" prefHeight="122.0" prefWidth="231.0" spacing="10.0">
                <children>

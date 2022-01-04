@@ -64,6 +64,7 @@ public class ClientBuyProductController implements Initializable {
         else if (command.compareTo("cart") == 0) {
             ClientCartController cartController = (ClientCartController) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_CART_SCREEN);
             cartController.setAppController(buyProductController) ;
+            return ;
         }
         else if (command.compareTo("back") == 0) {
             ScreenChanger.getInstance().onBack(event);

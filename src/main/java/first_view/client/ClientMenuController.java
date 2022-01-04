@@ -20,7 +20,7 @@ public class ClientMenuController {
     private static final String BUY_PRODUCT_SCREEN_NAME = "first_view/client/client_buy_product.fxml";
     private static final String CLIENT_CART_SCREEN_NAME = "first_view/client/client_cart.fxml";
     private static final String USER_AREA_SCREEN_NAME = "first_view/general/user_area.fxml";
-
+    private static final String FIDELITY_CARD_SCREEN_NAME = "first_view/client/client_fidelity_card.fxml" ;
 
     private static final String TAKE_APPOINTMENT_SCREEN_NAME = "first_view/client/client_take_appointment.fxml";
 
@@ -32,6 +32,7 @@ public class ClientMenuController {
     @FXML private MenuItem seeAppointmentsItem ;
     @FXML private MenuItem buyProductItem ;
     @FXML private MenuItem takeAppointmentItem ;
+    @FXML private MenuItem fidelityCardMenuItem ;
 
     @FXML private Button logoutButton ;
     @FXML private Button homeButton ;
@@ -75,6 +76,9 @@ public class ClientMenuController {
         }
         else if (sourceItem == userAreaItem) {
             newCenterNodeResName = USER_AREA_SCREEN_NAME;
+        }
+        else if (sourceItem == fidelityCardMenuItem) {
+            newCenterNodeResName = FIDELITY_CARD_SCREEN_NAME ;
         }
         else {
             newCenterNodeResName = null ;

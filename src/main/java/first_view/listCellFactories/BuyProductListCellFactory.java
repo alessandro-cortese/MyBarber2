@@ -3,9 +3,14 @@ package first_view.listCellFactories;
 import applicationController.BuyProductController;
 import engineering.bean.buyProduct.ProductBean;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
@@ -20,6 +25,8 @@ public class BuyProductListCellFactory extends ListCell<ProductBean> {
     private static final String NAME_LABEL_ID = "productNameLabel" ;
     private static final String PRICE_LABEL_ID = "productPriceLabel" ;
     private static final String INDEX_LABEL_ID = "productIndexLabel" ;
+    private static final String IMAGE_VIEW_ID = "productImageView" ;
+    private static final String PROGRESS_BAR_ID = "imageProgressBar" ;
     public static final String EURO_SYMBOL = "\u20ac" ;
 
     private final Integer caller ;
@@ -44,8 +51,14 @@ public class BuyProductListCellFactory extends ListCell<ProductBean> {
 
                 Label productNameLabel = (Label) parentNode.lookup("#" + NAME_LABEL_ID) ;
                 Label productPriceLabel = (Label) parentNode.lookup("#" + PRICE_LABEL_ID) ;
+                ImageView productImageView = (ImageView) parentNode.lookup("#" + IMAGE_VIEW_ID) ;
+                //Image rowImage = new Image("https://drive.googe.com/thumbnail?id=13E18W_hwUx1EYQo2FCYMAiA9qXRh8rPS",true) ;
+                //Image rowImage = new Image("https://drive.googe.com/thumbnail?id=13E18W_hwUx1EYQo2FCYMAiA9qXRh8rPS", productImageView.getFitWidth(),productImageView.getFitHeight(),true,true, true) ;
+
+
                 productNameLabel.setText(item.getName());
                 productPriceLabel.setText(EURO_SYMBOL + " " + item.getPrice());
+                //productImageView.setImage(rowImage);
 
                 if (caller == SECOND_VIEW) {
                     Label productIndexLabel = (Label) parentNode.lookup("#" + INDEX_LABEL_ID) ;

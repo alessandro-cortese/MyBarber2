@@ -22,8 +22,10 @@ public class ProductDAO {
 
     public ProductCatalog loadAllProducts() {
         ProductCatalog catalog = new ProductCatalog() ;
-        catalog.addProduct(1,"Dopobarba","ciao a tutti", 22.0, "ciao");
-        catalog.addProduct(2,"Shampoo", "Antigiallo", 11.25, "Simo");
+        for (int i = 0 ; i < 10 ; i++) {
+            catalog.addProduct(1, "Dopobarba", "ciao a tutti", 22.0, "ciao");
+            catalog.addProduct(2, "Shampoo", "Antigiallo", 11.25, "Simo");
+        }
 
         ArrayList<Product> products = new ArrayList<>() ;
 

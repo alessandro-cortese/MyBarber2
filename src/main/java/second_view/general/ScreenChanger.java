@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ScreenChanger {
@@ -28,9 +29,12 @@ public class ScreenChanger {
     public static final String CLIENT_SEARCH_SALOON_SCREEN = "second_view/client/client_search_saloon.fxml" ;
     public static final String CLIENT_BOOK_APPOINTMENT_SCREEN = "second_view/client/client_book_appointment.fxml" ;
 
+    public static final String CLIENT_COMPLETE_ORDER_SCREEN = "second_view/client/client_complete_order.fxml" ;
+
 
     ArrayList<Scene> backSceneStack ;
 
+    private Integer homeIndex ;
     private static ScreenChanger backController ;
 
     private ScreenChanger() {
@@ -54,6 +58,9 @@ public class ScreenChanger {
     }
 
     public Object changeScreen(ActionEvent event, String scenePath) throws IOException {
+        if (scenePath.compareTo(BARBER_HOME_SCREEN) == 0 || scenePath.compareTo(CLIENT_HOME_SCREEN) == 0) {
+            homeIndex = backSceneStack.size() + 1 ;
+        }
         Stage myStage = (Stage)((Node) event.getSource()).getScene().getWindow() ;
         FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource(scenePath)) ;
         Scene myScene = new Scene(root.load()) ;
@@ -62,6 +69,19 @@ public class ScreenChanger {
 
         return root.getController() ;
     }
+
+    public void goToHome(ActionEvent event) {
+        Scene homeScene = null;
+        while (backSceneStack.size() > homeIndex) {
+            homeScene = backSceneStack.remove(backSceneStack.size() - 1) ;
+        }
+        Stage myStage = (Stage)((Node) event.getSource()).getScene().getWindow() ;
+        myStage.setScene(homeScene);
+    }
+
+
+
+
 
 
 }

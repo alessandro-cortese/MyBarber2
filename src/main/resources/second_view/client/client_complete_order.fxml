@@ -6,11 +6,12 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="second_view.client.ClientCartController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="second_view.client.ClientCompleteOrderController">
    <children>
       <VBox layoutX="54.0" layoutY="113.0" spacing="25.0">
          <children>
@@ -23,7 +24,7 @@
                   </Label>
                   <ScrollPane prefHeight="261.0" prefWidth="306.0">
                      <content>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- increment &lt;productIndex&gt;&#10;- decrement &lt;productIndex&gt;&#10;- delete &lt;productIndex&gt;&#10;- complete&#10;- back">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- add coupon &lt;couponCode&gt;&#10;- set address &lt;address&gt;&#10;- set telephone &lt;telephhone&gt;&#10;- buy&#10;- back">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -36,10 +37,26 @@
             <Button fx:id="enterButton" defaultButton="true" mnemonicParsing="false" onAction="#onCommand" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: transparent;" />
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutX="462.0" layoutY="50.0" spacing="25.0">
+      <ListView fx:id="couponListView" layoutX="462.0" layoutY="113.0" prefHeight="223.0" prefWidth="400.0" />
+      <VBox alignment="CENTER" layoutX="485.0" layoutY="377.0" spacing="50.0">
          <children>
-            <ListView fx:id="cartListView" prefHeight="434.0" prefWidth="400.0" />
-            <Label fx:id="cartTotalLabel" text="Totale">
+            <VBox spacing="25.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="25.0">
+                     <children>
+                        <Label prefWidth="75.0" text="Indirizzo" />
+                        <TextField fx:id="addressTextField" prefHeight="26.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="25.0">
+                     <children>
+                        <Label prefWidth="75.0" text="Telefono" />
+                        <TextField fx:id="telephoneTextField" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label fx:id="orderTotalLabel" text="Totale Ordine">
                <font>
                   <Font size="14.0" />
                </font>

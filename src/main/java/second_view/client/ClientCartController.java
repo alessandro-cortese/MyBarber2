@@ -41,8 +41,6 @@ public class ClientCartController implements Initializable {
         commandLine.setStyle(null);
         commandLine.setText("");
 
-        String removeString = "remove" ;
-
         if (command.compareTo("back") == 0) {
             ScreenChanger.getInstance().onBack(event);
             return;
@@ -70,6 +68,11 @@ public class ClientCartController implements Initializable {
                 }
                 return;
             }
+        }
+        else if (command.compareTo("complete") == 0) {
+            ClientCompleteOrderController completeOrderController = (ClientCompleteOrderController) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_COMPLETE_ORDER_SCREEN);
+            completeOrderController.setApplicationController(buyProductController) ;
+            return ;
         }
 
         commandLine.setStyle("-fx-border-color: red");
