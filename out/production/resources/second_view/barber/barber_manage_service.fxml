@@ -39,7 +39,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER" layoutX="509.0" layoutY="47.0" prefHeight="507.0" prefWidth="364.0" spacing="10.0">
          <children>
-            <ListView prefHeight="330.0" prefWidth="364.0" />
+            <ListView fx:id="manageServiceListView" prefHeight="330.0" prefWidth="364.0" />
             <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="364.0">
                <children>
                   <Label prefWidth="150.0" text="Service Name:" />
@@ -56,6 +56,12 @@
                <children>
                   <Label prefWidth="150.0" text="Price:" />
                   <TextField fx:id="manageServicePriceTextField" editable="false" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="422.0" prefHeight="26.0" prefWidth="364.0">
+               <children>
+                  <Label prefWidth="150.0" text="Slot index:" />
+                  <TextField fx:id="manageServiceSlotIndexTextField" editable="false" prefWidth="200.0" />
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="467.0" prefHeight="26.0" prefWidth="364.0">

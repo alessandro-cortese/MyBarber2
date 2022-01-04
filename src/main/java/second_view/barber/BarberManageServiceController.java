@@ -1,19 +1,62 @@
 package second_view.barber;
 
+import applicationController.ManageServiceController;
+import engineering.bean.ServiceBean;
+import engineering.exception.NegativePriceException;
+import first_view.listCellFactories.ServiceListCellFactory;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import static engineering.otherclasses.NumericVerify.isNumeric;
 
-public class BarberManageServiceController {
+public class BarberManageServiceController implements Initializable {
 
     @FXML private TextField manageServiceCommandLine;
     @FXML private TextField manageServiceNameTextField;
     @FXML private TextField manageServiceDescriptionTextField;
     @FXML private TextField manageServicePriceTextField;
     @FXML private TextField manageServiceNameOfUsedProductTextField;
+    @FXML private TextField manageServiceSlotIndexTextField;
+    @FXML private ListView<ServiceBean> manageServiceListView;
+
+    private ArrayList<ServiceBean> serviceBeanArrayList;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources){
+
+        ManageServiceController manageServiceController = new ManageServiceController();
+
+        try{
+            serviceBeanArrayList = manageServiceController.getAllService();
+        } catch (NegativePriceException e) {
+            e.printStackTrace();
+        }
+
+
+        manageServiceListView.setCellFactory(param-> new ServiceListCellFactory(true));
+
+        manageServiceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            assert newValue != null;
+            manageServiceNameTextField.setText(newValue.getName());
+            manageServiceDescriptionTextField.setText(newValue.getDescription());
+            manageServiceNameOfUsedProductTextField.setText(newValue.getNameOfUsedProduct());
+            manageServicePriceTextField.setText(Double.toString(newValue.getPrice()));
+            manageServiceSlotIndexTextField.setText(Integer.toString(serviceBeanArrayList.indexOf(newValue)));
+        });
+
+        manageServiceListView.getItems().clear();
+        manageServiceListView.setItems(FXCollections.observableList(serviceBeanArrayList));
+    }
+
 
     @FXML
     public void onCommand(ActionEvent event) {
