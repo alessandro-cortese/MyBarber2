@@ -34,7 +34,7 @@ public class BarberUserareaController {
 
         }
         else if(userAreaCommand.compareTo("save") == 0 ){
-            System.out.println("saved");
+            return ;
         }
 
         barberUsereaCommandLine.setStyle("-fx-border-color: red");

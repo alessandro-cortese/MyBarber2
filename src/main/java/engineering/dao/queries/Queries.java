@@ -1,7 +1,7 @@
 package engineering.dao.queries;
 
 import model.User;
-import model.buyProduct.Order;
+import model.buy_product.Order;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

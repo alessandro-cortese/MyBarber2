@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-import static engineering.otherclasses.NumericVerify.isNumeric;
+import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberModifyServiceController {
 

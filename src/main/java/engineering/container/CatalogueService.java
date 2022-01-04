@@ -1,7 +1,7 @@
 package engineering.container;
 
 import model.Service;
-import model.buyProduct.Product;
+import model.buy_product.Product;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 

@@ -3,8 +3,8 @@ package engineering.dao;
 import engineering.dao.queries.Queries;
 import engineering.exception.ProductNotFoundException;
 import engineering.pattern.Connector;
-import model.buyProduct.Product;
-import model.buyProduct.containers.ProductCatalog;
+import model.buy_product.Product;
+import model.buy_product.containers.ProductCatalog;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

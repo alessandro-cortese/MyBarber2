@@ -1,6 +1,6 @@
 package second_view.barber;
 
-import applicationController.AddServiceController;
+import application_controller.AddServiceController;
 import engineering.bean.ServiceBean;
 import engineering.exception.NegativePriceException;
 import javafx.event.ActionEvent;
@@ -12,7 +12,7 @@ import second_view.general.ScreenChanger;
 
 import java.io.IOException;
 
-import static engineering.otherclasses.NumericVerify.isNumeric;
+import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberAddServiceController {
 

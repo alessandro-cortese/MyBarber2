@@ -1,9 +1,9 @@
 package second_view.barber;
 
-import applicationController.ManageServiceController;
+import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
 import engineering.exception.NegativePriceException;
-import first_view.listCellFactories.ServiceListCellFactory;
+import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static engineering.otherclasses.NumericVerify.isNumeric;
+import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberManageServiceController implements Initializable {
 
@@ -80,12 +80,10 @@ public class BarberManageServiceController implements Initializable {
             }
         }
         else if(manageServiceCommandLineLocal.compareTo("modify") == 0){
-            System.out.println("Modify");
             return;
             // TODO modify this method when you know the DAO classes
         }
         else if(manageServiceCommandLineLocal.compareTo("delete") == 0) {
-            System.out.println("Delete");
             return;
             // TODO modify this method when you know the DAO classes
         }

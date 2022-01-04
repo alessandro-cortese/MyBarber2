@@ -4,8 +4,8 @@ import engineering.dao.queries.Queries;
 import engineering.exception.InvalidCouponException;
 import engineering.pattern.Connector;
 import model.User;
-import model.buyProduct.Coupon;
-import model.buyProduct.containers.CouponContainer;
+import model.buy_product.Coupon;
+import model.buy_product.containers.CouponContainer;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -20,7 +20,7 @@ public class ClientSeeAppointmentsController implements Initializable {
     @FXML private Button goToSaloonButton ;
     @FXML private Button cancelAppointmentButton ;
 
-    private static final String LIST_ITEM_RES = "first_view/listitem/client_see_appointments_list_item.fxml";
+    private static final String LIST_ITEM_RES = "first_view/list_item/client_see_appointments_list_item.fxml";
 
 
     @Override

@@ -1,13 +1,11 @@
 package first_view.client;
 
-import applicationController.BuyProductController;
-import engineering.bean.buyProduct.CartBean;
-import engineering.bean.buyProduct.CartRowBean;
-import engineering.bean.buyProduct.ProductBean;
+import application_controller.BuyProductController;
+import engineering.bean.buy_product.CartBean;
+import engineering.bean.buy_product.CartRowBean;
+import engineering.bean.buy_product.ProductBean;
 import first_view.general.InternalBackController;
-import first_view.listCellFactories.CartRowListCellFactory;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import first_view.list_cell_factories.CartRowListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
