@@ -11,18 +11,20 @@ public class BookingController {
     private SaloonDAO saloonDAO;
     private List<Saloon> listSaloon;
     private  List<SaloonBean> saloonBeanList;
+    private String saloonCity;
     private String saloonName;
+    private Saloon saloonByName;
 
-    public List<SaloonBean> searchByNameSaloon(SaloonBean saloonBean) throws Exception {
+    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
         saloonBeanList = new ArrayList<>();
 
-        saloonName = saloonBean.getName();
+        saloonCity = saloonBean.getCity();
         saloonDAO = new SaloonDAO();
 
-        listSaloon= saloonDAO.retreiveBySaloonName(saloonName);
+        listSaloon= saloonDAO.retreiveByCityName(saloonCity); //chiamo la dao del salone per recuperare dal DB I valori della ricerca
 
-        for (Saloon saloon: listSaloon){ //imposto il saloonBean
+        for (Saloon saloon: listSaloon){ //imposto il saloonBean prendendo i valori dal model
             saloonBean.setName(saloon.getName());
             saloonBean.setAddress(saloon.getAddress());
             saloonBean.setCity(saloon.getCity());
@@ -38,6 +40,24 @@ public class BookingController {
 
 
         return null;
+    }
+
+    public SaloonBean searchByNameSaloon(SaloonBean saloonBean) throws Exception {
+
+        //saloonName = saloonBean.getName();
+        //SaloonDAO saloonDAO = new SaloonDAO();
+
+        saloonByName = saloonDAO.retreiveByNameSaloon(saloonName);
+
+        saloonBean.setName(saloonByName.getName());
+        saloonBean.setCity(saloonByName.getCity());
+        saloonBean.setAddress(saloonByName.getAddress());
+        saloonBean.setPhone(saloonByName.getPhone());
+        saloonBean.setSeatNumber(saloonByName.getSeatNumber());
+        saloonBean.setSlotTime(saloonByName.getSlotTime());
+
+        return  saloonBean;
+
     }
 
 }
