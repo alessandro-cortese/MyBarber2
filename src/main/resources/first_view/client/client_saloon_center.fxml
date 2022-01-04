@@ -29,57 +29,11 @@
                <children>
                   <AnchorPane prefHeight="575.0" prefWidth="253.0">
                      <children>
-                        <Button fx:id="bookedButton" layoutX="-68.0" layoutY="485.0" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: black;" text="Prenota" textFill="WHITE" />
+                        <Button fx:id="bookedButton" layoutX="-68.0" layoutY="485.0" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: black;" text="Vai al riepilogo" textFill="WHITE" />
                         <HBox alignment="TOP_RIGHT" layoutX="-76.0" layoutY="226.0" prefHeight="221.0" prefWidth="238.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
-                                 <children>
-                                    <Label text="Nome">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Indirizzo">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Città">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Telefono">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="237.0" prefWidth="122.0" spacing="15.0">
-                                 <children>
-                                    <Label text="Label">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Label">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Label">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Label">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
+                              <VBox prefHeight="237.0" prefWidth="122.0" spacing="15.0" />
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -88,7 +42,7 @@
                               <Insets top="80.0" />
                            </padding>
                         </HBox>
-                        <ListView fx:id="serviceSelectedListView" layoutX="-76.0" layoutY="84.0" prefHeight="204.0" prefWidth="258.0" />
+                        <ListView fx:id="serviceSelectedListView" layoutX="-76.0" layoutY="131.0" prefHeight="317.0" prefWidth="258.0" />
                      </children>
                   </AnchorPane>
                </children>
@@ -100,6 +54,61 @@
                         <Image url="@../../../../../images/barber_center.jpeg" />
                      </image>
                   </ImageView>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="36.0">
+                     <children>
+                        <Label text="Label">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <Label text="Nome">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                        <Label text="Label">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <Label text="Indirizzo">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                        <Label text="Label">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <Label text="Città">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                        <Label text="Label">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <Label text="Telefono">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="60.0" />
+                     </VBox.margin>
+                  </VBox>
                </children>
             </VBox>
          </children>

@@ -117,7 +117,10 @@ public class BookingGraphicController{
         //saloonBeanName = bookingController.searchByNameSaloon(saloonBean);
         Button sourceButton = (Button) actionEvent.getSource();
         if(sourceButton == saloonNextButton) {
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR))).load();
+            FXMLLoader fxmlLoader =new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR));
+            newCenterNode = fxmlLoader.load();
+            BookingDateHourGraphicController bookingDateHourGraphicController = fxmlLoader.getController();
+            bookingDateHourGraphicController.display(saloonBean);
         }
         if(sourceButton == placeNextButton)
             newCenterNode =(new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();

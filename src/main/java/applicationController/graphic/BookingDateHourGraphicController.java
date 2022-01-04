@@ -1,5 +1,6 @@
 package applicationController.graphic;
 
+import engineering.bean.SaloonBean;
 import first_view.pickers.TimePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
@@ -20,7 +22,11 @@ import java.time.LocalDate;
 
 public class BookingDateHourGraphicController {
         private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
-
+        private String  saloonName;
+        private String saloonCity;
+        private String saloonAddress;
+        private String saloonPhone;
+        private int seatNumber;
         @FXML
         private Button ConfirmDateHourButton;
 
@@ -40,7 +46,10 @@ public class BookingDateHourGraphicController {
         private DatePicker dateBooking;
 
         @FXML
-        private Label seatNumberLabel;
+        private Label saloonNameLabel;
+
+        @FXML
+        private ImageView saloonImage;
 
         @FXML
         void OnButtonClicked(ActionEvent event) throws IOException {
@@ -59,15 +68,22 @@ public class BookingDateHourGraphicController {
 
         @FXML
         public void ConfirmDateHour(ActionEvent event) throws IOException, ParseException { //qui chiamo la BookingDAO
-               // String bookingTime = hour.getText()+":00";
-                //LocalDate date = dateBooking.getValue();
-                //Time time = Time.valueOf(bookingTime);
+               String bookingTime = hourTextField.getText()+":00";
+                LocalDate date = dateBooking.getValue();
+                Time time = Time.valueOf(bookingTime);
                 //BookingBean bookingBean = new BookingBean(time, date);
                 //BookingController bookingController = new BookingController().VerifyBooking(bookingBean);
-
-                //System.out.println(date);
-                //System.out.println(time);
+                System.out.println(date);
+                System.out.println(time);
 
         }
-    }
+
+        public void display(SaloonBean saloonBean) {
+                this.saloonName = saloonBean.getName();
+                this.saloonAddress =saloonBean.getAddress();
+                this.saloonCity = saloonBean.getCity();
+                this.saloonPhone =saloonBean.getPhone();
+                this.seatNumber = saloonBean.getSeatNumber();
+        }
+}
 
