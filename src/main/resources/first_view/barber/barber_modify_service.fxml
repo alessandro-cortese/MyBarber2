@@ -17,7 +17,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="525.0" prefWidth="388.0" spacing="30.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="390.0" text="Modifica un Servizio">
+                  <Label prefHeight="39.0" prefWidth="390.0" text="Modifica Servizio">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -98,10 +98,19 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="saveChangesButton" layoutX="943.0" layoutY="603.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="166.0" text="Salva Modifiche">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+      <HBox layoutX="822.0" layoutY="603.0" spacing="75.0">
+         <children>
+            <Button fx:id="deleteServiceButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="85.0" text="Cancella">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="saveChangesButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="166.0" text="Salva Modifiche">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

@@ -22,8 +22,12 @@ public class BarberModifyServiceController {
     @FXML private TextField descriptionTextFieldModifyService;
     @FXML private TextField modifyServiceNameOfUsedProductTextField;
     @FXML private Button saveChangesButton;
+    @FXML private Button deleteServiceButton;
+
+    private ServiceBean serviceBean;
 
     private static final String BARBER_HOME_SCREEN_NAME = "first_view/barber/barber_home.fxml";
+    private static final String BARBER_DELETE_SERVICE_SCREEN_NAME = "first_view/barber/barber_confirm_delete_service.fxml" ;
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
@@ -33,11 +37,25 @@ public class BarberModifyServiceController {
                 && descriptionTextFieldModifyService.getText() != null) {
 
             System.out.println("Modify");
+
             InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_HOME_SCREEN_NAME));
             BorderPane myBorderPane = (BorderPane) (sourceButton.getScene()).getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
         }
+        else if(sourceButton == deleteServiceButton) {
+
+            InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_DELETE_SERVICE_SCREEN_NAME));
+            BorderPane myBorderPane = (BorderPane) (sourceButton.getScene()).getRoot();
+            myBorderPane.setCenter(fxmlLoader.load());
+
+            BarberConfirmDeleteServiceController barberConfirmDeleteServiceController = fxmlLoader.getController();
+            barberConfirmDeleteServiceController.displayServiceToDelete(this.serviceBean);
+
+        }
+
+
 
     }
 
@@ -51,6 +69,9 @@ public class BarberModifyServiceController {
     }
 
     public void displayServiceToModify(ServiceBean serviceBean) {
+
+        this.serviceBean = serviceBean;
+
         nameModifyServiceTextField.setText(serviceBean.getName());
         modifyServiceNameOfUsedProductTextField.setText(serviceBean.getNameOfUsedProduct());
         descriptionTextFieldModifyService.setText(serviceBean.getDescription());
