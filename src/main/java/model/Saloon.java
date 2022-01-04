@@ -11,7 +11,7 @@ public class Saloon {
     private Time slotTime;
     private int seatNumber;
 
-    public Saloon(String name, String city, String address, String phone,Time slotTime, int seatNumber){
+    public Saloon(String city, String name, String address, String phone,Time slotTime, int seatNumber){
 
         this.name = name;
         this.address = address;

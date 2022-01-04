@@ -97,7 +97,7 @@ public class BookingGraphicController{
     private SaloonBean saloonBean;
     private BookingController bookingController;
     private List<SaloonBean> saloonBeanList= new ArrayList<>();
-
+    private SaloonBean saloonBeanName;
     @FXML
     public void onBookedButton(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
@@ -112,7 +112,8 @@ public class BookingGraphicController{
         //String saloonCity = searchCity.getText();
        // saloonBean = new SaloonBean(saloon, saloonCity);
         bookingController = new BookingController();
-        //saloonBeanList = bookingController.searchByNameSaloon(saloonBean); //ATT: POSSO COMUNICARE LL'ALTRO CONTROLLER GRAFICO IL SALOONBEANLIST?
+        //saloonBeanList = bookingController.searchByCitySaloon(saloonBean); //ATT: POSSO COMUNICARE LL'ALTRO CONTROLLER GRAFICO IL SALOONBEANLIST? PER LA CITTÀ
+        saloonBeanName = bookingController.searchByNameSaloon(saloonBean);
         Button sourceButton = (Button) actionEvent.getSource();
         if(sourceButton == saloonNextButton) {
             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME))).load();

@@ -58,4 +58,11 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         String select = String.format("SELECT FROM SaloonTime where hourBooking = '%s' AND dateBooking ='%s'", time,date);
         return statement.executeQuery(select);
     }// DA fare insieme ad alessandro per chiarire
+
+
+    public static ResultSet selectSaloonByCity(Statement stmt, String saloonCity) throws SQLException {
+        String sql = "SELECT * FROM Saloon where city = '" + saloonCity + "';";
+        System.out.println(sql);
+        return stmt.executeQuery(sql);
+    }
 }

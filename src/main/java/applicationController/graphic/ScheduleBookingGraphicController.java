@@ -2,6 +2,7 @@ package applicationController.graphic;
 
 import applicationController.BookingController;
 import engineering.bean.BookingBean;
+import engineering.bean.SaloonBean;
 import first_view.ObservableListNode;
 import first_view.pickers.TimePicker;
 import javafx.collections.FXCollections;
@@ -26,11 +27,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ScheduleBookingGraphicController implements Initializable {
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
     private static final String SERVICE_ITEM ="first_view/listitem/barber_service_list_item.fxml";
+    private String saloonAddress;
+    private String city;
 
     @FXML
     private Button bookedButton;
@@ -61,6 +65,10 @@ public class ScheduleBookingGraphicController implements Initializable {
 
     @FXML
     private ListView<String> serviceSelectedListView;
+
+    public ScheduleBookingGraphicController(SaloonBean saloon){
+
+    }
 
     @FXML
     void onButtonSaloonClicked(ActionEvent event) throws IOException {
