@@ -21,15 +21,15 @@ public class ClientSearchSaloon {
         commandLine.setStyle(null);
         commandLine.setText("");
 
-        if (command.matches("search name (.*)")) {
+        if (command.matches("search name .*")) {//. qualsiasi carattere
             searchText.setText(command.replace("search name ", ""));
             searchTypeLabel.setText("Name");
         }
-        else if (command.matches("search city (.*)")) {
+        else if (command.matches("search city .*")) {
             searchText.setText(command.replace("search city ", ""));
             searchTypeLabel.setText("City");
         }
-        else if (command.matches("select ([0-9]+)")) {
+        else if (command.matches("select [0-9]+")) { //stringa composta da numeri  da 0 a 9 e almeno un carattere
             //Controllo che ci sia il salone con indice dato
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_APPOINTMENT_SCREEN);
         }

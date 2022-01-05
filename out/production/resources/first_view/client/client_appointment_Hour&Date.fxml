@@ -76,6 +76,16 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="35.0">
          <children>
+            <Label text="Data">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </Label>
+            <DatePicker fx:id="dateBooking">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </DatePicker>
             <Label text="Orario">
                <HBox.margin>
                   <Insets top="5.0" />
@@ -87,16 +97,6 @@
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </SplitMenuButton>
-            <Label text="Data">
-               <HBox.margin>
-                  <Insets top="5.0" />
-               </HBox.margin>
-            </Label>
-            <DatePicker fx:id="dateBooking">
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-            </DatePicker>
             <Button mnemonicParsing="false" onAction="#confirmDateHour" prefHeight="24.0" prefWidth="128.0" text="Conferma">
                <HBox.margin>
                   <Insets left="60.0" />
