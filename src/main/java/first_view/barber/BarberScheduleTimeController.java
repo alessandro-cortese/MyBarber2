@@ -2,7 +2,6 @@ package first_view.barber;
 
 import first_view.general.InternalBackController;
 import first_view.pickers.TimePicker;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,11 +9,48 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
 import java.io.IOException;
+import java.time.LocalTime;
 
 
 public class BarberScheduleTimeController {
+
+    @FXML private CheckBox mondayMorningCheckBox;
+    @FXML private CheckBox mondayAfternoonCheckBox;
+    @FXML private CheckBox dayTwoMorningCheckBox;
+    @FXML private CheckBox dayTwoAfternoonCheckBox;
+    @FXML private CheckBox dayThreeMorningCheckBox;
+    @FXML private CheckBox dayThreeAfternoonCheckBox;
+    @FXML private CheckBox dayFourAfternoonCheckBox;
+    @FXML private CheckBox dayFourMorningCheckBox;
+    @FXML private CheckBox dayFiveMorningCheckBox;
+    @FXML private CheckBox dayFiveAfternoonCheckBox;
+    @FXML private CheckBox daySixMorningCheckBox;
+    @FXML private CheckBox daySixAfternoonCheckBox;
+    @FXML private TextField mondayMorningOpen;
+    @FXML private TextField mondayMorningClose;
+    @FXML private TextField mondayAfternoonOpen;
+    @FXML private TextField mondayAfternoonClose;
+    @FXML private TextField dayTwoMorningOpen;
+    @FXML private TextField dayTwoMorningClose;
+    @FXML private TextField dayTwoAfternoonOpen;
+    @FXML private TextField dayTwoAfternoonClose;
+    @FXML private TextField dayThreeMorningOpen;
+    @FXML private TextField dayThreeMorningClose;
+    @FXML private TextField dayThreeAfternoonOpen;
+    @FXML private TextField dayThreeAfternoonClose;
+    @FXML private TextField dayFourMorningOpen;
+    @FXML private TextField dayFourMorningClose;
+    @FXML private TextField dayFourAfternoonOpen;
+    @FXML private TextField dayFourAfternoonClose;
+    @FXML private TextField dayFiveMorningOpen;
+    @FXML private TextField dayFiveMorningClose;
+    @FXML private TextField dayFiveAfternoonOpen;
+    @FXML private TextField dayFiveAfternoonClose;
+    @FXML private TextField daySixMorningOpen;
+    @FXML private TextField daySixMorningClose;
+    @FXML private TextField daySixAfternoonOpen;
+    @FXML private TextField daySixAfternoonClose;
 
     private CheckBox[] arrayCheckBox;
 
@@ -37,7 +73,6 @@ public class BarberScheduleTimeController {
 
     private TextField[][] arrayTextFiled;
 
-
     private void extractedTextField(){
 
         arrayTextFiled = new TextField[][]{
@@ -56,113 +91,30 @@ public class BarberScheduleTimeController {
         };
     }
 
+    private LocalTime[][] localTime;
 
-    @FXML
-    private CheckBox mondayMorningCheckBox;
+    private LocalTime localTime2;
 
-    @FXML
-    private CheckBox mondayAfternoonCheckBox;
-
-    @FXML
-    private CheckBox dayTwoMorningCheckBox;
-
-    @FXML
-    private CheckBox dayTwoAfternoonCheckBox;
-
-    @FXML
-    private CheckBox dayThreeMorningCheckBox;
-
-    @FXML
-    private CheckBox dayThreeAfternoonCheckBox;
-
-    @FXML
-    private CheckBox dayFourAfternoonCheckBox;
-
-    @FXML
-    private CheckBox dayFourMorningCheckBox;
-
-    @FXML
-    private CheckBox dayFiveMorningCheckBox;
-
-    @FXML
-    private CheckBox dayFiveAfternoonCheckBox;
-
-    @FXML
-    private CheckBox daySixMorningCheckBox;
-
-    @FXML
-    private CheckBox daySixAfternoonCheckBox;
-
-
-    @FXML
-    private TextField mondayMorningOpen;
-    @FXML
-    private TextField mondayMorningClose;
-
-    @FXML
-    private TextField mondayAfternoonOpen;
-    @FXML
-    private TextField mondayAfternoonClose;
-
-    @FXML
-    private TextField dayTwoMorningOpen;
-    @FXML
-    private TextField dayTwoMorningClose;
-
-    @FXML
-    private TextField dayTwoAfternoonOpen;
-    @FXML
-    private TextField dayTwoAfternoonClose;
-
-    @FXML
-    private TextField dayThreeMorningOpen;
-    @FXML
-    private TextField dayThreeMorningClose;
-
-    @FXML
-    private TextField dayThreeAfternoonOpen;
-    @FXML
-    private TextField dayThreeAfternoonClose;
-
-    @FXML
-    private TextField dayFourMorningOpen;
-    @FXML
-    private TextField dayFourMorningClose;
-
-    @FXML
-    private TextField dayFourAfternoonOpen;
-    @FXML
-    private TextField dayFourAfternoonClose;
-
-    @FXML
-    private TextField dayFiveMorningOpen;
-    @FXML
-    private TextField dayFiveMorningClose;
-
-    @FXML
-    private TextField dayFiveAfternoonOpen;
-    @FXML
-    private TextField dayFiveAfternoonClose;
-
-    @FXML
-    private TextField daySixMorningOpen;
-    @FXML
-    private TextField daySixMorningClose;
-
-    @FXML
-    private TextField daySixAfternoonOpen;
-    @FXML
-    private TextField daySixAfternoonClose;
+    private void extractedLocalTime(){
+        localTime = new LocalTime[12][2];
+    }
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
 
+        System.out.println(localTime2);
+
+        int i;
+        int j;
+
+        for (i = 0; i < localTime.length; i++)
+            for(j = 0; j < localTime[i].length; j++)
+                System.out.println(localTime[i][j]);
+
         if(sourceButton.getId().equals("saveButton")){
             InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());
         }
-
-
 
     }
 
@@ -199,11 +151,14 @@ public class BarberScheduleTimeController {
     @FXML
     public void onChangeTime(MouseEvent event) throws IOException {
         TextField textField = (TextField) event.getSource();
+        this.extractedLocalTime();
         this.extractedTextField();
         int i;
         int j;
         int rawIndex = 0;
         boolean flag = true;
+        TimePicker timePicker;
+
 
         for(i = 0; i < arrayTextFiled.length && flag; i++) {
             for(j = 0; j < arrayTextFiled[i].length && flag; j++) {
@@ -215,16 +170,32 @@ public class BarberScheduleTimeController {
         }
 
        if(rawIndex % 2 == 0){
-
-           ((TextField) event.getSource()).setText((new TimePicker(7, 13)).getTime());
-
+           timePicker = new TimePicker(7, 13);
        }else{
+           timePicker = new TimePicker(14, 21);
+       }
 
-           ((TextField) event.getSource()).setText((new TimePicker(14, 21)).getTime());
+       textField.setText(timePicker.getTime());
+       
+       String localHour = textField.getText();
+       String[] hour = localHour.split(":");
 
+       for(i = 0; i < arrayTextFiled.length; i++) {
+           for(j = 0; j < arrayTextFiled[i].length; j++) {
+               if(textField == arrayTextFiled[i][j]) {
+                   saveTime(hour, i, j);
+                   System.out.println(localTime[i][j]);
+                   System.out.println(i);
+                   System.out.println(j);
+                    return;
+               }
+           }
        }
 
     }
 
+    private void saveTime(String[] hour, int raw, int column){
+        localTime[raw][column] = LocalTime.of(Integer.parseInt(hour[0]), Integer.parseInt(hour[1]), 0);
+    }
 
 }

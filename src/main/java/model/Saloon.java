@@ -1,5 +1,4 @@
 package model;
-
 import java.sql.Time;
 
 public class Saloon {
@@ -19,7 +18,6 @@ public class Saloon {
         this.city = city;
         this.seatNumber = seatNumber;
         this.slotTime = slotTime;
-
     }
 
     public String getName(){
