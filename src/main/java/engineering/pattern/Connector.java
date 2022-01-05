@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class Connector { //SINGLETON CLASS
 
-    private Connection connection ; //di classe
-    private static Connector myConnector ;
+        private Connection connection ; //di classe
+        private static Connector myConnector ;
 
         protected Connector() {
             //if (System.getenv("RDS_HOSTNAME") != null) {
@@ -28,8 +28,6 @@ public class Connector { //SINGLETON CLASS
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
                     connection = DriverManager.getConnection(jdbcUrl);
 
-                    if(connection==null)
-                        System.out.println("pd");
                 }
                 catch (ClassNotFoundException e) {
                     throw new RuntimeException("Cannot find the driver in the classpath!", e);
@@ -49,8 +47,8 @@ public class Connector { //SINGLETON CLASS
             return myConnector ;
         }
 
-    public Connection getConnection() {
-        return connection;
-    }
+        public Connection getConnection() {
+            return connection;
+        }
 }
 

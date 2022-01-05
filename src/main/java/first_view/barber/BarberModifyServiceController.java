@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-import static engineering.otherclasses.NumericVerify.isNumeric;
+import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberModifyServiceController {
 
@@ -26,7 +26,6 @@ public class BarberModifyServiceController {
 
     private ServiceBean serviceBean;
 
-    private static final String BARBER_HOME_SCREEN_NAME = "first_view/barber/barber_home.fxml";
     private static final String BARBER_DELETE_SERVICE_SCREEN_NAME = "first_view/barber/barber_confirm_delete_service.fxml" ;
 
     @FXML
@@ -36,12 +35,8 @@ public class BarberModifyServiceController {
         if(sourceButton == saveChangesButton && nameModifyServiceTextField.getText() != null && isNumeric(modifyServicePriceTextField.getText())
                 && descriptionTextFieldModifyService.getText() != null) {
 
-            System.out.println("Modify");
+            InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
 
-            InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_HOME_SCREEN_NAME));
-            BorderPane myBorderPane = (BorderPane) (sourceButton.getScene()).getRoot();
-            myBorderPane.setCenter(fxmlLoader.load());
         }
         else if(sourceButton == deleteServiceButton) {
 
@@ -54,8 +49,6 @@ public class BarberModifyServiceController {
             barberConfirmDeleteServiceController.displayServiceToDelete(this.serviceBean);
 
         }
-
-
 
     }
 

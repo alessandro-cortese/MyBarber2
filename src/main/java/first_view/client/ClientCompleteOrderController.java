@@ -1,9 +1,9 @@
 package first_view.client;
 
-import applicationController.BuyProductController;
-import engineering.bean.buyProduct.CouponBean;
-import engineering.bean.buyProduct.OrderInfoBean;
-import engineering.bean.buyProduct.OrderTotalBean;
+import application_controller.BuyProductController;
+import engineering.bean.buy_product.CouponBean;
+import engineering.bean.buy_product.OrderInfoBean;
+import engineering.bean.buy_product.OrderTotalBean;
 import engineering.exception.InvalidCouponException;
 import first_view.general.InternalBackController;
 import javafx.collections.FXCollections;
@@ -15,7 +15,7 @@ import javafx.scene.control.*;
 import java.sql.Date;
 import java.time.Instant;
 
-import static first_view.listCellFactories.BuyProductListCellFactory.EURO_SYMBOL;
+import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 
 public class ClientCompleteOrderController {
 

@@ -2,8 +2,8 @@ package engineering.dao;
 
 import engineering.pattern.Connector;
 import model.User;
-import model.buyProduct.Order;
-import model.buyProduct.containers.CouponContainer;
+import model.buy_product.Order;
+import model.buy_product.containers.CouponContainer;
 
 import java.sql.*;
 import java.time.LocalTime;

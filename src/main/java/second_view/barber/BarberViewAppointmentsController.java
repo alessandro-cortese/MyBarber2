@@ -2,16 +2,19 @@ package second_view.barber;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
-import static engineering.otherclasses.NumericVerify.isNumeric;
+import java.time.LocalDate;
+
+import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberViewAppointmentsController {
 
     @FXML private TextField viewAppointmentsCommandLine;
     @FXML private TextField saloonNameFieldViewAppointments;
-    @FXML private TextField dateFieldViewAppointments;
+    @FXML private DatePicker datePickerViewAppointments;
     @FXML private TextField slotIndexFieldViewAppointments;
 
     @FXML
@@ -38,7 +41,6 @@ public class BarberViewAppointmentsController {
         }
         else if(viewAppointmentsCommand.compareTo("view") == 0) {
 
-            System.out.println("View");
             return ;
 
         }
@@ -61,9 +63,10 @@ public class BarberViewAppointmentsController {
         }
         else if (insertCommand.startsWith("select date")) {
 
+            datePickerViewAppointments.setValue(LocalDate.of(2022, 1, 46));
+
             viewAppointmentsField = insertCommand.replace("select date" + " ", "");
             if (manageInsertDate(viewAppointmentsField)) {
-                dateFieldViewAppointments.setText(viewAppointmentsField);
                 handled = true;
             }
         }
@@ -87,33 +90,7 @@ public class BarberViewAppointmentsController {
         String[] valueOfInsertDate;
         valueOfInsertDate = date.split("-");
 
-        if( isNumeric(valueOfInsertDate[0]) && isNumeric(valueOfInsertDate[1]) && isNumeric(valueOfInsertDate[2])) {
 
-            if (valueOfInsertDate[1].compareTo("2") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 28)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("1") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 31)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("3") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 31)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("4") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 30)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("5") == 0 && Integer.parseInt((valueOfInsertDate[2])) <= 31)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("6") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 30)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("7") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 31)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("8") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 31)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("9") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 30)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("10") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 31)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("11") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 30)
-                dateHandled = true;
-            else if (valueOfInsertDate[1].compareTo("12") == 0 && Integer.parseInt(valueOfInsertDate[2]) <= 31)
-                dateHandled = true;
-        }
 
         return dateHandled;
 

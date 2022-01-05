@@ -71,7 +71,7 @@
                         <MenuItem mnemonicParsing="false" text="I Tuoi Preferiti" />
                         <MenuItem mnemonicParsing="false" text="Le Tue Notifiche" />
                         <MenuItem fx:id="userAreaItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="La tua Zona Personale" />
-                        <MenuItem mnemonicParsing="false" text="Carte Fedeltà" />
+                        <MenuItem fx:id="fidelityCardMenuItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Carte Fedeltà" />
                      </items>
                   </Menu>
               </menus>

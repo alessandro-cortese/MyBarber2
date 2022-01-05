@@ -1,10 +1,10 @@
 package engineering.dao;
 
 import engineering.dao.queries.Queries;
+import engineering.exception.ProductNotFoundException;
 import engineering.pattern.Connector;
-import model.User;
-import model.buyProduct.Product;
-import model.buyProduct.containers.ProductCatalog;
+import model.buy_product.Product;
+import model.buy_product.containers.ProductCatalog;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,8 +22,10 @@ public class ProductDAO {
 
     public ProductCatalog loadAllProducts() {
         ProductCatalog catalog = new ProductCatalog() ;
-        catalog.addProduct(1,"Dopobarba","ciao a tutti", 22.0, "ciao");
-        catalog.addProduct(2,"Shampoo", "Antigiallo", 11.25, "Simo");
+        for (int i = 0 ; i < 10 ; i++) {
+            catalog.addProduct(1, "Dopobarba", "ciao a tutti", 22.0, "ciao");
+            catalog.addProduct(2, "Shampoo", "Antigiallo", 11.25, "Simo");
+        }
 
         ArrayList<Product> products = new ArrayList<>() ;
 
@@ -45,14 +47,17 @@ public class ProductDAO {
         return catalog ;
     }
 
-    public Product loadProductByIsbn(Integer isbn) {
+    public Product loadProductByName(String name) throws ProductNotFoundException{
         Product product = null;
         Connection connection = Connector.getConnectorInstance().getConnection();
         try (Statement statement = connection.createStatement() ;
-             ResultSet resultSet = Queries.loadProductByIsbn(statement, isbn) ;)
+             ResultSet resultSet = Queries.loadProductByName(statement, name) )
         {
             if (resultSet.isFirst()) {
                 product = createProduct(resultSet) ;
+            }
+            else{
+                throw new ProductNotFoundException();
             }
         }
         catch (SQLException sqlException) {

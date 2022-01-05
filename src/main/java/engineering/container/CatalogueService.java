@@ -1,14 +1,15 @@
 package engineering.container;
 
 import model.Service;
-import model.buyProduct.Product;
+import model.buy_product.Product;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CatalogueService {
-    private ArrayList<Service> serviceArrayList;
+    private List<Service> serviceArrayList;
 
-    public CatalogueService(ArrayList<Service> service){
+    public CatalogueService(List<Service> service){
         this.serviceArrayList = service;
     }
 
@@ -16,7 +17,7 @@ public class CatalogueService {
         this.serviceArrayList = new ArrayList<>();
     }
 
-    public ArrayList<Service> getServices(){
+    public List<Service> getServices(){
         return this.serviceArrayList;
     }
 

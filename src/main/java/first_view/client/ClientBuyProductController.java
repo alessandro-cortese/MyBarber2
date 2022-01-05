@@ -1,10 +1,10 @@
 package first_view.client;
 
-import applicationController.BuyProductController;
-import engineering.bean.buyProduct.ProductBean;
-import engineering.bean.buyProduct.ProductSearchInfoBean;
+import application_controller.BuyProductController;
+import engineering.bean.buy_product.ProductBean;
+import engineering.bean.buy_product.ProductSearchInfoBean;
 import first_view.general.InternalBackController;
-import first_view.listCellFactories.BuyProductListCellFactory;
+import first_view.list_cell_factories.BuyProductListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

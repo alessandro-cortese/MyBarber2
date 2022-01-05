@@ -42,7 +42,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationController.graphic.BookingDateHourGraphicController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application_controller.graphic.BookingDateHourGraphicController">
    <children>
       <VBox prefHeight="113.0" prefWidth="830.0">
          <children>
@@ -91,7 +91,7 @@
                   <Insets left="5.0" />
                </HBox.margin>
             </DatePicker>
-            <Button mnemonicParsing="false" onAction="#ConfirmDateHour" prefHeight="24.0" prefWidth="128.0" text="Conferma">
+            <Button mnemonicParsing="false" onAction="#confirmDateHour" prefHeight="24.0" prefWidth="128.0" text="Conferma">
                <HBox.margin>
                   <Insets left="60.0" />
                </HBox.margin>
@@ -116,7 +116,7 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="ConfirmDateHourButton" mnemonicParsing="false" onAction="#OnButtonClicked" prefHeight="0.0" prefWidth="186.0" text="Prosegui">
+            <Button fx:id="ConfirmDateHourButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="0.0" prefWidth="186.0" text="Prosegui">
                <HBox.margin>
                   <Insets left="300.0" />
                </HBox.margin>

@@ -10,16 +10,10 @@ import javafx.scene.control.TextField;
 
 public class BarberConfirmAddServiceController {
 
-    private ServiceBean serviceBean ;
-
     @FXML private TextField nameConfirmedAddService ;
-
     @FXML private TextField priceConfirmedAddService ;
-
     @FXML private TextField descriptionConfirmedAddService ;
-
     @FXML private TextField nameOfUsedProductConfirmedAddService ;
-
     @FXML private Button saveConfirmButton;
 
     @FXML
@@ -35,11 +29,10 @@ public class BarberConfirmAddServiceController {
 
     public void display(ServiceBean localServiceBean) {
 
-        this.serviceBean = localServiceBean;
-        nameConfirmedAddService.setText(serviceBean.getName()) ;
-        priceConfirmedAddService.setText(Double.toString(serviceBean.getPrice())) ;
-        descriptionConfirmedAddService.setText(serviceBean.getDescription()) ;
-        nameOfUsedProductConfirmedAddService.setText(serviceBean.getNameOfUsedProduct());
+        nameConfirmedAddService.setText(localServiceBean.getName()) ;
+        priceConfirmedAddService.setText(Double.toString(localServiceBean.getPrice())) ;
+        descriptionConfirmedAddService.setText(localServiceBean.getDescription()) ;
+        nameOfUsedProductConfirmedAddService.setText(localServiceBean.getNameOfUsedProduct());
 
     }
 

@@ -1,10 +1,10 @@
 package first_view.barber;
 
-import applicationController.ManageServiceController;
+import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
 import engineering.exception.NegativePriceException;
 import first_view.general.InternalBackController;
-import first_view.listCellFactories.ServiceListCellFactory;
+import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class BarberListServiceController implements Initializable {
@@ -30,7 +30,7 @@ public class BarberListServiceController implements Initializable {
     @FXML private Button addServiceButton;
 
 
-    private ArrayList<ServiceBean> arrayList ;
+    private List<ServiceBean> beanList;
 
     private static final String BARBER_MODIFY_SERVICE_SCREEN_NAME = "first_view/barber/barber_modify_service.fxml";
     private static final String BARBER_ADD_SERVICE_SCREEN_NAME = "first_view/barber/barber_add_service.fxml";
@@ -41,7 +41,7 @@ public class BarberListServiceController implements Initializable {
         ManageServiceController manageServiceController = new ManageServiceController();
 
         try {
-            arrayList = manageServiceController.getAllService();
+            beanList = manageServiceController.getAllService();
         } catch (NegativePriceException e) {
             e.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class BarberListServiceController implements Initializable {
         addServiceButton.setDisable(true);
 
         barberServiceListView.getItems().clear();
-        barberServiceListView.setItems(FXCollections.observableList(arrayList));
+        barberServiceListView.setItems(FXCollections.observableList(beanList));
 
     }
 

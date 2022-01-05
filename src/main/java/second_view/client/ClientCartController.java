@@ -1,10 +1,10 @@
 package second_view.client;
 
-import applicationController.BuyProductController;
-import engineering.bean.buyProduct.CartBean;
-import engineering.bean.buyProduct.CartRowBean;
-import engineering.bean.buyProduct.ProductBean;
-import first_view.listCellFactories.CartRowListCellFactory;
+import application_controller.BuyProductController;
+import engineering.bean.buy_product.CartBean;
+import engineering.bean.buy_product.CartRowBean;
+import engineering.bean.buy_product.ProductBean;
+import first_view.list_cell_factories.CartRowListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static first_view.listCellFactories.BuyProductListCellFactory.EURO_SYMBOL;
-import static first_view.listCellFactories.BuyProductListCellFactory.SECOND_VIEW;
+import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
+import static first_view.list_cell_factories.BuyProductListCellFactory.SECOND_VIEW;
 
 public class ClientCartController implements Initializable {
 
@@ -40,8 +40,6 @@ public class ClientCartController implements Initializable {
         String command = commandLine.getText() ;
         commandLine.setStyle(null);
         commandLine.setText("");
-
-        String removeString = "remove" ;
 
         if (command.compareTo("back") == 0) {
             ScreenChanger.getInstance().onBack(event);
@@ -70,6 +68,11 @@ public class ClientCartController implements Initializable {
                 }
                 return;
             }
+        }
+        else if (command.compareTo("complete") == 0) {
+            ClientCompleteOrderController completeOrderController = (ClientCompleteOrderController) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_COMPLETE_ORDER_SCREEN);
+            completeOrderController.setApplicationController(buyProductController) ;
+            return ;
         }
 
         commandLine.setStyle("-fx-border-color: red");

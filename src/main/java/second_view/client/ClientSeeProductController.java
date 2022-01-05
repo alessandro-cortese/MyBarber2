@@ -1,7 +1,7 @@
 package second_view.client;
 
-import applicationController.BuyProductController;
-import engineering.bean.buyProduct.ProductBean;
+import application_controller.BuyProductController;
+import engineering.bean.buy_product.ProductBean;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import second_view.general.ScreenChanger;
@@ -9,7 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import static first_view.listCellFactories.BuyProductListCellFactory.EURO_SYMBOL;
+import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 
 public class ClientSeeProductController {
 

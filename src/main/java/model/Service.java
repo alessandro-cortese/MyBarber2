@@ -1,6 +1,6 @@
 package model;
 
-import model.buyProduct.Product;
+import model.buy_product.Product;
 
 public class Service {
 

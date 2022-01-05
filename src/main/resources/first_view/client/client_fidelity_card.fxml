@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.client.ClientFidelityCardController">
+   <children>
+      <Label fx:id="pointsSaleLabel" layoutX="166.0" layoutY="84.0" text="Saldo Punti">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ListView layoutX="90.0" layoutY="212.0" orientation="HORIZONTAL" prefHeight="275.0" prefWidth="1100.0" />
+      <VBox alignment="CENTER" layoutX="427.0" layoutY="547.0" spacing="25.0">
+         <children>
+            <Label text="Genera Coupon">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox spacing="100.0">
+               <children>
+                  <Button fx:id="generateFiveButton" mnemonicParsing="false" prefWidth="75.0" text="€ 5&#10;100 punti&#10;" textAlignment="CENTER" />
+                  <Button fx:id="generateTenButton" mnemonicParsing="false" prefWidth="75.0" text="€ 10&#10;200 punti" textAlignment="CENTER" />
+                  <Button fx:id="generateTwentyButton" mnemonicParsing="false" prefWidth="75.0" text="€ 20&#10;400 punti" textAlignment="CENTER" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1000.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../images/AppLogo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

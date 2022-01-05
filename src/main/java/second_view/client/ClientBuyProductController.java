@@ -1,14 +1,12 @@
 package second_view.client;
 
-import applicationController.BuyProductController;
-import engineering.bean.buyProduct.ProductBean;
-import engineering.bean.buyProduct.ProductSearchInfoBean;
-import first_view.listCellFactories.BuyProductListCellFactory;
+import application_controller.BuyProductController;
+import engineering.bean.buy_product.ProductBean;
+import engineering.bean.buy_product.ProductSearchInfoBean;
+import first_view.list_cell_factories.BuyProductListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.util.Callback;
 import second_view.general.ScreenChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,6 +62,7 @@ public class ClientBuyProductController implements Initializable {
         else if (command.compareTo("cart") == 0) {
             ClientCartController cartController = (ClientCartController) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_CART_SCREEN);
             cartController.setAppController(buyProductController) ;
+            return ;
         }
         else if (command.compareTo("back") == 0) {
             ScreenChanger.getInstance().onBack(event);
