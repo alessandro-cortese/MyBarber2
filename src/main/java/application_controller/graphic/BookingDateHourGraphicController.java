@@ -1,5 +1,6 @@
 package application_controller.graphic;
 
+import application_controller.BookingController;
 import engineering.bean.SaloonBean;
 import first_view.pickers.TimePicker;
 import javafx.event.ActionEvent;
@@ -7,15 +8,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -46,6 +45,9 @@ public class BookingDateHourGraphicController {
         private DatePicker dateBooking;
 
         @FXML
+        private SplitMenuButton timeSlotSplitButton;
+
+        @FXML
         private Label saloonNameLabel;
 
         @FXML
@@ -56,19 +58,20 @@ public class BookingDateHourGraphicController {
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException {
                 Button sourceButton = (Button) event.getSource();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME));
-                ScheduleBookingGraphicController scheduleBookingGraphicController = fxmlLoader.getController();
-                scheduleBookingGraphicController.displaySaloon(new SaloonBean(saloonName, saloonAddress, saloonCity, saloonPhone,slotTime, seatNumber));
-                Parent newCenterNode = fxmlLoader.load();
-
+                FXMLLoader fxmlLoaderNode = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME));
+                //ScheduleBookingGraphicController scheduleBookingGraphicController = fxmlLoader.getController();
+               // scheduleBookingGraphicController.displaySaloon(new SaloonBean(saloonName, saloonAddress, saloonCity, saloonPhone,slotTime, seatNumber));
+                Parent newCenterNode = fxmlLoaderNode.load();
                 Scene myScene = sourceButton.getScene();
                 BorderPane borderPane = (BorderPane) myScene.getRoot();
                 borderPane.setCenter(newCenterNode);
         }
 
         @FXML
-        public void onChangeTime(MouseEvent event) throws IOException {
-                ((TextField) event.getSource()).setText((new TimePicker(0, 24)).getTime());
+        public void selectSlotTime(){
+                LocalDate date = dateBooking.getValue();
+                BookingController bookingController = new BookingController();
+                BookingController.RetreiveSlotTime(date);
         }
 
 

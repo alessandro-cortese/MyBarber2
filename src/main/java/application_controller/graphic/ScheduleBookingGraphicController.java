@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 
 public class ScheduleBookingGraphicController implements Initializable {
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
-    private static final String SERVICE_ITEM = "first_view/listitem/barber_service_list_item.fxml";
+    private static final String SERVICE_ITEM = "first_view/list_item/barber_service_list_item.fxml";
     private String saloonAddress;
     private String city;
 

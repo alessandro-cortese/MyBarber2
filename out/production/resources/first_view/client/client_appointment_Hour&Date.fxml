@@ -36,7 +36,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -75,13 +76,18 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="35.0">
          <children>
-            <Label text="Data">
+            <Label text="Orario">
                <HBox.margin>
                   <Insets top="5.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="hourTextField" onAction="#onChangeTime" onMouseClicked="#onChangeTime" prefHeight="24.0" prefWidth="200.0" />
-            <Label text="Orario">
+            <SplitMenuButton fx:id="timeSlotSplitButton" mnemonicParsing="false" onAction="#selectSlotTime" text="TimeSlot Disponibili">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </SplitMenuButton>
+            <Label text="Data">
                <HBox.margin>
                   <Insets top="5.0" />
                </HBox.margin>
