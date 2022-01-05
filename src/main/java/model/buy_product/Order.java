@@ -1,6 +1,7 @@
 package model.buy_product;
 
 import engineering.exception.InvalidCouponException;
+import engineering.exception.NegativePriceException;
 import engineering.pattern.decorator.Priceable;
 import engineering.pattern.observer.Subject;
 import model.buy_product.containers.CouponContainer;
@@ -15,32 +16,37 @@ public class Order extends Subject {
     private String paymentOption ;
     private Date date ;
 
-
-    private Cart cart ;
-    private CouponContainer couponContainer;
+    private final CouponContainer couponContainer;
+    private Priceable originalPrice ;
     private Priceable finalPrice;
 
 
-    public Order(Cart cart){
-        setCart(cart);
+    public Order(Priceable originalPrice){
+        setOriginalPrice(originalPrice);
         couponContainer = new CouponContainer() ;
-        finalPrice = cart ;
+        setFinalPrice(originalPrice);
     }
 
-    public void addCoupon(Coupon coupon) throws InvalidCouponException {
+    public void addCoupon(Coupon coupon) throws InvalidCouponException, NegativePriceException {
         couponContainer.addCoupon(coupon);
-        applyDiscount() ;
+        try {
+            applyDiscount() ;
+        } catch (NegativePriceException negativePriceException) {
+            couponContainer.removeCoupon(coupon);
+            applyDiscount();
+            throw negativePriceException ;
+        }
         notifyObservers();
     }
 
-    private void applyDiscount() {
-        finalPrice = cart ;
+    private void applyDiscount() throws NegativePriceException {
+        finalPrice = originalPrice ;
         for (int i = 0 ; i < couponContainer.getSize() ; i++) {
             Coupon currentCoupon = couponContainer.getCouponByIndex(i) ;
             if (currentCoupon != null) {
                 currentCoupon.setAppliedPrice(finalPrice);
                 if (currentCoupon.getPrice() < 0) {
-                    //throw NegativePriceException
+                    throw new NegativePriceException() ;
                 }
                 finalPrice = currentCoupon ;
             }
@@ -102,15 +108,27 @@ public class Order extends Subject {
         return couponCodeArray ;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
 
     public Integer getOrderPoints() {
-        return (int) Math.round(cart.getPrice()) ;
+        return (int) Math.round(originalPrice.getPrice()) ;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+
+    public Priceable getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(Priceable originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public void setFinalPrice(Priceable finalPrice) {
+        this.finalPrice = finalPrice ;
+    }
+
+    public void removeAllCoupon() {
+        couponContainer.clear() ;
+        setFinalPrice(originalPrice);
+        notifyObservers();
     }
 }

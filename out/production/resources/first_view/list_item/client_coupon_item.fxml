@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="275.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="104.0" fitWidth="183.0" layoutX="28.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -15,7 +14,7 @@
             <Image url="@../../../../../images/AppLogo.png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" layoutX="15.0" layoutY="155.0" prefHeight="75.0" prefWidth="194.0" spacing="35.0">
+      <VBox alignment="CENTER" layoutX="15.0" layoutY="155.0" prefHeight="75.0" prefWidth="194.0" spacing="25.0">
          <children>
             <Label fx:id="couponCodeLabel" text="Label">
                <font>
@@ -27,6 +26,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Label fx:id="itemIndexLabel" text="Label" />
          </children>
       </VBox>
    </children>

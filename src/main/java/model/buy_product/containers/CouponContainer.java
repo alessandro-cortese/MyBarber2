@@ -52,4 +52,8 @@ public class CouponContainer {
     public Integer getSize() {
         return couponArrayList.size() ;
     }
+
+    public void clear() {
+        couponArrayList.clear();
+    }
 }
