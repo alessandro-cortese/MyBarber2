@@ -51,10 +51,16 @@ public class BookingDateHourGraphicController {
         @FXML
         private ImageView saloonImage;
 
+        private Time slotTime;
+
         @FXML
         void OnButtonClicked(ActionEvent event) throws IOException {
                 Button sourceButton = (Button) event.getSource();
-                Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME))).load();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME));
+                ScheduleBookingGraphicController scheduleBookingGraphicController = fxmlLoader.getController();
+                scheduleBookingGraphicController.displaySaloon(new SaloonBean(saloonName, saloonAddress, saloonCity, saloonPhone,slotTime, seatNumber));
+                Parent newCenterNode = fxmlLoader.load();
+
                 Scene myScene = sourceButton.getScene();
                 BorderPane borderPane = (BorderPane) myScene.getRoot();
                 borderPane.setCenter(newCenterNode);
@@ -84,6 +90,7 @@ public class BookingDateHourGraphicController {
                 this.saloonCity = saloonBean.getCity();
                 this.saloonPhone =saloonBean.getPhone();
                 this.seatNumber = saloonBean.getSeatNumber();
+                this.slotTime = saloonBean.getSlotTime();
         }
 }
 

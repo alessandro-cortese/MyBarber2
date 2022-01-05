@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 
 public class ScheduleBookingGraphicController implements Initializable {
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
-    private static final String SERVICE_ITEM ="first_view/listitem/barber_service_list_item.fxml";
+    private static final String SERVICE_ITEM = "first_view/listitem/barber_service_list_item.fxml";
     private String saloonAddress;
     private String city;
 
@@ -55,14 +55,18 @@ public class ScheduleBookingGraphicController implements Initializable {
     private ListView serviceListView;
 
 
-
     @FXML
     private ListView<String> serviceSelectedListView;
+    private String nameSal;
+    private String saloonAddr;
+    private String saloonCity;
+    private String saloonPhone;
+    private int seatNumber;
 
     @FXML
     void onButtonSaloonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
-        Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME ))).load();
+        Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME))).load();
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
@@ -76,11 +80,11 @@ public class ScheduleBookingGraphicController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Node[] nodeService = new Node[10];
-        Node[] nodesList = new Node[10] ;
-        for (int i = 0 ; i < 10 ; i++) {
+        Node[] nodesList = new Node[10];
+        for (int i = 0; i < 10; i++) {
 
             try {
-                nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(SERVICE_ITEM))).load() ;
+                nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(SERVICE_ITEM))).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -90,11 +94,19 @@ public class ScheduleBookingGraphicController implements Initializable {
         serviceListView.setItems(clientAppointmentsList);
 
         ObservableList<String> list = FXCollections.observableArrayList();
-        for (int j=0; j< nodeService.length;j++){
+        for (int j = 0; j < nodeService.length; j++) {
             list.add("e");
         }
         serviceSelectedListView.setItems(list);
     }
 
+    public void displaySaloon(SaloonBean saloonBean) {
+        this.nameSal = saloonBean.getName();
+        this.saloonAddr = saloonBean.getAddress();
+        this.saloonCity = saloonBean.getCity();
+        this.saloonPhone = saloonBean.getPhone();
+        this.seatNumber = saloonBean.getSeatNumber();
+
+    }
 }
 
