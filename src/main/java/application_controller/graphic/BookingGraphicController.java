@@ -21,7 +21,6 @@ public class BookingGraphicController{
 
 
     private static final String CLIENT_TAKE_SALOON_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
-
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
     private static final String CLIENT_DATEHOUR= "first_view/client/client_appointment_Hour&Date.fxml";
 
@@ -109,9 +108,10 @@ public class BookingGraphicController{
         if(sourceButton == saloonNextButton) {
             FXMLLoader fxmlLoader =new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR));
             newCenterNode = fxmlLoader.load();
-            BookingDateHourGraphicController bookingDateHourGraphicController = fxmlLoader.getController();
-            bookingDateHourGraphicController.display(saloonBean);
+            //BookingDateHourGraphicController bookingDateHourGraphicController = fxmlLoader.getController();
+           // bookingDateHourGraphicController.display(saloonBean);
         }
+
         if(sourceButton == placeNextButton)
             newCenterNode =(new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
         if (sourceButton == bookedButton )

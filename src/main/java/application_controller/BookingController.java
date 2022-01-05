@@ -1,5 +1,6 @@
 package application_controller;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import engineering.bean.BookingBean;
@@ -14,6 +15,10 @@ public class BookingController {
     private String saloonCity;
     private String saloonName;
     private Saloon saloonByName;
+
+    public static void RetreiveSlotTime(LocalDate date) { //questa classe mi serve per recuperare in base alla data, orario e chiusura di mattina, pomeriggio di quel giorno e tramite la classe ScheduleTime creo gli slotTime
+
+    }
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 

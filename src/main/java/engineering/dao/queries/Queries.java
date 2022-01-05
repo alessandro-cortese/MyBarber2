@@ -11,6 +11,11 @@ import java.time.LocalDate;
 
 public class Queries { //qui vanno messe tutte le query per essere più compatti
 
+    private Queries() {
+
+    }
+
+
     //-+-+-+-+-+-+-+-+-+-+- Saloon -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet selectSaloonByName(Statement stmt, String name) throws SQLException{
         String sql = "SELECT * FROM Saloon where name = '" + name + "';";

@@ -35,8 +35,6 @@ public class BarberModifyServiceController {
         if(sourceButton == saveChangesButton && nameModifyServiceTextField.getText() != null && isNumeric(modifyServicePriceTextField.getText())
                 && descriptionTextFieldModifyService.getText() != null) {
 
-            System.out.println("Modify");
-
             InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
 
         }

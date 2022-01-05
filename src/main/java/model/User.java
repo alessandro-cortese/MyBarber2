@@ -3,11 +3,31 @@ package model;
 public abstract class User {
     private  String email;
     private  String pass;
+    private String name;
+    private String surname;
     private int pointsCard;
 
-    protected User(String email, String pass){
+    protected User(String email, String pass, String name, String surname){
         this.email = email;
         this.pass = pass;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setSurname(String surname){
+        this.surname = surname;
+    }
+
+    public String getSurname(){
+        return this.surname;
     }
 
     public String getEmail(){

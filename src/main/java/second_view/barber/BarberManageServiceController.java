@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static engineering.other_classes.NumericVerify.isNumeric;
@@ -28,7 +28,7 @@ public class BarberManageServiceController implements Initializable {
     @FXML private TextField manageServiceSlotIndexTextField;
     @FXML private ListView<ServiceBean> manageServiceListView;
 
-    private ArrayList<ServiceBean> serviceBeanArrayList;
+    private List<ServiceBean> serviceBeanList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -36,7 +36,7 @@ public class BarberManageServiceController implements Initializable {
         ManageServiceController manageServiceController = new ManageServiceController();
 
         try{
-            serviceBeanArrayList = manageServiceController.getAllService();
+            serviceBeanList = manageServiceController.getAllService();
         } catch (NegativePriceException e) {
             e.printStackTrace();
         }
@@ -50,11 +50,11 @@ public class BarberManageServiceController implements Initializable {
             manageServiceDescriptionTextField.setText(newValue.getDescription());
             manageServiceNameOfUsedProductTextField.setText(newValue.getNameOfUsedProduct());
             manageServicePriceTextField.setText(Double.toString(newValue.getPrice()));
-            manageServiceSlotIndexTextField.setText(Integer.toString(serviceBeanArrayList.indexOf(newValue)));
+            manageServiceSlotIndexTextField.setText(Integer.toString(serviceBeanList.indexOf(newValue)));
         });
 
         manageServiceListView.getItems().clear();
-        manageServiceListView.setItems(FXCollections.observableList(serviceBeanArrayList));
+        manageServiceListView.setItems(FXCollections.observableList(serviceBeanList));
     }
 
 

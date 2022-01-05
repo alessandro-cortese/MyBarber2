@@ -7,14 +7,15 @@ import engineering.exception.NegativePriceException;
 import model.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ManageServiceController {
 
-    public ArrayList<ServiceBean> getAllService() throws NegativePriceException {
+    public List<ServiceBean> getAllService() throws NegativePriceException {
 
         ServiceDAO serviceDAO = new ServiceDAO();
         CatalogueService catalogueService = serviceDAO.loadAllService();
-        ArrayList<Service> services = catalogueService.getServices();
+        List<Service> services = catalogueService.getServices();
         String nameOfUsedProduct;
         ArrayList<ServiceBean> serviceBeanList = new ArrayList<>();
 
