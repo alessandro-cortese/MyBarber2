@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class  BookingPreventivePriceGraphicController {
+public class  BookingPriceGraphicController {
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
     @FXML
     private TextField CouponTextField;
