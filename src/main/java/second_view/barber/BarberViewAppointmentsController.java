@@ -3,22 +3,32 @@ package second_view.barber;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberViewAppointmentsController {
 
+    private final static String SELECT_DATE_COMMAND = "select date";
+    private final static String SELECT_SALOON_COMMAND = "select saloon";
+    private final static String SELECT_SLOT_COMMAND = "select slot";
+
     @FXML private TextField viewAppointmentsCommandLine;
     @FXML private TextField saloonNameFieldViewAppointments;
-    @FXML private DatePicker datePickerViewAppointments;
     @FXML private TextField slotIndexFieldViewAppointments;
+    @FXML private TextField dateTextField;
+    @FXML private Label errorLabel;
+
+    private DatePicker datePickerViewAppointments;
 
     @FXML
     public void onCommand(ActionEvent event) {
+
 
         String viewAppointmentsCommand = viewAppointmentsCommandLine.getText();
         viewAppointmentsCommandLine.setText("");
@@ -49,30 +59,33 @@ public class BarberViewAppointmentsController {
 
     }
 
+
     private boolean selectCommand(String insertCommand){
 
         String viewAppointmentsField;
         boolean handled = false;
 
-        if(insertCommand.startsWith("select saloon")) {
+        if(insertCommand.startsWith(SELECT_SALOON_COMMAND)) {
 
-            viewAppointmentsField = insertCommand.replace("select saloon" + " ", "");
+            viewAppointmentsField = insertCommand.replace(SELECT_SALOON_COMMAND + " ", "");
             saloonNameFieldViewAppointments.setText(viewAppointmentsField);
             handled = true;
 
         }
-        else if (insertCommand.startsWith("select date")) {
+        else if (insertCommand.startsWith(SELECT_DATE_COMMAND)) {
 
-            datePickerViewAppointments.setValue(LocalDate.of(2022, 1, 46));
-
-            viewAppointmentsField = insertCommand.replace("select date" + " ", "");
+            datePickerViewAppointments = new DatePicker();
+            viewAppointmentsField = insertCommand.replace(SELECT_DATE_COMMAND + " ", "");
             if (manageInsertDate(viewAppointmentsField)) {
                 handled = true;
+                LocalDate date = datePickerViewAppointments.getValue();
+                dateTextField.setText(date.toString());
             }
-        }
-        else if (insertCommand.startsWith("select slot")) {
 
-            viewAppointmentsField = insertCommand.replace("select slot" + " ", "");
+        }
+        else if (insertCommand.startsWith(SELECT_SLOT_COMMAND)) {
+
+            viewAppointmentsField = insertCommand.replace(SELECT_SLOT_COMMAND + " ", "");
             if (isNumeric(viewAppointmentsField)) {
                 slotIndexFieldViewAppointments.setText(viewAppointmentsField);
                 handled = true;
@@ -90,7 +103,17 @@ public class BarberViewAppointmentsController {
         String[] valueOfInsertDate;
         valueOfInsertDate = date.split("-");
 
+        try{
 
+            datePickerViewAppointments.setValue(LocalDate.of(Integer.parseInt(valueOfInsertDate[0]), Integer.parseInt(valueOfInsertDate[1]), Integer.parseInt(valueOfInsertDate[2])));
+            dateHandled = true;
+            errorLabel.setText("");
+
+        }catch (DateTimeException e){
+
+            errorLabel.setText("Invalid entered Date!");
+
+        }
 
         return dateHandled;
 
