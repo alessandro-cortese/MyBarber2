@@ -31,7 +31,7 @@ public class ClientSearchSaloon {
         }
         else if (command.matches("select [0-9]+")) { //stringa composta da numeri  da 0 a 9 e almeno un carattere
             //Controllo che ci sia il salone con indice dato
-            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_APPOINTMENT_SCREEN);
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_DATEHOUR);
         }
 
         else if (command.compareTo("back") == 0) {

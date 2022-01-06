@@ -6,39 +6,30 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import second_view.general.ScreenChanger;
+
+import java.io.IOException;
 
 public class ClientBookAppointmentController {
 
 
-    @FXML TextField commandLine ;
-    @FXML TextField dateField ;
-    @FXML TextField slotField ;
-    @FXML ListView serviceList ;
+    @FXML private TextField commandLine ;
+    @FXML private ListView serviceListView ;
+    @FXML private ListView ServiceSelectedListView;
+
 
 
     @FXML
-    public void onCommand(ActionEvent event) {
+    public void onCommand(ActionEvent event) throws IOException {
         String commandText = commandLine.getText() ;
         commandLine.setStyle(null);
         commandLine.setText("");
 
-        if (commandText.matches("set date \\d{4}-\\d{2}-\\d{2}")) {
-            String date = commandText.replace("set date ", "") ;
-            dateField.setText(date);
-            return ;
-        }
-        else if (commandText.matches("set slot [0-9]+")) {
-            String slot = commandText.replace("set slot ", "") ;
-            slotField.setText(slot);
-            return ;
-        }
-        else if (commandText.matches("view date \\d{4}-\\d{2}-\\d{2}")) {
-            //Cambia visualizzazione degli slot del barbiere
-            return ;
-        }
-        else if (commandText.matches("service add [0-9]+")) {
-            //Cambia lista dei servizi dell'appuntamento
+
+
+        if (commandText.matches("service add [0-9]+")) {
+
             return;
         }
         else if (commandText.matches("service remove [0-9]+")) {
@@ -46,11 +37,16 @@ public class ClientBookAppointmentController {
             System.out.println(commandText.replace("service remove ", ""));
             return ;
         }
-        else if (commandText.compareTo("book") == 0) {
-            //ScreenChanger.getInstance().
-            //Implementare in ScreenChanger logica di ritorno alla home
+        else if (commandText.compareTo("go to payment") == 0) {
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_TOTALPRICE);
             return ;
         }
+        else if (commandText.compareTo("back") == 0) {
+            ScreenChanger.getInstance().onBack(event);
+            return;
+        }
+
+
 
         commandLine.setStyle("-fx-border-color: red");
 
