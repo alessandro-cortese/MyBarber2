@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,8 +32,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ScheduleBookingGraphicController implements Initializable {
-    private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
+
     private static final String SERVICE_ITEM = "first_view/list_item/barber_service_list_item.fxml";
+    private static final String PREVENTIVE_PRICE="first_view/client/client_preventive_price.fxml";
     private String saloonAddress;
     private String city;
 
@@ -66,8 +68,13 @@ public class ScheduleBookingGraphicController implements Initializable {
     @FXML
     void onButtonSaloonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
-        Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME))).load();
+        Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(PREVENTIVE_PRICE))).load();
         Scene myScene = sourceButton.getScene();
+        //Stage myStage = new Stage();
+        //Scene scene = newCenterNode.getScene();
+        //myStage.setScene(scene);
+        //myStage.show();
+
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
     }
