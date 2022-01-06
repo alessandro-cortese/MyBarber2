@@ -92,28 +92,24 @@
                         <TextField prefHeight="38.0" prefWidth="244.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="471.0" prefHeight="80.0" prefWidth="508.0">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="482.0" prefHeight="80.0" prefWidth="508.0">
                      <children>
-                        <Label prefHeight="37.0" prefWidth="250.0" text="durata slot:">
+                        <Label prefHeight="37.0" prefWidth="189.0" text="durata slot:">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <Label layoutX="146.0" layoutY="17.0" prefHeight="37.0" prefWidth="300.0" text="30 minuti">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
+                        <Spinner fx:id="slotTimeSpinner" prefHeight="38.0" prefWidth="244.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="482.0" prefHeight="80.0" prefWidth="508.0">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="497.0" prefHeight="80.0" prefWidth="508.0">
                      <children>
                         <Label prefHeight="37.0" prefWidth="189.0" text="numero posti:">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <Spinner prefHeight="38.0" prefWidth="244.0" />
+                        <Spinner fx:id="numberOfSeatsSpinner" prefHeight="38.0" prefWidth="244.0" />
                      </children>
                   </HBox>
                </children>

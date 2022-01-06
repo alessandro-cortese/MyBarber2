@@ -5,6 +5,7 @@ import engineering.bean.buy_product.CouponBean;
 import engineering.bean.buy_product.OrderInfoBean;
 import engineering.bean.buy_product.OrderTotalBean;
 import engineering.exception.InvalidCouponException;
+import engineering.exception.NegativePriceException;
 import first_view.general.InternalBackController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -57,8 +58,13 @@ public class ClientCompleteOrderController {
         CouponBean couponBean = new CouponBean(couponCodeField.getText()) ;
         try {
             buyProductController.applyCoupon(couponBean);
-        } catch (InvalidCouponException e) {
+        }
+        catch (InvalidCouponException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+            alert.showAndWait() ;
+        }
+        catch (NegativePriceException negativePriceException) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Il coupon non è applicabile") ;
             alert.showAndWait() ;
         }
     }

@@ -15,6 +15,7 @@ public class CouponDAO {
 
     private final static String EXAMPLE_COUPON = "coupon_-20" ;
 
+
     public Coupon loadCouponByCode(String couponCode, User user) throws InvalidCouponException {
         /*Connection connection = Connector.getConnectorInstance().getConnection();
         try(Statement statement = connection.createStatement() ;
@@ -29,7 +30,7 @@ public class CouponDAO {
         }*/
 
         if (couponCode.compareTo(EXAMPLE_COUPON) == 0) {
-            return new Coupon(couponCode, "") ;
+            return new Coupon(couponCode, 20.0) ;
         }
         else {
             throw new InvalidCouponException("Coupon non Trovato") ;
@@ -40,7 +41,7 @@ public class CouponDAO {
         Connection connection = Connector.getConnectorInstance().getConnection();
         try(Statement statement = connection.createStatement()) {
 
-            Queries.deleteCoupon(statement, coupon.getCouponCode(), coupon.getOwnerUser()) ;
+            Queries.deleteCoupon(statement, coupon.getCouponCode()) ;
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }

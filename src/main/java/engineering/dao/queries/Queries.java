@@ -47,9 +47,9 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query) ;
     }
 
-    public static void deleteCoupon(Statement statement, String couponCode, String email) throws SQLException {
-        String delete = String.format("DELETE Coupon where name = '%s' AND customer = '%s';", couponCode, email) ;
-        statement.execute(delete) ;
+    public static void deleteCoupon(Statement statement, String couponCode) throws SQLException {
+        //String delete = String.format("DELETE Coupon where name = '%s' AND customer = '%s';", couponCode, email) ;
+        //statement.execute(delete) ;
     }
 
 

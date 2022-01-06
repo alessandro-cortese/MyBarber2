@@ -29,7 +29,7 @@ public class ProductDAO {
 
         ArrayList<Product> products = new ArrayList<>() ;
 
-        /*Connection connection = Connector.getConnectorInstance().getConnection();
+        Connection connection = Connector.getConnectorInstance().getConnection();
         try (Statement statement = connection.createStatement() ;
              ResultSet resultSet = Queries.loadAllProducts(statement) ;)
         {
@@ -43,7 +43,7 @@ public class ProductDAO {
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
-        }*/
+        }
         return catalog ;
     }
 

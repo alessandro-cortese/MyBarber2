@@ -78,16 +78,21 @@ public class BarberListServiceController implements Initializable {
 
             String localNameOfUsedProduct = (nameOfProductTextField.getText() == null ? "" : nameOfProductTextField.getText());
 
-            ServiceBean localServiceBean = new ServiceBean(nameServiceTextField.getText(), descriptionServiceTextField.getText(), localNameOfUsedProduct, Double.parseDouble(priceServiceTextField.getText()));
+            ServiceBean localServiceBean = new ServiceBean(nameServiceTextField.getText(),
+                    descriptionServiceTextField.getText(), localNameOfUsedProduct, Double.parseDouble(priceServiceTextField.getText()));
+
+
             BarberModifyServiceController barberModifyServiceController = fxmlLoader.getController();
             barberModifyServiceController.displayServiceToModify(localServiceBean);
 
         }
         else if(serviceNode == addServiceButton) {
+
             InternalBackController.getInternalBackControllerInstance().onNextScreen(serviceNode);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_ADD_SERVICE_SCREEN_NAME));
             BorderPane myBorderPane = (BorderPane) serviceNode.getScene().getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
+
         }
 
     }

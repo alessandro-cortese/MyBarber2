@@ -5,6 +5,7 @@ import engineering.bean.buy_product.CouponBean;
 import engineering.bean.buy_product.OrderInfoBean;
 import engineering.bean.buy_product.OrderTotalBean;
 import engineering.exception.InvalidCouponException;
+import engineering.exception.NegativePriceException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -93,8 +94,13 @@ public class ClientCompleteOrderController implements Initializable {
         CouponBean couponBean = new CouponBean(commandInput) ;
         try {
             buyProductController.applyCoupon(couponBean);
-        } catch (InvalidCouponException e) {
+        }
+        catch (InvalidCouponException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+            alert.showAndWait() ;
+        }
+        catch (NegativePriceException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Coupon non Applicabile") ;
             alert.showAndWait() ;
         }
         updateView();

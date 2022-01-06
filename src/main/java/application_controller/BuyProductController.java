@@ -7,6 +7,7 @@ import engineering.dao.CouponDAO;
 import engineering.dao.OrderDAO;
 import engineering.dao.ProductDAO;
 import engineering.exception.InvalidCouponException;
+import engineering.exception.NegativePriceException;
 import model.User;
 import model.buy_product.Cart;
 import model.buy_product.Coupon;
@@ -19,23 +20,26 @@ import java.util.Map;
 
 public class BuyProductController {
 
-    private ProductDAO productDAO ;
-    private CouponDAO couponDAO ;
+    private final CouponDAO couponDAO ;
 
-    private ProductCatalog productCatalog ;
-    private Cart cart ;
-    private Order order ;
+    private final ProductCatalog productCatalog ;
 
-    private CartBean cartBean ;
+    private final Cart cart ;
+    private final Order order ;
+
+    private final CartBean cartBean ;
+    private final OrderTotalBean orderBean ;
 
     private User user ;
 
     public BuyProductController() {
-        productDAO = new ProductDAO() ;
+        ProductDAO productDAO = new ProductDAO();
         couponDAO = new CouponDAO() ;
         productCatalog = productDAO.loadAllProducts() ;
         cart = new Cart() ;
         order = new Order(cart) ;
+        cartBean = new CartBean(cart) ;
+        orderBean = new OrderTotalBean(order) ;
     }
 
     public ArrayList<ProductBean> filterProductList(ProductSearchInfoBean searchInfoBean) {
@@ -59,7 +63,6 @@ public class BuyProductController {
     }
 
     public CartBean showCart() {
-        cartBean = new CartBean(cart);
         return cartBean ;
     }
 
@@ -68,8 +71,7 @@ public class BuyProductController {
         cart.removeProduct(rmvProduct);
     }
 
-    public void applyCoupon(CouponBean couponBean) throws InvalidCouponException {
-
+    public void applyCoupon(CouponBean couponBean) throws InvalidCouponException, NegativePriceException {
         Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode(), user);
         order.addCoupon(myCoupon);
 
@@ -82,7 +84,9 @@ public class BuyProductController {
         order.setDate(orderInfoBean.getDate());
 
         OrderDAO orderDAO = new OrderDAO() ;
-        //orderDAO.saveOrder(order, user);
+        Integer orderKey = orderDAO.saveOrder(order, cart, user);
+
+        //Aggiungere Salvataggio delle righe del carrello: utilizzo CartDAO e orderKey
 
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
         paypalBoundary.pay(new OrderTotalBean(order));
@@ -107,7 +111,7 @@ public class BuyProductController {
     }
 
     public OrderTotalBean showOrder(){
-        order = new Order(cart) ;
-        return new OrderTotalBean(order) ;
+        order.removeAllCoupon();
+        return orderBean ;
     }
 }
