@@ -33,11 +33,10 @@ public class ProductDAO {
         try (Statement statement = connection.createStatement() ;
              ResultSet resultSet = Queries.loadAllProducts(statement) ;)
         {
-            if (resultSet.isFirst()) {
-                do {
-                    Product product = createProduct(resultSet);
-                    products.add(product);
-                } while (resultSet.next());
+
+            while (resultSet.next()) {
+                Product product = createProduct(resultSet);
+                products.add(product);
             }
 
         }

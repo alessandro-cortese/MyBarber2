@@ -14,6 +14,7 @@ public class EnterAsUserTypeController {
     public static final String BARBER_HOME_SCREEN = "first_view/barber/barber_home.fxml";
     public static final String CLIENT_HOME_SCREEN = "first_view/client/client_home.fxml";
 
+
     public void enterAsUser(int userType, Scene mainScene) throws IOException {
         BorderPane container = (BorderPane) mainScene.getRoot() ;
         String mainScreen ;

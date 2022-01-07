@@ -50,14 +50,17 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     public static void deleteCoupon(Statement statement, String couponCode) throws SQLException {
         //String delete = String.format("DELETE Coupon where name = '%s' AND customer = '%s';", couponCode, email) ;
         //statement.execute(delete) ;
+        String delete = String.format("DELETE FROM Coupon WHERE name = '%s';", couponCode) ;
+        statement.execute(delete) ;
     }
 
 
     //-+-+-+-+-+-+-+-+-+-+- Order -+-+-+-+-+-+-+-+-+-+-//
     public static void insertNewOrder(Statement statement, Order order, User user) {
 
-
     }
+
+
     //-+-+-+-+-+-+-+-+-+-+- SaloonTime -+-+-+-+-+-+-+-+-+-+-//
     public  static ResultSet SelectAvalaibleSaloonDateANDHour(Statement statement, Time time, LocalDate date) throws SQLException {
         String select = String.format("SELECT FROM SaloonTime where hourBooking = '%s' AND dateBooking ='%s';", time,date);
@@ -71,11 +74,27 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return stmt.executeQuery(sql);
     }
 
-    //-+-+-+-+-+-+-+-+-+-+- Service -+-+-+-+-+-+-+-+-+-+-//
 
+    //-+-+-+-+-+-+-+-+-+-+- Service -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet loadServiceByName(Statement statement, String serviceName) throws SQLException {
         String query = String.format("SELECT * FROM Service where name = '%s';", serviceName);
         return statement.executeQuery(query);
     }
 
+
+    //-+-+-+-+-+-+-+-+-+-+- User -+-+-+-+-+-+-+-+-+-+-//
+    public static ResultSet selectUserByCredentials(Statement statement, String userEmail, String password) throws SQLException {
+        String query = String.format("SELECT * FROM User WHERE email = '%s' AND pass = '%s' ;", userEmail, password) ;
+        return statement.executeQuery(query) ;
+    }
+
+    public static ResultSet selectBarberByEmail(Statement statement, String barberEmail) throws SQLException {
+        String query = String.format("SELECT * FROM Barber where emailUser = '%s' ;", barberEmail) ;
+        return statement.executeQuery(query) ;
+    }
+
+    public static ResultSet selectCustomerByEmail(Statement statement, String customerEmail) throws SQLException {
+        String query = String.format("SELECT * FROM Customer where userEmail = '%s' ;", customerEmail) ;
+        return statement.executeQuery(query) ;
+    }
 }

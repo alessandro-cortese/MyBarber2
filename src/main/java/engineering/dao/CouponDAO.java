@@ -21,6 +21,7 @@ public class CouponDAO {
         try(Statement statement = connection.createStatement() ;
             ResultSet resultSet = Queries.loadCouponByCode(statement, couponCode, user.getEmail()) ;)
         {
+            resultSet.next() ;
             if (!resultSet.isFirst()) {
                 throw new InvalidCouponException() ;
             }

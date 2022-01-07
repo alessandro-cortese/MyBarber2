@@ -60,13 +60,13 @@
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="100.0" text="Email" />
-                              <TextField prefHeight="24.0" prefWidth="250.0" />
+                              <TextField fx:id="emailTextField" prefHeight="24.0" prefWidth="250.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="100.0" text="Password" />
-                              <PasswordField prefHeight="26.0" prefWidth="250.0" />
+                              <PasswordField fx:id="passwordTextField" prefHeight="26.0" prefWidth="250.0" />
                            </children>
                         </HBox>
                      </children>
@@ -75,7 +75,7 @@
                      <children>
                         <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" onAction="#onButtonClicked" prefWidth="150.0" text="Accedi" />
                         <Hyperlink text="Hai dimenticato la password?" />
-                        <Button mnemonicParsing="false" prefWidth="150.0" text="Continua senza Accedere" />
+                        <Button fx:id="continueWithoutAccessButton" mnemonicParsing="false" onAction="#onButtonClicked" prefWidth="150.0" text="Continua senza Accedere" />
                      </children>
                   </VBox>
                </children>

@@ -5,6 +5,7 @@ public class Customer extends User{
     private String creditCard;
     private String phone;
 
+
     public Customer(String email, String pass, String name, String surname, String creditCard, String phone){
         super(email, pass, name, surname);
         setCreditCard(creditCard);
