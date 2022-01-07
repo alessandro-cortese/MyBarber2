@@ -24,7 +24,7 @@
                   </Label>
                   <ScrollPane prefHeight="261.0" prefWidth="306.0">
                      <content>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- service add &lt;index&gt;&#10;- service remove &lt;index&gt;&#10;- go to payment&#10;- back">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- service add &lt;index&gt;&#10;- service remove &lt;index&gt;&#10;- book&#10;- back">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -47,5 +47,23 @@
       <ListView fx:id="ServiceSelectedListView" layoutX="660.0" layoutY="126.0" prefHeight="292.0" prefWidth="163.0" />
       <Label layoutX="507.0" layoutY="95.0" text="Service" />
       <Label layoutX="689.0" layoutY="95.0" text="service selected" />
+      <HBox layoutX="450.0" layoutY="451.0" prefHeight="143.0" prefWidth="379.0">
+         <children>
+            <VBox prefHeight="143.0" prefWidth="167.0" spacing="23.0">
+               <children>
+                  <Label text="Saloon" />
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="16.0" prefWidth="131.0" text="Date appointmet" />
+                  <Label layoutX="10.0" layoutY="26.0" text="Hour appointment" />
+               </children>
+            </VBox>
+            <VBox prefHeight="143.0" prefWidth="143.0" spacing="15.0">
+               <children>
+                  <TextField fx:id="saloonName" prefHeight="24.0" prefWidth="185.0" />
+                  <TextField fx:id="dateText" prefHeight="24.0" prefWidth="155.0" />
+                  <TextField fx:id="hourText" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

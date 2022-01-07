@@ -1,16 +1,21 @@
 package second_view.client;
 
+import first_view.ObservableListNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ClientBookingDateHourGraphicContr{
+public class ClientBookingDateHourGraphicContr implements Initializable {
+
+    public static final String CLIENT_SLOTTIME_ITEM = "first_view/list_item/client_slotTime_item.fxml";
 
     @FXML
     private TextField commandLine;
@@ -25,13 +30,21 @@ public class ClientBookingDateHourGraphicContr{
     private Label exceptionLabel2;
 
     @FXML
-    private ListView<?> hourListView;
+    private ListView<Node> hourListView;
 
     @FXML
     private TextField slotTimeField;
 
     @FXML
     private TextField dateField;
+    @FXML
+    private  TextArea descriptionTextArea;
+
+    @FXML
+    private TextField saloonName;
+
+    @FXML
+    private TextField image;
 
     @FXML
     void onCommand(ActionEvent event) throws IOException {
@@ -65,6 +78,21 @@ public class ClientBookingDateHourGraphicContr{
             ScreenChanger.getInstance().onBack(event);
             return ;
         }
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Node[] nodesList = new Node[10];
+        for (int i = 0; i < 10; i++) {
+
+            try {
+                nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SLOTTIME_ITEM))).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
+        hourListView.setItems(clientAppointmentsList);
     }
 
 }

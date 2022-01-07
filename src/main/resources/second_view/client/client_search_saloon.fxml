@@ -6,11 +6,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="second_view.client.ClientSearchSaloon">
    <children>
@@ -38,12 +36,7 @@
             <Button fx:id="enterButton" defaultButton="true" mnemonicParsing="false" onAction="#onCommand" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: transparent;" />
          </children>
       </VBox>
-      <ListView layoutX="457.0" layoutY="114.0" prefHeight="450.0" prefWidth="400.0" />
-      <HBox alignment="CENTER" layoutX="458.0" layoutY="47.0" prefHeight="26.0" prefWidth="400.0" spacing="10.0">
-         <children>
-            <Label fx:id="searchTypeLabel" text="search type" />
-            <TextField fx:id="searchText" prefHeight="26.0" prefWidth="306.0" />
-         </children>
-      </HBox>
+      <ListView fx:id="saloonListView" layoutX="457.0" layoutY="114.0" prefHeight="450.0" prefWidth="400.0" />
+      <Label layoutX="568.0" layoutY="90.0" text="saloon in the city searched" />
    </children>
 </AnchorPane>
