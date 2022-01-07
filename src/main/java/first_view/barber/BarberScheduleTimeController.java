@@ -1,5 +1,6 @@
 package first_view.barber;
 
+import engineering.bean.SaloonBean;
 import first_view.general.InternalBackController;
 import first_view.pickers.TimePicker;
 import javafx.event.ActionEvent;
@@ -9,10 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TextField;
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalTime;
-import java.util.ResourceBundle;
-
 
 public class BarberScheduleTimeController {
 
@@ -20,19 +18,10 @@ public class BarberScheduleTimeController {
         this.extractLocalTime();
     }
 
-    public void setSlotMinutes(Integer slotMinutes) {
-
-        this.slotMinutes = slotMinutes;
-        this.extractNumberOfSlot();
-
-    }
-
-
     private LocalTime[][] localTime;
-
+    private SaloonBean saloonBean;
     private Integer[] numberOfSlot;
 
-    private Integer slotMinutes;
 
     @FXML private Button saveButton;
     @FXML private TextField openMorningTime;
@@ -48,15 +37,36 @@ public class BarberScheduleTimeController {
         numberOfSlot = new Integer[2];
     }
 
+    public void setSaloonBean(SaloonBean saloonBean) {
+
+        this.saloonBean = saloonBean;
+        this.extractNumberOfSlot();
+
+    }
+
+    private int convertTime(String time){
+
+        String[] localTime = time.split(":");
+        int hours = Integer.parseInt(localTime[0]);
+        int minutes = Integer.parseInt(localTime[1]);
+
+        return (hours * 60) + minutes;
+
+    }
+
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
         int minutes;
 
+        saloonBean.setTimeSchedule(localTime);
+
+
+
         for (int i = 0; i < localTime.length; i++) {
             for (int j = 0; j < localTime[i].length - 1; j++){
                 minutes = ((localTime[i][j + 1].getHour() * 60) + localTime[i][j + 1].getMinute()) - ((localTime[i][j].getHour() * 60) + localTime[i][j].getMinute());
-                numberOfSlot[i] = minutes / slotMinutes;
+                numberOfSlot[i] = minutes / convertTime(saloonBean.getSlotTime().toString());
             }
         }
 

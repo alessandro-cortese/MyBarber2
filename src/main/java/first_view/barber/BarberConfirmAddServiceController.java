@@ -1,5 +1,6 @@
 package first_view.barber;
 
+import application_controller.AddServiceController;
 import engineering.bean.ServiceBean;
 import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
@@ -10,11 +11,14 @@ import javafx.scene.control.TextField;
 
 public class BarberConfirmAddServiceController {
 
+    private ServiceBean serviceBean;
+
     @FXML private TextField nameConfirmedAddService ;
     @FXML private TextField priceConfirmedAddService ;
     @FXML private TextField descriptionConfirmedAddService ;
     @FXML private TextField nameOfUsedProductConfirmedAddService ;
     @FXML private Button saveConfirmButton;
+
 
     @FXML
     public void onButtonClicked(ActionEvent event) {
@@ -23,11 +27,15 @@ public class BarberConfirmAddServiceController {
 
         if(sourceNode == saveConfirmButton) {
             InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
+            AddServiceController addServiceController = new AddServiceController();
+            addServiceController.addService(serviceBean);
         }
 
     }
 
     public void display(ServiceBean localServiceBean) {
+
+        this.serviceBean = localServiceBean;
 
         nameConfirmedAddService.setText(localServiceBean.getName()) ;
         priceConfirmedAddService.setText(Double.toString(localServiceBean.getPrice())) ;

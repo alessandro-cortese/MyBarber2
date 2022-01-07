@@ -13,7 +13,8 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailGraphicController {
     private EmailGraphicController() {
-        throw new IllegalStateException("Utility class");}
+        throw new IllegalStateException("Utility class");
+    }
 
     public static Message sendEmail(String email) {
 

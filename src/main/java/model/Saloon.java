@@ -1,5 +1,6 @@
 package model;
 import java.sql.Time;
+import java.time.LocalTime;
 
 public class Saloon {
 
@@ -7,17 +8,25 @@ public class Saloon {
     private String city;
     private String address;
     private String phone;
+    private LocalTime[][] timeSchedule;
     private Time slotTime;
     private int seatNumber;
 
     public Saloon(String city, String name, String address, String phone,Time slotTime, int seatNumber){
 
+        this.extractedTimeSchedule();
         this.name = name;
         this.address = address;
-        this.phone = phone;
-        this.city = city;
+        this.setPhone(phone);
+        this.setCity(city);
         this.seatNumber = seatNumber;
         this.slotTime = slotTime;
+    }
+
+    private void extractedTimeSchedule(){
+
+        this.timeSchedule = new LocalTime[2][2];
+
     }
 
     public String getName(){
@@ -93,4 +102,13 @@ public class Saloon {
 
     }
 
+    public LocalTime[][] getTimeSchedule() {
+        return timeSchedule;
+    }
+
+    public void setTimeSchedule(LocalTime[][] localTimes){
+
+        this.timeSchedule = localTimes;
+
+    }
 }
