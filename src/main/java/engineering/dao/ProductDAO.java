@@ -52,6 +52,7 @@ public class ProductDAO {
         try (Statement statement = connection.createStatement() ;
              ResultSet resultSet = Queries.loadProductByName(statement, name) )
         {
+            resultSet.next();
             if (resultSet.isFirst()) {
                 product = createProduct(resultSet) ;
             }
@@ -66,6 +67,7 @@ public class ProductDAO {
     }
 
     private Product createProduct(ResultSet resultSet) throws SQLException {
+
         Integer isbn = resultSet.getInt(ISBN_COL_NAME) ;
         String name = resultSet.getString(NAME_COL_LABEL) ;
         String description = resultSet.getString(DESCRIPTION_COL_LABEL) ;

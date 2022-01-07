@@ -32,8 +32,10 @@ public class ServiceDAO {
     }
 
 
-    /*public Service loadServiceByName(String serviceName) throws ServiceNotFoundException{
-            Service service = null;
+    /*
+
+    public Service saveService(Service service) throws ServiceNotFoundException{
+
             try(Statement statement = connection.createStatement();
                 ResultSet resultSet = Queries.loadServiceByName(statement, serviceName))
 
@@ -51,9 +53,15 @@ public class ServiceDAO {
             }
     }
 
+    */
+
+
+    /*
     private Service createService(ResultSet resultSet) {
 
     }
-    */
+
+
+     */
 
 }

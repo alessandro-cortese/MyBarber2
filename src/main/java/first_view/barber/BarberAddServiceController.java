@@ -30,11 +30,15 @@ public class BarberAddServiceController {
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
         Node sourceNode = (Node) event.getSource();
-        if(sourceNode == continueButton){
+        BarberConfirmAddServiceController barberConfirmAddServiceController;
+
+
+        if (sourceNode == continueButton) {
             InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_CONFIRM_ADD_SERVICE_SCREEN_NAME));
             BorderPane myBorderPane = (BorderPane) sourceNode.getScene().getRoot();
             myBorderPane.setCenter(fxmlLoader.load());
+            barberConfirmAddServiceController = fxmlLoader.getController();
 
             try {
 
@@ -43,16 +47,16 @@ public class BarberAddServiceController {
                         nameOfUsedProductTextField.getText(),
                         Double.parseDouble(priceTextField.getText()));
 
-                BarberConfirmAddServiceController barberConfirmAddServiceController = fxmlLoader.getController() ;
-                barberConfirmAddServiceController.display(serviceBean) ;
 
-            }catch(NegativePriceException e){
+                barberConfirmAddServiceController.display(serviceBean);
+
+            } catch (NegativePriceException e) {
                 exceptionAddServiceLabel.setText("Insert Price is negative!");
             }
 
         }
-
     }
+
 
 
     @FXML

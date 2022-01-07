@@ -88,6 +88,7 @@ public class BookingDateHourGraphicController {
         }
 
         public void display(SaloonBean saloonBean) {
+
                 this.saloonName = saloonBean.getName();
                 this.saloonAddress =saloonBean.getAddress();
                 this.saloonCity = saloonBean.getCity();

@@ -1,8 +1,9 @@
 package engineering.bean;
 
 import engineering.exception.NegativePriceException;
+import engineering.pattern.observer.Subject;
 
-public class ServiceBean {
+public class ServiceBean extends Subject {
 
     private String name;
     private String description;
@@ -10,13 +11,13 @@ public class ServiceBean {
     private Double price;
 
     public ServiceBean() throws NegativePriceException{
-
         this("", "", "", 0.0D);
 
     }
 
     public ServiceBean (String name, String description, String nameOfUsedProduct, Double price) throws NegativePriceException{
 
+        super();
         this.setName(name);
         this.setDescription(description);
         this.setPrice(price);
@@ -25,19 +26,27 @@ public class ServiceBean {
     }
 
     public void setName(String name) {
+
         this.name = name;
+
     }
 
     public String getName() {
+
         return this.name;
+
     }
 
     public void setDescription(String description) {
+
         this.description = description;
+
     }
 
     public String getDescription() {
+
         return description;
+
     }
 
     public void setPrice(Double price) throws NegativePriceException{
@@ -49,18 +58,25 @@ public class ServiceBean {
     }
 
     public Double getPrice() {
+
         return price;
+
     }
 
     public String getNameOfUsedProduct() {
+
         return nameOfUsedProduct;
+
     }
 
     public void setNameOfUsedProduct(String nameOfUsedProduct) {
+
         this.nameOfUsedProduct = nameOfUsedProduct;
+
     }
 
     private boolean controlPrice(Double localPrice) throws NegativePriceException {
+
         boolean flag = false;
         if(localPrice <= 0.0D){
             throw new NegativePriceException();
@@ -70,6 +86,12 @@ public class ServiceBean {
         }
 
         return flag;
+
+    }
+
+    public void notifyChanges(){
+
+        super.notifyObservers();
 
     }
 
