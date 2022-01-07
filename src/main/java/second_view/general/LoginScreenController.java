@@ -40,6 +40,7 @@ public class LoginScreenController {
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_HOME_SCREEN);
         }
         else if (commandText.compareTo("subscribe") == 0) {
+
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.SUBSCRIBE_SCREEN);
         }
         else if (commandText.compareTo("submit") == 0) {

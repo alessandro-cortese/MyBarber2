@@ -65,6 +65,11 @@ public class LoginScreenController {
             InternalBackController.getInternalBackControllerInstance().enterAsUser(null, stage);
             return ;
         }
+        else if (eventSource == registerButton) {
+            BackController.getInstance().pushPrevScene(eventSource.getScene());
+            FXMLLoader registerLoader = new FXMLLoader(getClass().getClassLoader().getResource(REGISTER_SCREEN_NAME)) ;
+            stage.setScene(registerLoader.load());
+        }
 
         //Scelta Prossima Scena su base bottone cliccato
         //InternalBackController.getInternalBackControllerInstance().enterAsUser();
