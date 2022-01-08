@@ -5,21 +5,21 @@ import engineering.pattern.decorator.Priceable;
 public class Coupon implements Priceable {
 
     //Supposto che nel codice del coupon ci sia scritto lo sconto si può fare un parsing
-    private String couponCode ;
+    private Integer couponCode ;
     private Priceable appliedPrice ;
     private Double couponDiscount ;
 
 
-    public Coupon(String couponCode, Double couponDiscount) {
+    public Coupon(Integer couponCode, Double couponDiscount) {
         setCouponCode(couponCode);
         setCouponDiscount(couponDiscount);
     }
 
-    public String getCouponCode() {
+    public Integer getCouponCode() {
         return couponCode;
     }
 
-    public void setCouponCode(String couponCode) {
+    public void setCouponCode(Integer couponCode) {
         this.couponCode = couponCode;
     }
 

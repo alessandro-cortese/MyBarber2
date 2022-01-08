@@ -102,7 +102,7 @@ public class Order extends Subject {
         for (int i = 0 ; i < couponContainer.getSize() ; i++) {
             Coupon currentCoupon = couponContainer.getCouponByIndex(i) ;
             if (currentCoupon != null) {
-                couponCodeArray.add(currentCoupon.getCouponCode());
+                couponCodeArray.add(Integer.toString(currentCoupon.getCouponCode()));
             }
         }
         return couponCodeArray ;

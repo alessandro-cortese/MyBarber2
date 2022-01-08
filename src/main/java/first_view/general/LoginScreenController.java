@@ -3,6 +3,7 @@ package first_view.general;
 import application_controller.LoginController;
 import engineering.bean.AccessInfoBean;
 import engineering.bean.UserBean;
+import first_view.pickers.CredentialsPicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,9 +67,11 @@ public class LoginScreenController {
             return ;
         }
         else if (eventSource == registerButton) {
+            (new CredentialsPicker()).getAccessInfo() ;
             BackController.getInstance().pushPrevScene(eventSource.getScene());
             FXMLLoader registerLoader = new FXMLLoader(getClass().getClassLoader().getResource(REGISTER_SCREEN_NAME)) ;
             stage.setScene(registerLoader.load());
+
         }
 
         //Scelta Prossima Scena su base bottone cliccato

@@ -17,7 +17,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ListView layoutX="90.0" layoutY="212.0" orientation="HORIZONTAL" prefHeight="275.0" prefWidth="1100.0" />
+      <ListView fx:id="couponListView" layoutX="90.0" layoutY="212.0" orientation="HORIZONTAL" prefHeight="275.0" prefWidth="1100.0" />
       <VBox alignment="CENTER" layoutX="427.0" layoutY="547.0" spacing="25.0">
          <children>
             <Label text="Genera Coupon">
@@ -27,9 +27,9 @@
             </Label>
             <HBox spacing="100.0">
                <children>
-                  <Button fx:id="generateFiveButton" mnemonicParsing="false" prefWidth="75.0" text="€ 5&#10;100 punti&#10;" textAlignment="CENTER" />
-                  <Button fx:id="generateTenButton" mnemonicParsing="false" prefWidth="75.0" text="€ 10&#10;200 punti" textAlignment="CENTER" />
-                  <Button fx:id="generateTwentyButton" mnemonicParsing="false" prefWidth="75.0" text="€ 20&#10;400 punti" textAlignment="CENTER" />
+                  <Button fx:id="generateFiveButton" mnemonicParsing="false" onAction="#onButtonClicked" prefWidth="75.0" text="€ 5&#10;100 punti&#10;" textAlignment="CENTER" />
+                  <Button fx:id="generateTenButton" mnemonicParsing="false" onAction="#onButtonClicked" prefWidth="75.0" text="€ 10&#10;200 punti" textAlignment="CENTER" />
+                  <Button fx:id="generateTwentyButton" mnemonicParsing="false" onAction="#onButtonClicked" prefWidth="75.0" text="€ 20&#10;400 punti" textAlignment="CENTER" />
                </children>
             </HBox>
          </children>

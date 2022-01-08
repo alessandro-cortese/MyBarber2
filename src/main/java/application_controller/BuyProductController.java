@@ -72,7 +72,7 @@ public class BuyProductController {
     }
 
     public void applyCoupon(CouponBean couponBean) throws InvalidCouponException, NegativePriceException {
-        Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode(), user);
+        Coupon myCoupon = couponDAO.loadCouponByCode(Integer.parseInt(couponBean.getCouponCode()), user);
         order.addCoupon(myCoupon);
 
     }

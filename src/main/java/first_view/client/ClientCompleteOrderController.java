@@ -55,7 +55,14 @@ public class ClientCompleteOrderController {
     }
 
     private void insertCoupon() {
-        CouponBean couponBean = new CouponBean(couponCodeField.getText()) ;
+        String stringCouponCode = couponCodeField.getText() ;
+        if (!stringCouponCode.matches("[0-9]+")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "FORMATO DEL COUPON NON VALIDO") ;
+            alert.showAndWait() ;
+            return ;
+        }
+
+        CouponBean couponBean = new CouponBean(stringCouponCode) ;
         try {
             buyProductController.applyCoupon(couponBean);
         }

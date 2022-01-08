@@ -4,6 +4,7 @@ public class Customer extends User{
 
     private String creditCard;
     private String phone;
+    private Integer cardPoints ;
 
 
     public Customer(String email, String pass, String name, String surname, String creditCard, String phone){
@@ -12,8 +13,9 @@ public class Customer extends User{
         setPhone(phone);
     }
 
-    public Customer(String email, String pass, String name, String surname) {
+    public Customer(String email, String pass, String name, String surname, Integer cardPoints) {
         super(email, pass, name, surname);
+        setCardPoints(cardPoints);
     }
 
     public String getPhone() {
@@ -40,4 +42,11 @@ public class Customer extends User{
 
     }
 
+    public Integer getCardPoints() {
+        return cardPoints;
+    }
+
+    public void setCardPoints(Integer cardPoints) {
+        this.cardPoints = cardPoints;
+    }
 }

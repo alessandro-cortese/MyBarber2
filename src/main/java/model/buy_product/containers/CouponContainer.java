@@ -14,6 +14,10 @@ public class CouponContainer {
         couponArrayList = new ArrayList<>() ;
     }
 
+    public CouponContainer(ArrayList<Coupon> coupons) {
+        this.couponArrayList = coupons ;
+    }
+
     public void addCoupon(Coupon newCoupon) throws InvalidCouponException {
         if (verifyPresent(newCoupon) == null) {
             couponArrayList.add(newCoupon);

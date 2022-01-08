@@ -79,7 +79,7 @@ public class UserDAO {
     }
 
 
-    private User createBarber(ResultSet barberResultSet) throws SQLException {
+    private Barber createBarber(ResultSet barberResultSet) throws SQLException {
         String barberEmail = barberResultSet.getString(BARBER_EMAIL_COL_LABEL) ;
         String barberName = barberResultSet.getString(NAME_COL_LABEL) ;
         String barberSurname = barberResultSet.getString(SURNAME_COL_LABEL) ;
@@ -87,13 +87,29 @@ public class UserDAO {
         return new Barber(barberEmail, null, barberName, barberSurname) ;
     }
 
-    private User createCustomer(ResultSet customerResultSet) throws SQLException {
+    private Customer createCustomer(ResultSet customerResultSet) throws SQLException {
         String customerEmail = customerResultSet.getString(CUSTOMER_EMAIL_COL_LABEL) ;
         String customerName = customerResultSet.getString(NAME_COL_LABEL) ;
         String customerSurname = customerResultSet.getString(SURNAME_COL_LABEL) ;
-        //Integer customerPoints = customerResultSet.getInt(CUSTOMER_POINTS_COL_LABEL) ;
+        Integer customerPoints = customerResultSet.getInt(CUSTOMER_POINTS_COL_LABEL) ;
 
-        return new Customer(customerEmail, null, customerName, customerSurname) ;
+        return new Customer(customerEmail, null, customerName, customerSurname, customerPoints) ;
     }
 
+    public Customer loadCustomerByEmail(String userEmail){
+        Connection connection = Connector.getConnectorInstance().getConnection();
+        Customer customer = null ;
+        try(Statement statement = connection.createStatement() ;
+            ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail)
+        )
+        {
+            while (resultSet.next()) {
+                customer = createCustomer(resultSet) ;
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+        return customer ;
+    }
 }
