@@ -12,10 +12,12 @@ public class SaloonBean {
     private Time slotTime;
     private  int seatNumber;
     private LocalTime[][] timeSchedule;
+    private Integer[] numberOfSlots;
 
     public SaloonBean(){
 
         this.extractTimeSchedule();
+        this.extractNumberOfSlots();
 
     } //CONSTRUCTOR-NO ARGS MUST BE EMPTY!
 
@@ -36,9 +38,16 @@ public class SaloonBean {
 
     }
 
+    private void extractNumberOfSlots() {
+
+        this.numberOfSlots = new Integer[2];
+
+    }
+
     public SaloonBean(String name,String address,String city, String phone, int seatNumber, int slotTimeMinutes){
 
         this.extractTimeSchedule();
+        this.extractNumberOfSlots();
         this.address = address;
         this.name = name;
         this.phone = phone;
@@ -123,6 +132,18 @@ public class SaloonBean {
     public void setTimeSchedule(LocalTime[][] localTimes){
 
         this.timeSchedule = localTimes;
+
+    }
+
+    public void setNumberOfSlots(Integer[] numberOfSlots) {
+
+        this.numberOfSlots = numberOfSlots;
+
+    }
+
+    public Integer[] getNumberOfSlots() {
+
+        return this.numberOfSlots;
 
     }
 
