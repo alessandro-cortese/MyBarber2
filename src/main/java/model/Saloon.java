@@ -8,19 +8,52 @@ public class Saloon {
     private String city;
     private String address;
     private String phone;
-    private LocalTime[][] timeSchedule;
     private Time slotTime;
     private int seatNumber;
+    private LocalTime[][] timeSchedule;
+    private Integer[] numberOfSlots;
+
+    public Saloon(String name, String city, String address, String phone, Time slotTime, int seatNumber, LocalTime[][] localTimes, Integer[] numberOfSlots){
+
+        this.name = name;
+        this.city = city;
+        this.address = address;
+        this.phone = phone;
+        this.slotTime = slotTime;
+        this.seatNumber = seatNumber;
+        this.timeSchedule = localTimes;
+        this.numberOfSlots = numberOfSlots;
+
+    }
+
+    public Saloon(String name, String city, String address, String phone, Time slotTime, int seatNumber, Integer[] numberOfSlots){
+
+        this.name = name ;
+        this.city = city ;
+        this.address = address ;
+        this.phone = phone ;
+        this.slotTime = slotTime ;
+        this.seatNumber = seatNumber ;
+        this.numberOfSlots = numberOfSlots ;
+
+    }
 
     public Saloon(String city, String name, String address, String phone,Time slotTime, int seatNumber){
 
         this.extractedTimeSchedule();
+        this.extractedNumberOfSlots();
         this.name = name;
         this.address = address;
         this.setPhone(phone);
         this.setCity(city);
         this.seatNumber = seatNumber;
         this.slotTime = slotTime;
+    }
+
+    private void extractedNumberOfSlots(){
+
+        this.numberOfSlots = new Integer[2];
+
     }
 
     private void extractedTimeSchedule(){
@@ -103,7 +136,9 @@ public class Saloon {
     }
 
     public LocalTime[][] getTimeSchedule() {
+
         return timeSchedule;
+
     }
 
     public void setTimeSchedule(LocalTime[][] localTimes){
@@ -111,4 +146,17 @@ public class Saloon {
         this.timeSchedule = localTimes;
 
     }
+
+    public void setNumberOfSlots(Integer[] numberOfSlots){
+
+        this.numberOfSlots = numberOfSlots;
+
+    }
+
+    public Integer[] getNumberOfSlots() {
+
+        return this.numberOfSlots;
+
+    }
+
 }

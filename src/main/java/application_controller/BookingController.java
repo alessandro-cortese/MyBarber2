@@ -16,18 +16,20 @@ public class BookingController {
     private String saloonName;
     private Saloon saloonByName;
 
-    public static void RetreiveSlotTime(LocalDate date) { //questa classe mi serve per recuperare in base alla data, orario e chiusura di mattina, pomeriggio di quel giorno e tramite la classe ScheduleTime creo gli slotTime
+    public static void RetrieveSlotTime(LocalDate date) { //questa classe mi serve per recuperare in base alla data, orario e chiusura di mattina, pomeriggio di quel giorno e tramite la classe ScheduleTime creo gli slotTime
 
     }
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
+
+        SaloonDAO saloonDAO = new SaloonDAO();
 
         saloonBeanList = new ArrayList<>();
 
         saloonCity = saloonBean.getCity();
         saloonDAO = new SaloonDAO();
 
-        listSaloon= saloonDAO.retreiveByCityName(saloonCity); //chiamo la dao del salone per recuperare dal DB I valori della ricerca
+        listSaloon = saloonDAO.retrieveByCityName(saloonCity); //chiamo la dao del salone per recuperare dal DB I valori della ricerca
 
         for (Saloon saloon: listSaloon){ //imposto il saloonBean prendendo i valori dal model
             saloonBean.setName(saloon.getName());
@@ -49,10 +51,12 @@ public class BookingController {
 
     public SaloonBean searchByNameSaloon(SaloonBean saloonBean) throws Exception {
 
+        SaloonDAO saloonDAO = new SaloonDAO();
+
         //saloonName = saloonBean.getName();
         //SaloonDAO saloonDAO = new SaloonDAO();
 
-        saloonByName = saloonDAO.retreiveByNameSaloon(saloonName);
+        saloonByName = saloonDAO.retrieveByNameSaloon(saloonName);
 
         saloonBean.setName(saloonByName.getName());
         saloonBean.setCity(saloonByName.getCity());

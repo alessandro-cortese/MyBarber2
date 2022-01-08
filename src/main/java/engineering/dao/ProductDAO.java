@@ -5,7 +5,6 @@ import engineering.exception.ProductNotFoundException;
 import engineering.pattern.Connector;
 import model.buy_product.Product;
 import model.buy_product.containers.ProductCatalog;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

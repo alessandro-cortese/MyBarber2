@@ -1,6 +1,7 @@
 package first_view.barber;
 
 import engineering.bean.SaloonBean;
+import engineering.other_classes.ConvertTime;
 import first_view.general.InternalBackController;
 import first_view.pickers.TimePicker;
 import javafx.event.ActionEvent;
@@ -15,7 +16,10 @@ import java.time.LocalTime;
 public class BarberScheduleTimeController {
 
     public BarberScheduleTimeController(){
+
+        this.extractNumberOfSlot();
         this.extractLocalTime();
+
     }
 
     private LocalTime[][] localTime;
@@ -30,29 +34,25 @@ public class BarberScheduleTimeController {
     @FXML private TextField closeAfternoonTime;
 
     private void extractLocalTime(){
+
         localTime = new LocalTime[2][2];
+
     }
 
     private void extractNumberOfSlot(){
+
         numberOfSlot = new Integer[2];
+
     }
 
     public void setSaloonBean(SaloonBean saloonBean) {
 
         this.saloonBean = saloonBean;
         this.extractNumberOfSlot();
+        this.extractLocalTime();
 
     }
 
-    private int convertTime(String time){
-
-        String[] localTime = time.split(":");
-        int hours = Integer.parseInt(localTime[0]);
-        int minutes = Integer.parseInt(localTime[1]);
-
-        return (hours * 60) + minutes;
-
-    }
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
@@ -61,16 +61,16 @@ public class BarberScheduleTimeController {
 
         saloonBean.setTimeSchedule(localTime);
 
-
-
         for (int i = 0; i < localTime.length; i++) {
             for (int j = 0; j < localTime[i].length - 1; j++){
                 minutes = ((localTime[i][j + 1].getHour() * 60) + localTime[i][j + 1].getMinute()) - ((localTime[i][j].getHour() * 60) + localTime[i][j].getMinute());
-                numberOfSlot[i] = minutes / convertTime(saloonBean.getSlotTime().toString());
+                numberOfSlot[i] = minutes / ConvertTime.convertTime(saloonBean.getSlotTime().toString());
             }
         }
 
-        for (Integer integer : numberOfSlot) {
+        saloonBean.setNumberOfSlots(numberOfSlot);
+        System.out.println("saloonBean");
+        for (Integer integer : saloonBean.getNumberOfSlots()){
             System.out.println(integer);
         }
 

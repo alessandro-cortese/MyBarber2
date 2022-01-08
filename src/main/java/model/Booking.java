@@ -1,6 +1,6 @@
 package model;
 
-import engineering.container.CatalogueService;
+import engineering.container.ServiceCatalogue;
 
 import java.sql.Time;
 import java.util.Date;
@@ -9,11 +9,11 @@ public class Booking {
     private Date dateBooking = new Date();
     private Time hourBooking;
     private double priceBooking;
-    private CatalogueService services;
+    private ServiceCatalogue services;
     private Customer customer;
 
     public Booking(){
-        services = new CatalogueService();
+        services = new ServiceCatalogue();
     }
     public Booking(Customer customer){
         this.customer=customer;

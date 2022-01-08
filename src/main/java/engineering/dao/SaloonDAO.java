@@ -1,36 +1,195 @@
 package engineering.dao;
 
+import engineering.container.SaloonCatalogue;
 import engineering.dao.queries.Queries;
+import engineering.other_classes.ConvertTime;
 import engineering.pattern.Connector;
 import model.Saloon;
-
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class SaloonDAO {
-    static Connection conn;
 
-    public SaloonDAO(){ //CONSTRUCTOR NO_ARGS --> prendo la connessione dal Connector (che è la singleton class)
-        try {
-            System.out.println("cerco di ottenere la conn");
-            conn = Connector.getConnectorInstance().getConnection();
-            if (conn == null)
-                System.out.println("unable to create a connection with DBMS");
-        }
-        catch (Exception se){
-            se.printStackTrace();
-        }
+    private final static String SALOON_NAME_ID = "id" ;
+    private static final String SALOON_NAME_COL = "name" ;
+    private static final String SALOON_ADDRESS_COL = "address" ;
+    private static final String SALOON_CITY_COL = "city" ;
+    private static final String SALOON_TELEPHONE_COL = "telephone" ;
+    private static final String SALOON_INTERVAL_SLOT_TIME_COL = "intervalSlotTime" ;
+    private static final String SALOON_SEAT_NUMBER_COL = "seatNumber" ;
+    private static final String SALOON_NUMBER_SLOT_TIME_MORNING_COL = "numberSlotTimeMorning" ;
+    private static final String SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL = "numberSlotTimeAfternoon" ;
+    private final static String SALOON_OPENING_MORNING_TIME_COL = "openingMorningTime" ;
+    private final static String SALOON_OPENING_AFTERNOON_TIME_COL = "openingAfternoonTime" ;
+    private final static String SALOON_CLOSE_MORNING_TIME_COL = "closeMorningTime" ;
+    private final static String SALOON_CLOSE_AFTERNOON_TIME = "closeAfternoonTime" ;
+
+
+    private String barberEmail;
+    private Integer idSaloon;
+
+
+    public SaloonDAO(){
+
     }
 
-    public static List<Saloon> retreiveByCityName(String SaloonCity) throws Exception{
+    public  void setBarberEmail(String barberEmail) {
+        this.barberEmail = barberEmail;
+    }
+
+    public SaloonCatalogue loadAllSaloon() {
+
+        Saloon saloon;
+        SaloonCatalogue saloonCatalogue = new SaloonCatalogue();
+        ArrayList<Saloon> saloons = new ArrayList<Saloon>();
+        LocalTime[][] localTimes = new LocalTime[2][2];
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        saloon = loadSaloon(connection);
+
+        saloonCatalogue.setSaloonList(saloons);
+
+        return saloonCatalogue;
+    }
+
+    private Saloon loadSaloon(Connection connection) {
+
+        LocalTime[][] localTimes = new LocalTime[2][2];
+        Saloon saloon = null;
+
+        try (Statement saloonStatement = connection.createStatement();
+             ResultSet saloonResultSet = Queries.loadAllSaloon(saloonStatement, barberEmail)) {
+
+            while (saloonResultSet.next()) {
+
+
+                saloon = createSaloon(saloonResultSet);
+
+
+                try (Statement timeStatements = connection.createStatement();
+                     ResultSet timeResultSet = Queries.loadTimesOfSaloon(timeStatements, idSaloon)) {
+
+                    localTimes = createTimeSchedule(timeResultSet);
+
+
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+
+                saloon.setTimeSchedule(localTimes);
+
+            }
+
+
+
+
+
+        } catch (SQLException sqlException) {
+
+            sqlException.printStackTrace();
+
+        }
+
+        return saloon;
+    }
+
+
+    private Saloon loadSaloonByName(Connection connection, String city) {
+
+        LocalTime[][] localTimes = new LocalTime[2][2];
+        Saloon saloon = null;
+
+        try (Statement saloonStatement = connection.createStatement();
+             ResultSet resultSet = Queries.selectSaloonByCity(saloonStatement, city)) {
+
+            while (resultSet.next()) {
+
+
+                saloon = createSaloon(resultSet);
+
+
+                try (Statement timeStatements = connection.createStatement();
+                     ResultSet timeResultSet = Queries.loadTimesOfSaloon(timeStatements, idSaloon)) {
+
+                    localTimes = createTimeSchedule(timeResultSet);
+
+
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+
+                saloon.setTimeSchedule(localTimes);
+
+            }
+
+
+        } catch (SQLException sqlException) {
+
+            sqlException.printStackTrace();
+
+        }
+
+        return saloon;
+
+
+
+    }
+
+    private LocalTime[][] createTimeSchedule(ResultSet resultSet) throws SQLException {
+
+        LocalTime[][] localTimes = new LocalTime[2][2];
+
+        localTimes[0][0] = LocalTime.of(0,ConvertTime.convertTime(resultSet.getTime(SALOON_OPENING_MORNING_TIME_COL).toString()));
+        localTimes[0][1] = LocalTime.of(0, ConvertTime.convertTime(resultSet.getTime(SALOON_CLOSE_MORNING_TIME_COL).toString()));
+        localTimes[1][0] = LocalTime.of(0, ConvertTime.convertTime(resultSet.getTime(SALOON_OPENING_AFTERNOON_TIME_COL).toString()));
+        localTimes[1][1] = LocalTime.of(0, ConvertTime.convertTime(resultSet.getTime(SALOON_CLOSE_AFTERNOON_TIME).toString()));
+
+        return localTimes;
+    }
+
+    private Saloon createSaloon(ResultSet resultSet) throws SQLException {
+
+        Integer[] numberOfSlots = new Integer[2];
+        this.idSaloon = resultSet.getInt(SALOON_NAME_ID);
+        String name = resultSet.getString(SALOON_NAME_COL);
+        String address = resultSet.getString(SALOON_ADDRESS_COL);
+        String city = resultSet.getString(SALOON_CITY_COL);
+        String telephone = resultSet.getString(SALOON_TELEPHONE_COL);
+        Time intervalSlotTime = resultSet.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
+        int seatsNumber = resultSet.getInt(SALOON_SEAT_NUMBER_COL);
+        numberOfSlots[0] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_MORNING_COL) ;
+        numberOfSlots[1] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL) ;
+
+        return new Saloon(name, address, city, telephone, intervalSlotTime, seatsNumber, numberOfSlots);
+    }
+
+
+    /*
+    public List<Saloon> retrieveByCityName(String saloonCity){
+
+        List<Saloon> saloonList = new ArrayList<Saloon>();
+
+
+
+        return saloonList;
+    }
+
+    */
+
+
+    public static List<Saloon> retrieveByCityName(String SaloonCity) throws Exception{
         Statement stmt = null;
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
         List<Saloon> listOfSaloon = new ArrayList<Saloon>();
 
         try {
             //creazione ed esecuzione della query
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             if (stmt==null)
                 System.out.println("unable to execute query");
 
@@ -63,25 +222,22 @@ public class SaloonDAO {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
+                se2.printStackTrace();
             }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+
         }
         return listOfSaloon;
     }
 
 
-    public static Saloon retreiveByNameSaloon(String SaloonName) throws Exception {
+    public Saloon retrieveByNameSaloon(String SaloonName) throws Exception {
         Statement stmt = null;
         Saloon saloon;
+        Connection connection = Connector.getConnectorInstance().getConnection();
 
         try {
             //creazione ed esecuzione della query
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             if (stmt==null)
                 System.out.println("unable to execute query");
 
@@ -113,15 +269,11 @@ public class SaloonDAO {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
+                se2.printStackTrace();
             }
         }
         return saloon;
     }
+
 
 }

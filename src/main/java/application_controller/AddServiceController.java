@@ -2,7 +2,7 @@ package application_controller;
 
 import boundary.AddServiceBoundarySendEmail;
 import engineering.bean.ServiceBean;
-import engineering.container.CatalogueService;
+import engineering.container.ServiceCatalogue;
 import engineering.dao.ProductDAO;
 import engineering.exception.ProductNotFoundException;
 import model.Service;
@@ -27,8 +27,8 @@ public class AddServiceController {
         serviceBean.attach(addServiceBoundarySendEmail);
 
         service = new Service(serviceBean.getName(), serviceBean.getDescription(), serviceBean.getPrice(), localProduct);
-        CatalogueService catalogueService = new CatalogueService();
-        catalogueService.addService(service);
+        ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
+        serviceCatalogue.addService(service);
 
         serviceBean.notifyChanges();
 

@@ -2,7 +2,6 @@ package application_controller.graphic;
 
 import application_controller.BookingController;
 import engineering.bean.SaloonBean;
-import first_view.pickers.TimePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,11 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -71,7 +68,7 @@ public class BookingDateHourGraphicController {
         public void selectSlotTime(){
                 LocalDate date = dateBooking.getValue();
                 BookingController bookingController = new BookingController();
-                BookingController.RetreiveSlotTime(date);
+                BookingController.RetrieveSlotTime(date);
         }
 
 

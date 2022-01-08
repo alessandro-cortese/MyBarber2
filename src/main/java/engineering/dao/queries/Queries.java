@@ -23,6 +23,21 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return stmt.executeQuery(sql);
     }
 
+    public static ResultSet loadAllSaloon(Statement statement, String barberEmail) throws SQLException {
+        String query = String.format("SELECT * FROM Saloon WHERE barber = '%s';", barberEmail);
+        return statement.executeQuery(query);
+    }
+
+    public static ResultSet loadTimesOfSaloon(Statement statement, Integer saloonID) throws  SQLException {
+        String query = String.format("SELECT * FROM SaloonTime WHERE Saloon = '%d';", saloonID);
+        return statement.executeQuery(query);
+    }
+
+    public static ResultSet loadSaloonByName(Statement statement, String city) throws  SQLException {
+        String query = String.format("SELECT * FROM Saloon WHERE city = '%s';", city);
+        return statement.executeQuery(query);
+    }
+
 
     //-+-+-+-+-+-+-+-+-+-+- Product -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet loadAllProducts(Statement statement) throws  SQLException {

@@ -1,7 +1,7 @@
 package application_controller;
 
 import engineering.bean.ServiceBean;
-import engineering.container.CatalogueService;
+import engineering.container.ServiceCatalogue;
 import engineering.dao.ServiceDAO;
 import engineering.exception.NegativePriceException;
 import model.Service;
@@ -14,7 +14,7 @@ public class ManageServiceController {
     public List<ServiceBean> getAllService() throws NegativePriceException {
 
         ServiceDAO serviceDAO = new ServiceDAO();
-        CatalogueService catalogueService = serviceDAO.loadAllService();
+        ServiceCatalogue catalogueService = serviceDAO.loadAllService();
         List<Service> services = catalogueService.getServices();
         String nameOfUsedProduct;
         ArrayList<ServiceBean> serviceBeanList = new ArrayList<>();

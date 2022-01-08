@@ -24,7 +24,6 @@ public class BookingGraphicController{
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
     private static final String CLIENT_DATEHOUR= "first_view/client/client_appointment_Hour&Date.fxml";
 
-
     @FXML
     private Button bookedButton;
 
@@ -47,7 +46,7 @@ public class BookingGraphicController{
     private Button confirmDateHourButton;
 
     @FXML
-    private ListView serviceListView;
+    private ListView serviceSelectedListView;
 
     @FXML
     private Label seatNumberLabel;
@@ -71,7 +70,8 @@ public class BookingGraphicController{
 
     @FXML
     private TextField searchSaloonName;
-
+    @FXML
+    private ListView serviceListView;
     @FXML
     private TextField searchCity;
 
@@ -81,47 +81,60 @@ public class BookingGraphicController{
     Label showErr2;
     @FXML
     private Label NameSaloonItem;
-    @FXML
-    private Label placeSaloonItem;
+
+
 
     private SaloonBean saloonBean;
     private BookingController bookingController;
     private List<SaloonBean> saloonBeanList= new ArrayList<>();
     private SaloonBean saloonBeanName;
-    @FXML
-    public void onBookedButton(ActionEvent event) throws IOException {
-        Button sourceButton = (Button) event.getSource();
-        InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
-    }
 
 
     @FXML
-    public void onButtonSaloonClicked(ActionEvent actionEvent) throws Exception {
-        Parent newCenterNode=null;
-       // String saloon = searchSaloonName.getText();
+    public void onButtonSaloonCityClicked(ActionEvent event) throws IOException {
         //String saloonCity = searchCity.getText();
-       // saloonBean = new SaloonBean(saloon, saloonCity);
+        //saloonBean = new SaloonBean(saloon);
         //bookingController = new BookingController();
         //saloonBeanList = bookingController.searchByCitySaloon(saloonBean); //ATT: POSSO COMUNICARE LL'ALTRO CONTROLLER GRAFICO IL SALOONBEANLIST? PER LA CITTÀ
-        //saloonBeanName = bookingController.searchByNameSaloon(saloonBean);
-        Button sourceButton = (Button) actionEvent.getSource();
-        if(sourceButton == saloonNextButton) {
-            FXMLLoader fxmlLoader =new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR));
-            newCenterNode = fxmlLoader.load();
-            //BookingDateHourGraphicController bookingDateHourGraphicController = fxmlLoader.getController();
-           // bookingDateHourGraphicController.display(saloonBean);
-        }
-
-        if(sourceButton == placeNextButton)
-            newCenterNode =(new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME))).load();
-        if (sourceButton == bookedButton )
-             newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME ))).load();
-        if(sourceButton == saloonButton)
-            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR))).load();
+        Button sourceButton = (Button) event.getSource();
+        FXMLLoader fxmlLoader =new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_SCREEN_NAME));
+        Parent newCenterNode = fxmlLoader.load();
+        //BookingDateHourGraphicController bookingDateHourGraphicController = fxmlLoader.getController();
+        // bookingDateHourGraphicController.display(saloonBean);
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
+    }
+    @FXML
+    public void onButtonSaloonClicked(ActionEvent actionEvent) throws Exception {
+        Parent newCenterNode = null;
+        // String saloon = searchSaloonName.getText();
+        // saloonBean = new SaloonBean(saloon);
+        //bookingController = new BookingController();
+        //saloonBeanName = bookingController.searchByNameSaloon(saloonBean);
+        Button sourceButton = (Button) actionEvent.getSource();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR));
+        newCenterNode = fxmlLoader.load();
+        //BookingDateHourGraphicController bookingDateHourGraphicController = fxmlLoader.getController();
+        // bookingDateHourGraphicController.display(saloonBean);
+
+        if (sourceButton == bookedButton)
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME))).load();
+        if (sourceButton == saloonButton) {
+            //String saloonName = labelSaloonItem.getText();
+            //String saloonCity = placeSaloonItem.getText();
+            // saloonBean = new SaloonBean(saloon);
+            //bookingController = new BookingController();
+            //saloonBeanName = bookingController.searchByNameSaloon(saloonBean);
+            ClientListViewController clientListViewController = fxmlLoader.getController();
+            clientListViewController.display(saloonBean);
+        }
+            newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR))).load();
+            Scene myScene = sourceButton.getScene();
+            BorderPane borderPane = (BorderPane) myScene.getRoot();
+            borderPane.setCenter(newCenterNode);
+
+
 
     }
-
 }
