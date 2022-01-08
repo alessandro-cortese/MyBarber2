@@ -34,7 +34,8 @@ import java.util.ResourceBundle;
 public class ScheduleBookingGraphicController implements Initializable {
 
     private static final String SERVICE_ITEM = "first_view/list_item/barber_service_list_item.fxml";
-    private static final String PREVENTIVE_PRICE="first_view/client/client_preventive_price.fxml";
+
+
     private String saloonAddress;
     private String city;
 
@@ -64,17 +65,14 @@ public class ScheduleBookingGraphicController implements Initializable {
     private String saloonCity;
     private String saloonPhone;
     private int seatNumber;
+    private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
 
     @FXML
-    void onButtonSaloonClicked(ActionEvent event) throws IOException {
+    void onButtonSaloonClicked(ActionEvent event) throws IOException{
         Button sourceButton = (Button) event.getSource();
-        Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(PREVENTIVE_PRICE))).load();
+        FXMLLoader fxmlLoaderNode = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME));
+        Parent newCenterNode = fxmlLoaderNode.load();
         Scene myScene = sourceButton.getScene();
-        //Stage myStage = new Stage();
-        //Scene scene = newCenterNode.getScene();
-        //myStage.setScene(scene);
-        //myStage.show();
-
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
     }
@@ -86,7 +84,6 @@ public class ScheduleBookingGraphicController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Node[] nodeService = new Node[10];
         Node[] nodesList = new Node[10];
         for (int i = 0; i < 10; i++) {
 
@@ -99,12 +96,6 @@ public class ScheduleBookingGraphicController implements Initializable {
         }
         ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
         serviceListView.setItems(clientAppointmentsList);
-
-        ObservableList<String> list = FXCollections.observableArrayList();
-        for (int j = 0; j < nodeService.length; j++) {
-            list.add("e");
-        }
-        serviceSelectedListView.setItems(list);
     }
 
     public void displaySaloon(SaloonBean saloonBean) {
