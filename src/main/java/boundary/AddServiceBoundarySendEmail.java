@@ -13,8 +13,7 @@ public class AddServiceBoundarySendEmail implements Observer {
 
     @Override
     public void update() {
-        System.out.println("Send email");
-        System.out.println(serviceBean.getName());
+
     }
 
 }

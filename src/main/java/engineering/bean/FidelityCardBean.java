@@ -3,13 +3,14 @@ package engineering.bean;
 import engineering.bean.buy_product.CouponBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FidelityCardBean {
 
     private Integer pointsSale ;
-    private ArrayList<CouponBean> couponBeans ;
+    private List<CouponBean> couponBeans ;
 
-    public FidelityCardBean(Integer pointsSale, ArrayList<CouponBean> couponBeans) {
+    public FidelityCardBean(Integer pointsSale, List<CouponBean> couponBeans) {
         setPointsSale(pointsSale);
         setCouponBeans(couponBeans);
     }
@@ -22,11 +23,11 @@ public class FidelityCardBean {
         this.pointsSale = pointsSale;
     }
 
-    public ArrayList<CouponBean> getCouponBeans() {
+    public List<CouponBean> getCouponBeans() {
         return couponBeans;
     }
 
-    public void setCouponBeans(ArrayList<CouponBean> couponBeans) {
+    public void setCouponBeans(List<CouponBean> couponBeans) {
         this.couponBeans = couponBeans;
     }
 }

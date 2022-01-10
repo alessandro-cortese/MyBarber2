@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientBuyProductController implements Initializable {
@@ -41,15 +41,13 @@ public class ClientBuyProductController implements Initializable {
         String command = commandLine.getText() ;
         commandLine.setStyle(null);
         commandLine.setText("");
-        String searchString = "search" ;
-        String gotoString = "goto" ;
         if (command.matches("search .*")) {
             String commandInput = command.replace("search " , "") ;
             searchProduct(commandInput);
             return ;
         }
         else if (command.matches("goto [0-9]+")) {
-            String commandInput = command.replace(gotoString + " " , "") ;
+            String commandInput = command.replace("goto " , "") ;
             Integer productIndex = Integer.parseInt(commandInput) ;
             if (productIndex < productListView.getItems().size()) {
                 ProductBean productBean = productListView.getItems().get(productIndex);
@@ -72,13 +70,9 @@ public class ClientBuyProductController implements Initializable {
         commandLine.setStyle("-fx-border-color: red");
     }
 
-    private void goToProduct(Integer productIndex) {
-
-    }
-
     private void searchProduct(String searchText) {
         ProductSearchInfoBean productSearchInfoBean = new ProductSearchInfoBean(searchText) ;
-        ArrayList<ProductBean> productBeans = buyProductController.filterProductList(productSearchInfoBean) ;
+        List<ProductBean> productBeans = buyProductController.filterProductList(productSearchInfoBean) ;
         productListView.setItems(FXCollections.observableList(productBeans));
     }
 

@@ -20,12 +20,7 @@ import static first_view.general.RegisterScreenController.CLIENT_MENU_SCREEN_NAM
 
 public class LoginScreenController {
 
-    private FXMLLoader root;
-    private Stage stage;
-    private Scene scene;
-
-    private final String THIS_SCENE_NAME = "first_view/general/login_screen.fxml";
-    private final String REGISTER_SCREEN_NAME = "first_view/general/register_screen.fxml";
+    private static final String REGISTER_SCREEN_NAME = "first_view/general/register_screen.fxml";
 
     @FXML private Button loginButton ;
     @FXML private Button registerButton ;
@@ -45,7 +40,7 @@ public class LoginScreenController {
         Node eventSource = (Node)event.getSource() ;
         BackController.getInstance().pushPrevScene(eventSource.getScene());
 
-        stage = (Stage)(eventSource).getScene().getWindow() ;
+        Stage stage = (Stage) (eventSource).getScene().getWindow();
 
         if (eventSource == loginButton) {
             if (emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
@@ -60,11 +55,9 @@ public class LoginScreenController {
                 return ;
             }
             InternalBackController.getInternalBackControllerInstance().enterAsUser(userBean, stage);
-            return ;
         }
         else if (eventSource == continueWithoutAccessButton) {
             InternalBackController.getInternalBackControllerInstance().enterAsUser(null, stage);
-            return ;
         }
         else if (eventSource == registerButton) {
             (new CredentialsPicker()).getAccessInfo() ;
@@ -74,8 +67,6 @@ public class LoginScreenController {
 
         }
 
-        //Scelta Prossima Scena su base bottone cliccato
-        //InternalBackController.getInternalBackControllerInstance().enterAsUser();
     }
 
 
@@ -87,8 +78,7 @@ public class LoginScreenController {
 
         AccessInfoBean accessInfoBean = new AccessInfoBean(userEmail, password) ;
         LoginController loginController = new LoginController() ;
-        UserBean userBean = loginController.verifyUser(accessInfoBean) ;
-        return userBean ;
+        return loginController.verifyUser(accessInfoBean);
 
     }
 

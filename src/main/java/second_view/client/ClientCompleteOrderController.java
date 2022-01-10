@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 
-public class ClientCompleteOrderController implements Initializable {
+public class ClientCompleteOrderController {
 
     @FXML private ListView<CouponBean> couponListView ;
     @FXML private TextField commandLine ;
@@ -36,10 +36,6 @@ public class ClientCompleteOrderController implements Initializable {
     private BuyProductController buyProductController ;
     private OrderTotalBean orderTotalBean ;
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
 
     @FXML
     public void onCommand(ActionEvent event) throws IOException {

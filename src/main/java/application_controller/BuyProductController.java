@@ -16,6 +16,7 @@ import model.buy_product.Product;
 import model.buy_product.containers.ProductCatalog;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class BuyProductController {
@@ -42,14 +43,14 @@ public class BuyProductController {
         orderBean = new OrderTotalBean(order) ;
     }
 
-    public ArrayList<ProductBean> filterProductList(ProductSearchInfoBean searchInfoBean) {
+    public List<ProductBean> filterProductList(ProductSearchInfoBean searchInfoBean) {
         String searchName = searchInfoBean.getProductName() ;
-        ArrayList<Product> productArrayList = productCatalog.filterByName(searchName) ;
+        List<Product> productArrayList = productCatalog.filterByName(searchName) ;
         return createArrayProductBean(productArrayList) ;
     }
 
-    private ArrayList<ProductBean> createArrayProductBean(ArrayList<Product> productArrayList) {
-        ArrayList<ProductBean> productBeanArrayList = new ArrayList<>() ;
+    private List<ProductBean> createArrayProductBean(List<Product> productArrayList) {
+        List<ProductBean> productBeanArrayList = new ArrayList<>() ;
         for (Product product : productArrayList) {
             ProductBean productBean = new ProductBean(product.getIsbn(), product.getName(), product.getDescription(), product.getPrice()) ;
             productBeanArrayList.add(productBean) ;
@@ -58,7 +59,7 @@ public class BuyProductController {
     }
 
     public void insertProductToCart(ProductBean productBean) {
-        Product product = productCatalog.getProductByIsbn(productBean.getIsbn()) ;
+        Product product = productCatalog.getProductByIsbn(productBean.getBeanIsbn()) ;
         cart.insertProduct(product);
     }
 
@@ -67,7 +68,7 @@ public class BuyProductController {
     }
 
     public void removeProductFromCart(ProductBean productBean) {
-        Product rmvProduct = productCatalog.getProductByIsbn(productBean.getIsbn()) ;
+        Product rmvProduct = productCatalog.getProductByIsbn(productBean.getBeanIsbn()) ;
         cart.removeProduct(rmvProduct);
     }
 
@@ -78,10 +79,10 @@ public class BuyProductController {
     }
 
     public void completeOrder(OrderInfoBean orderInfoBean) {
-        order.setAddress(orderInfoBean.getAddress());
-        order.setTelephone(orderInfoBean.getTelephone());
-        order.setPaymentOption(orderInfoBean.getPaymentOption());
-        order.setDate(orderInfoBean.getDate());
+        order.setAddress(orderInfoBean.getAddressInfo());
+        order.setTelephone(orderInfoBean.getTelephoneInfo());
+        order.setPaymentOption(orderInfoBean.getPaymentOptionInfo());
+        order.setDate(orderInfoBean.getDateInfo());
 
         OrderDAO orderDAO = new OrderDAO() ;
         Integer orderKey = orderDAO.saveOrder(order, cart, user);
@@ -100,13 +101,13 @@ public class BuyProductController {
 
     private VendorOrderBean createNotificationInfo(String vendor, OrderInfoBean orderInfoBean) {
         //VendorOrderBean orderBean = new VendorOrderBean(vendor);
-        CartBean cartBean = new CartBean() ;
+        CartBean cartRowCreator = new CartBean() ;
         ArrayList<CartRowBean> cartRowBeans = new ArrayList<>() ;
 
         for (Map<String,String> cartRowInfo : cart.getRowsInfoByVendor(vendor)) {
-            cartRowBeans.add(cartBean.createRowBean(cartRowInfo)) ;
+            cartRowBeans.add(cartRowCreator.createRowBean(cartRowInfo)) ;
         }
-        return new VendorOrderBean(vendor, cartRowBeans, orderInfoBean.getAddress(), orderInfoBean.getTelephone(), orderInfoBean.getDate()) ;
+        return new VendorOrderBean(vendor, cartRowBeans, orderInfoBean.getAddressInfo(), orderInfoBean.getTelephoneInfo(), orderInfoBean.getDateInfo()) ;
 
     }
 

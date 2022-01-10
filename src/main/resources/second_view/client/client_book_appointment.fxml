@@ -44,7 +44,7 @@
          </children>
       </VBox>
       <ListView fx:id="serviceListView" layoutX="450.0" layoutY="126.0" prefHeight="292.0" prefWidth="163.0" />
-      <ListView fx:id="ServiceSelectedListView" layoutX="660.0" layoutY="126.0" prefHeight="292.0" prefWidth="163.0" />
+      <ListView fx:id="serviceSelectedListView" layoutX="660.0" layoutY="126.0" prefHeight="292.0" prefWidth="163.0" />
       <Label layoutX="507.0" layoutY="95.0" text="Service" />
       <Label layoutX="689.0" layoutY="95.0" text="service selected" />
       <HBox layoutX="450.0" layoutY="451.0" prefHeight="143.0" prefWidth="379.0">

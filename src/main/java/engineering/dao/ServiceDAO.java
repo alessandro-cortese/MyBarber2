@@ -11,11 +11,6 @@ public class ServiceDAO {
     private static final String DESCRIPTION_COL_NAME = "description";
     private static final String PRICE_COL_NAME = "price";
 
-
-    public ServiceDAO(){
-
-    }
-
     public ServiceCatalogue loadAllService() {
 
         Connection connection = Connector.getConnectorInstance().getConnection();

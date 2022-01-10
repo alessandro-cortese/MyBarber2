@@ -14,9 +14,9 @@ import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberViewAppointmentsController {
 
-    private final static String SELECT_DATE_COMMAND = "select date";
-    private final static String SELECT_SALOON_COMMAND = "select saloon";
-    private final static String SELECT_SLOT_COMMAND = "select slot";
+    private static final String SELECT_DATE_COMMAND = "select date";
+    private static final String SELECT_SALOON_COMMAND = "select saloon";
+    private static final String SELECT_SLOT_COMMAND = "select slot";
 
     @FXML private TextField viewAppointmentsCommandLine;
     @FXML private TextField saloonNameFieldViewAppointments;

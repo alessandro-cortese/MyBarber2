@@ -5,16 +5,17 @@ import model.buy_product.Coupon;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CouponContainer {
 
-    private ArrayList<Coupon> couponArrayList ;
+    private final List<Coupon> couponArrayList ;
 
     public CouponContainer() {
         couponArrayList = new ArrayList<>() ;
     }
 
-    public CouponContainer(ArrayList<Coupon> coupons) {
+    public CouponContainer(List<Coupon> coupons) {
         this.couponArrayList = coupons ;
     }
 

@@ -69,10 +69,6 @@ public class BarberScheduleTimeController {
         }
 
         saloonBean.setNumberOfSlots(numberOfSlot);
-        System.out.println("saloonBean");
-        for (Integer integer : saloonBean.getNumberOfSlots()){
-            System.out.println(integer);
-        }
 
         if(sourceButton == saveButton){
             InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());

@@ -78,9 +78,5 @@ public class ClientFidelityCardController implements Initializable {
         initialize(null, null);
     }
 
-    public void viewFidelityCard() {
-
-    }
-
 
 }

@@ -30,18 +30,6 @@ public class TimePicker extends TextInputDialog {
         //Si imposta il dialogPane
         super.setDialogPane(dialogPane);
 
-        /*
-            Si imposta il meccanismo di ritorno del risultato.
-            *   Se il bottone premuto è di tipo OK, allora si ritornano i valori degli slider formattati
-                in modo corretto;
-            *   Altrmenti si ritorna un valore di default con orario non impostato.
-
-            Notare che i bottoni cliccati sono bottoni che possono essere aggiunti in automatico nel DialogPane da
-            SceneBuiler impostando la  proprietà ButtonTypes e inserendo i tipi di bottoni che servono (con il +).
-
-            Fare attenzione alla funzione lambda che crea un ambito di esecuzione temporaneo (l'ho messa giusto per non avere
-            il warning di IntelliJ)
-         */
         super.resultConverterProperty().set(param -> {
             if (param == ButtonType.OK) {
                 String result = formatTime((int)hourSlider.getValue()) + ":" + formatTime((int)minuteSlider.getValue()) ;

@@ -11,6 +11,7 @@ import model.buy_product.Coupon;
 import model.buy_product.containers.CouponContainer;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ManageCouponController {
@@ -42,10 +43,10 @@ public class ManageCouponController {
 
         if (userBean != null) {
             customer = userDAO.loadCustomerByEmail(userBean.getUserEmail()) ;
-            ArrayList<Coupon> coupons = couponDAO.loadCouponByUser(userBean.getUserEmail()) ;
+            List<Coupon> coupons = couponDAO.loadCouponByUser(userBean.getUserEmail()) ;
             couponContainer = new CouponContainer(coupons) ;
 
-            ArrayList<CouponBean> couponBeans = createCouponBeans() ;
+            List<CouponBean> couponBeans = createCouponBeans() ;
             fidelityCard = new FidelityCardBean(customer.getCardPoints(), couponBeans) ;
         }
 
@@ -54,7 +55,7 @@ public class ManageCouponController {
 
     public FidelityCardBean generateNewCoupon(CouponBean couponBean) throws InvalidCouponException {
         Double couponValue = couponBean.getCouponDiscount() ;
-        Integer couponCost = (Integer) couponCostMap.get(couponValue) ;
+        Integer couponCost = couponCostMap.get(couponValue) ;
         FidelityCardBean fidelityCardBean = null ;
         if (couponCost != null) {
             Integer customerPoints = customer.getCardPoints();
@@ -78,7 +79,7 @@ public class ManageCouponController {
     }
 
 
-    public ArrayList<CouponBean> createCouponBeans() {
+    public List<CouponBean> createCouponBeans() {
         ArrayList<CouponBean> couponBeans = new ArrayList<>() ;
         for (int i = 0 ; i < couponContainer.getSize() ; i++) {
             Coupon coupon = couponContainer.getCouponByIndex(i) ;

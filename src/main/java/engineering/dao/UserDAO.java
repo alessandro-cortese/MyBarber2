@@ -56,7 +56,7 @@ public class UserDAO {
         return userType ;
     }
 
-    private User loadUser(String userEmail) throws SQLException {
+    /*private User loadUser(String userEmail) throws SQLException {
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         User user = null ;
@@ -86,6 +86,8 @@ public class UserDAO {
 
         return new Barber(barberEmail, null, barberName, barberSurname) ;
     }
+
+     */
 
     private Customer createCustomer(ResultSet customerResultSet) throws SQLException {
         String customerEmail = customerResultSet.getString(CUSTOMER_EMAIL_COL_LABEL) ;

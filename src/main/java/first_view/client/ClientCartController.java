@@ -84,7 +84,7 @@ public class ClientCartController implements Initializable {
         }
         else if (sourceNode == addOrderInfoButton){
             InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
-            FXMLLoader newCenterNodeLoader = new FXMLLoader(getClass().getClassLoader().getResource("first_view/client/client_complete_order.fxml"));
+            FXMLLoader newCenterNodeLoader = new FXMLLoader(getClass().getClassLoader().getResource(COMPLETE_ORDER_SCENE_RES));
             Scene myScene = sourceNode.getScene();
             BorderPane borderPane = (BorderPane) myScene.getRoot();
 

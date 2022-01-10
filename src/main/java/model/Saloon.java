@@ -13,11 +13,11 @@ public class Saloon {
     private LocalTime[][] timeSchedule;
     private Integer[] numberOfSlots;
 
-    public Saloon(String name, String city, String address, String phone, Time slotTime, int seatNumber, LocalTime[][] localTimes, Integer[] numberOfSlots){
+    public Saloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, LocalTime[][] localTimes, Integer[] numberOfSlots){
 
         this.name = name;
-        this.city = city;
-        this.address = address;
+        this.city = cityAndAddress[0];
+        this.address = cityAndAddress[1];
         this.phone = phone;
         this.slotTime = slotTime;
         this.seatNumber = seatNumber;

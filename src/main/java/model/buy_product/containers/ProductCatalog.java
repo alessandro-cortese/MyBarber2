@@ -3,15 +3,16 @@ package model.buy_product.containers;
 import model.buy_product.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.annotation.Nullable;
 
 public class ProductCatalog {
 
-    private ArrayList<Product> productArrayList ;
+    private final List<Product> productArrayList ;
 
-    public ProductCatalog(ArrayList<Product> products) {
+    public ProductCatalog(List<Product> products) {
         this.productArrayList = products ;
     }
 
@@ -27,8 +28,8 @@ public class ProductCatalog {
         productArrayList.add(createProduct(isbn, name, description, price, vendor)) ;
     }
 
-    public ArrayList<Product> filterByName(String productName) {
-        ArrayList<Product> filteredProductArray = new ArrayList<>() ;
+    public List<Product> filterByName(String productName) {
+        List<Product> filteredProductArray = new ArrayList<>() ;
         for (Product product : productArrayList) {
             if (product.getName().contains( productName)) {
                 filteredProductArray.add(product) ;

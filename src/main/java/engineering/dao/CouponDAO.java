@@ -9,15 +9,16 @@ import model.buy_product.containers.CouponContainer;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CouponDAO {
 
-    private final static Integer EXAMPLE_COUPON = 0 ;
+    private static final Integer EXAMPLE_COUPON = 0 ;
 
-    private final static String COUPON_CODE_COL_ID = "id" ;
-    private final static String COUPON_TYPE_COL_ID = "tipoCoupon" ;
-    private final static String COUPON_DISCOUNT_ID = "sconto" ;
-
+    private static final String COUPON_CODE_COL_ID = "id" ;
+    private static final String COUPON_TYPE_COL_ID = "tipoCoupon" ;
+    private static final String COUPON_DISCOUNT_COL_ID = "sconto" ;
+    private static final String COUPON_DISCOUNT_TYPE = "sconto";
 
     public Coupon loadCouponByCode(Integer couponCode, User user) throws InvalidCouponException {
         /*Connection connection = Connector.getConnectorInstance().getConnection();
@@ -41,9 +42,9 @@ public class CouponDAO {
         }
     }
 
-    public ArrayList<Coupon> loadCouponByUser(String userEmail) {
+    public List<Coupon> loadCouponByUser(String userEmail) {
         Connection connection = Connector.getConnectorInstance().getConnection();
-        ArrayList<Coupon> coupons = new ArrayList<>() ;
+        List<Coupon> coupons = new ArrayList<>() ;
         try (
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = Queries.selectCouponsByOwner(statement, userEmail) ;
@@ -63,7 +64,7 @@ public class CouponDAO {
 
     private Coupon createCoupon(ResultSet resultSet) throws SQLException {
         Integer couponCode = resultSet.getInt(COUPON_CODE_COL_ID) ;
-        Double couponDiscount = resultSet.getDouble(COUPON_DISCOUNT_ID) ;
+        Double couponDiscount = resultSet.getDouble(COUPON_DISCOUNT_COL_ID) ;
 
         return new Coupon(couponCode, couponDiscount) ;
     }
@@ -92,7 +93,7 @@ public class CouponDAO {
         Integer newCouponCode = -1 ;
         try(PreparedStatement statement = connection.prepareStatement("INSERT Coupon(id,tipoCoupon, sconto, donazione, customer) VALUES(0,?,?,?,?) ;", Statement.RETURN_GENERATED_KEYS);) {
 
-            statement.setString(1, "sconto");
+            statement.setString(1, COUPON_DISCOUNT_TYPE);
             statement.setDouble(2, couponValue);
             statement.setDouble(3, 0.0);
             statement.setString(4, email);

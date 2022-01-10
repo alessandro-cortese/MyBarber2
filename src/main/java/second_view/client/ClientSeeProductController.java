@@ -49,9 +49,9 @@ public class ClientSeeProductController {
 
     public void setProduct(ProductBean productBean) {
         this.productBean = productBean ;
-        productNameLabel.setText(productBean.getName());
-        productPriceLabel.setText(EURO_SYMBOL + " " + productBean.getPrice());
-        productDescriptionText.setText(productBean.getDescription());
+        productNameLabel.setText(productBean.getBeanName());
+        productPriceLabel.setText(EURO_SYMBOL + " " + productBean.getBeanPrice());
+        productDescriptionText.setText(productBean.getBeanDescription());
     }
 
     public void setController(BuyProductController buyProductController) {

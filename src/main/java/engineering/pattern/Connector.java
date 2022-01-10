@@ -7,18 +7,11 @@ public class Connector { //SINGLETON CLASS
         private Connection connection ; //di classe
         private static Connector myConnector ;
 
-        protected Connector() {
-            //if (System.getenv("RDS_HOSTNAME") != null) {
-                try {
-                    System.out.println("Loading driver...");
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    System.out.println("Driver loaded!");
-                    /*String dbName = System.getenv("RDS_DB_NAME");
-                    String userName = System.getenv("RDS_USERNAME");
-                    String password = System.getenv("RDS_PASSWORD");
-                    String hostname = System.getenv("RDS_HOSTNAME");
-                    String port = System.getenv("RDS_PORT");*/
+        protected Connector() throws RuntimeException {
 
+            try {
+
+                    Class.forName("com.mysql.cj.jdbc.Driver");
                     String dbName = "mydb";
                     String userName="admin";
                     String password="Alessandro99";

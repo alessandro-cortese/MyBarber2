@@ -23,8 +23,9 @@ public class ClientSearchSaloon implements Initializable {
     @FXML
     ListView saloonListView;
 
-    private String saloonName;
     public static final String CLIENT_SALOON_ITEM="second_view/client_saloon_item.fxml";
+
+
     @FXML
     public void onCommand(ActionEvent event) throws IOException {
         String command = commandLine.getText() ;
@@ -32,7 +33,7 @@ public class ClientSearchSaloon implements Initializable {
         commandLine.setText("");
 
         if (command.matches("search name .*")) {//. qualsiasi carattere
-            saloonName = commandLine.getText();
+            String saloonName = commandLine.getText();
 
         }
         else if (command.matches("search city .*")) {

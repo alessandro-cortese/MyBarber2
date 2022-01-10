@@ -26,14 +26,12 @@ public class ClientSeeAppointmentController {
         else if (command.startsWith(revokeString)) {
             String appointmentIndex = command.replace(revokeString + " ", "") ;
             if (appointmentIndex.matches("[0-9]+")) {
-                System.out.println(appointmentIndex);
                 return ;
             }
         }
         else if (command.startsWith(saloonString)) {
             String appointmentIndex = command.replace(saloonString + " ", "") ;
             if (appointmentIndex.matches("[0-9]+")) {
-                System.out.println(appointmentIndex);
                 return ;
             }
         }

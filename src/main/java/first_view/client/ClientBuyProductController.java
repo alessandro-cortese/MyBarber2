@@ -17,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientBuyProductController implements Initializable {
@@ -32,7 +32,6 @@ public class ClientBuyProductController implements Initializable {
     @FXML private Button goToCartButton ;
 
     private BuyProductController buyProductController;
-    private ArrayList<ProductBean> productBeans ;
 
     public static final String CLIENT_CART_SCENE_RES = "first_view/client/client_cart.fxml" ;
 
@@ -45,9 +44,9 @@ public class ClientBuyProductController implements Initializable {
         addToCartButton.setDisable(true);
 
         buyProductListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            productNameLabel.setText((newValue == null) ? "" : newValue.getName());
-            productPriceLabel.setText((newValue == null) ? "" : Double.toString(newValue.getPrice()));
-            productDescriptionLabel.setText((newValue == null) ? "" : newValue.getDescription());
+            productNameLabel.setText((newValue == null) ? "" : newValue.getBeanName());
+            productPriceLabel.setText((newValue == null) ? "" : Double.toString(newValue.getBeanPrice()));
+            productDescriptionLabel.setText((newValue == null) ? "" : newValue.getBeanDescription());
 
             addToCartButton.setDisable(newValue == null);
         });
@@ -88,11 +87,10 @@ public class ClientBuyProductController implements Initializable {
 
     private void searchProduct(String productName) {
         ProductSearchInfoBean searchInfoBean = new ProductSearchInfoBean(productName) ;
-        productBeans = buyProductController.filterProductList(searchInfoBean) ;
+        List<ProductBean> productBeans = buyProductController.filterProductList(searchInfoBean);
         buyProductListView.getItems().clear();
         buyProductListView.setItems(FXCollections.observableList(productBeans));
     }
 
-    private void addProduct() {}
 
 }

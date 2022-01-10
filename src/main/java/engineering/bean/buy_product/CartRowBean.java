@@ -3,7 +3,6 @@ package engineering.bean.buy_product;
 public class CartRowBean {
 
     private Integer quantity ;
-    //private ProductBean productBean ;
     private Integer isbn ;
     private String name ;
     private Double price ;

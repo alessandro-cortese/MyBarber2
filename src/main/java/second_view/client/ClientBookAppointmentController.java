@@ -14,7 +14,7 @@ public class ClientBookAppointmentController {
 
     @FXML private TextField commandLine ;
     @FXML private ListView serviceListView ;
-    @FXML private ListView ServiceSelectedListView;
+    @FXML private ListView serviceSelectedListView;
     @FXML private TextField dateText;
     @FXML private TextField saloonName;
     @FXML private TextField hourText;

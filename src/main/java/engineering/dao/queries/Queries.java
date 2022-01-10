@@ -19,7 +19,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     //-+-+-+-+-+-+-+-+-+-+- Saloon -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet selectSaloonByName(Statement stmt, String name) throws SQLException{
         String sql = "SELECT * FROM Saloon where name = '" + name + "';";
-        System.out.println(sql);
         return stmt.executeQuery(sql);
     }
 
@@ -63,8 +62,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     }
 
     public static void deleteCoupon(Statement statement, Integer couponCode) throws SQLException {
-        //String delete = String.format("DELETE Coupon where name = '%s' AND customer = '%s';", couponCode, email) ;
-        //statement.execute(delete) ;
         String delete = String.format("DELETE FROM Coupon WHERE name = '%d';", couponCode) ;
         statement.execute(delete) ;
     }
@@ -82,7 +79,7 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
 
     //-+-+-+-+-+-+-+-+-+-+- SaloonTime -+-+-+-+-+-+-+-+-+-+-//
-    public  static ResultSet SelectAvalaibleSaloonDateANDHour(Statement statement, Time time, LocalDate date) throws SQLException {
+    public  static ResultSet selectAvailableSaloonDateAndHour(Statement statement, Time time, LocalDate date) throws SQLException {
         String select = String.format("SELECT FROM SaloonTime where hourBooking = '%s' AND dateBooking ='%s';", time,date);
         return statement.executeQuery(select);
     }// DA fare insieme ad alessandro per chiarire
@@ -90,7 +87,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
     public static ResultSet selectSaloonByCity(Statement stmt, String saloonCity) throws SQLException {
         String sql = "SELECT * FROM Saloon where city = '" + saloonCity + "';";
-        System.out.println(sql);
         return stmt.executeQuery(sql);
     }
 

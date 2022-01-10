@@ -1,25 +1,20 @@
-package engineering.dao.queries;
+package engineering.dao;
 
+import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 
 import java.sql.*;
 import java.time.LocalDate;
 
 public class BookingDAO {
-    static Connection conn;
+    private final Connection conn;
 
     public BookingDAO() { //CONSTRUCTOR NO_ARGS --> prendo la connessione dal Connector (che è la singleton class)
-        try {
-            System.out.println("cerco di ottenere la conn");
             conn = Connector.getConnectorInstance().getConnection();
-            if (conn == null)
-                System.out.println("unable to create a connection with DBMS");
-        } catch (Exception se) {
-            se.printStackTrace();
-        }
     }
 
-    public static void VerifyDateHour(Time time, LocalDate date) throws Exception { // DA COMPLETARE CHIARIRE SLOT TIME BARBIERE
+    public void verifyDateHour(Time time, LocalDate date) throws Exception { // DA COMPLETARE CHIARIRE SLOT TIME BARBIERE
+
         Statement stmt = null;
 
         try {
@@ -28,11 +23,10 @@ public class BookingDAO {
             if (stmt == null)
                 System.out.println("unable to execute query");
 
-            ResultSet rs = Queries.SelectAvalaibleSaloonDateANDHour(stmt, time, date);
+            ResultSet rs = Queries.selectAvailableSaloonDateAndHour(stmt, time, date);
 
             if (!rs.first()) { //rs empty
-                Exception e = new Exception("Not found a availability booking's slotTime");
-                throw e;
+                throw new Exception("Not found a availability booking's slotTime");
             }
 
             //riposiz. del cursore
@@ -43,14 +37,8 @@ public class BookingDAO {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
+                se2.printStackTrace();
             }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-
 
         }
     }

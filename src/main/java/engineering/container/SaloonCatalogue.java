@@ -23,7 +23,7 @@ public class SaloonCatalogue {
 
     }
 
-    public void setSaloonList(ArrayList<Saloon> saloons){
+    public void setSaloonList(List<Saloon> saloons){
 
         this.saloonList = saloons;
 
@@ -41,9 +41,9 @@ public class SaloonCatalogue {
 
     }
 
-    public void addSaloon(String name, String city, String address, String phone, Time slotTime, int seatNumber, LocalTime[][] localTimes, Integer[] numberOfSlots) {
+    public void addSaloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, LocalTime[][] localTimes, Integer[] numberOfSlots) {
 
-        Saloon localSaloon = new Saloon(name, city, address, phone, slotTime, seatNumber, localTimes, numberOfSlots);
+        Saloon localSaloon = new Saloon(name, cityAndAddress, phone, slotTime, seatNumber, localTimes, numberOfSlots);
         this.saloonList.add(localSaloon);
 
     }

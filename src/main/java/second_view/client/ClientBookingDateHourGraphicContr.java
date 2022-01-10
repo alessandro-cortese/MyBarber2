@@ -74,10 +74,8 @@ public class ClientBookingDateHourGraphicContr implements Initializable {
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_APPOINTMENT_SCREEN);
             return ;
         }
-        else if (command.compareTo("back") == 0) {
-            ScreenChanger.getInstance().onBack(event);
-            return ;
-        }
+
+        commandLine.setStyle("-fx-border-color: red");
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

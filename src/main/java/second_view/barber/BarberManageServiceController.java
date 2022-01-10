@@ -81,11 +81,9 @@ public class BarberManageServiceController implements Initializable {
         }
         else if(manageServiceCommandLineLocal.compareTo("modify") == 0){
             return;
-            // TODO modify this method when you know the DAO classes
         }
         else if(manageServiceCommandLineLocal.compareTo("delete") == 0) {
             return;
-            // TODO modify this method when you know the DAO classes
         }
 
         manageServiceCommandLine.setStyle("-fx-border-color: red");

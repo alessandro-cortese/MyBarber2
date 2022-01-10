@@ -16,7 +16,7 @@ import java.io.IOException;
 public class  BookingPriceGraphicController {
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
     @FXML
-    private TextField CouponTextField;
+    private TextField couponTextField;
 
     @FXML
     private Button confirmButton;
@@ -25,7 +25,7 @@ public class  BookingPriceGraphicController {
     private Label totalPriceLabel;
 
     @FXML
-    public void OnConfirmAppointment(ActionEvent event) throws IOException {
+    public void onConfirmAppointment(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
         Parent newCenterNode = (new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_BOOKED_SCREEN_NAME))).load();
         Scene myScene = sourceButton.getScene();

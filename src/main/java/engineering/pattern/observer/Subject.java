@@ -6,7 +6,7 @@ public abstract class Subject {
 
     private ArrayList<Observer> observerArrayList ;
 
-    public Subject() {
+    protected Subject() {
         observerArrayList = new ArrayList<>() ;
     }
 
@@ -19,7 +19,7 @@ public abstract class Subject {
     }
 
     protected void notifyObservers() {
-        System.out.println("Notify");
+
         for (Observer observer : observerArrayList) {
             observer.update();
         }

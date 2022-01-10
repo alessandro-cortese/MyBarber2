@@ -1,7 +1,7 @@
 package engineering.bean.buy_product;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class VendorOrderBean {
 
@@ -10,9 +10,9 @@ public class VendorOrderBean {
     private String telephone ;
     private Date date ;
 
-    private ArrayList<CartRowBean> cartRowBeans ;
+    private List<CartRowBean> cartRowBeans ;
 
-    public VendorOrderBean(String vendor, ArrayList<CartRowBean> cartRowBeans, String address, String telephone, Date date) {
+    public VendorOrderBean(String vendor, List<CartRowBean> cartRowBeans, String address, String telephone, Date date) {
         setVendor(vendor);
         setCartRowBeans(cartRowBeans);
         setAddress(address);
@@ -54,11 +54,11 @@ public class VendorOrderBean {
         this.date = date;
     }
 
-    public ArrayList<CartRowBean> getCartRowBeans() {
+    public List<CartRowBean> getCartRowBeans() {
         return cartRowBeans;
     }
 
-    public void setCartRowBeans(ArrayList<CartRowBean> cartRowBeans) {
+    public void setCartRowBeans(List<CartRowBean> cartRowBeans) {
         this.cartRowBeans = cartRowBeans;
     }
 }

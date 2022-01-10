@@ -4,47 +4,47 @@ import java.util.Date;
 
 public class OrderInfoBean {
 
-    private String address ;
-    private String telephone ;
-    private String paymentOption ;
-    private Date date ;
+    private String addressInfo;
+    private String telephoneInfo;
+    private String paymentOptionInfo;
+    private Date dateInfo;
 
     public OrderInfoBean(String address, String telephone, String paymentOption, Date date) {
-        setAddress(address);
-        setTelephone(telephone);
-        setPaymentOption(paymentOption);
-        setDate(date);
+        setAddressInfo(address);
+        setTelephoneInfo(telephone);
+        setPaymentOptionInfo(paymentOption);
+        setDateInfo(date);
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddressInfo() {
+        return addressInfo;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddressInfo(String addressInfo) {
+        this.addressInfo = addressInfo;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getTelephoneInfo() {
+        return telephoneInfo;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setTelephoneInfo(String telephoneInfo) {
+        this.telephoneInfo = telephoneInfo;
     }
 
-    public String getPaymentOption() {
-        return paymentOption;
+    public String getPaymentOptionInfo() {
+        return paymentOptionInfo;
     }
 
-    public void setPaymentOption(String paymentOption) {
-        this.paymentOption = paymentOption;
+    public void setPaymentOptionInfo(String paymentOptionInfo) {
+        this.paymentOptionInfo = paymentOptionInfo;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateInfo() {
+        return dateInfo;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateInfo(Date dateInfo) {
+        this.dateInfo = dateInfo;
     }
 }

@@ -2,11 +2,10 @@ package engineering.bean.buy_product;
 
 public class ProductBean {
 
-    private Integer isbn ;
-    private String name ;
-    private String description ;
-    private Double price ;
-    //private Barber vendor ;
+    private Integer beanIsbn;
+    private String beanName;
+    private String beanDescription;
+    private Double beanPrice;
 
     public ProductBean() {
         this(0,"","",0.0) ;
@@ -17,42 +16,42 @@ public class ProductBean {
     }
 
     public ProductBean(Integer isbn, String name, String description, Double price) {
-        setIsbn(isbn);
-        setName(name);
-        setDescription(description);
-        setPrice(price);
+        setBeanIsbn(isbn);
+        setBeanName(name);
+        setBeanDescription(description);
+        setBeanPrice(price);
     }
 
-    public String getName() {
-        return name;
+    public String getBeanName() {
+        return beanName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBeanName(String beanName) {
+        this.beanName = beanName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBeanDescription() {
+        return beanDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBeanDescription(String beanDescription) {
+        this.beanDescription = beanDescription;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getBeanPrice() {
+        return beanPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setBeanPrice(Double beanPrice) {
+        this.beanPrice = beanPrice;
     }
 
 
-    public Integer getIsbn() {
-        return isbn;
+    public Integer getBeanIsbn() {
+        return beanIsbn;
     }
 
-    public void setIsbn(Integer isbn) {
-        this.isbn = isbn;
+    public void setBeanIsbn(Integer beanIsbn) {
+        this.beanIsbn = beanIsbn;
     }
 }

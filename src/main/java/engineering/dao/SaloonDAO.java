@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SaloonDAO {
 
-    private final static String SALOON_NAME_ID = "id" ;
+    private static final String SALOON_NAME_ID = "id" ;
     private static final String SALOON_NAME_COL = "name" ;
     private static final String SALOON_ADDRESS_COL = "address" ;
     private static final String SALOON_CITY_COL = "city" ;
@@ -22,19 +22,15 @@ public class SaloonDAO {
     private static final String SALOON_SEAT_NUMBER_COL = "seatNumber" ;
     private static final String SALOON_NUMBER_SLOT_TIME_MORNING_COL = "numberSlotTimeMorning" ;
     private static final String SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL = "numberSlotTimeAfternoon" ;
-    private final static String SALOON_OPENING_MORNING_TIME_COL = "openingMorningTime" ;
-    private final static String SALOON_OPENING_AFTERNOON_TIME_COL = "openingAfternoonTime" ;
-    private final static String SALOON_CLOSE_MORNING_TIME_COL = "closeMorningTime" ;
-    private final static String SALOON_CLOSE_AFTERNOON_TIME = "closeAfternoonTime" ;
+    private static final String SALOON_OPENING_MORNING_TIME_COL = "openingMorningTime" ;
+    private static final String SALOON_OPENING_AFTERNOON_TIME_COL = "openingAfternoonTime" ;
+    private static final String SALOON_CLOSE_MORNING_TIME_COL = "closeMorningTime" ;
+    private static final String SALOON_CLOSE_AFTERNOON_TIME = "closeAfternoonTime" ;
 
 
     private String barberEmail;
     private Integer idSaloon;
 
-
-    public SaloonDAO(){
-
-    }
 
     public  void setBarberEmail(String barberEmail) {
         this.barberEmail = barberEmail;
@@ -44,7 +40,7 @@ public class SaloonDAO {
 
         Saloon saloon;
         SaloonCatalogue saloonCatalogue = new SaloonCatalogue();
-        ArrayList<Saloon> saloons = new ArrayList<Saloon>();
+        List<Saloon> saloons = new ArrayList<>();
         LocalTime[][] localTimes = new LocalTime[2][2];
 
         Connection connection = Connector.getConnectorInstance().getConnection();
@@ -181,11 +177,11 @@ public class SaloonDAO {
     */
 
 
-    public static List<Saloon> retrieveByCityName(String SaloonCity) throws Exception{
+    public static List<Saloon> retrieveByCityName(String saloonCity) throws Exception{
         Statement stmt = null;
         Connection connection = Connector.getConnectorInstance().getConnection();
 
-        List<Saloon> listOfSaloon = new ArrayList<Saloon>();
+        List<Saloon> listOfSaloon = new ArrayList<>();
 
         try {
             //creazione ed esecuzione della query
@@ -193,24 +189,23 @@ public class SaloonDAO {
             if (stmt==null)
                 System.out.println("unable to execute query");
 
-            ResultSet rs = Queries.selectSaloonByCity(stmt,SaloonCity);
+            ResultSet rs = Queries.selectSaloonByCity(stmt,saloonCity);
 
             if (!rs.first()) { //rs empty
-                Exception e = new Exception("No Saloon found matching with city" + SaloonCity);
-                throw e;
+                throw new Exception("No Saloon found matching with city" + saloonCity);
             }
 
             //riposiz. del cursore
             rs.first();
             do {
                 // lettura delle colonne "by city"
-                String name = rs.getString("name");
-                String address = rs.getString("address");
-                String phone = rs.getString("telephone");
-                Time slotTime = rs.getTime("slotTime");
-                int seatNumber = rs.getInt("seatNumber");
+                String name = rs.getString(SALOON_NAME_COL);
+                String address = rs.getString(SALOON_ADDRESS_COL);
+                String phone = rs.getString(SALOON_TELEPHONE_COL);
+                Time slotTime = rs.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
+                int seatNumber = rs.getInt(SALOON_SEAT_NUMBER_COL);
 
-                Saloon s = new Saloon(SaloonCity, name,address, phone, slotTime, seatNumber);
+                Saloon s = new Saloon(saloonCity, name,address, phone, slotTime, seatNumber);
                 listOfSaloon.add(s);
             }while (rs.next());
             //chiudo rs
@@ -230,7 +225,7 @@ public class SaloonDAO {
     }
 
 
-    public Saloon retrieveByNameSaloon(String SaloonName) throws Exception {
+    public Saloon retrieveByNameSaloon(String saloonName) throws Exception {
         Statement stmt = null;
         Saloon saloon;
         Connection connection = Connector.getConnectorInstance().getConnection();
@@ -241,24 +236,23 @@ public class SaloonDAO {
             if (stmt==null)
                 System.out.println("unable to execute query");
 
-            ResultSet rs = Queries.selectSaloonByCity(stmt,SaloonName);
+            ResultSet rs = Queries.selectSaloonByCity(stmt,saloonName);
 
             if (!rs.first()) { //rs empty
-                Exception e = new Exception("No Saloon found matching with city" + SaloonName);
-                throw e;
+                throw new Exception("No Saloon found matching with city" + saloonName);
             }
 
             //riposiz. del cursore
             rs.first();
             do {
                 // lettura delle colonne "by name"
-                String city = rs.getString("city");
-                String address = rs.getString("address");
-                String phone = rs.getString("telephone");
-                Time slotTime = rs.getTime("slotTime");
-                int seatNumber = rs.getInt("seatNumber");
+                String city = rs.getString(SALOON_CITY_COL);
+                String address = rs.getString(SALOON_ADDRESS_COL);
+                String phone = rs.getString(SALOON_TELEPHONE_COL);
+                Time slotTime = rs.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
+                int seatNumber = rs.getInt(SALOON_SEAT_NUMBER_COL);
 
-               saloon = new Saloon(city, SaloonName,address, phone, slotTime, seatNumber);
+               saloon = new Saloon(city, saloonName,address, phone, slotTime, seatNumber);
             }while (rs.next());
             //chiudo rs
             rs.close();

@@ -68,7 +68,7 @@ public class BookingDateHourGraphicController {
         public void selectSlotTime(){
                 LocalDate date = dateBooking.getValue();
                 BookingController bookingController = new BookingController();
-                BookingController.RetrieveSlotTime(date);
+                BookingController.retrieveSlotTime(date);
         }
 
 

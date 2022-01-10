@@ -80,7 +80,7 @@ public class BookingGraphicController{
     @FXML
     Label showErr2;
     @FXML
-    private Label NameSaloonItem;
+    private Label nameSaloonItem;
 
 
 

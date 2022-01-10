@@ -16,7 +16,7 @@ public class BookingController {
     private String saloonName;
     private Saloon saloonByName;
 
-    public static void RetrieveSlotTime(LocalDate date) { //questa classe mi serve per recuperare in base alla data, orario e chiusura di mattina, pomeriggio di quel giorno e tramite la classe ScheduleTime creo gli slotTime
+    public static void retrieveSlotTime(LocalDate date) { //questa classe mi serve per recuperare in base alla data, orario e chiusura di mattina, pomeriggio di quel giorno e tramite la classe ScheduleTime creo gli slotTime
 
     }
 
@@ -43,7 +43,7 @@ public class BookingController {
         return saloonBeanList;
     }
 
-    public BookingController VerifyBooking(BookingBean bookingBean){
+    public BookingController verifyBooking(BookingBean bookingBean){
 
 
         return null;

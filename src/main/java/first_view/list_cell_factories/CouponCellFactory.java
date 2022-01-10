@@ -11,10 +11,9 @@ import java.io.IOException;
 
 public class CouponCellFactory extends ListCell<CouponBean> {
 
-    private final static String LIST_ITEM_RES = "first_view/list_item/client_coupon_item.fxml" ;
-    private final static String COUPON_CODE_LABEL_ID = "couponCodeLabel" ;
-    private final static String COUPON_DISCOUNT_LABEL_ID = "couponDiscountLabel" ;
-    private final static String COUPON_INDEX_LABEL_ID = "itemIndexLabel" ;
+    private static final String LIST_ITEM_RES = "first_view/list_item/client_coupon_item.fxml" ;
+    private static final String COUPON_CODE_LABEL_ID = "couponCodeLabel" ;
+    private static final String COUPON_DISCOUNT_LABEL_ID = "couponDiscountLabel" ;
 
     private Parent parentNode = null ;
 

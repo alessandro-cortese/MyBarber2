@@ -26,8 +26,6 @@ public class BarberConfirmDeleteServiceController {
 
         if(deleteEvent == deleteConfirmButton) {
 
-            // TODO when you understand the DAO classes delete the selected service from db
-
             InternalBackController.getInternalBackControllerInstance().backToHome(deleteEvent);
         }
 

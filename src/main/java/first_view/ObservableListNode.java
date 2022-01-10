@@ -10,7 +10,7 @@ public class ObservableListNode extends ObservableListBase<Node> {
 
     private ArrayList<Node> list ;
     public ObservableListNode(Node...arrayParam) {
-        list = new ArrayList<Node>() ;
+        list = new ArrayList<>() ;
         Collections.addAll(list, arrayParam);
     }
 
