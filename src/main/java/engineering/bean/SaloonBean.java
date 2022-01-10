@@ -21,11 +21,11 @@ public class SaloonBean {
 
     } //CONSTRUCTOR-NO ARGS MUST BE EMPTY!
 
-    public SaloonBean(String name, String city){
+    public SaloonBean(boolean type, String string){
 
         this.extractTimeSchedule();
 
-        if(city.equals(""))
+        if(type)
             this.name=name;
         else
             this.city=city;

@@ -192,7 +192,7 @@ public class SaloonDAO {
             ResultSet rs = Queries.selectSaloonByCity(stmt,saloonCity);
 
             if (!rs.first()) { //rs empty
-                throw new Exception("No Saloon found matching with city" + saloonCity);
+                throw new Exception("No Saloon found matching with city: " + saloonCity);
             }
 
             //riposiz. del cursore

@@ -1,28 +1,27 @@
 package application_controller.graphic;
 
+import application_controller.BookingController;
 import engineering.bean.SaloonBean;
-import first_view.ObservableListNode;
-import javafx.event.ActionEvent;
+import first_view.list_cell_factories.SaloonListCellFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.BorderPane;
+import javafx.util.Callback;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
 public class ClientListViewController implements Initializable {
     @FXML
-    private ListView<Node> saloonListView;
+    private ListView<SaloonBean> saloonListView;
 
     @FXML
     private Label placeSaloonItem;
@@ -34,7 +33,7 @@ public class ClientListViewController implements Initializable {
     private Button saloonButton;
 
     private static final String APPOINTMENT_SALOON_ITEM = "first_view/list_item/take_saloon_item.fxml";
-    private static final String CLIENT_DATEHOUR= "first_view/client/client_appointment_Hour&Date.fxml";
+
 
     private String saloonName;
     private String saloonAddress;
@@ -42,42 +41,30 @@ public class ClientListViewController implements Initializable {
     private String saloonPhone;
     private int seatNumber;
     private Time slotTime;
+    private BookingController bookingController;
+    private List<SaloonBean> saloonBeanList;
 
-    @FXML
-    public void onButtonSaloonClicked(ActionEvent actionEvent) throws IOException {
-        Button sourceButton = (Button) actionEvent.getSource();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR));
-        Parent newCenterNode = fxmlLoader.load();
-        //BookingDateHourGraphicController bookingDateHourGraphicController = fxmlLoader.getController();
-        // bookingDateHourGraphicController.display(saloonBean);
-        Scene myScene = sourceButton.getScene();
-        BorderPane borderPane = (BorderPane) myScene.getRoot();
-        borderPane.setCenter(newCenterNode);
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        saloonListView.setCellFactory(param -> new SaloonListCellFactory());
+        saloonListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-        Node[] nodesList = new Node[10];
-        for (int i = 0; i < 10; i++) {
-            try {
-                nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(APPOINTMENT_SALOON_ITEM))).load();
-            } catch (IOException e) {
-                e.getCause();
-            }
-        }
-        ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
-        saloonListView.setItems(clientAppointmentsList);
+        });
+        saloonListView.getItems().clear();
+        saloonListView.setItems(FXCollections.observableList(saloonBeanList));
+
+        /* FARE COSI
+        *  ProductSearchInfoBean searchInfoBean = new ProductSearchInfoBean(productName) ;
+        List<ProductBean> productBeans = buyProductController.filterProductList(searchInfoBean);
+        buyProductListView.getItems().clear();
+        buyProductListView.setItems(FXCollections.observableList(productBeans));
+        *
+        * */
     }
 
 
-    public void display(SaloonBean saloonBean) {
-        this.saloonName = saloonBean.getName();
-        this.saloonAddress =saloonBean.getAddress();
-        this.saloonCity = saloonBean.getCity();
-        this.saloonPhone =saloonBean.getPhone();
-        this.seatNumber = saloonBean.getSeatNumber();
-        this.slotTime = saloonBean.getSlotTime();
+    public void ListCityBean(List<SaloonBean> list) {
+        this.saloonBeanList = list;
     }
-
 }

@@ -14,7 +14,7 @@ public class SaloonListCellFactory extends ListCell<SaloonBean> {
     private Parent parentNode = null ;
 
     private static final String LIST_ITEM_SALOON = "first_view/list_item/take_saloon_item.fxml";
-    private static final String NAME_LABEL_ID = "nameSaloonItem" ;
+    private static final String NAME_LABEL_ID = "labelSaloonItem" ;
     private static final String PLACE_LABEL_ID = "placeSaloonItem" ;
 
     @Override
@@ -27,8 +27,8 @@ public class SaloonListCellFactory extends ListCell<SaloonBean> {
 
                 Label nameSaloonItem = (Label) parentNode.lookup("#" + NAME_LABEL_ID) ;
                 Label placeSaloonItem = (Label) parentNode.lookup("#" + PLACE_LABEL_ID) ;
-                nameSaloonItem.setText(item.getName());
-                placeSaloonItem.setText(item.getAddress()+item.getCity());
+                nameSaloonItem.setText("d"/*item.getName()*/);
+                //placeSaloonItem.setText(item.getAddress()+item.getCity());
 
                 setGraphic(parentNode);
 

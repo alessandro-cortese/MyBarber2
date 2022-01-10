@@ -24,7 +24,11 @@ public class BookedGraphicController implements Initializable {
         void onBookedButton(ActionEvent event) throws IOException {
             InternalBackController internalBackController = InternalBackController.getInternalBackControllerInstance();
             internalBackController.backToHome((Node) event.getSource());
+
+
         }
+
+
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
