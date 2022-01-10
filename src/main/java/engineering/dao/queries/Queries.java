@@ -82,7 +82,13 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     public  static ResultSet selectAvailableSaloonDateAndHour(Statement statement, Time time, LocalDate date) throws SQLException {
         String select = String.format("SELECT FROM SaloonTime where hourBooking = '%s' AND dateBooking ='%s';", time,date);
         return statement.executeQuery(select);
+
     }// DA fare insieme ad alessandro per chiarire
+
+    public static ResultSet selectSlotTimeSaloon(Statement stmt, String saloonName) throws SQLException {
+        String query = String.format("SELECT openMorningTime,openAfternoonTime,closeMorningTime,closeAfternoonTime,intervalSlotTime FROM Saloon join SaloonTime on id.Saloon = Saloon.SaloonTime WHERE name.Saloon = '%s';", saloonName);
+        return  stmt.executeQuery(query);
+    }
 
 
     public static ResultSet selectSaloonByCity(Statement stmt, String saloonCity) throws SQLException {

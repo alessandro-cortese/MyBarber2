@@ -1,7 +1,10 @@
 package engineering.bean;
 
+import javafx.fxml.Initializable;
+
 import java.sql.Time;
 import java.time.LocalTime;
+import java.util.List;
 
 public class SaloonBean {
 
@@ -25,11 +28,15 @@ public class SaloonBean {
 
         this.extractTimeSchedule();
 
-        if(type)
+        if(type) //if type is true, then the string inserted is "by name"
             this.name=name;
-        else
+        else    // by city
             this.city=city;
 
+    }
+
+    public SaloonBean(String saloonName) {
+        this.name= saloonName;
     }
 
     private void extractTimeSchedule(){

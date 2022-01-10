@@ -50,6 +50,10 @@ public class Saloon {
         this.slotTime = slotTime;
     }
 
+    public Saloon(String saloonName, Time openMorningTime, Time openAfternoonTime, Time closeMorningTime, Time closeAfternoonTime, Time intervalSlotTime) {
+
+    }
+
     private void extractedNumberOfSlots(){
 
         this.numberOfSlots = new Integer[2];

@@ -270,4 +270,48 @@ public class SaloonDAO {
     }
 
 
+    public static Saloon retreiveTimeSlots(String saloonName) throws Exception {
+        Statement stmt = null;
+        Saloon saloon;
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try {
+            //creazione ed esecuzione della query
+            stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            if (stmt==null)
+                System.out.println("unable to execute query");
+
+            ResultSet rs = Queries.selectSlotTimeSaloon(stmt, saloonName);
+
+            if (!rs.first()) { //rs empty
+                throw new Exception("No Saloon time-slots found matching with saloon: " + saloonName);
+            }
+
+            //riposiz. del cursore
+            rs.first();
+            do {
+                // lettura delle colonne "by name"
+                Time  openMorningTime = rs.getTime("openMorningTime");
+                Time openAfternoonTime = rs.getTime("openAfternoonTime");
+                Time closeMorningTime = rs.getTime("closeMorningTime");
+                Time closeAfternoonTime = rs.getTime("closeAfternoonTime");
+                Time intervalSlotTime = rs.getTime("intervalSlotTime");
+
+                saloon = new Saloon(saloonName, openMorningTime, openAfternoonTime,closeMorningTime, closeAfternoonTime,intervalSlotTime);
+            }while (rs.next());
+            //chiudo rs
+            rs.close();
+        }
+        finally {
+            // Clean-up dell'ambiente
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+        }
+        return saloon;
+
+    }
 }

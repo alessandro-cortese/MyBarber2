@@ -54,17 +54,13 @@ public class ClientListViewController implements Initializable {
         saloonListView.getItems().clear();
         saloonListView.setItems(FXCollections.observableList(saloonBeanList));
 
-        /* FARE COSI
-        *  ProductSearchInfoBean searchInfoBean = new ProductSearchInfoBean(productName) ;
-        List<ProductBean> productBeans = buyProductController.filterProductList(searchInfoBean);
-        buyProductListView.getItems().clear();
-        buyProductListView.setItems(FXCollections.observableList(productBeans));
-        *
-        * */
     }
 
 
-    public void ListCityBean(List<SaloonBean> list) {
+    public void ListCityBean(List<SaloonBean> list) { //metodo chiamato in BookingGraphicController per passare la list dei saloni di una certa città
         this.saloonBeanList = list;
+    }
+
+    public void display(SaloonBean saloonBean) {
     }
 }

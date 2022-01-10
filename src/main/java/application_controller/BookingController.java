@@ -1,5 +1,6 @@
 package application_controller;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -15,7 +16,7 @@ public class BookingController {
     private String saloonCity;
     private String saloonName;
     private Saloon saloonByName;
-
+    private Saloon saloon;
     public static void retrieveSlotTime(LocalDate date) { //questa classe mi serve per recuperare in base alla data, orario e chiusura di mattina, pomeriggio di quel giorno e tramite la classe ScheduleTime creo gli slotTime
 
     }
@@ -51,8 +52,6 @@ public class BookingController {
 
     public SaloonBean searchByNameSaloon(SaloonBean saloonBean) throws Exception {
 
-        SaloonDAO saloonDAO = new SaloonDAO();
-
         //saloonName = saloonBean.getName();
         //SaloonDAO saloonDAO = new SaloonDAO();
 
@@ -69,4 +68,22 @@ public class BookingController {
 
     }
 
+    public SaloonBean searchTimeSlots(SaloonBean saloonBean) {
+        SaloonBean saloonBeanTimeSlots;
+        SaloonDAO saloonDAO = new SaloonDAO();
+        saloonName = saloonBean.getName();
+
+        try {
+            saloon = saloonDAO.retreiveTimeSlots(saloonName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       // saloonBeanTimeSlots.s//devo settare i parametri ma aspetto alessandro
+
+
+        //return saloonBeanTimeSlots; // da finire
+        return null;
+    }
 }
