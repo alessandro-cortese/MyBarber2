@@ -20,35 +20,32 @@ public class CouponDAO {
     private static final String COUPON_DISCOUNT_COL_ID = "sconto" ;
     private static final String COUPON_DISCOUNT_TYPE = "sconto";
 
-    public Coupon loadCouponByCode(Integer couponCode, User user) throws InvalidCouponException {
-        /*Connection connection = Connector.getConnectorInstance().getConnection();
+    public Coupon loadCouponByCode(Integer couponCode) throws InvalidCouponException {
+        Connection connection = Connector.getConnectorInstance().getConnection();
+        Coupon coupon = null ;
         try(Statement statement = connection.createStatement() ;
-            ResultSet resultSet = Queries.loadCouponByCode(statement, couponCode, user.getEmail()) ;)
+            ResultSet resultSet = Queries.selectCouponByCode(statement, couponCode) ;)
         {
-            resultSet.next() ;
-            if (!resultSet.isFirst()) {
-                throw new InvalidCouponException() ;
+
+            if (resultSet.next()) {
+                coupon = createCoupon(resultSet) ;
+            }
+            else {
+                throw  new InvalidCouponException("ERRORE: COUPON NON VALIDO") ;
             }
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
-        }*/
+        }
 
-        if (couponCode == EXAMPLE_COUPON) {
-            return new Coupon(0, 20.0) ;
-        }
-        else {
-            throw new InvalidCouponException("Coupon non Trovato") ;
-        }
+        return coupon ;
     }
 
     public List<Coupon> loadCouponByUser(String userEmail) {
         Connection connection = Connector.getConnectorInstance().getConnection();
         List<Coupon> coupons = new ArrayList<>() ;
-        try (
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = Queries.selectCouponsByOwner(statement, userEmail) ;
-                )
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = Queries.selectCouponsByOwner(statement, userEmail) ;)
         {
             while (resultSet.next()) {
                 Coupon coupon = createCoupon(resultSet) ;
@@ -87,11 +84,11 @@ public class CouponDAO {
         }
     }
 
-    public Integer addNewCoupon(Double couponValue, String email) {
+    public Coupon addNewCoupon(Double couponValue, String email) {
         Connection connection = Connector.getConnectorInstance().getConnection();
 
-        Integer newCouponCode = -1 ;
-        try(PreparedStatement statement = connection.prepareStatement("INSERT Coupon(id,tipoCoupon, sconto, donazione, customer) VALUES(0,?,?,?,?) ;", Statement.RETURN_GENERATED_KEYS);) {
+        Coupon newCoupon = null ;
+        try(PreparedStatement statement = connection.prepareStatement("INSERT Coupon(tipoCoupon, sconto, donazione, customer) VALUES(?,?,?,?) ;", Statement.RETURN_GENERATED_KEYS);) {
 
             statement.setString(1, COUPON_DISCOUNT_TYPE);
             statement.setDouble(2, couponValue);
@@ -102,12 +99,13 @@ public class CouponDAO {
             ResultSet generatedKeys = statement.getGeneratedKeys() ;
 
             while (generatedKeys.next()) {
-                newCouponCode = generatedKeys.getInt(0) ;
+                Integer newCouponCode = generatedKeys.getInt(1) ;
+                newCoupon = new Coupon(newCouponCode, couponValue) ;
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
 
-        return newCouponCode ;
+        return newCoupon ;
     }
 }

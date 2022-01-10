@@ -2,11 +2,8 @@ package engineering.dao;
 
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
-import model.Barber;
 import model.Customer;
-import model.User;
 
-import javax.annotation.Nullable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -113,5 +110,17 @@ public class UserDAO {
         }
 
         return customer ;
+    }
+
+    public void updateCustomerPoints(Integer customerPoints, String customerEmail) {
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement() ;) {
+            String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customerPoints, customerEmail) ;
+            statement.executeUpdate(update) ;
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 }

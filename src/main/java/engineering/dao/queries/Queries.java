@@ -37,6 +37,11 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
+    public static ResultSet loadSaloonId(Statement statement, String barberEmail) throws SQLException {
+        String query = String.format("SELECT * FROM Saloon WHERE barber = '%s';", barberEmail);
+        return statement.executeQuery(query);
+    }
+
 
     //-+-+-+-+-+-+-+-+-+-+- Product -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet loadAllProducts(Statement statement) throws  SQLException {
@@ -56,13 +61,13 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
 
     //-+-+-+-+-+-+-+-+-+-+- Coupon -+-+-+-+-+-+-+-+-+-+-//
-    public static ResultSet selectCouponByCode(Statement statement, String couponCode, String userEmail) throws SQLException {
-        String query = String.format("SELECT * FROM Coupon C where C.name = '%s' AND C.customer = '%s';", couponCode, userEmail) ;
+    public static ResultSet selectCouponByCode(Statement statement, Integer couponCode) throws SQLException {
+        String query = String.format("SELECT * FROM Coupon C where C.id = %d ;", couponCode) ;
         return statement.executeQuery(query) ;
     }
 
     public static void deleteCoupon(Statement statement, Integer couponCode) throws SQLException {
-        String delete = String.format("DELETE FROM Coupon WHERE name = '%d';", couponCode) ;
+        String delete = String.format("DELETE FROM Coupon WHERE id = %d ;", couponCode) ;
         statement.execute(delete) ;
     }
 
@@ -70,6 +75,7 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         String query = String.format("SELECT * FROM Coupon WHERE customer = '%s' ;", userEmail) ;
         return statement.executeQuery(query) ;
     }
+
 
 
     //-+-+-+-+-+-+-+-+-+-+- Order -+-+-+-+-+-+-+-+-+-+-//
@@ -103,6 +109,18 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
+    public static int saveService(Statement statement, String barberEmail, String serviceName, String serviceDescription, Double price) throws SQLException {
+        String update = String.format("INSERT INTO Service(name, description, price, barber) VALUES('%s', '%s', %d, '%s');", serviceName, serviceDescription, price, barberEmail);
+        return statement.executeUpdate(update);
+    }
+
+    /*
+
+       private String name;
+    private String description;
+    private double price;
+     */
+
 
     //-+-+-+-+-+-+-+-+-+-+- User -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet selectUserByCredentials(Statement statement, String userEmail, String password) throws SQLException {
@@ -120,6 +138,11 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query) ;
     }
 
+    //-+-+-+-+-+-+-+-+-+-+- Customer -+-+-+-+-+-+-+-+-+-+-//
 
+    public static  ResultSet loadCustomerFromSaloon(Statement statement, Integer favoriteSaloonId) throws SQLException {
+        String query = String.format("SELECT C.* FROM Customer C JOIN favorite F ON C.userEmail = F.customer WHERE F.saloon = '%d';", favoriteSaloonId);
+        return statement.executeQuery(query);
+    }
 
 }

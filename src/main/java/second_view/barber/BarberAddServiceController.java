@@ -50,8 +50,8 @@ public class BarberAddServiceController {
         else if(addServiceCommand.compareTo("add") == 0 && getterTex()){
                 try {
                     ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
-                    AddServiceController addServiceController = new AddServiceController();
-                    addServiceController.addService(serviceBean);
+                    //AddServiceController addServiceController = new AddServiceController();
+                    //addServiceController.addService(serviceBean);
                 }catch(NegativePriceException e){
                     addServiceExceptionLabelSecondView.setText("Insert price is negative!");
                 }

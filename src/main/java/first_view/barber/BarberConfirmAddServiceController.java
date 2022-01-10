@@ -2,6 +2,7 @@ package first_view.barber;
 
 import application_controller.AddServiceController;
 import engineering.bean.ServiceBean;
+import engineering.bean.UserBean;
 import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,11 +25,13 @@ public class BarberConfirmAddServiceController {
     public void onButtonClicked(ActionEvent event) {
 
         Node sourceNode = (Node) event.getSource();
+        UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
+
 
         if(sourceNode == saveConfirmButton) {
             InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
             AddServiceController addServiceController = new AddServiceController();
-            addServiceController.addService(serviceBean);
+            addServiceController.addService(serviceBean,userBean);
         }
 
     }
