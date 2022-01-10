@@ -62,7 +62,7 @@ public class ManageCouponController {
             if (customerPoints >= couponCost) {
                 createNewCoupon(couponValue) ;
                 customer.setCardPoints(customer.getCardPoints() - couponCost);
-                //userDAO.updateCustomerPoints(customer.getCardPoints(), cusomer.getEmail()) ;
+                userDAO.updateCustomerPoints(customer.getCardPoints(), customer.getEmail()) ;
                 fidelityCardBean = new FidelityCardBean(customer.getCardPoints(), createCouponBeans()) ;
             }
             else {
@@ -73,9 +73,10 @@ public class ManageCouponController {
     }
 
     private void createNewCoupon(Double couponValue) throws InvalidCouponException {
-        Integer couponCode = couponDAO.addNewCoupon(couponValue, customer.getEmail()) ;
-        Coupon newCoupon = new Coupon(couponCode,couponValue) ;
-        couponContainer.addCoupon(newCoupon) ;
+        Coupon newCoupon = couponDAO.addNewCoupon(couponValue, customer.getEmail()) ;
+        if (newCoupon != null) {
+            couponContainer.addCoupon(newCoupon) ;
+        }
     }
 
 

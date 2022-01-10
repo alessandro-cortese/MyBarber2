@@ -56,13 +56,13 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
 
     //-+-+-+-+-+-+-+-+-+-+- Coupon -+-+-+-+-+-+-+-+-+-+-//
-    public static ResultSet selectCouponByCode(Statement statement, String couponCode, String userEmail) throws SQLException {
-        String query = String.format("SELECT * FROM Coupon C where C.name = '%s' AND C.customer = '%s';", couponCode, userEmail) ;
+    public static ResultSet selectCouponByCode(Statement statement, Integer couponCode) throws SQLException {
+        String query = String.format("SELECT * FROM Coupon C where C.id = %d ;", couponCode) ;
         return statement.executeQuery(query) ;
     }
 
     public static void deleteCoupon(Statement statement, Integer couponCode) throws SQLException {
-        String delete = String.format("DELETE FROM Coupon WHERE name = '%d';", couponCode) ;
+        String delete = String.format("DELETE FROM Coupon WHERE id = %d ;", couponCode) ;
         statement.execute(delete) ;
     }
 
@@ -70,6 +70,7 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         String query = String.format("SELECT * FROM Coupon WHERE customer = '%s' ;", userEmail) ;
         return statement.executeQuery(query) ;
     }
+
 
 
     //-+-+-+-+-+-+-+-+-+-+- Order -+-+-+-+-+-+-+-+-+-+-//

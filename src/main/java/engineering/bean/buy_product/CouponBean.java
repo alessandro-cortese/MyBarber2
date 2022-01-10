@@ -38,6 +38,6 @@ public class CouponBean {
 
     @Override
     public String toString() {
-        return couponCode ;
+        return String.format("Codice Coupon: %s", couponCode);
     }
 }

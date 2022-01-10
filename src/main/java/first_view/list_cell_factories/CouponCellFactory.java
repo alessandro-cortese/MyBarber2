@@ -28,8 +28,8 @@ public class CouponCellFactory extends ListCell<CouponBean> {
 
                 Label couponCodeLabel = (Label) parentNode.lookup("#" + COUPON_CODE_LABEL_ID) ;
                 Label couponDiscountLabel = (Label) parentNode.lookup("#" + COUPON_DISCOUNT_LABEL_ID) ;
-                couponCodeLabel.setText(item.getCouponCode());
-                couponDiscountLabel.setText(Double.toString(item.getCouponDiscount()));
+                couponCodeLabel.setText("Codice: " + item.getCouponCode());
+                couponDiscountLabel.setText("Sconto: " + Double.toString(item.getCouponDiscount()));
 
                 setGraphic(parentNode);
 
