@@ -33,7 +33,9 @@ public class SaloonDAO {
 
 
     public  void setBarberEmail(String barberEmail) {
+
         this.barberEmail = barberEmail;
+
     }
 
     public SaloonCatalogue loadAllSaloon() {
@@ -269,5 +271,24 @@ public class SaloonDAO {
         return saloon;
     }
 
+
+    public Integer loadIdOfSaloon(String barberEmail) {
+
+        Integer saloonIds = null;
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.loadSaloonId(statement, barberEmail)) {
+
+            if(resultSet.isFirst()) saloonIds = resultSet.getInt(SALOON_NAME_ID);
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+        return saloonIds;
+
+    }
 
 }

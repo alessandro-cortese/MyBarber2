@@ -8,14 +8,26 @@ public class Customer extends User{
 
 
     public Customer(String email, String pass, String name, String surname, String creditCard, String phone){
+
         super(email, pass, name, surname);
         setCreditCard(creditCard);
         setPhone(phone);
+
+    }
+
+    public Customer(String email, String pass, String name, String surname, String creditCard, String phone, Integer cardPoints){
+        super(email, pass, name, surname);
+        setCreditCard(creditCard);
+        setPhone(phone);
+        setCardPoints(cardPoints);
+
     }
 
     public Customer(String email, String pass, String name, String surname, Integer cardPoints) {
+
         super(email, pass, name, surname);
         setCardPoints(cardPoints);
+
     }
 
     public String getPhone() {
@@ -43,10 +55,16 @@ public class Customer extends User{
     }
 
     public Integer getCardPoints() {
+
         return cardPoints;
+
     }
 
     public void setCardPoints(Integer cardPoints) {
+
         this.cardPoints = cardPoints;
+
     }
+
+
 }

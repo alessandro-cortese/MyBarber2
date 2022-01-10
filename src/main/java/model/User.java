@@ -5,7 +5,6 @@ public abstract class User {
     private  String pass;
     private String name;
     private String surname;
-    private int pointsCard;
 
     protected User(String email, String pass, String name, String surname){
         this.email = email;
@@ -42,10 +41,5 @@ public abstract class User {
     public void setPass(String pass){
         this.pass = pass;
     }
-    public int getPointsCard(){
-        return pointsCard;
-    }
-    public void setPointsCard(int pointsCard){
-        this.pointsCard = pointsCard;
-    }
+
 }
