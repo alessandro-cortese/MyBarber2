@@ -14,7 +14,7 @@ public class ManageServiceController {
     public List<ServiceBean> getAllService() throws NegativePriceException {
 
         ServiceDAO serviceDAO = new ServiceDAO();
-        ServiceCatalogue catalogueService = serviceDAO.loadAllService();
+        ServiceCatalogue catalogueService = serviceDAO.loadServices();
         List<Service> services = catalogueService.getServices();
         String nameOfUsedProduct;
         ArrayList<ServiceBean> serviceBeanList = new ArrayList<>();

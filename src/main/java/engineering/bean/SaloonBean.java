@@ -1,10 +1,7 @@
 package engineering.bean;
 
-import javafx.fxml.Initializable;
-
 import java.sql.Time;
 import java.time.LocalTime;
-import java.util.List;
 
 public class SaloonBean {
 
@@ -14,47 +11,35 @@ public class SaloonBean {
     private String city;
     private Time slotTime;
     private  int seatNumber;
-    private LocalTime[][] timeSchedule;
-    private Integer[] numberOfSlots;
+    private LocalTime openingMorningTime;
+    private LocalTime closeMorningTime;
+    private LocalTime openingAfternoonTime;
+    private LocalTime closeAfternoonTime;
+    private Integer numberOfMorningSlots;
+    private Integer numberOfAfternoonSlots;
+
 
     public SaloonBean(){
-
-        this.extractTimeSchedule();
-        this.extractNumberOfSlots();
 
     } //CONSTRUCTOR-NO ARGS MUST BE EMPTY!
 
     public SaloonBean(boolean type, String string){
 
-        this.extractTimeSchedule();
-
         if(type) //if type is true, then the string inserted is "by name"
-            this.name=name;
+            this.name = name;
         else    // by city
-            this.city=city;
+            this.city = city;
 
     }
 
     public SaloonBean(String saloonName) {
-        this.name= saloonName;
-    }
 
-    private void extractTimeSchedule(){
-
-        this.timeSchedule = new LocalTime[2][2];
-
-    }
-
-    private void extractNumberOfSlots() {
-
-        this.numberOfSlots = new Integer[2];
+        this.name = saloonName;
 
     }
 
     public SaloonBean(String name,String address,String city, String phone, int seatNumber, int slotTimeMinutes){
 
-        this.extractTimeSchedule();
-        this.extractNumberOfSlots();
         this.address = address;
         this.name = name;
         this.phone = phone;
@@ -136,21 +121,75 @@ public class SaloonBean {
 
     }
 
-    public void setTimeSchedule(LocalTime[][] localTimes){
+    public void setNumberOfMorningSlots(Integer morningSlots) {
 
-        this.timeSchedule = localTimes;
-
-    }
-
-    public void setNumberOfSlots(Integer[] numberOfSlots) {
-
-        this.numberOfSlots = numberOfSlots;
+        this.numberOfMorningSlots = morningSlots;
 
     }
 
-    public Integer[] getNumberOfSlots() {
+    public Integer getNumberOfMorningSlots() {
 
-        return this.numberOfSlots;
+        return this.numberOfMorningSlots;
+
+    }
+
+    public void setNumberOfAfternoonSlots(Integer afternoonSlots) {
+
+        this.numberOfAfternoonSlots = afternoonSlots;
+
+    }
+
+    public Integer getNumberOfAfternoonSlots() {
+
+        return this.numberOfAfternoonSlots;
+
+    }
+
+    public LocalTime getOpeningMorningTime() {
+
+        return openingMorningTime;
+
+    }
+
+    public void setOpeningMorningTime(LocalTime openingMorningTime) {
+
+        this.openingMorningTime = openingMorningTime;
+
+    }
+
+    public LocalTime getCloseMorningTime() {
+
+        return closeMorningTime;
+
+    }
+
+    public void setCloseMorningTime(LocalTime closeMorningTime) {
+
+        this.closeMorningTime = closeMorningTime;
+
+    }
+
+    public LocalTime getOpeningAfternoonTime() {
+
+        return openingAfternoonTime;
+
+    }
+
+    public void setOpeningAfternoonTime(LocalTime openingAfternoonTime) {
+
+        this.openingAfternoonTime = openingAfternoonTime;
+
+    }
+
+    public LocalTime getCloseAfternoonTime() {
+
+        return closeAfternoonTime;
+
+    }
+
+    public void setCloseAfternoonTime(LocalTime closeAfternoonTime) {
+
+        this.closeAfternoonTime = closeAfternoonTime;
 
     }
 

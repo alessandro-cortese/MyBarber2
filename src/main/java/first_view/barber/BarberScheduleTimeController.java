@@ -59,7 +59,11 @@ public class BarberScheduleTimeController {
         Button sourceButton = (Button) event.getSource();
         int minutes;
 
-        saloonBean.setTimeSchedule(localTime);
+        saloonBean.setOpeningMorningTime(localTime[0][0]);
+        saloonBean.setCloseMorningTime(localTime[0][1]);
+        saloonBean.setOpeningAfternoonTime(localTime[1][0]);
+        saloonBean.setCloseAfternoonTime(localTime[1][1]);
+        
 
         for (int i = 0; i < localTime.length; i++) {
             for (int j = 0; j < localTime[i].length - 1; j++){
@@ -68,7 +72,8 @@ public class BarberScheduleTimeController {
             }
         }
 
-        saloonBean.setNumberOfSlots(numberOfSlot);
+        saloonBean.setNumberOfMorningSlots(numberOfSlot[0]);
+        saloonBean.setNumberOfAfternoonSlots(numberOfSlot[1]);
 
         if(sourceButton == saveButton){
             InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());

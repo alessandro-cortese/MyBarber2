@@ -11,7 +11,6 @@ import engineering.dao.ServiceDAO;
 import engineering.exception.ProductNotFoundException;
 import model.Customer;
 import model.Service;
-import model.User;
 import model.buy_product.Product;
 
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ public class AddServiceController {
         Service service;
 
         AddServiceBoundarySendEmail addServiceBoundarySendEmail = new AddServiceBoundarySendEmail(serviceBean);
+        ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
 
         SaloonDAO saloonDAO = new SaloonDAO();
         CustomerDAO customerDAO = new CustomerDAO();
@@ -41,7 +41,7 @@ public class AddServiceController {
 
         try{
 
-            localProduct = productDAO.loadProductByName(serviceBean.getName());
+            localProduct = productDAO.loadProductByName(serviceBean.getName(), userBean.getUserEmail());
 
         }catch (ProductNotFoundException e){
 
@@ -60,11 +60,15 @@ public class AddServiceController {
 
         service = new Service(serviceBean.getName(), serviceBean.getDescription(), serviceBean.getPrice(), localProduct);
 
-        ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
-        serviceCatalogue.addService(service);
 
-        addServiceBoundarySendEmail.setUserBeans(userBeans);
-        serviceBean.notifyChanges();
+        if(serviceDAO.insertService(service, userBean.getUserEmail())){
+
+            serviceCatalogue.addService(service);
+
+            addServiceBoundarySendEmail.setUserBeans(userBeans);
+            serviceBean.notifyChanges();
+
+        }
 
     }
 

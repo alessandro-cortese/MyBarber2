@@ -54,8 +54,8 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query) ;
     }
 
-    public static ResultSet loadProductByName(Statement statement, String name) throws SQLException {
-        String query = String.format("SELECT * FROM Product where name = '%s';", name) ;
+    public static ResultSet loadProductByName(Statement statement, String name, String barberEmail) throws SQLException {
+        String query = String.format("SELECT * FROM Product where name = '%s' AND barber = '%s';", name, barberEmail) ;
         return statement.executeQuery(query) ;
     }
 
@@ -105,7 +105,7 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
     //-+-+-+-+-+-+-+-+-+-+- Service -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet loadServiceByName(Statement statement, String serviceName) throws SQLException {
-        String query = String.format("SELECT * FROM Service where name = '%s';", serviceName);
+        String query = String.format("SELECT * FROM Service WHERE name = '%s';", serviceName);
         return statement.executeQuery(query);
     }
 
@@ -114,13 +114,10 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeUpdate(update);
     }
 
-    /*
-
-       private String name;
-    private String description;
-    private double price;
-     */
-
+    public static ResultSet loadServicesByBarberEmail(Statement statement, String barberEmail) throws SQLException {
+        String query = String.format("SELECT * FROM Service WHERE barber = '%s';", barberEmail);
+        return statement.executeQuery(query);
+    }
 
     //-+-+-+-+-+-+-+-+-+-+- User -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet selectUserByCredentials(Statement statement, String userEmail, String password) throws SQLException {

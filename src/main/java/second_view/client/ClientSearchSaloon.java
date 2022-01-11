@@ -1,13 +1,11 @@
 package second_view.client;
 
 import first_view.ObservableListNode;
-import first_view.list_cell_factories.CartRowListCellFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
@@ -41,7 +39,7 @@ public class ClientSearchSaloon implements Initializable {
         }
         else if (command.matches("select [0-9]+")) { //stringa composta da numeri  da 0 a 9 e almeno un carattere
             //Controllo che ci sia il salone con indice dato
-            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_DATEHOUR);
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_DATE_HOUR);
         }
 
         else if (command.compareTo("back") == 0) {
