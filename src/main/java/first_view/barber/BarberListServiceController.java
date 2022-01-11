@@ -52,10 +52,10 @@ public class BarberListServiceController implements Initializable {
             modifyServiceButton.setDisable(newValue == null);
             addServiceButton.setDisable(newValue == null);
             assert newValue != null;
-            nameServiceTextField.setText(newValue.getName());
-            descriptionServiceTextField.setText(newValue.getDescription());
-            nameOfProductTextField.setText(newValue.getNameOfUsedProduct());
-            priceServiceTextField.setText(Double.toString(newValue.getPrice()));
+            nameServiceTextField.setText(newValue.getNameInfo());
+            descriptionServiceTextField.setText(newValue.getDescriptionInfo());
+            nameOfProductTextField.setText(newValue.getNameOfUsedProductInfo());
+            priceServiceTextField.setText(Double.toString(newValue.getPriceInfo()));
         });
 
         modifyServiceButton.setDisable(true);

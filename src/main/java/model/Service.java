@@ -4,10 +4,10 @@ import model.buy_product.Product;
 
 public class Service {
 
-    private String name;
-    private String description;
-    private double price;
-    private Product usedProduct;
+    private String serviceName;
+    private String serviceDescription;
+    private double servicePrice;
+    private Product serviceUsedProduct;
 
     public Service () {
 
@@ -17,57 +17,57 @@ public class Service {
 
     public Service (String name, String description, double price, Product usedProduct) {
 
-        this.setName(name) ;
-        this.setDescription(description) ;
-        this.setPrice(price);
-        this.setUsedProduct(usedProduct);
+        this.setServiceName(name) ;
+        this.setServiceDescription(description) ;
+        this.setServicePrice(price);
+        this.setServiceUsedProduct(usedProduct);
     }
 
-    public String getName(){
+    public String getServiceName(){
 
-        return name;
-
-    }
-
-    public void setName(String name){
-
-        this.name = name;
+        return serviceName;
 
     }
 
-    public String getDescription(){
+    public void setServiceName(String serviceName){
 
-        return description;
-
-    }
-
-    public  void setDescription(String description){
-
-        this.description = description;
+        this.serviceName = serviceName;
 
     }
 
-    public Double getPrice(){
+    public String getServiceDescription(){
 
-        return price;
-
-    }
-
-    public void setPrice(double price){
-
-        this.price = price;
+        return serviceDescription;
 
     }
 
-    public void setUsedProduct(Product usedProduct) {
+    public  void setServiceDescription(String serviceDescription){
 
-        this.usedProduct = usedProduct;
+        this.serviceDescription = serviceDescription;
 
     }
 
-    public Product getUsedProduct() {
+    public Double getServicePrice(){
 
-        return this.usedProduct;
+        return servicePrice;
+
+    }
+
+    public void setServicePrice(double servicePrice){
+
+        this.servicePrice = servicePrice;
+
+    }
+
+    public void setServiceUsedProduct(Product serviceUsedProduct) {
+
+        this.serviceUsedProduct = serviceUsedProduct;
+
+    }
+
+    public Product getServiceUsedProduct() {
+
+        return this.serviceUsedProduct;
 
     }
 

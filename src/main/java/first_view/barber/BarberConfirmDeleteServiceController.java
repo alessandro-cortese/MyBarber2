@@ -33,10 +33,10 @@ public class BarberConfirmDeleteServiceController {
 
     public void displayServiceToDelete(ServiceBean serviceBean) {
 
-        nameDeleteServiceTextField.setText(serviceBean.getName());
-        priceDeleteServiceTextField.setText(Double.toString(serviceBean.getPrice()));
-        descriptionDeleteServiceTextField.setText(serviceBean.getDescription());
-        nameOfServiceToDeleteTextField.setText(serviceBean.getNameOfUsedProduct());
+        nameDeleteServiceTextField.setText(serviceBean.getNameInfo());
+        priceDeleteServiceTextField.setText(Double.toString(serviceBean.getPriceInfo()));
+        descriptionDeleteServiceTextField.setText(serviceBean.getDescriptionInfo());
+        nameOfServiceToDeleteTextField.setText(serviceBean.getNameOfUsedProductInfo());
 
     }
 

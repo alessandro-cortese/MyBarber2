@@ -51,7 +51,7 @@ public class ServiceCatalogue {
     public Service getServiceByName (String serviceName) {
 
         for(Service service : serviceArrayList) {
-            if(service.getName().compareTo(serviceName) == 0) {
+            if(service.getServiceName().compareTo(serviceName) == 0) {
                 return service;
             }
         }
@@ -62,7 +62,7 @@ public class ServiceCatalogue {
     public boolean removeService (String serviceName) {
 
         for (Service localService : serviceArrayList) {
-            if(localService.getName().compareTo(serviceName) == 0) {
+            if(localService.getServiceName().compareTo(serviceName) == 0) {
                 serviceArrayList.remove(localService);
                 return true;
             }
@@ -76,10 +76,10 @@ public class ServiceCatalogue {
         boolean flag = false;
         Service localService = getServiceByName(nameOfServiceToModify);
         if(localService != null) {
-            localService.setName(newName);
-            localService.setDescription(newDescription);
-            localService.setPrice(newPrice);
-            localService.setUsedProduct(newUsedProduct);
+            localService.setServiceName(newName);
+            localService.setServiceDescription(newDescription);
+            localService.setServicePrice(newPrice);
+            localService.setServiceUsedProduct(newUsedProduct);
             flag = true;
         }
         return flag;

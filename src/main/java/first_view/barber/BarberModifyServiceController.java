@@ -65,10 +65,10 @@ public class BarberModifyServiceController {
 
         this.serviceBean = serviceBean;
 
-        nameModifyServiceTextField.setText(serviceBean.getName());
-        modifyServiceNameOfUsedProductTextField.setText(serviceBean.getNameOfUsedProduct());
-        descriptionTextFieldModifyService.setText(serviceBean.getDescription());
-        modifyServicePriceTextField.setText(Double.toString(serviceBean.getPrice()));
+        nameModifyServiceTextField.setText(serviceBean.getNameInfo());
+        modifyServiceNameOfUsedProductTextField.setText(serviceBean.getNameOfUsedProductInfo());
+        descriptionTextFieldModifyService.setText(serviceBean.getDescriptionInfo());
+        modifyServicePriceTextField.setText(Double.toString(serviceBean.getPriceInfo()));
     }
 
 
