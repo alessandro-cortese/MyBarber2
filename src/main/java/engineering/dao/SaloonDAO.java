@@ -314,4 +314,28 @@ public class SaloonDAO {
         return saloon;
 
     }
+
+    public Integer loadIdOfSaloon(String barberEmail){
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        Integer saloonId = null;
+
+
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.loadSaloonId(statement, barberEmail)) {
+
+            if (resultSet.isFirst()) {
+
+                saloonId = resultSet.getInt(SALOON_NAME_ID);
+
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+        return saloonId;
+    }
+
 }

@@ -21,7 +21,6 @@ public class Connector { //SINGLETON CLASS
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
                     connection = DriverManager.getConnection(jdbcUrl);
 
-                    connection.setNetworkTimeout(E);
                 }
                 catch (ClassNotFoundException e) {
                     throw new RuntimeException("Cannot find the driver in the classpath!", e);

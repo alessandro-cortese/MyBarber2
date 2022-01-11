@@ -45,11 +45,11 @@ public class ProductDAO {
         return catalog ;
     }
 
-    public Product loadProductByName(String name) throws ProductNotFoundException{
+    public Product loadProductByName(String name, String barberEmail) throws ProductNotFoundException{
         Product product = null;
         Connection connection = Connector.getConnectorInstance().getConnection();
         try (Statement statement = connection.createStatement() ;
-             ResultSet resultSet = Queries.loadProductByName(statement, name) )
+             ResultSet resultSet = Queries.loadProductByName(statement, name, barberEmail) )
         {
             resultSet.next();
             if (resultSet.isFirst()) {

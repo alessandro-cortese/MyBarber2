@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceCatalogue {
-    private List<Service> serviceArrayList;
+
+    private final List<Service> serviceArrayList;
 
     public ServiceCatalogue(List<Service> service){
 

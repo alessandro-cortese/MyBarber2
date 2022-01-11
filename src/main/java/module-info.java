@@ -17,7 +17,6 @@ module it.barbergroup {
 
     exports first_view;
     exports first_view.pickers;
-    exports first_view.other_barber_scheduler;
     exports first_view.general;
     exports first_view.barber;
     exports first_view.client;
@@ -25,7 +24,6 @@ module it.barbergroup {
     opens first_view.client to javafx.fxml;
     opens first_view.barber to javafx.fxml;
     opens first_view.general to javafx.fxml;
-    opens first_view.other_barber_scheduler to javafx.fxml;
     opens first_view.pickers to javafx.fxml;
 
 

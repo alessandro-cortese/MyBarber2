@@ -22,14 +22,12 @@ public class ScreenChanger {
     public static final String CLIENT_SEE_APPOINTMENT_SCREEN = "second_view/client/client_see_appointment.fxml";
     public static final String BARBER_USER_AREA_SCREEN = "second_view/barber/barber_userarea.fxml";
     public static final String BARBER_MANAGE_SERVICE = "second_view/barber/barber_manage_service.fxml";
-
     public static final String BARBER_ADD_SERVICE_SCREEN_NAME = "second_view/barber/barber_add_service.fxml";
     public static final String BARBER_VIEW_APPOINTMENTS_SCREEN_NAME = "second_view/barber/barber_view_appointments.fxml" ;
-
     public static final String CLIENT_SEARCH_SALOON_SCREEN = "second_view/client/client_search_saloon.fxml" ;
     public static final String CLIENT_BOOK_APPOINTMENT_SCREEN = "second_view/client/client_book_appointment.fxml" ;
-    public static final String CLIENT_BOOK_DATEHOUR ="second_view/client/client_book_DateHour.fxml";
-    public static final String CLIENT_BOOK_TOTALPRICE = "second_view/client/client_totalPrice.fxml";
+    public static final String CLIENT_BOOK_DATE_HOUR ="second_view/client/client_book_DateHour.fxml";
+    public static final String CLIENT_BOOK_TOTAL_PRICE = "second_view/client/client_totalPrice.fxml";
 
     public static final String CLIENT_COMPLETE_ORDER_SCREEN = "second_view/client/client_complete_order.fxml" ;
 
