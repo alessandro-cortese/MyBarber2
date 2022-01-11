@@ -1,4 +1,5 @@
 package model;
+
 import java.sql.Time;
 import java.time.LocalTime;
 
@@ -10,8 +11,12 @@ public class Saloon {
     private String phone;
     private Time slotTime;
     private int seatNumber;
-    private LocalTime[][] timeSchedule;
-    private Integer[] numberOfSlots;
+    private LocalTime openingMorningTime;
+    private LocalTime closeMorningTime;
+    private LocalTime openingAfternoonTime;
+    private LocalTime closeAfternoonTime;
+    private Integer numberOfMorningSlots;
+    private Integer numberOfAfternoonSlots;
 
     public Saloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, LocalTime[][] localTimes, Integer[] numberOfSlots){
 
@@ -21,8 +26,12 @@ public class Saloon {
         this.phone = phone;
         this.slotTime = slotTime;
         this.seatNumber = seatNumber;
-        this.timeSchedule = localTimes;
-        this.numberOfSlots = numberOfSlots;
+        this.openingMorningTime = localTimes[0][1];
+        this.closeMorningTime = localTimes[0][2];
+        this.openingAfternoonTime = localTimes[1][0];
+        this.closeAfternoonTime = localTimes[1][1];
+        this.numberOfMorningSlots = numberOfSlots[0];
+        this.numberOfAfternoonSlots = numberOfSlots[1];
 
     }
 
@@ -34,14 +43,13 @@ public class Saloon {
         this.phone = phone ;
         this.slotTime = slotTime ;
         this.seatNumber = seatNumber ;
-        this.numberOfSlots = numberOfSlots ;
+        this.numberOfMorningSlots = numberOfSlots[0] ;
+        this.numberOfAfternoonSlots = numberOfSlots[1];
 
     }
 
     public Saloon(String city, String name, String address, String phone,Time slotTime, int seatNumber){
 
-        this.extractedTimeSchedule();
-        this.extractedNumberOfSlots();
         this.name = name;
         this.address = address;
         this.setPhone(phone);
@@ -54,33 +62,21 @@ public class Saloon {
 
     }
 
-    private void extractedNumberOfSlots(){
-
-        this.numberOfSlots = new Integer[2];
-
-    }
-
-    private void extractedTimeSchedule(){
-
-        this.timeSchedule = new LocalTime[2][2];
-
-    }
-
     public String getName(){
 
-        return name;
+        return this.name;
 
     }
 
     public void setName(String name){
 
-        this.name=name;
+        this.name = name;
 
     }
 
     public String getCity(){
 
-        return city;
+        return this.city;
 
     }
 
@@ -139,27 +135,75 @@ public class Saloon {
 
     }
 
-    public LocalTime[][] getTimeSchedule() {
+    public Integer getNumberOfMorningSlots() {
 
-        return timeSchedule;
-
-    }
-
-    public void setTimeSchedule(LocalTime[][] localTimes){
-
-        this.timeSchedule = localTimes;
+        return numberOfMorningSlots;
 
     }
 
-    public void setNumberOfSlots(Integer[] numberOfSlots){
+    public void setNumberOfMorningSlots(Integer numberOfMorningSlots) {
 
-        this.numberOfSlots = numberOfSlots;
+        this.numberOfMorningSlots = numberOfMorningSlots;
 
     }
 
-    public Integer[] getNumberOfSlots() {
+    public Integer getNumberOfAfternoonSlots() {
 
-        return this.numberOfSlots;
+        return numberOfAfternoonSlots;
+
+    }
+
+    public void setNumberOfAfternoonSlots(Integer numberOfAfternoonSlots) {
+
+        this.numberOfAfternoonSlots = numberOfAfternoonSlots;
+
+    }
+
+    public LocalTime getOpeningMorningTime() {
+
+        return openingMorningTime;
+
+    }
+
+    public void setOpeningMorningTime(LocalTime openingMorningTime) {
+
+        this.openingMorningTime = openingMorningTime;
+
+    }
+
+    public LocalTime getCloseMorningTime() {
+
+        return closeMorningTime;
+
+    }
+
+    public void setCloseMorningTime(LocalTime closeMorningTime) {
+
+        this.closeMorningTime = closeMorningTime;
+
+    }
+
+    public LocalTime getOpeningAfternoonTime() {
+
+        return openingAfternoonTime;
+
+    }
+
+    public void setOpeningAfternoonTime(LocalTime openingAfternoonTime) {
+
+        this.openingAfternoonTime = openingAfternoonTime;
+
+    }
+
+    public LocalTime getCloseAfternoonTime() {
+
+        return closeAfternoonTime;
+
+    }
+
+    public void setCloseAfternoonTime(LocalTime closeAfternoonTime) {
+
+        this.closeAfternoonTime = closeAfternoonTime;
 
     }
 

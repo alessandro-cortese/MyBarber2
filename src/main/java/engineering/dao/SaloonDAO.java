@@ -76,7 +76,10 @@ public class SaloonDAO {
                     sqlException.printStackTrace();
                 }
 
-                saloon.setTimeSchedule(localTimes);
+                saloon.setOpeningMorningTime(localTimes[0][0]);
+                saloon.setCloseMorningTime(localTimes[0][1]);
+                saloon.setOpeningAfternoonTime(localTimes[1][0]);
+                saloon.setCloseAfternoonTime(localTimes[1][1]);
 
             }
 
@@ -118,7 +121,10 @@ public class SaloonDAO {
                     sqlException.printStackTrace();
                 }
 
-                saloon.setTimeSchedule(localTimes);
+                saloon.setOpeningMorningTime(localTimes[0][0]);
+                saloon.setCloseMorningTime(localTimes[0][1]);
+                saloon.setOpeningAfternoonTime(localTimes[1][0]);
+                saloon.setCloseAfternoonTime(localTimes[1][1]);
 
             }
 
