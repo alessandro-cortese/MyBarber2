@@ -44,8 +44,8 @@ public class ServiceListCellFactory extends ListCell<ServiceBean> {
 
                 Label nameServiceLabel = (Label) parentNode.lookup("#" + SERVICE_NAME_LABEL_ID);
                 Label priceServiceLabel = (Label) parentNode.lookup("#" + SERVICE_PRICE_LABEL_ID);
-                nameServiceLabel.setText(item.getName());
-                priceServiceLabel.setText(item.getPrice() + " " + EURO_SYMBOL);
+                nameServiceLabel.setText(item.getNameInfo());
+                priceServiceLabel.setText(item.getPriceInfo() + " " + EURO_SYMBOL);
 
                 if(viewCaller){
                     Label indexLabel = (Label) parentNode.lookup("#" + SERVICE_LABEL_SLOT_NAME_ID);

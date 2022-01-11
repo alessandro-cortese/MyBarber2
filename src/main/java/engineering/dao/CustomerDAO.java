@@ -13,12 +13,12 @@ import java.util.List;
 
 public class CustomerDAO {
 
-    private final static String CUSTOMER_COL_EMAIL = "userEmail" ;
-    private final static String CUSTOMER_COL_NAME = "name" ;
-    private final static String CUSTOMER_COL_SURNAME  = "surname" ;
-    private final static String CUSTOMER_COL_TELEPHONE = "telephone" ;
-    private final static String CUSTOMER_COL_CREDIT_CARD = "creditCard" ;
-    private final static String CUSTOMER_COL_CARD_POINTS = "cardPoints" ;
+    private static final String CUSTOMER_COL_EMAIL = "userEmail" ;
+    private static final String CUSTOMER_COL_NAME = "name" ;
+    private static final String CUSTOMER_COL_SURNAME  = "surname" ;
+    private static final String CUSTOMER_COL_TELEPHONE = "telephone" ;
+    private static final String CUSTOMER_COL_CREDIT_CARD = "creditCard" ;
+    private static final String CUSTOMER_COL_CARD_POINTS = "cardPoints" ;
 
     public List<Customer> loadCustomerFromFavoriteSaloon(Integer favoriteSaloonId) {
 

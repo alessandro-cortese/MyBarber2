@@ -4,7 +4,6 @@ import engineering.container.ServiceCatalogue;
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 import model.Service;
-import model.buy_product.Product;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -37,7 +36,7 @@ public class ServiceDAO {
 
         try(Statement statement = connection.createStatement()) {
 
-            int result = Queries.saveService(statement, barberEmail, service.getName(), service.getDescription(), service.getPrice());
+            int result = Queries.saveService(statement, barberEmail, service.getServiceName(), service.getServiceDescription(), service.getServicePrice());
 
             flag = result > 0;
 

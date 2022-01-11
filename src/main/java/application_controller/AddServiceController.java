@@ -41,12 +41,12 @@ public class AddServiceController {
 
         try{
 
-            localProduct = productDAO.loadProductByName(serviceBean.getName(), userBean.getUserEmail());
+            localProduct = productDAO.loadProductByName(serviceBean.getNameInfo(), userBean.getUserEmail());
 
         }catch (ProductNotFoundException e){
 
             localProduct = null;
-            serviceBean.setNameOfUsedProduct("");
+            serviceBean.setNameOfUsedProductInfo("");
 
         }
 
@@ -58,7 +58,7 @@ public class AddServiceController {
 
         serviceBean.attach(addServiceBoundarySendEmail);
 
-        service = new Service(serviceBean.getName(), serviceBean.getDescription(), serviceBean.getPrice(), localProduct);
+        service = new Service(serviceBean.getNameInfo(), serviceBean.getDescriptionInfo(), serviceBean.getPriceInfo(), localProduct);
 
 
         if(serviceDAO.insertService(service, userBean.getUserEmail())){

@@ -46,10 +46,10 @@ public class BarberManageServiceController implements Initializable {
 
         manageServiceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             assert newValue != null;
-            manageServiceNameTextField.setText(newValue.getName());
-            manageServiceDescriptionTextField.setText(newValue.getDescription());
-            manageServiceNameOfUsedProductTextField.setText(newValue.getNameOfUsedProduct());
-            manageServicePriceTextField.setText(Double.toString(newValue.getPrice()));
+            manageServiceNameTextField.setText(newValue.getNameInfo());
+            manageServiceDescriptionTextField.setText(newValue.getDescriptionInfo());
+            manageServiceNameOfUsedProductTextField.setText(newValue.getNameOfUsedProductInfo());
+            manageServicePriceTextField.setText(Double.toString(newValue.getPriceInfo()));
             manageServiceSlotIndexTextField.setText(Integer.toString(serviceBeanList.indexOf(newValue)));
         });
 

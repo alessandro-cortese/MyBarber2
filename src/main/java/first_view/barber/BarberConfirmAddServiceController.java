@@ -40,10 +40,10 @@ public class BarberConfirmAddServiceController {
 
         this.serviceBean = localServiceBean;
 
-        nameConfirmedAddService.setText(localServiceBean.getName()) ;
-        priceConfirmedAddService.setText(Double.toString(localServiceBean.getPrice())) ;
-        descriptionConfirmedAddService.setText(localServiceBean.getDescription()) ;
-        nameOfUsedProductConfirmedAddService.setText(localServiceBean.getNameOfUsedProduct());
+        nameConfirmedAddService.setText(localServiceBean.getNameInfo()) ;
+        priceConfirmedAddService.setText(Double.toString(localServiceBean.getPriceInfo())) ;
+        descriptionConfirmedAddService.setText(localServiceBean.getDescriptionInfo()) ;
+        nameOfUsedProductConfirmedAddService.setText(localServiceBean.getNameOfUsedProductInfo());
 
     }
 

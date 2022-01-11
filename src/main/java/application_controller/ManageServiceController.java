@@ -21,14 +21,14 @@ public class ManageServiceController {
 
         for (Service service : services){
 
-            if(service.getUsedProduct() == null){
+            if(service.getServiceUsedProduct() == null){
                 nameOfUsedProduct = "";
             }
             else {
-                nameOfUsedProduct = service.getUsedProduct().getName();
+                nameOfUsedProduct = service.getServiceUsedProduct().getName();
             }
 
-            serviceBeanList.add(new ServiceBean(service.getName(), service.getDescription(), nameOfUsedProduct, service.getPrice()));
+            serviceBeanList.add(new ServiceBean(service.getServiceName(), service.getServiceDescription(), nameOfUsedProduct, service.getServicePrice()));
         }
 
         return serviceBeanList;
