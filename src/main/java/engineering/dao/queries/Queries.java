@@ -92,7 +92,7 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     }// DA fare insieme ad alessandro per chiarire
 
     public static ResultSet selectSlotTimeSaloon(Statement stmt, String saloonName) throws SQLException {
-        String query = String.format("SELECT openMorningTime,openAfternoonTime,closeMorningTime,closeAfternoonTime,intervalSlotTime FROM Saloon join SaloonTime on id.Saloon = Saloon.SaloonTime WHERE name.Saloon = '%s';", saloonName);
+        String query = String.format("SELECT openMorningTime,openAfternoonTime,closeMorningTime,closeAfternoonTime,intervalSlotTime,seatNumber,numberSlotTimeMorning,numberSlotTimeAfternoon FROM Saloon join SaloonTime on Saloon.id = SaloonTime.Saloon WHERE Saloon.name ='%s';", saloonName);
         return  stmt.executeQuery(query);
     }
 

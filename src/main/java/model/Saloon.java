@@ -11,10 +11,10 @@ public class Saloon {
     private String phone;
     private Time slotTime;
     private int seatNumber;
-    private LocalTime openingMorningTime;
-    private LocalTime closeMorningTime;
-    private LocalTime openingAfternoonTime;
-    private LocalTime closeAfternoonTime;
+    private Time openingMorningTime;
+    private Time closeMorningTime;
+    private Time openingAfternoonTime;
+    private Time closeAfternoonTime;
     private Integer numberOfMorningSlots;
     private Integer numberOfAfternoonSlots;
 
@@ -26,10 +26,10 @@ public class Saloon {
         this.phone = phone;
         this.slotTime = slotTime;
         this.seatNumber = seatNumber;
-        this.openingMorningTime = localTimes[0][1];
-        this.closeMorningTime = localTimes[0][2];
-        this.openingAfternoonTime = localTimes[1][0];
-        this.closeAfternoonTime = localTimes[1][1];
+        this.openingMorningTime = Time.valueOf(localTimes[0][1]);
+        this.closeMorningTime = Time.valueOf(localTimes[0][2]);
+        this.openingAfternoonTime = Time.valueOf(localTimes[1][0]);
+        this.closeAfternoonTime = Time.valueOf(localTimes[1][1]);
         this.numberOfMorningSlots = numberOfSlots[0];
         this.numberOfAfternoonSlots = numberOfSlots[1];
 
@@ -59,7 +59,23 @@ public class Saloon {
     }
 
     public Saloon(String saloonName, Time openMorningTime, Time openAfternoonTime, Time closeMorningTime, Time closeAfternoonTime, Time intervalSlotTime) {
+        this.name = saloonName;
+        this.openingMorningTime = openMorningTime;
+        this.openingAfternoonTime = openAfternoonTime;
+        this.closeAfternoonTime = closeAfternoonTime;
+        this.closeMorningTime = closeMorningTime;
+        this.slotTime = intervalSlotTime;
+    }
 
+    public Saloon(String saloonName, Time[][] time, Time intervalSlotTime, int[] numberSlotTime) {
+        this.name = saloonName;
+        this.closeMorningTime= time[0][1];
+        this.closeAfternoonTime = time[1][0];
+        this.openingMorningTime = time[0][0];
+        this.openingAfternoonTime = time[1][1];
+        this.slotTime = intervalSlotTime;
+        this.numberOfMorningSlots = numberSlotTime[0];
+        this.numberOfAfternoonSlots = numberSlotTime[1];
     }
 
     public String getName(){
@@ -159,49 +175,49 @@ public class Saloon {
 
     }
 
-    public LocalTime getOpeningMorningTime() {
+    public Time getOpeningMorningTime() {
 
         return openingMorningTime;
 
     }
 
-    public void setOpeningMorningTime(LocalTime openingMorningTime) {
+    public void setOpeningMorningTime(Time openingMorningTime) {
 
         this.openingMorningTime = openingMorningTime;
 
     }
 
-    public LocalTime getCloseMorningTime() {
+    public Time getCloseMorningTime() {
 
         return closeMorningTime;
 
     }
 
-    public void setCloseMorningTime(LocalTime closeMorningTime) {
+    public void setCloseMorningTime(Time closeMorningTime) {
 
         this.closeMorningTime = closeMorningTime;
 
     }
 
-    public LocalTime getOpeningAfternoonTime() {
+    public Time getOpeningAfternoonTime() {
 
         return openingAfternoonTime;
 
     }
 
-    public void setOpeningAfternoonTime(LocalTime openingAfternoonTime) {
+    public void setOpeningAfternoonTime(Time openingAfternoonTime) {
 
         this.openingAfternoonTime = openingAfternoonTime;
 
     }
 
-    public LocalTime getCloseAfternoonTime() {
+    public Time getCloseAfternoonTime() {
 
         return closeAfternoonTime;
 
     }
 
-    public void setCloseAfternoonTime(LocalTime closeAfternoonTime) {
+    public void setCloseAfternoonTime(Time closeAfternoonTime) {
 
         this.closeAfternoonTime = closeAfternoonTime;
 

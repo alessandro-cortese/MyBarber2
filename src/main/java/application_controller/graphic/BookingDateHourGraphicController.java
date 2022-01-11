@@ -3,6 +3,7 @@ package application_controller.graphic;
 import application_controller.BookingController;
 import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
+import engineering.time.ScheduleTime;
 import first_view.list_cell_factories.SaloonListCellFactory;
 import first_view.list_cell_factories.SaloonTimeSlotsListCellFactory;
 import javafx.collections.FXCollections;
@@ -81,7 +82,7 @@ public class BookingDateHourGraphicController implements Initializable {
         public void selectSlotTime(){
                 LocalDate date = dateBooking.getValue();
                 BookingController bookingController = new BookingController();
-                bookingController.retrieveSlotTime(date);
+
         }
 
 
@@ -114,13 +115,10 @@ public class BookingDateHourGraphicController implements Initializable {
         @Override
         public void initialize(URL location, ResourceBundle resources) {
                 timeSlotListView.setCellFactory(param -> new SaloonTimeSlotsListCellFactory());
-                timeSlotListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
-                });
-
-                searchTimeSlots();
+                searchTimeSlots();//recupero gli slot Time
                 timeSlotListView.getItems().clear();
-                timeSlotListView.setItems(FXCollections.observableList(timeSlotList));
+                ScheduleTime scheduleTime = new ScheduleTime(timeSlotSaloon);
+                //timeSlotListView.setItems(FXCollections.observableList(timeSlotList));
 
         }
 

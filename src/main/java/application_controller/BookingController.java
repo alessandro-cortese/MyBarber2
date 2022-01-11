@@ -17,9 +17,6 @@ public class BookingController {
     private String saloonName;
     private Saloon saloonByName;
     private Saloon saloon;
-    public static void retrieveSlotTime(LocalDate date) { //questa classe mi serve per recuperare in base alla data, orario e chiusura di mattina, pomeriggio di quel giorno e tramite la classe ScheduleTime creo gli slotTime
-
-    }
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
@@ -80,10 +77,16 @@ public class BookingController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       // saloonBeanTimeSlots.s//devo settare i parametri ma aspetto alessandro
+        saloonBeanTimeSlots = new SaloonBean();
+        saloonBeanTimeSlots.setOpeningMorningTime(saloon.getOpeningMorningTime());
+        saloonBeanTimeSlots.setOpeningAfternoonTime(saloon.getOpeningAfternoonTime());
+        saloonBeanTimeSlots.setCloseMorningTime(saloon.getCloseMorningTime());
+        saloonBeanTimeSlots.setCloseAfternoonTime(saloon.getCloseAfternoonTime());
+        saloonBeanTimeSlots.setSlotTime(saloon.getSlotTime());
+        saloonBeanTimeSlots.setSeatNumber(saloon.getSeatNumber());
+        saloonBeanTimeSlots.setNumberOfMorningSlots(saloon.getNumberOfMorningSlots());
+        saloonBeanTimeSlots.setNumberOfAfternoonSlots(saloon.getNumberOfAfternoonSlots());
 
-
-        //return saloonBeanTimeSlots; // da finire
-        return null;
+        return saloonBeanTimeSlots;
     }
 }

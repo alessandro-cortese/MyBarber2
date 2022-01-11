@@ -30,6 +30,9 @@ public class SaloonDAO {
 
     private String barberEmail;
     private Integer idSaloon;
+    private Time[][] time = new Time[2][2];
+    private static int[] numberSlotTime = new int[2];
+
 
 
     public  void setBarberEmail(String barberEmail) {
@@ -76,10 +79,10 @@ public class SaloonDAO {
                     sqlException.printStackTrace();
                 }
 
-                saloon.setOpeningMorningTime(localTimes[0][0]);
-                saloon.setCloseMorningTime(localTimes[0][1]);
-                saloon.setOpeningAfternoonTime(localTimes[1][0]);
-                saloon.setCloseAfternoonTime(localTimes[1][1]);
+                saloon.setOpeningMorningTime(Time.valueOf(localTimes[0][0]));
+                saloon.setCloseMorningTime(Time.valueOf(localTimes[0][1]));
+                saloon.setOpeningAfternoonTime(Time.valueOf(localTimes[1][0]));
+                saloon.setCloseAfternoonTime(Time.valueOf(localTimes[1][1]));
 
             }
 
@@ -121,10 +124,10 @@ public class SaloonDAO {
                     sqlException.printStackTrace();
                 }
 
-                saloon.setOpeningMorningTime(localTimes[0][0]);
-                saloon.setCloseMorningTime(localTimes[0][1]);
-                saloon.setOpeningAfternoonTime(localTimes[1][0]);
-                saloon.setCloseAfternoonTime(localTimes[1][1]);
+                saloon.setOpeningMorningTime(Time.valueOf(localTimes[0][0]));
+                saloon.setCloseMorningTime(Time.valueOf(localTimes[0][1]));
+                saloon.setOpeningAfternoonTime(Time.valueOf(localTimes[1][0]));
+                saloon.setCloseAfternoonTime(Time.valueOf(localTimes[1][1]));
 
             }
 
@@ -297,13 +300,17 @@ public class SaloonDAO {
             rs.first();
             do {
                 // lettura delle colonne "by name"
-                Time  openMorningTime = rs.getTime("openMorningTime");
-                Time openAfternoonTime = rs.getTime("openAfternoonTime");
-                Time closeMorningTime = rs.getTime("closeMorningTime");
-                Time closeAfternoonTime = rs.getTime("closeAfternoonTime");
+                Time[][] time = new Time[2][2];
+                time[1][1] = rs.getTime("openMorningTime");
+                time[0][0] = rs.getTime("openAfternoonTime");
+                time[0][1] = rs.getTime("closeMorningTime");
+                time[1][0] = rs.getTime("closeAfternoonTime");
                 Time intervalSlotTime = rs.getTime("intervalSlotTime");
+                int seatNumber = rs.getInt("seatNumber");
+                numberSlotTime[0] = rs.getInt("numberSlotTimeMorning");
+                numberSlotTime[1] = rs.getInt("numberSlotTimeAfternoon");
 
-                saloon = new Saloon(saloonName, openMorningTime, openAfternoonTime,closeMorningTime, closeAfternoonTime,intervalSlotTime);
+                saloon = new Saloon(saloonName,time,intervalSlotTime, numberSlotTime);
             }while (rs.next());
             //chiudo rs
             rs.close();

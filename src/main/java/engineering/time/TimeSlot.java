@@ -7,7 +7,6 @@ public class TimeSlot {//***************************CLASSE DI INGEGNERIZZAZIONE 
     private int seatAvalaible; //posti disponibili
     private Time fromTime;     //orario inizio timeSlot
     private Time toTime;       //orario fine timeSlot
-    private Date dateTimeSlot;  //giorno del time slot
 
     public int getSeatAvalaible() {
         return seatAvalaible;
@@ -33,11 +32,4 @@ public class TimeSlot {//***************************CLASSE DI INGEGNERIZZAZIONE 
         this.toTime = toTime;
     }
 
-    public Date getDateTimeSlot() {
-        return dateTimeSlot;
-    }
-
-    public void setDateTimeSlot(Date dateTimeSlot) {
-        this.dateTimeSlot = dateTimeSlot;
-    }
 }

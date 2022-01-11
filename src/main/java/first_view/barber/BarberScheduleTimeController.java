@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.sql.Time;
 import java.time.LocalTime;
 
 public class BarberScheduleTimeController {
@@ -59,10 +60,10 @@ public class BarberScheduleTimeController {
         Button sourceButton = (Button) event.getSource();
         int minutes;
 
-        saloonBean.setOpeningMorningTime(localTime[0][0]);
-        saloonBean.setCloseMorningTime(localTime[0][1]);
-        saloonBean.setOpeningAfternoonTime(localTime[1][0]);
-        saloonBean.setCloseAfternoonTime(localTime[1][1]);
+        saloonBean.setOpeningMorningTime(Time.valueOf(localTime[0][0]));
+        saloonBean.setCloseMorningTime(Time.valueOf(localTime[0][1]));
+        saloonBean.setOpeningAfternoonTime(Time.valueOf(localTime[1][0]));
+        saloonBean.setCloseAfternoonTime(Time.valueOf(localTime[1][1]));
         
 
         for (int i = 0; i < localTime.length; i++) {
