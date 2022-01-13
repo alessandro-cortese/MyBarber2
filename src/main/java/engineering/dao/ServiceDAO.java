@@ -4,11 +4,9 @@ import engineering.container.ServiceCatalogue;
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 import model.Service;
+import model.buy_product.Product;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,24 @@ public class ServiceDAO {
     private static final String SERVICE_NAME_COL_NAME = "name";
     private static final String SERVICE_DESCRIPTION_COL_NAME = "description";
     private static final String SERVICE_PRICE_COL_NAME = "price";
-    //private static final String SERVICE_BARBER_COL_NAME = "barber";
+
+    private String barberEmail;
+
+    public ServiceDAO(String barberEmail){
+        this.barberEmail = barberEmail;
+    }
+
+    public void setBarberEmail(String barberEmail){
+
+        this.barberEmail = barberEmail;
+
+    }
+
+    public String getBarberEmail(){
+
+        return this.barberEmail;
+
+    }
 
     public ServiceCatalogue loadServices() {
 
@@ -29,22 +44,48 @@ public class ServiceDAO {
 
     }
 
-    public boolean insertService(Service service, String barberEmail){
+    public int insertService(Service service, String barberEmail){
 
-        boolean flag = false;
+        int newKeys = -1;
         Connection connection = Connector.getConnectorInstance().getConnection();
 
-        try(Statement statement = connection.createStatement()) {
+        try(PreparedStatement statement = connection.prepareStatement("INSERT Service(name, description, price, barber) VALUES(?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS)) {
 
-            int result = Queries.saveService(statement, barberEmail, service.getServiceName(), service.getServiceDescription(), service.getServicePrice());
+            statement.setString(1, service.getServiceName());
+            statement.setString(2, service.getServiceDescription());
+            statement.setDouble(3, service.getServicePrice());
+            statement.setString(4, barberEmail);
 
-            flag = result > 0;
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+
+            if(resultSet.next()) {
+                newKeys = resultSet.getInt(1);
+            }
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
 
-        return flag;
+
+        return newKeys;
+
+    }
+
+    public void insertServiceProduct(Integer serviceId, Integer productId) {
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT SserviceProduct(idService, idProduct) VALUES(?, ?)")) {
+
+            preparedStatement.setInt(1, serviceId);
+            preparedStatement.setInt(2, productId);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
 
     }
 
@@ -61,11 +102,10 @@ public class ServiceDAO {
 
             while(resultSet.next()) {
 
-                //Service service = createService(resultSet);
-                //services.add(service);
+                Service service = createService(resultSet);
+                services.add(service);
 
             }
-
 
 
         } catch (SQLException sqlException) {
@@ -74,26 +114,32 @@ public class ServiceDAO {
 
         }
 
+        serviceCatalogue.setServiceArrayList(services);
+
         return serviceCatalogue;
 
     }
 
-    /*private Service createService(ResultSet resultSet) throws SQLException {
+    private Service createService(ResultSet resultSet) throws SQLException {
 
+        ProductDAO productDAO = new ProductDAO();
+        int serviceId = resultSet.getInt(1);
+        int productId;
+        Product product;
         String serviceName = resultSet.getString(SERVICE_NAME_COL_NAME);
         String serviceDescription = resultSet.getString(SERVICE_DESCRIPTION_COL_NAME);
-        Double servicePrice = resultSet.getDouble(SERVICE_PRICE_COL_NAME);
+        double servicePrice = resultSet.getDouble(SERVICE_PRICE_COL_NAME);
+        productId = productDAO.loadIsbnOfUsedProduct(serviceId);
 
+        if(productId != -1){
 
+            product = productDAO.loadProductByIsbn(productId, barberEmail);
+            return new Service(serviceName, serviceDescription, servicePrice, product);
+
+        }
+
+        return new Service(serviceName, serviceDescription, servicePrice);
 
     }
-
-
-    private String name;
-    private String description;
-    private double price;
-    private Product usedProduct;
- */
-
 
 }

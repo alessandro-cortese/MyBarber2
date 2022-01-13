@@ -60,10 +60,10 @@ public class BarberScheduleTimeController {
         Button sourceButton = (Button) event.getSource();
         int minutes;
 
-        saloonBean.setOpeningMorningTime(Time.valueOf(localTime[0][0]));
-        saloonBean.setCloseMorningTime(Time.valueOf(localTime[0][1]));
-        saloonBean.setOpeningAfternoonTime(Time.valueOf(localTime[1][0]));
-        saloonBean.setCloseAfternoonTime(Time.valueOf(localTime[1][1]));
+        saloonBean.setOpeningMorningTimeInfo(Time.valueOf(localTime[0][0]));
+        saloonBean.setCloseMorningTimeInfo(Time.valueOf(localTime[0][1]));
+        saloonBean.setOpeningAfternoonTimeInfo(Time.valueOf(localTime[1][0]));
+        saloonBean.setCloseAfternoonTimeInfo(Time.valueOf(localTime[1][1]));
         
 
         for (int i = 0; i < localTime.length; i++) {
@@ -73,8 +73,8 @@ public class BarberScheduleTimeController {
             }
         }
 
-        saloonBean.setNumberOfMorningSlots(numberOfSlot[0]);
-        saloonBean.setNumberOfAfternoonSlots(numberOfSlot[1]);
+        saloonBean.setNumberOfMorningSlotsInfo(numberOfSlot[0]);
+        saloonBean.setNumberOfAfternoonSlotsInfo(numberOfSlot[1]);
 
         if(sourceButton == saveButton){
             InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());
@@ -86,17 +86,22 @@ public class BarberScheduleTimeController {
     public void onChangeTime(MouseEvent event) throws IOException {
 
         TimePicker timePicker = null;
+        int start = 0;
+        int end = 0;
         TextField textField = (TextField) event.getSource();
 
         String[] time;
 
         if(textField == openMorningTime || textField == closeMorningTime) {
-            timePicker = new TimePicker(7, 13);
+            start = 7;
+            end = 13;
         }
         else if(textField == openAfternoonTime || textField == closeAfternoonTime) {
-            timePicker = new TimePicker(14, 21);
+            start = 14;
+            end = 21;
         }
 
+        timePicker = new TimePicker(start, end);
         textField.setText(timePicker.getTime());
         time = textField.getText().split(":");
 

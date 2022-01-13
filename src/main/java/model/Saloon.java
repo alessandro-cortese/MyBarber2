@@ -56,18 +56,22 @@ public class Saloon {
         this.setCity(city);
         this.seatNumber = seatNumber;
         this.slotTime = slotTime;
+
     }
 
     public Saloon(String saloonName, Time openMorningTime, Time openAfternoonTime, Time closeMorningTime, Time closeAfternoonTime, Time intervalSlotTime) {
+
         this.name = saloonName;
         this.openingMorningTime = openMorningTime;
         this.openingAfternoonTime = openAfternoonTime;
         this.closeAfternoonTime = closeAfternoonTime;
         this.closeMorningTime = closeMorningTime;
         this.slotTime = intervalSlotTime;
+
     }
 
     public Saloon(String saloonName, Time[][] time, Time intervalSlotTime, int[] numberSlotTime) {
+
         this.name = saloonName;
         this.closeMorningTime= time[0][1];
         this.closeAfternoonTime = time[1][0];
@@ -76,6 +80,7 @@ public class Saloon {
         this.slotTime = intervalSlotTime;
         this.numberOfMorningSlots = numberSlotTime[0];
         this.numberOfAfternoonSlots = numberSlotTime[1];
+
     }
 
     public String getName(){
