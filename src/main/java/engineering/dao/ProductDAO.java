@@ -65,6 +65,43 @@ public class ProductDAO {
         return product ;
     }
 
+    public int loadIsbnOfUsedProduct(Integer serviceId) throws SQLException{
+
+        int productId = -1;
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.loadProductIdFromServiceProduct(statement, serviceId)){
+
+            resultSet.next();
+            if(resultSet.first()){
+                productId = resultSet.getInt(1);
+            }
+
+        }
+        return productId;
+
+    }
+
+    public Product loadProductByIsbn(int productIsbn, String barberEmail) throws SQLException{
+
+        Product product = null;
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.loadProductByIsbn(statement, productIsbn, barberEmail)){
+
+            resultSet.next();
+            if(resultSet.first()){
+                product = createProduct(resultSet);
+            }
+
+        }
+
+        return product;
+
+    }
+
     private Product createProduct(ResultSet resultSet) throws SQLException {
 
         Integer isbn = resultSet.getInt(ISBN_COL_NAME) ;

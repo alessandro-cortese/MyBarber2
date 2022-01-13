@@ -1,7 +1,6 @@
 package application_controller;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.*;
 
 import engineering.bean.BookingBean;
@@ -78,14 +77,14 @@ public class BookingController {
             e.printStackTrace();
         }
         saloonBeanTimeSlots = new SaloonBean();
-        saloonBeanTimeSlots.setOpeningMorningTime(saloon.getOpeningMorningTime());
-        saloonBeanTimeSlots.setOpeningAfternoonTime(saloon.getOpeningAfternoonTime());
-        saloonBeanTimeSlots.setCloseMorningTime(saloon.getCloseMorningTime());
-        saloonBeanTimeSlots.setCloseAfternoonTime(saloon.getCloseAfternoonTime());
+        saloonBeanTimeSlots.setOpeningMorningTimeInfo(saloon.getOpeningMorningTime());
+        saloonBeanTimeSlots.setOpeningAfternoonTimeInfo(saloon.getOpeningAfternoonTime());
+        saloonBeanTimeSlots.setCloseMorningTimeInfo(saloon.getCloseMorningTime());
+        saloonBeanTimeSlots.setCloseAfternoonTimeInfo(saloon.getCloseAfternoonTime());
         saloonBeanTimeSlots.setSlotTime(saloon.getSlotTime());
         saloonBeanTimeSlots.setSeatNumber(saloon.getSeatNumber());
-        saloonBeanTimeSlots.setNumberOfMorningSlots(saloon.getNumberOfMorningSlots());
-        saloonBeanTimeSlots.setNumberOfAfternoonSlots(saloon.getNumberOfAfternoonSlots());
+        saloonBeanTimeSlots.setNumberOfMorningSlotsInfo(saloon.getNumberOfMorningSlots());
+        saloonBeanTimeSlots.setNumberOfAfternoonSlotsInfo(saloon.getNumberOfAfternoonSlots());
 
         return saloonBeanTimeSlots;
     }

@@ -24,13 +24,15 @@ public class AddServiceController {
         Product localProduct;
         Service service;
 
+        int serviceKey;
+
         AddServiceBoundarySendEmail addServiceBoundarySendEmail = new AddServiceBoundarySendEmail(serviceBean);
         ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
 
         SaloonDAO saloonDAO = new SaloonDAO();
         CustomerDAO customerDAO = new CustomerDAO();
         ProductDAO productDAO = new ProductDAO();
-        ServiceDAO serviceDAO = new ServiceDAO();
+        ServiceDAO serviceDAO = new ServiceDAO(userBean.getUserEmail());
 
         Integer saloonId = saloonDAO.loadIdOfSaloon(userBean.getUserEmail());
 
@@ -38,6 +40,7 @@ public class AddServiceController {
         List<Customer> customers;
 
         customers = customerDAO.loadCustomerFromFavoriteSaloon(saloonId);
+
 
         try{
 
@@ -60,8 +63,16 @@ public class AddServiceController {
 
         service = new Service(serviceBean.getNameInfo(), serviceBean.getDescriptionInfo(), serviceBean.getPriceInfo(), localProduct);
 
+        serviceKey = serviceDAO.insertService(service, userBean.getUserEmail()) ;
 
-        if(serviceDAO.insertService(service, userBean.getUserEmail())){
+
+        if(!(serviceBean.getNameOfUsedProductInfo().equals("")) && localProduct != null) {
+
+            serviceDAO.insertServiceProduct(serviceKey, localProduct.getIsbn());
+
+        }
+
+        if(serviceKey != -1){
 
             serviceCatalogue.addService(service);
 

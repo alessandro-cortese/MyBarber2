@@ -21,11 +21,15 @@ public class ServiceListCellFactory extends ListCell<ServiceBean> {
     private boolean viewCaller;
 
     public ServiceListCellFactory() {
+
         this.viewCaller = false;
+
     }
 
     public ServiceListCellFactory(boolean flag){
+
         this.viewCaller = flag;
+
     }
 
 

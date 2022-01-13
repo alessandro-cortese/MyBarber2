@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ServiceCatalogue {
 
-    private final List<Service> serviceArrayList;
+    private List<Service> serviceArrayList;
 
     public ServiceCatalogue(List<Service> service){
 
@@ -68,6 +68,12 @@ public class ServiceCatalogue {
             }
         }
         return false;
+
+    }
+
+    public void setServiceArrayList(List<Service> services) {
+
+        this.serviceArrayList = services;
 
     }
 

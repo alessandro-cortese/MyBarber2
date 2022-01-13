@@ -39,6 +39,7 @@ public class BarberListServiceController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         ManageServiceController manageServiceController = new ManageServiceController();
+        manageServiceController.setUserBean(InternalBackController.getInternalBackControllerInstance().getLoggedUser());
 
         try {
             beanList = manageServiceController.getAllService();

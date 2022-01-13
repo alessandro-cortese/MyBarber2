@@ -59,6 +59,16 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query) ;
     }
 
+    public static ResultSet loadProductIdFromServiceProduct(Statement statement, Integer serviceId) throws  SQLException {
+        String query = String.format("SELECT * FROM ServiceProduct WHERE idService = '%d';", serviceId);
+        return statement.executeQuery(query);
+    }
+
+    public static ResultSet loadProductByIsbn(Statement statement, int productIsbn, String barberEmail) throws SQLException {
+        String query = String.format("SELECT * FROM Product WHERE id = '%d' AND barber = '%s';", productIsbn, barberEmail);
+        return statement.executeQuery(query);
+    }
+
 
     //-+-+-+-+-+-+-+-+-+-+- Coupon -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet selectCouponByCode(Statement statement, Integer couponCode) throws SQLException {
@@ -109,10 +119,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
-    public static int saveService(Statement statement, String barberEmail, String serviceName, String serviceDescription, Double price) throws SQLException {
-        String update = String.format("INSERT INTO Service(name, description, price, barber) VALUES('%s', '%s', %d, '%s');", serviceName, serviceDescription, price, barberEmail);
-        return statement.executeUpdate(update);
-    }
 
     public static ResultSet loadServicesByBarberEmail(Statement statement, String barberEmail) throws SQLException {
         String query = String.format("SELECT * FROM Service WHERE barber = '%s';", barberEmail);

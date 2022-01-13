@@ -15,6 +15,14 @@ public class Service {
 
     }
 
+    public Service (String serviceName, String serviceDescription, Double servicePrice) {
+
+        this.setServiceName(serviceName);
+        this.setServiceDescription(serviceDescription);
+        this.setServicePrice(servicePrice);
+
+    }
+
     public Service (String name, String description, double price, Product usedProduct) {
 
         this.setServiceName(name) ;
