@@ -5,6 +5,7 @@ import engineering.exception.NegativePriceException;
 import engineering.pattern.decorator.Priceable;
 import engineering.pattern.observer.Subject;
 import model.buy_product.containers.CouponContainer;
+import model.buy_product.coupon.Coupon;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,14 +29,20 @@ public class Order extends Subject {
     }
 
     public void addCoupon(Coupon coupon) throws InvalidCouponException, NegativePriceException {
-        couponContainer.addCoupon(coupon);
-        try {
-            applyDiscount() ;
-        } catch (NegativePriceException negativePriceException) {
-            couponContainer.removeCoupon(coupon);
-            applyDiscount();
-            throw negativePriceException ;
+        if (couponContainer.verifyPresent(coupon) == null) {
+            couponContainer.addCoupon(coupon);
+            try {
+                applyDiscount() ;
+            } catch (NegativePriceException negativePriceException) {
+                couponContainer.removeCoupon(coupon);
+                applyDiscount();
+                throw negativePriceException ;
+            }
         }
+        else {
+            throw new InvalidCouponException("ERRORE: COUPON UTILIZZATO!!") ;
+        }
+
         notifyObservers();
     }
 

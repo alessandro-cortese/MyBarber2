@@ -10,7 +10,7 @@ import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import model.User;
 import model.buy_product.Cart;
-import model.buy_product.Coupon;
+import model.buy_product.coupon.Coupon;
 import model.buy_product.Order;
 import model.buy_product.Product;
 import model.buy_product.containers.ProductCatalog;

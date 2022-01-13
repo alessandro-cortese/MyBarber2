@@ -3,22 +3,27 @@ package engineering.dao;
 import engineering.dao.queries.Queries;
 import engineering.exception.InvalidCouponException;
 import engineering.pattern.Connector;
-import model.User;
-import model.buy_product.Coupon;
+import model.buy_product.coupon.Coupon;
 import model.buy_product.containers.CouponContainer;
+import model.buy_product.coupon.PercentageCoupon;
+import model.buy_product.coupon.SubtractionCoupon;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static model.buy_product.coupon.Coupon.PERCENTAGE_TYPE;
+import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
 
 public class CouponDAO {
 
     private static final Integer EXAMPLE_COUPON = 0 ;
 
     private static final String COUPON_CODE_COL_ID = "id" ;
-    private static final String COUPON_TYPE_COL_ID = "tipoCoupon" ;
-    private static final String COUPON_DISCOUNT_COL_ID = "sconto" ;
-    private static final String COUPON_DISCOUNT_TYPE = "sconto";
+    private static final String COUPON_TYPE_COL_ID = "couponType" ;
+    private static final String COUPON_DISCOUNT_COL_ID = "discount" ;
+    private static final String COUPON_SUBTRACTION_TYPE = "subtraction";
+    private static final String COUPON_PERCENTAGE_TYPE = "percentage" ;
 
     public Coupon loadCouponByCode(Integer couponCode) throws InvalidCouponException {
         Connection connection = Connector.getConnectorInstance().getConnection();
@@ -62,8 +67,13 @@ public class CouponDAO {
     private Coupon createCoupon(ResultSet resultSet) throws SQLException {
         Integer couponCode = resultSet.getInt(COUPON_CODE_COL_ID) ;
         Double couponDiscount = resultSet.getDouble(COUPON_DISCOUNT_COL_ID) ;
+        String typeEnum = resultSet.getString(COUPON_TYPE_COL_ID) ;
 
-        return new Coupon(couponCode, couponDiscount) ;
+        Coupon coupon ;
+        if (typeEnum.compareTo(COUPON_PERCENTAGE_TYPE) == 0) coupon = new PercentageCoupon(couponCode, couponDiscount) ;
+        else coupon = new SubtractionCoupon(couponCode, couponDiscount);
+
+        return coupon ;
     }
 
     public void invalidateCoupon(Coupon coupon) {
@@ -84,23 +94,31 @@ public class CouponDAO {
         }
     }
 
-    public Coupon addNewCoupon(Double couponValue, String email) {
+    public Coupon addNewCoupon(Integer couponType, Double couponValue, String ownerEmail) {
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         Coupon newCoupon = null ;
-        try(PreparedStatement statement = connection.prepareStatement("INSERT Coupon(tipoCoupon, sconto, donazione, customer) VALUES(?,?,?,?) ;", Statement.RETURN_GENERATED_KEYS);) {
+        try(PreparedStatement statement = connection.prepareStatement("INSERT Coupon(couponType, discount, customer) VALUES(?,?,?) ;", Statement.RETURN_GENERATED_KEYS);) {
 
-            statement.setString(1, COUPON_DISCOUNT_TYPE);
+            String dbCouponType;
+            if (couponType == SUBTRACTION_TYPE) {
+                dbCouponType = COUPON_SUBTRACTION_TYPE ;
+            }
+            else {
+                dbCouponType = COUPON_PERCENTAGE_TYPE ;
+            }
+
+            statement.setString(1, dbCouponType);
             statement.setDouble(2, couponValue);
-            statement.setDouble(3, 0.0);
-            statement.setString(4, email);
+            statement.setString(3, ownerEmail);
 
             statement.executeUpdate() ;
             ResultSet generatedKeys = statement.getGeneratedKeys() ;
 
             while (generatedKeys.next()) {
                 Integer newCouponCode = generatedKeys.getInt(1) ;
-                newCoupon = new Coupon(newCouponCode, couponValue) ;
+                if (couponType == SUBTRACTION_TYPE) newCoupon = new SubtractionCoupon(newCouponCode, couponValue) ;
+                else newCoupon = new PercentageCoupon(newCouponCode, couponValue) ;
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();

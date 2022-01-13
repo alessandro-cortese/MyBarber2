@@ -1,22 +1,37 @@
 package engineering.bean.buy_product;
 
+import engineering.exception.InvalidCouponException;
+
 public class CouponBean {
 
     private String couponCode ;
     private Double couponDiscount ;
+    private String couponType ;
 
     public CouponBean(String couponCode) {
         setCouponCode(couponCode);
     }
 
-    public CouponBean(String couponCode, Double couponDiscount) {
-        setCouponCode(couponCode);
-        setCouponDiscount(couponDiscount);
+    public CouponBean(String couponCode, Double couponDiscount) throws InvalidCouponException {
+        try {
+            Integer.parseInt(couponCode) ;
+            setCouponCode(couponCode);
+            setCouponDiscount(couponDiscount);
+        }
+        catch (NumberFormatException numberFormatException) {
+            throw new InvalidCouponException("FORMATO DEL CODICE INSERITO NON VALIDO");
+        }
     }
 
-    public CouponBean(Integer couponCode, Double couponDiscount) {
+    public CouponBean(Integer couponCode, Double couponDiscount, String couponType) {
         setCouponCode(Integer.toString(couponCode));
         setCouponDiscount(couponDiscount);
+        setCouponType(couponType);
+    }
+
+    public CouponBean(Double couponDiscount, String couponType){
+            setCouponDiscount(couponDiscount);
+            setCouponType(couponType);
     }
 
     public String getCouponCode() {
@@ -39,5 +54,13 @@ public class CouponBean {
     @Override
     public String toString() {
         return String.format("Codice Coupon: %s", couponCode);
+    }
+
+    public String getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(String couponType) {
+        this.couponType = couponType;
     }
 }

@@ -22,7 +22,7 @@ public class Cart extends Subject implements Priceable {
         cartRowArrayList = new ArrayList<>() ;
     }
 
-    public void insertProduct(Product newProduct) {
+    public void  insertProduct(Product newProduct) {
         CartRow productRow = verifyPresent(newProduct) ;
         if (productRow == null) {
             cartRowArrayList.add(new CartRow(newProduct, 1)) ;

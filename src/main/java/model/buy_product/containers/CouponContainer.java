@@ -1,7 +1,6 @@
 package model.buy_product.containers;
 
-import engineering.exception.InvalidCouponException;
-import model.buy_product.Coupon;
+import model.buy_product.coupon.Coupon;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -17,16 +16,14 @@ public class CouponContainer {
 
     public CouponContainer(List<Coupon> coupons) {
         this.couponArrayList = coupons ;
+        this.couponArrayList.sort(null);
     }
 
-    public void addCoupon(Coupon newCoupon) throws InvalidCouponException {
+    public void addCoupon(Coupon newCoupon){
         if (verifyPresent(newCoupon) == null) {
             couponArrayList.add(newCoupon);
+            couponArrayList.sort(null);
         }
-        else {
-            throw new InvalidCouponException("Coupon già Utilizzato");
-        }
-
     }
 
     public void removeCoupon(Coupon rmvCoupon) {
@@ -37,9 +34,9 @@ public class CouponContainer {
     }
 
     @Nullable
-    private Coupon verifyPresent(Coupon verifyCoupon) {
+    public Coupon verifyPresent(Coupon verifyCoupon) {
         for (Coupon coupon : couponArrayList) {
-            if (coupon.getCouponCode().compareTo(verifyCoupon.getCouponCode()) == 0) {
+            if (coupon.getCouponCode() == verifyCoupon.getCouponCode()) {
                 return coupon ;
             }
         }

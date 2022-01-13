@@ -9,6 +9,8 @@ import javafx.scene.control.ListCell;
 
 import java.io.IOException;
 
+import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
+
 public class CouponCellFactory extends ListCell<CouponBean> {
 
     private static final String LIST_ITEM_RES = "first_view/list_item/client_coupon_item.fxml" ;
@@ -29,7 +31,11 @@ public class CouponCellFactory extends ListCell<CouponBean> {
                 Label couponCodeLabel = (Label) parentNode.lookup("#" + COUPON_CODE_LABEL_ID) ;
                 Label couponDiscountLabel = (Label) parentNode.lookup("#" + COUPON_DISCOUNT_LABEL_ID) ;
                 couponCodeLabel.setText("Codice: " + item.getCouponCode());
-                couponDiscountLabel.setText("Sconto: " + Double.toString(item.getCouponDiscount()));
+
+                String discountSymbol = "" ;
+                if (item.getCouponType().compareTo("subtraction") == 0) discountSymbol = EURO_SYMBOL ;
+                else discountSymbol = "%" ;
+                couponDiscountLabel.setText("Sconto: " + (item.getCouponDiscount()) + discountSymbol);
 
                 setGraphic(parentNode);
 

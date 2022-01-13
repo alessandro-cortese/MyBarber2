@@ -6,21 +6,36 @@ import engineering.bean.buy_product.CouponBean;
 import engineering.dao.CouponDAO;
 import engineering.dao.UserDAO;
 import engineering.exception.InvalidCouponException;
+import javafx.util.Pair;
 import model.Customer;
-import model.buy_product.Coupon;
 import model.buy_product.containers.CouponContainer;
+import model.buy_product.coupon.Coupon;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static model.buy_product.coupon.Coupon.PERCENTAGE_TYPE;
+import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
+
 public class ManageCouponController {
 
-    private static final Integer FIVE_COUPON_COST = 100 ;
-    private static final Integer TEN_COUPON_COST = 200 ;
-    private static final Integer TWENTY_COUPON_COST = 400 ;
+    private static final Integer SUB_FIVE_COUPON_COST = 200 ;
+    private static final Integer SUB_TEN_COUPON_COST = 300 ;
+    private static final Integer SUB_TWENTY_COUPON_COST = 400 ;
+    private static final Integer PERC_FIFTEEN_COUPON_COST = 150;
+    private static final Integer PERC_THIRTY_FIVE_COUPON_COST = 275;
+    private static final Integer PERC_FIFTY_COUPON_COST = 500;
 
-    private final Map<Double, Integer> couponCostMap = Map.of(5.0, FIVE_COUPON_COST, 10.0, TEN_COUPON_COST, 20.0, TWENTY_COUPON_COST) ;
+    private static final Map<Pair<Integer,Double>, Integer> couponCostMap = Map.of(
+            new Pair<>(SUBTRACTION_TYPE, 5.0), SUB_FIVE_COUPON_COST,
+            new Pair<>(SUBTRACTION_TYPE, 10.0), SUB_TEN_COUPON_COST,
+            new Pair<>(SUBTRACTION_TYPE, 20.0), SUB_TWENTY_COUPON_COST,
+
+            new Pair<>(PERCENTAGE_TYPE, 15.0), PERC_FIFTEEN_COUPON_COST,
+            new Pair<>(PERCENTAGE_TYPE, 35.0), PERC_THIRTY_FIVE_COUPON_COST,
+            new Pair<>(PERCENTAGE_TYPE, 50.0), PERC_FIFTY_COUPON_COST) ;
+
 
 
     private final CouponDAO couponDAO ;
@@ -35,6 +50,7 @@ public class ManageCouponController {
         couponContainer = null ;
         userDAO = new UserDAO() ;
         customer = null;
+
     }
 
 
@@ -55,12 +71,22 @@ public class ManageCouponController {
 
     public FidelityCardBean generateNewCoupon(CouponBean couponBean) throws InvalidCouponException {
         Double couponValue = couponBean.getCouponDiscount() ;
-        Integer couponCost = couponCostMap.get(couponValue) ;
+
+        Integer couponType ;
+        if (couponBean.getCouponType().compareTo("subtraction") == 0) {
+            couponType = SUBTRACTION_TYPE ;
+        }
+        else {
+            couponType = PERCENTAGE_TYPE ;
+        }
+        Pair<Integer, Double> productCostKey = new Pair<>(couponType, couponBean.getCouponDiscount()) ;
+
+        Integer couponCost = couponCostMap.get(productCostKey) ;
         FidelityCardBean fidelityCardBean = null ;
         if (couponCost != null) {
             Integer customerPoints = customer.getCardPoints();
             if (customerPoints >= couponCost) {
-                createNewCoupon(couponValue) ;
+                createNewCoupon(couponType, couponValue) ;
                 customer.setCardPoints(customer.getCardPoints() - couponCost);
                 userDAO.updateCustomerPoints(customer.getCardPoints(), customer.getEmail()) ;
                 fidelityCardBean = new FidelityCardBean(customer.getCardPoints(), createCouponBeans()) ;
@@ -72,8 +98,8 @@ public class ManageCouponController {
         return fidelityCardBean ;
     }
 
-    private void createNewCoupon(Double couponValue) throws InvalidCouponException {
-        Coupon newCoupon = couponDAO.addNewCoupon(couponValue, customer.getEmail()) ;
+    private void createNewCoupon(Integer couponType, Double couponValue) {
+        Coupon newCoupon = couponDAO.addNewCoupon(couponType, couponValue, customer.getEmail()) ;
         if (newCoupon != null) {
             couponContainer.addCoupon(newCoupon) ;
         }
@@ -85,7 +111,13 @@ public class ManageCouponController {
         for (int i = 0 ; i < couponContainer.getSize() ; i++) {
             Coupon coupon = couponContainer.getCouponByIndex(i) ;
             if (coupon != null) {
-                CouponBean couponBean = new CouponBean(coupon.getCouponCode(), coupon.getCouponDiscount()) ;
+                CouponBean couponBean ;
+                if (coupon.getCouponType() == SUBTRACTION_TYPE) {
+                    couponBean = new CouponBean(coupon.getCouponCode(), coupon.getCouponDiscount(), "subtraction");
+                }
+                else {
+                    couponBean = new CouponBean(coupon.getCouponCode(), coupon.getCouponDiscount(), "percentage");
+                }
                 couponBeans.add(couponBean) ;
             }
         }

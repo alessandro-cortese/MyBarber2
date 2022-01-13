@@ -13,16 +13,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ClientFidelityCardController implements Initializable {
 
-    @FXML private Button generateFiveButton ;
-    @FXML private Button generateTenButton ;
-    @FXML private Button generateTwentyButton ;
+    @FXML private ToggleGroup chooseGenerateGroup ;
+    @FXML private Button generateCouponButton ;
+    @FXML private RadioButton subtractionFiveRadio ;
+    @FXML private RadioButton subtractionTenRadio ;
+    @FXML private RadioButton subtractionTwentyRadio ;
+    @FXML private RadioButton percentageFifteenRadio ;
+    @FXML private RadioButton percentageThirtyFiveRadio ;
+    @FXML private RadioButton percentageFiftyRadio ;
+
     @FXML private ListView<CouponBean> couponListView ;
     @FXML private Label pointsSaleLabel ;
 
@@ -42,9 +47,7 @@ public class ClientFidelityCardController implements Initializable {
             couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));
             pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale() );
         }
-        generateFiveButton.setDisable(userBean == null);
-        generateTenButton.setDisable(userBean == null);
-        generateTwentyButton.setDisable(userBean == null);
+        generateCouponButton.setDisable(userBean == null);
     }
 
     @FXML
@@ -53,26 +56,37 @@ public class ClientFidelityCardController implements Initializable {
 
         UserBean loggedUser = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
         if (loggedUser == null) {
-
+            return ;
         }
 
-        if (eventSource == generateFiveButton) {
-            getNewCoupon(5.0);
+        if (eventSource == generateCouponButton) {
+            String couponType = "" ;
+            Double couponValue = 0.0 ;
+
+            if (subtractionFiveRadio.isSelected() || subtractionTenRadio.isSelected() || subtractionTwentyRadio.isSelected()) {
+                couponType = "subtraction" ;
+                if (subtractionFiveRadio.isSelected()) couponValue = 5.0 ;
+                else if (subtractionTenRadio.isSelected()) couponValue = 10.0 ;
+                else couponValue = 20.0 ;
+            }
+            else {
+                couponType = "percentage" ;
+                if (percentageFifteenRadio.isSelected()) couponValue = 15.0 ;
+                else if (percentageThirtyFiveRadio.isSelected()) couponValue = 35.0 ;
+                else couponValue = 50.0 ;
+            }
+
+            getNewCoupon(couponType, couponValue);
         }
-        else if (eventSource == generateTenButton) {
-            getNewCoupon(10.0);
-        }
-        else if (eventSource == generateTwentyButton) {
-            getNewCoupon(20.0);
-        }
+
     }
 
-    public void getNewCoupon(Double couponValue) {
-        CouponBean couponBean = new CouponBean("", couponValue);
+    public void getNewCoupon(String couponType, Double couponValue) {
         try {
+            CouponBean couponBean = new CouponBean(couponValue, couponType);
             manageCouponController.generateNewCoupon(couponBean) ;
         } catch (InvalidCouponException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Errore nella Creazione del Coupon") ;
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
             alert.showAndWait() ;
         }
         initialize(null, null);
