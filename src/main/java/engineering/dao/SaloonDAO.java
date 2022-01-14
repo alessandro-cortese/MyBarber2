@@ -234,21 +234,22 @@ public class SaloonDAO {
     }
 
 
-    public Saloon retrieveByNameSaloon(String saloonName) throws Exception {
+    public static  Saloon retrieveByNameSaloon(String saloonName) throws Exception {
         Statement stmt = null;
         Saloon saloon;
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         try {
             //creazione ed esecuzione della query
+            System.out.println(saloonName);
             stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             if (stmt==null)
                 System.out.println("unable to execute query");
 
-            ResultSet rs = Queries.selectSaloonByCity(stmt,saloonName);
+            ResultSet rs = Queries.selectSaloonByName(stmt,saloonName);
 
             if (!rs.first()) { //rs empty
-                throw new Exception("No Saloon found matching with city" + saloonName);
+                throw new Exception("No Saloon found matching with name: " + saloonName);
             }
 
             //riposiz. del cursore

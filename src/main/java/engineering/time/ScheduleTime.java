@@ -17,7 +17,7 @@ public class ScheduleTime {   //classi di ingegnerizzazione che aggrega i time s
         timeOpen = saloonTimeSlots.getOpeningMorningTimeInfo();
         sumTime = new Time(timeOpen.getTime()); //return hours in milliseconds
 
-        for (int i = 0; i< saloonTimeSlots.getNumberOfAfternoonSlotsInfo() + saloonTimeSlots.getNumberOfMorningSlotsInfo(); i++){
+        for (int i = 0; i< saloonTimeSlots.getNumberOfMorningSlotsInfo(); i++){
                 timeSlot = new TimeSlot();
 
                 timeSlot.setFromTime(sumTime);
@@ -28,6 +28,16 @@ public class ScheduleTime {   //classi di ingegnerizzazione che aggrega i time s
 
         }
 
+        timeOpen = saloonTimeSlots.getOpeningAfternoonTimeInfo();
+        sumTime = new Time(timeOpen.getTime());
+
+        for (int i =0; i< saloonTimeSlots.getNumberOfAfternoonSlotsInfo();i++){
+            timeSlot = new TimeSlot();
+            sumTime.setTime(sumTime.getTime() + saloonTimeSlots.getSlotTime().getTime());
+            timeSlot.setToTime(sumTime);
+            timeSlot.setSeatAvalaible(saloonTimeSlots.getSeatNumber());
+            timeSlotList.add(timeSlot);
+        }
     }
 
     public List<TimeSlot> timeSlotsIstance(){

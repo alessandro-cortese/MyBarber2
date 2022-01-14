@@ -19,8 +19,6 @@ public class BookingController {
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
-        SaloonDAO saloonDAO = new SaloonDAO();
-
         saloonBeanList = new ArrayList<>();
 
         saloonCity = saloonBean.getCity();
@@ -50,8 +48,8 @@ public class BookingController {
 
         //saloonName = saloonBean.getName();
         //SaloonDAO saloonDAO = new SaloonDAO();
-
-        saloonByName = saloonDAO.retrieveByNameSaloon(saloonName);
+        System.out.println(saloonBean.getName());
+        saloonByName = saloonDAO.retrieveByNameSaloon(saloonBean.getName());
 
         saloonBean.setName(saloonByName.getName());
         saloonBean.setCity(saloonByName.getCity());
