@@ -1,6 +1,7 @@
 package first_view.barber;
 
 import engineering.bean.ServiceBean;
+import engineering.exception.InsertNegativePriceException;
 import engineering.exception.NegativePriceException;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
@@ -50,7 +51,7 @@ public class BarberAddServiceController {
 
                 barberConfirmAddServiceController.display(serviceBean);
 
-            } catch (NegativePriceException e) {
+            }catch (InsertNegativePriceException e) {
                 exceptionAddServiceLabel.setText("Insert Price is negative!");
             }
 

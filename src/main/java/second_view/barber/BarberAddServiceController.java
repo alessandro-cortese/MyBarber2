@@ -2,7 +2,8 @@ package second_view.barber;
 
 import application_controller.AddServiceController;
 import engineering.bean.ServiceBean;
-import engineering.exception.NegativePriceException;
+import engineering.exception.DuplicatedServiceException;
+import engineering.exception.InsertNegativePriceException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -16,6 +17,10 @@ import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberAddServiceController {
 
+    public BarberAddServiceController(){
+        goBackToHome = true;
+    }
+
     @FXML private TextField addServiceCommandLine;
     @FXML private TextField nameAddServiceField;
     @FXML private TextField descriptionAddServiceField;
@@ -28,6 +33,7 @@ public class BarberAddServiceController {
     private static final String SET_PRICE_COMMAND = "set price" ;
     private static final String SET_USED_PRODUCT_COMMAND = "set product used" ;
 
+    private boolean goBackToHome;
 
     @FXML
     public void onCommand(ActionEvent event) throws IOException {
@@ -36,7 +42,6 @@ public class BarberAddServiceController {
         addServiceExceptionLabelSecondView.setText("");
         addServiceCommandLine.setText("");
         addServiceCommandLine.setStyle(null);
-
 
         if(addServiceCommand.compareTo("back") == 0) {
             ScreenChanger.getInstance().onBack(event) ;
@@ -49,14 +54,30 @@ public class BarberAddServiceController {
         }
         else if(addServiceCommand.compareTo("add") == 0 && getterTex()){
                 try {
+
                     ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
                     AddServiceController addServiceController = new AddServiceController();
-                    //addServiceController.addService(serviceBean);
-                }catch(NegativePriceException e){
-                    addServiceExceptionLabelSecondView.setText("Insert price is negative!");
+                    addServiceController.addService(serviceBean, ScreenChanger.getInstance().getLoggedUser());
+
+                } catch (DuplicatedServiceException e) {
+
+                    addServiceExceptionLabelSecondView.setText("Insert service already exist!");
+                    goBackToHome = false;
+
+                } catch (InsertNegativePriceException e) {
+
+                    addServiceExceptionLabelSecondView.setText(e.getMessage());
+                    goBackToHome = false;
+                    addServicePriceField.setText("Insert correct price!");
+
                 }
 
-                ScreenChanger.getInstance().goToHome(event);
+            if(goBackToHome) {
+
+                    ScreenChanger.getInstance().goToHome(event);
+
+                }
+
                 return ;
         }
 

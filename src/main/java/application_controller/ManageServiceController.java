@@ -4,6 +4,7 @@ import engineering.bean.ServiceBean;
 import engineering.bean.UserBean;
 import engineering.container.ServiceCatalogue;
 import engineering.dao.ServiceDAO;
+import engineering.exception.InsertNegativePriceException;
 import engineering.exception.NegativePriceException;
 import model.Service;
 import model.User;
@@ -16,7 +17,7 @@ public class ManageServiceController {
     private UserBean userBean;
 
 
-    public List<ServiceBean> getAllService() throws NegativePriceException {
+    public List<ServiceBean> getAllService() throws InsertNegativePriceException {
 
         ServiceDAO serviceDAO = new ServiceDAO(userBean.getUserEmail());
         ServiceCatalogue catalogueService = serviceDAO.loadServices();

@@ -1,5 +1,6 @@
 package engineering.bean;
 
+import engineering.exception.InsertNegativePriceException;
 import engineering.exception.NegativePriceException;
 import engineering.pattern.observer.Subject;
 
@@ -10,12 +11,12 @@ public class ServiceBean extends Subject {
     private String nameOfUsedProductInfo;
     private Double priceInfo;
 
-    public ServiceBean() throws NegativePriceException{
+    public ServiceBean() throws InsertNegativePriceException {
         this("", "", "", 0.0D);
 
     }
 
-    public ServiceBean (String name, String description, String nameOfUsedProduct, Double price) throws NegativePriceException{
+    public ServiceBean (String name, String description, String nameOfUsedProduct, Double price) throws InsertNegativePriceException {
 
         super();
         this.setNameInfo(name);
@@ -49,10 +50,19 @@ public class ServiceBean extends Subject {
 
     }
 
-    public void setPriceInfo(Double priceInfo) throws NegativePriceException{
+    public void setPriceInfo(Double priceInfo) throws InsertNegativePriceException {
 
-        if (controlPrice(priceInfo)){
-            this.priceInfo = priceInfo;
+        try {
+
+            if (controlPrice(priceInfo)) {
+
+                this.priceInfo = priceInfo;
+
+            }
+        }catch (NegativePriceException e){
+
+            this.priceInfo = -(priceInfo);
+            throw new InsertNegativePriceException("Insert Price is negative!");
         }
 
     }

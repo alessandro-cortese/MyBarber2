@@ -8,6 +8,7 @@ import engineering.dao.CustomerDAO;
 import engineering.dao.ProductDAO;
 import engineering.dao.SaloonDAO;
 import engineering.dao.ServiceDAO;
+import engineering.exception.DuplicatedServiceException;
 import engineering.exception.ProductNotFoundException;
 import model.Customer;
 import model.Service;
@@ -15,19 +16,20 @@ import model.buy_product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AddServiceController {
 
-    public void addService(ServiceBean serviceBean, UserBean userBean) {
+    public void addService(ServiceBean serviceBean, UserBean userBean) throws DuplicatedServiceException {
 
 
         Product localProduct;
-        Service service;
+        Service newService;
 
         int serviceKey;
 
         AddServiceBoundarySendEmail addServiceBoundarySendEmail = new AddServiceBoundarySendEmail(serviceBean);
-        ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
+        ServiceCatalogue serviceCatalogue;
 
         SaloonDAO saloonDAO = new SaloonDAO();
         CustomerDAO customerDAO = new CustomerDAO();
@@ -40,7 +42,7 @@ public class AddServiceController {
         List<Customer> customers;
 
         customers = customerDAO.loadCustomerFromFavoriteSaloon(saloonId);
-
+        serviceCatalogue = serviceDAO.loadServices();
 
         try{
 
@@ -61,10 +63,20 @@ public class AddServiceController {
 
         serviceBean.attach(addServiceBoundarySendEmail);
 
-        service = new Service(serviceBean.getNameInfo(), serviceBean.getDescriptionInfo(), serviceBean.getPriceInfo(), localProduct);
+        newService = new Service(serviceBean.getNameInfo(), serviceBean.getDescriptionInfo(), serviceBean.getPriceInfo(), localProduct);
 
-        serviceKey = serviceDAO.insertService(service, userBean.getUserEmail()) ;
+        for(Service service : serviceCatalogue.getServices()){
 
+            if(Objects.equals(service.getServiceName(), newService.getServiceName()) && Objects.equals(service.getServiceDescription(), newService.getServiceDescription()) &&
+                    Objects.equals(service.getServicePrice(), newService.getServicePrice())){
+
+                throw new DuplicatedServiceException("Servizio già esistente!");
+
+            }
+
+        }
+
+        serviceKey = serviceDAO.insertService(newService, userBean.getUserEmail()) ;
 
         if(!(serviceBean.getNameOfUsedProductInfo().equals("")) && localProduct != null) {
 
@@ -74,7 +86,7 @@ public class AddServiceController {
 
         if(serviceKey != -1){
 
-            serviceCatalogue.addService(service);
+            serviceCatalogue.addService(newService);
 
             addServiceBoundarySendEmail.setUserBeans(userBeans);
             serviceBean.notifyChanges();

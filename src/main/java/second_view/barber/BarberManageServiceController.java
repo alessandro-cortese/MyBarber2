@@ -2,6 +2,7 @@ package second_view.barber;
 
 import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
+import engineering.exception.InsertNegativePriceException;
 import engineering.exception.NegativePriceException;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
@@ -34,10 +35,11 @@ public class BarberManageServiceController implements Initializable {
     public void initialize(URL location, ResourceBundle resources){
 
         ManageServiceController manageServiceController = new ManageServiceController();
+        manageServiceController.setUserBean(ScreenChanger.getInstance().getLoggedUser());
 
         try{
             serviceBeanList = manageServiceController.getAllService();
-        } catch (NegativePriceException e) {
+        } catch (InsertNegativePriceException e) {
             e.printStackTrace();
         }
 

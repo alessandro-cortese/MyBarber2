@@ -8,11 +8,15 @@ public class DuplicatedServiceException extends Exception {
     private static final long serialVersionUID = -1087345248663858448L;
 
     public DuplicatedServiceException() {
+
         super();
+
     }
 
     public DuplicatedServiceException(String message) {
+
         super(message);
+
     }
 
 }

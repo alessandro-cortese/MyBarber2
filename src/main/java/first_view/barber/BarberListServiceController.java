@@ -2,6 +2,7 @@ package first_view.barber;
 
 import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
+import engineering.exception.InsertNegativePriceException;
 import engineering.exception.NegativePriceException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.ServiceListCellFactory;
@@ -43,7 +44,7 @@ public class BarberListServiceController implements Initializable {
 
         try {
             beanList = manageServiceController.getAllService();
-        } catch (NegativePriceException e) {
+        } catch (InsertNegativePriceException e) {
             e.printStackTrace();
         }
 

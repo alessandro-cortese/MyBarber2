@@ -31,7 +31,7 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="525.0" prefWidth="388.0" spacing="15.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="390.0" text="Nome Centro">
+                  <Label prefHeight="39.0" prefWidth="390.0" text="Nuovo Servizio">
                      <font>
                         <Font size="28.0" />
                      </font>

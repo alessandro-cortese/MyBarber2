@@ -3,14 +3,22 @@ package first_view.barber;
 import application_controller.AddServiceController;
 import engineering.bean.ServiceBean;
 import engineering.bean.UserBean;
+import engineering.exception.DuplicatedServiceException;
 import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class BarberConfirmAddServiceController {
+
+    public BarberConfirmAddServiceController() {
+
+        this.goToHome = false;
+
+    }
 
     private ServiceBean serviceBean;
 
@@ -19,19 +27,35 @@ public class BarberConfirmAddServiceController {
     @FXML private TextField descriptionConfirmedAddService ;
     @FXML private TextField nameOfUsedProductConfirmedAddService ;
     @FXML private Button saveConfirmButton;
+    @FXML private Label errorLabelConfirmAddService;
 
+    private boolean goToHome;
 
     @FXML
     public void onButtonClicked(ActionEvent event) {
 
+        errorLabelConfirmAddService.setText("");
         Node sourceNode = (Node) event.getSource();
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
-
+        goToHome = true;
 
         if(sourceNode == saveConfirmButton) {
-            InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
             AddServiceController addServiceController = new AddServiceController();
-            addServiceController.addService(serviceBean,userBean);
+            try {
+
+                addServiceController.addService(serviceBean, userBean);
+
+
+            }catch (DuplicatedServiceException e){
+
+                errorLabelConfirmAddService.setText("Servizio già esistente!");
+                goToHome = false;
+
+            }
+
+        }
+        if(goToHome) {
+            InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
         }
 
     }
