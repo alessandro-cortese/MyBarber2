@@ -23,7 +23,7 @@ public class ScheduleTime {   //classi di ingegnerizzazione che aggrega i time s
                 timeSlot.setFromTime(sumTime);
                 sumTime.setTime(sumTime.getTime() + saloonTimeSlots.getSlotTime().getTime());
                 timeSlot.setToTime(sumTime);
-                timeSlot.setSeatAvalaible(saloonTimeSlots.getSeatNumber());
+                timeSlot.setSeatAvailable(saloonTimeSlots.getSeatNumber());
                 timeSlotList.add(timeSlot);
 
         }
@@ -35,7 +35,7 @@ public class ScheduleTime {   //classi di ingegnerizzazione che aggrega i time s
             timeSlot = new TimeSlot();
             sumTime.setTime(sumTime.getTime() + saloonTimeSlots.getSlotTime().getTime());
             timeSlot.setToTime(sumTime);
-            timeSlot.setSeatAvalaible(saloonTimeSlots.getSeatNumber());
+            timeSlot.setSeatAvailable(saloonTimeSlots.getSeatNumber());
             timeSlotList.add(timeSlot);
         }
     }

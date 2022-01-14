@@ -37,12 +37,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
-    public static ResultSet loadSaloonId(Statement statement, String barberEmail) throws SQLException {
-        String query = String.format("SELECT * FROM Saloon WHERE barber = '%s';", barberEmail);
-        return statement.executeQuery(query);
-    }
-
-
     //-+-+-+-+-+-+-+-+-+-+- Product -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet loadAllProducts(Statement statement) throws  SQLException {
         String query = "SELECT * from Product" ;
@@ -89,9 +83,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
 
     //-+-+-+-+-+-+-+-+-+-+- Order -+-+-+-+-+-+-+-+-+-+-//
-    public static void insertNewOrder(Statement statement, Order order, User user) {
-
-    }
 
 
     //-+-+-+-+-+-+-+-+-+-+- SaloonTime -+-+-+-+-+-+-+-+-+-+-//

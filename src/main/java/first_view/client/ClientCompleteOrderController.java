@@ -18,7 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.time.Instant;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;

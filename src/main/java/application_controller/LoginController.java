@@ -13,7 +13,6 @@ public class LoginController {
     public UserBean verifyUser(AccessInfoBean accessInfoBean) throws NotExistentUserException {
         UserDAO userDAO = new UserDAO() ;
         Integer userType = userDAO.loadUserByCredentials(accessInfoBean.getUserEmail(), accessInfoBean.getUserPassword());
-        UserBean userBean = new UserBean(accessInfoBean.getUserEmail(), userType) ;
-        return userBean ;
+        return new UserBean(accessInfoBean.getUserEmail(), userType);
     }
 }

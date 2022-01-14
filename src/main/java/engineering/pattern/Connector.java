@@ -7,7 +7,7 @@ public class Connector { //SINGLETON CLASS
         private Connection connection ; //di classe
         private static Connector myConnector ;
 
-        protected Connector() throws RuntimeException {
+        protected Connector()  {
 
             try {
 
@@ -20,17 +20,15 @@ public class Connector { //SINGLETON CLASS
 
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
                     connection = DriverManager.getConnection(jdbcUrl);
-             }
-                catch (ClassNotFoundException e) {
-                    throw new RuntimeException("Cannot find the driver in the classpath!", e);
-                }
-                catch (SQLException e) {
-                    // handle any errors
-                    System.out.println("SQLException: " + e.getMessage());
-                    System.out.println("SQLState: " + e.getSQLState());
-                    System.out.println("VendorError: " + e.getErrorCode());
-                }
-           // }
+            }catch (SQLException e) {
+                    e.getMessage();
+                    e.getSQLState();
+                    e.getErrorCode();
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
 
         public static Connector getConnectorInstance() { //di classe

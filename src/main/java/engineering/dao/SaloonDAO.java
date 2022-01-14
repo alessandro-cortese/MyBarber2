@@ -39,7 +39,7 @@ public class SaloonDAO {
         this.barberEmail = barberEmail;
     }
 
-    public SaloonCatalogue loadAllSaloon() {
+    /*public SaloonCatalogue loadAllSaloon() {
 
         Saloon saloon;
         SaloonCatalogue saloonCatalogue = new SaloonCatalogue();
@@ -54,6 +54,7 @@ public class SaloonDAO {
 
         return saloonCatalogue;
     }
+     */
 
     private Saloon loadSaloon(Connection connection) {
 
@@ -337,7 +338,7 @@ public class SaloonDAO {
 
 
         try(Statement statement = connection.createStatement();
-            ResultSet resultSet = Queries.loadSaloonId(statement, barberEmail)) {
+            ResultSet resultSet = Queries.loadAllSaloon(statement, barberEmail)) {
 
             if (resultSet.isFirst()) {
 
