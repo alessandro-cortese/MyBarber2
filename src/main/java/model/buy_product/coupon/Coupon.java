@@ -62,7 +62,6 @@ public abstract class Coupon implements Priceable, Comparable<Coupon> {
 
     @Override
     public int compareTo(Coupon toCompare) {
-        System.out.printf("%d %d%n", this.couponCode, toCompare.couponCode);
         Integer typeComparison = Integer.compare(this.couponType, toCompare.getCouponType()) ;
         if (typeComparison != 0) return typeComparison ;
         else {

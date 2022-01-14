@@ -3,6 +3,7 @@ package first_view.general;
 import application_controller.LoginController;
 import engineering.bean.AccessInfoBean;
 import engineering.bean.UserBean;
+import engineering.exception.NotExistentUserException;
 import first_view.pickers.CredentialsPicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.User;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 
 import static first_view.general.RegisterScreenController.CLIENT_MENU_SCREEN_NAME;
@@ -48,13 +51,10 @@ public class LoginScreenController {
                 alert.showAndWait() ;
                 return ;
             }
-            UserBean userBean = login() ;
-            if (userBean == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "L'utente indicato non esiste!!") ;
-                alert.showAndWait() ;
-                return ;
-            }
-            InternalBackController.getInternalBackControllerInstance().enterAsUser(userBean, stage);
+
+            UserBean userBean = login();
+            if (userBean != null) InternalBackController.getInternalBackControllerInstance().enterAsUser(userBean, stage);
+
         }
         else if (eventSource == continueWithoutAccessButton) {
             InternalBackController.getInternalBackControllerInstance().enterAsUser(null, stage);
@@ -69,17 +69,22 @@ public class LoginScreenController {
 
     }
 
-
-
-
-    private UserBean login() {
+    @Nullable
+    private UserBean login()  {
         String userEmail = emailTextField.getText() ;
         String password = passwordTextField.getText() ;
 
         AccessInfoBean accessInfoBean = new AccessInfoBean(userEmail, password) ;
         LoginController loginController = new LoginController() ;
-        return loginController.verifyUser(accessInfoBean);
 
+        UserBean loggedUser = null ;
+        try {
+            loggedUser = loginController.verifyUser(accessInfoBean);
+        } catch (NotExistentUserException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+            alert.showAndWait() ;
+        }
+        return loggedUser ;
     }
 
 }

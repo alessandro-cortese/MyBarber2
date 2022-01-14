@@ -2,12 +2,17 @@ package application_controller;
 
 import boundary.buy_product.BuyProductEMailSystemBoundary;
 import boundary.buy_product.BuyProductPaypalBoundary;
+import engineering.bean.AccessInfoBean;
+import engineering.bean.UserBean;
 import engineering.bean.buy_product.*;
 import engineering.dao.CouponDAO;
 import engineering.dao.OrderDAO;
 import engineering.dao.ProductDAO;
+import engineering.dao.UserDAO;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
+import engineering.exception.NotExistentUserException;
+import model.Customer;
 import model.User;
 import model.buy_product.Cart;
 import model.buy_product.coupon.Coupon;
@@ -31,7 +36,7 @@ public class BuyProductController {
     private final CartBean cartBean ;
     private final OrderTotalBean orderBean ;
 
-    private User user ;
+    private Customer customer;
 
     public BuyProductController() {
         ProductDAO productDAO = new ProductDAO();
@@ -75,19 +80,27 @@ public class BuyProductController {
     public void applyCoupon(CouponBean couponBean) throws InvalidCouponException, NegativePriceException {
         Coupon myCoupon = couponDAO.loadCouponByCode(Integer.parseInt(couponBean.getCouponCode()));
         order.addCoupon(myCoupon);
-
     }
 
-    public void completeOrder(OrderInfoBean orderInfoBean) {
+    public void completeOrder(OrderInfoBean orderInfoBean, UserBean loggedUser) throws NotExistentUserException {
+        UserDAO userDAO = new UserDAO() ;
+        if (customer == null) {
+            customer = userDAO.loadCustomerByEmail(loggedUser.getUserEmail());
+        }
+
         order.setAddress(orderInfoBean.getAddressInfo());
         order.setTelephone(orderInfoBean.getTelephoneInfo());
         order.setPaymentOption(orderInfoBean.getPaymentOptionInfo());
         order.setDate(orderInfoBean.getDateInfo());
 
         OrderDAO orderDAO = new OrderDAO() ;
-        Integer orderKey = orderDAO.saveOrder(order, cart, user);
+        Integer orderKey = orderDAO.saveOrder(order, cart, customer);
 
         //Aggiungere Salvataggio delle righe del carrello: utilizzo CartDAO e orderKey
+        System.out.println(customer.getCardPoints());
+        customer.setCardPoints(customer.getCardPoints() + order.getOrderPoints());
+        System.out.println(customer.getCardPoints());
+        userDAO.updateCustomerPoints(customer, customer.getCardPoints());
 
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
         paypalBoundary.pay(new OrderTotalBean(order));
@@ -114,5 +127,16 @@ public class BuyProductController {
     public OrderTotalBean showOrder(){
         order.removeAllCoupon();
         return orderBean ;
+    }
+
+    public UserBean login(AccessInfoBean accessInfo) throws NotExistentUserException {
+        LoginController loginController = new LoginController() ;
+        UserBean userBean = null;
+
+        userBean = loginController.verifyUser(accessInfo) ;
+        UserDAO userDAO = new UserDAO() ;
+        customer = userDAO.loadCustomerByEmail(userBean.getUserEmail()) ;
+
+        return userBean ;
     }
 }

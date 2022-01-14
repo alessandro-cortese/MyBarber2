@@ -1,6 +1,7 @@
 package engineering.dao;
 
 import engineering.dao.queries.Queries;
+import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
 import model.Customer;
 
@@ -28,7 +29,7 @@ public class UserDAO {
     private static final Integer BARBER_TYPE = 1 ;
 
 
-    public Integer loadUserByCredentials(String userEmail, String userPassword) {
+    public Integer loadUserByCredentials(String userEmail, String userPassword) throws NotExistentUserException {
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         Integer userType = -1 ;
@@ -44,6 +45,9 @@ public class UserDAO {
                 else if (userEnum.compareTo(CUSTOMER_ENUM_TYPE) == 0) {
                     userType = CUSTOMER_TYPE ;
                 }
+            }
+            else {
+                throw new NotExistentUserException("UTENTE INDICATO NON ESISTE!!") ;
             }
 
         } catch (SQLException sqlException) {
@@ -95,15 +99,18 @@ public class UserDAO {
         return new Customer(customerEmail, null, customerName, customerSurname, customerPoints) ;
     }
 
-    public Customer loadCustomerByEmail(String userEmail){
+    public Customer loadCustomerByEmail(String userEmail) throws NotExistentUserException{
         Connection connection = Connector.getConnectorInstance().getConnection();
         Customer customer = null ;
         try(Statement statement = connection.createStatement() ;
             ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail)
         )
         {
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 customer = createCustomer(resultSet) ;
+            }
+            else {
+                throw new NotExistentUserException("NON ESISTE UN CLIENTE CON LE CREDENZIALI INDICATE!!") ;
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -112,13 +119,13 @@ public class UserDAO {
         return customer ;
     }
 
-    public void updateCustomerPoints(Integer customerPoints, String customerEmail) {
+    public void updateCustomerPoints(Customer customer, Integer customerPoints) {
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         try(Statement statement = connection.createStatement() ;) {
-            String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customerPoints, customerEmail) ;
+            String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customerPoints, customer.getEmail()) ;
             statement.executeUpdate(update) ;
-
+            System.out.println(customerPoints);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }

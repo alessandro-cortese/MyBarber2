@@ -6,6 +6,7 @@ import engineering.bean.buy_product.CouponBean;
 import engineering.dao.CouponDAO;
 import engineering.dao.UserDAO;
 import engineering.exception.InvalidCouponException;
+import engineering.exception.NotExistentUserException;
 import javafx.util.Pair;
 import model.Customer;
 import model.buy_product.containers.CouponContainer;
@@ -54,7 +55,7 @@ public class ManageCouponController {
     }
 
 
-    public FidelityCardBean showFidelityCard(UserBean userBean) {
+    public FidelityCardBean showFidelityCard(UserBean userBean) throws NotExistentUserException {
         FidelityCardBean fidelityCard = null;
 
         if (userBean != null) {
@@ -88,7 +89,7 @@ public class ManageCouponController {
             if (customerPoints >= couponCost) {
                 createNewCoupon(couponType, couponValue) ;
                 customer.setCardPoints(customer.getCardPoints() - couponCost);
-                userDAO.updateCustomerPoints(customer.getCardPoints(), customer.getEmail()) ;
+                userDAO.updateCustomerPoints(customer, customer.getCardPoints()) ;
                 fidelityCardBean = new FidelityCardBean(customer.getCardPoints(), createCouponBeans()) ;
             }
             else {

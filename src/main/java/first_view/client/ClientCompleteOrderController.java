@@ -1,18 +1,23 @@
 package first_view.client;
 
 import application_controller.BuyProductController;
+import engineering.bean.AccessInfoBean;
+import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
 import engineering.bean.buy_product.OrderInfoBean;
 import engineering.bean.buy_product.OrderTotalBean;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
+import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
+import first_view.pickers.CredentialsPicker;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.Instant;
 
@@ -35,23 +40,48 @@ public class ClientCompleteOrderController {
 
 
     @FXML
-    public void onButtonClicked(ActionEvent event) {
+    public void onButtonClicked(ActionEvent event) throws IOException {
         Node sourceNode = (Node) event.getSource() ;
         if (sourceNode == addCouponButton) {
             insertCoupon() ;
         }
         else if (sourceNode == payWithPaypalButton || sourceNode == payWithGooglePayButton) {
-            if (!addressField.getText().isEmpty() && !telephoneField.getText().isEmpty()) {
-                String paymentType = (sourceNode == payWithPaypalButton) ? "paypal" : "google" ;
-                buy(paymentType);
-                InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
-            }
-            else {
-                Alert alertDialog = new Alert(Alert.AlertType.ERROR, "Necessario completare tutti i campi!!") ;
-                alertDialog.showAndWait() ;
+
+            try {
+                if (InternalBackController.getInternalBackControllerInstance().getLoggedUser() == null) login();
+
+                if (!addressField.getText().isEmpty() && !telephoneField.getText().isEmpty()) {
+                    String paymentType = (sourceNode == payWithPaypalButton) ? "paypal" : "google";
+                    buy(paymentType);
+                    InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
+                } else {
+                    Alert alertDialog = new Alert(Alert.AlertType.ERROR, "COMPLETARE TUTTI I CAMPI DELL'ORDINE!!");
+                    alertDialog.showAndWait();
+                }
+
+            } catch (NotExistentUserException e) {
+                //Se il login non è andato bene non posso andare avanti quindi faccio return ;
+                return;
             }
         }
+
         updateInfo();
+    }
+
+    private void login() throws IOException, NotExistentUserException {
+        CredentialsPicker credentialsPicker = new CredentialsPicker() ;
+        AccessInfoBean accessInfo = credentialsPicker.getAccessInfo() ;
+        if (accessInfo != null) {
+            try {
+                UserBean loggedUser = buyProductController.login(accessInfo) ;
+                InternalBackController.getInternalBackControllerInstance().setLoggedUser(loggedUser);
+            }
+            catch (NotExistentUserException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+                alert.showAndWait() ;
+                throw e ;
+            }
+        }
     }
 
     private void insertCoupon() {
@@ -93,9 +123,10 @@ public class ClientCompleteOrderController {
         couponListView.setItems(FXCollections.observableList(orderTotalBean.getCouponBeans()));
     }
 
-    private void buy(String paymentType) {
+    private void buy(String paymentType) throws NotExistentUserException {
         OrderInfoBean orderInfoBean = new OrderInfoBean(addressField.getText(), telephoneField.getText(), paymentType, Date.from(Instant.now())) ;
-        buyProductController.completeOrder(orderInfoBean);
+        UserBean loggedUser = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
+        buyProductController.completeOrder(orderInfoBean, loggedUser);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Il tuo ordine è stato completato correttamente") ;
         alert.showAndWait() ;
     }

@@ -5,6 +5,7 @@ import engineering.bean.FidelityCardBean;
 import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
 import engineering.exception.InvalidCouponException;
+import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CouponCellFactory;
 import javafx.collections.FXCollections;
@@ -30,6 +31,7 @@ public class ClientFidelityCardController implements Initializable {
 
     @FXML private ListView<CouponBean> couponListView ;
     @FXML private Label pointsSaleLabel ;
+    @FXML private Label userNameLabel ;
 
     private final ManageCouponController manageCouponController ;
 
@@ -43,9 +45,17 @@ public class ClientFidelityCardController implements Initializable {
 
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser() ;
         if (userBean != null) {
-            FidelityCardBean fidelityCardBean = manageCouponController.showFidelityCard(userBean) ;
-            couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));
-            pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale() );
+            userNameLabel.setText(userBean.getUserEmail());
+            FidelityCardBean fidelityCardBean = null;
+            try {
+                fidelityCardBean = manageCouponController.showFidelityCard(userBean);
+                couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));
+                pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale() );
+            } catch (NotExistentUserException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+                alert.showAndWait() ;
+            }
+
         }
         generateCouponButton.setDisable(userBean == null);
     }

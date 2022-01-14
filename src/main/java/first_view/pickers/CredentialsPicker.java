@@ -4,10 +4,7 @@ import engineering.bean.AccessInfoBean;
 import engineering.bean.UserBean;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.AccessibleAction;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -25,17 +22,19 @@ public class CredentialsPicker extends Dialog<AccessInfoBean> {
         this.setTitle("Inserire Credenziali");
 
         TextField emailField = (TextField) dialogPane.lookup("#" + EMAIL_FIELD_ID);
-        TextField passwordField = (TextField) dialogPane.lookup("#" + PASSWORD_FIELD_ID) ;
+        PasswordField passwordField = (PasswordField) dialogPane.lookup("#" + PASSWORD_FIELD_ID) ;
 
         this.resultConverterProperty().set(param -> {
+            String email = "";
+            String password = "";
             if (param == ButtonType.OK) {
-                AccessInfoBean accessInfoBean = new AccessInfoBean(emailField.getText(), passwordField.getText()) ;
-                this.setResult(accessInfoBean);
-                return accessInfoBean ;
+                email = emailField.getText() ;
+                password = passwordField.getText() ;
+
             }
-            else {
-                return null ;
-            }
+            AccessInfoBean accessInfoBean = new AccessInfoBean(email, password) ;
+            this.setResult(accessInfoBean);
+            return accessInfoBean ;
         });
     }
 

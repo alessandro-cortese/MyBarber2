@@ -1,6 +1,7 @@
 package second_view.client;
 
 import application_controller.BuyProductController;
+import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
 import engineering.bean.buy_product.OrderInfoBean;
 import engineering.bean.buy_product.OrderTotalBean;
@@ -9,7 +10,6 @@ import engineering.exception.NegativePriceException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -17,10 +17,8 @@ import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Date;
 import java.time.Instant;
-import java.util.ResourceBundle;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 
@@ -64,7 +62,7 @@ public class ClientCompleteOrderController {
             return ;
         }
         else if (command.compareTo("buy") == 0) {
-            if (telephoneTextField.getText().compareTo("") == 0 || addressTextField.getText().compareTo("") == 0) {
+            if (telephoneTextField.getText().isEmpty() || addressTextField.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Completare tutti i Campi") ;
                 alert.showAndWait() ;
             }
@@ -81,7 +79,8 @@ public class ClientCompleteOrderController {
 
     private void buy() {
         OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText(), "paypal", Date.from(Instant.now())) ;
-        buyProductController.completeOrder(orderInfoBean);
+        UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser() ;
+        //buyProductController.completeOrder(orderInfoBean, loggedUser);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ordine Eseguito con Successo!!") ;
         alert.showAndWait() ;
     }

@@ -1,5 +1,6 @@
 package second_view.general;
 
+import engineering.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -36,6 +37,8 @@ public class ScreenChanger {
 
     private Integer homeIndex ;
     private static ScreenChanger backController ;
+
+    private UserBean loggedUser ;
 
     private ScreenChanger() {
         backSceneStack = new ArrayList<>() ;
@@ -80,6 +83,13 @@ public class ScreenChanger {
     }
 
 
+    public void setLoggedUser(UserBean user) {
+        this.loggedUser = user ;
+    }
+
+    public UserBean getLoggedUser() {
+        return loggedUser ;
+    }
 
 
 
