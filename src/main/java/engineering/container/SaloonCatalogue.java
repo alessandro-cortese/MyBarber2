@@ -2,24 +2,20 @@ package engineering.container;
 
 import model.Saloon;
 import javax.annotation.Nullable;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SaloonCatalogue {
 
     private List<Saloon> saloonList;
 
-    public SaloonCatalogue(){
-
-        this.saloonList = new ArrayList<>();
-
-    }
 
     public SaloonCatalogue(List<Saloon> saloonList) {
 
         this.saloonList = saloonList;
+
+    }
+
+    public SaloonCatalogue() {
 
     }
 
@@ -41,12 +37,6 @@ public class SaloonCatalogue {
 
     }
 
-    public void addSaloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, LocalTime[][] localTimes, Integer[] numberOfSlots) {
-
-        Saloon localSaloon = new Saloon(name, cityAndAddress, phone, slotTime, seatNumber, localTimes, numberOfSlots);
-        this.saloonList.add(localSaloon);
-
-    }
 
     @Nullable
     public Saloon getSaloonByName (String saloonName) {

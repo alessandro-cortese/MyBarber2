@@ -1,6 +1,5 @@
 package application_controller;
 
-import java.sql.SQLException;
 import java.util.*;
 
 import engineering.bean.BookingBean;
@@ -49,9 +48,9 @@ public class BookingController {
     public SaloonBean searchByNameSaloon(SaloonBean saloonBean) throws Exception {
 
         //saloonName = saloonBean.getName();
-        //SaloonDAO saloonDAO = new SaloonDAO();
+        SaloonDAO saloonDAO = new SaloonDAO();
         System.out.println(saloonBean.getName());
-        saloonByName = saloonDAO.retrieveByNameSaloon(saloonBean.getName());
+        saloonByName = saloonDAO.retrieveByNameOfSaloon(saloonBean.getName());
 
         saloonBean.setName(saloonByName.getName());
         saloonBean.setCity(saloonByName.getCity());
@@ -70,11 +69,13 @@ public class BookingController {
         saloonName = saloonBean.getName();
 
         try {
-            saloon = saloonDAO.retreiveTimeSlots(saloonName);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+            saloon = saloonDAO.retrieveTimeSlots(saloonName);
+
         } catch (Exception e) {
+
             e.printStackTrace();
+
         }
         saloonBeanTimeSlots = new SaloonBean();
         saloonBeanTimeSlots.setOpeningMorningTimeInfo(saloon.getOpeningMorningTime());
