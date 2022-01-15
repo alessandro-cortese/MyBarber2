@@ -17,7 +17,7 @@ public class Saloon {
     private Integer numberOfMorningSlots;
     private Integer numberOfAfternoonSlots;
 
-    public Saloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, Time[][] localTimes, Integer[] numberOfSlots){
+    public Saloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, Integer[] numberOfSlots){
 
         this.name = name;
         this.city = cityAndAddress[0];
@@ -25,10 +25,6 @@ public class Saloon {
         this.phone = phone;
         this.slotTime = slotTime;
         this.seatNumber = seatNumber;
-        this.openingMorningTime = localTimes[0][0];
-        this.closeMorningTime = localTimes[0][1];
-        this.openingAfternoonTime = localTimes[1][0];
-        this.closeAfternoonTime = localTimes[1][1];
         this.numberOfMorningSlots = numberOfSlots[0];
         this.numberOfAfternoonSlots = numberOfSlots[1];
 
@@ -81,11 +77,6 @@ public class Saloon {
         this.numberOfAfternoonSlots = numberSlotTime[1];
 
     }
-
-    public Saloon() {
-
-    }
-
     public String getName(){
 
         return this.name;

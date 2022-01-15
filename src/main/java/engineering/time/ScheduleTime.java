@@ -15,11 +15,11 @@ public class ScheduleTime {   //classi di ingegnerizzazione che aggrega i time s
 
     public ScheduleTime(SaloonBean saloonTimeSlots){
         timeOpen = saloonTimeSlots.getOpeningMorningTimeInfo();
+        System.out.println(timeOpen);
         sumTime = new Time(timeOpen.getTime()); //return hours in milliseconds
 
         for (int i = 0; i< saloonTimeSlots.getNumberOfMorningSlotsInfo(); i++){
                 timeSlot = new TimeSlot();
-
                 timeSlot.setFromTime(sumTime);
                 sumTime.setTime(sumTime.getTime() + saloonTimeSlots.getSlotTime().getTime());
                 timeSlot.setToTime(sumTime);
@@ -31,7 +31,7 @@ public class ScheduleTime {   //classi di ingegnerizzazione che aggrega i time s
         timeOpen = saloonTimeSlots.getOpeningAfternoonTimeInfo();
         sumTime = new Time(timeOpen.getTime());
 
-        for (int i =0; i< saloonTimeSlots.getNumberOfAfternoonSlotsInfo();i++){
+        for (int i =0; i < saloonTimeSlots.getNumberOfAfternoonSlotsInfo();i++){
             timeSlot = new TimeSlot();
             sumTime.setTime(sumTime.getTime() + saloonTimeSlots.getSlotTime().getTime());
             timeSlot.setToTime(sumTime);

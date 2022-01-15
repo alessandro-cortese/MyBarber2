@@ -20,8 +20,8 @@ public class SaloonDAO {
     private static final String SALOON_SEAT_NUMBER_COL = "seatNumber" ;
     private static final String SALOON_NUMBER_SLOT_TIME_MORNING_COL = "numberSlotTimeMorning" ;
     private static final String SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL = "numberSlotTimeAfternoon" ;
-    private static final String SALOON_OPENING_MORNING_TIME_COL = "openingMorningTime" ;
-    private static final String SALOON_OPENING_AFTERNOON_TIME_COL = "openingAfternoonTime" ;
+    private static final String SALOON_OPENING_MORNING_TIME_COL = "openMorningTime" ;
+    private static final String SALOON_OPENING_AFTERNOON_TIME_COL = "openAfternoonTime" ;
     private static final String SALOON_CLOSE_MORNING_TIME_COL = "closeMorningTime" ;
     private static final String SALOON_CLOSE_AFTERNOON_TIME = "closeAfternoonTime" ;
 
@@ -110,8 +110,8 @@ public class SaloonDAO {
         Connection connection = Connector.getConnectorInstance().getConnection();
         Saloon saloon = null;
 
-        try(Statement statement = connection.createStatement();
-            ResultSet resultSet = Queries.loadSaloonByName(statement, saloonName)){
+        try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            ResultSet resultSet = Queries.selectSaloonByName(statement, saloonName)){
 
             if(resultSet.first()){
 
@@ -138,7 +138,7 @@ public class SaloonDAO {
         Time intervalSlotTime;
         int[] numberSlotTime = new int[2];
 
-        try(Statement statement = connection.createStatement();
+        try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             ResultSet resultSet = Queries.selectSlotTimeSaloon(statement, saloonName)) {
 
             if(resultSet.first()) {
@@ -190,25 +190,20 @@ public class SaloonDAO {
 
     private Saloon createSaloon(ResultSet resultSet) throws SQLException {
 
-        Time[][] times = new Time[2][2];
         Integer[] numberOfSlots = new Integer[2];
         String[] cityAndAddress = new String[2];
         String name = resultSet.getString(SALOON_NAME_COL);
         String address = resultSet.getString(SALOON_ADDRESS_COL);
         String city = resultSet.getString(SALOON_CITY_COL);
         String telephone = resultSet.getString(SALOON_TELEPHONE_COL);
-        Time intervalSlotTime = resultSet.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
-        times[0][0] = resultSet.getTime(SALOON_OPENING_MORNING_TIME_COL);
-        times[0][1] = resultSet.getTime(SALOON_CLOSE_MORNING_TIME_COL);
-        times[1][0] = resultSet.getTime(SALOON_OPENING_AFTERNOON_TIME_COL);
-        times[1][1] = resultSet.getTime(SALOON_CLOSE_AFTERNOON_TIME);
         int seatsNumber = resultSet.getInt(SALOON_SEAT_NUMBER_COL);
         numberOfSlots[0] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_MORNING_COL) ;
         numberOfSlots[1] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL) ;
+        Time intervalSlotTime = resultSet.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
         cityAndAddress[0] = city;
         cityAndAddress[1] = address;
 
-        return new Saloon(name, cityAndAddress, telephone, intervalSlotTime, seatsNumber, times, numberOfSlots);
+        return new Saloon(name, cityAndAddress, telephone, intervalSlotTime, seatsNumber, numberOfSlots);
     }
 
 }
