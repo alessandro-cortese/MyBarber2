@@ -17,9 +17,9 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
 
     //-+-+-+-+-+-+-+-+-+-+- Saloon -+-+-+-+-+-+-+-+-+-+-//
-    public static ResultSet selectSaloonByName(Statement stmt, String name) throws SQLException{
-        String sql = "SELECT * FROM Saloon where name = '" + name + "';";
-        return stmt.executeQuery(sql);
+    public static ResultSet selectSaloonByName(Statement stmt, String saloonName) throws SQLException{
+        String query = String.format("SELECT * FROM Saloon WHERE name = '%s';", saloonName);
+        return stmt.executeQuery(query);
     }
 
     public static ResultSet loadAllSaloon(Statement statement, String barberEmail) throws SQLException {
@@ -37,9 +37,10 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
+
     //-+-+-+-+-+-+-+-+-+-+- Product -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet loadAllProducts(Statement statement) throws  SQLException {
-        String query = "SELECT * from Product" ;
+        String query = "SELECT * FROM Product";
         return  statement.executeQuery(query) ;
     }
 
