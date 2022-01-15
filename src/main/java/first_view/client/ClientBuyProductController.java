@@ -1,8 +1,10 @@
 package first_view.client;
 
 import application_controller.BuyProductController;
+import engineering.bean.UserBean;
 import engineering.bean.buy_product.ProductBean;
 import engineering.bean.buy_product.ProductSearchInfoBean;
+import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.BuyProductListCellFactory;
 import javafx.collections.FXCollections;
@@ -35,12 +37,22 @@ public class ClientBuyProductController implements Initializable {
 
     public static final String CLIENT_CART_SCENE_RES = "first_view/client/client_cart.fxml" ;
 
+    public ClientBuyProductController() {
+        UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
+        if (userBean != null) {
+            try {
+                buyProductController = new BuyProductController(userBean) ;
+            } catch (NotExistentUserException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+                alert.showAndWait() ;
+            }
+        }
+        else buyProductController = new BuyProductController() ;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buyProductController = new BuyProductController() ;
-
         buyProductListView.setCellFactory(param -> new BuyProductListCellFactory());
-
         addToCartButton.setDisable(true);
 
         buyProductListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -50,7 +62,6 @@ public class ClientBuyProductController implements Initializable {
 
             addToCartButton.setDisable(newValue == null);
         });
-
 
         searchProduct("");
     }
@@ -71,7 +82,6 @@ public class ClientBuyProductController implements Initializable {
                 InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceNode);
                 FXMLLoader newCenterNodeLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_CART_SCENE_RES));
 
-
                 Scene myScene = sourceNode.getScene();
                 BorderPane borderPane = (BorderPane) myScene.getRoot();
                 borderPane.setCenter(newCenterNodeLoader.load());
@@ -88,9 +98,7 @@ public class ClientBuyProductController implements Initializable {
     private void searchProduct(String productName) {
         ProductSearchInfoBean searchInfoBean = new ProductSearchInfoBean(productName) ;
         List<ProductBean> productBeans = buyProductController.filterProductList(searchInfoBean);
-        buyProductListView.getItems().clear();
         buyProductListView.setItems(FXCollections.observableList(productBeans));
     }
-
 
 }

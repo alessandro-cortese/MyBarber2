@@ -56,7 +56,7 @@ public class ClientCompleteOrderController {
             telephoneTextField.setText(commandInput);
             return ;
         }
-        else if (command.matches("add coupon .+")) {
+        else if (command.matches("add coupon [0-9]+")) {
             String commandInput = command.replace("add coupon ", "") ;
             insertCoupon(commandInput) ;
             return ;
@@ -78,7 +78,7 @@ public class ClientCompleteOrderController {
     }
 
     private void buy() {
-        OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText(), "paypal", Date.from(Instant.now())) ;
+        OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText(), "paypal") ;
         UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser() ;
         //buyProductController.completeOrder(orderInfoBean, loggedUser);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ordine Eseguito con Successo!!") ;

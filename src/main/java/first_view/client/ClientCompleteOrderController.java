@@ -18,10 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.util.Date;
-import java.time.Instant;
-
-import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 
 public class ClientCompleteOrderController {
 
@@ -71,17 +67,16 @@ public class ClientCompleteOrderController {
     private void login() throws IOException, NotExistentUserException {
         CredentialsPicker credentialsPicker = new CredentialsPicker() ;
         AccessInfoBean accessInfo = credentialsPicker.getAccessInfo() ;
-        if (accessInfo != null) {
-            try {
-                UserBean loggedUser = buyProductController.login(accessInfo) ;
-                InternalBackController.getInternalBackControllerInstance().setLoggedUser(loggedUser);
-            }
-            catch (NotExistentUserException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-                alert.showAndWait() ;
-                throw e ;
-            }
+        try {
+            UserBean loggedUser = buyProductController.login(accessInfo) ;
+            InternalBackController.getInternalBackControllerInstance().setLoggedUser(loggedUser);
         }
+        catch (NotExistentUserException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+            alert.showAndWait() ;
+            throw e ;
+        }
+
     }
 
     private void insertCoupon() {
@@ -106,7 +101,6 @@ public class ClientCompleteOrderController {
         }
     }
 
-
     public void setApplicationController(BuyProductController buyProductController) {
         this.buyProductController = buyProductController ;
         viewOrder();
@@ -118,13 +112,13 @@ public class ClientCompleteOrderController {
     }
 
     private void updateInfo() {
-        orderTotalAmountLabel.setText("Totale Ordine: "+ EURO_SYMBOL + orderTotalBean.getTotal());
+        orderTotalAmountLabel.setText(String.format("Totale Ordine: %.2f", orderTotalBean.getTotal()));
         acquiredPointsLabel.setText("Punti Raccolti: " + orderTotalBean.getPoints());
         couponListView.setItems(FXCollections.observableList(orderTotalBean.getCouponBeans()));
     }
 
     private void buy(String paymentType) throws NotExistentUserException {
-        OrderInfoBean orderInfoBean = new OrderInfoBean(addressField.getText(), telephoneField.getText(), paymentType, Date.from(Instant.now())) ;
+        OrderInfoBean orderInfoBean = new OrderInfoBean(addressField.getText(), telephoneField.getText(), paymentType) ;
         UserBean loggedUser = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
         buyProductController.completeOrder(orderInfoBean, loggedUser);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Il tuo ordine è stato completato correttamente") ;

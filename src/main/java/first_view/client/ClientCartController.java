@@ -40,7 +40,6 @@ public class ClientCartController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         cartListView.setCellFactory(param -> new CartRowListCellFactory());
 
         cartListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -52,7 +51,6 @@ public class ClientCartController implements Initializable {
         plusButton.setDisable(true);
         deleteButton.setDisable(true);
         minusButton.setDisable(true);
-
     }
 
     public void setApplicationController(BuyProductController buyProductController) {
@@ -67,7 +65,7 @@ public class ClientCartController implements Initializable {
 
     private void updateInfo() {
         cartListView.setItems(FXCollections.observableList(cartBean.getCartRowBeanArrayList()));
-        totalAmount.setText(Double.toString(cartBean.getTotal()));
+        totalAmount.setText(String.format("%.2f", cartBean.getTotal())) ;
     }
 
     public void onButtonClicked(ActionEvent event) {

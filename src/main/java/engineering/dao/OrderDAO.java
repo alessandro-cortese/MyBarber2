@@ -11,30 +11,32 @@ import java.time.LocalTime;
 
 public class OrderDAO {
 
-    private static final String INSERT_ORDER_STATEMENT = "INSERT INTO CustomerOrder (hourOrder, dateOrder, customerEmail, idProduct) VALUES (?,?,?,?)" ;
 
-    public Integer saveOrder(Order order, Cart cart, User user) {
+    public void saveOrder(Order order, Cart cart, User user) {
+
         CouponDAO couponDAO = new CouponDAO() ;
         CouponContainer couponContainer = order.getCouponContainer() ;
         couponDAO.invalidateAllCoupon(couponContainer);
 
-        Integer orderKey = -1 ;
-
         Connection connection = Connector.getConnectorInstance().getConnection();
-        try(PreparedStatement statement = connection.prepareStatement(INSERT_ORDER_STATEMENT, Statement.RETURN_GENERATED_KEYS);) {
-            statement.setTime(1, Time.valueOf(LocalTime.now()));
-            statement.setDate(2, new Date(order.getDate().getTime()));
-            statement.setString(3, user.getEmail());
-            statement.setInt(4, 0);
+        try(PreparedStatement statement = connection.prepareStatement("INSERT INTO CustomerOrder (dateOrder, orderTotal, oderAddress, orderTelephone, customer) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);) {
 
-            //statement.execute() ;
-            //orderKey = statement.getGeneratedKeys() ;
-            CartDAO cartDAO = new CartDAO() ;
-            cartDAO.saveCart(cart, orderKey);
+            statement.setDate(1, new Date(order.getDate().getTime()));
+            statement.setDouble(2, order.getFinalPrice());
+            statement.setString(3, order.getAddress());
+            statement.setString(4, order.getTelephone());
+            statement.setString(5, user.getEmail());
+
+            statement.executeUpdate() ;
+            ResultSet generatedKeys = statement.getGeneratedKeys() ;
+            if (generatedKeys.next()) {
+                Integer orderKey = generatedKeys.getInt(1);
+                order.setOrderCode(orderKey);
+            }
+            //CartDAO cartDAO = new CartDAO() ;
+            //cartDAO.saveCart(cart, orderKey);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
-        return orderKey ;
     }
 }

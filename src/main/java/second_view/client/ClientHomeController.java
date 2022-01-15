@@ -45,6 +45,7 @@ public class ClientHomeController {
 
         }
         else if (command.compareTo("fidelity") == 0) {
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_FIDELITY_CARD_SCREEN) ;
             return ;
         }
         else if (command.compareTo("userarea") == 0) {

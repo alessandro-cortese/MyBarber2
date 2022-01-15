@@ -66,6 +66,9 @@ public class ManageCouponController {
             List<CouponBean> couponBeans = createCouponBeans() ;
             fidelityCard = new FidelityCardBean(customer.getCardPoints(), couponBeans) ;
         }
+        else {
+            throw new NotExistentUserException("ACCESSO NON EFFETTUATO!!") ;
+        }
 
         return fidelityCard ;
     }

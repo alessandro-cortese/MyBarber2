@@ -7,13 +7,11 @@ public class OrderInfoBean {
     private String addressInfo;
     private String telephoneInfo;
     private String paymentOptionInfo;
-    private Date dateInfo;
 
-    public OrderInfoBean(String address, String telephone, String paymentOption, Date date) {
+    public OrderInfoBean(String address, String telephone, String paymentOption) {
         setAddressInfo(address);
         setTelephoneInfo(telephone);
         setPaymentOptionInfo(paymentOption);
-        setDateInfo(date);
     }
 
     public String getAddressInfo() {
@@ -38,13 +36,5 @@ public class OrderInfoBean {
 
     public void setPaymentOptionInfo(String paymentOptionInfo) {
         this.paymentOptionInfo = paymentOptionInfo;
-    }
-
-    public Date getDateInfo() {
-        return dateInfo;
-    }
-
-    public void setDateInfo(Date dateInfo) {
-        this.dateInfo = dateInfo;
     }
 }
