@@ -1,27 +1,35 @@
 package first_view.barber;
 
-import first_view.ObservableListNode;
+import application_controller.ManageSaloonController;
+import engineering.bean.SaloonBean;
+import first_view.list_cell_factories.BarberSaloonListCellFactory;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import first_view.general.InternalBackController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class BarberCenterController implements Initializable {
 
-    @FXML private ListView<Node> barberCenterListView;
-
+    @FXML private ListView<SaloonBean> barberCenterListView;
+    @FXML private Label nameCenterLabelFirstView;
+    @FXML private Label addressCenterLabelFirstView;
+    @FXML private Label cityCenterLabelFirstView;
+    @FXML private Label telephoneCenterLabelFirstView;
     @FXML private Button addCenterButton;
     @FXML private Button modifyButton;
-    @FXML private Button removeCenterButton;
+
+    private List<SaloonBean> saloonBeanList;
 
     private static final String BARBER_CENTER_LIST_ITEM = "first_view/list_item/center_list_item.fxml";
 
@@ -32,16 +40,25 @@ public class BarberCenterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Node[] nodes = new Node[5];
-        for (int i = 0 ; i < nodes.length ; i++) {
-            try {
-                nodes[i] = (new FXMLLoader(getClass().getClassLoader().getResource(BARBER_CENTER_LIST_ITEM))).load() ;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        ObservableListNode barberCenterObservableListNode = new ObservableListNode(nodes);
-        barberCenterListView.setItems(barberCenterObservableListNode);
+        ManageSaloonController manageSaloonController = new ManageSaloonController();
+        manageSaloonController.setUserBean(InternalBackController.getInternalBackControllerInstance().getLoggedUser());
+
+        saloonBeanList = manageSaloonController.getAllSaloon();
+
+        barberCenterListView.setCellFactory(param -> new BarberSaloonListCellFactory());
+
+        barberCenterListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+
+
+            nameCenterLabelFirstView.setText(newValue.getName());
+            addressCenterLabelFirstView.setText(newValue.getAddress());
+            cityCenterLabelFirstView.setText(newValue.getCity());
+            telephoneCenterLabelFirstView.setText(newValue.getPhone());
+
+        }));
+
+        barberCenterListView.getItems().clear();
+        barberCenterListView.setItems(FXCollections.observableList(saloonBeanList));
 
     }
 

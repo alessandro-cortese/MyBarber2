@@ -9,8 +9,6 @@ import javafx.scene.control.ListCell;
 import java.io.IOException;
 
 public class SaloonListCellFactory extends ListCell<SaloonBean> {
-
-
     private Parent parentNode = null ;
 
     private static final String LIST_ITEM_SALOON = "first_view/list_item/take_saloon_item.fxml";
@@ -27,8 +25,8 @@ public class SaloonListCellFactory extends ListCell<SaloonBean> {
 
                 Label nameSaloonItem = (Label) parentNode.lookup("#" + NAME_LABEL_ID) ;
                 Label placeSaloonItem = (Label) parentNode.lookup("#" + PLACE_LABEL_ID) ;
-                nameSaloonItem.setText("d"/*item.getName()*/);
-                //placeSaloonItem.setText(item.getAddress()+item.getCity());
+                nameSaloonItem.setText(item.getName());
+                placeSaloonItem.setText(item.getAddress()+item.getCity());
 
                 setGraphic(parentNode);
 

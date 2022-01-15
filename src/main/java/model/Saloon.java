@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Time;
-import java.time.LocalTime;
 
 public class Saloon {
 
@@ -18,7 +17,16 @@ public class Saloon {
     private Integer numberOfMorningSlots;
     private Integer numberOfAfternoonSlots;
 
-    public Saloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, LocalTime[][] localTimes, Integer[] numberOfSlots){
+    public Saloon(String name, String phone, String address, String city) {
+
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+
+    }
+
+    public Saloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, Integer[] numberOfSlots){
 
         this.name = name;
         this.city = cityAndAddress[0];
@@ -26,10 +34,6 @@ public class Saloon {
         this.phone = phone;
         this.slotTime = slotTime;
         this.seatNumber = seatNumber;
-        this.openingMorningTime = Time.valueOf(localTimes[0][1]);
-        this.closeMorningTime = Time.valueOf(localTimes[0][2]);
-        this.openingAfternoonTime = Time.valueOf(localTimes[1][0]);
-        this.closeAfternoonTime = Time.valueOf(localTimes[1][1]);
         this.numberOfMorningSlots = numberOfSlots[0];
         this.numberOfAfternoonSlots = numberOfSlots[1];
 
@@ -82,7 +86,6 @@ public class Saloon {
         this.numberOfAfternoonSlots = numberSlotTime[1];
 
     }
-
     public String getName(){
 
         return this.name;

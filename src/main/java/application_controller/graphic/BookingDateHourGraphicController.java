@@ -26,7 +26,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class BookingDateHourGraphicController implements Initializable {
+public class BookingDateHourGraphicController {
         private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
         private String  saloonName;
         private String saloonCity;
@@ -54,18 +54,22 @@ public class BookingDateHourGraphicController implements Initializable {
 
         @FXML
         private SplitMenuButton timeSlotSplitButton;
-
         @FXML
-        private Label saloonNameLabel;
+        private Label  saloonNameLabel;
+
 
         @FXML
         private ImageView saloonImage;
 
         @FXML
         private ListView timeSlotListView;
+        @FXML
+        private Label HourLabel;
+
+        private SaloonBean timeSlotSaloon;
 
         private Time slotTime;
-        private SaloonBean timeSlotSaloon;
+
 
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException {
@@ -90,43 +94,39 @@ public class BookingDateHourGraphicController implements Initializable {
         @FXML
         public void ConfirmHour(ActionEvent event) throws IOException, ParseException { //qui chiamo la BookingDAO
 
-                SaloonBean saloonBean = new SaloonBean(saloonName);
-                BookingController bookingController = new BookingController();
-                bookingController.searchTimeSlots(saloonBean);
-
 
         }
 
-
-
-
-        public void display(SaloonBean saloonBean) {
-
-                this.saloonName = saloonBean.getName();
-                this.saloonAddress =saloonBean.getAddress();
-                this.saloonCity = saloonBean.getCity();
-                this.saloonPhone =saloonBean.getPhone();
-                this.seatNumber = saloonBean.getSeatNumber();
-                this.slotTime = saloonBean.getSlotTime();
-
-                saloonNameLabel.setText(saloonName);
+        public void display(SaloonBean saloonBean) { //setto la saloonBean del sottoscritto controller
+                timeSlotSaloon = new SaloonBean();
+                this.timeSlotSaloon.setName(saloonBean.getName());
+                this.timeSlotSaloon.setAddress(saloonBean.getAddress());
+                this.timeSlotSaloon.setCity(saloonBean.getCity());
+                this.timeSlotSaloon.setPhone(saloonBean.getPhone());
+                this.timeSlotSaloon.setSeatNumber(saloonBean.getSeatNumber());
+                this.timeSlotSaloon.setSlotTime(saloonBean.getSlotTime());
+                this.timeSlotSaloon.setCloseAfternoonTimeInfo(saloonBean.getCloseAfternoonTimeInfo());
+                this.timeSlotSaloon.setCloseMorningTimeInfo(saloonBean.getCloseMorningTimeInfo());
+                this.timeSlotSaloon.setOpeningAfternoonTimeInfo(saloonBean.getOpeningAfternoonTimeInfo());
+                this.timeSlotSaloon.setOpeningMorningTimeInfo(saloonBean.getOpeningMorningTimeInfo());
+                this.timeSlotSaloon.setNumberOfAfternoonSlotsInfo(saloonBean.getNumberOfAfternoonSlotsInfo());
+                this.timeSlotSaloon.setNumberOfMorningSlotsInfo(saloonBean.getNumberOfMorningSlotsInfo());
         }
 
-        @Override
-        public void initialize(URL location, ResourceBundle resources) {
+        public void injectSaloonIntoDateHour() {
                 timeSlotListView.setCellFactory(param -> new SaloonTimeSlotsListCellFactory());
-                System.out.println(saloonName+1);
-                searchTimeSlots();//recupero gli slot Time dal db
-                timeSlotListView.getItems().clear();
 
+                searchTimeSlots();//recupero gli slot Time dal db
+
+                timeSlotListView.getItems().clear();
                 timeSlotList = new ScheduleTime(timeSlotSaloon).timeSlotsIstance();
                 timeSlotListView.setItems(FXCollections.observableList(timeSlotList));
+                saloonNameLabel.setText(timeSlotSaloon.getName());
 
         }
 
         private void searchTimeSlots() {
-                SaloonBean saloonBean = new SaloonBean(saloonName);
-                System.out.println(saloonName);
+                SaloonBean saloonBean = new SaloonBean(timeSlotSaloon.getName());
                 BookingController bookingController = new BookingController();
                 timeSlotSaloon = bookingController.searchTimeSlots(saloonBean);//bean che ritona gli estremi mattina e pomeriggio e poi devo calcolare gli slot time e metterli in timeSlotList
         }
