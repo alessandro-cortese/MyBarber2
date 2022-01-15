@@ -83,6 +83,10 @@ public class Saloon {
 
     }
 
+    public Saloon() {
+
+    }
+
     public String getName(){
 
         return this.name;

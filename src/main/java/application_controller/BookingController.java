@@ -16,6 +16,8 @@ public class BookingController {
     private String saloonName;
     private Saloon saloonByName;
     private Saloon saloon;
+    private List<SaloonBean> saloonBeans;
+    private String saloonNameG;
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
@@ -85,5 +87,17 @@ public class BookingController {
         saloonBeanTimeSlots.setNumberOfAfternoonSlotsInfo(saloon.getNumberOfAfternoonSlots());
 
         return saloonBeanTimeSlots;
+    }
+
+    public void setSaloonBeanList(List<SaloonBean> saloonBeanList) {
+        this.saloonBeans =saloonBeanList;
+    }
+
+    public List<SaloonBean> getSaloonBeans() {
+        return saloonBeans;
+    }
+
+    public void setSaloonName(String saloonCity) {
+        saloonNameG = saloonCity;
     }
 }

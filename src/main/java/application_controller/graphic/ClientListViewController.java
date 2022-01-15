@@ -4,35 +4,22 @@ import application_controller.BookingController;
 import engineering.bean.SaloonBean;
 import first_view.list_cell_factories.SaloonListCellFactory;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.util.Callback;
 
-import java.net.URL;
 import java.sql.Time;
 import java.util.List;
-import java.util.ResourceBundle;
 
 
-public class ClientListViewController implements Initializable {
+public class ClientListViewController {
     @FXML
     private ListView<SaloonBean> saloonListView;
 
-    @FXML
-    private Label placeSaloonItem;
 
-    @FXML
-    Label labelSaloonItem;
-
-    @FXML
-    private Button saloonButton;
-
-    private static final String APPOINTMENT_SALOON_ITEM = "first_view/list_item/take_saloon_item.fxml";
+    private  final String APPOINTMENT_SALOON_ITEM = "first_view/list_item/take_saloon_item.fxml";
+    private  final String CLIENT_TAKE_APPOINTMENT ="first_view/client/client_take_appointment.fxml";
 
 
     private String saloonName;
@@ -43,24 +30,17 @@ public class ClientListViewController implements Initializable {
     private Time slotTime;
     private BookingController bookingController;
     private List<SaloonBean> saloonBeanList;
+    private BookingGraphicController bookingGraphicController;
+    private SaloonBean saloonBean;
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void injectSaloonList(List<SaloonBean> saloonBeanList) {
         saloonListView.setCellFactory(param -> new SaloonListCellFactory());
-        saloonListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
-        });
-        saloonListView.getItems().clear();
-        saloonListView.setItems(FXCollections.observableList(saloonBeanList));
-
+        this.saloonBeanList = saloonBeanList;
+        saloonListView.setItems(FXCollections.observableArrayList(saloonBeanList));
     }
 
-
-    public void ListCityBean(List<SaloonBean> list) { //metodo chiamato in BookingGraphicController per passare la list dei saloni di una certa città
-        this.saloonBeanList = list;
-    }
-
-    public void display(SaloonBean saloonBean) {
+    public void setSaloonName(String saloonName) {
+        this.saloonName= saloonName;
     }
 }

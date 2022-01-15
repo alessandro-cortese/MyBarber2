@@ -183,8 +183,7 @@ public class SaloonBean {
 
     public Time getCloseAfternoonTimeInfo() {
 
-        return Time.valueOf(String.valueOf(closeAfternoonTimeInfo));
-
+        return closeAfternoonTimeInfo;
     }
 
     public void setCloseAfternoonTimeInfo(Time closeAfternoonTimeInfo) {
