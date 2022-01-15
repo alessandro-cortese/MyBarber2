@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class BarberSaloonListCellFactory extends ListCell<SaloonBean> {
 
-
     private Parent parentNode = null;
 
     private static final String BARBER_SALOON_LIST_ITEM = "first_view/list_item/center_list_item.fxml" ;

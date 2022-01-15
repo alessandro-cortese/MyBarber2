@@ -214,6 +214,7 @@ public class SaloonDAO {
         cityAndAddress[1] = address;
 
         return new Saloon(name, cityAndAddress, telephone, intervalSlotTime, seatsNumber, numberOfSlots);
+
     }
 
 }

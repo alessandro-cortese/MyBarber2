@@ -2,7 +2,6 @@ package first_view.barber;
 
 import application_controller.ManageSaloonController;
 import engineering.bean.SaloonBean;
-import first_view.ObservableListNode;
 import first_view.list_cell_factories.BarberSaloonListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -12,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import first_view.general.InternalBackController;
 
