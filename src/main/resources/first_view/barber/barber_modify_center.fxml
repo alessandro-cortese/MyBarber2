@@ -62,16 +62,6 @@
                         <TextField fx:id="cityCenterTextField" prefHeight="38.0" prefWidth="244.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="248.0" prefHeight="80.0" prefWidth="508.0">
-                     <children>
-                        <Label prefHeight="37.0" prefWidth="189.0" text="email:">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="emailCenterTextField" prefHeight="38.0" prefWidth="244.0" />
-                     </children>
-                  </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="348.0" prefHeight="80.0" prefWidth="508.0">
                      <children>
                         <Label prefHeight="37.0" prefWidth="189.0" text="telefono:">

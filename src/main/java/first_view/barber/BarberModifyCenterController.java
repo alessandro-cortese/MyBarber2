@@ -23,7 +23,6 @@ public class BarberModifyCenterController implements Initializable {
     @FXML private TextField nameCenterTextField;
     @FXML private TextField wayCenterTextField;
     @FXML private TextField cityCenterTextField;
-    @FXML private TextField emailCenterTextField;
     @FXML private TextField phoneCenterTextField;
     @FXML private Button continueButton;
     @FXML private Spinner<Integer> slotTimeSpinner;

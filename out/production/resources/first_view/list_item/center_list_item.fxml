@@ -14,13 +14,9 @@
             <Image url="@../../../../../images/barber_chain_logo.jpeg" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" prefHeight="113.0" prefWidth="261.0" spacing="15.0">
+      <VBox alignment="TOP_CENTER" prefHeight="119.0" prefWidth="157.0" spacing="10.0">
          <children>
-<<<<<<< Updated upstream
-            <HBox layoutX="10.0" layoutY="30.0" prefHeight="34.0" prefWidth="157.0">
-=======
             <HBox layoutX="10.0" layoutY="68.0" prefHeight="34.0" prefWidth="157.0">
->>>>>>> Stashed changes
                <children>
                   <Label prefHeight="34.0" prefWidth="61.0" text="Nome:" />
                   <Label fx:id="barberSaloonNameLabel" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="81.0" />
@@ -28,19 +24,20 @@
             </HBox>
             <HBox prefHeight="34.0" prefWidth="157.0">
                <children>
-<<<<<<< Updated upstream
                   <Label prefHeight="34.0" prefWidth="61.0" text="Città:" />
                   <Label fx:id="barberSaloonCityLabel" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="81.0" />
-=======
-                  <Label fx:id="barberSaloonCityLabel" prefHeight="34.0" prefWidth="61.0" text="City:" />
-                  <Label layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="81.0" />
->>>>>>> Stashed changes
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="79.0" prefHeight="34.0" prefWidth="157.0">
                <children>
                   <Label prefHeight="34.0" prefWidth="61.0" text="Via:" />
                   <Label fx:id="barberSaloonAddressLabel" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="81.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="157.0">
+               <children>
+                  <Label fx:id="indexSaloonLabel" prefHeight="34.0" prefWidth="61.0" />
+                  <Label fx:id="indexSaloonOfListLabel" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="81.0" />
                </children>
             </HBox>
          </children>

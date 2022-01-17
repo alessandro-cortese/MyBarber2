@@ -16,6 +16,20 @@ public class BarberSaloonListCellFactory extends ListCell<SaloonBean> {
     private static final String SALOON_NAME_LABEL_ID = "barberSaloonNameLabel";
     private static final String SALOON_CITY_LABEL_ID = "barberSaloonCityLabel";
     private static final String SALOON_ADDRESS_LABEL_ID = "barberSaloonAddressLabel";
+    private static final String SALOON_LABEL_SLOT_NAME_ID = "indexSaloonLabel";
+    private static final String SALOON_SLOT_INDEX_LABEL_ID = "indexSaloonOfListLabel";
+
+    private boolean viewCaller;
+
+    public BarberSaloonListCellFactory(){
+
+    }
+
+    public BarberSaloonListCellFactory(boolean flag){
+
+        this.viewCaller = flag;
+
+    }
 
     @Override
     protected void updateItem(SaloonBean item, boolean empty) {
@@ -25,6 +39,8 @@ public class BarberSaloonListCellFactory extends ListCell<SaloonBean> {
         Label nameSaloonLabel;
         Label citySaloonLabel;
         Label addressSaloonLabel;
+        Label saloonIndexLabel;
+        Label saloonSlotIndexLabel;
 
         if(item != null) {
 
@@ -43,6 +59,16 @@ public class BarberSaloonListCellFactory extends ListCell<SaloonBean> {
                 nameSaloonLabel.setText(item.getName());
                 citySaloonLabel.setText(item.getCity());
                 addressSaloonLabel.setText(item.getAddress());
+
+                if(viewCaller) {
+
+                    saloonIndexLabel = (Label) parentNode.lookup("#" + SALOON_LABEL_SLOT_NAME_ID);
+                    saloonSlotIndexLabel = (Label) parentNode.lookup("#" + SALOON_SLOT_INDEX_LABEL_ID);
+
+                    saloonIndexLabel.setText("Slot index");
+                    saloonSlotIndexLabel.setText(Integer.toString(this.getIndex()));
+
+                }
 
                 setGraphic(parentNode);
 
