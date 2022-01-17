@@ -74,16 +74,21 @@ public class ClientFidelityCardGUIController implements Initializable {
         CouponBean requestCouponBean = new CouponBean(couponValue, couponType) ;
 
         try {
-            manageCouponController.generateNewCoupon(requestCouponBean) ;
-        } catch (InvalidCouponException e) {
+            FidelityCardBean fidelityCardBean = manageCouponController.generateNewCoupon(requestCouponBean) ;
+            updateView(fidelityCardBean);
+        } catch (InvalidCouponException | NotExistentUserException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
             alert.showAndWait() ;
         }
-        initialize(null, null);
     }
 
     private void viewFidelityCard(UserBean loggedUser) throws NotExistentUserException {
         FidelityCardBean fidelityCardBean = manageCouponController.showFidelityCard(loggedUser) ;
+        updateView(fidelityCardBean);
+    }
+
+    private void updateView(FidelityCardBean fidelityCardBean) {
+        UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
         pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale());
         userEmailLabel.setText("eMail " + loggedUser.getUserEmail());
         couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));

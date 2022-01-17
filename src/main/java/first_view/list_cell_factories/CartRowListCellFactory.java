@@ -42,7 +42,7 @@ public class CartRowListCellFactory extends ListCell<CartRowBean> {
                 Label productPriceLabel = (Label) parentNode.lookup("#" + PRICE_LABEL_ID) ;
                 Label productQuantityLabel = (Label) parentNode.lookup("#" + QUANTITY_LABEL_ID) ;
                 productNameLabel.setText(item.getName());
-                productPriceLabel.setText(EURO_SYMBOL + " " + item.getPrice());
+                productPriceLabel.setText(String.format("%s %.2f", EURO_SYMBOL, item.getPrice()));
                 productQuantityLabel.setText(Integer.toString(item.getQuantity()));
 
                 if (caller == SECOND_VIEW) {

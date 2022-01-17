@@ -91,12 +91,8 @@ public class ClientCompleteOrderController {
         try {
             buyProductController.applyCoupon(couponBean);
         }
-        catch (InvalidCouponException e) {
+        catch (InvalidCouponException | NegativePriceException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-            alert.showAndWait() ;
-        }
-        catch (NegativePriceException negativePriceException) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Il coupon non è applicabile") ;
             alert.showAndWait() ;
         }
     }
@@ -119,8 +115,7 @@ public class ClientCompleteOrderController {
 
     private void buy(String paymentType) throws NotExistentUserException {
         OrderInfoBean orderInfoBean = new OrderInfoBean(addressField.getText(), telephoneField.getText(), paymentType) ;
-        UserBean loggedUser = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
-        buyProductController.completeOrder(orderInfoBean, loggedUser);
+        buyProductController.completeOrder(orderInfoBean);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Il tuo ordine è stato completato correttamente") ;
         alert.showAndWait() ;
     }

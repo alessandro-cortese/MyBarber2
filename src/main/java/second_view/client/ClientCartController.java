@@ -100,7 +100,7 @@ public class ClientCartController implements Initializable {
     private void updateView() {
         cartBean = buyProductController.showCart() ;
         cartListView.setItems(FXCollections.observableList(cartBean.getCartRowBeanArrayList()));
-        cartTotalLabel.setText("Totale: " + EURO_SYMBOL + cartBean.getTotal());
+        cartTotalLabel.setText(String.format("Totale: %s%.2f",EURO_SYMBOL, cartBean.getTotal()));
     }
 
 
