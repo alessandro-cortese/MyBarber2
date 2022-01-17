@@ -17,6 +17,15 @@ public class Saloon {
     private Integer numberOfMorningSlots;
     private Integer numberOfAfternoonSlots;
 
+    public Saloon(String name, String phone, String address, String city) {
+
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+
+    }
+
     public Saloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, Integer[] numberOfSlots){
 
         this.name = name;

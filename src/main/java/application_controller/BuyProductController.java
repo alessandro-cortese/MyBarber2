@@ -5,24 +5,21 @@ import boundary.buy_product.BuyProductPaypalBoundary;
 import engineering.bean.AccessInfoBean;
 import engineering.bean.UserBean;
 import engineering.bean.buy_product.*;
-import engineering.dao.CouponDAO;
-import engineering.dao.OrderDAO;
-import engineering.dao.ProductDAO;
-import engineering.dao.UserDAO;
+import engineering.dao.*;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.exception.NotExistentUserException;
 import model.Customer;
-import model.User;
 import model.buy_product.Cart;
-import model.buy_product.coupon.Coupon;
 import model.buy_product.Order;
 import model.buy_product.Product;
 import model.buy_product.containers.ProductCatalog;
+import model.buy_product.coupon.Coupon;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.time.Instant;
+import java.util.*;
+
+import static engineering.bean.buy_product.VendorOrderBean.*;
 
 public class BuyProductController {
 
@@ -46,6 +43,11 @@ public class BuyProductController {
         order = new Order(cart) ;
         cartBean = new CartBean(cart) ;
         orderBean = new OrderTotalBean(order) ;
+    }
+
+    public BuyProductController(UserBean loggedUserBean) throws NotExistentUserException {
+        this() ;
+        customerLogin(loggedUserBean);
     }
 
     public List<ProductBean> filterProductList(ProductSearchInfoBean searchInfoBean) {
@@ -91,15 +93,15 @@ public class BuyProductController {
         order.setAddress(orderInfoBean.getAddressInfo());
         order.setTelephone(orderInfoBean.getTelephoneInfo());
         order.setPaymentOption(orderInfoBean.getPaymentOptionInfo());
-        order.setDate(orderInfoBean.getDateInfo());
+        order.setDate(Date.from(Instant.now()));
 
         OrderDAO orderDAO = new OrderDAO() ;
-        Integer orderKey = orderDAO.saveOrder(order, cart, customer);
+        orderDAO.saveOrder(order, cart, customer);
 
-        //Aggiungere Salvataggio delle righe del carrello: utilizzo CartDAO e orderKey
-        System.out.println(customer.getCardPoints());
+        CartDAO cartDAO = new CartDAO() ;
+        cartDAO.saveCart(cart, order.getOrderCode());
+
         customer.setCardPoints(customer.getCardPoints() + order.getOrderPoints());
-        System.out.println(customer.getCardPoints());
         userDAO.updateCustomerPoints(customer, customer.getCardPoints());
 
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
@@ -108,11 +110,11 @@ public class BuyProductController {
         BuyProductEMailSystemBoundary eMailSystemBoundary = new BuyProductEMailSystemBoundary() ;
         ArrayList<String> vendorsInfo = cart.getVendorsInfo();
         for (String vendor : vendorsInfo) {
-            eMailSystemBoundary.notifyVendors(createNotificationInfo(vendor, orderInfoBean));
+            eMailSystemBoundary.notifyVendors(createNotificationInfo(vendor, order));
         }
     }
 
-    private VendorOrderBean createNotificationInfo(String vendor, OrderInfoBean orderInfoBean) {
+    private VendorOrderBean createNotificationInfo(String vendor, Order order) {
         //VendorOrderBean orderBean = new VendorOrderBean(vendor);
         CartBean cartRowCreator = new CartBean() ;
         ArrayList<CartRowBean> cartRowBeans = new ArrayList<>() ;
@@ -120,7 +122,12 @@ public class BuyProductController {
         for (Map<String,String> cartRowInfo : cart.getRowsInfoByVendor(vendor)) {
             cartRowBeans.add(cartRowCreator.createRowBean(cartRowInfo)) ;
         }
-        return new VendorOrderBean(vendor, cartRowBeans, orderInfoBean.getAddressInfo(), orderInfoBean.getTelephoneInfo(), orderInfoBean.getDateInfo()) ;
+
+        Calendar calendar = Calendar.getInstance() ;
+        calendar.setTime(order.getDate());
+
+        Map<String,Integer> dateMap = Map.of(VENDOR_ORDER_YEAR_KEY, calendar.get(Calendar.YEAR), VENDOR_ORDER_MONTH_KEY, calendar.get(Calendar.MONTH), VENDOR_ORDER_DAY_KEY, calendar.get(Calendar.DAY_OF_MONTH)) ;
+        return new VendorOrderBean(vendor, cartRowBeans, order.getAddress(), order.getTelephone(), dateMap) ;
 
     }
 
@@ -131,12 +138,16 @@ public class BuyProductController {
 
     public UserBean login(AccessInfoBean accessInfo) throws NotExistentUserException {
         LoginController loginController = new LoginController() ;
-        UserBean userBean = null;
 
-        userBean = loginController.verifyUser(accessInfo) ;
-        UserDAO userDAO = new UserDAO() ;
-        customer = userDAO.loadCustomerByEmail(userBean.getUserEmail()) ;
+        UserBean userBean = loginController.verifyUser(accessInfo) ;
+        customerLogin(userBean) ;
 
         return userBean ;
     }
+
+    public void customerLogin(UserBean userBean) throws NotExistentUserException {
+        UserDAO userDAO = new UserDAO() ;
+        customer = userDAO.loadCustomerByEmail(userBean.getUserEmail()) ;
+    }
+
 }

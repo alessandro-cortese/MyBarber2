@@ -32,6 +32,15 @@ public class SaloonBean {
 
     }
 
+    public SaloonBean(String name, String telephone, String address, String city){
+
+        this.name = name;
+        this.phone = telephone;
+        this.address = address;
+        this.city = city;
+
+    }
+
     public SaloonBean(String saloonName) {
 
         this.name = saloonName;

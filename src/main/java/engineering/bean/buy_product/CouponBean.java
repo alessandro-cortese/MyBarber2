@@ -53,7 +53,12 @@ public class CouponBean {
 
     @Override
     public String toString() {
-        return String.format("Codice Coupon: %s", couponCode);
+        if (couponType == null || couponDiscount == null) {
+            return String.format("Codice: %s", couponCode);
+        }
+        else {
+            return String.format("Codice: %s\t\tTipo: %s\t\tValore: %.2f", couponCode, couponType, couponDiscount);
+        }
     }
 
     public String getCouponType() {

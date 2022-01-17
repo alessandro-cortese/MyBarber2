@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class Order extends Subject {
 
+    private Integer orderCode ;
     private String address ;
     private String telephone ;
     private String paymentOption ;
@@ -42,7 +43,6 @@ public class Order extends Subject {
         else {
             throw new InvalidCouponException("ERRORE: COUPON UTILIZZATO!!") ;
         }
-
         notifyObservers();
     }
 
@@ -137,5 +137,13 @@ public class Order extends Subject {
         couponContainer.clear() ;
         setFinalPrice(originalPrice);
         notifyObservers();
+    }
+
+    public Integer getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(Integer orderCode) {
+        this.orderCode = orderCode;
     }
 }

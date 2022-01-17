@@ -25,7 +25,17 @@ public class SaloonDAO {
     private static final String SALOON_CLOSE_MORNING_TIME_COL = "closeMorningTime" ;
     private static final String SALOON_CLOSE_AFTERNOON_TIME = "closeAfternoonTime" ;
 
-    
+
+    public SaloonCatalogue loadAllSaloon() {
+
+        SaloonCatalogue saloonCatalogue = new SaloonCatalogue();
+        saloonCatalogue.addSaloon(new Saloon("BarberShop", "069576865", "Via Nomentana", "Roma"));
+        saloonCatalogue.addSaloon(new Saloon("OldBarber", "068965123", "Via Tuscolana", "Roma"));
+        return saloonCatalogue;
+
+    }
+
+
     public SaloonCatalogue loadAllSaloonByBarberEmail(String barberEmail) {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
@@ -202,6 +212,7 @@ public class SaloonDAO {
         cityAndAddress[1] = address;
 
         return new Saloon(name, cityAndAddress, telephone, intervalSlotTime, seatsNumber, numberOfSlots);
+
     }
 
 }

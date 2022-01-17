@@ -5,6 +5,7 @@ import engineering.pattern.observer.Subject;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Cart extends Subject implements Priceable {
@@ -15,14 +16,14 @@ public class Cart extends Subject implements Priceable {
     public static final String PRICE_KEY = "price" ;
     public static final String VENDOR_KEY = "vendor" ;
 
-    private ArrayList<CartRow> cartRowArrayList ;
+    private final ArrayList<CartRow> cartRowArrayList ;
 
     public Cart() {
         super();
         cartRowArrayList = new ArrayList<>() ;
     }
 
-    public void  insertProduct(Product newProduct) {
+    public void insertProduct(Product newProduct) {
         CartRow productRow = verifyPresent(newProduct) ;
         if (productRow == null) {
             cartRowArrayList.add(new CartRow(newProduct, 1)) ;
@@ -97,6 +98,10 @@ public class Cart extends Subject implements Priceable {
             }
         }
         return rowsInfo ;
+    }
+
+    public List<CartRow> getCartRowArrayList() {
+        return this.cartRowArrayList ;
     }
 
     @Override

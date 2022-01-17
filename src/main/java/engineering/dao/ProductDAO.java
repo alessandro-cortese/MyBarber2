@@ -20,12 +20,6 @@ public class ProductDAO {
     private static final String BARBER_COL_LABEL = "barber" ;
 
     public ProductCatalog loadAllProducts() {
-        ProductCatalog catalog = new ProductCatalog() ;
-        for (int i = 0 ; i < 10 ; i++) {
-            catalog.addProduct(1, "Dopobarba", "ciao a tutti", 22.0, "ciao");
-            catalog.addProduct(2, "Shampoo", "Antigiallo", 11.25, "Simo");
-        }
-
         ArrayList<Product> products = new ArrayList<>() ;
 
         Connection connection = Connector.getConnectorInstance().getConnection();
@@ -42,7 +36,7 @@ public class ProductDAO {
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        return catalog ;
+        return new ProductCatalog(products) ;
     }
 
     public Product loadProductByName(String name, String barberEmail) throws ProductNotFoundException{

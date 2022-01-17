@@ -9,8 +9,6 @@ import javafx.scene.control.ListCell;
 import java.io.IOException;
 
 public class SaloonListCellFactory extends ListCell<SaloonBean> {
-
-
     private Parent parentNode = null ;
 
     private static final String LIST_ITEM_SALOON = "first_view/list_item/take_saloon_item.fxml";

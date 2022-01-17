@@ -3,7 +3,6 @@ package second_view.barber;
 import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
 import engineering.exception.InsertNegativePriceException;
-import engineering.exception.NegativePriceException;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;

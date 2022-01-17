@@ -31,6 +31,7 @@ public class ScreenChanger {
     public static final String CLIENT_BOOK_TOTAL_PRICE = "second_view/client/client_totalPrice.fxml";
 
     public static final String CLIENT_COMPLETE_ORDER_SCREEN = "second_view/client/client_complete_order.fxml" ;
+    public static final String CLIENT_FIDELITY_CARD_SCREEN = "second_view/client/client_fidelity_card.fxml" ;
 
 
     ArrayList<Scene> backSceneStack ;
