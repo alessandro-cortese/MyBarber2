@@ -76,8 +76,6 @@ public class SaloonDAO {
             sqlException.printStackTrace();
 
         }
-
-
         return saloon;
     }
 

@@ -17,6 +17,7 @@ public class ScheduleTime {   //classi di ingegnerizzazione che aggrega i time s
         timeOpen = saloonTimeSlots.getOpeningMorningTimeInfo();
         System.out.println(timeOpen);
         sumTime = new Time(timeOpen.getTime()); //return hours in milliseconds
+        System.out.println(sumTime);
 
         for (int i = 0; i< saloonTimeSlots.getNumberOfMorningSlotsInfo(); i++){
                 timeSlot = new TimeSlot();
@@ -30,8 +31,10 @@ public class ScheduleTime {   //classi di ingegnerizzazione che aggrega i time s
 
         timeOpen = saloonTimeSlots.getOpeningAfternoonTimeInfo();
         sumTime = new Time(timeOpen.getTime());
+        System.out.println(sumTime);
 
-        for (int i =0; i < saloonTimeSlots.getNumberOfAfternoonSlotsInfo();i++){
+
+        for (int i = saloonTimeSlots.getNumberOfMorningSlotsInfo() +1 ; i < saloonTimeSlots.getNumberOfAfternoonSlotsInfo();i++){
             timeSlot = new TimeSlot();
             sumTime.setTime(sumTime.getTime() + saloonTimeSlots.getSlotTime().getTime());
             timeSlot.setToTime(sumTime);
