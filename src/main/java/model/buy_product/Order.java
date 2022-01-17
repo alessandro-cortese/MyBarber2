@@ -53,7 +53,7 @@ public class Order extends Subject {
             if (currentCoupon != null) {
                 currentCoupon.setAppliedPrice(finalPrice);
                 if (currentCoupon.getPrice() < 0) {
-                    throw new NegativePriceException() ;
+                    throw new NegativePriceException("IL COUPON APPLICATO NEGATIVIZZA IL PREZZO") ;
                 }
                 finalPrice = currentCoupon ;
             }

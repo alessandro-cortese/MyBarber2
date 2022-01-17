@@ -57,7 +57,7 @@ public class CouponBean {
             return String.format("Codice: %s", couponCode);
         }
         else {
-            return String.format("Codice: %s\t\tTipo: %s\t\tValore: %.2f", couponCode, couponType, couponDiscount);
+            return String.format("Codice: %3s\t\tTipo: %s\t\tValore: %.2f", couponCode, couponType, couponDiscount);
         }
     }
 

@@ -51,7 +51,7 @@ public class BuyProductListCellFactory extends ListCell<ProductBean> {
 
 
                 productNameLabel.setText(item.getBeanName());
-                productPriceLabel.setText(EURO_SYMBOL + " " + item.getBeanPrice());
+                productPriceLabel.setText(String.format("%s %.2f",EURO_SYMBOL,item.getBeanPrice()));
                 //productImageView.setImage(rowImage);
 
                 if (Objects.equals(caller, SECOND_VIEW)) {

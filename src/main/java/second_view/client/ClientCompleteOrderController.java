@@ -7,6 +7,8 @@ import engineering.bean.buy_product.OrderInfoBean;
 import engineering.bean.buy_product.OrderTotalBean;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
+import engineering.exception.NotExistentUserException;
+import first_view.pickers.CredentialsPicker;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,8 +69,12 @@ public class ClientCompleteOrderController {
                 alert.showAndWait() ;
             }
             else {
-                buy();
-                ScreenChanger.getInstance().goToHome(event);
+                try {
+                    buy();
+                    ScreenChanger.getInstance().goToHome(event);
+                }
+                catch (NotExistentUserException ignored) {
+                }
             }
 
             return ;
@@ -77,28 +83,37 @@ public class ClientCompleteOrderController {
         commandLine.setStyle("-fx-border-color: red") ;
     }
 
-    private void buy() {
-        OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText(), "paypal") ;
-        UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser() ;
-        //buyProductController.completeOrder(orderInfoBean, loggedUser);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ordine Eseguito con Successo!!") ;
-        alert.showAndWait() ;
+    private void buy() throws IOException, NotExistentUserException {
+        try {
+            UserBean userBean = ScreenChanger.getInstance().getLoggedUser();
+            if (userBean == null) {
+                userBean = buyProductController.login((new CredentialsPicker()).getAccessInfo()) ;
+                ScreenChanger.getInstance().setLoggedUser(userBean);
+            }
+            OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText(), "paypal") ;
+            buyProductController.completeOrder(orderInfoBean);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "ORDINE ESEGUITO CON SUCCESSO") ;
+            alert.showAndWait() ;
+
+
+        } catch (NotExistentUserException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+            alert.showAndWait() ;
+            throw e ;
+        }
     }
 
     private void insertCoupon(String commandInput) {
         CouponBean couponBean = new CouponBean(commandInput) ;
         try {
             buyProductController.applyCoupon(couponBean);
+            updateView();
         }
-        catch (InvalidCouponException e) {
+        catch (InvalidCouponException | NegativePriceException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
             alert.showAndWait() ;
         }
-        catch (NegativePriceException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Coupon non Applicabile") ;
-            alert.showAndWait() ;
-        }
-        updateView();
     }
 
 
@@ -110,7 +125,7 @@ public class ClientCompleteOrderController {
 
     private void updateView() {
         couponListView.setItems(FXCollections.observableList(orderTotalBean.getCouponBeans()));
-        orderTotalLabel.setText("Totale Ordine: " + EURO_SYMBOL + orderTotalBean.getTotal());
+        orderTotalLabel.setText(String.format("Totale Ordine: %s %.2f" ,EURO_SYMBOL, orderTotalBean.getTotal())) ;
     }
 
 
