@@ -15,7 +15,7 @@ public class SaloonTimeSlotsListCellFactory  extends ListCell<TimeSlot> {
     private static final String LIST_ITEM_SALOON_TIMESLOTS="first_view/list_item/client_time_slot_item.fxml";
     private static final String INIT_TIME = "initTime";
     private static final String FINAL_TIME ="finalTime";
-    private static final String SEAT_NUMBER="seatNumber"; //da implemetare sul fxml
+    private static final String SEAT_NUMBER="seatNumberLabel"; //da implemetare sul fxml
     private Parent parentNode = null ;
 
     @Override
@@ -31,7 +31,7 @@ public class SaloonTimeSlotsListCellFactory  extends ListCell<TimeSlot> {
                 Label seatNumber = (Label)parentNode.lookup("#" + SEAT_NUMBER);
                 initTime.setText(String.valueOf(item.getFromTime()));
                 finalTime.setText(String.valueOf(item.getToTime()));
-                seatNumber.setText("Posti disponibili: "+ String.valueOf(item.getSeatAvailable()));
+                seatNumber.setText(String.valueOf(item.getSeatAvailable()));
 
                 setGraphic(parentNode);
 

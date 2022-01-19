@@ -18,7 +18,7 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
     //-+-+-+-+-+-+-+-+-+-+- Saloon -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet selectSaloonByName(Statement stmt, String saloonName) throws SQLException{
-        String query = String.format("SELECT * FROM Saloon WHERE name = '%s';", saloonName);
+        String query = String.format("SELECT * FROM Saloon join SaloonTime on Saloon.id = SaloonTime.Saloon WHERE  name = '%s';", saloonName);
         return stmt.executeQuery(query);
     }
 
@@ -33,7 +33,7 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     }
 
     public static ResultSet loadSaloonByName(Statement statement, String city) throws  SQLException {
-        String query = String.format("SELECT * FROM Saloon WHERE city = '%s';", city);
+        String query = String.format("SELECT * FROM Saloon join SaloonTime  WHERE Saloon.id = SaloonTime.Saloon AND city = '%s';", city);
         return statement.executeQuery(query);
     }
 
