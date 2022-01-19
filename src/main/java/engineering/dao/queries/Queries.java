@@ -111,6 +111,11 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
+    public static ResultSet selectServices(Statement statement, String saloonName) throws SQLException {
+        String sql = String.format("SELECT SE.name,SE.description, SE.price FROM Saloon S, Barber B, Service SE WHERE S.barber = B.emailUser AND B.emailUser = SE.barber AND S.name = '%s'; ",saloonName);
+        return  statement.executeQuery(sql);
+    }
+
 
     public static ResultSet loadServicesByBarberEmail(Statement statement, String barberEmail) throws SQLException {
         String query = String.format("SELECT * FROM Service WHERE barber = '%s';", barberEmail);
@@ -139,5 +144,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         String query = String.format("SELECT C.* FROM Customer C JOIN favorite F ON C.userEmail = F.customer WHERE F.saloon = '%d';", favoriteSaloonId);
         return statement.executeQuery(query);
     }
+
 
 }

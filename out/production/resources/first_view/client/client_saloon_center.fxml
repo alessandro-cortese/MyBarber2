@@ -17,9 +17,9 @@
          <children>
             <VBox prefHeight="599.0" prefWidth="324.0" spacing="50.0">
                <children>
-                  <Label prefHeight="24.0" prefWidth="304.0" text="Label">
+                  <Label fx:id="dateLabel" prefHeight="24.0" prefWidth="304.0" text="Label">
                      <graphic>
-                        <Label prefHeight="16.0" prefWidth="98.0" text="Data">
+                        <Label prefHeight="24.0" prefWidth="107.0" text="Data">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -29,18 +29,30 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="24.0" prefWidth="302.0" text="Label">
-                     <graphic>
-                        <Label prefHeight="16.0" prefWidth="95.0" text="Orario">
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+                     <children>
+                        <Label prefHeight="24.0" prefWidth="91.0" text="Slot Time">
                            <font>
                               <Font size="19.0" />
                            </font>
                         </Label>
-                     </graphic>
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
+                        <Label fx:id="hourLabelInit" text="Inizio">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Label text="-">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hourLabelFinal" text="Fine">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
                <HBox.margin>
                   <Insets top="150.0" />
@@ -70,7 +82,7 @@
                   </ImageView>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="36.0">
                      <children>
-                        <Label text="Label">
+                        <Label fx:id="nameSaloonLabel" text="Label">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -82,7 +94,7 @@
                               </Label>
                            </graphic>
                         </Label>
-                        <Label text="Label">
+                        <Label fx:id="addressSaloonLabel" text="Label">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -94,7 +106,7 @@
                               </Label>
                            </graphic>
                         </Label>
-                        <Label text="Label">
+                        <Label fx:id="citySaloonLabel" text="Label">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -106,7 +118,7 @@
                               </Label>
                            </graphic>
                         </Label>
-                        <Label text="Label">
+                        <Label fx:id="phoneSaloonLabel" text="Label">
                            <font>
                               <Font size="19.0" />
                            </font>

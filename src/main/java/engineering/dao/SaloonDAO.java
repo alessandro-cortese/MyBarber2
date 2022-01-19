@@ -161,8 +161,6 @@ public class SaloonDAO {
                 numberSlotTime[0] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_MORNING_COL);
                 numberSlotTime[1] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL);
                 int seatNumber = resultSet.getInt(SALOON_SEAT_NUMBER_COL);
-                System.out.println("emo"+seatNumber );
-
                 saloon = new Saloon(saloonName, times, intervalSlotTime, numberSlotTime,seatNumber);
 
             }

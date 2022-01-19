@@ -14,7 +14,6 @@ public class ScheduleTime {
     private  LocalTime intervalSlotTime;   //classi di ingegnerizzazione che aggrega i time slot della mattina
     private List<TimeSlot> timeSlotList;
     private Time timeOpen;
-    private Time sum;
     private Time sumTime;
 
     public ScheduleTime(SaloonBean saloonTimeSlots){
@@ -31,9 +30,9 @@ public class ScheduleTime {
         public List<TimeSlot> CreateSlotTime(){
 
             timeSlotList = new ArrayList<>();
-
+            TimeSlot timeSlot;
             for (int i = 0; i< slotTimeMorning ; i++){
-                TimeSlot timeSlot = new TimeSlot();
+                timeSlot = new TimeSlot();
                 long in = timeOpen.getTime();
                 timeOpen = new Time(in);
                 timeSlot.setFromTime(timeOpen);
@@ -55,7 +54,6 @@ public class ScheduleTime {
                 //System.out.println(time.getFromTime());
                 //System.out.println(time.getToTime());
             }
-
             return timeSlotList;
         }
 
@@ -71,16 +69,5 @@ public class ScheduleTime {
             timeSlot.setSeatAvailable(saloonTimeSlots.getSeatNumber());
             timeSlotList.add(timeSlot);
         }*/
-
-
-    public List<TimeSlot> timeSlotsIstance(){
-        return timeSlotList;
-    }
-
-
-
-
-
-
 
 }

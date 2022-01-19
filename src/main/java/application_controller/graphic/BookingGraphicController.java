@@ -143,7 +143,6 @@ public class BookingGraphicController{
 
             bookingController = new BookingController();
             saloonBeanName = bookingController.searchByNameSaloon(saloonBean); //ritona una saloonBean
-            System.out.println("or"+saloonBean.getName());
             bookingDateHourGraphicController = fxmlLoader.getController();
             bookingDateHourGraphicController.display(saloonBeanName);
             bookingDateHourGraphicController.injectSaloonIntoDateHour();

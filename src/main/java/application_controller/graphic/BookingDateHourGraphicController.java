@@ -34,6 +34,7 @@ public class BookingDateHourGraphicController {
         private String saloonPhone;
         private int seatNumber;
         private List<TimeSlot> timeSlotList;
+        private TimeSlot timeSlot;
         @FXML
         private Button ConfirmDateHourButton;
 
@@ -68,8 +69,6 @@ public class BookingDateHourGraphicController {
 
         private SaloonBean timeSlotSaloon;
 
-        private Time slotTime;
-
         @FXML
         private Label initTime;
         @FXML
@@ -77,18 +76,21 @@ public class BookingDateHourGraphicController {
         @FXML
         private Label seatNumberLabel;
 
+        private SaloonBean timeSlotSaloonInfo;
+        private LocalDate date;
 
 
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException {
                 Button sourceButton = (Button) event.getSource();
                 FXMLLoader fxmlLoaderNode = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME));
-                //ScheduleBookingGraphicController scheduleBookingGraphicController = fxmlLoader.getController();
-               // scheduleBookingGraphicController.displaySaloon(new SaloonBean(saloonName, saloonAddress, saloonCity, saloonPhone,slotTime, seatNumber));
                 Parent newCenterNode = fxmlLoaderNode.load();
                 Scene myScene = sourceButton.getScene();
                 BorderPane borderPane = (BorderPane) myScene.getRoot();
                 borderPane.setCenter(newCenterNode);
+                ScheduleBookingGraphicController scheduleBookingGraphicController = fxmlLoaderNode.getController();
+                //scheduleBookingGraphicController.displaySaloon(timeSlotSaloonInfo, timeSlot,date );
+                //scheduleBookingGraphicController.InjectServiceSaloon();
         }
 
         @FXML
@@ -101,13 +103,18 @@ public class BookingDateHourGraphicController {
 
         @FXML
         public void ConfirmHour(ActionEvent event) throws IOException, ParseException { //qui chiamo la BookingDAO
-
+                date = dateBooking.getValue();
 
         }
 
-        public void display(SaloonBean saloonBean) { //setto la saloonBean del sottoscritto controller
-                timeSlotSaloon = new SaloonBean();
-                this.timeSlotSaloon.setName(saloonBean.getName());
+
+
+        public void display(SaloonBean saloonBean) {
+                timeSlotSaloonInfo = new SaloonBean();
+                this.timeSlotSaloonInfo.setName(saloonBean.getName());
+                this.timeSlotSaloonInfo.setCity(saloonBean.getCity());
+                this.timeSlotSaloonInfo.setPhone(saloonBean.getPhone());
+                this.timeSlotSaloonInfo.setAddress(saloonBean.getAddress());
         }
 
         public void injectSaloonIntoDateHour() {
@@ -118,30 +125,28 @@ public class BookingDateHourGraphicController {
                 timeSlotListView.getItems().clear();
                 timeSlotList = new ScheduleTime(timeSlotSaloon).CreateSlotTime();
                 timeSlotListView.setItems(FXCollections.observableList(timeSlotList));
-                System.out.println(timeSlotSaloon.getName());
-                System.out.println(timeSlotSaloon.getNumberOfMorningSlotsInfo());
-                System.out.println(timeSlotSaloon.getAddress());
-                System.out.println(timeSlotSaloon.getSeatNumber());
 
 
         }
 
         private void searchTimeSlots() {
-                System.out.println("sddd"+timeSlotSaloon.getSeatNumber());
-                seatNumber = timeSlotSaloon.getSeatNumber();
-                SaloonBean saloonBean = new SaloonBean(timeSlotSaloon.getName());
-                saloonNameLabel.setText(timeSlotSaloon.getName());
+                SaloonBean saloonBean = new SaloonBean(timeSlotSaloonInfo.getName());
+                saloonNameLabel.setText(timeSlotSaloonInfo.getName());
 
                 BookingController bookingController = new BookingController();
                 timeSlotSaloon = bookingController.searchTimeSlots(saloonBean);//FAR RITORNARE PURE GLI I SEAT TIME
         }
+
         @FXML
         public void slotTimeSelected(){
                 TimeSlot timeSlot = new TimeSlot();
                 timeSlot.setSeatAvailable(Integer.parseInt(seatNumberLabel.getText()));
                 System.out.println(timeSlot.getSeatAvailable());
                 timeSlot.setFromTime(Time.valueOf(initTime.getText()));
+                System.out.println("diomerda"+timeSlot.getFromTime());
                 timeSlot.setToTime(Time.valueOf(finalTime.getText()));
+                System.out.println("diomerdacc"+timeSlot.getToTime());
+
         }
 }
 

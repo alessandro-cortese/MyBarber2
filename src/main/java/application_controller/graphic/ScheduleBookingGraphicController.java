@@ -1,37 +1,25 @@
 package application_controller.graphic;
 
 import application_controller.BookingController;
-import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
-import first_view.ObservableListNode;
-import first_view.pickers.TimePicker;
+import engineering.bean.ServiceBean;
+import engineering.time.TimeSlot;
+import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class ScheduleBookingGraphicController implements Initializable {
+public class ScheduleBookingGraphicController{
 
     private static final String SERVICE_ITEM = "first_view/list_item/barber_service_list_item.fxml";
 
@@ -43,19 +31,26 @@ public class ScheduleBookingGraphicController implements Initializable {
     private Button bookedButton;
 
     @FXML
-    private SplitMenuButton catalogueBooking;
-
-    @FXML
     private ImageView saloonImage;
 
     @FXML
-    private Label saloonName;
-
-    @FXML
-    private TextField textTime;
-
-    @FXML
     private ListView serviceListView;
+    @FXML
+    private Label dateLabel;
+
+     @FXML
+     private Label hourLabelInit;
+     @FXML
+     private Label hourLabelFinal;
+
+     @FXML
+     private Label nameSaloonLabel;
+     @FXML
+     private Label citySaloonLabel;
+     @FXML
+     private Label addressSaloonLabel;
+     @FXML
+     private Label phoneSaloonLabel;
 
 
     @FXML
@@ -66,6 +61,11 @@ public class ScheduleBookingGraphicController implements Initializable {
     private String saloonPhone;
     private int seatNumber;
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
+    private SaloonBean saloonInfo;
+    private List<TimeSlot> servicesList;
+    private List<ServiceBean> servicesSaloonList;
+    private TimeSlot timeSlotInfo;
+    private LocalDate dateBooking;
 
     @FXML
     void onButtonSaloonClicked(ActionEvent event) throws IOException{
@@ -82,29 +82,40 @@ public class ScheduleBookingGraphicController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        Node[] nodesList = new Node[10];
-        for (int i = 0; i < 10; i++) {
 
-            try {
-                nodesList[i] = (new FXMLLoader(getClass().getClassLoader().getResource(SERVICE_ITEM))).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void InjectServiceSaloon(){
+        serviceListView.setCellFactory(param -> new ServiceListCellFactory());
+
+        BookingController bookingController = new BookingController();
+        servicesSaloonList = bookingController.SearchServices(saloonInfo);
+        if(servicesSaloonList.isEmpty()){
+            System.out.println("non funge");
+        }
+        serviceListView.getItems().clear();
+        serviceListView.setItems(FXCollections.observableList(servicesSaloonList));
+        phoneSaloonLabel.setText(saloonInfo.getPhone());
+        nameSaloonLabel.setText(saloonInfo.getName());
+        citySaloonLabel.setText(saloonInfo.getCity());
+        addressSaloonLabel.setText(saloonInfo.getAddress());
+        hourLabelInit.setText(String.valueOf(timeSlotInfo.getFromTime()));
+        hourLabelFinal.setText(String.valueOf(timeSlotInfo.getToTime()));
+        dateLabel.setText(String.valueOf(dateBooking));
 
         }
-        ObservableListNode clientAppointmentsList = new ObservableListNode(nodesList);
-        serviceListView.setItems(clientAppointmentsList);
+
+
+    public void displaySaloon(SaloonBean saloonBean, TimeSlot timeSlot, LocalDate date) {
+        saloonInfo = new SaloonBean();
+        timeSlotInfo = new TimeSlot();
+        this.saloonInfo.setName(saloonBean.getName());
+        this.saloonInfo.setAddress(saloonBean.getAddress());
+        this.saloonInfo.setCity(saloonBean.getCity());
+        this.saloonInfo.setPhone(saloonBean.getPhone());
+        this.saloonInfo.setSeatNumber(saloonBean.getSeatNumber());
+        //this.timeSlotInfo.setFromTime(timeSlot.getFromTime());
+        //this.timeSlotInfo.setToTime(timeSlot.getToTime());
+        this.dateBooking = date;
     }
 
-    public void displaySaloon(SaloonBean saloonBean) {
-        this.nameSal = saloonBean.getName();
-        this.saloonAddr = saloonBean.getAddress();
-        this.saloonCity = saloonBean.getCity();
-        this.saloonPhone = saloonBean.getPhone();
-        this.seatNumber = saloonBean.getSeatNumber();
-
-    }
 }
 

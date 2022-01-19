@@ -4,8 +4,12 @@ import java.util.*;
 
 import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
+import engineering.bean.ServiceBean;
 import engineering.dao.SaloonDAO;
+import engineering.dao.ServiceDAO;
+import engineering.exception.InsertNegativePriceException;
 import model.Saloon;
+import model.Service;
 
 public class BookingController {
     private SaloonDAO saloonDAO;
@@ -16,6 +20,8 @@ public class BookingController {
     private Saloon saloonByName;
     private Saloon saloon;
     private String saloonNameG;
+    private List<Service> ServicesList=new ArrayList<>();
+    private List<ServiceBean> servicesBeanList= new ArrayList<>();
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
@@ -49,8 +55,7 @@ public class BookingController {
         saloonBean.setCity(saloonByName.getCity());
         saloonBean.setAddress(saloonByName.getAddress());
         saloonBean.setPhone(saloonByName.getPhone());
-        saloonBean.setSeatNumber(saloonByName.getSeatNumber());
-        saloonBean.setSlotTime(saloonByName.getSlotTime());
+
 
         return  saloonBean;
 
@@ -77,7 +82,6 @@ public class BookingController {
         saloonBeanTimeSlots.setCloseAfternoonTimeInfo(saloon.getCloseAfternoonTime());
         saloonBeanTimeSlots.setSlotTime(saloon.getSlotTime());
         saloonBeanTimeSlots.setSeatNumber(saloon.getSeatNumber());
-        System.out.println("porc"+saloon.getSeatNumber() );
         saloonBeanTimeSlots.setNumberOfMorningSlotsInfo(saloon.getNumberOfMorningSlots());
         saloonBeanTimeSlots.setNumberOfAfternoonSlotsInfo(saloon.getNumberOfAfternoonSlots());
 
@@ -87,5 +91,25 @@ public class BookingController {
 
     public void setSaloonName(String saloonCity) {
         saloonNameG = saloonCity;
+    }
+
+    public List<ServiceBean> SearchServices(SaloonBean saloonBean) {
+        ServiceDAO serviceDAO = new ServiceDAO();
+        servicesBeanList = new ArrayList<>();
+        ServicesList = serviceDAO.retreiveService(saloonBean.getName());
+        for (Service service: ServicesList){
+            try {
+                ServiceBean serviceBean = new ServiceBean();
+                serviceBean.setNameInfo(service.getServiceName());
+                serviceBean.setDescriptionInfo(service.getServiceDescription());
+                serviceBean.setPriceInfo(service.getServicePrice());
+                servicesBeanList.add(serviceBean);
+            } catch (InsertNegativePriceException e) { //RICORDARSI DI FARE LA MIA di eccezzione(CIOÈ DI ROBERTO)
+                e.printStackTrace();
+            }
+
+        }
+
+        return servicesBeanList;
     }
 }
