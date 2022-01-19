@@ -1,5 +1,6 @@
 package engineering.dao;
 
+import engineering.bean.UserBean;
 import engineering.container.SaloonCatalogue;
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
@@ -26,6 +27,7 @@ public class SaloonDAO {
     private static final String SALOON_CLOSE_MORNING_TIME_COL = "closeMorningTime" ;
     private static final String SALOON_CLOSE_AFTERNOON_TIME = "closeAfternoonTime" ;
 
+    private String barberEmail;
 
     public SaloonCatalogue loadAllSaloon() {
 
@@ -161,7 +163,6 @@ public class SaloonDAO {
                 numberSlotTime[0] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_MORNING_COL);
                 numberSlotTime[1] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL);
                 int seatNumber = resultSet.getInt(SALOON_SEAT_NUMBER_COL);
-                System.out.println("emo"+seatNumber );
 
                 saloon = new Saloon(saloonName, times, intervalSlotTime, numberSlotTime,seatNumber);
 
@@ -217,6 +218,18 @@ public class SaloonDAO {
         cityAndAddress[1] = address;
 
         return new Saloon(name, cityAndAddress, telephone, intervalSlotTime, seatsNumber, numberOfSlots);
+
+    }
+
+    public String getBarberEmail() {
+
+        return barberEmail;
+
+    }
+
+    public void setBarberEmail(String barberEmail) {
+
+        this.barberEmail = barberEmail;
 
     }
 

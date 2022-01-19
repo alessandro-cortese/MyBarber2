@@ -34,7 +34,8 @@ public class AddServiceController {
         SaloonDAO saloonDAO = new SaloonDAO();
         CustomerDAO customerDAO = new CustomerDAO();
         ProductDAO productDAO = new ProductDAO();
-        ServiceDAO serviceDAO = new ServiceDAO(userBean.getUserEmail());
+        ServiceDAO serviceDAO = new ServiceDAO();
+        serviceDAO.setBarberEmail(userBean.getUserEmail());
 
         Integer saloonId = saloonDAO.loadIdOfSaloon(userBean.getUserEmail());
 

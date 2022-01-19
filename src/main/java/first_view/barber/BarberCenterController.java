@@ -11,10 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import first_view.general.InternalBackController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -29,8 +27,6 @@ public class BarberCenterController implements Initializable {
     @FXML private Label telephoneCenterLabelFirstView;
     @FXML private Button addCenterButton;
     @FXML private Button modifyButton;
-
-    private static final String BARBER_CENTER_LIST_ITEM = "first_view/list_item/center_list_item.fxml";
 
     private static final String ADD_BARBER_CENTER_SCREEN_NAME = "first_view/barber/barber_modify_center.fxml";
     private static final String BARBER_MODIFY_SCREEN_NAME = "first_view/barber/barber_modify_center.fxml";
