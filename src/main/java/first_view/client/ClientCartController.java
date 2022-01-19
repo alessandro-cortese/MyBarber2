@@ -1,9 +1,11 @@
 package first_view.client;
 
 import application_controller.BuyProductController;
+import engineering.bean.UserBean;
 import engineering.bean.buy_product.CartBean;
 import engineering.bean.buy_product.CartRowBean;
 import engineering.bean.buy_product.ProductBean;
+import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CartRowListCellFactory;
 import javafx.collections.FXCollections;
@@ -13,15 +15,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 
 public class ClientCartController implements Initializable {
 
@@ -37,6 +38,19 @@ public class ClientCartController implements Initializable {
 
     public static final String COMPLETE_ORDER_SCENE_RES = "first_view/client/client_complete_order.fxml" ;
 
+    public ClientCartController() {
+        UserBean loggedUser = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
+        if (loggedUser != null) {
+            try {
+                buyProductController = new BuyProductController(loggedUser);
+            } catch (NotExistentUserException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+                alert.showAndWait() ;
+            }
+        }
+        else buyProductController = new BuyProductController() ;
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,6 +65,8 @@ public class ClientCartController implements Initializable {
         plusButton.setDisable(true);
         deleteButton.setDisable(true);
         minusButton.setDisable(true);
+
+        viewCart();
     }
 
     public void setApplicationController(BuyProductController buyProductController) {
@@ -65,7 +81,7 @@ public class ClientCartController implements Initializable {
 
     private void updateInfo() {
         cartListView.setItems(FXCollections.observableList(cartBean.getCartRowBeanArrayList()));
-        totalAmount.setText(String.format("%.2f", cartBean.getTotal())) ;
+        totalAmount.setText(String.format("Totale: %s %.2f", EURO_SYMBOL, cartBean.getTotal())) ;
     }
 
     public void onButtonClicked(ActionEvent event) {

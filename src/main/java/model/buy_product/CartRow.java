@@ -1,6 +1,8 @@
 package model.buy_product;
 
-public class CartRow {
+import java.io.Serializable;
+
+public class CartRow implements Serializable {
 
     private Product product ;
     private Integer quantity ;

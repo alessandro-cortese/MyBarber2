@@ -73,7 +73,8 @@ public class LoginScreenController {
     private UserBean login()  {
         String userEmail = emailTextField.getText() ;
         String password = passwordTextField.getText() ;
-
+        System.out.println(userEmail);
+        System.out.println(password);
         AccessInfoBean accessInfoBean = new AccessInfoBean(userEmail, password) ;
         LoginController loginController = new LoginController() ;
 

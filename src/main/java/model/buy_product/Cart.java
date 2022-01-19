@@ -4,11 +4,12 @@ import engineering.pattern.decorator.Priceable;
 import engineering.pattern.observer.Subject;
 
 import javax.annotation.Nullable;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Cart extends Subject implements Priceable {
+public class Cart extends Subject implements Priceable, Serializable {
 
     public static final String QUANTITY_KEY = "quantity" ;
     public static final String ISBN_KEY = "isbn" ;
@@ -73,7 +74,7 @@ public class Cart extends Subject implements Priceable {
     @Nullable
     private CartRow verifyPresent(Product verifyProduct) {
         for (CartRow row : cartRowArrayList) {
-            if (row.getProduct() == verifyProduct) {
+            if (row.getProduct().equals(verifyProduct)) {
                 return row ;
             }
         }

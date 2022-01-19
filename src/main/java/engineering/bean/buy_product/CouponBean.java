@@ -8,8 +8,9 @@ public class CouponBean {
     private Double couponDiscount ;
     private String couponType ;
 
-    public CouponBean(String couponCode) {
+    public CouponBean(String couponCode){
         setCouponCode(couponCode);
+
     }
 
     public CouponBean(String couponCode, Double couponDiscount) throws InvalidCouponException {
@@ -30,8 +31,8 @@ public class CouponBean {
     }
 
     public CouponBean(Double couponDiscount, String couponType){
-            setCouponDiscount(couponDiscount);
-            setCouponType(couponType);
+        setCouponDiscount(couponDiscount);
+        setCouponType(couponType);
     }
 
     public String getCouponCode() {
