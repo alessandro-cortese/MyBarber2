@@ -76,7 +76,6 @@ public class ClientCompleteOrderController {
             alert.showAndWait() ;
             throw e ;
         }
-
     }
 
     private void insertCoupon() {
@@ -87,8 +86,8 @@ public class ClientCompleteOrderController {
             return ;
         }
 
-        CouponBean couponBean = new CouponBean(stringCouponCode) ;
         try {
+            CouponBean couponBean = new CouponBean(stringCouponCode) ;
             buyProductController.applyCoupon(couponBean);
         }
         catch (InvalidCouponException | NegativePriceException e) {

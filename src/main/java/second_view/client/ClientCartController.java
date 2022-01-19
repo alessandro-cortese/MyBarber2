@@ -1,13 +1,17 @@
 package second_view.client;
 
 import application_controller.BuyProductController;
+import engineering.bean.UserBean;
 import engineering.bean.buy_product.CartBean;
 import engineering.bean.buy_product.CartRowBean;
 import engineering.bean.buy_product.ProductBean;
+import engineering.exception.NotExistentUserException;
+import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CartRowListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import second_view.general.ScreenChanger;
@@ -31,9 +35,25 @@ public class ClientCartController implements Initializable {
     BuyProductController buyProductController ;
     CartBean cartBean ;
 
+    public ClientCartController() {
+        UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
+        if (loggedUser == null) {
+            buyProductController = new BuyProductController();
+        }
+        else {
+            try {
+                buyProductController = new BuyProductController(loggedUser) ;
+            } catch (NotExistentUserException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+                alert.showAndWait() ;
+            }
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cartListView.setCellFactory(param -> new CartRowListCellFactory(SECOND_VIEW));
+        updateView();
     }
 
     public void onCommand(ActionEvent event) throws IOException {

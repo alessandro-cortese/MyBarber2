@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
-
-import java.time.DateTimeException;
-import java.time.LocalTime;
-
+import static engineering.other_classes.LocalTimeVerify.isLocalTime;
 import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberAddNewSaloonController {
@@ -45,7 +42,6 @@ public class BarberAddNewSaloonController {
         addSaloonCommandLine.setStyle(null);
         errorAddSaloonLabel.setText("");
         String newField;
-        String[] times;
 
         if(addSaloonCommandLineLocal.compareTo("back") == 0) {
             ScreenChanger.getInstance().onBack(event);
@@ -56,14 +52,14 @@ public class BarberAddNewSaloonController {
             addSaloonNameTextField.setText(newField);
             return ;
         }
-        else if(addSaloonCommandLineLocal.startsWith(SET_ADDRESS_NEW_SALOON_COMMAND)) {
+        else if(addSaloonCommandLineLocal.startsWith(SET_ADDRESS_NEW_SALOON_COMMAND) ) {
             newField = addSaloonCommandLineLocal.replace(SET_ADDRESS_NEW_SALOON_COMMAND + " ", "");
             addSaloonAddressTextField.setText(newField);
-            return ;
+            return;
         }else if(addSaloonCommandLineLocal.startsWith(SET_CITY_NEW_SALOON_COMMAND)) {
             newField = addSaloonCommandLineLocal.replace(SET_CITY_NEW_SALOON_COMMAND + " ", "");
             addSaloonCityTextField.setText(newField);
-            return ;
+            return;
         }
         else if(addSaloonCommandLineLocal.startsWith(SET_PHONE_NEW_SALOON_COMMAND)) {
             newField = addSaloonCommandLineLocal.replace(SET_PHONE_NEW_SALOON_COMMAND + " ", "");
@@ -82,67 +78,66 @@ public class BarberAddNewSaloonController {
                 return;
             }
         }
-        else if(addSaloonCommandLineLocal.startsWith(SET_OPEN_MORNING_TIME_COMMAND)) {
-            times = addSaloonCommandLineLocal.replace(SET_OPEN_MORNING_TIME_COMMAND + " ", "").split("-");
-            newField = addSaloonCommandLineLocal.replace(SET_OPEN_MORNING_TIME_COMMAND + " ", "");
-            if(isNumeric(times[0]) && isNumeric(times[1]) && isLocalTime(times)){
-                addSaloonOpenMorningTimeTextField.setText(newField);
-                return;
-            }
-            else {
-                displayErrorTime();
-            }
+        else if((addSaloonCommandLineLocal.startsWith(SET_OPEN_MORNING_TIME_COMMAND) || addSaloonCommandLineLocal.startsWith(SET_CLOSE_MORNING_TIME_COMMAND)) && setMorningTime(addSaloonCommandLineLocal)){
+            return;
         }
-        else if(addSaloonCommandLineLocal.startsWith(SET_CLOSE_MORNING_TIME_COMMAND)) {
-            times = addSaloonCommandLineLocal.replace(SET_CLOSE_MORNING_TIME_COMMAND + " ", "").split("-");
-            newField = addSaloonCommandLineLocal.replace(SET_CLOSE_MORNING_TIME_COMMAND + " ", "");
-            if(isNumeric(times[0]) && isNumeric(times[1]) && isLocalTime(times)) {
-                addSaloonCloseMorningTimeTextField.setText(newField);
-                return;
-            }
-            else{
-                displayErrorTime();
-            }
-        }
-        else if(addSaloonCommandLineLocal.startsWith(SET_OPEN_AFTERNOON_TIME_COMMAND)) {
-            times = addSaloonCommandLineLocal.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "").split("-");
-            newField = addSaloonCommandLineLocal.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "");
-            if(isNumeric(times[0]) && isNumeric(times[1]) && isLocalTime(times)) {
-                addSaloonOpenAfternoonTimeTextField.setText(newField);
-                return;
-            }
-            else{
-                displayErrorTime();
-            }
-        }
-        else if(addSaloonCommandLineLocal.startsWith(SET_CLOSE_AFTERNOON_TIME_COMMAND)) {
-            times = addSaloonCommandLineLocal.replace(SET_CLOSE_AFTERNOON_TIME_COMMAND + " ", "").split("-");
-            newField = addSaloonCommandLineLocal.replace(SET_CLOSE_AFTERNOON_TIME_COMMAND + " ", "");
-            if(isNumeric(times[0]) && isNumeric(times[1]) && isLocalTime(times)) {
-                addSaloonCloseAfternoonTimeTextField.setText(newField);
-                return;
-            }
-            else{
-                displayErrorTime();
-            }
+        else if((addSaloonCommandLineLocal.startsWith(SET_OPEN_AFTERNOON_TIME_COMMAND) || addSaloonCommandLineLocal.startsWith(SET_CLOSE_AFTERNOON_TIME_COMMAND)) && setAfternoonTime(addSaloonCommandLineLocal)) {
+            return ;
         }
 
         addSaloonCommandLine.setStyle("-fx-border-color: red");
 
     }
 
-    public void displayErrorTime() {
-        errorAddSaloonLabel.setText("Wrong insert time");
+    private boolean setAfternoonTime(String commandLine) {
+
+        String[] afternoonTimes;
+        String afternoonFields;
+
+        if(commandLine.startsWith(SET_OPEN_AFTERNOON_TIME_COMMAND)) {
+            afternoonTimes = commandLine.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "").split(":");
+            afternoonFields = commandLine.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "");
+            if(isNumeric(afternoonTimes[0]) && isNumeric(afternoonTimes[1]) && isLocalTime(afternoonTimes)) {
+                addSaloonOpenAfternoonTimeTextField.setText(afternoonFields);
+                return true;
+            }
+        }
+        else if(commandLine.startsWith(SET_CLOSE_AFTERNOON_TIME_COMMAND)) {
+            afternoonTimes = commandLine.replace(SET_CLOSE_AFTERNOON_TIME_COMMAND + " ", "").split(":");
+            afternoonFields = commandLine.replace(SET_CLOSE_AFTERNOON_TIME_COMMAND + " ", "");
+            if(isNumeric(afternoonTimes[0]) && isNumeric(afternoonTimes[1]) && isLocalTime(afternoonTimes)) {
+                addSaloonCloseAfternoonTimeTextField.setText(afternoonFields);
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
-    private boolean isLocalTime(String[] times){
+    private boolean setMorningTime(String commandLine) {
 
-        try{
-            LocalTime localTime = LocalTime.of(Integer.parseInt(times[0]), Integer.parseInt(times[1]));
-            return true;
-        }catch(DateTimeException e){
-            return false;
+        String[] morningTimes;
+        String morningField;
+
+        if(commandLine.startsWith(SET_OPEN_MORNING_TIME_COMMAND)) {
+            morningTimes = commandLine.replace(SET_OPEN_MORNING_TIME_COMMAND + " ", "").split(":");
+            morningField = commandLine.replace(SET_OPEN_MORNING_TIME_COMMAND + " ", "");
+            if(isNumeric(morningTimes[0]) && isNumeric(morningTimes[1]) && isLocalTime(morningTimes)) {
+                addSaloonOpenMorningTimeTextField.setText(morningField);
+                return true;
+            }
         }
+        else if(commandLine.startsWith(SET_CLOSE_MORNING_TIME_COMMAND)) {
+            morningTimes = commandLine.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "").split(":");
+            morningField = commandLine.replace(SET_CLOSE_MORNING_TIME_COMMAND + " ", "");
+            if(isNumeric(morningTimes[0]) && isNumeric(morningTimes[1]) && isLocalTime(morningTimes)) {
+                addSaloonCloseMorningTimeTextField.setText(morningField);
+                return true;
+            }
+        }
+
+        return false;
 
     }
 

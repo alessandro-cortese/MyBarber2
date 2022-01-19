@@ -23,7 +23,7 @@
                   </Label>
                   <ScrollPane prefHeight="261.0" prefWidth="306.0">
                      <content>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- set name &lt;name&gt;&#10;- set  address &lt;address&gt;&#10;- set city &lt;city&gt;&#10;- set phone number &lt;phone number&gt;&#10;- set slot time &lt;slot time&gt;&#10;- set seats number &lt;seats number&gt;&#10;- set open morning time &lt;hh-mm&gt;&#10;- set close morning time &lt;hh-mm&gt;&#10;- set open afternoon time &lt;hh-mm&gt;&#10;- set close afternoon time &lt;hh-mm&gt; &#10;- add &#10;- back">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- set name &lt;name&gt;&#10;- set  address &lt;address&gt;&#10;- set city &lt;city&gt;&#10;- set phone number &lt;phone number&gt;&#10;- set slot time &lt;slot time&gt;&#10;- set seats number &lt;seats number&gt;&#10;- set open morning time &lt;hh:mm&gt;&#10;- set close morning time &lt;hh:mm&gt;&#10;- set open afternoon time &lt;hh:mm&gt;&#10;- set close afternoon time &lt;hh:mm&gt; &#10;- add &#10;- back">
                            <font>
                               <Font size="14.0" />
                            </font>

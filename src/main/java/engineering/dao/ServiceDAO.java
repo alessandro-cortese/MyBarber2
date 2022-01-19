@@ -19,9 +19,6 @@ public class ServiceDAO {
     private String barberEmail;
     private List<Service> serviceList;
 
-    public ServiceDAO(String barberEmail){
-        this.barberEmail = barberEmail;
-    }
 
     public ServiceDAO() {
     }
@@ -70,7 +67,6 @@ public class ServiceDAO {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
 
         return newKeys;
 

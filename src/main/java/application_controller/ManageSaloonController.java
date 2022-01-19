@@ -22,8 +22,11 @@ public class ManageSaloonController {
     public List<SaloonBean> getAllSaloon() {
 
         SaloonDAO saloonDAO = new SaloonDAO();
+        saloonDAO.setBarberEmail(userBean.getUserEmail());
+
         SaloonCatalogue saloonCatalogue = saloonDAO.loadAllSaloon();
         List<Saloon> saloons = saloonCatalogue.getSaloonList();
+
         ArrayList<SaloonBean> saloonBeanArrayList = new ArrayList<>();
 
         for(Saloon saloon : saloons) {

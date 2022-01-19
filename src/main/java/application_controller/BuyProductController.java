@@ -35,6 +35,9 @@ public class BuyProductController {
 
     private Customer customer;
 
+    private CartFileSaver cartFileSaver ;
+
+
     public BuyProductController() {
         ProductDAO productDAO = new ProductDAO();
         couponDAO = new CouponDAO() ;
@@ -46,8 +49,17 @@ public class BuyProductController {
     }
 
     public BuyProductController(UserBean loggedUserBean) throws NotExistentUserException {
-        this() ;
+        ProductDAO productDAO = new ProductDAO();
+        couponDAO = new CouponDAO() ;
+        productCatalog = productDAO.loadAllProducts() ;
+
         customerLogin(loggedUserBean);
+        cartFileSaver = new CartFileSaver(customer.getEmail()) ;
+        cart = cartFileSaver.loadCartFromFile() ;
+
+        order = new Order(cart) ;
+        cartBean = new CartBean(cart) ;
+        orderBean = new OrderTotalBean(order) ;
     }
 
     public List<ProductBean> filterProductList(ProductSearchInfoBean searchInfoBean) {
@@ -68,6 +80,7 @@ public class BuyProductController {
     public void insertProductToCart(ProductBean productBean) {
         Product product = productCatalog.getProductByIsbn(productBean.getBeanIsbn()) ;
         cart.insertProduct(product);
+        if (customer != null) cartFileSaver.saveCartInFile(cart);
     }
 
     public CartBean showCart() {
@@ -77,6 +90,7 @@ public class BuyProductController {
     public void removeProductFromCart(ProductBean productBean) {
         Product rmvProduct = productCatalog.getProductByIsbn(productBean.getBeanIsbn()) ;
         cart.removeProduct(rmvProduct);
+        if (customer != null) cartFileSaver.saveCartInFile(cart);
     }
 
     public void applyCoupon(CouponBean couponBean) throws InvalidCouponException, NegativePriceException {
@@ -95,6 +109,8 @@ public class BuyProductController {
 
         CartDAO cartDAO = new CartDAO() ;
         cartDAO.saveCart(cart, order.getOrderCode());
+
+        cartFileSaver.deleteCart() ;
 
         UserDAO userDAO = new UserDAO() ;
         customer.setCardPoints(customer.getCardPoints() + order.getOrderPoints());
@@ -138,6 +154,8 @@ public class BuyProductController {
         UserBean userBean = loginController.verifyUser(accessInfo) ;
         customerLogin(userBean) ;
 
+        cartFileSaver = new CartFileSaver(customer.getEmail()) ;
+        cartFileSaver.saveCartInFile(cart);
         return userBean ;
     }
 

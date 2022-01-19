@@ -32,13 +32,10 @@ public class ClientFidelityCardGUIController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
         try {
             viewFidelityCard(loggedUser) ;
-        } catch (NotExistentUserException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-            alert.showAndWait() ;
+        } catch (NotExistentUserException ignored) {
         }
     }
 

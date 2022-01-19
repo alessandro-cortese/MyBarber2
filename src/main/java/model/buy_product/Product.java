@@ -1,6 +1,8 @@
 package model.buy_product;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
     private Integer isbn ;
     private String name ;
@@ -60,12 +62,17 @@ public class Product {
         this.vendor = vendor;
     }
 
+
     @Override
     public boolean equals(Object toCompare) {
-        if (this == toCompare) return true ;
+        Boolean result ;
+        if (this == toCompare) result = true ;
         else if (toCompare instanceof Product) {
-            return ((Product) toCompare).getIsbn() == this.getIsbn() ;
+            result = (Integer.compare(this.getIsbn(), ((Product) toCompare).getIsbn()) == 0) ;
+            System.out.println(this.getName() + this.getIsbn());
+            System.out.println(((Product) toCompare).getName() + ((Product) toCompare).getIsbn());
         }
-        else return false ;
+        else result = false ;
+        return result ;
     }
 }
