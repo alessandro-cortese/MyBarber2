@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 public class Saloon {
 
@@ -8,7 +9,7 @@ public class Saloon {
     private String city;
     private String address;
     private String phone;
-    private Time slotTime;
+    private LocalTime slotTime;
     private int seatNumber;
     private Time openingMorningTime;
     private Time closeMorningTime;
@@ -26,7 +27,7 @@ public class Saloon {
 
     }
 
-    public Saloon(String name, String[] cityAndAddress, String phone, Time slotTime, int seatNumber, Integer[] numberOfSlots){
+    public Saloon(String name, String[] cityAndAddress, String phone, LocalTime slotTime, int seatNumber, Integer[] numberOfSlots){
 
         this.name = name;
         this.city = cityAndAddress[0];
@@ -39,7 +40,7 @@ public class Saloon {
 
     }
 
-    public Saloon(String name, String city, String address, String phone, Time slotTime, int seatNumber, Integer[] numberOfSlots){
+    public Saloon(String name, String city, String address, String phone, LocalTime slotTime, int seatNumber, Integer[] numberOfSlots){
 
         this.name = name ;
         this.city = city ;
@@ -52,7 +53,7 @@ public class Saloon {
 
     }
 
-    public Saloon(String city, String name, String address, String phone,Time slotTime, int seatNumber){
+    public Saloon(String city, String name, String address, String phone,LocalTime slotTime, int seatNumber){
 
         this.name = name;
         this.address = address;
@@ -63,7 +64,7 @@ public class Saloon {
 
     }
 
-    public Saloon(String saloonName, Time openMorningTime, Time openAfternoonTime, Time closeMorningTime, Time closeAfternoonTime, Time intervalSlotTime) {
+    public Saloon(String saloonName, Time openMorningTime, Time openAfternoonTime, Time closeMorningTime, Time closeAfternoonTime, LocalTime intervalSlotTime) {
 
         this.name = saloonName;
         this.openingMorningTime = openMorningTime;
@@ -74,7 +75,7 @@ public class Saloon {
 
     }
 
-    public Saloon(String saloonName, Time[][] time, Time intervalSlotTime, int[] numberSlotTime) {
+    public Saloon(String saloonName, Time[][] time, LocalTime intervalSlotTime, int[] numberSlotTime, int seatNumber) {
 
         this.name = saloonName;
         this.closeMorningTime= time[0][1];
@@ -84,7 +85,7 @@ public class Saloon {
         this.slotTime = intervalSlotTime;
         this.numberOfMorningSlots = numberSlotTime[0];
         this.numberOfAfternoonSlots = numberSlotTime[1];
-
+        this.seatNumber = seatNumber;
     }
     public String getName(){
 
@@ -134,13 +135,13 @@ public class Saloon {
 
     }
 
-    public Time getSlotTime(){
+    public LocalTime getSlotTime(){
 
         return slotTime;
     }
 
 
-    public void setSlotTime(Time slotTime) {
+    public void setSlotTime(LocalTime slotTime) {
 
         this.slotTime = slotTime;
 

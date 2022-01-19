@@ -9,7 +9,7 @@ public class SaloonBean {
     private String address;
     private String phone;
     private String city;
-    private Time slotTime;
+    private LocalTime slotTime;
     private  int seatNumber;
     private Time openingMorningTimeInfo;
     private Time closeMorningTimeInfo;
@@ -54,7 +54,7 @@ public class SaloonBean {
         this.phone = phone;
         this.seatNumber = seatNumber;
         this.city = city;
-        this.slotTime = Time.valueOf(LocalTime.of(0, slotTimeMinutes));
+        this.slotTime = LocalTime.of(0,slotTimeMinutes);
 
     }
 
@@ -106,13 +106,12 @@ public class SaloonBean {
 
     }
 
-    public Time getSlotTime() {
-
+    public LocalTime getSlotTime() {
         return slotTime;
 
     }
 
-    public void setSlotTime(Time slotTime) {
+    public void setSlotTime(LocalTime slotTime) {
 
         this.slotTime = slotTime;
 

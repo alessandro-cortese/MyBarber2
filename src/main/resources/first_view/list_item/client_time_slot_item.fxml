@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#slotTimeSelected" prefHeight="130.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application_controller.graphic.BookingDateHourGraphicController">
    <children>
       <VBox alignment="CENTER" prefHeight="55.0" prefWidth="158.0">
          <children>
@@ -22,6 +22,6 @@
             </HBox>
          </children>
       </VBox>
-      <Label fx:id="seatNumber" layoutX="14.0" layoutY="57.0" text="Posti disponibili:" />
+      <Label fx:id="seatNumberLabel" layoutX="14.0" layoutY="57.0" text="Posti disponibili:" />
    </children>
 </AnchorPane>

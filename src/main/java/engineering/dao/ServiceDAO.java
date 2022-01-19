@@ -18,9 +18,6 @@ public class ServiceDAO {
 
     private String barberEmail;
 
-    public ServiceDAO(String barberEmail){
-        this.barberEmail = barberEmail;
-    }
 
     public void setBarberEmail(String barberEmail){
 
@@ -66,7 +63,6 @@ public class ServiceDAO {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
 
         return newKeys;
 

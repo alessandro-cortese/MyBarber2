@@ -70,6 +70,14 @@ public class BookingDateHourGraphicController {
 
         private Time slotTime;
 
+        @FXML
+        private Label initTime;
+        @FXML
+        private Label finalTime;
+        @FXML
+        private Label seatNumberLabel;
+
+
 
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException {
@@ -100,17 +108,6 @@ public class BookingDateHourGraphicController {
         public void display(SaloonBean saloonBean) { //setto la saloonBean del sottoscritto controller
                 timeSlotSaloon = new SaloonBean();
                 this.timeSlotSaloon.setName(saloonBean.getName());
-                this.timeSlotSaloon.setAddress(saloonBean.getAddress());
-                this.timeSlotSaloon.setCity(saloonBean.getCity());
-                this.timeSlotSaloon.setPhone(saloonBean.getPhone());
-                this.timeSlotSaloon.setSeatNumber(saloonBean.getSeatNumber());
-                this.timeSlotSaloon.setSlotTime(saloonBean.getSlotTime());
-                this.timeSlotSaloon.setCloseAfternoonTimeInfo(saloonBean.getCloseAfternoonTimeInfo());
-                this.timeSlotSaloon.setCloseMorningTimeInfo(saloonBean.getCloseMorningTimeInfo());
-                this.timeSlotSaloon.setOpeningAfternoonTimeInfo(saloonBean.getOpeningAfternoonTimeInfo());
-                this.timeSlotSaloon.setOpeningMorningTimeInfo(saloonBean.getOpeningMorningTimeInfo());
-                this.timeSlotSaloon.setNumberOfAfternoonSlotsInfo(saloonBean.getNumberOfAfternoonSlotsInfo());
-                this.timeSlotSaloon.setNumberOfMorningSlotsInfo(saloonBean.getNumberOfMorningSlotsInfo());
         }
 
         public void injectSaloonIntoDateHour() {
@@ -119,16 +116,32 @@ public class BookingDateHourGraphicController {
                 searchTimeSlots();//recupero gli slot Time dal db
 
                 timeSlotListView.getItems().clear();
-                timeSlotList = new ScheduleTime(timeSlotSaloon).timeSlotsIstance();
+                timeSlotList = new ScheduleTime(timeSlotSaloon).CreateSlotTime();
                 timeSlotListView.setItems(FXCollections.observableList(timeSlotList));
-                saloonNameLabel.setText(timeSlotSaloon.getName());
+                System.out.println(timeSlotSaloon.getName());
+                System.out.println(timeSlotSaloon.getNumberOfMorningSlotsInfo());
+                System.out.println(timeSlotSaloon.getAddress());
+                System.out.println(timeSlotSaloon.getSeatNumber());
+
 
         }
 
         private void searchTimeSlots() {
+                System.out.println("sddd"+timeSlotSaloon.getSeatNumber());
+                seatNumber = timeSlotSaloon.getSeatNumber();
                 SaloonBean saloonBean = new SaloonBean(timeSlotSaloon.getName());
+                saloonNameLabel.setText(timeSlotSaloon.getName());
+
                 BookingController bookingController = new BookingController();
-                timeSlotSaloon = bookingController.searchTimeSlots(saloonBean);//bean che ritona gli estremi mattina e pomeriggio e poi devo calcolare gli slot time e metterli in timeSlotList
+                timeSlotSaloon = bookingController.searchTimeSlots(saloonBean);//FAR RITORNARE PURE GLI I SEAT TIME
+        }
+        @FXML
+        public void slotTimeSelected(){
+                TimeSlot timeSlot = new TimeSlot();
+                timeSlot.setSeatAvailable(Integer.parseInt(seatNumberLabel.getText()));
+                System.out.println(timeSlot.getSeatAvailable());
+                timeSlot.setFromTime(Time.valueOf(initTime.getText()));
+                timeSlot.setToTime(Time.valueOf(finalTime.getText()));
         }
 }
 

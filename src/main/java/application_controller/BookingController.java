@@ -15,7 +15,6 @@ public class BookingController {
     private String saloonName;
     private Saloon saloonByName;
     private Saloon saloon;
-    private List<SaloonBean> saloonBeans;
     private String saloonNameG;
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
@@ -39,15 +38,9 @@ public class BookingController {
         return saloonBeanList;
     }
 
-    public BookingController verifyBooking(BookingBean bookingBean){
-
-
-        return null;
-    }
 
     public SaloonBean searchByNameSaloon(SaloonBean saloonBean) throws Exception {
 
-        //saloonName = saloonBean.getName();
         SaloonDAO saloonDAO = new SaloonDAO();
         System.out.println(saloonBean.getName());
         saloonByName = saloonDAO.retrieveByNameOfSaloon(saloonBean.getName());
@@ -84,19 +77,13 @@ public class BookingController {
         saloonBeanTimeSlots.setCloseAfternoonTimeInfo(saloon.getCloseAfternoonTime());
         saloonBeanTimeSlots.setSlotTime(saloon.getSlotTime());
         saloonBeanTimeSlots.setSeatNumber(saloon.getSeatNumber());
+        System.out.println("porc"+saloon.getSeatNumber() );
         saloonBeanTimeSlots.setNumberOfMorningSlotsInfo(saloon.getNumberOfMorningSlots());
         saloonBeanTimeSlots.setNumberOfAfternoonSlotsInfo(saloon.getNumberOfAfternoonSlots());
 
         return saloonBeanTimeSlots;
     }
 
-    public void setSaloonBeanList(List<SaloonBean> saloonBeanList) {
-        this.saloonBeans =saloonBeanList;
-    }
-
-    public List<SaloonBean> getSaloonBeans() {
-        return saloonBeans;
-    }
 
     public void setSaloonName(String saloonCity) {
         saloonNameG = saloonCity;

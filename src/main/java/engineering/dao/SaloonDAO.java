@@ -1,10 +1,12 @@
 package engineering.dao;
 
+import engineering.bean.UserBean;
 import engineering.container.SaloonCatalogue;
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 import model.Saloon;
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class SaloonDAO {
     private static final String SALOON_CLOSE_MORNING_TIME_COL = "closeMorningTime" ;
     private static final String SALOON_CLOSE_AFTERNOON_TIME = "closeAfternoonTime" ;
 
+    private String barberEmail;
 
     public SaloonCatalogue loadAllSaloon() {
 
@@ -143,7 +146,7 @@ public class SaloonDAO {
         Connection connection = Connector.getConnectorInstance().getConnection();
         Saloon saloon = null;
         Time[][] times = new Time[2][2];
-        Time intervalSlotTime;
+        LocalTime intervalSlotTime;
         int[] numberSlotTime = new int[2];
 
         try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -155,11 +158,13 @@ public class SaloonDAO {
                 times[0][1] = resultSet.getTime(SALOON_CLOSE_MORNING_TIME_COL);
                 times[1][0] = resultSet.getTime(SALOON_OPENING_AFTERNOON_TIME_COL);
                 times[1][1] = resultSet.getTime(SALOON_CLOSE_AFTERNOON_TIME);
-                intervalSlotTime = resultSet.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
+                Time time = resultSet.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
+                intervalSlotTime = time.toLocalTime();
                 numberSlotTime[0] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_MORNING_COL);
                 numberSlotTime[1] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL);
+                int seatNumber = resultSet.getInt(SALOON_SEAT_NUMBER_COL);
 
-                saloon = new Saloon(saloonName, times, intervalSlotTime, numberSlotTime);
+                saloon = new Saloon(saloonName, times, intervalSlotTime, numberSlotTime,seatNumber);
 
             }
 
@@ -207,11 +212,24 @@ public class SaloonDAO {
         int seatsNumber = resultSet.getInt(SALOON_SEAT_NUMBER_COL);
         numberOfSlots[0] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_MORNING_COL) ;
         numberOfSlots[1] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL) ;
-        Time intervalSlotTime = resultSet.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
+        Time time = resultSet.getTime(SALOON_INTERVAL_SLOT_TIME_COL);
+        LocalTime intervalSlotTime = time.toLocalTime();
         cityAndAddress[0] = city;
         cityAndAddress[1] = address;
 
         return new Saloon(name, cityAndAddress, telephone, intervalSlotTime, seatsNumber, numberOfSlots);
+
+    }
+
+    public String getBarberEmail() {
+
+        return barberEmail;
+
+    }
+
+    public void setBarberEmail(String barberEmail) {
+
+        this.barberEmail = barberEmail;
 
     }
 

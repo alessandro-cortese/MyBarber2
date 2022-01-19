@@ -31,14 +31,13 @@ public class BarberManageSaloonController implements Initializable {
     private static final String OVERWRITE_SALOON_ADDRESS_COMMAND = "overwrite address";
     private static final String OVERWRITE_SALOON_PHONE_NUMBER_COMMAND = "overwrite phone number";
 
-    private List<SaloonBean> saloonBeanList;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
 
         ManageSaloonController manageSaloonController = new ManageSaloonController();
         manageSaloonController.setUserBean(ScreenChanger.getInstance().getLoggedUser());
+        List<SaloonBean> saloonBeanList;
 
         saloonBeanList = manageSaloonController.getAllSaloon();
 
