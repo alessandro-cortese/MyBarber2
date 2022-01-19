@@ -84,12 +84,7 @@ public class BuyProductController {
         order.addCoupon(myCoupon);
     }
 
-    public void completeOrder(OrderInfoBean orderInfoBean, UserBean loggedUser) throws NotExistentUserException {
-        UserDAO userDAO = new UserDAO() ;
-        if (customer == null) {
-            customer = userDAO.loadCustomerByEmail(loggedUser.getUserEmail());
-        }
-
+    public void completeOrder(OrderInfoBean orderInfoBean) throws NotExistentUserException {
         order.setAddress(orderInfoBean.getAddressInfo());
         order.setTelephone(orderInfoBean.getTelephoneInfo());
         order.setPaymentOption(orderInfoBean.getPaymentOptionInfo());
@@ -101,6 +96,7 @@ public class BuyProductController {
         CartDAO cartDAO = new CartDAO() ;
         cartDAO.saveCart(cart, order.getOrderCode());
 
+        UserDAO userDAO = new UserDAO() ;
         customer.setCardPoints(customer.getCardPoints() + order.getOrderPoints());
         userDAO.updateCustomerPoints(customer, customer.getCardPoints());
 

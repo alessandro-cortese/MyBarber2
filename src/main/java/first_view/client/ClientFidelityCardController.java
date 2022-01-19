@@ -16,6 +16,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.time.LocalTime;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ClientFidelityCardController implements Initializable {
@@ -49,8 +51,7 @@ public class ClientFidelityCardController implements Initializable {
             FidelityCardBean fidelityCardBean = null;
             try {
                 fidelityCardBean = manageCouponController.showFidelityCard(userBean);
-                couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));
-                pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale() );
+                updateView(fidelityCardBean) ;
             } catch (NotExistentUserException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
                 alert.showAndWait() ;
@@ -58,6 +59,11 @@ public class ClientFidelityCardController implements Initializable {
 
         }
         generateCouponButton.setDisable(userBean == null);
+    }
+
+    private void updateView(FidelityCardBean fidelityCardBean) {
+        couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));
+        pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale() );
     }
 
     @FXML
@@ -70,8 +76,8 @@ public class ClientFidelityCardController implements Initializable {
         }
 
         if (eventSource == generateCouponButton) {
-            String couponType = "" ;
-            Double couponValue = 0.0 ;
+            String couponType;
+            Double couponValue;
 
             if (subtractionFiveRadio.isSelected() || subtractionTenRadio.isSelected() || subtractionTwentyRadio.isSelected()) {
                 couponType = "subtraction" ;
@@ -85,7 +91,6 @@ public class ClientFidelityCardController implements Initializable {
                 else if (percentageThirtyFiveRadio.isSelected()) couponValue = 35.0 ;
                 else couponValue = 50.0 ;
             }
-
             getNewCoupon(couponType, couponValue);
         }
 
@@ -94,12 +99,12 @@ public class ClientFidelityCardController implements Initializable {
     public void getNewCoupon(String couponType, Double couponValue) {
         try {
             CouponBean couponBean = new CouponBean(couponValue, couponType);
-            manageCouponController.generateNewCoupon(couponBean) ;
-        } catch (InvalidCouponException e) {
+            FidelityCardBean fidelityCardBean = manageCouponController.generateNewCoupon(couponBean) ;
+            updateView(fidelityCardBean);
+        } catch (InvalidCouponException | NotExistentUserException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
             alert.showAndWait() ;
         }
-        initialize(null, null);
     }
 
 

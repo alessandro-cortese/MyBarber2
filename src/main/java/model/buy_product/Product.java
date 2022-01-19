@@ -59,4 +59,13 @@ public class Product {
     public void setVendor(String vendor) {
         this.vendor = vendor;
     }
+
+    @Override
+    public boolean equals(Object toCompare) {
+        if (this == toCompare) return true ;
+        else if (toCompare instanceof Product) {
+            return ((Product) toCompare).getIsbn() == this.getIsbn() ;
+        }
+        else return false ;
+    }
 }

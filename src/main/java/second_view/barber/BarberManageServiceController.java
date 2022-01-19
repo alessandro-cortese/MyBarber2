@@ -28,6 +28,11 @@ public class BarberManageServiceController implements Initializable {
     @FXML private TextField manageServiceSlotIndexTextField;
     @FXML private ListView<ServiceBean> manageServiceListView;
 
+    private static final String OVERWRITE_NAME_COMMAND = "overwrite name";
+    private static final String OVERWRITE_PRICE_COMMAND = "overwrite price";
+    private static final String OVERWRITE_DESCRIPTION_COMMAND = "overwrite description";
+    private static final String OVERWRITE_NAME_OF_USED_PRODUCT_COMMAND = "overwrite name of used product";
+
     private List<ServiceBean> serviceBeanList;
 
     @Override
@@ -95,27 +100,27 @@ public class BarberManageServiceController implements Initializable {
         boolean flag = false;
         String newManageServiceField;
 
-        if(command.startsWith("overwrite name")) {
+        if(command.startsWith(OVERWRITE_NAME_COMMAND)) {
 
-            newManageServiceField = command.replace("overwrite name" + " ", "");
+            newManageServiceField = command.replace(OVERWRITE_NAME_COMMAND + " ", "");
             manageServiceNameTextField.setText(newManageServiceField);
             flag = true;
 
         }
-        else if(command.startsWith("overwrite price")) {
-            newManageServiceField = command.replace("overwrite price" + " ", "");
+        else if(command.startsWith(OVERWRITE_PRICE_COMMAND)) {
+            newManageServiceField = command.replace(OVERWRITE_PRICE_COMMAND + " ", "");
             if(isNumeric(newManageServiceField)) {
                 manageServicePriceTextField.setText(newManageServiceField);
                 flag = true;
             }
         }
-        else if(command.startsWith("overwrite description")) {
-            newManageServiceField = command.replace("overwrite descriptio" + " ", "");
+        else if(command.startsWith(OVERWRITE_DESCRIPTION_COMMAND)) {
+            newManageServiceField = command.replace(OVERWRITE_DESCRIPTION_COMMAND + " ", "");
             manageServiceDescriptionTextField.setText(newManageServiceField);
             flag = true;
         }
-        else if(command.startsWith("overwrite name of used product")) {
-            newManageServiceField = command.replace("overwrite name of used product" + " ", "");
+        else if(command.startsWith(OVERWRITE_NAME_OF_USED_PRODUCT_COMMAND)) {
+            newManageServiceField = command.replace(OVERWRITE_NAME_OF_USED_PRODUCT_COMMAND + " ", "");
             manageServiceNameOfUsedProductTextField.setText(newManageServiceField);
             flag = true;
         }

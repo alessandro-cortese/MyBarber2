@@ -1,11 +1,14 @@
 package second_view.client;
 
 import application_controller.BuyProductController;
+import engineering.bean.UserBean;
 import engineering.bean.buy_product.ProductBean;
 import engineering.bean.buy_product.ProductSearchInfoBean;
+import engineering.exception.NotExistentUserException;
 import first_view.list_cell_factories.BuyProductListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import second_view.general.ScreenChanger;
 import javafx.event.ActionEvent;
@@ -26,12 +29,25 @@ public class ClientBuyProductController implements Initializable {
     private BuyProductController buyProductController ;
 
 
+    public ClientBuyProductController() {
+        UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
+        if (loggedUser == null) {
+            buyProductController = new BuyProductController();
+        }
+        else {
+            try {
+                buyProductController = new BuyProductController(loggedUser) ;
+            } catch (NotExistentUserException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+                alert.showAndWait() ;
+            }
+        }
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buyProductController = new BuyProductController() ;
-
         productListView.setCellFactory(param -> new BuyProductListCellFactory(BuyProductListCellFactory.SECOND_VIEW));
-
         searchProduct("");
     }
 

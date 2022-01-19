@@ -63,8 +63,7 @@ public class ManageCouponController {
             List<Coupon> coupons = couponDAO.loadCouponByUser(userBean.getUserEmail()) ;
             couponContainer = new CouponContainer(coupons) ;
 
-            List<CouponBean> couponBeans = createCouponBeans() ;
-            fidelityCard = new FidelityCardBean(customer.getCardPoints(), couponBeans) ;
+            fidelityCard = createFidelityCardBean() ;
         }
         else {
             throw new NotExistentUserException("ACCESSO NON EFFETTUATO!!") ;
@@ -73,7 +72,18 @@ public class ManageCouponController {
         return fidelityCard ;
     }
 
-    public FidelityCardBean generateNewCoupon(CouponBean couponBean) throws InvalidCouponException {
+    private FidelityCardBean createFidelityCardBean() {
+        List<CouponBean> couponBeans = createCouponBeans() ;
+        Integer cardPoints = customer.getCardPoints() ;
+        return new FidelityCardBean(cardPoints, couponBeans) ;
+    }
+
+    public FidelityCardBean generateNewCoupon(CouponBean couponBean) throws InvalidCouponException, NotExistentUserException {
+
+        if (customer == null) {
+            throw new NotExistentUserException("ACCESSO NON EFFETTUATO!!") ;
+        }
+
         Double couponValue = couponBean.getCouponDiscount() ;
 
         Integer couponType ;
@@ -86,21 +96,25 @@ public class ManageCouponController {
         Pair<Integer, Double> productCostKey = new Pair<>(couponType, couponBean.getCouponDiscount()) ;
 
         Integer couponCost = couponCostMap.get(productCostKey) ;
-        FidelityCardBean fidelityCardBean = null ;
+        System.out.println(couponCost);
         if (couponCost != null) {
             Integer customerPoints = customer.getCardPoints();
             if (customerPoints >= couponCost) {
                 createNewCoupon(couponType, couponValue) ;
-                customer.setCardPoints(customer.getCardPoints() - couponCost);
-                userDAO.updateCustomerPoints(customer, customer.getCardPoints()) ;
-                fidelityCardBean = new FidelityCardBean(customer.getCardPoints(), createCouponBeans()) ;
+                updateCustomer(couponCost) ;
             }
             else {
                 throw new InvalidCouponException("PUNTI NON SUFFICIENTI PER GENERARE IL COUPON!!") ;
             }
         }
-        return fidelityCardBean ;
+        return createFidelityCardBean();
     }
+
+    private void updateCustomer(Integer couponCost) {
+        customer.setCardPoints(customer.getCardPoints() - couponCost);
+        userDAO.updateCustomerPoints(customer, customer.getCardPoints()) ;
+    }
+
 
     private void createNewCoupon(Integer couponType, Double couponValue) {
         Coupon newCoupon = couponDAO.addNewCoupon(couponType, couponValue, customer.getEmail()) ;
