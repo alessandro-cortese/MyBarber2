@@ -3,6 +3,7 @@ package application_controller.graphic;
 import application_controller.BookingController;
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
+import engineering.exception.InsertNegativePriceException;
 import engineering.time.TimeSlot;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
@@ -13,10 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleBookingGraphicController{
@@ -53,19 +57,42 @@ public class ScheduleBookingGraphicController{
      private Label phoneSaloonLabel;
 
 
-    @FXML
-    private ListView<String> serviceSelectedListView;
-    private String nameSal;
-    private String saloonAddr;
-    private String saloonCity;
-    private String saloonPhone;
-    private int seatNumber;
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
+    private static final String CLIENT_SERVICE_ITEM ="first_view/list_item/client_service_item.fxml";
     private SaloonBean saloonInfo;
-    private List<TimeSlot> servicesList;
     private List<ServiceBean> servicesSaloonList;
     private TimeSlot timeSlotInfo;
     private LocalDate dateBooking;
+
+    @FXML
+    private Label indexLabel;
+
+    @FXML
+    private Label indexServiceOfListLabel;
+
+    @FXML
+    private Label serviceNameLabel;
+
+    @FXML
+    private  Label servicePriceLabel;
+
+    private ServiceBean service;
+    private static List<ServiceBean> serviceListSelected;
+
+    public ScheduleBookingGraphicController(){
+        serviceListSelected = new ArrayList<>();
+    }
+
+    @FXML
+    void selectServiceOnListView(MouseEvent event) throws InsertNegativePriceException {
+        service = new ServiceBean();
+        service.setNameInfo(serviceNameLabel.getText());
+        service.setPriceInfo(Double.parseDouble(servicePriceLabel.getText()));
+        serviceListSelected.add(service);
+        System.out.println("servizio selezionato" + serviceNameLabel.getText());
+        System.out.println("size " + serviceListSelected.size());
+
+    }
 
     @FXML
     void onButtonSaloonClicked(ActionEvent event) throws IOException{
@@ -75,24 +102,24 @@ public class ScheduleBookingGraphicController{
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
+        BookedGraphicController bookedGraphicController = fxmlLoaderNode.getController();
+        bookedGraphicController.injectServicesList(serviceListSelected);
+
+
     }
 
-    @FXML
-    void selectService(ActionEvent event) throws IOException {
 
-    }
+
 
 
     public void InjectServiceSaloon(){
-        serviceListView.setCellFactory(param -> new ServiceListCellFactory());
+        serviceListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM));
 
         BookingController bookingController = new BookingController();
         servicesSaloonList = bookingController.SearchServices(saloonInfo);
-        if(servicesSaloonList.isEmpty()){
-            System.out.println("non funge");
-        }
         serviceListView.getItems().clear();
         serviceListView.setItems(FXCollections.observableList(servicesSaloonList));
+
         phoneSaloonLabel.setText(saloonInfo.getPhone());
         nameSaloonLabel.setText(saloonInfo.getName());
         citySaloonLabel.setText(saloonInfo.getCity());
@@ -112,8 +139,8 @@ public class ScheduleBookingGraphicController{
         this.saloonInfo.setCity(saloonBean.getCity());
         this.saloonInfo.setPhone(saloonBean.getPhone());
         this.saloonInfo.setSeatNumber(saloonBean.getSeatNumber());
-        //this.timeSlotInfo.setFromTime(timeSlot.getFromTime());
-        //this.timeSlotInfo.setToTime(timeSlot.getToTime());
+        this.timeSlotInfo.setFromTime(timeSlot.getFromTime());
+        this.timeSlotInfo.setToTime(timeSlot.getToTime());
         this.dateBooking = date;
     }
 

@@ -10,12 +10,10 @@ public class Service {
     private Product serviceUsedProduct;
 
     public Service () {
-
         this("", "", 0.0D, null);
-
     }
 
-    public Service (String serviceName, String serviceDescription, Double servicePrice) {
+    public Service (String serviceName, String serviceDescription, double servicePrice) {
 
         this.setServiceName(serviceName);
         this.setServiceDescription(serviceDescription);

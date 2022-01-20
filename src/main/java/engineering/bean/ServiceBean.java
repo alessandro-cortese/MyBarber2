@@ -11,9 +11,7 @@ public class ServiceBean extends Subject {
     private String nameOfUsedProductInfo;
     private Double priceInfo;
 
-    public ServiceBean() throws InsertNegativePriceException {
-        this("", "", "", 0.0D);
-
+    public ServiceBean(){
     }
 
     public ServiceBean (String name, String description, String nameOfUsedProduct, Double price) throws InsertNegativePriceException {

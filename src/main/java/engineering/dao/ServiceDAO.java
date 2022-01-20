@@ -149,18 +149,20 @@ public class ServiceDAO {
 
             ResultSet resultSet = Queries.selectServices(statement, saloonName)) {
             serviceList = new ArrayList<>();
-            if(resultSet.first()) {
 
                 while(resultSet.next()){
+                    System.out.println("nessuno");
                     Service service = createServiceCustomer(resultSet);
+                    System.out.println(service.getServicePrice());
                     serviceList.add(service);
                 }
 
-            }
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+        if(serviceList.isEmpty())
+            System.out.println("eeccc");
         return serviceList;
     }
 
@@ -169,7 +171,7 @@ public class ServiceDAO {
         String serviceName = resultSet.getString(SERVICE_NAME_COL_NAME);
         String serviceDescription = resultSet.getString(SERVICE_DESCRIPTION_COL_NAME);
         double servicePrice = resultSet.getDouble(SERVICE_PRICE_COL_NAME);
-
+        System.out.println(serviceName);
         return new Service(serviceName, serviceDescription, servicePrice);
     }
 }

@@ -19,9 +19,11 @@ public class ScheduleTime {
     public ScheduleTime(SaloonBean saloonTimeSlots){
         timeOpen = saloonTimeSlots.getOpeningMorningTimeInfo();
         seatNumber = saloonTimeSlots.getSeatNumber();
+        System.out.println(saloonTimeSlots.getOpeningMorningTimeInfo());
         System.out.println(saloonTimeSlots.getNumberOfMorningSlotsInfo());
         sumTime = new Time(timeOpen.getTime()); //return hours in milliseconds
         intervalSlotTime = saloonTimeSlots.getSlotTime();
+        System.out.println(intervalSlotTime);
         slotTimeMorning = saloonTimeSlots.getNumberOfMorningSlotsInfo();
         slotTimeAfternoon = saloonTimeSlots.getNumberOfAfternoonSlotsInfo();
 

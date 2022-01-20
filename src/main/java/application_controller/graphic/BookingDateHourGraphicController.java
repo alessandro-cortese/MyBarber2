@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class BookingDateHourGraphicController {
+
         private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
         private String  saloonName;
         private String saloonCity;
@@ -34,7 +35,8 @@ public class BookingDateHourGraphicController {
         private String saloonPhone;
         private int seatNumber;
         private List<TimeSlot> timeSlotList;
-        private TimeSlot timeSlot;
+        private static TimeSlot timeSlot;
+
         @FXML
         private Button ConfirmDateHourButton;
 
@@ -79,6 +81,9 @@ public class BookingDateHourGraphicController {
         private SaloonBean timeSlotSaloonInfo;
         private LocalDate date;
 
+        public BookingDateHourGraphicController(){
+                timeSlot = new TimeSlot();
+        }
 
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException {
@@ -89,15 +94,9 @@ public class BookingDateHourGraphicController {
                 BorderPane borderPane = (BorderPane) myScene.getRoot();
                 borderPane.setCenter(newCenterNode);
                 ScheduleBookingGraphicController scheduleBookingGraphicController = fxmlLoaderNode.getController();
-                //scheduleBookingGraphicController.displaySaloon(timeSlotSaloonInfo, timeSlot,date );
-                //scheduleBookingGraphicController.InjectServiceSaloon();
-        }
-
-        @FXML
-        public void selectSlotTime(){
-                LocalDate date = dateBooking.getValue();
-                BookingController bookingController = new BookingController();
-
+                System.out.println(timeSlot.getFromTime()+"and"+ timeSlot.getToTime());
+                scheduleBookingGraphicController.displaySaloon(timeSlotSaloonInfo, timeSlot,date );
+                scheduleBookingGraphicController.InjectServiceSaloon();
         }
 
 
@@ -139,7 +138,6 @@ public class BookingDateHourGraphicController {
 
         @FXML
         public void slotTimeSelected(){
-                TimeSlot timeSlot = new TimeSlot();
                 timeSlot.setSeatAvailable(Integer.parseInt(seatNumberLabel.getText()));
                 System.out.println(timeSlot.getSeatAvailable());
                 timeSlot.setFromTime(Time.valueOf(initTime.getText()));
@@ -148,5 +146,6 @@ public class BookingDateHourGraphicController {
                 System.out.println("diomerdacc"+timeSlot.getToTime());
 
         }
+
 }
 

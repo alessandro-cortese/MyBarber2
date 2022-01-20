@@ -20,8 +20,8 @@ public class BookingController {
     private Saloon saloonByName;
     private Saloon saloon;
     private String saloonNameG;
-    private List<Service> ServicesList=new ArrayList<>();
-    private List<ServiceBean> servicesBeanList= new ArrayList<>();
+    private List<Service> ServicesList;
+    private List<ServiceBean> servicesBeanList;
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 

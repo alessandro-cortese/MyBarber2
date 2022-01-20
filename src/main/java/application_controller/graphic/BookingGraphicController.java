@@ -95,7 +95,6 @@ public class BookingGraphicController{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOONLIST_SCREEN_NAME));
         saloonCity = searchCity.getText();
 
-
         newCenterNode = fxmlLoader.load();
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
@@ -109,6 +108,7 @@ public class BookingGraphicController{
 
 
     }
+
 
     @FXML
     public void onButtonSaloonClicked(ActionEvent actionEvent) throws Exception {
@@ -149,10 +149,5 @@ public class BookingGraphicController{
 
 
         }
-
-
-
-
-
     }
 }
