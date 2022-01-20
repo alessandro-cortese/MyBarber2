@@ -39,7 +39,7 @@ public class BarberConfirmAddServiceController {
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
         goToHome = true;
 
-        if(sourceNode == saveConfirmButton) {
+        if(sourceNode == saveConfirmButton && serviceBean != null && (serviceBean.getNameInfo() != null && serviceBean.getNameOfUsedProductInfo() != null && serviceBean.getPriceInfo() != null)) {
             AddServiceController addServiceController = new AddServiceController();
             try {
 
@@ -54,6 +54,14 @@ public class BarberConfirmAddServiceController {
             }
 
         }
+        else {
+
+            errorLabelConfirmAddService.setText("Campi insertiti non validi!");
+            return;
+
+        }
+
+
         if(goToHome) {
             InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
         }

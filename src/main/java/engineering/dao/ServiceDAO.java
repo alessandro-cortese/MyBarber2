@@ -20,9 +20,6 @@ public class ServiceDAO {
     private List<Service> serviceList;
 
 
-    public ServiceDAO() {
-    }
-
     public void setBarberEmail(String barberEmail){
 
         this.barberEmail = barberEmail;
@@ -142,7 +139,7 @@ public class ServiceDAO {
 
     }
 
-    public List<Service> retreiveService(String saloonName) {
+    public List<Service> retrieveService(String saloonName) {
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -150,19 +147,15 @@ public class ServiceDAO {
             ResultSet resultSet = Queries.selectServices(statement, saloonName)) {
             serviceList = new ArrayList<>();
 
-                while(resultSet.next()){
-                    System.out.println("nessuno");
-                    Service service = createServiceCustomer(resultSet);
-                    System.out.println(service.getServicePrice());
-                    serviceList.add(service);
-                }
-
+            while(resultSet.next()){
+                Service service = createServiceCustomer(resultSet);
+                serviceList.add(service);
+            }
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        if(serviceList.isEmpty())
-            System.out.println("eeccc");
+
         return serviceList;
     }
 
@@ -171,7 +164,7 @@ public class ServiceDAO {
         String serviceName = resultSet.getString(SERVICE_NAME_COL_NAME);
         String serviceDescription = resultSet.getString(SERVICE_DESCRIPTION_COL_NAME);
         double servicePrice = resultSet.getDouble(SERVICE_PRICE_COL_NAME);
-        System.out.println(serviceName);
         return new Service(serviceName, serviceDescription, servicePrice);
+
     }
 }
