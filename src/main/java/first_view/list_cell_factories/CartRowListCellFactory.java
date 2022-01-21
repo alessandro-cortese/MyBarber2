@@ -56,6 +56,9 @@ public class CartRowListCellFactory extends ListCell<CartRowBean> {
                 e.printStackTrace();
             }
         }
+        else {
+            setGraphic(null);
+        }
 
     }
 }

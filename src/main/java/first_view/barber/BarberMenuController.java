@@ -26,6 +26,7 @@ public class BarberMenuController {
     @FXML private MenuItem addServiceItem;
     @FXML private MenuItem listAppointmentsItem;
     @FXML private MenuItem serviceMenuItem;
+    @FXML private MenuItem manageOrderMenuItem ;
 
     @FXML private Button logoutButton ;
     @FXML private Button homeButton ;
@@ -39,6 +40,7 @@ public class BarberMenuController {
     private static final String BARBER_MANAGE_PRODUCT_SCREEN_NAME = "first_view/barber/barber_manage_products.fxml";
     private static final String BARBER_APPOINTMENTS_LIST_VIEW_SCREEN_NAME = "first_view/barber/barber_manage_appointments.fxml";
     private static final String BARBER_MANAGE_SERVICE_SCREEN_NAME = "first_view/barber/barber_manage_service.fxml" ;
+    private static final String BARBER_MANAGE_ORDER_SCREEN_NAME = "first_view/barber/barber_manage_order.fxml" ;
 
 
     @FXML
@@ -86,6 +88,9 @@ public class BarberMenuController {
         }
         else if (sourceItem == serviceMenuItem) {
             newCenterNodeResName = BARBER_MANAGE_SERVICE_SCREEN_NAME ;
+        }
+        else if (sourceItem == manageOrderMenuItem) {
+            newCenterNodeResName = BARBER_MANAGE_ORDER_SCREEN_NAME ;
         }
 
         else {

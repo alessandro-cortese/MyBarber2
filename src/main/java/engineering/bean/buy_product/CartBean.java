@@ -4,25 +4,25 @@ import engineering.pattern.observer.Observer;
 import model.buy_product.Cart;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static model.buy_product.Cart.*;
 
-public class CartBean implements Observer {
+public class CartBean {
 
     private Double total ;
-    private ArrayList<CartRowBean> cartRowBeanArrayList ;
-    private Cart observedCart ;
+    private List<CartRowBean> cartRowBeanArrayList ;
 
-    public CartBean() {}
+    public CartBean() {
+        this(0.0, new ArrayList<>()) ;
+    }
 
 
-    public CartBean(Cart observedCart) {
-        setTotal(0.0);
-        setCartRowBeanArrayList(new ArrayList<>()) ;
-        setObservedCart(observedCart);
-        observedCart.attach(this);
-        update();
+    public CartBean(Double total, List<CartRowBean> cartRowBeans) {
+        setTotal(total);
+        setCartRowBeanArrayList(cartRowBeans) ;
+
     }
 
     public Double getTotal() {
@@ -33,22 +33,12 @@ public class CartBean implements Observer {
         this.total = total;
     }
 
-    public ArrayList<CartRowBean> getCartRowBeanArrayList() {
+    public List<CartRowBean> getCartRowBeanArrayList() {
         return cartRowBeanArrayList;
     }
 
-    public void setCartRowBeanArrayList(ArrayList<CartRowBean> cartRowBeanArrayList) {
+    public void setCartRowBeanArrayList(List<CartRowBean> cartRowBeanArrayList) {
         this.cartRowBeanArrayList = cartRowBeanArrayList;
-    }
-
-    @Override
-    public void update() {
-        setTotal(observedCart.getTotal());
-        ArrayList<Map<String,String>> rowsInfo = observedCart.getItemsInfo() ;
-        cartRowBeanArrayList.clear();
-        for (Map<String,String> rowInfo : rowsInfo) {
-            cartRowBeanArrayList.add(createRowBean(rowInfo)) ;
-        }
     }
 
     public CartRowBean createRowBean(Map<String, String> rowInfo) {
@@ -56,9 +46,5 @@ public class CartBean implements Observer {
                 Integer.parseInt(rowInfo.get(ISBN_KEY)),
                 rowInfo.get(NAME_KEY),
                 Double.parseDouble(rowInfo.get(PRICE_KEY)));
-    }
-
-    public void setObservedCart(Cart observedCart) {
-        this.observedCart = observedCart;
     }
 }

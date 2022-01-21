@@ -30,10 +30,10 @@ public class CouponCellFactory extends ListCell<CouponBean> {
 
                 Label couponCodeLabel = (Label) parentNode.lookup("#" + COUPON_CODE_LABEL_ID) ;
                 Label couponDiscountLabel = (Label) parentNode.lookup("#" + COUPON_DISCOUNT_LABEL_ID) ;
-                couponCodeLabel.setText("Codice: " + item.getCouponCode());
+                couponCodeLabel.setText("Codice: " + item.getExternalCouponCode());
 
                 String discountSymbol = "" ;
-                if (item.getCouponType().compareTo("subtraction") == 0) discountSymbol = EURO_SYMBOL ;
+                if (item.getExternalCouponType().compareTo("subtraction") == 0) discountSymbol = EURO_SYMBOL ;
                 else discountSymbol = "%" ;
                 couponDiscountLabel.setText("Sconto: " + (item.getCouponDiscount()) + discountSymbol);
 
@@ -42,6 +42,9 @@ public class CouponCellFactory extends ListCell<CouponBean> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else {
+            setGraphic(null);
         }
     }
 }

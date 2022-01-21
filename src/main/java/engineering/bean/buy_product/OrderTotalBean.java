@@ -1,63 +1,53 @@
 package engineering.bean.buy_product;
 
-import engineering.pattern.observer.Observer;
-import model.buy_product.Order;
-
 import java.util.ArrayList;
 
-public class OrderTotalBean implements Observer {
+public class OrderTotalBean {
 
-    private Order observedOrder ;
-    private Double total ;
-    private Integer points ;
-    private ArrayList<CouponBean> couponBeans ;
+    private Double orderTotal ;
+    private ArrayList<Integer> couponCodes ;
+    private Integer orderPoints ;
 
-    public OrderTotalBean(Order observedOrder) {
-        setObservedOrder(observedOrder);
-        couponBeans = new ArrayList<>() ;
-        setPoints(0);
-        observedOrder.attach(this);
-        update();
+    public OrderTotalBean(Double oderTotal, ArrayList<Integer> couponCodes, Integer orderPoints) {
+        setOrderTotal(oderTotal);
+        setCouponCodes(couponCodes);
+        setOrderPoints(orderPoints);
     }
 
-    public Order getObservedOrder() {
-        return observedOrder;
+    public OrderTotalBean(Double orderTotal) {
+        this(orderTotal, null, 0) ;
     }
 
-    public void setObservedOrder(Order observedOrder) {
-        this.observedOrder = observedOrder;
+
+    public Double getOrderTotal() {
+        return orderTotal;
     }
 
-    public double getTotal() {
-        return this.total ;
+    public void setOrderTotal(Double orderTotal) {
+        this.orderTotal = orderTotal;
     }
 
-    @Override
-    public void update() {
-        setTotal(observedOrder.getFinalPrice());
+    public ArrayList<Integer> getInternalCouponCodes() {
+        return couponCodes;
+    }
 
-        ArrayList<String> couponCodeArray = observedOrder.getCouponsState() ;
-        couponBeans.clear();
-        for (String couponCode : couponCodeArray) {
-            couponBeans.add(new CouponBean(couponCode)) ;
+    public ArrayList<String> getExternalCouponCodes() {
+        ArrayList<String> externalCouponCodes = new ArrayList<>() ;
+        for (Integer code : couponCodes) {
+            externalCouponCodes.add(Integer.toString(code)) ;
         }
-
-        setPoints(observedOrder.getOrderPoints());
+        return externalCouponCodes ;
     }
 
-    public ArrayList<CouponBean> getCouponBeans() {
-        return couponBeans ;
+    public void setCouponCodes(ArrayList<Integer> couponCodes) {
+        this.couponCodes = couponCodes;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public Integer getOrderPoints() {
+        return orderPoints;
     }
 
-    public Integer getPoints() {
-        return points;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
+    public void setOrderPoints(Integer orderPoints) {
+        this.orderPoints = orderPoints;
     }
 }

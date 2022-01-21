@@ -1,72 +1,34 @@
 package model.buy_product;
 
-import engineering.exception.InvalidCouponException;
-import engineering.exception.NegativePriceException;
-import engineering.pattern.decorator.Priceable;
-import engineering.pattern.observer.Subject;
-import model.buy_product.containers.CouponContainer;
-import model.buy_product.coupon.Coupon;
-
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Date;
 
-public class Order extends Subject {
+public class Order {
 
     private Integer orderCode ;
+
     private String address ;
     private String telephone ;
     private String paymentOption ;
-    private Date date ;
+    private String orderOwner ;
+    private LocalDate date ;
+    private Double finalPrice ;
 
-    private final CouponContainer couponContainer;
-    private Priceable originalPrice ;
-    private Priceable finalPrice;
+    private Cart orderCart ;
 
 
-    public Order(Priceable originalPrice){
-        setOriginalPrice(originalPrice);
-        couponContainer = new CouponContainer() ;
-        setFinalPrice(originalPrice);
+    public Order(Cart cart) {
+        setOrderCart(cart);
     }
 
-    public void addCoupon(Coupon coupon) throws InvalidCouponException, NegativePriceException {
-        if (couponContainer.verifyPresent(coupon) == null) {
-            couponContainer.addCoupon(coupon);
-            try {
-                applyDiscount() ;
-            } catch (NegativePriceException negativePriceException) {
-                couponContainer.removeCoupon(coupon);
-                applyDiscount();
-                throw negativePriceException ;
-            }
-        }
-        else {
-            throw new InvalidCouponException("ERRORE: COUPON UTILIZZATO!!") ;
-        }
-        notifyObservers();
+    public Order(Integer orderCode, String address, String telephone, String orderOwner, LocalDate date) {
+        setOrderCode(orderCode);
+        setAddress(address);
+        setAddress(telephone);
+        setOrderOwner(orderOwner);
+        setDate(date);
     }
 
-    private void applyDiscount() throws NegativePriceException {
-        finalPrice = originalPrice ;
-        for (int i = 0 ; i < couponContainer.getSize() ; i++) {
-            Coupon currentCoupon = couponContainer.getCouponByIndex(i) ;
-            if (currentCoupon != null) {
-                currentCoupon.setAppliedPrice(finalPrice);
-                if (currentCoupon.getPrice() < 0) {
-                    throw new NegativePriceException("IL COUPON APPLICATO NEGATIVIZZA IL PREZZO") ;
-                }
-                finalPrice = currentCoupon ;
-            }
-        }
-    }
-
-    public CouponContainer getCouponContainer() {
-        return couponContainer;
-    }
-
-    public void removeCoupon(Coupon toRemoveCoupon) {
-        couponContainer.removeCoupon(toRemoveCoupon);
-    }
 
     public String getAddress() {
         return address;
@@ -92,52 +54,14 @@ public class Order extends Subject {
         this.paymentOption = paymentOption;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Double getFinalPrice() {
-        return this.finalPrice.getPrice() ;
-    }
-
-    public ArrayList<String> getCouponsState() {
-        ArrayList<String> couponCodeArray = new ArrayList<>() ;
-        for (int i = 0 ; i < couponContainer.getSize() ; i++) {
-            Coupon currentCoupon = couponContainer.getCouponByIndex(i) ;
-            if (currentCoupon != null) {
-                couponCodeArray.add(Integer.toString(currentCoupon.getCouponCode()));
-            }
-        }
-        return couponCodeArray ;
-    }
-
-
-    public Integer getOrderPoints() {
-        return (int) Math.round(originalPrice.getPrice()) ;
-    }
-
-
-    public Priceable getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Priceable originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public void setFinalPrice(Priceable finalPrice) {
-        this.finalPrice = finalPrice ;
-    }
-
-    public void removeAllCoupon() {
-        couponContainer.clear() ;
-        setFinalPrice(originalPrice);
-        notifyObservers();
-    }
 
     public Integer getOrderCode() {
         return orderCode;
@@ -145,5 +69,33 @@ public class Order extends Subject {
 
     public void setOrderCode(Integer orderCode) {
         this.orderCode = orderCode;
+    }
+
+    public Cart getOrderCart() {
+        return orderCart;
+    }
+
+    public void setOrderCart(Cart orderCart) {
+        this.orderCart = orderCart;
+    }
+
+    public Integer getOrderPoints() {
+        return (int) Math.round(orderCart.getTotal()) ;
+    }
+
+    public Double getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(Double finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+    public String getOrderOwner() {
+        return orderOwner;
+    }
+
+    public void setOrderOwner(String orderOwner) {
+        this.orderOwner = orderOwner;
     }
 }

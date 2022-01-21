@@ -33,7 +33,6 @@ public class ClientCartController implements Initializable {
     @FXML private Label cartTotalLabel ;
 
     BuyProductController buyProductController ;
-    CartBean cartBean ;
 
     public ClientCartController() {
         UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
@@ -118,7 +117,7 @@ public class ClientCartController implements Initializable {
     }
 
     private void updateView() {
-        cartBean = buyProductController.showCart() ;
+        CartBean cartBean = buyProductController.showCart() ;
         cartListView.setItems(FXCollections.observableList(cartBean.getCartRowBeanArrayList()));
         cartTotalLabel.setText(String.format("Totale: %s%.2f",EURO_SYMBOL, cartBean.getTotal()));
     }

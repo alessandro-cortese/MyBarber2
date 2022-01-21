@@ -1,5 +1,7 @@
 package engineering.bean.buy_product;
 
+import java.lang.constant.Constable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -13,17 +15,19 @@ public class VendorOrderBean {
     private String vendor ;
     private String address ;
     private String telephone ;
-    private Map<String, Integer> date ;
+    private String orderOwner ;
+    private LocalDate date ;
+    private Integer orderCode ;
 
-    private List<CartRowBean> cartRowBeans ;
 
-    public VendorOrderBean(String vendor, List<CartRowBean> cartRowBeans, String address, String telephone, Map<String, Integer> dateMap) {
+    public VendorOrderBean(String vendor, String address, String telephone, LocalDate date, String orderOwner, Integer orderCode) {
         setVendor(vendor);
-        setCartRowBeans(cartRowBeans);
         setAddress(address);
         setVendor(vendor);
-        setDate(dateMap);
+        setDate(date);
         setTelephone(telephone);
+        setOrderOwner(orderOwner);
+        setOrderCode(orderCode);
     }
 
 
@@ -51,27 +55,36 @@ public class VendorOrderBean {
         this.telephone = telephone;
     }
 
-    public Integer getDay() {
-        return date.get(VENDOR_ORDER_DAY_KEY) ;
+
+    public String getOrderOwner() {
+        return orderOwner;
     }
 
-    public Integer getMoth() {
-        return date.get(VENDOR_ORDER_MONTH_KEY) ;
+    public void setOrderOwner(String orderOwner) {
+        this.orderOwner = orderOwner;
     }
 
-    public Integer getYear() {
-        return date.get(VENDOR_ORDER_YEAR_KEY) ;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDate(Map<String, Integer> date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public List<CartRowBean> getCartRowBeans() {
-        return cartRowBeans;
+    public Map<String, Integer> getExternalDate() {
+        return Map.of(VENDOR_ORDER_YEAR_KEY, date.getYear(), VENDOR_ORDER_MONTH_KEY, date.getMonth().getValue(), VENDOR_ORDER_DAY_KEY, date.getDayOfMonth()) ;
     }
 
-    public void setCartRowBeans(List<CartRowBean> cartRowBeans) {
-        this.cartRowBeans = cartRowBeans;
+    public Integer getOrderCode() {
+        return orderCode;
+    }
+
+    public String getExternalOrderCode() {
+        return Integer.toString(orderCode) ;
+    }
+
+    public void setOrderCode(Integer orderCode) {
+        this.orderCode = orderCode;
     }
 }

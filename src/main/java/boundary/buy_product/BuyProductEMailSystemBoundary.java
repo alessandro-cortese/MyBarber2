@@ -9,7 +9,7 @@ public class BuyProductEMailSystemBoundary {
     }
 
     private Boolean sendEmail(VendorOrderBean vendorOrderBean) {
-        System.out.println(vendorOrderBean.getVendor()) ;
+        System.out.printf("Carissimo %s.\nSiamo lieti di informarti che hai ricevuto un ordine da %s.\nControlla la sezione degli ordini per vedere i dettagli\n", vendorOrderBean.getVendor(), vendorOrderBean.getOrderOwner());
         return true ;
     }
 }
