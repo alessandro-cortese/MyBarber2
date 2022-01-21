@@ -2,21 +2,22 @@ package engineering.bean.buy_product;
 
 import engineering.exception.InvalidCouponException;
 
+import static model.buy_product.coupon.Coupon.PERCENTAGE_TYPE;
+import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
+
 public class CouponBean {
 
-    private String couponCode ;
+    private Integer couponCode ;
     private Double couponDiscount ;
-    private String couponType ;
+    private Integer couponType ;
 
-    public CouponBean(String couponCode){
-        setCouponCode(couponCode);
-
+    public CouponBean(String couponCode) throws InvalidCouponException {
+        this(couponCode, 0.0) ;
     }
 
     public CouponBean(String couponCode, Double couponDiscount) throws InvalidCouponException {
         try {
-            Integer.parseInt(couponCode) ;
-            setCouponCode(couponCode);
+            setCouponCode(Integer.parseInt(couponCode));
             setCouponDiscount(couponDiscount);
         }
         catch (NumberFormatException numberFormatException) {
@@ -24,23 +25,16 @@ public class CouponBean {
         }
     }
 
-    public CouponBean(Integer couponCode, Double couponDiscount, String couponType) {
-        setCouponCode(Integer.toString(couponCode));
+    public CouponBean(Integer couponCode, Double couponDiscount, Integer couponType) {
+        setCouponCode(couponCode);
         setCouponDiscount(couponDiscount);
         setCouponType(couponType);
     }
 
     public CouponBean(Double couponDiscount, String couponType){
         setCouponDiscount(couponDiscount);
-        setCouponType(couponType);
-    }
-
-    public String getCouponCode() {
-        return couponCode;
-    }
-
-    public void setCouponCode(String couponCode) {
-        this.couponCode = couponCode;
+        if (couponType == "subtraction") setCouponType(SUBTRACTION_TYPE);
+        else setCouponType(PERCENTAGE_TYPE);
     }
 
     public Double getCouponDiscount() {
@@ -62,11 +56,28 @@ public class CouponBean {
         }
     }
 
-    public String getCouponType() {
+    public Integer getCouponType() {
         return couponType;
     }
 
-    public void setCouponType(String couponType) {
+    public void setCouponCode(Integer couponCode) {
+        this.couponCode = couponCode;
+    }
+
+    public String getExternalCouponCode() {
+        return Integer.toString(couponCode) ;
+    }
+
+    public Integer getCouponCode() {
+        return this.couponCode ;
+    }
+
+    public void setCouponType(Integer couponType) {
         this.couponType = couponType;
+    }
+
+    public String getExternalCouponType() {
+        if (couponType == SUBTRACTION_TYPE) return "subtraction" ;
+        else return "percentage" ;
     }
 }

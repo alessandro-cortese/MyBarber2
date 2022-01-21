@@ -11,12 +11,15 @@ import engineering.exception.NegativePriceException;
 import engineering.exception.NotExistentUserException;
 import model.Customer;
 import model.buy_product.Cart;
+import model.buy_product.CartRow;
 import model.buy_product.Order;
 import model.buy_product.Product;
 import model.buy_product.containers.ProductCatalog;
 import model.buy_product.coupon.Coupon;
+import model.buy_product.coupon.CouponApplier;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.*;
 
 import static engineering.bean.buy_product.VendorOrderBean.*;
@@ -24,28 +27,22 @@ import static engineering.bean.buy_product.VendorOrderBean.*;
 public class BuyProductController {
 
     private final CouponDAO couponDAO ;
-
     private final ProductCatalog productCatalog ;
-
     private final Cart cart ;
     private final Order order ;
-
-    private final CartBean cartBean ;
-    private final OrderTotalBean orderBean ;
-
     private Customer customer;
-
     private CartFileSaver cartFileSaver ;
+    private final CouponApplier couponApplier ;
 
 
     public BuyProductController() {
         ProductDAO productDAO = new ProductDAO();
         couponDAO = new CouponDAO() ;
         productCatalog = productDAO.loadAllProducts() ;
+
         cart = new Cart() ;
         order = new Order(cart) ;
-        cartBean = new CartBean(cart) ;
-        orderBean = new OrderTotalBean(order) ;
+        couponApplier = new CouponApplier(cart) ;
     }
 
     public BuyProductController(UserBean loggedUserBean) throws NotExistentUserException {
@@ -56,10 +53,9 @@ public class BuyProductController {
         customerLogin(loggedUserBean);
         cartFileSaver = new CartFileSaver(customer.getEmail()) ;
         cart = cartFileSaver.loadCartFromFile() ;
+        couponApplier = new CouponApplier(cart) ;
 
         order = new Order(cart) ;
-        cartBean = new CartBean(cart) ;
-        orderBean = new OrderTotalBean(order) ;
     }
 
     public List<ProductBean> filterProductList(ProductSearchInfoBean searchInfoBean) {
@@ -77,47 +73,75 @@ public class BuyProductController {
         return productBeanArrayList ;
     }
 
-    public void insertProductToCart(ProductBean productBean) {
+    public CartBean insertProductToCart(ProductBean productBean) {
         Product product = productCatalog.getProductByIsbn(productBean.getBeanIsbn()) ;
         cart.insertProduct(product);
         if (customer != null) cartFileSaver.saveCartInFile(cart);
+
+        return createCartBean() ;
     }
 
     public CartBean showCart() {
-        return cartBean ;
+        return createCartBean() ;
     }
 
-    public void removeProductFromCart(ProductBean productBean) {
+    public CartBean createCartBean() {
+        List<CartRow> cartRows = cart.getCartRowArrayList() ;
+        CartBean cartBean = new CartBean() ;
+        cartBean.setTotal(cart.getTotal());
+        List<CartRowBean> cartRowBeans = new ArrayList<>() ;
+        for (CartRow cartRow : cartRows) {
+            cartRowBeans.add(new CartRowBean(cartRow.getQuantity(), cartRow.getProductIsbn(), cartRow.getProductName(), cartRow.getProductPrice())) ;
+        }
+        cartBean.setCartRowBeanArrayList(cartRowBeans);
+        return cartBean;
+    }
+
+
+    public CartBean removeProductFromCart(ProductBean productBean) {
         Product rmvProduct = productCatalog.getProductByIsbn(productBean.getBeanIsbn()) ;
         cart.removeProduct(rmvProduct);
         if (customer != null) cartFileSaver.saveCartInFile(cart);
+
+        return createCartBean() ;
     }
 
-    public void applyCoupon(CouponBean couponBean) throws InvalidCouponException, NegativePriceException {
-        Coupon myCoupon = couponDAO.loadCouponByCode(Integer.parseInt(couponBean.getCouponCode()));
-        order.addCoupon(myCoupon);
+    public OrderTotalBean applyCoupon(CouponBean couponBean) throws InvalidCouponException, NegativePriceException {
+        Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode());
+        couponApplier.applyCoupon(myCoupon);
+        Double cartPrice = cart.getPrice() ;
+        Integer orderPoints = (int) Math.round(cartPrice) ;
+        return new OrderTotalBean(couponApplier.getFinalPrice(), couponApplier.getAppliedCouponCode(), orderPoints) ;
     }
 
     public void completeOrder(OrderInfoBean orderInfoBean) throws NotExistentUserException {
+        //IMPOSTIO INFORMAZIONI DI ORDER
         order.setAddress(orderInfoBean.getAddressInfo());
         order.setTelephone(orderInfoBean.getTelephoneInfo());
         order.setPaymentOption(orderInfoBean.getPaymentOptionInfo());
-        order.setDate(Date.from(Instant.now()));
+        order.setDate(LocalDate.now());
+        order.setFinalPrice(couponApplier.getFinalPrice());
+        order.setOrderOwner(customer.getEmail());
 
+        //SALVATAGGIO ORDER
         OrderDAO orderDAO = new OrderDAO() ;
-        orderDAO.saveOrder(order, cart, customer);
+        orderDAO.saveOrder(order);
 
-        CartDAO cartDAO = new CartDAO() ;
-        cartDAO.saveCart(cart, order.getOrderCode());
+        //INVALIDO TUTTI I COUPON UTILIZZATI
+        CouponDAO couponDAO = new CouponDAO() ;
+        couponDAO.invalidateAllCoupon(couponApplier.getCouponContainer());
 
+        //Cancellazione del carrello provvisorio
         cartFileSaver.deleteCart() ;
 
+        //AGGIORNAMENTO PUNTEGGIO CUSTOMER
         UserDAO userDAO = new UserDAO() ;
         customer.setCardPoints(customer.getCardPoints() + order.getOrderPoints());
         userDAO.updateCustomerPoints(customer, customer.getCardPoints());
 
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
-        paypalBoundary.pay(new OrderTotalBean(order));
+        paypalBoundary.pay(new OrderTotalBean(couponApplier.getFinalPrice()));
+
 
         BuyProductEMailSystemBoundary eMailSystemBoundary = new BuyProductEMailSystemBoundary() ;
         ArrayList<String> vendorsInfo = cart.getVendorsInfo();
@@ -127,25 +151,18 @@ public class BuyProductController {
     }
 
     private VendorOrderBean createNotificationInfo(String vendor, Order order) {
-        //VendorOrderBean orderBean = new VendorOrderBean(vendor);
-        CartBean cartRowCreator = new CartBean() ;
-        ArrayList<CartRowBean> cartRowBeans = new ArrayList<>() ;
-
-        for (Map<String,String> cartRowInfo : cart.getRowsInfoByVendor(vendor)) {
-            cartRowBeans.add(cartRowCreator.createRowBean(cartRowInfo)) ;
-        }
-
         Calendar calendar = Calendar.getInstance() ;
-        calendar.setTime(order.getDate());
+        calendar.setTime(Date.from(Instant.now()));
 
-        Map<String,Integer> dateMap = Map.of(VENDOR_ORDER_YEAR_KEY, calendar.get(Calendar.YEAR), VENDOR_ORDER_MONTH_KEY, calendar.get(Calendar.MONTH), VENDOR_ORDER_DAY_KEY, calendar.get(Calendar.DAY_OF_MONTH)) ;
-        return new VendorOrderBean(vendor, cartRowBeans, order.getAddress(), order.getTelephone(), dateMap) ;
+        return new VendorOrderBean(vendor, order.getAddress(), order.getTelephone(), order.getDate(), order.getOrderOwner(), order.getOrderCode()) ;
 
     }
 
     public OrderTotalBean showOrder(){
-        order.removeAllCoupon();
-        return orderBean ;
+        couponApplier.reset() ;
+        Double cartPrice = cart.getPrice() ;
+        Integer orderPoints = (int) Math.round(cartPrice) ;
+        return new OrderTotalBean(couponApplier.getFinalPrice(), couponApplier.getAppliedCouponCode(), orderPoints) ;
     }
 
     public UserBean login(AccessInfoBean accessInfo) throws NotExistentUserException {

@@ -14,16 +14,20 @@ import first_view.pickers.CredentialsPicker;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ClientCompleteOrderController {
+public class ClientCompleteOrderController implements Initializable {
 
     @FXML private Button addCouponButton ;
     @FXML private TextField addressField ;
-    @FXML private ListView<CouponBean> couponListView ;
+    @FXML private ListView<String> couponListView ;
     @FXML private Label orderTotalAmountLabel ;
     @FXML private Label acquiredPointsLabel ;
     @FXML private Button payWithPaypalButton ;
@@ -32,7 +36,24 @@ public class ClientCompleteOrderController {
     @FXML private Button payWithGooglePayButton ;
 
     private BuyProductController buyProductController ;
-    private OrderTotalBean orderTotalBean ;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        couponListView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) setText("Codice Coupon: " + item);
+                        else setText(null) ;
+
+                    }
+                };
+            }
+        });
+    }
 
 
     @FXML
@@ -60,8 +81,6 @@ public class ClientCompleteOrderController {
                 return;
             }
         }
-
-        updateInfo();
     }
 
     private void login() throws IOException, NotExistentUserException {
@@ -88,7 +107,8 @@ public class ClientCompleteOrderController {
 
         try {
             CouponBean couponBean = new CouponBean(stringCouponCode) ;
-            buyProductController.applyCoupon(couponBean);
+            OrderTotalBean orderTotalBean = buyProductController.applyCoupon(couponBean);
+            updateInfo(orderTotalBean);
         }
         catch (InvalidCouponException | NegativePriceException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
@@ -102,14 +122,15 @@ public class ClientCompleteOrderController {
     }
 
     public void viewOrder() {
-        orderTotalBean = buyProductController.showOrder() ;
-        updateInfo();
+        OrderTotalBean orderTotalBean = buyProductController.showOrder() ;
+        updateInfo(orderTotalBean);
     }
 
-    private void updateInfo() {
-        orderTotalAmountLabel.setText(String.format("Totale Ordine: %.2f", orderTotalBean.getTotal()));
-        acquiredPointsLabel.setText("Punti Raccolti: " + orderTotalBean.getPoints());
-        couponListView.setItems(FXCollections.observableList(orderTotalBean.getCouponBeans()));
+    private void updateInfo(OrderTotalBean orderTotalBean) {
+        orderTotalAmountLabel.setText(String.format("Totale Ordine: %.2f", orderTotalBean.getOrderTotal()));
+        acquiredPointsLabel.setText("Punti Raccolti: " + orderTotalBean.getOrderPoints());
+
+        couponListView.setItems(FXCollections.observableList(orderTotalBean.getExternalCouponCodes()));
     }
 
     private void buy(String paymentType) throws NotExistentUserException {
@@ -118,4 +139,6 @@ public class ClientCompleteOrderController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Il tuo ordine è stato completato correttamente") ;
         alert.showAndWait() ;
     }
+
+
 }

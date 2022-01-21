@@ -96,6 +96,27 @@ public class ProductDAO {
 
     }
 
+    public Product loadProductByIsbn2(int productIsbn) throws SQLException{
+
+        Product product = null;
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        String query = String.format("SELECT * FROM Product WHERE id = %d", productIsbn) ;
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query)){
+
+
+            if(resultSet.next()){
+                product = createProduct(resultSet);
+            }
+
+        }
+
+        return product;
+
+    }
+
+
     private Product createProduct(ResultSet resultSet) throws SQLException {
 
         Integer isbn = resultSet.getInt(ISBN_COL_NAME) ;

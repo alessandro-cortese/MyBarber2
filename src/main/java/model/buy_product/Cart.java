@@ -54,22 +54,6 @@ public class Cart extends Subject implements Priceable, Serializable {
         return total ;
     }
 
-    public ArrayList<Map<String, String>> getItemsInfo() {
-        ArrayList<Map<String,String>> mapArrayList = new ArrayList<>() ;
-        for (CartRow cartRow : cartRowArrayList) {
-            Map<String,String> rowInfo = createRowInfo(cartRow) ;
-            mapArrayList.add(rowInfo) ;
-        }
-        return mapArrayList ;
-    }
-
-    private Map<String, String> createRowInfo(CartRow cartRow) {
-        return Map.of(QUANTITY_KEY, String.valueOf(cartRow.getQuantity()),
-                ISBN_KEY, String.valueOf(cartRow.getProductIsbn()),
-                NAME_KEY, String.valueOf(cartRow.getProductName()),
-                PRICE_KEY, String.valueOf(cartRow.getProductPrice()) ,
-                VENDOR_KEY, cartRow.getProductVendor()) ;
-    }
 
     @Nullable
     private CartRow verifyPresent(Product verifyProduct) {
@@ -91,15 +75,6 @@ public class Cart extends Subject implements Priceable, Serializable {
         return vendorsInfo ;
     }
 
-    public ArrayList<Map<String,String>> getRowsInfoByVendor(String vendor) {
-        ArrayList<Map<String,String>> rowsInfo = new ArrayList<>() ;
-        for (CartRow cartRow : cartRowArrayList) {
-            if (cartRow.getProductVendor().compareTo(vendor) == 0) {
-                rowsInfo.add(createRowInfo(cartRow)) ;
-            }
-        }
-        return rowsInfo ;
-    }
 
     public List<CartRow> getCartRowArrayList() {
         return this.cartRowArrayList ;

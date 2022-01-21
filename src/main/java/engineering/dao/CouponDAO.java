@@ -12,18 +12,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static model.buy_product.coupon.Coupon.PERCENTAGE_TYPE;
 import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
 
 public class CouponDAO {
 
-    private static final Integer EXAMPLE_COUPON = 0 ;
-
     private static final String COUPON_CODE_COL_ID = "id" ;
     private static final String COUPON_TYPE_COL_ID = "couponType" ;
     private static final String COUPON_DISCOUNT_COL_ID = "discount" ;
-    private static final String COUPON_SUBTRACTION_TYPE = "subtraction";
-    private static final String COUPON_PERCENTAGE_TYPE = "percentage" ;
+
+    private static final String COUPON_SUBTRACTION_DB_ENUM = "subtraction";
+    private static final String COUPON_PERCENTAGE_DB_ENUM = "percentage" ;
+
 
     public Coupon loadCouponByCode(Integer couponCode) throws InvalidCouponException {
         Connection connection = Connector.getConnectorInstance().getConnection();
@@ -70,7 +69,7 @@ public class CouponDAO {
         String typeEnum = resultSet.getString(COUPON_TYPE_COL_ID) ;
 
         Coupon coupon ;
-        if (typeEnum.compareTo(COUPON_PERCENTAGE_TYPE) == 0) coupon = new PercentageCoupon(couponCode, couponDiscount) ;
+        if (typeEnum.compareTo(COUPON_PERCENTAGE_DB_ENUM) == 0) coupon = new PercentageCoupon(couponCode, couponDiscount) ;
         else coupon = new SubtractionCoupon(couponCode, couponDiscount);
 
         return coupon ;
@@ -102,10 +101,10 @@ public class CouponDAO {
 
             String dbCouponType;
             if (couponType == SUBTRACTION_TYPE) {
-                dbCouponType = COUPON_SUBTRACTION_TYPE ;
+                dbCouponType = COUPON_SUBTRACTION_DB_ENUM;
             }
             else {
-                dbCouponType = COUPON_PERCENTAGE_TYPE ;
+                dbCouponType = COUPON_PERCENTAGE_DB_ENUM;
             }
 
             statement.setString(1, dbCouponType);
@@ -120,6 +119,8 @@ public class CouponDAO {
                 if (couponType == SUBTRACTION_TYPE) newCoupon = new SubtractionCoupon(newCouponCode, couponValue) ;
                 else newCoupon = new PercentageCoupon(newCouponCode, couponValue) ;
             }
+
+            generatedKeys.close();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }

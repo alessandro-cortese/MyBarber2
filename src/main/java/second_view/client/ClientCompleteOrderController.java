@@ -19,14 +19,12 @@ import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.time.Instant;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 
 public class ClientCompleteOrderController {
 
-    @FXML private ListView<CouponBean> couponListView ;
+    @FXML private ListView<String> couponListView ;
     @FXML private TextField commandLine ;
     @FXML private TextField addressTextField ;
     @FXML private TextField telephoneTextField ;
@@ -34,7 +32,6 @@ public class ClientCompleteOrderController {
 
 
     private BuyProductController buyProductController ;
-    private OrderTotalBean orderTotalBean ;
 
 
     @FXML
@@ -76,7 +73,6 @@ public class ClientCompleteOrderController {
                 catch (NotExistentUserException ignored) {
                 }
             }
-
             return ;
         }
 
@@ -105,10 +101,10 @@ public class ClientCompleteOrderController {
     }
 
     private void insertCoupon(String commandInput) {
-        CouponBean couponBean = new CouponBean(commandInput) ;
         try {
-            buyProductController.applyCoupon(couponBean);
-            updateView();
+            CouponBean couponBean = new CouponBean(commandInput) ;
+            OrderTotalBean orderTotalBean = buyProductController.applyCoupon(couponBean);
+            updateView(orderTotalBean);
         }
         catch (InvalidCouponException | NegativePriceException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
@@ -119,13 +115,13 @@ public class ClientCompleteOrderController {
 
     public void setApplicationController(BuyProductController buyProductController) {
         this.buyProductController = buyProductController ;
-        orderTotalBean = buyProductController.showOrder() ;
-        updateView() ;
+        OrderTotalBean orderTotalBean = buyProductController.showOrder() ;
+        updateView(orderTotalBean) ;
     }
 
-    private void updateView() {
-        couponListView.setItems(FXCollections.observableList(orderTotalBean.getCouponBeans()));
-        orderTotalLabel.setText(String.format("Totale Ordine: %s %.2f" ,EURO_SYMBOL, orderTotalBean.getTotal())) ;
+    private void updateView(OrderTotalBean orderTotalBean) {
+        couponListView.setItems(FXCollections.observableList(orderTotalBean.getExternalCouponCodes()));
+        orderTotalLabel.setText(String.format("Totale Ordine: %s %.2f" ,EURO_SYMBOL, orderTotalBean.getOrderTotal())) ;
     }
 
 

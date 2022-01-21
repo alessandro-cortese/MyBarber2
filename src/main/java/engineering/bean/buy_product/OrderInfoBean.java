@@ -1,7 +1,5 @@
 package engineering.bean.buy_product;
 
-import java.util.Date;
-
 public class OrderInfoBean {
 
     private String addressInfo;

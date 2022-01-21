@@ -64,6 +64,9 @@ public class BuyProductListCellFactory extends ListCell<ProductBean> {
                 e.printStackTrace();
             }
         }
+        else {
+            setGraphic(null);
+        }
 
     }
 }

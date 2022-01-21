@@ -34,7 +34,6 @@ public class ClientCartController implements Initializable {
     @FXML private Button addOrderInfoButton ;
 
     private BuyProductController buyProductController ;
-    private CartBean cartBean ;
 
     public static final String COMPLETE_ORDER_SCENE_RES = "first_view/client/client_complete_order.fxml" ;
 
@@ -75,11 +74,12 @@ public class ClientCartController implements Initializable {
     }
 
     private void viewCart() {
-        cartBean = buyProductController.showCart();
-        updateInfo() ;
+        CartBean cartBean = buyProductController.showCart();
+        updateInfo(cartBean) ;
     }
 
-    private void updateInfo() {
+    private void updateInfo(CartBean cartBean) {
+        cartListView.getItems().clear();
         cartListView.setItems(FXCollections.observableList(cartBean.getCartRowBeanArrayList()));
         totalAmount.setText(String.format("Totale: %s %.2f", EURO_SYMBOL, cartBean.getTotal())) ;
     }
@@ -110,10 +110,8 @@ public class ClientCartController implements Initializable {
 
             ClientCompleteOrderController completeOrderController = newCenterNodeLoader.getController();
             completeOrderController.setApplicationController(buyProductController);
-
-            return ;
         }
-        updateInfo();
+
     }
 
     private void deleteProduct(CartRowBean cartRow) {
@@ -121,15 +119,19 @@ public class ClientCartController implements Initializable {
         for (int i = 0 ; i < quantity ; i++) {
             removeProduct(cartRow);
         }
+        CartBean cartBean = buyProductController.showCart() ;
+        updateInfo(cartBean);
     }
 
     private void removeProduct(CartRowBean cartRow) {
         ProductBean productBean = new ProductBean(cartRow.getIsbn()) ;
-        buyProductController.removeProductFromCart(productBean);
+        CartBean cartBean = buyProductController.removeProductFromCart(productBean);
+        updateInfo(cartBean);
     }
 
     private void addProduct(CartRowBean cartRow) {
         ProductBean productBean = new ProductBean(cartRow.getIsbn()) ;
-        buyProductController.insertProductToCart(productBean);
+        CartBean cartBean = buyProductController.insertProductToCart(productBean);
+        updateInfo(cartBean);
     }
 }

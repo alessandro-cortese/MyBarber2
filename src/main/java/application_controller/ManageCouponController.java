@@ -86,21 +86,14 @@ public class ManageCouponController {
 
         Double couponValue = couponBean.getCouponDiscount() ;
 
-        Integer couponType ;
-        if (couponBean.getCouponType().compareTo("subtraction") == 0) {
-            couponType = SUBTRACTION_TYPE ;
-        }
-        else {
-            couponType = PERCENTAGE_TYPE ;
-        }
-        Pair<Integer, Double> productCostKey = new Pair<>(couponType, couponBean.getCouponDiscount()) ;
+        Pair<Integer, Double> productCostKey = new Pair<>(couponBean.getCouponType(), couponBean.getCouponDiscount()) ;
 
         Integer couponCost = couponCostMap.get(productCostKey) ;
         System.out.println(couponCost);
         if (couponCost != null) {
             Integer customerPoints = customer.getCardPoints();
             if (customerPoints >= couponCost) {
-                createNewCoupon(couponType, couponValue) ;
+                createNewCoupon(couponBean.getCouponType(), couponValue) ;
                 updateCustomer(couponCost) ;
             }
             else {
@@ -129,13 +122,7 @@ public class ManageCouponController {
         for (int i = 0 ; i < couponContainer.getSize() ; i++) {
             Coupon coupon = couponContainer.getCouponByIndex(i) ;
             if (coupon != null) {
-                CouponBean couponBean ;
-                if (coupon.getCouponType() == SUBTRACTION_TYPE) {
-                    couponBean = new CouponBean(coupon.getCouponCode(), coupon.getCouponDiscount(), "subtraction");
-                }
-                else {
-                    couponBean = new CouponBean(coupon.getCouponCode(), coupon.getCouponDiscount(), "percentage");
-                }
+                CouponBean couponBean = new CouponBean(coupon.getCouponCode(), coupon.getCouponDiscount(), coupon.getCouponType());
                 couponBeans.add(couponBean) ;
             }
         }

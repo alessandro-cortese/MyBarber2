@@ -1,8 +1,5 @@
 package engineering.dao.queries;
 
-import model.User;
-import model.buy_product.Order;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -84,6 +81,15 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
 
     //-+-+-+-+-+-+-+-+-+-+- Order -+-+-+-+-+-+-+-+-+-+-//
+    public static ResultSet selectOrderByVendor(Statement statement, String vendor) throws SQLException {
+        String query = String.format("SELECT DISTINCT CustomerOrder.* FROM CustomerOrder JOIN ProductOrder JOIN Product ON (CustomerOrder.id = ProductOrder.orderId AND ProductOrder.productId = Product.id) WHERE Product.barber = '%s';", vendor) ;
+        return statement.executeQuery(query) ;
+    }
+
+    public static ResultSet selectCartByOrderId(Statement statement, Integer orderId) throws SQLException {
+        String query = String.format("SELECT * FROM ProductOrder WHERE orderId = %d", orderId) ;
+        return statement.executeQuery(query) ;
+    }
 
 
     //-+-+-+-+-+-+-+-+-+-+- SaloonTime -+-+-+-+-+-+-+-+-+-+-//

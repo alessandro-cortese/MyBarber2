@@ -57,7 +57,7 @@
                   <Menu mnemonicParsing="false" text="Vendi Prodotto">
                      <items>
                         <MenuItem fx:id="manageProductsItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Gestisci Prodotti" />
-                        <MenuItem mnemonicParsing="false" text="Ordini" />
+                        <MenuItem fx:id="manageOrderMenuItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Ordini" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Catalogo Premi" />
