@@ -7,6 +7,7 @@ public class TimeSlot {//***************************CLASSE DI INGEGNERIZZAZIONE 
     private int seatAvailable; //posti disponibili
     private Time fromTime;     //orario inizio timeSlot
     private Time toTime;       //orario fine timeSlot
+    private int index;
 
     public int getSeatAvailable() {
         return seatAvailable;
@@ -32,4 +33,11 @@ public class TimeSlot {//***************************CLASSE DI INGEGNERIZZAZIONE 
         this.toTime = toTime;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 }

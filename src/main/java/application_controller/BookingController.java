@@ -23,7 +23,7 @@ public class BookingController {
     private List<Service> ServicesList;
     private List<ServiceBean> servicesBeanList;
 
-    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws SaloonNotFoundException {
+    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
         saloonBeanList = new ArrayList<>();
         saloonCity = saloonBean.getCity();
@@ -70,7 +70,6 @@ public class BookingController {
             saloon = saloonDAO.retrieveTimeSlots(saloonName);
 
         } catch (Exception e) {
-
             e.printStackTrace();
 
         }
