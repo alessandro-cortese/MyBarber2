@@ -12,13 +12,16 @@ import second_view.general.ScreenChanger;
 
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberAddServiceController {
 
     public BarberAddServiceController(){
+
         goBackToHome = true;
+
     }
 
     @FXML private TextField addServiceCommandLine;
@@ -34,6 +37,7 @@ public class BarberAddServiceController {
     private static final String SET_USED_PRODUCT_COMMAND = "set product used" ;
 
     private boolean goBackToHome;
+    private boolean invalidField;
 
     @FXML
     public void onCommand(ActionEvent event) throws IOException {
@@ -44,41 +48,57 @@ public class BarberAddServiceController {
         addServiceCommandLine.setStyle(null);
 
         if(addServiceCommand.compareTo("back") == 0) {
+
             ScreenChanger.getInstance().onBack(event) ;
             return ;
+
         }
+
         else if(addServiceCommand.startsWith("set")){
+
             if(handlerSetCommand(addServiceCommand)){
+
                 return ;
+
             }
+
         }
+
         else if(addServiceCommand.compareTo("add") == 0 && getterTex()){
-                try {
 
-                    ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
-                    AddServiceController addServiceController = new AddServiceController();
-                    addServiceController.addService(serviceBean, ScreenChanger.getInstance().getLoggedUser());
+            try {
 
-                } catch (DuplicatedServiceException e) {
+                ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
+                AddServiceController addServiceController = new AddServiceController();
+                addServiceController.addService(serviceBean, ScreenChanger.getInstance().getLoggedUser());
 
-                    addServiceExceptionLabelSecondView.setText("Insert service already exist!");
-                    goBackToHome = false;
+            } catch (DuplicatedServiceException e) {
 
-                } catch (InsertNegativePriceException e) {
+                addServiceExceptionLabelSecondView.setText("This service already exist!");
+                goBackToHome = false;
 
-                    addServiceExceptionLabelSecondView.setText(e.getMessage());
-                    goBackToHome = false;
-                    addServicePriceField.setText("Insert correct price!");
+            } catch (InsertNegativePriceException e) {
 
-                }
+                addServiceExceptionLabelSecondView.setText(e.getMessage());
+                goBackToHome = false;
+                addServicePriceField.setText("Invalid correct price!");
+
+            }
 
             if(goBackToHome) {
 
-                    ScreenChanger.getInstance().goToHome(event);
+                ScreenChanger.getInstance().goToHome(event);
 
-                }
+            }
 
-                return ;
+            return ;
+
+        }
+
+        if(invalidField) {
+
+            addServiceExceptionLabelSecondView.setText("Invalid entered values!");
+
         }
 
         addServiceCommandLine.setStyle("-fx-border-color: red");
@@ -86,7 +106,11 @@ public class BarberAddServiceController {
     }
 
     private boolean getterTex(){
-        return nameAddServiceField.getText() != null && addServicePriceField.getText() != null && descriptionAddServiceField.getText() != null;
+
+        boolean flag = !Objects.equals(nameAddServiceField.getText(), "") && !Objects.equals(addServicePriceField.getText(), "") && !Objects.equals(descriptionAddServiceField.getText(), "");
+        invalidField = true;
+        return flag;
+
     }
 
     private boolean handlerSetCommand(String insertCommand){

@@ -30,6 +30,7 @@ public class BarberAddServiceController {
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
+        exceptionAddServiceLabel.setText("");
         Node sourceNode = (Node) event.getSource();
         BarberConfirmAddServiceController barberConfirmAddServiceController;
 
@@ -53,6 +54,8 @@ public class BarberAddServiceController {
 
             }catch (InsertNegativePriceException e) {
                 exceptionAddServiceLabel.setText("Insert Price is negative!");
+            }catch (NumberFormatException e){
+                exceptionAddServiceLabel.setText("Null Insert Field!");
             }
 
         }

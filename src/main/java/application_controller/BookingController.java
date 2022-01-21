@@ -2,7 +2,6 @@ package application_controller;
 
 import java.util.*;
 
-import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
 import engineering.dao.SaloonDAO;
@@ -96,7 +95,7 @@ public class BookingController {
     public List<ServiceBean> SearchServices(SaloonBean saloonBean) {
         ServiceDAO serviceDAO = new ServiceDAO();
         servicesBeanList = new ArrayList<>();
-        ServicesList = serviceDAO.retreiveService(saloonBean.getName());
+        ServicesList = serviceDAO.retrieveService(saloonBean.getName());
         for (Service service: ServicesList){
             try {
                 ServiceBean serviceBean = new ServiceBean();

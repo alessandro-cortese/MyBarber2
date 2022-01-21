@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
+
+import java.time.LocalTime;
+
 import static engineering.other_classes.LocalTimeVerify.isLocalTime;
 import static engineering.other_classes.NumericVerify.isNumeric;
 
@@ -92,21 +95,23 @@ public class BarberAddNewSaloonController {
     private boolean setAfternoonTime(String commandLine) {
 
         String[] afternoonTimes;
-        String afternoonFields;
+        LocalTime afternoonLocalTime;
+
+
 
         if(commandLine.startsWith(SET_OPEN_AFTERNOON_TIME_COMMAND)) {
             afternoonTimes = commandLine.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "").split(":");
-            afternoonFields = commandLine.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "");
-            if(isNumeric(afternoonTimes[0]) && isNumeric(afternoonTimes[1]) && isLocalTime(afternoonTimes)) {
-                addSaloonOpenAfternoonTimeTextField.setText(afternoonFields);
+            if(isNumeric(afternoonTimes[0]) && isNumeric(afternoonTimes[1]) && isLocalTime(afternoonTimes) != null) {
+                afternoonLocalTime = isLocalTime(afternoonTimes);
+                addSaloonOpenAfternoonTimeTextField.setText(String.valueOf(afternoonLocalTime));
                 return true;
             }
         }
         else if(commandLine.startsWith(SET_CLOSE_AFTERNOON_TIME_COMMAND)) {
             afternoonTimes = commandLine.replace(SET_CLOSE_AFTERNOON_TIME_COMMAND + " ", "").split(":");
-            afternoonFields = commandLine.replace(SET_CLOSE_AFTERNOON_TIME_COMMAND + " ", "");
-            if(isNumeric(afternoonTimes[0]) && isNumeric(afternoonTimes[1]) && isLocalTime(afternoonTimes)) {
-                addSaloonCloseAfternoonTimeTextField.setText(afternoonFields);
+            if(isNumeric(afternoonTimes[0]) && isNumeric(afternoonTimes[1]) && isLocalTime(afternoonTimes) != null) {
+                afternoonLocalTime = isLocalTime(afternoonTimes);
+                addSaloonCloseAfternoonTimeTextField.setText(String.valueOf(afternoonLocalTime));
                 return true;
             }
         }
@@ -118,21 +123,21 @@ public class BarberAddNewSaloonController {
     private boolean setMorningTime(String commandLine) {
 
         String[] morningTimes;
-        String morningField;
+        LocalTime morningLocalTime;
 
         if(commandLine.startsWith(SET_OPEN_MORNING_TIME_COMMAND)) {
             morningTimes = commandLine.replace(SET_OPEN_MORNING_TIME_COMMAND + " ", "").split(":");
-            morningField = commandLine.replace(SET_OPEN_MORNING_TIME_COMMAND + " ", "");
-            if(isNumeric(morningTimes[0]) && isNumeric(morningTimes[1]) && isLocalTime(morningTimes)) {
-                addSaloonOpenMorningTimeTextField.setText(morningField);
+            if(isNumeric(morningTimes[0]) && isNumeric(morningTimes[1]) && isLocalTime(morningTimes) != null) {
+                morningLocalTime = isLocalTime(morningTimes);
+                addSaloonOpenMorningTimeTextField.setText(String.valueOf(morningLocalTime));
                 return true;
             }
         }
         else if(commandLine.startsWith(SET_CLOSE_MORNING_TIME_COMMAND)) {
             morningTimes = commandLine.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "").split(":");
-            morningField = commandLine.replace(SET_CLOSE_MORNING_TIME_COMMAND + " ", "");
-            if(isNumeric(morningTimes[0]) && isNumeric(morningTimes[1]) && isLocalTime(morningTimes)) {
-                addSaloonCloseMorningTimeTextField.setText(morningField);
+            if(isNumeric(morningTimes[0]) && isNumeric(morningTimes[1]) && isLocalTime(morningTimes) != null) {
+                morningLocalTime = isLocalTime(morningTimes);
+                addSaloonCloseMorningTimeTextField.setText(String.valueOf(morningLocalTime));
                 return true;
             }
         }

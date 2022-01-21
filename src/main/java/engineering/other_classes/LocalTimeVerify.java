@@ -7,12 +7,11 @@ public class LocalTimeVerify {
 
     private LocalTimeVerify() {}
 
-    public static boolean isLocalTime(String[] times){
+    public static LocalTime isLocalTime(String[] times){
         try{
-            LocalTime.of(Integer.parseInt(times[0]), Integer.parseInt(times[1]));
-            return true;
+            return LocalTime.of(Integer.parseInt(times[0]), Integer.parseInt(times[1]));
         }catch(DateTimeException e){
-            return false;
+            return null;
         }
 
     }
