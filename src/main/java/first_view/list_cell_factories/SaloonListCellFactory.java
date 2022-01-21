@@ -11,11 +11,16 @@ import java.io.IOException;
 public class SaloonListCellFactory extends ListCell<SaloonBean> {
     private final boolean view;
     private Parent parentNode = null ;
+    Label nameSaloonItem;
+    Label placeSaloonItem;
 
     private static final String LIST_ITEM_SALOON = "first_view/list_item/take_saloon_item.fxml";
     private static final String LIST_ITEM_SALOON_2V="second_view/list_item/client_saloon_item.fxml";
     private static final String NAME_LABEL_ID = "labelSaloonItem" ;
     private static final String PLACE_LABEL_ID = "placeSaloonItem" ;
+    private static final String NAME_LABEL ="saloonNameLabel";
+    private static final String SLOT_INDEX ="slotIndexLabel";
+    private static final String PLACE_LABEL="saloonCityLabel";
 
     public SaloonListCellFactory(boolean view){
         this.view = view;
@@ -31,14 +36,21 @@ public class SaloonListCellFactory extends ListCell<SaloonBean> {
             try {
                 if (parentNode == null && view) {
                     parentNode = new FXMLLoader(getClass().getClassLoader().getResource(LIST_ITEM_SALOON)).load();
-                    Label nameSaloonItem = (Label) parentNode.lookup("#" + NAME_LABEL_ID);
-                    Label placeSaloonItem = (Label) parentNode.lookup("#" + PLACE_LABEL_ID);
-                    nameSaloonItem.setText(item.getName());
-                    placeSaloonItem.setText(item.getAddress() + item.getCity());
+                    nameSaloonItem = (Label) parentNode.lookup("#" + NAME_LABEL_ID);
+                    placeSaloonItem = (Label) parentNode.lookup("#" + PLACE_LABEL_ID);
+
                 }
                 if(parentNode == null && !view){
                     parentNode = new FXMLLoader(getClass().getClassLoader().getResource(LIST_ITEM_SALOON_2V)).load();
+                    nameSaloonItem = (Label) parentNode.lookup("#"+NAME_LABEL);
+                    Label indexSaloonItem = (Label) parentNode.lookup("#"+SLOT_INDEX);
+                    placeSaloonItem = (Label) parentNode.lookup("#"+ PLACE_LABEL);
+                    indexSaloonItem.setText("slot index: "+ item.getIndex());
+
                 }
+
+                nameSaloonItem.setText(item.getName());
+                placeSaloonItem.setText(item.getAddress() + item.getCity());
                 setGraphic(parentNode);
 
             } catch (IOException e) {

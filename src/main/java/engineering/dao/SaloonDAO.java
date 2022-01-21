@@ -92,13 +92,18 @@ public class SaloonDAO {
         return saloon;
     }
 
-    public List<Saloon> retrieveByCityName(String saloonCity) {
+    public List<Saloon> retrieveByCityName(String saloonCity) throws Exception {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
         ArrayList<Saloon> saloons = new ArrayList<>();
 
-        try(Statement statement = connection.createStatement();
+        try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.TYPE_SCROLL_INSENSITIVE);
             ResultSet resultSet = Queries.loadSaloonByName(statement, saloonCity)){
+            if (!resultSet.first() ) {
+                String message ="nessun salone disponibile, riprova un'altra citta";
+                throw new Exception(message);
+            }
+            resultSet.beforeFirst();// return on the previous row
 
             while(resultSet.next()){
 
@@ -107,9 +112,7 @@ public class SaloonDAO {
             }
 
         } catch (SQLException sqlException) {
-
             sqlException.printStackTrace();
-
         }
 
         return saloons;

@@ -125,7 +125,6 @@ public class BookingDateHourGraphicController {
                 timeSlotList = new ScheduleTime(timeSlotSaloon).CreateSlotTime();
                 timeSlotListView.setItems(FXCollections.observableList(timeSlotList));
 
-
         }
 
         private void searchTimeSlots() {

@@ -27,9 +27,9 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ScrollPane prefHeight="261.0" prefWidth="306.0">
+                        <ScrollPane prefHeight="261.0" prefWidth="243.0">
                            <content>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- set date &lt;yyyy\mm\dd&gt;&#10;- select slot time &lt;index&gt;&#10;- confirm&#10;- continue booking&#10;- back">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- set date &lt;yyyy-mm-dd&gt;&#10;- select slot time &lt;index&gt;&#10;- confirm&#10;- continue booking&#10;- back">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -52,7 +52,7 @@
                   </VBox>
                </children>
             </VBox>
-            <ListView fx:id="hourListView" layoutX="385.0" layoutY="141.0" prefHeight="261.0" prefWidth="167.0" />
+            <ListView fx:id="hourListView" layoutX="365.0" layoutY="141.0" onMouseClicked="#slotTimeSelected" prefHeight="261.0" prefWidth="205.0" />
             <TextField fx:id="dateField" layoutX="573.0" layoutY="469.0" prefHeight="24.0" prefWidth="167.0" />
             <TextField fx:id="slotTimeField" layoutX="573.0" layoutY="503.0" prefHeight="24.0" prefWidth="167.0" />
             <Label fx:id="exceptionLabel2" layoutX="491.0" layoutY="507.0" prefWidth="75.0" text="Slot time" />
