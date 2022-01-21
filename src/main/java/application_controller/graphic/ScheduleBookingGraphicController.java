@@ -64,11 +64,6 @@ public class ScheduleBookingGraphicController{
     private TimeSlot timeSlotInfo;
     private LocalDate dateBooking;
 
-    @FXML
-    private Label indexLabel;
-
-    @FXML
-    private Label indexServiceOfListLabel;
 
     @FXML
     private Label serviceNameLabel;
@@ -104,6 +99,9 @@ public class ScheduleBookingGraphicController{
         borderPane.setCenter(newCenterNode);
         BookedGraphicController bookedGraphicController = fxmlLoaderNode.getController();
         bookedGraphicController.injectServicesList(serviceListSelected);
+        BookingController bookingController = new BookingController();
+        bookingController.saveBooking(serviceListSelected,saloonInfo);// DA FINIRE
+
 
 
     }

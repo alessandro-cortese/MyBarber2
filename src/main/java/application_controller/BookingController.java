@@ -8,6 +8,7 @@ import engineering.bean.ServiceBean;
 import engineering.dao.SaloonDAO;
 import engineering.dao.ServiceDAO;
 import engineering.exception.InsertNegativePriceException;
+import engineering.exception.SaloonNotFoundException;
 import model.Saloon;
 import model.Service;
 
@@ -23,10 +24,9 @@ public class BookingController {
     private List<Service> ServicesList;
     private List<ServiceBean> servicesBeanList;
 
-    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
+    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws SaloonNotFoundException {
 
         saloonBeanList = new ArrayList<>();
-
         saloonCity = saloonBean.getCity();
         saloonDAO = new SaloonDAO();
 
@@ -111,5 +111,8 @@ public class BookingController {
         }
 
         return servicesBeanList;
+    }
+
+    public void saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo) { //MANCA IL CUSTOMERBEAN
     }
 }

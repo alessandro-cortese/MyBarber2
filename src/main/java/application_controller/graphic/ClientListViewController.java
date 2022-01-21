@@ -21,7 +21,7 @@ public class ClientListViewController {
     private  final String APPOINTMENT_SALOON_ITEM = "first_view/list_item/take_saloon_item.fxml";
     private  final String CLIENT_TAKE_APPOINTMENT ="first_view/client/client_take_appointment.fxml";
 
-
+    private boolean firstView=true;
     private String saloonName;
     private String saloonAddress;
     private String saloonCity;
@@ -35,7 +35,7 @@ public class ClientListViewController {
 
 
     public void injectSaloonList(List<SaloonBean> saloonBeanList) {
-        saloonListView.setCellFactory(param -> new SaloonListCellFactory());
+        saloonListView.setCellFactory(param -> new SaloonListCellFactory(firstView));
         this.saloonBeanList = saloonBeanList;
         saloonListView.setItems(FXCollections.observableArrayList(saloonBeanList));
     }

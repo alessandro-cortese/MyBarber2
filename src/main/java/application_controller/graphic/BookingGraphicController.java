@@ -101,7 +101,7 @@ public class BookingGraphicController{
         borderPane.setCenter(newCenterNode);
         saloonBean = new SaloonBean(false, saloonCity);
         bookingController = new BookingController();
-        saloonBeanList = bookingController.searchByCitySaloon(saloonBean); //ATT: POSSO COMUNICARE LL'ALTRO CONTROLLER GRAFICO IL SALOONBEANLIST? PER LA CITTÀ
+        saloonBeanList = bookingController.searchByCitySaloon(saloonBean);
        ClientListViewController clientListViewController;
        clientListViewController = fxmlLoader.getController();
        clientListViewController.injectSaloonList(saloonBeanList);
