@@ -4,6 +4,7 @@ import java.util.*;
 
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
+import engineering.bean.TimeSlotBean;
 import engineering.dao.SaloonDAO;
 import engineering.dao.ServiceDAO;
 import engineering.exception.InsertNegativePriceException;
@@ -112,5 +113,12 @@ public class BookingController {
     }
 
     public void saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo) { //MANCA IL CUSTOMERBEAN
+    }
+
+    public boolean checkDateHour(TimeSlotBean timeSlotBean) {
+        SaloonDAO saloonDAO = new SaloonDAO();
+        //result = saloonDAO.checkS
+
+        return true;
     }
 }

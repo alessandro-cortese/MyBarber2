@@ -2,6 +2,9 @@ package second_view.client;
 
 import application_controller.BookingController;
 import engineering.bean.SaloonBean;
+import engineering.bean.TimeSlotBean;
+import engineering.exception.InvalidTimeSlot;
+import engineering.exception.SaloonNotFoundException;
 import engineering.time.ScheduleTime;
 import engineering.time.TimeSlot;
 import first_view.ObservableListNode;
@@ -61,9 +64,11 @@ public class ClientBookingDateHourGraphicContr{
     private SaloonBean timeSlotSaloon;
     private List<TimeSlot> timeSlotList;
     private TimeSlot timeSlot;
+    private String index;
+    private TimeSlot timeSlotInfo;
 
     @FXML
-    void onCommand(ActionEvent event) throws IOException {
+    void onCommand(ActionEvent event) throws IOException, InvalidTimeSlot {
         String command = commandLine.getText() ;
         commandLine.setStyle(null);
         commandLine.setText("");
@@ -78,16 +83,24 @@ public class ClientBookingDateHourGraphicContr{
             return;
         }
         else if (command.matches("select slot time [0-9]+")) {
-            String index = command.replace("select slot time ", "");
+            index = command.replace("select slot time ", "");
             int in = Integer.parseInt(index);
             System.out.println(in);
+            try {
+                verifyIndexSlotTime();
+            } catch (Exception e) {
+                InvalidTimeSlot e1 = new InvalidTimeSlot(e.getMessage());
+                throw e1;
+            }
             slotTimeField.setText(index);
             return ;
         }
         else if (command.compareTo("confirm") == 0) { //manda una notifica al controllore per ottenere le informazioni necessarie
-            String index = slotTimeField.getText();
+
             String date = dateField.getText();
 
+            BookingController bookingController = new BookingController();
+            //bookingController.checkDateHour(timeSlotBean); DA FINIRE
             return ;
         }
         else if (command.compareTo("continue booking") == 0) {
@@ -96,6 +109,24 @@ public class ClientBookingDateHourGraphicContr{
         }
 
         commandLine.setStyle("-fx-border-color: red");
+    }
+
+    private void verifyIndexSlotTime() throws Exception {
+        boolean flag = false;
+        for (TimeSlot timeSlot : hourListView.getItems()) {
+            int i = timeSlot.getIndex();
+            int ind = Integer.parseInt(index);
+            if (ind == i) {
+                flag = true;
+                timeSlotInfo = new TimeSlot();
+                timeSlotInfo.setFromTime(timeSlot.getFromTime());
+                timeSlotInfo.setToTime(timeSlot.getToTime());
+                timeSlotInfo.setSeatAvailable(timeSlotInfo.getSeatAvailable());
+                break;
+            }
+        }
+        if (!flag)
+            throw new Exception("slot time non valido");
     }
 
     public void InjectSaloonInfo(SaloonBean saloonBeanInfo) {
@@ -121,20 +152,5 @@ public class ClientBookingDateHourGraphicContr{
         hourListView.setItems(FXCollections.observableList(timeSlotList));
     }
 
-    @FXML
-    public void slotTimeSelected(){
-        timeSlot.setSeatAvailable(Integer.parseInt(seatNumberLabel.getText()));
-        String i = indexLabel.getText();
-        int ind = Integer.parseInt(i.replace("slot index: ",""));
-        timeSlot.setIndex(ind);
-        System.out.println("vedi mpo l'indice"+ind);
-        System.out.println(timeSlot.getSeatAvailable());
-        timeSlot.setFromTime(Time.valueOf(initTime.getText()));
-        System.out.println("diomerda"+timeSlot.getFromTime());
-        timeSlot.setToTime(Time.valueOf(finalTime.getText()));
-        System.out.println("diomerdacc"+timeSlot.getToTime());
-
-
-    }
 }
 

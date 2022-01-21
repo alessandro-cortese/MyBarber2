@@ -5,6 +5,8 @@ public class UserBean {
     private String userEmail ;
     private Integer userType ;
 
+    public UserBean(){}
+
     public UserBean(String userEmail, Integer userType) {
 
         setUserEmail(userEmail);

@@ -2,6 +2,7 @@ package engineering.bean;
 
 import model.Saloon;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,17 +10,13 @@ import java.util.List;
 
 public class BookingBean {
     private  String saloonName;
-    private List<Saloon> listSaloon = new ArrayList<Saloon>();
     private Time time;
-    private LocalDate date;
+    private Date date;
 
 
-    //public BookingBean(){}
+    public BookingBean(){}
 
-    //public BookingBean(ListSaloon, ){
-
-    //}
-    public BookingBean(String saloonName, LocalDate date){
+    public BookingBean(String saloonName, Date date){
         this.date=date;
         this.saloonName = saloonName;
 
