@@ -46,14 +46,6 @@ public class Cart extends Subject implements Priceable, Serializable {
         super.notifyObservers();
     }
 
-    public Double getTotal() {
-        Double total = 0.0 ;
-        for (CartRow row : cartRowArrayList) {
-            total = total + row.getSubTotal() ;
-        }
-        return total ;
-    }
-
 
     @Nullable
     private CartRow verifyPresent(Product verifyProduct) {
@@ -82,6 +74,10 @@ public class Cart extends Subject implements Priceable, Serializable {
 
     @Override
     public Double getPrice() {
-        return getTotal();
+        Double total = 0.0 ;
+        for (CartRow row : cartRowArrayList) {
+            total = total + row.getSubTotal() ;
+        }
+        return total ;
     }
 }

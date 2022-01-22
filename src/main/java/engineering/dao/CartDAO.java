@@ -7,6 +7,8 @@ import model.buy_product.CartRow;
 import model.buy_product.Product;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartDAO {
 
@@ -14,13 +16,13 @@ public class CartDAO {
     private static final String ORDER_ID_LAB = "orderId" ;
     private static final String PRODUCT_QUANTITY_LAB = "productQuantity" ;
 
-    public void saveCart(Cart cart, Integer orderKey) {
+    public void saveCart(List<CartRow> cartRowList, Integer orderKey) {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
         String insert = "INSERT INTO ProductOrder (productId, orderId, productQuantity) VALUES(?,?,?)" ;
         try(PreparedStatement statement = connection.prepareStatement(insert) ;) {
 
-            for (CartRow cartRow : cart.getCartRowArrayList()) {
+            for (CartRow cartRow : cartRowList) {
                 statement.setInt(1, cartRow.getProductIsbn());
                 statement.setInt(2, orderKey);
                 statement.setInt(3, cartRow.getQuantity());
@@ -35,10 +37,10 @@ public class CartDAO {
         } ;
     }
 
-    public Cart loadCartByOrderCode(Integer orderCode) {
+    public List<CartRow> loadCartByOrderCode(Integer orderCode) {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
-        Cart loadedCart = new Cart() ;
+        List<CartRow> cartRowList = new ArrayList<>() ;
         try(
                 Statement statement = connection.createStatement() ;
                 ResultSet resultSet = Queries.selectCartByOrderId(statement, orderCode) ;
@@ -50,15 +52,14 @@ public class CartDAO {
                 Integer productQuantity = resultSet.getInt(PRODUCT_QUANTITY_LAB) ;
 
                 Product product = productDAO.loadProductByIsbn2(productId) ;
+                CartRow cartRow = new CartRow(product, productQuantity) ;
 
-                for (int i = 0 ; i < productQuantity ; i++) {
-                    loadedCart.insertProduct(product);
-                }
+                cartRowList.add(cartRow) ;
             }
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        return loadedCart ;
+        return cartRowList ;
     }
 }

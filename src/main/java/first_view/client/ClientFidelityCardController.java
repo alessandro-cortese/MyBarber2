@@ -47,7 +47,7 @@ public class ClientFidelityCardController implements Initializable {
 
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser() ;
         if (userBean != null) {
-            userNameLabel.setText(userBean.getUserEmail());
+            userNameLabel.setText("eMail " + userBean.getUserEmail());
             FidelityCardBean fidelityCardBean = null;
             try {
                 fidelityCardBean = manageCouponController.showFidelityCard(userBean);

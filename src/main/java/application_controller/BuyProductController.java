@@ -20,9 +20,10 @@ import model.buy_product.coupon.CouponApplier;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.*;
-
-import static engineering.bean.buy_product.VendorOrderBean.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class BuyProductController {
 
@@ -41,7 +42,7 @@ public class BuyProductController {
         productCatalog = productDAO.loadAllProducts() ;
 
         cart = new Cart() ;
-        order = new Order(cart) ;
+        order = new Order() ;
         couponApplier = new CouponApplier(cart) ;
     }
 
@@ -55,7 +56,7 @@ public class BuyProductController {
         cart = cartFileSaver.loadCartFromFile() ;
         couponApplier = new CouponApplier(cart) ;
 
-        order = new Order(cart) ;
+        order = new Order() ;
     }
 
     public List<ProductBean> filterProductList(ProductSearchInfoBean searchInfoBean) {
@@ -88,7 +89,7 @@ public class BuyProductController {
     public CartBean createCartBean() {
         List<CartRow> cartRows = cart.getCartRowArrayList() ;
         CartBean cartBean = new CartBean() ;
-        cartBean.setTotal(cart.getTotal());
+        cartBean.setTotal(cart.getPrice());
         List<CartRowBean> cartRowBeans = new ArrayList<>() ;
         for (CartRow cartRow : cartRows) {
             cartRowBeans.add(new CartRowBean(cartRow.getQuantity(), cartRow.getProductIsbn(), cartRow.getProductName(), cartRow.getProductPrice())) ;
@@ -122,6 +123,7 @@ public class BuyProductController {
         order.setDate(LocalDate.now());
         order.setFinalPrice(couponApplier.getFinalPrice());
         order.setOrderOwner(customer.getEmail());
+        order.setCartRows(cart.getCartRowArrayList());
 
         //SALVATAGGIO ORDER
         OrderDAO orderDAO = new OrderDAO() ;
@@ -136,12 +138,13 @@ public class BuyProductController {
 
         //AGGIORNAMENTO PUNTEGGIO CUSTOMER
         UserDAO userDAO = new UserDAO() ;
-        customer.setCardPoints(customer.getCardPoints() + order.getOrderPoints());
-        userDAO.updateCustomerPoints(customer, customer.getCardPoints());
+        Double cartPrice = cart.getPrice() ;
+        Integer orderPoints = (int) Math.round(cartPrice) ;
+        customer.setCardPoints(customer.getCardPoints() + orderPoints);
+        userDAO.updateCustomerPoints(customer);
 
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
         paypalBoundary.pay(new OrderTotalBean(couponApplier.getFinalPrice()));
-
 
         BuyProductEMailSystemBoundary eMailSystemBoundary = new BuyProductEMailSystemBoundary() ;
         ArrayList<String> vendorsInfo = cart.getVendorsInfo();

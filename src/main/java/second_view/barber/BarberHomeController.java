@@ -49,10 +49,12 @@ public class BarberHomeController {
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_MANAGE_SALOON_SCREEN_NAME);
             return ;
         }
+        else if (commandLine.compareTo("manage order") == 0) {
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_SEE_ORDER_SCREEN) ;
+            return ;
+        }
 
         barberHomeCommandLine.setStyle("-fx-border-color: red");
-
-
 
     }
 }

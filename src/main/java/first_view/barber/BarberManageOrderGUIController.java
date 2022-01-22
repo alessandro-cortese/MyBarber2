@@ -10,6 +10,7 @@ import first_view.list_cell_factories.CartRowListCellFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static first_view.list_cell_factories.BuyProductListCellFactory.FIRST_VIEW;
 
 public class BarberManageOrderGUIController implements Initializable {
 
@@ -40,14 +43,13 @@ public class BarberManageOrderGUIController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        orderListView.setCellFactory(param -> new BarberOrderListCellFactory());
+        orderListView.setCellFactory(param -> new BarberOrderListCellFactory(FIRST_VIEW));
 
         orderCartListView.setCellFactory(param -> new CartRowListCellFactory()) ;
 
         orderListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 List<CartRowBean> cartRowBeans = barberManageOrderController.showOrderCart(newValue);
-                Collections.reverse(cartRowBeans);
                 orderCartListView.setItems(FXCollections.observableList(cartRowBeans));
                 orderTelephoneLabel.setText(newValue.getTelephone());
                 orderAddressLabel.setText(newValue.getAddress());
@@ -65,6 +67,15 @@ public class BarberManageOrderGUIController implements Initializable {
 
     private void viewAllOrders() {
         List<VendorOrderBean> vendorOrderBeans = barberManageOrderController.showAllOrders() ;
+        Collections.reverse(vendorOrderBeans);
         orderListView.setItems(FXCollections.observableList(vendorOrderBeans));
+    }
+
+    @FXML
+    public void onButtonClicked(ActionEvent event) {
+        VendorOrderBean vendorOrderBean = orderListView.getSelectionModel().getSelectedItem() ;
+        if (vendorOrderBean != null) {
+            barberManageOrderController.confirmOrder(vendorOrderBean) ;
+        }
     }
 }
