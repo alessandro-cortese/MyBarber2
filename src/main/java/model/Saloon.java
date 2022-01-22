@@ -1,5 +1,6 @@
 package model;
 
+import engineering.other_classes.Weekdays;
 import java.sql.Time;
 import java.time.LocalTime;
 
@@ -11,6 +12,7 @@ public class Saloon {
     private String phone;
     private LocalTime slotTime;
     private int seatNumber;
+    private Weekdays[] closedDayOfWeek;
     private Time openingMorningTime;
     private Time closeMorningTime;
     private Time openingAfternoonTime;
@@ -24,6 +26,7 @@ public class Saloon {
         this.phone = phone;
         this.address = address;
         this.city = city;
+        this.extractClosedDaysOfWeek();
 
     }
 
@@ -37,6 +40,7 @@ public class Saloon {
         this.seatNumber = seatNumber;
         this.numberOfMorningSlots = numberOfSlots[0];
         this.numberOfAfternoonSlots = numberOfSlots[1];
+        this.extractClosedDaysOfWeek();
 
     }
 
@@ -50,6 +54,7 @@ public class Saloon {
         this.seatNumber = seatNumber ;
         this.numberOfMorningSlots = numberOfSlots[0] ;
         this.numberOfAfternoonSlots = numberOfSlots[1];
+        this.extractClosedDaysOfWeek();
 
     }
 
@@ -61,6 +66,7 @@ public class Saloon {
         this.setCity(city);
         this.seatNumber = seatNumber;
         this.slotTime = slotTime;
+        this.extractClosedDaysOfWeek();
 
     }
 
@@ -72,6 +78,7 @@ public class Saloon {
         this.closeAfternoonTime = closeAfternoonTime;
         this.closeMorningTime = closeMorningTime;
         this.slotTime = intervalSlotTime;
+        this.extractClosedDaysOfWeek();
 
     }
 
@@ -86,7 +93,16 @@ public class Saloon {
         this.numberOfMorningSlots = numberSlotTime[0];
         this.numberOfAfternoonSlots = numberSlotTime[1];
         this.seatNumber = seatNumber;
+        this.extractClosedDaysOfWeek();
+
     }
+
+    private void extractClosedDaysOfWeek() {
+
+        this.closedDayOfWeek = new Weekdays[2];
+
+    }
+
     public String getName(){
 
         return this.name;
@@ -232,4 +248,12 @@ public class Saloon {
 
     }
 
+    public Weekdays[] getClosedDayOfWeek() {
+        return closedDayOfWeek;
+    }
+
+    public void setClosedDayOfWeek(Weekdays closedDayOfWeek) {
+        this.closedDayOfWeek[0] = closedDayOfWeek;
+        this.closedDayOfWeek[1] = Weekdays.Sunday;
+    }
 }

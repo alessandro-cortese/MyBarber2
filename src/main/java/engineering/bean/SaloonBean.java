@@ -1,5 +1,6 @@
 package engineering.bean;
 
+import engineering.other_classes.Weekdays;
 import java.sql.Time;
 import java.time.LocalTime;
 
@@ -11,6 +12,7 @@ public class SaloonBean {
     private String phone;
     private String city;
     private LocalTime slotTime;
+    private Weekdays[] closedDayOfWeekInfo;
     private  int seatNumber;
     private Time openingMorningTimeInfo;
     private Time closeMorningTimeInfo;
@@ -39,6 +41,7 @@ public class SaloonBean {
         this.phone = telephone;
         this.address = address;
         this.city = city;
+        this.extractClosedDayOfWeekInfo();
 
     }
 
@@ -56,6 +59,13 @@ public class SaloonBean {
         this.seatNumber = seatNumber;
         this.city = city;
         this.slotTime = LocalTime.of(0,slotTimeMinutes);
+        this.extractClosedDayOfWeekInfo();
+
+    }
+
+    private void extractClosedDayOfWeekInfo(){
+
+        this.closedDayOfWeekInfo = new Weekdays[2];
 
     }
 
@@ -202,10 +212,28 @@ public class SaloonBean {
     }
 
     public int getIndex() {
+
         return index;
+
     }
 
     public void setIndex(int index) {
+
         this.index = index;
+
     }
+
+    public Weekdays[] getClosedDayOfWeekInfo() {
+
+        return closedDayOfWeekInfo;
+
+    }
+
+    public void setClosedDayOfWeekInfo(Weekdays closedDayOfWeekInfo) {
+
+        this.closedDayOfWeekInfo[0] = closedDayOfWeekInfo;
+        this.closedDayOfWeekInfo[1] = Weekdays.Sunday;
+
+    }
+
 }
