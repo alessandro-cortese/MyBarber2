@@ -1,9 +1,6 @@
 package engineering.dao.queries;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Time;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class Queries { //qui vanno messe tutte le query per essere più compatti
@@ -97,7 +94,7 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         String select = String.format("SELECT FROM SaloonTime where hourBooking = '%s' AND dateBooking ='%s';", time,date);
         return statement.executeQuery(select);
 
-    }// DA fare insieme ad alessandro per chiarire
+    }
 
     public static ResultSet selectSlotTimeSaloon(Statement stmt, String saloonName) throws SQLException {
         String query = String.format("SELECT openMorningTime,openAfternoonTime,closeMorningTime,closeAfternoonTime,intervalSlotTime,seatNumber,numberSlotTimeMorning,numberSlotTimeAfternoon FROM Saloon join SaloonTime on Saloon.id = SaloonTime.Saloon WHERE Saloon.name ='%s';", saloonName);
@@ -151,5 +148,9 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
-
+    //-+-+-+-+-+-+-+-+-+-+- SaloonDay -+-+-+-+-+-+-+-+-+-+-//
+    public static ResultSet checkDateClosed(Statement statement,String saloonName) throws SQLException {
+        String sql = String.format("SELECT dayClosed FROM Saloon join SaloonDay on Saloon.id = SaloonDay.Saloon WHERE name = '%s';",saloonName);
+        return  statement.executeQuery(sql);
+    }
 }

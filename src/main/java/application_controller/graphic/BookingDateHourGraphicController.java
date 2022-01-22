@@ -41,16 +41,10 @@ public class BookingDateHourGraphicController {
         private Button ConfirmDateHourButton;
 
         @FXML
-        private TextField hourTextField;
-
-        @FXML
         private Label exceptionDateLabel;
 
         @FXML
         private Label exceptionHourLabel;
-
-        @FXML
-        private Label generalException;
 
         @FXML
         private DatePicker dateBooking;

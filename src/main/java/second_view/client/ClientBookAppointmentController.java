@@ -1,16 +1,15 @@
 package second_view.client;
 
-import javafx.collections.ObservableListBase;
+import engineering.bean.SaloonBean;
+import engineering.time.TimeSlot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;
 
 public class ClientBookAppointmentController {
-
 
     @FXML private TextField commandLine ;
     @FXML private ListView serviceListView ;
@@ -20,13 +19,11 @@ public class ClientBookAppointmentController {
     @FXML private TextField hourText;
 
 
-
     @FXML
     public void onCommand(ActionEvent event) throws IOException {
         String commandText = commandLine.getText() ;
         commandLine.setStyle(null);
         commandLine.setText("");
-
 
 
         if (commandText.matches("service add [0-9]+")) {
@@ -54,6 +51,14 @@ public class ClientBookAppointmentController {
         }
 
         commandLine.setStyle("-fx-border-color: red");
+
+    }
+
+    public void injectDateHourSaloonInfo(TimeSlot timeSlotInfo, SaloonBean saloonBean, String date) {
+        dateText.setText(date);
+        hourText.setText(timeSlotInfo.getFromTime()+" - "+timeSlotInfo.getToTime());
+        saloonName.setText(saloonBean.getName());
+
 
     }
 }

@@ -11,31 +11,22 @@ public class ServiceCatalogue {
     private List<Service> serviceArrayList;
 
     public ServiceCatalogue(List<Service> service){
-
         this.serviceArrayList = service;
-
     }
 
     public ServiceCatalogue(){
-
         this.serviceArrayList = new ArrayList<>();
-
     }
 
     public List<Service> getServices(){
-
         return this.serviceArrayList;
-
     }
 
     public Service createService(String name, String description, double price, Product usedProduct) {
-
          return new Service(name, description, price, usedProduct);
-
     }
 
     public void addService(Service newService) {
-
         serviceArrayList.add(newService);
 
     }

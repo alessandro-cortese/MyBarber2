@@ -106,9 +106,11 @@ public class ClientCompleteOrderController implements Initializable {
         }
 
         try {
+
             CouponBean couponBean = new CouponBean(stringCouponCode) ;
             OrderTotalBean orderTotalBean = buyProductController.applyCoupon(couponBean);
             updateInfo(orderTotalBean);
+
         }
         catch (InvalidCouponException | NegativePriceException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;

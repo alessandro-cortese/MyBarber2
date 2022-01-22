@@ -39,57 +39,62 @@ public class ClientSearchSaloon {
     }
 
     @FXML
-    public void onCommand(ActionEvent event) throws SaloonNotFoundException, IOException {
+    public void onCommand(ActionEvent event) {
         String command = commandLine.getText() ;
         commandLine.setStyle(null);
         commandLine.setText("");
 
-        if (command.matches("search name .*")) {//. qualsiasi carattere
-            String saloonName = command.replace("search name", "");
+        try {
 
-        }
-        else if (command.matches("search city .*")) {
+            if (command.matches("search name .*")) {//. qualsiasi carattere
+                String saloonName = command.replace("search name", "");
+                return;//STUB
 
-            saloonListView.setCellFactory(param -> new SaloonListCellFactory(false));
+            } else if (command.matches("search city .*")) {
 
-            String saloonCity = command.replace("search city ","");
-            System.out.println(saloonCity);
-            saloonBean = new SaloonBean(false, saloonCity);
-            BookingController bookingController = new BookingController();
-            try {
+                saloonListView.setCellFactory(param -> new SaloonListCellFactory(false));
+
+                String saloonCity = command.replace("search city ", "");
+                System.out.println(saloonCity);
+                saloonBean = new SaloonBean(false, saloonCity);
+                BookingController bookingController = new BookingController();
+
                 saloonBeanList = bookingController.searchByCitySaloon(saloonBean);
-            } catch (Exception e) {
+
+
+                int i = 0;
+                for (SaloonBean saloonBean : saloonBeanList) {
+                    saloonBean.setIndex(i);
+                    i++;
+                    System.out.println(saloonBean.getIndex());
+                    System.out.println(saloonBean.getCity());
+                    System.out.println(saloonBean.getName());
+
+                }
                 saloonListView.getItems().clear();
-                throw new SaloonNotFoundException(e.getMessage());
-            }
+                saloonListView.setItems(FXCollections.observableList(saloonBeanList));
+                return;
 
-            int i=0;
-            for (SaloonBean saloonBean: saloonBeanList){
-                saloonBean.setIndex(i);
-                i++;
-                System.out.println(saloonBean.getIndex());
-            }
-            saloonListView.setItems(FXCollections.observableList(saloonBeanList));
-
-            return;
-
-        }
-        else if (command.matches("select [0-9]+")) { //stringa composta da numeri  da 0 a 9 e almeno un carattere
+            } else if (command.matches("select [0-9]+")) { //stringa composta da numeri  da 0 a 9 e almeno un carattere
                 String index = command.replace("select ", "");
                 int in = Integer.parseInt(index);
-                System.out.println(in);
                 verifyValidIndex(in);
 
                 ClientBookingDateHourGraphicContr clientBookingDateHourGraphicContr = (ClientBookingDateHourGraphicContr) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_DATE_HOUR);
                 clientBookingDateHourGraphicContr.InjectSaloonInfo(saloonBeanInfo);
-            return;
-        }
+                return;
 
-        else if (command.compareTo("back") == 0) {
-            ScreenChanger.getInstance().onBack(event);
-            return ;
+            } else if (command.compareTo("back") == 0) {
+                ScreenChanger.getInstance().onBack(event);
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SaloonNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         commandLine.setStyle("-fx-border-color: red");
     }
 

@@ -16,14 +16,16 @@ public class ScheduleTime {
     private Time timeOpen;
     private Time sumTime;
 
+
     public ScheduleTime(SaloonBean saloonTimeSlots){
+        timeSlotList = new ArrayList<>();
+
         timeOpen = saloonTimeSlots.getOpeningMorningTimeInfo();
-        seatNumber = saloonTimeSlots.getSeatNumber();
-        System.out.println(saloonTimeSlots.getOpeningMorningTimeInfo());
-        System.out.println(saloonTimeSlots.getNumberOfMorningSlotsInfo());
         sumTime = new Time(timeOpen.getTime()); //return hours in milliseconds
+        seatNumber = saloonTimeSlots.getSeatNumber();
+
+
         intervalSlotTime = saloonTimeSlots.getSlotTime();
-        System.out.println(intervalSlotTime);
         slotTimeMorning = saloonTimeSlots.getNumberOfMorningSlotsInfo();
         slotTimeAfternoon = saloonTimeSlots.getNumberOfAfternoonSlotsInfo();
 
@@ -31,7 +33,8 @@ public class ScheduleTime {
 
         public List<TimeSlot> CreateSlotTime(){
 
-            timeSlotList = new ArrayList<>();
+
+
             TimeSlot timeSlot;
             for (int i = 0; i< slotTimeMorning ; i++){
                 timeSlot = new TimeSlot();

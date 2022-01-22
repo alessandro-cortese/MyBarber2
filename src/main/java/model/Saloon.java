@@ -9,7 +9,7 @@ public class Saloon {
     private String city;
     private String address;
     private String phone;
-    private LocalTime slotTime;
+    private LocalTime intervalSlotTime;
     private int seatNumber;
     private Time openingMorningTime;
     private Time closeMorningTime;
@@ -33,7 +33,7 @@ public class Saloon {
         this.city = cityAndAddress[0];
         this.address = cityAndAddress[1];
         this.phone = phone;
-        this.slotTime = slotTime;
+        this.intervalSlotTime = slotTime;
         this.seatNumber = seatNumber;
         this.numberOfMorningSlots = numberOfSlots[0];
         this.numberOfAfternoonSlots = numberOfSlots[1];
@@ -46,7 +46,7 @@ public class Saloon {
         this.city = city ;
         this.address = address ;
         this.phone = phone ;
-        this.slotTime = slotTime ;
+        this.intervalSlotTime = slotTime ;
         this.seatNumber = seatNumber ;
         this.numberOfMorningSlots = numberOfSlots[0] ;
         this.numberOfAfternoonSlots = numberOfSlots[1];
@@ -60,7 +60,7 @@ public class Saloon {
         this.setPhone(phone);
         this.setCity(city);
         this.seatNumber = seatNumber;
-        this.slotTime = slotTime;
+        this.intervalSlotTime = slotTime;
 
     }
 
@@ -71,7 +71,7 @@ public class Saloon {
         this.openingAfternoonTime = openAfternoonTime;
         this.closeAfternoonTime = closeAfternoonTime;
         this.closeMorningTime = closeMorningTime;
-        this.slotTime = intervalSlotTime;
+        this.intervalSlotTime = intervalSlotTime;
 
     }
 
@@ -82,7 +82,7 @@ public class Saloon {
         this.closeAfternoonTime = time[1][0];
         this.openingMorningTime = time[0][0];
         this.openingAfternoonTime = time[1][1];
-        this.slotTime = intervalSlotTime;
+        this.intervalSlotTime = intervalSlotTime;
         this.numberOfMorningSlots = numberSlotTime[0];
         this.numberOfAfternoonSlots = numberSlotTime[1];
         this.seatNumber = seatNumber;
@@ -137,13 +137,13 @@ public class Saloon {
 
     public LocalTime getSlotTime(){
 
-        return slotTime;
+        return intervalSlotTime;
     }
 
 
     public void setSlotTime(LocalTime slotTime) {
 
-        this.slotTime = slotTime;
+        this.intervalSlotTime = slotTime;
 
     }
 

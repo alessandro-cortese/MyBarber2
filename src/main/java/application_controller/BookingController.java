@@ -1,14 +1,17 @@
 package application_controller;
 
+import java.sql.Date;
 import java.util.*;
 
+import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
-import engineering.bean.TimeSlotBean;
 import engineering.dao.SaloonDAO;
 import engineering.dao.ServiceDAO;
 import engineering.exception.InsertNegativePriceException;
+import engineering.exception.InvalidIndexSelected;
 import engineering.exception.SaloonNotFoundException;
+import javafx.scene.control.Alert;
 import model.Saloon;
 import model.Service;
 
@@ -45,7 +48,7 @@ public class BookingController {
     }
 
 
-    public SaloonBean searchByNameSaloon(SaloonBean saloonBean) throws Exception {
+    public SaloonBean searchByNameSaloon(SaloonBean saloonBean){
 
         SaloonDAO saloonDAO = new SaloonDAO();
         System.out.println(saloonBean.getName());
@@ -115,10 +118,20 @@ public class BookingController {
     public void saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo) { //MANCA IL CUSTOMERBEAN
     }
 
-    public boolean checkDateHour(TimeSlotBean timeSlotBean) {
+    public boolean checkDateHour(BookingBean bookingBean) throws  SaloonNotFoundException {
         SaloonDAO saloonDAO = new SaloonDAO();
-        //result = saloonDAO.checkS
+        boolean result = saloonDAO.checkDateSaloon(bookingBean.getSaloonName() ,bookingBean.getDate());
+        if (result == true){
+            String mess="data non disponibile, il Salone è chiuso!";
+                throw new SaloonNotFoundException(mess);
+        }
+        else{
+            System.out.println("Data confermata");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"conferma effettuta");
+            alert.showAndWait();
+        }
 
-        return true;
+        return result;
     }
+
 }

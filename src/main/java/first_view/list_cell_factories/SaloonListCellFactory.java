@@ -50,6 +50,7 @@ public class SaloonListCellFactory extends ListCell<SaloonBean> {
                 }
 
                 nameSaloonItem.setText(item.getName());
+                System.out.println(item.getCity()+"ewe");
                 placeSaloonItem.setText(item.getAddress() + item.getCity());
                 setGraphic(parentNode);
 

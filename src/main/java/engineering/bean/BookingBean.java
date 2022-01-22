@@ -4,25 +4,41 @@ import model.Saloon;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BookingBean {
     private  String saloonName;
-    private Time time;
-    private Date date;
+    private String date;
 
 
     public BookingBean(){}
 
     public BookingBean(String saloonName, Date date){
-        this.date=date;
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEEEE", Locale.ENGLISH);
+        String dayOfWeek =  formatter.format(date);
+        this.date=dayOfWeek;
+
         this.saloonName = saloonName;
-
-    }
-    public BookingBean(Time time){
-        this.time = time;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        String dayOfWeek = new SimpleDateFormat("EEEE").format(date);
+        this.date = dayOfWeek;
+    }
+
+    public String getSaloonName() {
+        return saloonName;
+    }
+
+    public void setSaloonName(String saloonName) {
+        this.saloonName = saloonName;
+    }
 }

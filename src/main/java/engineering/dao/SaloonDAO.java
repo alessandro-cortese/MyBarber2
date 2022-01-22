@@ -26,6 +26,7 @@ public class SaloonDAO {
     private static final String SALOON_OPENING_AFTERNOON_TIME_COL = "openAfternoonTime" ;
     private static final String SALOON_CLOSE_MORNING_TIME_COL = "closeMorningTime" ;
     private static final String SALOON_CLOSE_AFTERNOON_TIME = "closeAfternoonTime" ;
+    private static final String DAY_CLOSED="dayClosed";
 
     private String barberEmail;
 
@@ -104,13 +105,11 @@ public class SaloonDAO {
                 throw new Exception(message);
             }
             resultSet.beforeFirst();// return on the previous row
-
             while(resultSet.next()){
 
                 Saloon saloon = createSaloon(resultSet);
                 saloons.add(saloon);
             }
-
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -235,4 +234,25 @@ public class SaloonDAO {
 
     }
 
+    public boolean checkDateSaloon(String saloonName, String date) {
+        Connection connection = Connector.getConnectorInstance().getConnection();
+        boolean flag= false;
+        String day = null;
+        try {
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            ResultSet resultSet = Queries.checkDateClosed(statement,saloonName);
+            if (resultSet.first())
+                day = resultSet.getString(DAY_CLOSED);
+                System.out.println("giorno recuperato dal db"+day);
+                System.out.println("confrontare col giorno: " +date);
+
+            if ( day != null) {
+                if (day.compareTo(date) == 0)
+                    flag = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag; //se il giorno inserito è presente in qualche tupla del SaloonDay allora non è possibile prenotare, quindi ritona true
+    }
 }
