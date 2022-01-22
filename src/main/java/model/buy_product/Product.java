@@ -69,8 +69,6 @@ public class Product implements Serializable {
         if (this == toCompare) result = true ;
         else if (toCompare instanceof Product) {
             result = (Integer.compare(this.getIsbn(), ((Product) toCompare).getIsbn()) == 0) ;
-            System.out.println(this.getName() + this.getIsbn());
-            System.out.println(((Product) toCompare).getName() + ((Product) toCompare).getIsbn());
         }
         else result = false ;
         return result ;

@@ -119,13 +119,12 @@ public class UserDAO {
         return customer ;
     }
 
-    public void updateCustomerPoints(Customer customer, Integer customerPoints) {
+    public void updateCustomerPoints(Customer customer) {
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         try(Statement statement = connection.createStatement() ;) {
-            String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customerPoints, customer.getEmail()) ;
+            String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customer.getCardPoints(), customer.getEmail()) ;
             statement.executeUpdate(update) ;
-            System.out.println(customerPoints);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }

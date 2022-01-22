@@ -4,6 +4,7 @@ import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 import model.User;
 import model.buy_product.Cart;
+import model.buy_product.CartRow;
 import model.buy_product.Order;
 
 import java.sql.*;
@@ -41,7 +42,7 @@ public class OrderDAO {
 
             //Salvataggio del Carrello(varie righe di prodotti) relativo a questo ordine
             CartDAO cartDAO = new CartDAO() ;
-            cartDAO.saveCart(order.getOrderCart(), order.getOrderCode());
+            cartDAO.saveCart(order.getCartRows(), order.getOrderCode());
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -60,8 +61,8 @@ public class OrderDAO {
             CartDAO cartDAO = new CartDAO() ;
             while (resultSet.next()) {
                 Order order = createOrder(resultSet) ;
-                Cart cart = cartDAO.loadCartByOrderCode(order.getOrderCode()) ;
-                order.setOrderCart(cart);
+                List<CartRow> cartRows = cartDAO.loadCartByOrderCode(order.getOrderCode()) ;
+                order.setCartRows(cartRows);
                 orderList.add(order) ;
             }
         } catch (SQLException sqlException) {

@@ -2,6 +2,7 @@ package model.buy_product;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 
@@ -14,12 +15,10 @@ public class Order {
     private LocalDate date ;
     private Double finalPrice ;
 
-    private Cart orderCart ;
+    private List<CartRow> cartRows ;
 
 
-    public Order(Cart cart) {
-        setOrderCart(cart);
-    }
+    public Order() {}
 
     public Order(Integer orderCode, String address, String telephone, String orderOwner, LocalDate date) {
         setOrderCode(orderCode);
@@ -71,18 +70,6 @@ public class Order {
         this.orderCode = orderCode;
     }
 
-    public Cart getOrderCart() {
-        return orderCart;
-    }
-
-    public void setOrderCart(Cart orderCart) {
-        this.orderCart = orderCart;
-    }
-
-    public Integer getOrderPoints() {
-        return (int) Math.round(orderCart.getTotal()) ;
-    }
-
     public Double getFinalPrice() {
         return finalPrice;
     }
@@ -97,5 +84,13 @@ public class Order {
 
     public void setOrderOwner(String orderOwner) {
         this.orderOwner = orderOwner;
+    }
+
+    public List<CartRow> getCartRows() {
+        return cartRows;
+    }
+
+    public void setCartRows(List<CartRow> cartRows) {
+        this.cartRows = cartRows;
     }
 }

@@ -11,6 +11,8 @@ public class CouponBean {
     private Double couponDiscount ;
     private Integer couponType ;
 
+    public CouponBean() {}
+
     public CouponBean(String couponCode) throws InvalidCouponException {
         this(couponCode, 0.0) ;
     }
@@ -45,16 +47,6 @@ public class CouponBean {
         this.couponDiscount = couponDiscount;
     }
 
-
-    @Override
-    public String toString() {
-        if (couponType == null || couponDiscount == null) {
-            return String.format("Codice: %s", couponCode);
-        }
-        else {
-            return String.format("Codice: %3s\t\tTipo: %s\t\tValore: %.2f", couponCode, couponType, couponDiscount);
-        }
-    }
 
     public Integer getCouponType() {
         return couponType;

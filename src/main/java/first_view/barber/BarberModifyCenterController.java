@@ -1,18 +1,15 @@
 package first_view.barber;
 
 import engineering.bean.SaloonBean;
+import engineering.other_classes.Weekdays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import first_view.general.InternalBackController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +24,7 @@ public class BarberModifyCenterController implements Initializable {
     @FXML private Button continueButton;
     @FXML private Spinner<Integer> slotTimeSpinner;
     @FXML private Spinner<Integer> numberOfSeatsSpinner;
+    @FXML private ChoiceBox<String> closedDaysChoiceBox;
 
     private static final String BARBER_SCHEDULE_SCREEN_NAME = "first_view/barber/barber_schedule.fxml";
 
@@ -37,6 +35,8 @@ public class BarberModifyCenterController implements Initializable {
         FXMLLoader fxmlLoader;
         BorderPane myBorderPane;
         SaloonBean saloonBean;
+        String closedDayRefactor;
+        Weekdays closedDay = null;
 
         if( sourceNode == continueButton){
 
@@ -49,6 +49,19 @@ public class BarberModifyCenterController implements Initializable {
             Integer seatsNumber = numberOfSeatsSpinner.getValue();
             saloonBean =  new SaloonBean(nameCenterTextField.getText(), wayCenterTextField.getText(), cityCenterTextField.getText(), phoneCenterTextField.getText(), seatsNumber, slotMinutes);
 
+            closedDayRefactor = closedDaysChoiceBox.getValue();
+
+            switch (closedDayRefactor) {
+                case "Monday" -> closedDay = Weekdays.Monday;
+                case "Tuesday" -> closedDay = Weekdays.Tuesday;
+                case "Wednesday" -> closedDay = Weekdays.Wednesday;
+                case "Thursday" -> closedDay = Weekdays.Thursday;
+                case "Friday" -> closedDay = Weekdays.Friday;
+                case "Saturday" -> closedDay = Weekdays.Saturday;
+            }
+
+            saloonBean.setClosedDayOfWeekInfo(closedDay);
+            System.out.println(closedDay);
             BarberScheduleTimeController barberScheduleTimeController = fxmlLoader.getController();
             barberScheduleTimeController.setSaloonBean(saloonBean);
         }
@@ -64,5 +77,9 @@ public class BarberModifyCenterController implements Initializable {
         slotTimeSpinner.setValueFactory(firstSpinnerValueFactory);
         numberOfSeatsSpinner.setValueFactory(secondSpinnerValueFactory);
 
+        String[] weekdays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        closedDaysChoiceBox.getItems().addAll(weekdays);
+
     }
+
 }

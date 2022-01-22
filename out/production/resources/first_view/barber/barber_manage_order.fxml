@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberManageOrderGUIController">
    <children>
       <ListView fx:id="orderListView" layoutX="61.0" layoutY="107.0" prefHeight="550.0" prefWidth="400.0" />
@@ -59,6 +58,6 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="confirmOrderButton" layoutX="886.0" layoutY="644.0" mnemonicParsing="false" text="Conferma Ordine" />
+      <Button fx:id="confirmOrderButton" layoutX="886.0" layoutY="644.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Conferma Ordine" />
    </children>
 </AnchorPane>

@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 import second_view.general.ScreenChanger;
 
 import java.net.URL;
@@ -37,6 +38,20 @@ public class ClientFidelityCardGUIController implements Initializable {
             viewFidelityCard(loggedUser) ;
         } catch (NotExistentUserException ignored) {
         }
+
+        couponListView.setCellFactory(new Callback<ListView<CouponBean>, ListCell<CouponBean>>() {
+            @Override
+            public ListCell<CouponBean> call(ListView<CouponBean> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(CouponBean item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item != null) setText(String.format("Codice: %3s\t\tTipo: %s\t\tValore: %.2f", item.getExternalCouponCode(), item.getExternalCouponType(), item.getCouponDiscount()));
+                        else setText(null) ;
+                    }
+                };
+            }
+        });
     }
 
 

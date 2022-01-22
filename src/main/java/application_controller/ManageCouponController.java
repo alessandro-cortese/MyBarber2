@@ -38,7 +38,6 @@ public class ManageCouponController {
             new Pair<>(PERCENTAGE_TYPE, 50.0), PERC_FIFTY_COUPON_COST) ;
 
 
-
     private final CouponDAO couponDAO ;
     private CouponContainer couponContainer ;
     private final UserDAO userDAO ;
@@ -51,7 +50,6 @@ public class ManageCouponController {
         couponContainer = null ;
         userDAO = new UserDAO() ;
         customer = null;
-
     }
 
 
@@ -105,7 +103,7 @@ public class ManageCouponController {
 
     private void updateCustomer(Integer couponCost) {
         customer.setCardPoints(customer.getCardPoints() - couponCost);
-        userDAO.updateCustomerPoints(customer, customer.getCardPoints()) ;
+        userDAO.updateCustomerPoints(customer) ;
     }
 
 
