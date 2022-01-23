@@ -77,33 +77,13 @@ public class ProductDAO {
 
     }
 
-    public Product loadProductByIsbn(int productIsbn, String barberEmail) throws SQLException{
+    public Product loadProductByIsbn(int productIsbn) throws SQLException{
 
         Product product = null;
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         try(Statement statement = connection.createStatement();
-            ResultSet resultSet = Queries.loadProductByIsbn(statement, productIsbn, barberEmail)){
-
-            resultSet.next();
-            if(resultSet.first()){
-                product = createProduct(resultSet);
-            }
-
-        }
-
-        return product;
-
-    }
-
-    public Product loadProductByIsbn2(int productIsbn) throws SQLException{
-
-        Product product = null;
-        Connection connection = Connector.getConnectorInstance().getConnection();
-
-        String query = String.format("SELECT * FROM Product WHERE id = %d", productIsbn) ;
-        try(Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query)){
+            ResultSet resultSet = Queries.loadProductByIsbn(statement, productIsbn)){
 
 
             if(resultSet.next()){

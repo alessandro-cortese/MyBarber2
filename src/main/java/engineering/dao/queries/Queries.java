@@ -53,8 +53,8 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
-    public static ResultSet loadProductByIsbn(Statement statement, int productIsbn, String barberEmail) throws SQLException {
-        String query = String.format("SELECT * FROM Product WHERE id = '%d' AND barber = '%s';", productIsbn, barberEmail);
+    public static ResultSet loadProductByIsbn(Statement statement, int productIsbn) throws SQLException {
+        String query = String.format("SELECT * FROM Product WHERE id = %d;", productIsbn);
         return statement.executeQuery(query);
     }
 
@@ -153,4 +153,5 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         String sql = String.format("SELECT dayClosed FROM Saloon join SaloonDay on Saloon.id = SaloonDay.Saloon WHERE name = '%s';",saloonName);
         return  statement.executeQuery(sql);
     }
+
 }

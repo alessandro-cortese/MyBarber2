@@ -130,7 +130,7 @@ public class ServiceDAO {
 
         if(productId != -1){
 
-            product = productDAO.loadProductByIsbn(productId, barberEmail);
+            product = productDAO.loadProductByIsbn(productId);
             return new Service(serviceName, serviceDescription, servicePrice, product);
 
         }

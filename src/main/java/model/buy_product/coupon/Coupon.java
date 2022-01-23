@@ -31,11 +31,6 @@ public abstract class Coupon implements Priceable, Comparable<Coupon> {
         this.couponCode = couponCode;
     }
 
-    @Override
-    public Double getPrice() {
-        return appliedPrice.getPrice() - getCouponDiscount();
-    }
-
     public void setAppliedPrice(Priceable appliedPrice) {
         this.appliedPrice = appliedPrice;
     }
@@ -59,6 +54,8 @@ public abstract class Coupon implements Priceable, Comparable<Coupon> {
     protected Priceable getAppliedPrice() {
         return appliedPrice ;
     }
+
+
 
     @Override
     public int compareTo(Coupon toCompare) {

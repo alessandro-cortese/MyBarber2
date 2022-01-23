@@ -21,7 +21,7 @@ public class BarberOrderListCellFactory extends ListCell<VendorOrderBean> {
 
     private Parent parentNode = null ;
 
-    private Integer caller ;
+    private final Integer caller ;
 
     public BarberOrderListCellFactory(Integer caller) {
         this.caller = caller ;

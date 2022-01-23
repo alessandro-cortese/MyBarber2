@@ -12,18 +12,19 @@ import first_view.pickers.CredentialsPicker;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 import javafx.util.Pair;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 
-public class ClientCompleteOrderController {
+public class ClientCompleteOrderController implements Initializable {
 
     @FXML private ListView<String> couponListView ;
     @FXML private TextField commandLine ;
@@ -33,6 +34,24 @@ public class ClientCompleteOrderController {
 
 
     private BuyProductController buyProductController ;
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        couponListView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) setText("Codice Coupon: " + item);
+                        else setText(null);
+                    }
+                };
+            }
+        });
+    }
 
 
     @FXML
@@ -124,6 +143,5 @@ public class ClientCompleteOrderController {
         couponListView.setItems(FXCollections.observableList(orderTotalBean.getExternalCouponCodes()));
         orderTotalLabel.setText(String.format("Totale Ordine: %s %.2f" ,EURO_SYMBOL, orderTotalBean.getOrderTotal())) ;
     }
-
 
 }

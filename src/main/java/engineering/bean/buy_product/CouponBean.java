@@ -10,6 +10,8 @@ public class CouponBean {
     private Integer couponCode ;
     private Double couponDiscount ;
     private Integer couponType ;
+    private Integer couponPointsPrice;
+
 
     public CouponBean() {}
 
@@ -71,5 +73,13 @@ public class CouponBean {
     public String getExternalCouponType() {
         if (couponType == SUBTRACTION_TYPE) return "subtraction" ;
         else return "percentage" ;
+    }
+
+    public Integer getCouponPointsPrice() {
+        return couponPointsPrice;
+    }
+
+    public void setCouponPointsPrice(Integer couponPointsPrice) {
+        this.couponPointsPrice = couponPointsPrice;
     }
 }
