@@ -2,7 +2,6 @@ package engineering.dao;
 
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
-import model.buy_product.Cart;
 import model.buy_product.CartRow;
 import model.buy_product.Product;
 
@@ -51,7 +50,7 @@ public class CartDAO {
                 Integer productId = resultSet.getInt(PRODUCT_ID_LAB) ;
                 Integer productQuantity = resultSet.getInt(PRODUCT_QUANTITY_LAB) ;
 
-                Product product = productDAO.loadProductByIsbn2(productId) ;
+                Product product = productDAO.loadProductByIsbn(productId) ;
                 CartRow cartRow = new CartRow(product, productQuantity) ;
 
                 cartRowList.add(cartRow) ;

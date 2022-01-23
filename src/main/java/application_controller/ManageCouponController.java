@@ -21,35 +21,33 @@ import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
 
 public class ManageCouponController {
 
-    private static final Integer SUB_FIVE_COUPON_COST = 200 ;
-    private static final Integer SUB_TEN_COUPON_COST = 300 ;
-    private static final Integer SUB_TWENTY_COUPON_COST = 400 ;
-    private static final Integer PERC_FIFTEEN_COUPON_COST = 150;
-    private static final Integer PERC_THIRTY_FIVE_COUPON_COST = 275;
-    private static final Integer PERC_FIFTY_COUPON_COST = 500;
-
-    private static final Map<Pair<Integer,Double>, Integer> couponCostMap = Map.of(
-            new Pair<>(SUBTRACTION_TYPE, 5.0), SUB_FIVE_COUPON_COST,
-            new Pair<>(SUBTRACTION_TYPE, 10.0), SUB_TEN_COUPON_COST,
-            new Pair<>(SUBTRACTION_TYPE, 20.0), SUB_TWENTY_COUPON_COST,
-
-            new Pair<>(PERCENTAGE_TYPE, 15.0), PERC_FIFTEEN_COUPON_COST,
-            new Pair<>(PERCENTAGE_TYPE, 35.0), PERC_THIRTY_FIVE_COUPON_COST,
-            new Pair<>(PERCENTAGE_TYPE, 50.0), PERC_FIFTY_COUPON_COST) ;
-
-
     private final CouponDAO couponDAO ;
     private CouponContainer couponContainer ;
     private final UserDAO userDAO ;
 
     private Customer customer ;
 
+    private final List<CouponBean> couponCosts ;
 
     public ManageCouponController() {
         couponDAO = new CouponDAO() ;
         couponContainer = null ;
         userDAO = new UserDAO() ;
         customer = null;
+
+        Map<Double, Integer> subtractionCouponCostMap = Map.of(5.0, 200, 10.0, 300, 20.0, 400);
+        List<CouponBean> subtractionCouponBean = createCouponPriceBean(subtractionCouponCostMap, SUBTRACTION_TYPE) ;
+
+        Map<Double, Integer> percentageCouponCostMap = Map.of(15.0, 150, 35.0, 275, 50.0, 500);
+        List<CouponBean> percentageCouponBean = createCouponPriceBean(percentageCouponCostMap, PERCENTAGE_TYPE) ;
+
+        couponCosts = new ArrayList<>() ;
+        couponCosts.addAll(subtractionCouponBean) ;
+        couponCosts.addAll(percentageCouponBean) ;
+    }
+
+    public List<CouponBean> showCouponCosts() {
+        return couponCosts ;
     }
 
 
@@ -77,27 +75,22 @@ public class ManageCouponController {
     }
 
     public FidelityCardBean generateNewCoupon(CouponBean couponBean) throws InvalidCouponException, NotExistentUserException {
-
         if (customer == null) {
             throw new NotExistentUserException("ACCESSO NON EFFETTUATO!!") ;
         }
 
         Double couponValue = couponBean.getCouponDiscount() ;
-
-        Pair<Integer, Double> productCostKey = new Pair<>(couponBean.getCouponType(), couponBean.getCouponDiscount()) ;
-
-        Integer couponCost = couponCostMap.get(productCostKey) ;
-        System.out.println(couponCost);
-        if (couponCost != null) {
-            Integer customerPoints = customer.getCardPoints();
-            if (customerPoints >= couponCost) {
-                createNewCoupon(couponBean.getCouponType(), couponValue) ;
-                updateCustomer(couponCost) ;
-            }
-            else {
-                throw new InvalidCouponException("PUNTI NON SUFFICIENTI PER GENERARE IL COUPON!!") ;
-            }
+        Integer couponCost = couponBean.getCouponPointsPrice() ;
+        //System.out.println(couponCost);
+        Integer customerPoints = customer.getCardPoints();
+        if (customerPoints >= couponCost) {
+            createNewCoupon(couponBean.getCouponType(), couponValue) ;
+            updateCustomer(couponCost) ;
         }
+        else {
+            throw new InvalidCouponException("PUNTI NON SUFFICIENTI PER GENERARE IL COUPON!!") ;
+        }
+
         return createFidelityCardBean();
     }
 
@@ -125,5 +118,20 @@ public class ManageCouponController {
             }
         }
         return couponBeans ;
+    }
+
+    private List<CouponBean> createCouponPriceBean(Map<Double,Integer> couponCostMap, Integer couponType) {
+        List<CouponBean> couponBeanList = new ArrayList<>() ;
+
+        for (Double couponDiscount : couponCostMap.keySet()) {
+            CouponBean couponBean = new CouponBean() ;
+            couponBean.setCouponDiscount(couponDiscount);
+            couponBean.setCouponType(couponType);
+            couponBean.setCouponPointsPrice(couponCostMap.get(couponDiscount));
+
+            couponBeanList.add(couponBean) ;
+        }
+
+        return couponBeanList ;
     }
 }
