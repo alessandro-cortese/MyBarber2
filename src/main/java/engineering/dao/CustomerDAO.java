@@ -17,7 +17,6 @@ public class CustomerDAO {
     private static final String CUSTOMER_COL_NAME = "name" ;
     private static final String CUSTOMER_COL_SURNAME  = "surname" ;
     private static final String CUSTOMER_COL_TELEPHONE = "telephone" ;
-    private static final String CUSTOMER_COL_CREDIT_CARD = "creditCard" ;
     private static final String CUSTOMER_COL_CARD_POINTS = "cardPoints" ;
 
     public List<Customer> loadCustomerFromFavoriteSaloon(Integer favoriteSaloonId) {
@@ -49,11 +48,10 @@ public class CustomerDAO {
         String password = "";
         String name = resultSet.getString(CUSTOMER_COL_NAME);
         String surname = resultSet.getString(CUSTOMER_COL_SURNAME);
-        String creditCard = resultSet.getString(CUSTOMER_COL_CREDIT_CARD);
         String phone = resultSet.getString(CUSTOMER_COL_TELEPHONE);
         Integer pointsCard = resultSet.getInt(CUSTOMER_COL_CARD_POINTS);
 
-        return new Customer(email, password, name, surname, creditCard, phone, pointsCard);
+        return new Customer(email, password, name, surname, phone, pointsCard);
 
     }
 

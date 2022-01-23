@@ -2,7 +2,6 @@ package first_view.barber;
 
 import engineering.bean.ServiceBean;
 import engineering.exception.InsertNegativePriceException;
-import engineering.exception.NegativePriceException;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;

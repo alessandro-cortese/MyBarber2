@@ -1,5 +1,6 @@
 package second_view.barber;
 
+import engineering.other_classes.Weekdays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -24,6 +25,7 @@ public class BarberAddNewSaloonController {
     @FXML private TextField addSaloonCloseMorningTimeTextField;
     @FXML private TextField addSaloonOpenAfternoonTimeTextField;
     @FXML private TextField addSaloonCloseAfternoonTimeTextField;
+    @FXML private TextField addSaloonClosedDayTextField;
     @FXML private Label errorAddSaloonLabel;
 
     private static final String SET_NAME_NEW_SALOON_COMMAND = "set name";
@@ -36,11 +38,13 @@ public class BarberAddNewSaloonController {
     private static final String SET_CLOSE_MORNING_TIME_COMMAND = "set close morning time";
     private static final String SET_OPEN_AFTERNOON_TIME_COMMAND = "set open afternoon time";
     private static final String SET_CLOSE_AFTERNOON_TIME_COMMAND = "set close afternoon time";
+    private static final String SET_CLOSE_DAY_COMMAND = "set closed day";
 
     @FXML
     public void onCommand(ActionEvent event) {
 
         String addSaloonCommandLineLocal = addSaloonCommandLine.getText();
+        Weekdays closedDay;
         addSaloonCommandLine.setText("");
         addSaloonCommandLine.setStyle(null);
         errorAddSaloonLabel.setText("");
@@ -87,6 +91,42 @@ public class BarberAddNewSaloonController {
         else if((addSaloonCommandLineLocal.startsWith(SET_OPEN_AFTERNOON_TIME_COMMAND) || addSaloonCommandLineLocal.startsWith(SET_CLOSE_AFTERNOON_TIME_COMMAND)) && setAfternoonTime(addSaloonCommandLineLocal)) {
             return ;
         }
+        else if(addSaloonCommandLineLocal.startsWith(SET_CLOSE_DAY_COMMAND)) {
+            newField = addSaloonCommandLineLocal.replace(SET_CLOSE_DAY_COMMAND + " ", "");
+            switch (newField) {
+                case "Monday" -> {
+                    closedDay = Weekdays.MONDAY;
+                    addSaloonClosedDayTextField.setText(newField);
+                    return;
+                }
+                case "Tuesday" -> {
+                    closedDay = Weekdays.TUESDAY;
+                    addSaloonClosedDayTextField.setText(newField);
+                    return;
+                }
+                case "Wednesday" -> {
+                    closedDay = Weekdays.WEDNESDAY;
+                    addSaloonClosedDayTextField.setText(newField);
+                    return;
+                }
+                case "Thursday" -> {
+                    closedDay = Weekdays.THURSDAY;
+                    addSaloonClosedDayTextField.setText(newField);
+                    return;
+                }
+                case "Friday" -> {
+                    closedDay = Weekdays.FRIDAY;
+                    addSaloonClosedDayTextField.setText(newField);
+                    return;
+                }
+                case "Saturday" -> {
+                    closedDay = Weekdays.SATURDAY;
+                    addSaloonClosedDayTextField.setText(newField);
+                    return;
+                }
+            }
+
+        }
 
         addSaloonCommandLine.setStyle("-fx-border-color: red");
 
@@ -96,8 +136,6 @@ public class BarberAddNewSaloonController {
 
         String[] afternoonTimes;
         LocalTime afternoonLocalTime;
-
-
 
         if(commandLine.startsWith(SET_OPEN_AFTERNOON_TIME_COMMAND)) {
             afternoonTimes = commandLine.replace(SET_OPEN_AFTERNOON_TIME_COMMAND + " ", "").split(":");

@@ -52,12 +52,12 @@ public class BarberModifyCenterController implements Initializable {
             closedDayRefactor = closedDaysChoiceBox.getValue();
 
             switch (closedDayRefactor) {
-                case "Monday" -> closedDay = Weekdays.Monday;
-                case "Tuesday" -> closedDay = Weekdays.Tuesday;
-                case "Wednesday" -> closedDay = Weekdays.Wednesday;
-                case "Thursday" -> closedDay = Weekdays.Thursday;
-                case "Friday" -> closedDay = Weekdays.Friday;
-                case "Saturday" -> closedDay = Weekdays.Saturday;
+                case "Lunedì" -> closedDay = Weekdays.MONDAY;
+                case "Martedì" -> closedDay = Weekdays.TUESDAY;
+                case "Mercoledì" -> closedDay = Weekdays.WEDNESDAY;
+                case "Giovedì" -> closedDay = Weekdays.THURSDAY;
+                case "Venerdì" -> closedDay = Weekdays.FRIDAY;
+                case "Sabato" -> closedDay = Weekdays.SATURDAY;
             }
 
             saloonBean.setClosedDayOfWeekInfo(closedDay);
@@ -77,7 +77,7 @@ public class BarberModifyCenterController implements Initializable {
         slotTimeSpinner.setValueFactory(firstSpinnerValueFactory);
         numberOfSeatsSpinner.setValueFactory(secondSpinnerValueFactory);
 
-        String[] weekdays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        String[] weekdays = {"Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"};
         closedDaysChoiceBox.getItems().addAll(weekdays);
 
     }

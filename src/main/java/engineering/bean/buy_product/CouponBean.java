@@ -37,7 +37,7 @@ public class CouponBean {
 
     public CouponBean(Double couponDiscount, String couponType){
         setCouponDiscount(couponDiscount);
-        if (couponType == "subtraction") setCouponType(SUBTRACTION_TYPE);
+        if (couponType.equals("subtraction")) setCouponType(SUBTRACTION_TYPE);
         else setCouponType(PERCENTAGE_TYPE);
     }
 

@@ -232,7 +232,7 @@ public class SaloonBean {
     public void setClosedDayOfWeekInfo(Weekdays closedDayOfWeekInfo) {
 
         this.closedDayOfWeekInfo[0] = closedDayOfWeekInfo;
-        this.closedDayOfWeekInfo[1] = Weekdays.Sunday;
+        this.closedDayOfWeekInfo[1] = Weekdays.SUNDAY;
 
     }
 

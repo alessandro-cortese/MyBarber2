@@ -26,12 +26,6 @@ public class ServiceDAO {
 
     }
 
-    public String getBarberEmail(){
-
-        return this.barberEmail;
-
-    }
-
     public ServiceCatalogue loadServices() {
 
         ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
