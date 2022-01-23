@@ -1,6 +1,7 @@
 package engineering.time;
 
-import engineering.bean.SaloonBean;
+import engineering.bean.TimeSlotBean;
+import model.Saloon;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -15,49 +16,41 @@ public class ScheduleTime {
     private List<TimeSlot> timeSlotList;
     private Time timeOpen;
     private Time sumTime;
+    TimeSlot timeSlot;
 
-
-    public ScheduleTime(SaloonBean saloonTimeSlots){
-        timeSlotList = new ArrayList<>();
-
-        timeOpen = saloonTimeSlots.getOpeningMorningTimeInfo();
-        sumTime = new Time(timeOpen.getTime()); //return hours in milliseconds
+    public ScheduleTime(Saloon saloonTimeSlots){
+        timeSlotList = new ArrayList<TimeSlot>();
+        timeOpen = saloonTimeSlots.getOpeningMorningTime();
+        sumTime = new Time(timeOpen.getTime());
         seatNumber = saloonTimeSlots.getSeatNumber();
 
 
         intervalSlotTime = saloonTimeSlots.getSlotTime();
-        slotTimeMorning = saloonTimeSlots.getNumberOfMorningSlotsInfo();
-        slotTimeAfternoon = saloonTimeSlots.getNumberOfAfternoonSlotsInfo();
+        slotTimeMorning = saloonTimeSlots.getNumberOfMorningSlots();
+        slotTimeAfternoon = saloonTimeSlots.getNumberOfAfternoonSlots();
 
     }
 
         public List<TimeSlot> CreateSlotTime(){
 
-
-
-            TimeSlot timeSlot;
             for (int i = 0; i< slotTimeMorning ; i++){
                 timeSlot = new TimeSlot();
                 long in = timeOpen.getTime();
                 timeOpen = new Time(in);
                 timeSlot.setFromTime(timeOpen);
+
                 int minute = intervalSlotTime.getMinute();
                 int millisec = minute*60000;
 
-                System.out.println("prima: "+timeOpen);
                 timeOpen.setTime(timeOpen.getTime());
                 long i2 = timeOpen.getTime()+millisec;
                 timeOpen = new Time(i2);
                 System.out.println("dopo: "+timeOpen);
                 timeSlot.setToTime(timeOpen);
                 timeSlot.setSeatAvailable(seatNumber);
+
                 timeSlotList.add(timeSlot);
 
-            }
-
-            for (TimeSlot time : timeSlotList){
-                //System.out.println(time.getFromTime());
-                //System.out.println(time.getToTime());
             }
             return timeSlotList;
         }

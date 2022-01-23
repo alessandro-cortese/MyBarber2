@@ -4,6 +4,7 @@ import application_controller.BookingController;
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
 import engineering.exception.InsertNegativePriceException;
+import engineering.exception.ServiceNotFoundException;
 import engineering.time.TimeSlot;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
@@ -24,12 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleBookingGraphicController{
-
-    private static final String SERVICE_ITEM = "first_view/list_item/barber_service_list_item.fxml";
-
-
-    private String saloonAddress;
-    private String city;
 
     @FXML
     private Button bookedButton;
@@ -73,6 +68,7 @@ public class ScheduleBookingGraphicController{
 
     private ServiceBean service;
     private static List<ServiceBean> serviceListSelected;
+    private boolean firstView;
 
     public ScheduleBookingGraphicController(){
         serviceListSelected = new ArrayList<>();
@@ -102,20 +98,15 @@ public class ScheduleBookingGraphicController{
         BookingController bookingController = new BookingController();
         bookingController.saveBooking(serviceListSelected,saloonInfo);// DA FINIRE
 
-
-
     }
 
-
-
-
-
-    public void InjectServiceSaloon(){
-        serviceListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM));
+    public void InjectServiceSaloon() throws ServiceNotFoundException {
+        firstView= false;
+        serviceListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,firstView));
 
         BookingController bookingController = new BookingController();
         servicesSaloonList = bookingController.SearchServices(saloonInfo);
-        serviceListView.getItems().clear();
+
         serviceListView.setItems(FXCollections.observableList(servicesSaloonList));
 
         phoneSaloonLabel.setText(saloonInfo.getPhone());

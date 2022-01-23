@@ -102,5 +102,4 @@ public class ServiceBean extends Subject {
         super.notifyObservers();
 
     }
-
 }

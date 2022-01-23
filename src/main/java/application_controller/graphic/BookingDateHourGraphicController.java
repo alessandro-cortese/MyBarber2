@@ -3,6 +3,8 @@ package application_controller.graphic;
 import application_controller.BookingController;
 import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
+import engineering.bean.TimeSlotBean;
+import engineering.exception.ServiceNotFoundException;
 import engineering.time.ScheduleTime;
 import engineering.time.TimeSlot;
 import first_view.list_cell_factories.SaloonListCellFactory;
@@ -63,7 +65,7 @@ public class BookingDateHourGraphicController {
         @FXML
         private Label HourLabel;
 
-        private SaloonBean timeSlotSaloon;
+        private List<TimeSlotBean> timeSlotSaloon;
 
         @FXML
         private Label initTime;
@@ -80,7 +82,7 @@ public class BookingDateHourGraphicController {
         }
 
         @FXML
-        void onButtonClicked(ActionEvent event) throws IOException {
+        void onButtonClicked(ActionEvent event) throws IOException, ServiceNotFoundException {
                 Button sourceButton = (Button) event.getSource();
                 FXMLLoader fxmlLoaderNode = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME));
                 Parent newCenterNode = fxmlLoaderNode.load();
@@ -113,11 +115,9 @@ public class BookingDateHourGraphicController {
         public void injectSaloonIntoDateHour() {
                 timeSlotListView.setCellFactory(param -> new SaloonTimeSlotsListCellFactory());
 
-                searchTimeSlots();//recupero gli slot Time dal db
+                searchTimeSlots();
 
-                timeSlotListView.getItems().clear();
-                timeSlotList = new ScheduleTime(timeSlotSaloon).CreateSlotTime();
-                timeSlotListView.setItems(FXCollections.observableList(timeSlotList));
+                timeSlotListView.setItems(FXCollections.observableList(timeSlotSaloon));
 
         }
 

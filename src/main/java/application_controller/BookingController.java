@@ -6,11 +6,15 @@ import java.util.*;
 import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
+import engineering.bean.TimeSlotBean;
 import engineering.dao.SaloonDAO;
 import engineering.dao.ServiceDAO;
 import engineering.exception.InsertNegativePriceException;
 import engineering.exception.InvalidIndexSelected;
 import engineering.exception.SaloonNotFoundException;
+import engineering.exception.ServiceNotFoundException;
+import engineering.time.ScheduleTime;
+import engineering.time.TimeSlot;
 import javafx.scene.control.Alert;
 import model.Saloon;
 import model.Service;
@@ -26,6 +30,8 @@ public class BookingController {
     private String saloonNameG;
     private List<Service> ServicesList;
     private List<ServiceBean> servicesBeanList;
+    private List<TimeSlotBean> saloonBeanTimeSlots;
+    private List<TimeSlot> saloonTimeSlots;
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
@@ -64,8 +70,8 @@ public class BookingController {
 
     }
 
-    public SaloonBean searchTimeSlots(SaloonBean saloonBean) {
-        SaloonBean saloonBeanTimeSlots;
+    public List<TimeSlotBean> searchTimeSlots(SaloonBean saloonBean) {
+        saloonBeanTimeSlots= new ArrayList<>();
         SaloonDAO saloonDAO = new SaloonDAO();
         saloonName = saloonBean.getName();
 
@@ -77,25 +83,21 @@ public class BookingController {
             e.printStackTrace();
 
         }
-        saloonBeanTimeSlots = new SaloonBean();
-        saloonBeanTimeSlots.setOpeningMorningTimeInfo(saloon.getOpeningMorningTime());
-        saloonBeanTimeSlots.setOpeningAfternoonTimeInfo(saloon.getOpeningAfternoonTime());
-        saloonBeanTimeSlots.setCloseMorningTimeInfo(saloon.getCloseMorningTime());
-        saloonBeanTimeSlots.setCloseAfternoonTimeInfo(saloon.getCloseAfternoonTime());
-        saloonBeanTimeSlots.setSlotTime(saloon.getSlotTime());
-        saloonBeanTimeSlots.setSeatNumber(saloon.getSeatNumber());
-        saloonBeanTimeSlots.setNumberOfMorningSlotsInfo(saloon.getNumberOfMorningSlots());
-        saloonBeanTimeSlots.setNumberOfAfternoonSlotsInfo(saloon.getNumberOfAfternoonSlots());
+
+        saloonTimeSlots= new ScheduleTime(saloon).CreateSlotTime();
+        saloonBeanTimeSlots = new ArrayList<>();
+        for (TimeSlot timeSlot : saloonTimeSlots){
+            TimeSlotBean timeSlotBean = new TimeSlotBean();
+            timeSlotBean.setFromTime(timeSlot.getFromTime());
+            timeSlotBean.setToTime(timeSlot.getToTime());
+            timeSlotBean.setSeatAvailable(timeSlot.getSeatAvailable());
+            saloonBeanTimeSlots.add(timeSlotBean);
+        }
 
         return saloonBeanTimeSlots;
     }
 
-
-    public void setSaloonName(String saloonCity) {
-        saloonNameG = saloonCity;
-    }
-
-    public List<ServiceBean> SearchServices(SaloonBean saloonBean) {
+    public List<ServiceBean> SearchServices(SaloonBean saloonBean) throws ServiceNotFoundException {
         ServiceDAO serviceDAO = new ServiceDAO();
         servicesBeanList = new ArrayList<>();
         ServicesList = serviceDAO.retrieveService(saloonBean.getName());
@@ -106,8 +108,9 @@ public class BookingController {
                 serviceBean.setDescriptionInfo(service.getServiceDescription());
                 serviceBean.setPriceInfo(service.getServicePrice());
                 servicesBeanList.add(serviceBean);
-            } catch (InsertNegativePriceException e) { //RICORDARSI DI FARE LA MIA di eccezzione(CIOÈ DI ROBERTO)
-                e.printStackTrace();
+            } catch (Exception e) {
+                ServiceNotFoundException e1 = new ServiceNotFoundException(e.getMessage());
+                throw e1;
             }
 
         }

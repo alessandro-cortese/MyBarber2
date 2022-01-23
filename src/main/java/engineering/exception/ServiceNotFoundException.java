@@ -1,5 +1,7 @@
 package engineering.exception;
 
+import javafx.scene.control.Alert;
+
 import java.io.Serial;
 
 public class ServiceNotFoundException extends Exception{
@@ -13,6 +15,8 @@ public class ServiceNotFoundException extends Exception{
 
     public ServiceNotFoundException(String message){
         super(message);
+        Alert alert = new Alert(Alert.AlertType.ERROR, message);
+        alert.showAndWait();
     }
 
 }

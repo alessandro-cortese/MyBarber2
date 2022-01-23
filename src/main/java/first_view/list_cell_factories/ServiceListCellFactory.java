@@ -33,9 +33,9 @@ public class ServiceListCellFactory extends ListCell<ServiceBean> {
         this.viewCaller = flag;
 
     }
-    public ServiceListCellFactory(String fxmlPath){
+    public ServiceListCellFactory(String fxmlPath, boolean view){
         this.fxmlPath = fxmlPath;
-        this.viewCaller = false;
+        this.viewCaller = view;
     }
 
 

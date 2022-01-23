@@ -1,6 +1,7 @@
 package first_view.list_cell_factories;
 
 import engineering.bean.SaloonBean;
+import engineering.bean.TimeSlotBean;
 import engineering.time.ScheduleTime;
 import engineering.time.TimeSlot;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +12,7 @@ import javafx.scene.control.ListCell;
 
 import java.io.IOException;
 
-public class SaloonTimeSlotsListCellFactory  extends ListCell<TimeSlot> {
+public class SaloonTimeSlotsListCellFactory  extends ListCell<TimeSlotBean> {
     private static final String LIST_ITEM_SALOON_TIMESLOTS="first_view/list_item/client_time_slot_item.fxml";
     private static final String LIST_ITEM_SALOON_TIMESLOTS_2V="second_view/list_item/client_slot_time_item.fxml";
     private static final String INIT_TIME = "initTime";
@@ -26,7 +27,7 @@ public class SaloonTimeSlotsListCellFactory  extends ListCell<TimeSlot> {
     }
 
     @Override
-    protected void updateItem(TimeSlot item, boolean empty) {
+    protected void updateItem(TimeSlotBean item, boolean empty) {
         super.updateItem(item, empty);
 
         if (item != null) {

@@ -3,9 +3,9 @@ package second_view.client;
 import application_controller.BookingController;
 import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
+import engineering.bean.TimeSlotBean;
 import engineering.exception.InvalidIndexSelected;
 import engineering.exception.SaloonNotFoundException;
-import engineering.time.ScheduleTime;
 import engineering.time.TimeSlot;
 import first_view.list_cell_factories.SaloonTimeSlotsListCellFactory;
 import javafx.collections.FXCollections;
@@ -37,7 +37,7 @@ public class ClientBookingDateHourGraphicContr{
     private Label seatNumberLabel;
 
     @FXML
-    private ListView<TimeSlot> hourListView;
+    private ListView<TimeSlotBean> hourListView;
 
     @FXML
     private TextField slotTimeField;
@@ -52,10 +52,10 @@ public class ClientBookingDateHourGraphicContr{
     private TextField saloonName;
 
     private SaloonBean saloonBean;
-    private SaloonBean timeSlotSaloon;
-    private List<TimeSlot> timeSlotList;
+    private List<TimeSlotBean> timeSlotSaloon;
+    private List<TimeSlotBean> timeSlotList;
     private String index;
-    private TimeSlot timeSlotInfo;
+    private TimeSlotBean timeSlotInfo;
     private String date;
 
     @FXML
@@ -100,7 +100,6 @@ public class ClientBookingDateHourGraphicContr{
             e.printStackTrace();
         } catch (SaloonNotFoundException e) {
             e.printStackTrace();
-
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -109,12 +108,12 @@ public class ClientBookingDateHourGraphicContr{
 
     private void verifyIndexSlotTime() throws InvalidIndexSelected {
         boolean flag = false;
-        for (TimeSlot timeSlot : hourListView.getItems()) {
+        for (TimeSlotBean timeSlot : hourListView.getItems()) {
             int i = timeSlot.getIndex();
             int ind = Integer.parseInt(index);
             if (ind == i) {
                 flag = true;
-                timeSlotInfo = new TimeSlot();
+                timeSlotInfo = new TimeSlotBean();
                 timeSlotInfo.setFromTime(timeSlot.getFromTime());
                 timeSlotInfo.setToTime(timeSlot.getToTime());
                 timeSlotInfo.setSeatAvailable(timeSlotInfo.getSeatAvailable());
@@ -138,13 +137,13 @@ public class ClientBookingDateHourGraphicContr{
 
         BookingController bookingController = new BookingController();
         timeSlotSaloon = bookingController.searchTimeSlots(saloonBean);//FAR RITORNARE PURE GLI I SEAT TIME
-        timeSlotList = new ScheduleTime(timeSlotSaloon).CreateSlotTime();
+
         int i=0;
-        for(TimeSlot timeSlot : timeSlotList){
+        for(TimeSlotBean timeSlot : timeSlotSaloon){
             timeSlot.setIndex(i);
             i++;
         }
-        hourListView.setItems(FXCollections.observableList(timeSlotList));
+        hourListView.setItems(FXCollections.observableList(timeSlotSaloon));
     }
 
 
