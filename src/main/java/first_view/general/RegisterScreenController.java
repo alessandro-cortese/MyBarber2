@@ -1,5 +1,7 @@
 package first_view.general;
 
+import application_controller.RegisterController;
+import engineering.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
@@ -33,6 +36,21 @@ public class RegisterScreenController {
 
     @FXML
     private RadioButton barberTypeRadioButton;
+    @FXML
+    private TextField nameText;
+    @FXML
+    private TextField surnameText;
+    @FXML
+    private TextField emailText;
+    @FXML
+    private TextField passText;
+    @FXML
+    private TextField confirmPassText;
+    @FXML
+    private Button googleButton;
+    @FXML
+    private Button facebookButton;
+    private int userType;
 
 
     @FXML
@@ -44,16 +62,31 @@ public class RegisterScreenController {
     @FXML
     public void onButtonClicked(ActionEvent event) throws  IOException {
         Node sourceNode = (Node)event.getSource() ;
-        if (sourceNode.getId().equals("registerButton")) {
+        if (sourceNode.getId().equals("registerButton"))
             onRegisterButtonClicked(sourceNode) ;
-        }
+        if(sourceNode.getId().equals(googleButton))
+            return;
+        if(sourceNode.getId().equals(facebookButton))
+            return;
+
+        UserBean userBean = new UserBean();
+        userBean.setUserEmail(emailText.getText());
+        userBean.setName(nameText.getText());
+        userBean.setPass(passText.getText());
+        userBean.setUserType(userType);
+
+        RegisterController registerController = new RegisterController();
+        registerController.register(userBean);
+
+
+
     }
 
     private void onRegisterButtonClicked(Node sourceNode) throws IOException {
         BackController.getInstance().pushPrevScene(sourceNode.getScene());
 
         //Vedo tipo di utente selezionato in base al RadioButton
-        int userType = clientTypeRadioButton.isSelected() ? CLIENT_TYPE : BARBER_TYPE ;
+        userType = clientTypeRadioButton.isSelected() ? CLIENT_TYPE : BARBER_TYPE ;
         String nextSceneName = clientTypeRadioButton.isSelected() ? CLIENT_MENU_SCREEN_NAME : BARBER_MENU_SCREEN_NAME ;
 
         //Scelgo prossima scena e la imposto nello Stage

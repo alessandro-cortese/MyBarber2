@@ -3,6 +3,7 @@ package engineering.dao;
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 import model.Customer;
+import model.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,22 +14,23 @@ import java.util.List;
 
 public class CustomerDAO {
 
-    private static final String CUSTOMER_COL_EMAIL = "userEmail" ;
-    private static final String CUSTOMER_COL_NAME = "name" ;
-    private static final String CUSTOMER_COL_SURNAME  = "surname" ;
-    private static final String CUSTOMER_COL_TELEPHONE = "telephone" ;
-    private static final String CUSTOMER_COL_CARD_POINTS = "cardPoints" ;
+    private static final String CUSTOMER_COL_EMAIL = "userEmail";
+    private static final String CUSTOMER_COL_NAME = "name";
+    private static final String CUSTOMER_COL_SURNAME = "surname";
+    private static final String CUSTOMER_COL_TELEPHONE = "telephone";
+    private static final String CUSTOMER_COL_CARD_POINTS = "cardPoints";
+    private static final String CUSTOMER= "customer";
 
     public List<Customer> loadCustomerFromFavoriteSaloon(Integer favoriteSaloonId) {
 
         List<Customer> customers = new ArrayList<>();
         Connection connection = Connector.getConnectorInstance().getConnection();
 
-        try(Statement statement = connection.createStatement();
-            ResultSet resultSet = Queries.loadCustomerFromSaloon(statement, favoriteSaloonId)) {
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = Queries.loadCustomerFromSaloon(statement, favoriteSaloonId)) {
 
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 customers.add(createCustomer(resultSet));
 
@@ -56,8 +58,18 @@ public class CustomerDAO {
     }
 
 
+    public void insertCustomer(User customer) {
+        Connection connection = Connector.getConnectorInstance().getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            System.out.println(customer.getPass());
+            boolean resultSet2 = Queries.insertIntoUser(statement,customer.getEmail(),customer.getPass(),CUSTOMER);
+            boolean resultSet = Queries.insertIntoCustomer(statement, customer.getName(), customer.getSurname(), customer.getEmail());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
-
-
+    }
 }

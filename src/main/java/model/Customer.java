@@ -1,5 +1,7 @@
 package model;
 
+import engineering.bean.UserBean;
+
 public class Customer extends User{
 
     private String phone;
@@ -30,6 +32,13 @@ public class Customer extends User{
     public Customer() {
         super();
     }
+
+    public Customer(String name, String surname, String email, String pass) {
+        super(email, pass, name, surname);
+        setCardPoints(0);
+        setPhone("");
+    }
+
 
     public String getPhone() {
 

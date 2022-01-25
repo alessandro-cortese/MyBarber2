@@ -8,6 +8,8 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     private Queries() {
 
     }
+    private static final String PHONE="";
+    private static final int CARDPOINTS=0;
 
 
     //-+-+-+-+-+-+-+-+-+-+- Saloon -+-+-+-+-+-+-+-+-+-+-//
@@ -131,6 +133,11 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query) ;
     }
 
+    public static boolean insertIntoUser(Statement statement, String email, String pass, String type) throws SQLException {
+        String sql = String.format("INSERT INTO User values('%s','%s','%s');", email,pass,type);
+        return statement.execute(sql);
+    }
+
     public static ResultSet selectBarberByEmail(Statement statement, String barberEmail) throws SQLException {
         String query = String.format("SELECT * FROM Barber where emailUser = '%s' ;", barberEmail) ;
         return statement.executeQuery(query) ;
@@ -148,10 +155,18 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
+    public static boolean insertIntoCustomer(Statement statement, String name, String surname, String email) throws SQLException {
+
+        String sql = String.format("INSERT INTO Customer values('%s','%s','%s','%s','%d');",email,name,surname,PHONE,CARDPOINTS);
+        return statement.execute(sql);
+    }
+
     //-+-+-+-+-+-+-+-+-+-+- SaloonDay -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet checkDateClosed(Statement statement,String saloonName) throws SQLException {
         String sql = String.format("SELECT dayClosed FROM Saloon join SaloonDay on Saloon.id = SaloonDay.Saloon WHERE name = '%s';",saloonName);
         return  statement.executeQuery(sql);
     }
+
+
 
 }

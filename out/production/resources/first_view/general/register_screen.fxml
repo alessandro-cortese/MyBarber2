@@ -25,19 +25,19 @@
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="200.0" text="Nome" />
-                              <TextField prefWidth="200.0" />
+                              <TextField fx:id="nameText" prefWidth="200.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="200.0" text="Cognome" />
-                              <TextField prefWidth="200.0" />
+                              <TextField fx:id="surnameText" prefWidth="200.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="200.0" text="eMail" />
-                              <TextField prefWidth="200.0" />
+                              <TextField fx:id="emailText" prefWidth="200.0" />
                            </children>
                         </HBox>
                      </children>
@@ -47,13 +47,13 @@
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="200.0" text="Password" />
-                              <PasswordField prefWidth="200.0" />
+                              <PasswordField fx:id="passText" prefWidth="200.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="200.0" text="Conferma Password" />
-                              <PasswordField prefWidth="200.0" />
+                              <PasswordField fx:id="confirmPassText" prefWidth="200.0" />
                            </children>
                         </HBox>
                      </children>
@@ -78,7 +78,7 @@
             <VBox alignment="CENTER" spacing="10.0">
                <children>
                   <Label text="Oppure" />
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="       Accedi con Google">
+                  <Button fx:id="googleButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" text="       Accedi con Google">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,7 +90,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="   Accedi con Facebook">
+                  <Button fx:id="facebookButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" text="   Accedi con Facebook">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
