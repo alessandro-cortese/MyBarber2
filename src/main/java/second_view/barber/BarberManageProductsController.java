@@ -9,5 +9,4 @@ public class BarberManageProductsController {
     public void onCommand(ActionEvent event) {
 
     }
-
 }
