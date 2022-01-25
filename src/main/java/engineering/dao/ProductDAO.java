@@ -5,10 +5,8 @@ import engineering.exception.ProductNotFoundException;
 import engineering.pattern.Connector;
 import model.buy_product.Product;
 import model.buy_product.containers.ProductCatalog;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ProductDAO {
@@ -37,6 +35,51 @@ public class ProductDAO {
             sqlException.printStackTrace();
         }
         return new ProductCatalog(products) ;
+    }
+
+    public boolean insertProduct(Product product, String barberEmail) {
+
+        boolean flag = true;
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(PreparedStatement statement = connection.prepareStatement("INSERT Product(name, description, price, barber) VALUES(?, ?, ?, ?);")){
+
+            statement.setString(1, product.getName());
+            statement.setString(2, product.getDescription());
+            statement.setDouble(3, product.getPrice());
+            statement.setString(4, barberEmail);
+
+            statement.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    public ProductCatalog loadAllProductsByBarberEmail(String barberEmail) {
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.loadAllProductByBarberEmail(statement, barberEmail)){
+
+            while(resultSet.next()) {
+                Product localProduct = createProduct(resultSet);
+                products.add(localProduct);
+            }
+
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+        return new ProductCatalog(products);
+
     }
 
     public Product loadProductByName(String name, String barberEmail) throws ProductNotFoundException{

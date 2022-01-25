@@ -40,6 +40,11 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return  statement.executeQuery(query) ;
     }
 
+    public static ResultSet loadAllProductByBarberEmail(Statement statement, String barberEMail) throws SQLException {
+        String query = String.format("SELECT * FROM Product WHERE barber = '%s' ;", barberEMail);
+        return statement.executeQuery(query);
+    }
+
     public static ResultSet loadProductsByName(Statement statement, String productName) throws SQLException {
         String query = String.format("SELECT * FROM Product where name = '%s';", productName) ;
         return statement.executeQuery(query) ;

@@ -53,6 +53,14 @@ public class BarberHomeController {
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_SEE_ORDER_SCREEN) ;
             return ;
         }
+        else if (commandLine.compareTo("manage products") == 0){
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_MANAGE_PRODUCT_SCREEN_NAME);
+            return;
+        }
+        else if (commandLine.compareTo("add product") == 0) {
+            ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_ADD_PRODUCT_SCREEN_NAME);
+            return;
+        }
 
         barberHomeCommandLine.setStyle("-fx-border-color: red");
 

@@ -3,6 +3,8 @@ package first_view.barber;
 import application_controller.AddProductController;
 import engineering.bean.UserBean;
 import engineering.bean.buy_product.ProductBean;
+import engineering.exception.DuplicatedProductException;
+import engineering.exception.InvalidInsertProductException;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;
@@ -42,22 +44,40 @@ public class BarberAddProductController {
         if(sourceNodeAddProduct == continueButtonAddProduct) {
 
             controlContinue();
+
             try {
 
                 ProductBean productBean = new ProductBean(-1, nameAddProductTextField.getText(), descriptionTextFiledAddProduct.getText(), Double.parseDouble(priceTextField.getText()));
-
-                if(continueFlag) {
-                    InternalBackController.getInternalBackControllerInstance().backToHome(sourceNodeAddProduct);
-                    addProductController.addProduct(productBean, userBean);
-                }
+                addProductController.addProduct(productBean, userBean);
 
 
             }catch (NumberFormatException e) {
 
-                exceptionAddProductLabel.setText("Inserisci il valore nel campi!");
+                exceptionAddProductLabel.setText("Inserisci il valore nel campi obbligatori!");
+                continueFlag = false;
+
+            } catch (DuplicatedProductException e) {
+
+                exceptionAddProductLabel.setText("Prodotto inserito già esistente!");
+                continueFlag = false;
+
+            } catch (InvalidInsertProductException e) {
+
+                exceptionAddProductLabel.setText("Prodotto inserito non valido!");
+                e.printStackTrace();
                 continueFlag = false;
 
             }
+
+            if(continueFlag) {
+                InternalBackController.getInternalBackControllerInstance().backToHome(sourceNodeAddProduct);
+            }
+            else {
+
+                exceptionAddProductLabel.setText("Inserisci il valore nei campi obbligatori!");
+
+            }
+
 
         }
 

@@ -25,7 +25,7 @@
                   </Label>
                   <ScrollPane prefHeight="261.0" prefWidth="306.0">
                      <content>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- manage saloon&#10;- manage service&#10;- manage appointments&#10;- manage order&#10;- userarea&#10;- add service&#10;- logout&#10;- back">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- manage saloon&#10;- manage service&#10;- manage appointments&#10;- manage order&#10;- manage products&#10;- userarea&#10;- add service&#10;- add product&#10;- logout&#10;- back">
                            <font>
                               <Font size="14.0" />
                            </font>

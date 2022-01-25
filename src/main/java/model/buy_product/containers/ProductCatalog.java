@@ -37,4 +37,10 @@ public class ProductCatalog {
         return null ;
     }
 
+    public void addProduct(Product newProduct) {
+
+        this.productArrayList.add(newProduct);
+
+    }
+
 }

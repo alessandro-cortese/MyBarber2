@@ -98,7 +98,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Label fx:id="exceptionAddProductLabel" layoutX="442.0" layoutY="572.0" prefHeight="34.0" prefWidth="397.0">
+      <Label fx:id="exceptionAddProductLabel" layoutX="338.0" layoutY="547.0" prefHeight="34.0" prefWidth="605.0">
          <font>
             <Font size="28.0" />
          </font>

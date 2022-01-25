@@ -68,8 +68,7 @@ public class AddServiceController {
 
         for(Service service : serviceCatalogue.getServices()){
 
-            if(Objects.equals(service.getServiceName(), newService.getServiceName()) && Objects.equals(service.getServiceDescription(), newService.getServiceDescription()) &&
-                    Objects.equals(service.getServicePrice(), newService.getServicePrice())){
+            if(controlDuplicatedService(service, newService)){
 
                 throw new DuplicatedServiceException("Servizio già esistente!");
 
@@ -94,6 +93,11 @@ public class AddServiceController {
 
         }
 
+    }
+
+    private boolean controlDuplicatedService(Service localService, Service service) {
+        return Objects.equals(localService.getServiceName(), service.getServiceName()) && Objects.equals(localService.getServiceDescription(), service.getServiceDescription()) &&
+                Objects.equals(localService.getServicePrice(), service.getServicePrice());
     }
 
 }
