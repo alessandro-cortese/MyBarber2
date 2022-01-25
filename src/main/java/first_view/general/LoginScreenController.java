@@ -63,6 +63,7 @@ public class LoginScreenController {
             //(new CredentialsPicker()).getAccessInfo() ;
             //BackController.getInstance().pushPrevScene(eventSource.getScene());
             FXMLLoader registerLoader = new FXMLLoader(getClass().getClassLoader().getResource(REGISTER_SCREEN_NAME)) ;
+
             stage.setScene(registerLoader.load());
 
         }

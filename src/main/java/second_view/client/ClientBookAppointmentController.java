@@ -8,12 +8,14 @@ import engineering.exception.InvalidIndexSelected;
 import engineering.exception.ServiceNotFoundException;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientBookAppointmentController {
@@ -22,7 +24,7 @@ public class ClientBookAppointmentController {
 
     @FXML private TextField commandLine ;
     @FXML private ListView<ServiceBean> serviceListView ;
-    @FXML private ListView serviceSelectedListView;
+    @FXML private ListView<ServiceBean> serviceSelectedListView;
     @FXML private TextField dateText;
     @FXML private TextField saloonName;
     @FXML private TextField hourText;
@@ -30,10 +32,11 @@ public class ClientBookAppointmentController {
     private List<ServiceBean> serviceBeanList;
     private boolean secondView;
     private double totalPrice = 0.0;
+    private List<ServiceBean> servicesBeanSelected;
 
 
     @FXML
-    public void onCommand(ActionEvent event) throws IOException {
+    public void onCommand(ActionEvent event) throws IOException, InvalidIndexSelected {
         String commandText = commandLine.getText() ;
         commandLine.setStyle(null);
         commandLine.setText("");
@@ -42,16 +45,22 @@ public class ClientBookAppointmentController {
         if (commandText.matches("select service [0-9]+")) {
             String index = commandText.replace("select service ", "");
             int in = Integer.parseInt(index);
-            verifyIndexSlotTime(in);
+            verifyIndexSlotTime(in,true);
+            ServiceBean serviceBean = serviceListView.getItems().get(in);
+            servicesBeanSelected.add(serviceBean);
+            serviceSelectedListView.setItems(FXCollections.observableList(servicesBeanSelected));
             return;
         }
         else if (commandText.matches("remove service [0-9]+")) {
             //Rimuove indice da lista dei servizi aggiunti
-            commandText.replace("remove service ", "");
+            String index = commandText.replace("remove service ", "");
+            int in = Integer.parseInt(index);
+            verifyIndexSlotTime(in,false);
+            serviceSelectedListView.getItems().remove(in);
             return ;
         }
         else if (commandText.compareTo("book") == 0) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"il prezzo totale e': "+"17.00$\nVerrai rimandato alla home" );
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Prenotazione avvenuta con successo! controlla l'email che ti abbiamo spedito!\nVerrai rimandato alla home" );
             alert.showAndWait();
             ButtonType buttonType =alert.getResult();
             String result =buttonType.getText();
@@ -68,28 +77,25 @@ public class ClientBookAppointmentController {
 
     }
 
-    private void verifyIndexSlotTime(int in) {
-       /* boolean flag = false;
-        for (ServiceBean serviceBean : serviceListView.getItems()) {
-            int i = serviceBean.getIndex();
-            int ind = Integer.parseInt(index);
-            if (ind == i) {
+    private void verifyIndexSlotTime(int in, boolean rs) throws InvalidIndexSelected {
+        boolean flag = false;
+        ListView<ServiceBean> listView;
+        if(rs)
+            listView = serviceListView;
+        else
+            listView = serviceSelectedListView;
+
+            if (in <= listView.getItems().size())
                 flag = true;
-                timeSlotInfo = new TimeSlotBean();
-                timeSlotInfo.setFromTime(timeSlot.getFromTime());
-                timeSlotInfo.setToTime(timeSlot.getToTime());
-                timeSlotInfo.setSeatAvailable(timeSlotInfo.getSeatAvailable());
-                break;
-            }
-        }
-        if (!flag)
-            throw new InvalidIndexSelected("slot time non valido");*/
+            if (!flag)
+                throw new InvalidIndexSelected("slot time non valido");
     }
 
     public void injectDateHourSaloonInfo(TimeSlotBean timeSlotInfo, SaloonBean saloonBean, String date) throws ServiceNotFoundException {
         secondView= true;
+        servicesBeanSelected = new ArrayList<>();
         serviceListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,secondView));
-        
+        serviceSelectedListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,secondView));
         dateText.setText(date);
         hourText.setText(timeSlotInfo.getFromTime()+" - "+timeSlotInfo.getToTime());
         saloonName.setText(saloonBean.getName());

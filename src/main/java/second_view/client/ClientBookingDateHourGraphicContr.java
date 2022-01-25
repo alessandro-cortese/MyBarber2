@@ -76,7 +76,7 @@ public class ClientBookingDateHourGraphicContr{
                 index = command.replace("select slot time ", "");
                 int in = Integer.parseInt(index);
                 System.out.println(in);
-                verifyIndexSlotTime();
+                verifyIndexSlotTime(in);
                 slotTimeField.setText(index);
                 return;
 
@@ -106,20 +106,18 @@ public class ClientBookingDateHourGraphicContr{
         commandLine.setStyle("-fx-border-color: red");
     }
 
-    private void verifyIndexSlotTime() throws InvalidIndexSelected {
+    private void verifyIndexSlotTime(int ind) throws InvalidIndexSelected {
         boolean flag = false;
-        for (TimeSlotBean timeSlot : hourListView.getItems()) {
-            int i = timeSlot.getIndex();
-            int ind = Integer.parseInt(index);
-            if (ind == i) {
+
+            if (ind <= hourListView.getItems().size()) {
                 flag = true;
                 timeSlotInfo = new TimeSlotBean();
-                timeSlotInfo.setFromTime(timeSlot.getFromTime());
-                timeSlotInfo.setToTime(timeSlot.getToTime());
-                timeSlotInfo.setSeatAvailable(timeSlotInfo.getSeatAvailable());
-                break;
+                TimeSlotBean timeSlotBean = hourListView.getItems().get(ind);
+                timeSlotInfo.setFromTime(timeSlotBean.getFromTime());
+                timeSlotInfo.setToTime(timeSlotBean.getToTime());
+                timeSlotInfo.setSeatAvailable(timeSlotBean.getSeatAvailable());
+
             }
-        }
         if (!flag)
             throw new InvalidIndexSelected("slot time non valido");
     }
@@ -138,12 +136,8 @@ public class ClientBookingDateHourGraphicContr{
         BookingController bookingController = new BookingController();
         timeSlotSaloon = bookingController.searchTimeSlots(saloonBean);//FAR RITORNARE PURE GLI I SEAT TIME
 
-        int i=0;
-        for(TimeSlotBean timeSlot : timeSlotSaloon){
-            timeSlot.setIndex(i);
-            i++;
-        }
         hourListView.setItems(FXCollections.observableList(timeSlotSaloon));
+
     }
 
 

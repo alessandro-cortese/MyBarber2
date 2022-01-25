@@ -27,6 +27,10 @@ public class Customer extends User{
 
     }
 
+    public Customer() {
+        super();
+    }
+
     public String getPhone() {
 
         return phone;

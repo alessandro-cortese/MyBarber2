@@ -7,8 +7,6 @@ public class TimeSlotBean {
     private int seatAvailable;
     private Time fromTime;
     private Time toTime;
-    private int index;
-
 
     public TimeSlotBean(){}
 
@@ -44,11 +42,4 @@ public class TimeSlotBean {
         this.seatAvailable = seatAvailable;
     }
 
-    public void setIndex(int i) {
-        this.index = i;
-    }
-
-    public int getIndex() {
-        return index;
-    }
 }

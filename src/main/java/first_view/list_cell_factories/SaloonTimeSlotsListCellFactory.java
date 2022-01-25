@@ -37,7 +37,7 @@ public class SaloonTimeSlotsListCellFactory  extends ListCell<TimeSlotBean> {
                 if(parentNode== null && !view){
                     parentNode = new FXMLLoader(getClass().getClassLoader().getResource(LIST_ITEM_SALOON_TIMESLOTS_2V)).load();
                     Label index = (Label) parentNode.lookup("#"+INDEX);
-                    index.setText("slot index: "+String.valueOf(item.getIndex()));
+                    index.setText("slot index: "+Integer.toString(this.getIndex()));
                 }
 
                 Label initTime = (Label) parentNode.lookup("#" + INIT_TIME) ;

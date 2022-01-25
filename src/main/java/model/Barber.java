@@ -8,4 +8,7 @@ public class Barber extends User {
 
     }
 
+    public Barber() {
+
+    }
 }

@@ -2,9 +2,9 @@ package engineering.pattern;
 
 import java.sql.*;
 
-public class Connector { //SINGLETON CLASS
+public class Connector {
 
-        private Connection connection ; //di classe
+        private Connection connection ;
         private static Connector myConnector ;
 
         protected Connector()  {
@@ -31,7 +31,7 @@ public class Connector { //SINGLETON CLASS
 
         }
 
-        public static Connector getConnectorInstance() { //di classe
+        public static Connector getConnectorInstance() {
             if (myConnector == null)
                 myConnector = new Connector();
             return myConnector ;
