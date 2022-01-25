@@ -5,6 +5,7 @@ import engineering.bean.UserBean;
 import engineering.bean.buy_product.CartBean;
 import engineering.bean.buy_product.CartRowBean;
 import engineering.bean.buy_product.ProductBean;
+import engineering.dao.CartFileSaver;
 import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CartRowListCellFactory;
@@ -39,15 +40,7 @@ public class ClientCartController implements Initializable {
 
     public ClientCartController() {
         UserBean loggedUser = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
-        if (loggedUser != null) {
-            try {
-                buyProductController = new BuyProductController(loggedUser);
-            } catch (NotExistentUserException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-                alert.showAndWait() ;
-            }
-        }
-        else buyProductController = new BuyProductController() ;
+        buyProductController = new BuyProductController(loggedUser);
     }
 
 
@@ -79,9 +72,9 @@ public class ClientCartController implements Initializable {
     }
 
     private void updateInfo(CartBean cartBean) {
-        cartListView.getItems().clear();
         cartListView.setItems(FXCollections.observableList(cartBean.getCartRowBeanArrayList()));
         totalAmount.setText(String.format("Totale: %s %.2f", EURO_SYMBOL, cartBean.getTotal())) ;
+        addOrderInfoButton.setDisable(cartBean.getCartRowBeanArrayList().size() == 0);
     }
 
     public void onButtonClicked(ActionEvent event) {

@@ -36,17 +36,7 @@ public class ClientCartController implements Initializable {
 
     public ClientCartController() {
         UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
-        if (loggedUser == null) {
-            buyProductController = new BuyProductController();
-        }
-        else {
-            try {
-                buyProductController = new BuyProductController(loggedUser) ;
-            } catch (NotExistentUserException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-                alert.showAndWait() ;
-            }
-        }
+        buyProductController = new BuyProductController(loggedUser);
     }
 
     @Override
@@ -120,6 +110,8 @@ public class ClientCartController implements Initializable {
         CartBean cartBean = buyProductController.showCart() ;
         cartListView.setItems(FXCollections.observableList(cartBean.getCartRowBeanArrayList()));
         cartTotalLabel.setText(String.format("Totale: %s%.2f",EURO_SYMBOL, cartBean.getTotal()));
+
+
     }
 
 

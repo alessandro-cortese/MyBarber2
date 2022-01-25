@@ -52,8 +52,7 @@ public class ClientFidelityCardController implements Initializable {
                     protected void updateItem(CouponBean item, boolean empty) {
                         super.updateItem(item, empty);
                         if (item != null) {
-                            String couponType = item.getExternalCouponType();
-                            setText(String.format("SCONTO: -%.2f\t\t%s\t\tCOSTO IN PUNTI: %d", item.getCouponDiscount(), (couponType.compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getCouponPointsPrice()));
+                            setText(String.format("SCONTO: -%.2f\t\t%s\t\tCOSTO IN PUNTI: %d", item.getCouponDiscount(), (item.getExternalCouponType().compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getCouponPointsPrice()));
                             setStyle("-fx-font-size: 16 ; -fx-alignment: center");
                         } else setText(null);
                     }

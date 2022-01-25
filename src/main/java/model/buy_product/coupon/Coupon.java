@@ -12,12 +12,12 @@ public abstract class Coupon implements Priceable, Comparable<Coupon> {
     public static final Integer SUBTRACTION_TYPE = 0 ;
     public static final Integer PERCENTAGE_TYPE = 1 ;
 
-    public Coupon(Integer couponCode, Double couponDiscount) {
+    protected Coupon(Integer couponCode, Double couponDiscount) {
         setCouponCode(couponCode);
         setCouponDiscount(couponDiscount);
     }
 
-    public Coupon(Integer couponCode, Double couponDiscount, Integer couponType) {
+    protected Coupon(Integer couponCode, Double couponDiscount, Integer couponType) {
         setCouponCode(couponCode);
         setCouponDiscount(couponDiscount);
         setCouponType(couponType);
@@ -54,8 +54,6 @@ public abstract class Coupon implements Priceable, Comparable<Coupon> {
     protected Priceable getAppliedPrice() {
         return appliedPrice ;
     }
-
-
 
     @Override
     public int compareTo(Coupon toCompare) {

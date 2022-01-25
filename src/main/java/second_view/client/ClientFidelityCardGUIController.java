@@ -70,8 +70,7 @@ public class ClientFidelityCardGUIController implements Initializable {
                     protected void updateItem(CouponBean item, boolean empty) {
                         super.updateItem(item, empty);
                         if (item != null) {
-                            String couponType = item.getExternalCouponType();
-                            setText(String.format("INDEX: %1$4d\tSCONTO: -%2$4.2f\t\t%3$1s\t\tCOSTO IN PUNTI: %4$3d", this.getIndex() , item.getCouponDiscount(), (couponType.compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getCouponPointsPrice()));
+                            setText(String.format("INDEX: %1$4d\tSCONTO: -%2$4.2f\t\t%3$1s\t\tCOSTO IN PUNTI: %4$3d", this.getIndex() , item.getCouponDiscount(), (item.getExternalCouponType().compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getCouponPointsPrice()));
                             setStyle("-fx-font-size: 12 ; -fx-alignment: center");
                         } else setText(null);
                     }

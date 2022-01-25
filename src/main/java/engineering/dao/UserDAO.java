@@ -57,39 +57,6 @@ public class UserDAO {
         return userType ;
     }
 
-    /*private User loadUser(String userEmail) throws SQLException {
-        Connection connection = Connector.getConnectorInstance().getConnection();
-
-        User user = null ;
-        try (
-                Statement barberStatement = connection.createStatement() ;
-                Statement customerStatement = connection.createStatement() ;
-                ResultSet barberResultSet = Queries.selectBarberByEmail(barberStatement, userEmail) ;
-                ResultSet customerResultSet = Queries.selectCustomerByEmail(customerStatement, userEmail) ;
-            ) {
-
-            if (barberResultSet.isFirst()) {
-                user = createBarber(barberResultSet) ;
-            }
-            else if (customerResultSet.isFirst()) {
-                user = createCustomer(customerResultSet) ;
-            }
-        }
-
-        return user ;
-    }
-
-
-    private Barber createBarber(ResultSet barberResultSet) throws SQLException {
-        String barberEmail = barberResultSet.getString(BARBER_EMAIL_COL_LABEL) ;
-        String barberName = barberResultSet.getString(NAME_COL_LABEL) ;
-        String barberSurname = barberResultSet.getString(SURNAME_COL_LABEL) ;
-
-        return new Barber(barberEmail, null, barberName, barberSurname) ;
-    }
-
-     */
-
     private Customer createCustomer(ResultSet customerResultSet) throws SQLException {
         String customerEmail = customerResultSet.getString(CUSTOMER_EMAIL_COL_LABEL) ;
         String customerName = customerResultSet.getString(NAME_COL_LABEL) ;

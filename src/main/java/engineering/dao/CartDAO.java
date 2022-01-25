@@ -12,7 +12,6 @@ import java.util.List;
 public class CartDAO {
 
     private static final String PRODUCT_ID_LAB = "productId" ;
-    private static final String ORDER_ID_LAB = "orderId" ;
     private static final String PRODUCT_QUANTITY_LAB = "productQuantity" ;
 
     public void saveCart(List<CartRow> cartRowList, Integer orderKey) {

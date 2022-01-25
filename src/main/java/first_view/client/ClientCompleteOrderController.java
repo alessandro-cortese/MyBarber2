@@ -1,7 +1,6 @@
 package first_view.client;
 
 import application_controller.BuyProductController;
-import engineering.bean.AccessInfoBean;
 import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
 import engineering.bean.buy_product.OrderInfoBean;
@@ -10,6 +9,7 @@ import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
+import first_view.list_cell_factories.CouponCodeCellFactory;
 import first_view.pickers.CredentialsPicker;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,20 +38,7 @@ public class ClientCompleteOrderController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        couponListView.setCellFactory(new Callback<>() {
-            @Override
-            public ListCell<String> call(ListView<String> param) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) setText("Codice Coupon: " + item);
-                        else setText(null) ;
-
-                    }
-                };
-            }
-        });
+        couponListView.setCellFactory(param -> new CouponCodeCellFactory());
     }
 
 
@@ -65,48 +51,43 @@ public class ClientCompleteOrderController implements Initializable {
         else if (sourceNode == payWithPaypalButton || sourceNode == payWithGooglePayButton) {
 
             try {
-                if (InternalBackController.getInternalBackControllerInstance().getLoggedUser() == null) login();
-
                 if (!addressField.getText().isEmpty() && !telephoneField.getText().isEmpty()) {
                     String paymentType = (sourceNode == payWithPaypalButton) ? "paypal" : "google";
+
+                    if (InternalBackController.getInternalBackControllerInstance().getLoggedUser() == null) {
+                        login();
+                    }
+
                     buy(paymentType);
                     InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
-                } else {
+                }
+                else {
                     Alert alertDialog = new Alert(Alert.AlertType.ERROR, "COMPLETARE TUTTI I CAMPI DELL'ORDINE!!");
                     alertDialog.showAndWait();
                 }
 
             } catch (NotExistentUserException e) {
                 //Se il login non è andato bene non posso andare avanti quindi faccio return ;
-                return;
             }
         }
     }
 
     private void login() throws IOException, NotExistentUserException {
         CredentialsPicker credentialsPicker = new CredentialsPicker() ;
-        AccessInfoBean accessInfo = credentialsPicker.getAccessInfo() ;
+        UserBean userBean = credentialsPicker.doLogin() ;
         try {
-            UserBean loggedUser = buyProductController.login(accessInfo) ;
-            InternalBackController.getInternalBackControllerInstance().setLoggedUser(loggedUser);
-        }
-        catch (NotExistentUserException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-            alert.showAndWait() ;
-            throw e ;
+            buyProductController.loadCustomer(userBean);
+            InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBean);
+        } catch (NotExistentUserException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+            throw e;
         }
     }
 
     private void insertCoupon() {
         String stringCouponCode = couponCodeField.getText() ;
-        if (!stringCouponCode.matches("[0-9]+")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "FORMATO DEL COUPON NON VALIDO") ;
-            alert.showAndWait() ;
-            return ;
-        }
-
         try {
-
             CouponBean couponBean = new CouponBean(stringCouponCode) ;
             OrderTotalBean orderTotalBean = buyProductController.applyCoupon(couponBean);
             updateInfo(orderTotalBean);
@@ -135,12 +116,11 @@ public class ClientCompleteOrderController implements Initializable {
         couponListView.setItems(FXCollections.observableList(orderTotalBean.getExternalCouponCodes()));
     }
 
-    private void buy(String paymentType) throws NotExistentUserException {
+    private void buy(String paymentType) {
         OrderInfoBean orderInfoBean = new OrderInfoBean(addressField.getText(), telephoneField.getText(), paymentType) ;
         buyProductController.completeOrder(orderInfoBean);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Il tuo ordine è stato completato correttamente") ;
         alert.showAndWait() ;
     }
-
 
 }
