@@ -16,17 +16,6 @@ public class ProductCatalog {
         this.productArrayList = products ;
     }
 
-    public ProductCatalog() {
-        this.productArrayList = new ArrayList<>() ;
-    }
-
-    public Product createProduct(Integer isbn, String name, String description, Double price, String vendor) {
-        return new Product(isbn, name, description, price, vendor) ;
-    }
-
-    public void addProduct(Integer isbn, String name, String description, Double price, String vendor) {
-        productArrayList.add(createProduct(isbn, name, description, price, vendor)) ;
-    }
 
     public List<Product> filterByName(String productName) {
         List<Product> filteredProductArray = new ArrayList<>() ;
@@ -48,13 +37,4 @@ public class ProductCatalog {
         return null ;
     }
 
-    @Nullable
-    public Product getProductByName(String nameOfProduct) {
-        for (Product product : productArrayList) {
-            if (product.getName().compareTo(nameOfProduct) == 0) {
-                return product;
-            }
-        }
-        return null;
-    }
 }

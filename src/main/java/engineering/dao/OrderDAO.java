@@ -7,17 +7,18 @@ import model.buy_product.Cart;
 import model.buy_product.CartRow;
 import model.buy_product.Order;
 
+import java.io.FileInputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class OrderDAO {
 
     private static final String ORDER_ID_LAB = "id" ;
     private static final String ORDER_DATE_LAB = "orderDate" ;
     private static final String ORDER_CUSTOMER_LAB = "customer" ;
-    private static final String ORDER_TOTAL_LAB = "orderTotal" ;
     private static final String ORDER_ADDRESS_LAB = "orderAddress" ;
     private static final String ORDER_TELEPHONE_LAB = "orderTelephone" ;
 
@@ -68,7 +69,6 @@ public class OrderDAO {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
         return orderList ;
     }
 

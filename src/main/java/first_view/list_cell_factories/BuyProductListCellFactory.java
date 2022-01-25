@@ -46,13 +46,9 @@ public class BuyProductListCellFactory extends ListCell<ProductBean> {
 
                 Label productNameLabel = (Label) parentNode.lookup("#" + NAME_LABEL_ID) ;
                 Label productPriceLabel = (Label) parentNode.lookup("#" + PRICE_LABEL_ID) ;
-                ImageView productImageView = (ImageView) parentNode.lookup("#" + IMAGE_VIEW_ID) ;
-                //Image rowImage = new Image("https://drive.googe.com/thumbnail?id=13E18W_hwUx1EYQo2FCYMAiA9qXRh8rPS", productImageView.getFitWidth(),productImageView.getFitHeight(),true,true, true) ;
-
 
                 productNameLabel.setText(item.getBeanName());
                 productPriceLabel.setText(String.format("%s %.2f",EURO_SYMBOL,item.getBeanPrice()));
-                //productImageView.setImage(rowImage);
 
                 if (Objects.equals(caller, SECOND_VIEW)) {
                     Label productIndexLabel = (Label) parentNode.lookup("#" + INDEX_LABEL_ID) ;

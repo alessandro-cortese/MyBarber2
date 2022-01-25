@@ -8,14 +8,14 @@ import engineering.bean.buy_product.OrderTotalBean;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.exception.NotExistentUserException;
+import first_view.general.InternalBackController;
+import first_view.list_cell_factories.CouponCodeCellFactory;
 import first_view.pickers.CredentialsPicker;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.util.Callback;
-import javafx.util.Pair;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;
@@ -38,19 +38,7 @@ public class ClientCompleteOrderController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        couponListView.setCellFactory(new Callback<>() {
-            @Override
-            public ListCell<String> call(ListView<String> param) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) setText("Codice Coupon: " + item);
-                        else setText(null);
-                    }
-                };
-            }
-        });
+        couponListView.setCellFactory(param -> new CouponCodeCellFactory());
     }
 
 
@@ -75,7 +63,7 @@ public class ClientCompleteOrderController implements Initializable {
             telephoneTextField.setText(commandInput);
             return ;
         }
-        else if (command.matches("add coupon [0-9]+")) {
+        else if (command.matches("add coupon .+")) {
             String commandInput = command.replace("add coupon ", "") ;
             insertCoupon(commandInput) ;
             return ;
@@ -87,11 +75,11 @@ public class ClientCompleteOrderController implements Initializable {
             }
             else {
                 try {
+                    if (ScreenChanger.getInstance().getLoggedUser() == null) login() ;
                     buy();
                     ScreenChanger.getInstance().goToHome(event);
                 }
-                catch (NotExistentUserException ignored) {
-                }
+                catch (NotExistentUserException ignored) {}
             }
             return ;
         }
@@ -99,25 +87,24 @@ public class ClientCompleteOrderController implements Initializable {
         commandLine.setStyle("-fx-border-color: red") ;
     }
 
-    private void buy() throws IOException, NotExistentUserException {
+    private void login() throws IOException, NotExistentUserException {
+        CredentialsPicker credentialsPicker = new CredentialsPicker() ;
+        UserBean userBean = credentialsPicker.doLogin() ;
         try {
-            UserBean userBean = ScreenChanger.getInstance().getLoggedUser();
-            if (userBean == null) {
-                userBean = buyProductController.login((new CredentialsPicker()).getAccessInfo()) ;
-                ScreenChanger.getInstance().setLoggedUser(userBean);
-            }
-            OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText(), "paypal") ;
-            buyProductController.completeOrder(orderInfoBean);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "ORDINE ESEGUITO CON SUCCESSO") ;
-            alert.showAndWait() ;
-
-
+            buyProductController.loadCustomer(userBean);
+            ScreenChanger.getInstance().setLoggedUser(userBean);
         } catch (NotExistentUserException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-            alert.showAndWait() ;
-            throw e ;
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+            throw e;
         }
+    }
+
+    private void buy() {
+        OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText(), "paypal") ;
+        buyProductController.completeOrder(orderInfoBean);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "ORDINE ESEGUITO CON SUCCESSO") ;
+        alert.showAndWait() ;
     }
 
     private void insertCoupon(String commandInput) {

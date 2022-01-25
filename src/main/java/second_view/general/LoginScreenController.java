@@ -24,8 +24,6 @@ public class LoginScreenController {
 
     @FXML private Button enterButton ;
 
-    private static final String[] commands = {"set email", "set password", "not login", "subscribe", "submit"} ;
-
     private final LoginController loginController ;
 
     public LoginScreenController() {
@@ -64,7 +62,7 @@ public class LoginScreenController {
                 completeAlert.showAndWait() ;
             }
             else {
-                UserBean loggedUser = login(userEmail, userPassword, event) ;
+                UserBean loggedUser = login(userEmail, userPassword) ;
                 enterAsUser(loggedUser, event) ;
             }
             return ;
@@ -86,7 +84,7 @@ public class LoginScreenController {
         }
     }
 
-    private UserBean login(String userEmail, String userPassword, ActionEvent event) {
+    private UserBean login(String userEmail, String userPassword) {
         AccessInfoBean accessInfo = new AccessInfoBean(userEmail, userPassword) ;
         UserBean loggedUser = null;
         try {

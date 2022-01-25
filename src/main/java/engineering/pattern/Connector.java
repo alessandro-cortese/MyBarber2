@@ -1,6 +1,10 @@
 package engineering.pattern;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 public class Connector { //SINGLETON CLASS
 
@@ -10,7 +14,20 @@ public class Connector { //SINGLETON CLASS
         protected Connector()  {
 
             try {
+                    /*
+                    Properties prop = new Properties() ;
+                    prop.load(new FileInputStream("engineering/dao/db_configuration.properties"));
+                    String driver = prop.getProperty("jdbcDriver") ;
+                    String dbName = prop.getProperty("dbName") ;
+                    String dbUsername = prop.getProperty("dbUserName") ;
+                    String dbPassword = prop.getProperty("dbPassword") ;
+                    String dbPort = prop.getProperty("dbPort") ;
+                    String dbHostname = prop.getProperty("dbHostName") ;
+                    String dbUrlStart = prop.getProperty("dbUrlStart") ;
 
+                    String jdbcUrl = String.format("%s://%s:%s/%s?user=%s&password=%s",dbUrlStart,dbHostname,dbPort,dbName, dbUsername, dbPassword) ;
+                    connection = DriverManager.getConnection(jdbcUrl);
+                    */
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     String dbName = "mydb";
                     String userName="admin";

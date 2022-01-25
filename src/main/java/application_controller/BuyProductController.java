@@ -29,33 +29,25 @@ public class BuyProductController {
 
     private final CouponDAO couponDAO ;
     private final ProductCatalog productCatalog ;
-    private final Cart cart ;
+    private Cart cart ;
     private final Order order ;
     private Customer customer;
     private CartFileSaver cartFileSaver ;
     private final CouponApplier couponApplier ;
 
 
-    public BuyProductController() {
+    public BuyProductController(UserBean loggedUserBean) {
         ProductDAO productDAO = new ProductDAO();
         couponDAO = new CouponDAO() ;
         productCatalog = productDAO.loadAllProducts() ;
 
-        cart = new Cart() ;
-        order = new Order() ;
+        try {
+            loadCustomer(loggedUserBean);
+            cart = cartFileSaver.loadCartFromFile() ;
+        } catch (NotExistentUserException e) {
+            cart = new Cart() ;
+        }
         couponApplier = new CouponApplier(cart) ;
-    }
-
-    public BuyProductController(UserBean loggedUserBean) throws NotExistentUserException {
-        ProductDAO productDAO = new ProductDAO();
-        couponDAO = new CouponDAO() ;
-        productCatalog = productDAO.loadAllProducts() ;
-
-        customerLogin(loggedUserBean);
-        cartFileSaver = new CartFileSaver(customer.getEmail()) ;
-        cart = cartFileSaver.loadCartFromFile() ;
-        couponApplier = new CouponApplier(cart) ;
-
         order = new Order() ;
     }
 
@@ -86,7 +78,7 @@ public class BuyProductController {
         return createCartBean() ;
     }
 
-    public CartBean createCartBean() {
+    private CartBean createCartBean() {
         List<CartRow> cartRows = cart.getCartRowArrayList() ;
         CartBean cartBean = new CartBean() ;
         cartBean.setTotal(cart.getPrice());
@@ -115,7 +107,7 @@ public class BuyProductController {
         return new OrderTotalBean(couponApplier.getFinalPrice(), couponApplier.getAppliedCouponCode(), orderPoints) ;
     }
 
-    public void completeOrder(OrderInfoBean orderInfoBean) throws NotExistentUserException {
+    public void completeOrder(OrderInfoBean orderInfoBean) {
         //IMPOSTIO INFORMAZIONI DI ORDER
         order.setAddress(orderInfoBean.getAddressInfo());
         order.setTelephone(orderInfoBean.getTelephoneInfo());
@@ -134,7 +126,7 @@ public class BuyProductController {
         couponDAO.invalidateAllCoupon(couponApplier.getCouponContainer());
 
         //Cancellazione del carrello provvisorio
-        cartFileSaver.deleteCart() ;
+        cartFileSaver.deleteCartFromFile() ;
 
         //AGGIORNAMENTO PUNTEGGIO CUSTOMER
         UserDAO userDAO = new UserDAO() ;
@@ -158,7 +150,6 @@ public class BuyProductController {
         calendar.setTime(Date.from(Instant.now()));
 
         return new VendorOrderBean(vendor, order.getAddress(), order.getTelephone(), order.getDate(), order.getOrderOwner(), order.getOrderCode()) ;
-
     }
 
     public OrderTotalBean showOrder(){
@@ -168,20 +159,14 @@ public class BuyProductController {
         return new OrderTotalBean(couponApplier.getFinalPrice(), couponApplier.getAppliedCouponCode(), orderPoints) ;
     }
 
-    public UserBean login(AccessInfoBean accessInfo) throws NotExistentUserException {
-        LoginController loginController = new LoginController() ;
+    public void loadCustomer(UserBean userBean) throws NotExistentUserException {
+        if (userBean == null) throw new NotExistentUserException() ;
 
-        UserBean userBean = loginController.verifyUser(accessInfo) ;
-        customerLogin(userBean) ;
-
-        cartFileSaver = new CartFileSaver(customer.getEmail()) ;
-        cartFileSaver.saveCartInFile(cart);
-        return userBean ;
-    }
-
-    public void customerLogin(UserBean userBean) throws NotExistentUserException {
         UserDAO userDAO = new UserDAO() ;
         customer = userDAO.loadCustomerByEmail(userBean.getUserEmail()) ;
+        cartFileSaver = new CartFileSaver(customer.getEmail()) ;
+
+        if (cart != null) cartFileSaver.saveCartInFile(cart);
     }
 
 }

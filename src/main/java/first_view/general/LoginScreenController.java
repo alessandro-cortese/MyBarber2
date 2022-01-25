@@ -60,10 +60,9 @@ public class LoginScreenController {
             InternalBackController.getInternalBackControllerInstance().enterAsUser(null, stage);
         }
         else if (eventSource == registerButton) {
-            //(new CredentialsPicker()).getAccessInfo() ;
-            //BackController.getInstance().pushPrevScene(eventSource.getScene());
+            BackController.getInstance().pushPrevScene(eventSource.getScene());
             FXMLLoader registerLoader = new FXMLLoader(getClass().getClassLoader().getResource(REGISTER_SCREEN_NAME)) ;
-            stage.setScene(registerLoader.load());
+            stage.setScene(new Scene(registerLoader.load()));
 
         }
 

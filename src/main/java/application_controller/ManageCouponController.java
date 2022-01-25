@@ -29,6 +29,8 @@ public class ManageCouponController {
 
     private final List<CouponBean> couponCosts ;
 
+
+
     public ManageCouponController() {
         couponDAO = new CouponDAO() ;
         couponContainer = null ;
@@ -123,11 +125,11 @@ public class ManageCouponController {
     private List<CouponBean> createCouponPriceBean(Map<Double,Integer> couponCostMap, Integer couponType) {
         List<CouponBean> couponBeanList = new ArrayList<>() ;
 
-        for (Double couponDiscount : couponCostMap.keySet()) {
+        for (Map.Entry<Double,Integer> couponDiscount : couponCostMap.entrySet()) {
             CouponBean couponBean = new CouponBean() ;
-            couponBean.setCouponDiscount(couponDiscount);
+            couponBean.setCouponDiscount(couponDiscount.getKey());
             couponBean.setCouponType(couponType);
-            couponBean.setCouponPointsPrice(couponCostMap.get(couponDiscount));
+            couponBean.setCouponPointsPrice(couponDiscount.getValue());
 
             couponBeanList.add(couponBean) ;
         }

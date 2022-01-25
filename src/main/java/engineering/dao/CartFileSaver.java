@@ -3,6 +3,8 @@ package engineering.dao;
 import model.buy_product.Cart;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class CartFileSaver {
 
@@ -19,8 +21,7 @@ public class CartFileSaver {
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream) ;
                 ) {
             cart = (Cart) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException ignored) {
-        }
+        } catch (IOException | ClassNotFoundException ignored) {}
         return cart ;
     }
 
@@ -29,14 +30,16 @@ public class CartFileSaver {
                 FileOutputStream fileOutputStream = new FileOutputStream(new File(cartFileName)) ;
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream) ;
         ) {
-            //System.out.println("SALVATO");
             objectOutputStream.writeObject(cart);
         } catch (IOException ignored) {
         }
     }
 
-    public void deleteCart() {
-        File cartFile = new File(cartFileName) ;
-        cartFile.delete() ;
+    public void deleteCartFromFile() {
+        try {
+            Files.delete(Path.of(cartFileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

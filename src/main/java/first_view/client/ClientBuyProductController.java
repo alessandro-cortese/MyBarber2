@@ -33,21 +33,13 @@ public class ClientBuyProductController implements Initializable {
     @FXML private Label productDescriptionLabel ;
     @FXML private Button goToCartButton ;
 
-    private BuyProductController buyProductController;
+    private final BuyProductController buyProductController;
 
     public static final String CLIENT_CART_SCENE_RES = "first_view/client/client_cart.fxml" ;
 
     public ClientBuyProductController() {
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
-        if (userBean != null) {
-            try {
-                buyProductController = new BuyProductController(userBean) ;
-            } catch (NotExistentUserException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-                alert.showAndWait() ;
-            }
-        }
-        else buyProductController = new BuyProductController() ;
+        buyProductController = new BuyProductController(userBean) ;
     }
 
     @Override

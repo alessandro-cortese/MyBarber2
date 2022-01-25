@@ -26,22 +26,12 @@ public class ClientBuyProductController implements Initializable {
     @FXML private TextField commandLine ;
     @FXML private ListView<ProductBean> productListView ;
 
-    private BuyProductController buyProductController ;
+    private final BuyProductController buyProductController ;
 
 
     public ClientBuyProductController() {
         UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
-        if (loggedUser == null) {
-            buyProductController = new BuyProductController();
-        }
-        else {
-            try {
-                buyProductController = new BuyProductController(loggedUser) ;
-            } catch (NotExistentUserException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-                alert.showAndWait() ;
-            }
-        }
+        buyProductController = new BuyProductController(loggedUser) ;
     }
 
 
