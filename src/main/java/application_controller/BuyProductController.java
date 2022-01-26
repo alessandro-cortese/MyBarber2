@@ -30,10 +30,9 @@ public class BuyProductController {
     private final CouponDAO couponDAO ;
     private final ProductCatalog productCatalog ;
     private Cart cart ;
-    private final Order order ;
     private Customer customer;
     private CartFileSaver cartFileSaver ;
-    private final CouponApplier couponApplier ;
+    private CouponApplier couponApplier ;
 
 
     public BuyProductController(UserBean loggedUserBean) {
@@ -48,7 +47,6 @@ public class BuyProductController {
             cart = new Cart() ;
         }
         couponApplier = new CouponApplier(cart) ;
-        order = new Order() ;
     }
 
     public List<ProductBean> filterProductList(ProductSearchInfoBean searchInfoBean) {
@@ -108,6 +106,7 @@ public class BuyProductController {
     }
 
     public void completeOrder(OrderInfoBean orderInfoBean) {
+        Order order = new Order() ;
         //IMPOSTIO INFORMAZIONI DI ORDER
         order.setAddress(orderInfoBean.getAddressInfo());
         order.setTelephone(orderInfoBean.getTelephoneInfo());
@@ -122,7 +121,6 @@ public class BuyProductController {
         orderDAO.saveOrder(order);
 
         //INVALIDO TUTTI I COUPON UTILIZZATI
-        CouponDAO couponDAO = new CouponDAO() ;
         couponDAO.invalidateAllCoupon(couponApplier.getCouponContainer());
 
         //Cancellazione del carrello provvisorio

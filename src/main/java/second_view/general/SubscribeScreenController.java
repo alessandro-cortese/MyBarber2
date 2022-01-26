@@ -20,7 +20,6 @@ public class SubscribeScreenController {
     @FXML private TextField subscribeEmailField ;
     @FXML private PasswordField subscribePasswordField ;
     @FXML private TextField userTypeField ;
-    @FXML private TextField confirmPassField;
 
 
     private Map<String, TextField> textFieldMap ;
@@ -31,7 +30,6 @@ public class SubscribeScreenController {
                 "set name", nameField,
                 "set surname", surnameField,
                 "set email", subscribeEmailField,
-                "set address", confirmPassField,
                 "set password", subscribePasswordField) ;
     }
 

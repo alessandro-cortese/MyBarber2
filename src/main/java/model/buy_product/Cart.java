@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Cart extends Subject implements Priceable, Serializable {
+public class Cart implements Priceable, Serializable {
 
     public static final String QUANTITY_KEY = "quantity" ;
     public static final String ISBN_KEY = "isbn" ;
@@ -32,7 +32,6 @@ public class Cart extends Subject implements Priceable, Serializable {
         else {
             productRow.setQuantity(productRow.getQuantity() + 1);
         }
-        super.notifyObservers();
     }
 
     public void removeProduct(Product rmvProduct) {
@@ -43,7 +42,6 @@ public class Cart extends Subject implements Priceable, Serializable {
                 cartRowArrayList.remove(productRow) ;
             }
         }
-        super.notifyObservers();
     }
 
 
