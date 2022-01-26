@@ -73,6 +73,7 @@ public class RegisterScreenController {
         userBean.setUserEmail(emailText.getText());
         userBean.setName(nameText.getText());
         userBean.setPass(passText.getText());
+        userBean.setSurname(surnameText.getText());
         userBean.setUserType(userType);
 
         RegisterController registerController = new RegisterController();

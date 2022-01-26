@@ -66,7 +66,7 @@ public class CustomerDAO {
             boolean resultSet2 = Queries.insertIntoUser(statement,customer.getEmail(),customer.getPass(),CUSTOMER);
             boolean resultSet = Queries.insertIntoCustomer(statement, customer.getName(), customer.getSurname(), customer.getEmail());
 
-        } catch (SQLException e) {
+        } catch (SQLException e) {// converti ecc
             e.printStackTrace();
         }
 

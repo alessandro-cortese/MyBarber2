@@ -1,5 +1,7 @@
 package second_view.general;
 
+import application_controller.RegisterController;
+import engineering.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -15,23 +17,22 @@ public class SubscribeScreenController {
     @FXML private TextField subscribeCommandLine;
     @FXML private TextField nameField ;
     @FXML private TextField surnameField ;
-    @FXML private TextField addressField ;
     @FXML private TextField subscribeEmailField ;
     @FXML private PasswordField subscribePasswordField ;
     @FXML private TextField userTypeField ;
-    @FXML private TextField usernameField;
+    @FXML private TextField confirmPassField;
 
 
     private Map<String, TextField> textFieldMap ;
+    private int type;
 
     private void initMap() {
         textFieldMap = Map.of(
                 "set name", nameField,
                 "set surname", surnameField,
                 "set email", subscribeEmailField,
-                "set address", addressField,
-                "set password", subscribePasswordField,
-                "set username", usernameField) ;
+                "set address", confirmPassField,
+                "set password", subscribePasswordField) ;
     }
 
 
@@ -50,10 +51,28 @@ public class SubscribeScreenController {
             return ;
         }
         else if (commandText.startsWith("register") && registerCommand(commandText)) {
+
+
             if (userTypeField.getText().compareTo("B") == 0) {
+                type=1;
                 ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_HOME_SCREEN);
-                return ;
             }
+            if(userTypeField.getText().compareTo("C")==0){
+                type =0;
+                ScreenChanger.getInstance().changeScreen(event,ScreenChanger.CLIENT_HOME_SCREEN);
+            }
+
+            UserBean userBean = new UserBean();
+            userBean.setName(nameField.getText());
+            userBean.setSurname(surnameField.getText());
+            userBean.setUserType(type);
+            userBean.setUserEmail(subscribeEmailField.getText());
+            userBean.setPass(subscribePasswordField.getText());
+
+            RegisterController registerController = new RegisterController();
+            registerController.register(userBean);
+            return;
+
         }
         else if (commandText.compareTo("back") == 0) {
             ScreenChanger.getInstance().onBack(event);
@@ -101,6 +120,5 @@ public class SubscribeScreenController {
         }
         return handled;
     }
-
 
 }

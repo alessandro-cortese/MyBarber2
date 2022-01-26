@@ -172,6 +172,9 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return  statement.executeQuery(sql);
     }
 
-
-
+    //-+-+-+-+-+-+-+-+-+-+- Barber -+-+-+-+-+-+-+-+-+-+-//
+    public static boolean insertIntoBarber(Statement statement, String name, String surname, String email) throws SQLException {
+        String sql = String.format("INSERT INTO Barber values('%s','%s','%s');",email,name,surname);
+        return  statement.execute(sql);
+    }
 }
