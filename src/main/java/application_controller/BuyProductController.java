@@ -32,7 +32,7 @@ public class BuyProductController {
     private Cart cart ;
     private Customer customer;
     private CartFileSaver cartFileSaver ;
-    private CouponApplier couponApplier ;
+    private final CouponApplier couponApplier ;
 
 
     public BuyProductController(UserBean loggedUserBean) {
@@ -113,7 +113,7 @@ public class BuyProductController {
         order.setPaymentOption(orderInfoBean.getPaymentOptionInfo());
         order.setDate(LocalDate.now());
         order.setFinalPrice(couponApplier.getFinalPrice());
-        order.setOrderOwner(customer.getEmail());
+        order.setOrderOwner(customer);
         order.setCartRows(cart.getCartRowArrayList());
 
         //SALVATAGGIO ORDER
@@ -147,7 +147,7 @@ public class BuyProductController {
         Calendar calendar = Calendar.getInstance() ;
         calendar.setTime(Date.from(Instant.now()));
 
-        return new VendorOrderBean(vendor, order.getAddress(), order.getTelephone(), order.getDate(), order.getOrderOwner(), order.getOrderCode()) ;
+        return new VendorOrderBean(vendor, order.getAddress(), order.getTelephone(), order.getDate(), order.getOwnerEmail(), order.getOrderCode()) ;
     }
 
     public OrderTotalBean showOrder(){

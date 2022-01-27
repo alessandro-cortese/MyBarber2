@@ -41,10 +41,4 @@ public class CartBean {
         this.cartRowBeanArrayList = cartRowBeanArrayList;
     }
 
-    public CartRowBean createRowBean(Map<String, String> rowInfo) {
-        return new CartRowBean(Integer.parseInt(rowInfo.get(QUANTITY_KEY)),
-                Integer.parseInt(rowInfo.get(ISBN_KEY)),
-                rowInfo.get(NAME_KEY),
-                Double.parseDouble(rowInfo.get(PRICE_KEY)));
-    }
 }

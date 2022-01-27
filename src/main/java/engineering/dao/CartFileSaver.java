@@ -17,22 +17,23 @@ public class CartFileSaver {
     public Cart loadCartFromFile() {
         Cart cart = new Cart() ;
         try(
-                FileInputStream fileInputStream = new FileInputStream(cartFileName) ;
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream) ;
+                FileInputStream fileInputStream = new FileInputStream(cartFileName);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 ) {
             cart = (Cart) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException ignored) {}
+        } catch (IOException | ClassNotFoundException exception) {
+            //Se il file che contiene il carrello non viene trovato, si ritorna direttamente una nuova istanza di carrello
+        }
         return cart ;
     }
 
     public void saveCartInFile(Cart cart) {
         try(
-                FileOutputStream fileOutputStream = new FileOutputStream(new File(cartFileName)) ;
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream) ;
+                FileOutputStream fileOutputStream = new FileOutputStream(cartFileName);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         ) {
             objectOutputStream.writeObject(cart);
-        } catch (IOException ignored) {
-        }
+        } catch (IOException ignored) {}
     }
 
     public void deleteCartFromFile() {

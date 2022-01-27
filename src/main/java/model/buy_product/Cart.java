@@ -11,16 +11,9 @@ import java.util.Map;
 
 public class Cart implements Priceable, Serializable {
 
-    public static final String QUANTITY_KEY = "quantity" ;
-    public static final String ISBN_KEY = "isbn" ;
-    public static final String NAME_KEY = "name" ;
-    public static final String PRICE_KEY = "price" ;
-    public static final String VENDOR_KEY = "vendor" ;
-
     private final ArrayList<CartRow> cartRowArrayList ;
 
     public Cart() {
-        super();
         cartRowArrayList = new ArrayList<>() ;
     }
 

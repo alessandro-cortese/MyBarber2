@@ -4,6 +4,7 @@ import boundary.buy_product.BarberManageOrderEMailSystemBoundary;
 import engineering.bean.UserBean;
 import engineering.bean.buy_product.CartRowBean;
 import engineering.bean.buy_product.VendorOrderBean;
+import engineering.dao.BarberDAO;
 import engineering.dao.OrderDAO;
 import engineering.dao.UserDAO;
 import model.User;
@@ -21,17 +22,17 @@ public class BarberManageOrderController {
     private List<Order> orderList ;
 
     public BarberManageOrderController(UserBean loggedUser) {
-        UserDAO userDAO = new UserDAO() ;
-        //barber = userDAO.loadBarberByEmail() ;
+        BarberDAO barberDAO = new BarberDAO() ;
+        barber = barberDAO.loadBarber(loggedUser.getUserEmail()) ;
     }
 
     public List<VendorOrderBean> showAllOrders() {
         OrderDAO orderDAO = new OrderDAO() ;
-        orderList = orderDAO.loadAllOrdersByBarber("barber") ;
+        orderList = orderDAO.loadAllOrdersByBarber(barber.getEmail()) ;
 
         List<VendorOrderBean> vendorOrderBeans = new ArrayList<>() ;
         for (Order order : orderList) {
-            VendorOrderBean vendorOrderBean = new VendorOrderBean("barber", order.getAddress(), order.getTelephone(), order.getDate(), order.getOrderOwner(), order.getOrderCode()) ; ;
+            VendorOrderBean vendorOrderBean = new VendorOrderBean(barber.getEmail(), order.getAddress(), order.getTelephone(), order.getDate(), order.getOwnerEmail(), order.getOrderCode()) ; ;
             vendorOrderBeans.add(vendorOrderBean) ;
         }
 
