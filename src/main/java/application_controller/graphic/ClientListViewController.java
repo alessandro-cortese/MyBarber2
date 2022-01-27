@@ -39,8 +39,4 @@ public class ClientListViewController {
         this.saloonBeanList = saloonBeanList;
         saloonListView.setItems(FXCollections.observableArrayList(saloonBeanList));
     }
-
-    public void setSaloonName(String saloonName) {
-        this.saloonName= saloonName;
-    }
 }

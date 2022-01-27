@@ -13,7 +13,7 @@ public class BookingDAO {
             conn = Connector.getConnectorInstance().getConnection();
     }
 
-    public void verifyDateHour(Time time, LocalDate date) throws Exception { // DA COMPLETARE CHIARIRE SLOT TIME BARBIERE
+    /*public void verifyDateHour(Time time, LocalDate date) throws Exception { // DA COMPLETARE CHIARIRE SLOT TIME BARBIERE
 
         Statement stmt = null;
 
@@ -41,5 +41,5 @@ public class BookingDAO {
             }
 
         }
-    }
+    }*/
 }

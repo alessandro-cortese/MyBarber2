@@ -52,8 +52,6 @@ public class BookingDateHourGraphicController {
         private DatePicker dateBooking;
 
         @FXML
-        private SplitMenuButton timeSlotSplitButton;
-        @FXML
         private Label  saloonNameLabel;
 
 
