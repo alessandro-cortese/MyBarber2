@@ -2,8 +2,10 @@ package second_view.general;
 
 import application_controller.RegisterController;
 import engineering.bean.UserBean;
+import engineering.exception.InvalidCredentialsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -20,6 +22,7 @@ public class SubscribeScreenController {
     @FXML private TextField subscribeEmailField ;
     @FXML private PasswordField subscribePasswordField ;
     @FXML private TextField userTypeField ;
+    private UserBean userBean;
 
 
     private Map<String, TextField> textFieldMap ;
@@ -60,12 +63,15 @@ public class SubscribeScreenController {
                 ScreenChanger.getInstance().changeScreen(event,ScreenChanger.CLIENT_HOME_SCREEN);
             }
 
-            UserBean userBean = new UserBean();
-            userBean.setName(nameField.getText());
-            userBean.setSurname(surnameField.getText());
-            userBean.setUserType(type);
-            userBean.setUserEmail(subscribeEmailField.getText());
-            userBean.setPass(subscribePasswordField.getText());
+            try {
+
+                 userBean = retrieveInfo();
+            } catch (InvalidCredentialsException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+                return;
+            }
+
 
             RegisterController registerController = new RegisterController();
             registerController.register(userBean);
@@ -78,6 +84,20 @@ public class SubscribeScreenController {
         }
 
         subscribeCommandLine.setStyle("-fx-border-color: red");
+    }
+
+    private UserBean retrieveInfo() throws InvalidCredentialsException {
+        UserBean userBean = new UserBean();
+        userBean.setName(nameField.getText());
+        userBean.setSurname(surnameField.getText());
+        userBean.setUserType(type);
+        userBean.setUserEmail(subscribeEmailField.getText());
+        userBean.setPass(subscribePasswordField.getText());
+
+        if(nameField.getText().isEmpty() || userTypeField.getText().isEmpty() || subscribePasswordField.getText().isEmpty() || surnameField.getText().isEmpty() || subscribeEmailField.getText().isEmpty()) {
+            throw new InvalidCredentialsException("indicare valori validi nei campi!");
+        }
+        return userBean;
     }
 
     private boolean setCommand(String insertedCommand) {

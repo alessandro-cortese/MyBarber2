@@ -75,7 +75,7 @@
                   <HBox>
                      <children>
                         <Label prefWidth="150.0" text="User Type" />
-                        <PasswordField fx:id="userTypeField" prefWidth="200.0" />
+                        <TextField fx:id="userTypeField" prefHeight="24.0" prefWidth="201.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="112.0" />

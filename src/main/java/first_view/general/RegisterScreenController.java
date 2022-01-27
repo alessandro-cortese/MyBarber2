@@ -2,15 +2,13 @@ package first_view.general;
 
 import application_controller.RegisterController;
 import engineering.bean.UserBean;
+import engineering.exception.InvalidCredentialsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,6 +49,7 @@ public class RegisterScreenController {
     @FXML
     private Button facebookButton;
     private int userType;
+    private UserBean userBean;
 
 
     @FXML
@@ -69,6 +68,23 @@ public class RegisterScreenController {
         if(sourceNode.getId().equals(facebookButton))
             return;
 
+        try {
+            userBean = retrieveInfo();
+        } catch (InvalidCredentialsException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+            return;
+        }
+
+
+        RegisterController registerController = new RegisterController();
+        registerController.register(userBean);
+
+
+
+    }
+
+    private UserBean retrieveInfo() throws InvalidCredentialsException {
         UserBean userBean = new UserBean();
         userBean.setUserEmail(emailText.getText());
         userBean.setName(nameText.getText());
@@ -76,11 +92,10 @@ public class RegisterScreenController {
         userBean.setSurname(surnameText.getText());
         userBean.setUserType(userType);
 
-        RegisterController registerController = new RegisterController();
-        registerController.register(userBean);
+        if(emailText.getText().isEmpty() || nameText.getText().isEmpty() || passText.getText().isEmpty() || surnameText.getText().isEmpty())
+            throw new InvalidCredentialsException("indicare valori validi nei campi!");
 
-
-
+        return  userBean;
     }
 
     private void onRegisterButtonClicked(Node sourceNode) throws IOException {
