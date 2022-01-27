@@ -10,8 +10,8 @@ import java.util.List;
 
 public class ScheduleTime {
     private  int seatNumber;
-    private  Integer slotTimeAfternoon;
-    private  Integer slotTimeMorning;
+    private  int slotTimeAfternoon;
+    private  int slotTimeMorning;
     private  LocalTime intervalSlotTime;   //classi di ingegnerizzazione che aggrega i time slot della mattina
     private List<TimeSlot> timeSlotList;
     private Time timeOpen;

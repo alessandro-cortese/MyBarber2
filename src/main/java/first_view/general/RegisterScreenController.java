@@ -76,7 +76,6 @@ public class RegisterScreenController {
             return;
         }
 
-
         RegisterController registerController = new RegisterController();
         registerController.register(userBean);
 

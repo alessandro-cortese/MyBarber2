@@ -118,7 +118,9 @@ public class BookingController {
         return servicesBeanList;
     }
 
-    public void saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo) { //MANCA IL CUSTOMERBEAN
+    public boolean saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo) { //MANCA IL CUSTOMERBEAN
+
+        return false;
     }
 
     public boolean checkDateHour(BookingBean bookingBean) throws  SaloonNotFoundException {
