@@ -16,15 +16,7 @@ public class ServiceDAO {
     private static final String SERVICE_DESCRIPTION_COL_NAME = "description";
     private static final String SERVICE_PRICE_COL_NAME = "price";
 
-    private String barberEmail;
     private List<Service> serviceList;
-
-
-    public void setBarberEmail(String barberEmail){
-
-        this.barberEmail = barberEmail;
-
-    }
 
     public ServiceCatalogue loadServices() {
 

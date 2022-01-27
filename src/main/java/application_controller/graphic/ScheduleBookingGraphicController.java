@@ -107,12 +107,12 @@ public class ScheduleBookingGraphicController{
 
     }
 
-    public void InjectServiceSaloon() throws ServiceNotFoundException {
+    public void injectServiceSaloon() throws ServiceNotFoundException {
         firstView= false;
         serviceListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,firstView));
 
         BookingController bookingController = new BookingController();
-        servicesSaloonList = bookingController.SearchServices(saloonInfo);
+        servicesSaloonList = bookingController.searchServices(saloonInfo);
 
         serviceListView.setItems(FXCollections.observableList(servicesSaloonList));
 
