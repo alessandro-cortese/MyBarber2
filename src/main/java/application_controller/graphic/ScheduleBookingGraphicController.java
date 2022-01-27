@@ -3,9 +3,11 @@ package application_controller.graphic;
 import application_controller.BookingController;
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
+import engineering.bean.UserBean;
 import engineering.exception.InsertNegativePriceException;
 import engineering.exception.ServiceNotFoundException;
 import engineering.time.TimeSlot;
+import first_view.general.InternalBackController;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -20,6 +22,7 @@ import javafx.scene.layout.BorderPane;
 
 
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +99,11 @@ public class ScheduleBookingGraphicController{
         BookedGraphicController bookedGraphicController = fxmlLoaderNode.getController();
         bookedGraphicController.injectServicesList(serviceListSelected);
         BookingController bookingController = new BookingController();
-        bookingController.saveBooking(serviceListSelected,saloonInfo);// DA FINIRE
+        UserBean userBean;
+        userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
+        System.out.println(userBean.getUserEmail());
+        Date date = Date.valueOf(dateBooking);
+        bookingController.saveBooking(serviceListSelected,saloonInfo,userBean,timeSlotInfo,date);// DA FINIRE
 
     }
 

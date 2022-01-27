@@ -27,8 +27,6 @@ public class Booking{
 
     }
 
-
-
     public Date getDateBooking() {
         return dateBooking;
     }

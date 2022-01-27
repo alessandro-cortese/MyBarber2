@@ -28,8 +28,8 @@ public class BookedGraphicController{
 
     @FXML
         void onBookedButton(ActionEvent event) throws IOException {
-            InternalBackController internalBackController = InternalBackController.getInternalBackControllerInstance();
-            internalBackController.backToHome((Node) event.getSource());
+            InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());
+
         }
 
 

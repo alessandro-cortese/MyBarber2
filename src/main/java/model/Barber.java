@@ -1,7 +1,5 @@
 package model;
 
-import engineering.bean.UserBean;
-
 public class Barber extends User {
 
     public Barber(String email, String pass, String name, String surname) {
@@ -10,7 +8,4 @@ public class Barber extends User {
 
     }
 
-    public Barber(UserBean userBean) {
-        super(userBean.getUserEmail(), userBean.getPass(), userBean.getName(), userBean.getSurname());
-    }
 }

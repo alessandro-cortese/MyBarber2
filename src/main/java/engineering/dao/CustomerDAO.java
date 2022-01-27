@@ -21,6 +21,18 @@ public class CustomerDAO {
     private static final String CUSTOMER_COL_CARD_POINTS = "cardPoints";
     private static final String CUSTOMER= "customer";
 
+    public Customer retrieveInfoCustomer(String userEmail) {
+        Customer customer = null;
+        Connection connection = Connector.getConnectorInstance().getConnection();
+        try {Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail);
+            customer = createCustomer(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
     public List<Customer> loadCustomerFromFavoriteSaloon(Integer favoriteSaloonId) {
 
         List<Customer> customers = new ArrayList<>();

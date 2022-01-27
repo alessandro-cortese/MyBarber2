@@ -1,21 +1,20 @@
 package application_controller;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.*;
 
-import engineering.bean.BookingBean;
-import engineering.bean.SaloonBean;
-import engineering.bean.ServiceBean;
-import engineering.bean.TimeSlotBean;
+import engineering.bean.*;
+import engineering.dao.BookingDAO;
+import engineering.dao.CustomerDAO;
 import engineering.dao.SaloonDAO;
 import engineering.dao.ServiceDAO;
-import engineering.exception.InsertNegativePriceException;
-import engineering.exception.InvalidIndexSelected;
 import engineering.exception.SaloonNotFoundException;
 import engineering.exception.ServiceNotFoundException;
 import engineering.time.ScheduleTime;
 import engineering.time.TimeSlot;
 import javafx.scene.control.Alert;
+import model.Customer;
 import model.Saloon;
 import model.Service;
 
@@ -32,6 +31,7 @@ public class BookingController {
     private List<ServiceBean> servicesBeanList;
     private List<TimeSlotBean> saloonBeanTimeSlots;
     private List<TimeSlot> saloonTimeSlots;
+    private Date date;
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
@@ -39,16 +39,16 @@ public class BookingController {
         saloonCity = saloonBean.getCity();
         saloonDAO = new SaloonDAO();
 
-        listSaloon = saloonDAO.retrieveByCityName(saloonCity); //chiamo la dao del salone per recuperare dal DB I valori della ricerca
+        listSaloon = saloonDAO.retrieveByCityName(saloonCity);
 
-        for (Saloon saloon: listSaloon){ //imposto il saloonBean prendendo i valori dal model
+        for (Saloon saloon: listSaloon){
             saloonBean.setName(saloon.getName());
             saloonBean.setAddress(saloon.getAddress());
             saloonBean.setCity(saloon.getCity());
             saloonBean.setPhone(saloon.getPhone());
             saloonBean.setSeatNumber(saloon.getSeatNumber());
             saloonBean.setSlotTime(saloon.getSlotTime());
-            saloonBeanList.add(saloonBean); //aggiungo al vettore saloonbeanList il saloonBean precedentemente impostato
+            saloonBeanList.add(saloonBean);
         }
         return saloonBeanList;
     }
@@ -83,7 +83,6 @@ public class BookingController {
             e.printStackTrace();
 
         }
-
         saloonTimeSlots= new ScheduleTime(saloon).CreateSlotTime();
         saloonBeanTimeSlots = new ArrayList<>();
         for (TimeSlot timeSlot : saloonTimeSlots){
@@ -118,7 +117,21 @@ public class BookingController {
         return servicesBeanList;
     }
 
-    public boolean saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo) { //MANCA IL CUSTOMERBEAN
+    public boolean saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo, UserBean userBean, TimeSlot timeSlot, Date date) {
+        String userEmail = userBean.getUserEmail();
+        String[] services = new String[serviceListSelected.size()];
+        Time fromTime = timeSlot.getFromTime();
+        Time toTime= timeSlot.getToTime();
+        this.date=date ;
+        
+        for (int i=0; i< serviceListSelected.size(); i++){
+            services[i] = serviceListSelected.get(i).getNameInfo();
+        }
+        CustomerDAO customerDAO = new CustomerDAO();
+        BookingDAO bookingDAO = new BookingDAO();
+        Customer customer = customerDAO.retrieveInfoCustomer(userEmail);
+        //Booking booking = new Booking(customer,saloonByName,,) MANCA LA SELEZIONE DEL SALONE E LO SLOT SELEZ
+        boolean insertBooking = bookingDAO.insertBooking(userEmail, saloonInfo.getName(), services, fromTime, toTime, date);
 
         return false;
     }
