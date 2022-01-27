@@ -1,5 +1,7 @@
 package model.buy_product;
 
+import model.Barber;
+
 import java.io.Serializable;
 
 public class Product implements Serializable {
@@ -8,13 +10,13 @@ public class Product implements Serializable {
     private String name ;
     private String description ;
     private Double price ;
-    private String vendor ;
+    private Barber vendor ;
 
     public Product() {
-        this(0,"","", 0.0, "") ;
+        this(0,"","", 0.0, null) ;
     }
 
-    public Product(Integer isbn, String name, String description, Double price, String vendor) {
+    public Product(Integer isbn, String name, String description, Double price, Barber vendor) {
         setIsbn(isbn);
         setName(name);
         setDescription(description);
@@ -54,11 +56,11 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public String getVendor() {
+    public Barber getVendor() {
         return vendor;
     }
 
-    public void setVendor(String vendor) {
+    public void setVendor(Barber vendor) {
         this.vendor = vendor;
     }
 

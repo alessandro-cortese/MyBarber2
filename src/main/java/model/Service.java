@@ -8,6 +8,7 @@ public class Service {
     private String serviceDescription;
     private double servicePrice;
     private Product serviceUsedProduct;
+    private Barber barber;
 
     public Service () {
         this("", "", 0.0D, null);
@@ -77,4 +78,11 @@ public class Service {
 
     }
 
+    public Barber getBarber() {
+        return barber;
+    }
+
+    public void setBarber(Barber barber) {
+        this.barber = barber;
+    }
 }
