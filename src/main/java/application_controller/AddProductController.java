@@ -20,7 +20,7 @@ public class AddProductController {
         ProductCatalog productCatalog = productDAO.loadAllProductsByBarberEmail(userBean.getUserEmail());
         Barber barber = new Barber(userBean.getUserEmail(), userBean.getPass(), userBean.getName(), userBean.getSurname());
 
-        Product product = new Product(productBean.getBeanIsbn(), productBean.getBeanName(), productBean.getBeanDescription(), productBean.getBeanPrice(), userBean.getUserEmail());
+        Product product = new Product(productBean.getBeanIsbn(), productBean.getBeanName(), productBean.getBeanDescription(), productBean.getBeanPrice(), barber);
         product.setVendor(barber);
         List<Product> products = productCatalog.filterByName(product.getName());
 
