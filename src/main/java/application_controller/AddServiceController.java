@@ -10,6 +10,7 @@ import engineering.dao.SaloonDAO;
 import engineering.dao.ServiceDAO;
 import engineering.exception.DuplicatedServiceException;
 import engineering.exception.ProductNotFoundException;
+import model.Barber;
 import model.Customer;
 import model.Service;
 import model.buy_product.Product;
@@ -25,6 +26,7 @@ public class AddServiceController {
 
         Product localProduct;
         Service newService;
+        Barber barber = new Barber(userBean.getUserEmail(), userBean.getPass(), userBean.getName(), userBean.getSurname());
 
         int serviceKey;
 
@@ -65,6 +67,7 @@ public class AddServiceController {
         serviceBean.attach(addServiceBoundarySendEmail);
 
         newService = new Service(serviceBean.getNameInfo(), serviceBean.getDescriptionInfo(), serviceBean.getPriceInfo(), localProduct);
+        newService.setBarber(barber);
 
         for(Service service : serviceCatalogue.getServices()){
 
