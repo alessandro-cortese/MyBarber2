@@ -18,8 +18,8 @@ public class ClientListViewController {
     private ListView<SaloonBean> saloonListView;
 
 
-    private  final String APPOINTMENT_SALOON_ITEM = "first_view/list_item/take_saloon_item.fxml";
-    private  final String CLIENT_TAKE_APPOINTMENT ="first_view/client/client_take_appointment.fxml";
+    private static final String APPOINTMENT_SALOON_ITEM = "first_view/list_item/take_saloon_item.fxml";
+    private static final String CLIENT_TAKE_APPOINTMENT ="first_view/client/client_take_appointment.fxml";
 
     private boolean firstView=true;
     private String saloonName;

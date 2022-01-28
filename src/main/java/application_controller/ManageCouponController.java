@@ -83,7 +83,6 @@ public class ManageCouponController {
 
         Double couponValue = couponBean.getCouponDiscount() ;
         Integer couponCost = couponBean.getCouponPointsPrice() ;
-        //System.out.println(couponCost);
         Integer customerPoints = customer.getCardPoints();
         if (customerPoints >= couponCost) {
             createNewCoupon(couponBean.getCouponType(), couponValue) ;

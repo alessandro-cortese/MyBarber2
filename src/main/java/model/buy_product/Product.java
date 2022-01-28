@@ -60,6 +60,10 @@ public class Product implements Serializable {
         return vendor;
     }
 
+    public String getVendorEmail() {
+        return vendor.getEmail() ;
+    }
+
     public void setVendor(Barber vendor) {
         this.vendor = vendor;
     }

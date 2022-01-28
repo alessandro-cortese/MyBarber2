@@ -46,6 +46,6 @@ public class CartRow implements Serializable {
     }
 
     public String getProductVendor() {
-        return product.getVendor() ;
+        return product.getVendorEmail() ;
     }
 }

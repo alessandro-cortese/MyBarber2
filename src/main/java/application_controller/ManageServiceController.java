@@ -20,7 +20,6 @@ public class ManageServiceController {
     public List<ServiceBean> getAllService() throws InsertNegativePriceException {
 
         ServiceDAO serviceDAO = new ServiceDAO();
-        serviceDAO.setBarberEmail(userBean.getUserEmail());
         ServiceCatalogue catalogueService = serviceDAO.loadServices();
         List<Service> services = catalogueService.getServices();
         String nameOfUsedProduct;

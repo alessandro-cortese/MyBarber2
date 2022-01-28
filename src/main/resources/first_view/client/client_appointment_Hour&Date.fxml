@@ -101,12 +101,12 @@
                   <Insets top="30.0" />
                </HBox.margin>
             </Label>
-            <Label fx:id="HourLabel" text="Label">
+            <Label fx:id="hourLabel" text="Label">
                <HBox.margin>
                   <Insets top="30.0" />
                </HBox.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#ConfirmHour" prefHeight="24.0" prefWidth="128.0" text="Conferma">
+            <Button mnemonicParsing="false" onAction="#confirmHour" prefHeight="24.0" prefWidth="128.0" text="Conferma">
                <HBox.margin>
                   <Insets top="30.0" />
                </HBox.margin>
@@ -131,7 +131,7 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="ConfirmDateHourButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="0.0" prefWidth="186.0" text="Prosegui">
+            <Button fx:id="confirmDateHourButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="0.0" prefWidth="186.0" text="Prosegui">
                <HBox.margin>
                   <Insets left="300.0" />
                </HBox.margin>

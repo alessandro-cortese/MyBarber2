@@ -39,7 +39,6 @@ public class BarberAddProductController {
     public void onCommand(ActionEvent event) {
 
         String addProductCommand = addProductCommandLine.getText();
-        String newField;
         AddProductController addProductController;
         addProductCommandLine.setText("");
         addProductCommandLine.setStyle(null);
@@ -51,30 +50,11 @@ public class BarberAddProductController {
             return;
 
         }
-        else if(addProductCommand.startsWith(SET_PRODUCT_NAME_COMMAND)) {
+        else if(addProductCommand.startsWith("set")) {
 
-            newField = addProductCommand.replace(SET_PRODUCT_NAME_COMMAND + " ", "");
-            nameAddProductField.setText(newField);
-            return;
-
-        }
-        else if(addProductCommand.startsWith(SET_PRODUCT_DESCRIPTION_COMMAND)) {
-
-            newField = addProductCommand.replace(SET_PRODUCT_DESCRIPTION_COMMAND + " ", "");
-            descriptionAddProductField.setText(newField);
-            return;
-
-        }
-        else if(addProductCommand.startsWith(SET_PRICE_PRODUCT_COMMAND)) {
-
-            newField = addProductCommand.replace(SET_PRICE_PRODUCT_COMMAND + " ", "");
-            if(newField.compareTo(SET_PRICE_PRODUCT_COMMAND) != 0 &&isNumeric(newField)) {
-
-                addProductPriceField.setText(newField);
+            if(manageSetCommand(addProductCommand)){
                 return;
-
             }
-            else addProductExceptionLabelSecondView.setText("Incorrect insert price!");
 
         }
         else if(addProductCommand.compareTo("add") == 0 && controlValueField()) {
@@ -109,6 +89,41 @@ public class BarberAddProductController {
         }
 
         addProductCommandLine.setStyle("-fx-border-color: red");
+    }
+
+    private boolean manageSetCommand(String addProductCommand) {
+
+        String newField;
+
+        if(addProductCommand.startsWith(SET_PRODUCT_NAME_COMMAND)) {
+
+            newField = addProductCommand.replace(SET_PRODUCT_NAME_COMMAND + " ", "");
+            nameAddProductField.setText(newField);
+            return true;
+
+        }
+        else if(addProductCommand.startsWith(SET_PRODUCT_DESCRIPTION_COMMAND)) {
+
+            newField = addProductCommand.replace(SET_PRODUCT_DESCRIPTION_COMMAND + " ", "");
+            descriptionAddProductField.setText(newField);
+            return true;
+
+        }
+        else if(addProductCommand.startsWith(SET_PRICE_PRODUCT_COMMAND)) {
+
+            newField = addProductCommand.replace(SET_PRICE_PRODUCT_COMMAND + " ", "");
+            if(newField.compareTo(SET_PRICE_PRODUCT_COMMAND) != 0 &&isNumeric(newField)) {
+
+                addProductPriceField.setText(newField);
+                return true;
+
+            }
+            else addProductExceptionLabelSecondView.setText("Incorrect insert price!");
+
+        }
+
+        return false;
+
     }
 
     private boolean controlValueField() {

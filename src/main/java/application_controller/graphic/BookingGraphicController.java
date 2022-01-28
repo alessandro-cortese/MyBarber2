@@ -2,30 +2,24 @@ package application_controller.graphic;
 
 import application_controller.BookingController;
 import engineering.bean.SaloonBean;
-import first_view.general.InternalBackController;
-import first_view.list_cell_factories.SaloonListCellFactory;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookingGraphicController{
 
 
-    public static final String CLIENT_TAKE_SALOONLIST_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
+    public static final String CLIENT_TAKE_SALOON_LIST_SCREEN_NAME = "first_view/client/client_take_saloon.fxml";
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
-    private static final String CLIENT_DATEHOUR= "first_view/client/client_appointment_Hour&Date.fxml";
+    private static final String CLIENT_DATE_HOUR = "first_view/client/client_appointment_Hour&Date.fxml";
 
     @FXML
     private Button bookedButton;
@@ -42,20 +36,6 @@ public class BookingGraphicController{
     @FXML
     private Label saloonName;
 
-    @FXML
-    private TextField textTime;
-
-    @FXML
-    private Button confirmDateHourButton;
-
-    @FXML
-    private ListView serviceSelectedListView;
-
-    @FXML
-    private Label seatNumberLabel;
-
-    @FXML
-    private ListView<SaloonBean> saloonListView = new ListView<SaloonBean>();
     @FXML
     private Button saloonButton;
 
@@ -92,7 +72,7 @@ public class BookingGraphicController{
 
 
         sourceButton = (Button) event.getSource();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOONLIST_SCREEN_NAME));
+        fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_LIST_SCREEN_NAME));
         saloonCity = searchCity.getText();
 
         newCenterNode = fxmlLoader.load();
@@ -113,7 +93,7 @@ public class BookingGraphicController{
     @FXML
     public void onButtonSaloonClicked(ActionEvent actionEvent) throws Exception {
         newCenterNode = null;
-        fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATEHOUR));
+        fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_DATE_HOUR));
         sourceButton = (Button) actionEvent.getSource();
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();

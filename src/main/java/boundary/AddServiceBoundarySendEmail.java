@@ -23,6 +23,8 @@ public class AddServiceBoundarySendEmail implements Observer {
 
         try(PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter( "EmailAddressFile.txt")))){
 
+            printWriter.println(serviceBean.getNameInfo());
+
             for(UserBean userBean : userBeans) {
 
                 printWriter.println(userBean.getUserEmail());

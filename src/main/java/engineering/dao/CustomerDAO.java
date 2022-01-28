@@ -81,7 +81,23 @@ public class CustomerDAO {
         } catch (SQLException e) {// converti ecc
             e.printStackTrace();
         }
+    }
 
+    public Customer loadCustomerByEmail(String email) {
+        Connection connection = Connector.getConnectorInstance().getConnection();
+        Customer customer = null ;
+        try(
+                Statement statement = connection.createStatement() ;
+                ResultSet resultSet = Queries.selectCustomerByEmail(statement, email) ;
+                )
+        {
+            while (resultSet.next()) {
+                customer = createCustomer(resultSet) ;
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
 
+        return customer ;
     }
 }

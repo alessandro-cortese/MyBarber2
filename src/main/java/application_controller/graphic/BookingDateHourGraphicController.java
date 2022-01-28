@@ -1,19 +1,15 @@
 package application_controller.graphic;
 
 import application_controller.BookingController;
-import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
 import engineering.bean.TimeSlotBean;
 import engineering.exception.ServiceNotFoundException;
-import engineering.time.ScheduleTime;
 import engineering.time.TimeSlot;
-import first_view.list_cell_factories.SaloonListCellFactory;
 import first_view.list_cell_factories.SaloonTimeSlotsListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,12 +17,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Time;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class BookingDateHourGraphicController {
 
@@ -40,7 +34,7 @@ public class BookingDateHourGraphicController {
         private static TimeSlot timeSlot;
 
         @FXML
-        private Button ConfirmDateHourButton;
+        private Button confirmDateHourButton;
 
         @FXML
         private Label exceptionDateLabel;
@@ -61,7 +55,7 @@ public class BookingDateHourGraphicController {
         @FXML
         private ListView timeSlotListView;
         @FXML
-        private Label HourLabel;
+        private Label hourLabel;
 
         private List<TimeSlotBean> timeSlotSaloon;
 
@@ -90,12 +84,12 @@ public class BookingDateHourGraphicController {
                 ScheduleBookingGraphicController scheduleBookingGraphicController = fxmlLoaderNode.getController();
                 System.out.println(timeSlot.getFromTime()+"and"+ timeSlot.getToTime());
                 scheduleBookingGraphicController.displaySaloon(timeSlotSaloonInfo, timeSlot,date );
-                scheduleBookingGraphicController.InjectServiceSaloon();
+                scheduleBookingGraphicController.injectServiceSaloon();
         }
 
 
         @FXML
-        public void ConfirmHour(ActionEvent event) throws IOException, ParseException { //qui chiamo la BookingDAO
+        public void confirmHour(ActionEvent event) throws IOException, ParseException { //qui chiamo la BookingDAO
                 date = dateBooking.getValue();
 
         }

@@ -2,7 +2,9 @@ package model;
 
 import engineering.bean.UserBean;
 
-public class Customer extends User{
+import java.io.Serializable;
+
+public class Customer extends User implements Serializable {
 
     private String phone;
     private Integer cardPoints ;
@@ -59,7 +61,6 @@ public class Customer extends User{
     }
 
     public void setCardPoints(Integer cardPoints) {
-
         this.cardPoints = cardPoints;
 
     }

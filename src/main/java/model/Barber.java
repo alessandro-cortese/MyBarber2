@@ -1,11 +1,11 @@
 package model;
 
-public class Barber extends User {
+import java.io.Serializable;
+
+public class Barber extends User implements Serializable {
 
     public Barber(String email, String pass, String name, String surname) {
-
         super(email, pass, name, surname);
-
     }
 
 }

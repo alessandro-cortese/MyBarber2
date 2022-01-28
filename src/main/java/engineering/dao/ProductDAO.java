@@ -3,6 +3,7 @@ package engineering.dao;
 import engineering.dao.queries.Queries;
 import engineering.exception.ProductNotFoundException;
 import engineering.pattern.Connector;
+import model.Barber;
 import model.buy_product.Product;
 import model.buy_product.containers.ProductCatalog;
 
@@ -27,6 +28,7 @@ public class ProductDAO {
 
             while (resultSet.next()) {
                 Product product = createProduct(resultSet);
+
                 products.add(product);
             }
 
@@ -148,6 +150,9 @@ public class ProductDAO {
         Double price = resultSet.getDouble(PRICE_COL_LABEL) ;
         String vendorEmail = resultSet.getString(BARBER_COL_LABEL) ;
 
-        return new Product(isbn, name, description, price, vendorEmail) ;
+        BarberDAO barberDAO = new BarberDAO() ;
+        Barber vendor = barberDAO.loadBarber(vendorEmail) ;
+
+        return new Product(isbn, name, description, price, vendor) ;
     }
 }

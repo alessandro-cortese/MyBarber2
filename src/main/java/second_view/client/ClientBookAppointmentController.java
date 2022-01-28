@@ -8,7 +8,6 @@ import engineering.exception.InvalidIndexSelected;
 import engineering.exception.ServiceNotFoundException;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -100,7 +99,7 @@ public class ClientBookAppointmentController {
         hourText.setText(timeSlotInfo.getFromTime()+" - "+timeSlotInfo.getToTime());
         saloonName.setText(saloonBean.getName());
         BookingController bookingController = new BookingController();
-        serviceBeanList = bookingController.SearchServices(saloonBean);
+        serviceBeanList = bookingController.searchServices(saloonBean);
         serviceListView.setItems(FXCollections.observableList(serviceBeanList));
 
 

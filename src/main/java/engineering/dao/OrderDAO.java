@@ -2,6 +2,7 @@ package engineering.dao;
 
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
+import model.Customer;
 import model.User;
 import model.buy_product.Cart;
 import model.buy_product.CartRow;
@@ -32,7 +33,7 @@ public class OrderDAO {
             statement.setDouble(2, order.getFinalPrice());
             statement.setString(3, order.getAddress());
             statement.setString(4, order.getTelephone());
-            statement.setString(5, order.getOrderOwner());
+            statement.setString(5, order.getOwnerEmail());
 
             statement.executeUpdate() ;
             ResultSet generatedKeys = statement.getGeneratedKeys() ;
@@ -77,9 +78,11 @@ public class OrderDAO {
         Integer orderCode = resultSet.getInt(ORDER_ID_LAB) ;
         String orderAddress = resultSet.getString(ORDER_ADDRESS_LAB) ;
         String orderTelephone = resultSet.getString(ORDER_TELEPHONE_LAB) ;
-        String orderOwner = resultSet.getString(ORDER_CUSTOMER_LAB) ;
+        String ownerEmail = resultSet.getString(ORDER_CUSTOMER_LAB) ;
         LocalDate orderDate = resultSet.getDate(ORDER_DATE_LAB).toLocalDate() ;
 
-       return new Order(orderCode, orderAddress, orderTelephone, orderOwner, orderDate) ;
+        CustomerDAO customerDAO = new CustomerDAO() ;
+        Customer customer = customerDAO.loadCustomerByEmail(ownerEmail);
+        return new Order(orderCode, orderAddress, orderTelephone, customer, orderDate) ;
     }
 }

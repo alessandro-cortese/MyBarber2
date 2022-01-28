@@ -86,7 +86,7 @@ public class BookingController {
         return saloonBeanTimeSlots;
     }
 
-    public List<ServiceBean> SearchServices(SaloonBean saloonBean) throws ServiceNotFoundException {
+    public List<ServiceBean> searchServices(SaloonBean saloonBean) throws ServiceNotFoundException {
         ServiceDAO serviceDAO = new ServiceDAO();
         List<ServiceBean> servicesBeanList = new ArrayList<>();
         List<Service> ServicesList = serviceDAO.retrieveService(saloonBean.getName());

@@ -178,8 +178,10 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return  statement.execute(sql);
     }
 
+
     public static boolean insertBookingInfo(Statement statement, String userEmail, String nameSaloon, String service, Time fromTime, Time toTime,Date date) throws SQLException {
         String sql=String.format("INSERT INTO Booking(dateBooking,fromTime,toTime,customer,Saloon,service) values('%t','%T','%T','%s','%s','%s');");
         return statement.execute(sql);
     }
+
 }

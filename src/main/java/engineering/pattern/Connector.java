@@ -13,39 +13,32 @@ public class Connector {
 
         protected Connector()  {
 
-            try {
-                    /*
-                    Properties prop = new Properties() ;
-                    prop.load(new FileInputStream("engineering/dao/db_configuration.properties"));
-                    String driver = prop.getProperty("jdbcDriver") ;
-                    String dbName = prop.getProperty("dbName") ;
-                    String dbUsername = prop.getProperty("dbUserName") ;
-                    String dbPassword = prop.getProperty("dbPassword") ;
-                    String dbPort = prop.getProperty("dbPort") ;
-                    String dbHostname = prop.getProperty("dbHostName") ;
-                    String dbUrlStart = prop.getProperty("dbUrlStart") ;
+            try(FileInputStream fileInputStream = new FileInputStream("src/main/java/engineering/dao/db_configuration.properties")) {
 
-                    String jdbcUrl = String.format("%s://%s:%s/%s?user=%s&password=%s",dbUrlStart,dbHostname,dbPort,dbName, dbUsername, dbPassword) ;
-                    connection = DriverManager.getConnection(jdbcUrl);
-                    */
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    String dbName = "mydb";
-                    String userName="admin";
-                    String password="Alessandro99";
-                    String port ="3306";
-                    String hostname="mybarberdb.cvgybcfusiqr.eu-west-2.rds.amazonaws.com";
+                Properties prop = new Properties() ;
+                prop.load(fileInputStream);
+                String driver = prop.getProperty("jdbcDriver") ;
+                String dbName = prop.getProperty("dbName") ;
+                String dbUsername = prop.getProperty("dbUserName") ;
+                String dbPassword = prop.getProperty("dbPassword") ;
+                String dbPort = prop.getProperty("dbPort") ;
+                String dbHostname = prop.getProperty("dbHostName") ;
+                String dbUrlStart = prop.getProperty("dbUrlStart") ;
 
-                    String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
-                    connection = DriverManager.getConnection(jdbcUrl);
-            }catch (SQLException e) {
-                    e.getMessage();
-                    e.getSQLState();
-                    e.getErrorCode();
+                Class.forName(driver) ;
+                String jdbcUrl = String.format("%s://%s:%s/%s?user=%s&password=%s",dbUrlStart,dbHostname,dbPort,dbName, dbUsername, dbPassword) ;
+                connection = DriverManager.getConnection(jdbcUrl);
 
-            } catch (ClassNotFoundException e) {
+            }
+            catch (SQLException e) {
+                e.getMessage();
+                e.getSQLState();
+                e.getErrorCode();
+
+            }
+            catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }
-
         }
 
         public static Connector getConnectorInstance() {

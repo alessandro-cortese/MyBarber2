@@ -1,5 +1,7 @@
 package model.buy_product;
 
+import model.Customer;
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +13,7 @@ public class Order {
     private String address ;
     private String telephone ;
     private String paymentOption ;
-    private String orderOwner ;
+    private Customer orderOwner ;
     private LocalDate date ;
     private Double finalPrice ;
 
@@ -20,7 +22,7 @@ public class Order {
 
     public Order() {}
 
-    public Order(Integer orderCode, String address, String telephone, String orderOwner, LocalDate date) {
+    public Order(Integer orderCode, String address, String telephone, Customer orderOwner, LocalDate date) {
         setOrderCode(orderCode);
         setAddress(address);
         setAddress(telephone);
@@ -78,11 +80,11 @@ public class Order {
         this.finalPrice = finalPrice;
     }
 
-    public String getOrderOwner() {
+    public Customer getOrderOwner() {
         return orderOwner;
     }
 
-    public void setOrderOwner(String orderOwner) {
+    public void setOrderOwner(Customer orderOwner) {
         this.orderOwner = orderOwner;
     }
 
@@ -92,5 +94,9 @@ public class Order {
 
     public void setCartRows(List<CartRow> cartRows) {
         this.cartRows = cartRows;
+    }
+
+    public String getOwnerEmail() {
+        return orderOwner.getEmail() ;
     }
 }
