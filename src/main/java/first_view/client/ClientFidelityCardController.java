@@ -4,10 +4,12 @@ import application_controller.ManageCouponController;
 import engineering.bean.FidelityCardBean;
 import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
+import engineering.exception.CardPointsException;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CouponCellFactory;
+import first_view.list_cell_factories.CouponCostListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +25,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
+import static first_view.list_cell_factories.BuyProductListCellFactory.FIRST_VIEW;
 
 public class ClientFidelityCardController implements Initializable {
 
@@ -34,6 +37,7 @@ public class ClientFidelityCardController implements Initializable {
     @FXML private Label pointsSaleLabel ;
     @FXML private Label userNameLabel ;
 
+
     private final ManageCouponController manageCouponController ;
 
     public ClientFidelityCardController() {
@@ -42,23 +46,9 @@ public class ClientFidelityCardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        couponListView.setCellFactory(param -> new CouponCellFactory());
+        couponListView.setCellFactory(param -> new CouponCellFactory(FIRST_VIEW));
 
-        couponCostListView.setCellFactory(new Callback<>() {
-            @Override
-            public ListCell<CouponBean> call(ListView<CouponBean> param) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(CouponBean item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            setText(String.format("SCONTO: -%.2f\t\t%s\t\tCOSTO IN PUNTI: %d", item.getCouponDiscount(), (item.getExternalCouponType().compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getCouponPointsPrice()));
-                            setStyle("-fx-font-size: 16 ; -fx-alignment: center");
-                        } else setText(null);
-                    }
-                };
-            }
-        });
+        couponCostListView.setCellFactory(param -> new CouponCostListCellFactory(FIRST_VIEW));
 
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser() ;
         if (userBean != null) {
@@ -95,12 +85,12 @@ public class ClientFidelityCardController implements Initializable {
 
     public void getNewCoupon() {
         try {
-            CouponBean couponBean = couponCostListView.selectionModelProperty().get().getSelectedItem(); ;
+            CouponBean couponBean = couponCostListView.selectionModelProperty().get().getSelectedItem();
             if (couponBean != null) {
                 FidelityCardBean fidelityCardBean = manageCouponController.generateNewCoupon(couponBean);
                 updateView(fidelityCardBean);
             }
-        } catch (InvalidCouponException | NotExistentUserException e) {
+        } catch (CardPointsException | NotExistentUserException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
             alert.showAndWait() ;
         }

@@ -6,10 +6,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="second_view.barber.BarberSeeOrderCartGUIController">
    <children>
@@ -37,6 +37,52 @@
             <Button fx:id="enterButton" defaultButton="true" mnemonicParsing="false" onAction="#onCommand" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: transparent;" />
          </children>
       </VBox>
-      <ListView fx:id="orderCartListView" layoutX="450.0" layoutY="50.0" prefHeight="500.0" prefWidth="400.0" />
+      <VBox alignment="CENTER" layoutX="558.0" layoutY="426.0" spacing="25.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label prefWidth="150.0" text="Indirizzo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="addressLabel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label prefWidth="150.0" text="Telefono">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="telephoneLabel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label prefWidth="150.0" text="Committente">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderOwnerLabel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <ListView fx:id="orderCartListView" layoutX="450.0" layoutY="40.0" prefHeight="350.0" prefWidth="400.0" />
    </children>
 </AnchorPane>

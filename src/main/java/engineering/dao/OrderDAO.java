@@ -27,6 +27,7 @@ public class OrderDAO {
     public void saveOrder(Order order) {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
+
         try(PreparedStatement statement = connection.prepareStatement("INSERT INTO CustomerOrder (orderDate, orderTotal, orderAddress, orderTelephone, customer) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);) {
 
             statement.setDate(1, Date.valueOf(order.getDate()));
@@ -36,10 +37,11 @@ public class OrderDAO {
             statement.setString(5, order.getOwnerEmail());
 
             statement.executeUpdate() ;
-            ResultSet generatedKeys = statement.getGeneratedKeys() ;
-            if (generatedKeys.next()) {
-                Integer orderKey = generatedKeys.getInt(1);
-                order.setOrderCode(orderKey);
+            try(ResultSet generatedKeys = statement.getGeneratedKeys() ;) {
+                if (generatedKeys.next()) {
+                    Integer orderKey = generatedKeys.getInt(1);
+                    order.setOrderCode(orderKey);
+                }
             }
 
             //Salvataggio del Carrello(varie righe di prodotti) relativo a questo ordine

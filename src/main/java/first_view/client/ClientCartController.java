@@ -112,19 +112,15 @@ public class ClientCartController implements Initializable {
         for (int i = 0 ; i < quantity ; i++) {
             removeProduct(cartRow);
         }
-        CartBean cartBean = buyProductController.showCart() ;
-        updateInfo(cartBean);
     }
 
     private void removeProduct(CartRowBean cartRow) {
-        ProductBean productBean = new ProductBean(cartRow.getIsbn()) ;
-        CartBean cartBean = buyProductController.removeProductFromCart(productBean);
+        CartBean cartBean = buyProductController.changeProductQuantity(cartRow, -1) ;
         updateInfo(cartBean);
     }
 
     private void addProduct(CartRowBean cartRow) {
-        ProductBean productBean = new ProductBean(cartRow.getIsbn()) ;
-        CartBean cartBean = buyProductController.insertProductToCart(productBean);
+        CartBean cartBean = buyProductController.changeProductQuantity(cartRow, +1) ;
         updateInfo(cartBean);
     }
 }

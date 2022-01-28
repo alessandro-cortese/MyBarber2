@@ -17,7 +17,7 @@ import java.util.List;
 
 public class BarberManageOrderController {
 
-    private User barber;
+    private final User barber;
 
     private List<Order> orderList ;
 

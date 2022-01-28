@@ -32,7 +32,7 @@ public class CartDAO {
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
-        } ;
+        }
     }
 
     public List<CartRow> loadCartByOrderCode(Integer orderCode) {

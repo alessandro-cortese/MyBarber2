@@ -1,14 +1,15 @@
 package engineering.bean.buy_product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderTotalBean {
 
     private Double orderTotal ;
-    private ArrayList<Integer> couponCodes ;
+    private List<Integer> couponCodes ;
     private Integer orderPoints ;
 
-    public OrderTotalBean(Double oderTotal, ArrayList<Integer> couponCodes, Integer orderPoints) {
+    public OrderTotalBean(Double oderTotal, List<Integer> couponCodes, Integer orderPoints) {
         setOrderTotal(oderTotal);
         setCouponCodes(couponCodes);
         setOrderPoints(orderPoints);
@@ -27,7 +28,7 @@ public class OrderTotalBean {
         this.orderTotal = orderTotal;
     }
 
-    public ArrayList<Integer> getInternalCouponCodes() {
+    public List<Integer> getInternalCouponCodes() {
         return couponCodes;
     }
 
@@ -39,7 +40,7 @@ public class OrderTotalBean {
         return externalCouponCodes ;
     }
 
-    public void setCouponCodes(ArrayList<Integer> couponCodes) {
+    public void setCouponCodes(List<Integer> couponCodes) {
         this.couponCodes = couponCodes;
     }
 

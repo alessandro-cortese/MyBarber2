@@ -33,7 +33,9 @@ public class CartFileSaver {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         ) {
             objectOutputStream.writeObject(cart);
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+            //Se il file non viene trovato il carrello non viene salvato
+        }
     }
 
     public void deleteCartFromFile() {

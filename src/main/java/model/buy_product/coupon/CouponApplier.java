@@ -6,6 +6,7 @@ import engineering.pattern.decorator.Priceable;
 import model.buy_product.containers.CouponContainer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CouponApplier {
 
@@ -58,8 +59,8 @@ public class CouponApplier {
         }
     }
 
-    public ArrayList<Integer> getAppliedCouponCode() {
-        ArrayList<Integer> couponCodes = new ArrayList<>() ;
+    public List<Integer> getAppliedCouponCode() {
+        List<Integer> couponCodes = new ArrayList<>() ;
         for (int i = 0 ; i < couponContainer.getSize() ; i++) {
             if (couponContainer.getCouponByIndex(i) != null) couponCodes.add(couponContainer.getCouponByIndex(i).getCouponCode()) ;
         }

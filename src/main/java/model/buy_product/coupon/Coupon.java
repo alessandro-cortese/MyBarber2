@@ -63,4 +63,9 @@ public abstract class Coupon implements Priceable, Comparable<Coupon> {
             return Double.compare(this.getCouponDiscount(), toCompare.getCouponDiscount());
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return super.equals(other) ;
+    }
 }

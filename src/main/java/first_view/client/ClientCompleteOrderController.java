@@ -5,6 +5,7 @@ import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
 import engineering.bean.buy_product.OrderInfoBean;
 import engineering.bean.buy_product.OrderTotalBean;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.exception.NotExistentUserException;
@@ -32,7 +33,6 @@ public class ClientCompleteOrderController implements Initializable {
     @FXML private Button payWithPaypalButton ;
     @FXML private TextField telephoneField ;
     @FXML private TextField couponCodeField ;
-    @FXML private Button payWithGooglePayButton ;
 
     private BuyProductController buyProductController ;
 
@@ -48,17 +48,16 @@ public class ClientCompleteOrderController implements Initializable {
         if (sourceNode == addCouponButton) {
             insertCoupon() ;
         }
-        else if (sourceNode == payWithPaypalButton || sourceNode == payWithGooglePayButton) {
+        else if (sourceNode == payWithPaypalButton) {
 
             try {
                 if (!addressField.getText().isEmpty() && !telephoneField.getText().isEmpty()) {
-                    String paymentType = (sourceNode == payWithPaypalButton) ? "paypal" : "google";
 
                     if (InternalBackController.getInternalBackControllerInstance().getLoggedUser() == null) {
                         login();
                     }
-
-                    buy(paymentType);
+                    OrderInfoBean orderInfoBean = new OrderInfoBean(addressField.getText(), telephoneField.getText()) ;
+                    buy(orderInfoBean);
                     InternalBackController.getInternalBackControllerInstance().backToHome(sourceNode);
                 }
                 else {
@@ -66,8 +65,9 @@ public class ClientCompleteOrderController implements Initializable {
                     alertDialog.showAndWait();
                 }
 
-            } catch (NotExistentUserException e) {
-                //Se il login non è andato bene non posso andare avanti quindi faccio return ;
+            } catch (NotExistentUserException | IncorrectFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
             }
         }
     }
@@ -75,14 +75,9 @@ public class ClientCompleteOrderController implements Initializable {
     private void login() throws IOException, NotExistentUserException {
         CredentialsPicker credentialsPicker = new CredentialsPicker() ;
         UserBean userBean = credentialsPicker.doLogin() ;
-        try {
-            buyProductController.loadCustomer(userBean);
-            InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBean);
-        } catch (NotExistentUserException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-            throw e;
-        }
+        buyProductController.loadCustomer(userBean);
+        InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBean);
+
     }
 
     private void insertCoupon() {
@@ -116,8 +111,7 @@ public class ClientCompleteOrderController implements Initializable {
         couponListView.setItems(FXCollections.observableList(orderTotalBean.getExternalCouponCodes()));
     }
 
-    private void buy(String paymentType) {
-        OrderInfoBean orderInfoBean = new OrderInfoBean(addressField.getText(), telephoneField.getText(), paymentType) ;
+    private void buy(OrderInfoBean orderInfoBean) {
         buyProductController.completeOrder(orderInfoBean);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Il tuo ordine è stato completato correttamente") ;
         alert.showAndWait() ;

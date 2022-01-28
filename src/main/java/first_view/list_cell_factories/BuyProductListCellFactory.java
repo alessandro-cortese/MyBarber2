@@ -21,7 +21,6 @@ public class BuyProductListCellFactory extends ListCell<ProductBean> {
     private static final String NAME_LABEL_ID = "productNameLabel" ;
     private static final String PRICE_LABEL_ID = "productPriceLabel" ;
     private static final String INDEX_LABEL_ID = "productIndexLabel" ;
-    private static final String IMAGE_VIEW_ID = "productImageView" ;
     public static final String EURO_SYMBOL = "\u20ac" ;
 
     private final Integer caller ;

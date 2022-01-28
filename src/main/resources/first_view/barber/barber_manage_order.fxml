@@ -21,7 +21,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="orderAddressLabel" text="Label">
+                  <Label fx:id="orderAddressLabel">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -35,7 +35,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="orderTelephoneLabel" text="Label">
+                  <Label fx:id="orderTelephoneLabel">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -49,7 +49,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="orderOwnerLabel" text="Label">
+                  <Label fx:id="orderOwnerLabel">
                      <font>
                         <Font size="14.0" />
                      </font>
