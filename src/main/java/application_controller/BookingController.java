@@ -88,8 +88,8 @@ public class BookingController {
     public List<ServiceBean> searchServices(SaloonBean saloonBean) throws ServiceNotFoundException {
         ServiceDAO serviceDAO = new ServiceDAO();
         List<ServiceBean> servicesBeanList = new ArrayList<>();
-        List<Service> ServicesList = serviceDAO.retrieveService(saloonBean.getName());
-        for (Service service: ServicesList){
+        List<Service> servicesList = serviceDAO.retrieveService(saloonBean.getName());
+        for (Service service: servicesList){
             try {
                 ServiceBean serviceBean = new ServiceBean();
                 serviceBean.setNameInfo(service.getServiceName());
@@ -142,10 +142,11 @@ public class BookingController {
             String mess="data non disponibile, il Salone è chiuso!";
             throw new SaloonNotFoundException(mess);
         }
-            String message="conferma effettuta";
-            Alert alert = new Alert(Alert.AlertType.INFORMATION,message);
+        else {
+            String message = "conferma effettuta";
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
             alert.showAndWait();
-
+        }
 
         return result;
     }

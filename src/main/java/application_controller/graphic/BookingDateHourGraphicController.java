@@ -63,7 +63,7 @@ public class BookingDateHourGraphicController {
 
         private SaloonBean timeSlotSaloonInfo;
         private LocalDate date;
-        
+
 
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException, ServiceNotFoundException {
