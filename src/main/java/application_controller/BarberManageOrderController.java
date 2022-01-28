@@ -32,7 +32,7 @@ public class BarberManageOrderController {
 
         List<VendorOrderBean> vendorOrderBeans = new ArrayList<>() ;
         for (Order order : orderList) {
-            VendorOrderBean vendorOrderBean = new VendorOrderBean(barber.getEmail(), order.getAddress(), order.getTelephone(), order.getDate(), order.getOwnerEmail(), order.getOrderCode()) ; ;
+            VendorOrderBean vendorOrderBean = new VendorOrderBean(barber.getEmail(), order.getAddress(), order.getTelephone(), order.getDate(), order.getOwnerEmail(), order.getOrderCode()) ;
             vendorOrderBeans.add(vendorOrderBean) ;
         }
 

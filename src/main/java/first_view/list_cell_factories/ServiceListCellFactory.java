@@ -33,9 +33,12 @@ public class ServiceListCellFactory extends ListCell<ServiceBean> {
         this.viewCaller = flag;
 
     }
+
     public ServiceListCellFactory(String fxmlPath, boolean view){
+
         this.fxmlPath = fxmlPath;
         this.viewCaller = view;
+
     }
 
 
@@ -48,24 +51,30 @@ public class ServiceListCellFactory extends ListCell<ServiceBean> {
 
             try{
 
-                if(parentNode == null) {
-                    if(fxmlPath.compareTo(CLIENT_SERVICE_ITEM) == 0){
+                if(parentNode == null && fxmlPath != null && fxmlPath.compareTo(CLIENT_SERVICE_ITEM) == 0) {
                         parentNode = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SERVICE_ITEM)).load() ;
-                    }
-                    else {
-                        parentNode = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_LIST_ITEM)).load();
-                    }
                 }
+                else {
+                    parentNode = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_LIST_ITEM)).load();
+                }
+
+
+                if(parentNode == null) {
+                    parentNode = new FXMLLoader(getClass().getClassLoader().getResource(BARBER_LIST_ITEM)).load();
+                }
+
 
                 Label nameServiceLabel = (Label) parentNode.lookup("#" + SERVICE_NAME_LABEL_ID);
                 Label priceServiceLabel = (Label) parentNode.lookup("#" + SERVICE_PRICE_LABEL_ID);
                 nameServiceLabel.setText(item.getNameInfo());
-                if(fxmlPath.compareTo(CLIENT_SERVICE_ITEM) == 0){
+
+                if(fxmlPath != null && fxmlPath.compareTo(CLIENT_SERVICE_ITEM) == 0){
                     priceServiceLabel.setText(String.valueOf(item.getPriceInfo()));
                 }
                 else {
                     priceServiceLabel.setText(item.getPriceInfo() + " " + EURO_SYMBOL);
                 }
+
                 if(viewCaller){
                     Label indexLabel = (Label) parentNode.lookup("#" + SERVICE_LABEL_SLOT_NAME_ID);
                     Label indexSlotLabel = (Label) parentNode.lookup("#" + SERVICE_SLOT_INDEX_LABEL_ID);
