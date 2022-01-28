@@ -49,7 +49,7 @@ public class RegisterScreenController {
     @FXML
     private Button facebookButton;
     private int userType;
-    private UserBean userBean;
+
 
 
     @FXML
@@ -61,6 +61,7 @@ public class RegisterScreenController {
     @FXML
     public void onButtonClicked(ActionEvent event) throws  IOException {
         Node sourceNode = (Node)event.getSource() ;
+        UserBean userBean;
         if (sourceNode.getId().equals("registerButton"))
             onRegisterButtonClicked(sourceNode) ;
         if(sourceNode.getId().equals(googleButton))
@@ -84,17 +85,17 @@ public class RegisterScreenController {
     }
 
     private UserBean retrieveInfo() throws InvalidCredentialsException {
-        UserBean userBean = new UserBean();
-        userBean.setUserEmail(emailText.getText());
-        userBean.setName(nameText.getText());
-        userBean.setPass(passText.getText());
-        userBean.setSurname(surnameText.getText());
-        userBean.setUserType(userType);
+        UserBean userBeanInfo = new UserBean();
+        userBeanInfo.setUserEmail(emailText.getText());
+        userBeanInfo.setName(nameText.getText());
+        userBeanInfo.setPass(passText.getText());
+        userBeanInfo.setSurname(surnameText.getText());
+        userBeanInfo.setUserType(userType);
 
         if(emailText.getText().isEmpty() || nameText.getText().isEmpty() || passText.getText().isEmpty() || surnameText.getText().isEmpty())
             throw new InvalidCredentialsException("indicare valori validi nei campi!");
 
-        return  userBean;
+        return  userBeanInfo;
     }
 
     private void onRegisterButtonClicked(Node sourceNode) throws IOException {

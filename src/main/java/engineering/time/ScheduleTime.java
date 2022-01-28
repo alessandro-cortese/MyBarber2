@@ -1,6 +1,6 @@
 package engineering.time;
 
-import engineering.bean.TimeSlotBean;
+
 import model.Saloon;
 
 import java.sql.Time;

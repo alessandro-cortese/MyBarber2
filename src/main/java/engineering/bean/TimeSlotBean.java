@@ -8,8 +8,6 @@ public class TimeSlotBean {
     private Time fromTime;
     private Time toTime;
 
-    public TimeSlotBean(){}
-
 
     public Time getFromTime() {
         return fromTime;

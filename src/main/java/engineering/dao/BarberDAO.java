@@ -22,9 +22,8 @@ public class BarberDAO {
         try {
 
             Statement statement = connection.createStatement();
-            System.out.println(barber.getPass());
-            boolean resultSet2 = Queries.insertIntoUser(statement,barber.getEmail(),barber.getPass(),BARBER);
-            boolean resultSet = Queries.insertIntoBarber(statement, barber.getName(), barber.getSurname(), barber.getEmail());
+            Queries.insertIntoUser(statement,barber.getEmail(),barber.getPass(),BARBER);
+            Queries.insertIntoBarber(statement, barber.getName(), barber.getSurname(), barber.getEmail());
 
         } catch (SQLException e) {// fare conversione dell'eccezione
             e.printStackTrace();
