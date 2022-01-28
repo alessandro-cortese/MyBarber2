@@ -3,6 +3,7 @@ package engineering.dao;
 import engineering.bean.UserBean;
 import engineering.container.SaloonCatalogue;
 import engineering.dao.queries.Queries;
+import engineering.exception.SaloonNotFoundException;
 import engineering.pattern.Connector;
 import model.Saloon;
 import java.sql.*;
@@ -93,7 +94,7 @@ public class SaloonDAO {
         return saloon;
     }
 
-    public List<Saloon> retrieveByCityName(String saloonCity) throws Exception {
+    public List<Saloon> retrieveByCityName(String saloonCity) throws SaloonNotFoundException {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
         ArrayList<Saloon> saloons = new ArrayList<>();
@@ -102,7 +103,7 @@ public class SaloonDAO {
             ResultSet resultSet = Queries.loadSaloonByName(statement, saloonCity)){
             if (!resultSet.first() ) {
                 String message ="nessun salone disponibile, riprova un'altra citta";
-                throw new Exception(message);
+                throw new SaloonNotFoundException(message);
             }
             resultSet.beforeFirst();// return on the previous row
             while(resultSet.next()){

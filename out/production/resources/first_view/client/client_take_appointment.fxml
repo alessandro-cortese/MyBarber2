@@ -13,7 +13,7 @@
    <children>
       <TabPane layoutX="-5.0" layoutY="78.0" prefHeight="524.0" prefWidth="906.0" style="-fx-skin: black;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab id="saloonTab" fx:id="saloonTab" text="Salone">
+          <Tab id="saloonTab" fx:id="saloonTab" text="Nome del salone">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="183.0" prefWidth="225.0">
                      <children>
@@ -24,12 +24,12 @@
                               <Label fx:id="showErr" prefHeight="14.0" prefWidth="301.0" textAlignment="CENTER" />
                            </children>
                         </VBox>
-                        <Label layoutX="171.0" layoutY="140.0" text=" Nome Salone" />
+                        <Label layoutX="177.0" layoutY="140.0" text=" Nome salone" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab id="placeTab" fx:id="placeTab" text="Trattamento">
+          <Tab id="placeTab" fx:id="placeTab" text="Città del salone">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="183.0" prefWidth="225.0">
                      <children>
@@ -40,14 +40,14 @@
                               <Label fx:id="showErr2" prefHeight="16.0" prefWidth="383.0" textAlignment="CENTER" />
                            </children>
                         </VBox>
-                        <Label layoutX="236.0" layoutY="144.0" text="Città" />
+                        <Label layoutX="190.0" layoutY="140.0" text="Città salone" />
                      </children>
                   </AnchorPane>
                </content>
           </Tab>
         </tabs>
       </TabPane>
-      <Label layoutY="38.0" text="Prenota Un Appuntamento">
+      <Label layoutY="38.0" prefHeight="30.0" prefWidth="888.0" text="Cerca un salone in base la tua città oppure inserisci il suo nome!">
          <font>
             <Font size="24.0" />
          </font>

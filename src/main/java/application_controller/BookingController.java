@@ -22,9 +22,8 @@ import model.Service;
 public class BookingController {
 
     private Saloon saloon;
-    private Date date;
 
-    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
+    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws SaloonNotFoundException {
 
         List<SaloonBean> saloonBeanList = new ArrayList<>();
         String saloonCity = saloonBean.getCity();
@@ -108,7 +107,6 @@ public class BookingController {
 
     public boolean saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo, UserBean userBean, TimeSlotBean timeSlotBean, Date date) {
         String userEmail = userBean.getUserEmail();
-        System.out.println("email: "+userEmail);
         String[] services = new String[serviceListSelected.size()];
         TimeSlot timeSlot = new TimeSlot();
         List<Service> serviceList = new ArrayList<>();
@@ -124,7 +122,6 @@ public class BookingController {
         timeSlot.setFromTime(fromTime);
         timeSlot.setToTime(toTime);
         timeSlot.setSeatAvailable(timeSlotBean.getSeatAvailable());
-        this.date=date ;
         
         for (int i=0; i< serviceListSelected.size(); i++){
             services[i] = serviceListSelected.get(i).getNameInfo();

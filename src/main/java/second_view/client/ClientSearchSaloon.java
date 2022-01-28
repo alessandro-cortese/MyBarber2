@@ -7,7 +7,6 @@ import first_view.list_cell_factories.SaloonListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -29,13 +28,12 @@ public class ClientSearchSaloon {
     @FXML
     private Label saloonCityLabel;
 
-    public static final String CLIENT_SALOON_ITEM= "second_view/list_item/client_saloon_item.fxml";
     private SaloonBean saloonBean;
-    private static List<SaloonBean> saloonBeanList;
+    private List<SaloonBean> saloonBeanList;
     private SaloonBean saloonBeanInfo;
 
     public ClientSearchSaloon(){
-        saloonListView = new ListView<>() ; //ho definito come controllore del file fxml degli items di saloonListview questo controllore
+        saloonListView = new ListView<>() ;
     }
 
     @FXML
@@ -47,7 +45,7 @@ public class ClientSearchSaloon {
         try {
 
             if (command.matches("search name .*")) {//. qualsiasi carattere
-                String saloonName = command.replace("search name", "");
+
                 return;//STUB
 
             } else if (command.matches("search city .*")) {

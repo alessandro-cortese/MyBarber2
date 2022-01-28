@@ -26,8 +26,7 @@ public class BookingDateHourGraphicController {
 
         private static final String CLIENT_SALOON_CENTER_SCREEN_NAME = "first_view/client/client_saloon_center.fxml";
 
-        private List<TimeSlot> timeSlotList;
-        private static TimeSlotBean timeSlotBean;
+        private TimeSlotBean timeSlotBean;
 
         @FXML
         private Button confirmDateHourButton;
@@ -64,10 +63,7 @@ public class BookingDateHourGraphicController {
 
         private SaloonBean timeSlotSaloonInfo;
         private LocalDate date;
-
-        public BookingDateHourGraphicController(){
-                timeSlotBean = new TimeSlotBean();
-        }
+        
 
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException, ServiceNotFoundException {
