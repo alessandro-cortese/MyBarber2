@@ -3,6 +3,7 @@ package application_controller.graphic;
 import application_controller.BookingController;
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
+import engineering.bean.TimeSlotBean;
 import engineering.bean.UserBean;
 import engineering.exception.InsertNegativePriceException;
 import engineering.exception.ServiceNotFoundException;
@@ -59,7 +60,7 @@ public class ScheduleBookingGraphicController{
     private static final String CLIENT_SERVICE_ITEM ="first_view/list_item/client_service_item.fxml";
     private SaloonBean saloonInfo;
     private List<ServiceBean> servicesSaloonList;
-    private TimeSlot timeSlotInfo;
+    private TimeSlotBean timeSlotInfo;
     private LocalDate dateBooking;
 
 
@@ -98,10 +99,10 @@ public class ScheduleBookingGraphicController{
         borderPane.setCenter(newCenterNode);
         BookedGraphicController bookedGraphicController = fxmlLoaderNode.getController();
         bookedGraphicController.injectServicesList(serviceListSelected);
+        System.out.println("size della list"+serviceListSelected.size());
         BookingController bookingController = new BookingController();
-        UserBean userBean;
-        userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
-        System.out.println(userBean.getUserEmail());
+
+        UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
         Date date = Date.valueOf(dateBooking);
         bookingController.saveBooking(serviceListSelected,saloonInfo,userBean,timeSlotInfo,date);// DA FINIRE
 
@@ -127,9 +128,9 @@ public class ScheduleBookingGraphicController{
         }
 
 
-    public void displaySaloon(SaloonBean saloonBean, TimeSlot timeSlot, LocalDate date) {
+    public void displaySaloon(SaloonBean saloonBean, TimeSlotBean timeSlot, LocalDate date) {
         saloonInfo = new SaloonBean();
-        timeSlotInfo = new TimeSlot();
+        timeSlotInfo = new TimeSlotBean();
         this.saloonInfo.setName(saloonBean.getName());
         this.saloonInfo.setAddress(saloonBean.getAddress());
         this.saloonInfo.setCity(saloonBean.getCity());

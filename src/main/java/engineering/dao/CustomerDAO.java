@@ -25,8 +25,11 @@ public class CustomerDAO {
         Customer customer = null;
         Connection connection = Connector.getConnectorInstance().getConnection();
         try {Statement statement = connection.createStatement();
+
             ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail);
-            customer = createCustomer(resultSet);
+            while (resultSet.next()) {
+                customer = createCustomer(resultSet);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

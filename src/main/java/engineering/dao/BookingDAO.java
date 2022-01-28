@@ -14,7 +14,7 @@ public class BookingDAO {
         try {
             Statement statement = conn.createStatement();
             int i=0;
-            while(services[i] !=null ) {
+            while(i< services.length  ) {
                 flag = Queries.insertBookingInfo(statement, userEmail, nameSaloon, services[i], fromTime, toTime, date);
             i++;
             }

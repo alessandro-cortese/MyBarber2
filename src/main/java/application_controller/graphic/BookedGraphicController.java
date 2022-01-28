@@ -36,7 +36,6 @@ public class BookedGraphicController{
     public void injectServicesList(List<ServiceBean> services) {
         firstView=false;
         serviceSelectedListView.setCellFactory(param -> new ServiceListCellFactory(SERVICE_ITEM,firstView));
-        serviceSelectedListView.getItems().clear();
         serviceSelectedListView.setItems(FXCollections.observableList(services));
 
     }

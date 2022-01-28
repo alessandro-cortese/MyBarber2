@@ -14,6 +14,7 @@ import engineering.exception.ServiceNotFoundException;
 import engineering.time.ScheduleTime;
 import engineering.time.TimeSlot;
 import javafx.scene.control.Alert;
+import model.Booking;
 import model.Customer;
 import model.Saloon;
 import model.Service;
@@ -21,7 +22,6 @@ import model.Service;
 public class BookingController {
 
     private Saloon saloon;
-
     private Date date;
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
@@ -61,7 +61,7 @@ public class BookingController {
     }
 
     public List<TimeSlotBean> searchTimeSlots(SaloonBean saloonBean) {
-        List<TimeSlotBean> saloonBeanTimeSlots= new ArrayList<>();
+        List<TimeSlotBean> saloonBeanTimeSlots;
         SaloonDAO saloonDAO = new SaloonDAO();
         String saloonName = saloonBean.getName();
 
@@ -106,11 +106,24 @@ public class BookingController {
         return servicesBeanList;
     }
 
-    public boolean saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo, UserBean userBean, TimeSlot timeSlot, Date date) {
+    public boolean saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo, UserBean userBean, TimeSlotBean timeSlotBean, Date date) {
         String userEmail = userBean.getUserEmail();
+        System.out.println("email: "+userEmail);
         String[] services = new String[serviceListSelected.size()];
-        Time fromTime = timeSlot.getFromTime();
-        Time toTime= timeSlot.getToTime();
+        TimeSlot timeSlot = new TimeSlot();
+        List<Service> serviceList = new ArrayList<>();
+        for (int i=0; i< serviceListSelected.size();i++){
+            Service service = new Service();
+            service.setServiceName(serviceListSelected.get(i).getNameInfo());
+            service.setServiceDescription(serviceListSelected.get(i).getDescriptionInfo());
+            service.setServicePrice(serviceListSelected.get(i).getPriceInfo());
+            serviceList.add(service);
+        }
+        Time fromTime = timeSlotBean.getFromTime();
+        Time toTime= timeSlotBean.getToTime();
+        timeSlot.setFromTime(fromTime);
+        timeSlot.setToTime(toTime);
+        timeSlot.setSeatAvailable(timeSlotBean.getSeatAvailable());
         this.date=date ;
         
         for (int i=0; i< serviceListSelected.size(); i++){
@@ -119,8 +132,8 @@ public class BookingController {
         CustomerDAO customerDAO = new CustomerDAO();
         BookingDAO bookingDAO = new BookingDAO();
         Customer customer = customerDAO.retrieveInfoCustomer(userEmail);
-        //Booking booking = new Booking(customer,saloonByName,,) MANCA LA SELEZIONE DEL SALONE E LO SLOT SELEZ
-        boolean insertBooking = bookingDAO.insertBooking(userEmail, saloonInfo.getName(), services, fromTime, toTime, date);
+        new Booking(customer,saloon,serviceList,timeSlot) ;
+        bookingDAO.insertBooking(userEmail, saloonInfo.getName(), services, fromTime, toTime, date);
 
         return false;
     }
