@@ -16,7 +16,7 @@ public class EmailGraphicController {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Message sendEmail(String email) {
+    public static Message sendEmail() {
 
 
         Properties p = new Properties();
@@ -28,7 +28,7 @@ public class EmailGraphicController {
         p.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         String myEmail = "mybarber@gmail.com";
-        String myPassword = "fantozzi";	//inserire la password dell'email di medictory
+        String myPassword = "fantozzi";
 
         Session session = Session.getInstance(p, new Authenticator() {
             @Override
@@ -37,7 +37,7 @@ public class EmailGraphicController {
             }
         });
 
-        return prepareMessage(session, email);
+        return prepareMessage(session, myEmail);
     }
 
 
@@ -47,7 +47,7 @@ public class EmailGraphicController {
 
             mex.setFrom(new InternetAddress(myEmail));
 
-            mex.setRecipient(Message.RecipientType.TO, new InternetAddress("roberto.fard@gmail.com"/*this.email*/));	//inserire l'email a cui inviare il messaggio
+            mex.setRecipient(Message.RecipientType.TO, new InternetAddress(myEmail));
 
 
 

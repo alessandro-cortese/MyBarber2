@@ -19,35 +19,26 @@ import model.Saloon;
 import model.Service;
 
 public class BookingController {
-    private SaloonDAO saloonDAO;
-    private List<Saloon> listSaloon;
-    private  List<SaloonBean> saloonBeanList;
-    private String saloonCity;
-    private String saloonName;
-    private Saloon saloonByName;
+
     private Saloon saloon;
-    private String saloonNameG;
-    private List<Service> ServicesList;
-    private List<ServiceBean> servicesBeanList;
-    private List<TimeSlotBean> saloonBeanTimeSlots;
-    private List<TimeSlot> saloonTimeSlots;
+
     private Date date;
 
     public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
 
-        saloonBeanList = new ArrayList<>();
-        saloonCity = saloonBean.getCity();
-        saloonDAO = new SaloonDAO();
+        List<SaloonBean> saloonBeanList = new ArrayList<>();
+        String saloonCity = saloonBean.getCity();
+        SaloonDAO saloonDAO = new SaloonDAO();
 
-        listSaloon = saloonDAO.retrieveByCityName(saloonCity);
+        List<Saloon> listSaloon = saloonDAO.retrieveByCityName(saloonCity);
 
-        for (Saloon saloon: listSaloon){
-            saloonBean.setName(saloon.getName());
-            saloonBean.setAddress(saloon.getAddress());
-            saloonBean.setCity(saloon.getCity());
-            saloonBean.setPhone(saloon.getPhone());
-            saloonBean.setSeatNumber(saloon.getSeatNumber());
-            saloonBean.setSlotTime(saloon.getSlotTime());
+        for (Saloon saloonItem: listSaloon){
+            saloonBean.setName(saloonItem.getName());
+            saloonBean.setAddress(saloonItem.getAddress());
+            saloonBean.setCity(saloonItem.getCity());
+            saloonBean.setPhone(saloonItem.getPhone());
+            saloonBean.setSeatNumber(saloonItem.getSeatNumber());
+            saloonBean.setSlotTime(saloonItem.getSlotTime());
             saloonBeanList.add(saloonBean);
         }
         return saloonBeanList;
@@ -57,8 +48,7 @@ public class BookingController {
     public SaloonBean searchByNameSaloon(SaloonBean saloonBean){
 
         SaloonDAO saloonDAO = new SaloonDAO();
-        System.out.println(saloonBean.getName());
-        saloonByName = saloonDAO.retrieveByNameOfSaloon(saloonBean.getName());
+        Saloon saloonByName = saloonDAO.retrieveByNameOfSaloon(saloonBean.getName());
 
         saloonBean.setName(saloonByName.getName());
         saloonBean.setCity(saloonByName.getCity());
@@ -71,9 +61,9 @@ public class BookingController {
     }
 
     public List<TimeSlotBean> searchTimeSlots(SaloonBean saloonBean) {
-        saloonBeanTimeSlots= new ArrayList<>();
+        List<TimeSlotBean> saloonBeanTimeSlots= new ArrayList<>();
         SaloonDAO saloonDAO = new SaloonDAO();
-        saloonName = saloonBean.getName();
+        String saloonName = saloonBean.getName();
 
         try {
 
@@ -83,7 +73,7 @@ public class BookingController {
             e.printStackTrace();
 
         }
-        saloonTimeSlots= new ScheduleTime(saloon).CreateSlotTime();
+        List<TimeSlot> saloonTimeSlots= new ScheduleTime(saloon).CreateSlotTime();
         saloonBeanTimeSlots = new ArrayList<>();
         for (TimeSlot timeSlot : saloonTimeSlots){
             TimeSlotBean timeSlotBean = new TimeSlotBean();
@@ -98,8 +88,8 @@ public class BookingController {
 
     public List<ServiceBean> SearchServices(SaloonBean saloonBean) throws ServiceNotFoundException {
         ServiceDAO serviceDAO = new ServiceDAO();
-        servicesBeanList = new ArrayList<>();
-        ServicesList = serviceDAO.retrieveService(saloonBean.getName());
+        List<ServiceBean> servicesBeanList = new ArrayList<>();
+        List<Service> ServicesList = serviceDAO.retrieveService(saloonBean.getName());
         for (Service service: ServicesList){
             try {
                 ServiceBean serviceBean = new ServiceBean();
@@ -108,8 +98,7 @@ public class BookingController {
                 serviceBean.setPriceInfo(service.getServicePrice());
                 servicesBeanList.add(serviceBean);
             } catch (Exception e) {
-                ServiceNotFoundException e1 = new ServiceNotFoundException(e.getMessage());
-                throw e1;
+                throw new ServiceNotFoundException(e.getMessage());
             }
 
         }
@@ -141,13 +130,12 @@ public class BookingController {
         boolean result = saloonDAO.checkDateSaloon(bookingBean.getSaloonName() ,bookingBean.getDate());
         if (result == true){
             String mess="data non disponibile, il Salone è chiuso!";
-                throw new SaloonNotFoundException(mess);
+            throw new SaloonNotFoundException(mess);
         }
-        else{
-            System.out.println("Data confermata");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"conferma effettuta");
+            String message="conferma effettuta";
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,message);
             alert.showAndWait();
-        }
+
 
         return result;
     }
