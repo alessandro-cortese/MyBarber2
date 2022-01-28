@@ -24,16 +24,17 @@ public class BookedGraphicController{
 
         @FXML
         private ListView<ServiceBean> serviceSelectedListView;
-        private boolean firstView;
+
 
     @FXML
-        void onBookedButton(ActionEvent event) throws IOException {
+        void onBookedButton(ActionEvent event) {
             InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());
 
         }
 
 
     public void injectServicesList(List<ServiceBean> services) {
+        boolean firstView;
         firstView=false;
         serviceSelectedListView.setCellFactory(param -> new ServiceListCellFactory(SERVICE_ITEM,firstView));
         serviceSelectedListView.setItems(FXCollections.observableList(services));

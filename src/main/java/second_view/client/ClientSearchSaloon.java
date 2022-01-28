@@ -7,7 +7,6 @@ import first_view.list_cell_factories.SaloonListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -29,13 +28,12 @@ public class ClientSearchSaloon {
     @FXML
     private Label saloonCityLabel;
 
-    public static final String CLIENT_SALOON_ITEM= "second_view/list_item/client_saloon_item.fxml";
     private SaloonBean saloonBean;
-    private static List<SaloonBean> saloonBeanList;
+    private List<SaloonBean> saloonBeanList;
     private SaloonBean saloonBeanInfo;
 
     public ClientSearchSaloon(){
-        saloonListView = new ListView<>() ; //ho definito come controllore del file fxml degli items di saloonListview questo controllore
+        saloonListView = new ListView<>() ;
     }
 
     @FXML
@@ -47,7 +45,7 @@ public class ClientSearchSaloon {
         try {
 
             if (command.matches("search name .*")) {//. qualsiasi carattere
-                String saloonName = command.replace("search name", "");
+
                 return;//STUB
 
             } else if (command.matches("search city .*")) {
@@ -62,23 +60,14 @@ public class ClientSearchSaloon {
                 saloonBeanList = bookingController.searchByCitySaloon(saloonBean);
 
 
-                int i = 0;
-                for (SaloonBean saloonBean : saloonBeanList) {
-                    saloonBean.setIndex(i);
-                    i++;
-                    System.out.println(saloonBean.getIndex());
-                    System.out.println(saloonBean.getCity());
-                    System.out.println(saloonBean.getName());
-
-                }
                 saloonListView.getItems().clear();
                 saloonListView.setItems(FXCollections.observableList(saloonBeanList));
                 return;
 
-            } else if (command.matches("select [0-9]+")) { //stringa composta da numeri  da 0 a 9 e almeno un carattere
-                String index = command.replace("select ", "");
-                int in = Integer.parseInt(index);
-                verifyValidIndex(in);
+            } else if (command.matches("select [0-9]+")) {
+                //String index = command.replace("select ", "");
+                //int in = Integer.parseInt(index);
+                //verifyValidIndex(in);
 
                 ClientBookingDateHourGraphicContr clientBookingDateHourGraphicContr = (ClientBookingDateHourGraphicContr) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_DATE_HOUR);
                 clientBookingDateHourGraphicContr.InjectSaloonInfo(saloonBeanInfo);
@@ -98,11 +87,10 @@ public class ClientSearchSaloon {
         commandLine.setStyle("-fx-border-color: red");
     }
 
-    private void verifyValidIndex(int index) throws SaloonNotFoundException {
+    /*private void verifyValidIndex(int index) throws SaloonNotFoundException {
         boolean flag = false;
         for (SaloonBean saloonBean : saloonListView.getItems()) {
-            int i = saloonBean.getIndex();
-            if (index == i) {
+            if (index == saloonListView.getItems().) {
                 flag = true;
                 saloonBeanInfo = new SaloonBean();
                 saloonBeanInfo.setName(saloonBean.getName());
@@ -115,5 +103,5 @@ public class ClientSearchSaloon {
         if (!flag) {
             throw new SaloonNotFoundException("slot index non valido");
         }
-    }
+    }*/
 }

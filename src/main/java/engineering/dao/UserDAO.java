@@ -12,12 +12,9 @@ import java.sql.Statement;
 
 public class UserDAO {
 
-    private static final String EMAIL_COL_LABEL = "email" ;
-    private static final String PASSWORD_COL_LABEL = "pass" ;
     private static final String NAME_COL_LABEL = "name" ;
     private static final String SURNAME_COL_LABEL = "surname" ;
 
-    private static final String BARBER_EMAIL_COL_LABEL = "emailUser" ;
     private static final String CUSTOMER_EMAIL_COL_LABEL = "userEmail" ;
     private static final String CUSTOMER_POINTS_COL_LABEL = "cardPoints" ;
 

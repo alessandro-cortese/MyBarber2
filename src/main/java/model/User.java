@@ -15,6 +15,7 @@ public abstract class User {
 
     protected User() {}
 
+
     public void setName(String name){
         this.name = name;
     }

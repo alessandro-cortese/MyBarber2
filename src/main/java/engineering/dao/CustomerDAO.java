@@ -77,9 +77,8 @@ public class CustomerDAO {
         Connection connection = Connector.getConnectorInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
-            System.out.println(customer.getPass());
-            boolean resultSet2 = Queries.insertIntoUser(statement,customer.getEmail(),customer.getPass(),CUSTOMER);
-            boolean resultSet = Queries.insertIntoCustomer(statement, customer.getName(), customer.getSurname(), customer.getEmail());
+            Queries.insertIntoUser(statement,customer.getEmail(),customer.getPass(),CUSTOMER);
+            Queries.insertIntoCustomer(statement, customer.getName(), customer.getSurname(), customer.getEmail());
 
         } catch (SQLException e) {// converti ecc
             e.printStackTrace();

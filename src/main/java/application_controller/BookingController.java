@@ -22,9 +22,8 @@ import model.Service;
 public class BookingController {
 
     private Saloon saloon;
-    private Date date;
 
-    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws Exception {
+    public List<SaloonBean> searchByCitySaloon(SaloonBean saloonBean) throws SaloonNotFoundException {
 
         List<SaloonBean> saloonBeanList = new ArrayList<>();
         String saloonCity = saloonBean.getCity();
@@ -89,8 +88,8 @@ public class BookingController {
     public List<ServiceBean> searchServices(SaloonBean saloonBean) throws ServiceNotFoundException {
         ServiceDAO serviceDAO = new ServiceDAO();
         List<ServiceBean> servicesBeanList = new ArrayList<>();
-        List<Service> ServicesList = serviceDAO.retrieveService(saloonBean.getName());
-        for (Service service: ServicesList){
+        List<Service> servicesList = serviceDAO.retrieveService(saloonBean.getName());
+        for (Service service: servicesList){
             try {
                 ServiceBean serviceBean = new ServiceBean();
                 serviceBean.setNameInfo(service.getServiceName());
@@ -108,7 +107,6 @@ public class BookingController {
 
     public boolean saveBooking(List<ServiceBean> serviceListSelected, SaloonBean saloonInfo, UserBean userBean, TimeSlotBean timeSlotBean, Date date) {
         String userEmail = userBean.getUserEmail();
-        System.out.println("email: "+userEmail);
         String[] services = new String[serviceListSelected.size()];
         TimeSlot timeSlot = new TimeSlot();
         List<Service> serviceList = new ArrayList<>();
@@ -124,7 +122,6 @@ public class BookingController {
         timeSlot.setFromTime(fromTime);
         timeSlot.setToTime(toTime);
         timeSlot.setSeatAvailable(timeSlotBean.getSeatAvailable());
-        this.date=date ;
         
         for (int i=0; i< serviceListSelected.size(); i++){
             services[i] = serviceListSelected.get(i).getNameInfo();
@@ -141,14 +138,13 @@ public class BookingController {
     public boolean checkDateHour(BookingBean bookingBean) throws  SaloonNotFoundException {
         SaloonDAO saloonDAO = new SaloonDAO();
         boolean result = saloonDAO.checkDateSaloon(bookingBean.getSaloonName() ,bookingBean.getDate());
-        if (result == true){
+        if (result){
             String mess="data non disponibile, il Salone è chiuso!";
             throw new SaloonNotFoundException(mess);
         }
-            String message="conferma effettuta";
-            Alert alert = new Alert(Alert.AlertType.INFORMATION,message);
+            String message = "conferma effettuta";
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
             alert.showAndWait();
-
 
         return result;
     }

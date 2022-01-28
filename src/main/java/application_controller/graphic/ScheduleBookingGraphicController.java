@@ -59,7 +59,7 @@ public class ScheduleBookingGraphicController{
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
     private static final String CLIENT_SERVICE_ITEM ="first_view/list_item/client_service_item.fxml";
     private SaloonBean saloonInfo;
-    private List<ServiceBean> servicesSaloonList;
+
     private TimeSlotBean timeSlotInfo;
     private LocalDate dateBooking;
 
@@ -70,22 +70,16 @@ public class ScheduleBookingGraphicController{
     @FXML
     private  Label servicePriceLabel;
 
-    private ServiceBean service;
     private static List<ServiceBean> serviceListSelected;
-    private boolean firstView;
 
-    public ScheduleBookingGraphicController(){
-        serviceListSelected = new ArrayList<>();
-    }
 
     @FXML
     void selectServiceOnListView(MouseEvent event) throws InsertNegativePriceException {
-        service = new ServiceBean();
+        ServiceBean service = new ServiceBean();
+        serviceListSelected = new ArrayList<>();
         service.setNameInfo(serviceNameLabel.getText());
         service.setPriceInfo(Double.parseDouble(servicePriceLabel.getText()));
         serviceListSelected.add(service);
-        System.out.println("servizio selezionato" + serviceNameLabel.getText());
-        System.out.println("size " + serviceListSelected.size());
 
     }
 
@@ -99,21 +93,20 @@ public class ScheduleBookingGraphicController{
         borderPane.setCenter(newCenterNode);
         BookedGraphicController bookedGraphicController = fxmlLoaderNode.getController();
         bookedGraphicController.injectServicesList(serviceListSelected);
-        System.out.println("size della list"+serviceListSelected.size());
         BookingController bookingController = new BookingController();
 
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
         Date date = Date.valueOf(dateBooking);
-        bookingController.saveBooking(serviceListSelected,saloonInfo,userBean,timeSlotInfo,date);// DA FINIRE
+        bookingController.saveBooking(serviceListSelected,saloonInfo,userBean,timeSlotInfo,date);
 
     }
 
     public void injectServiceSaloon() throws ServiceNotFoundException {
-        firstView= false;
+        boolean firstView= false;
         serviceListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,firstView));
 
         BookingController bookingController = new BookingController();
-        servicesSaloonList = bookingController.searchServices(saloonInfo);
+        List<ServiceBean> servicesSaloonList = bookingController.searchServices(saloonInfo);
 
         serviceListView.setItems(FXCollections.observableList(servicesSaloonList));
 
