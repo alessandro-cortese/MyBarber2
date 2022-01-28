@@ -76,6 +76,7 @@ public class ScheduleBookingGraphicController{
     @FXML
     void selectServiceOnListView(MouseEvent event) throws InsertNegativePriceException {
         ServiceBean service = new ServiceBean();
+        serviceListSelected = new ArrayList<>();
         service.setNameInfo(serviceNameLabel.getText());
         service.setPriceInfo(Double.parseDouble(servicePriceLabel.getText()));
         serviceListSelected.add(service);

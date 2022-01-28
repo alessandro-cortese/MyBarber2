@@ -39,7 +39,6 @@ public class BookingGraphicController{
 
 
     private Parent newCenterNode;
-    private  String saloonCity;
     private Button sourceButton;
     private FXMLLoader fxmlLoader;
 
@@ -50,7 +49,7 @@ public class BookingGraphicController{
 
         sourceButton = (Button) event.getSource();
         fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_LIST_SCREEN_NAME));
-        saloonCity = searchCity.getText();
+        String saloonCity = searchCity.getText();
 
         newCenterNode = fxmlLoader.load();
         Scene myScene = sourceButton.getScene();

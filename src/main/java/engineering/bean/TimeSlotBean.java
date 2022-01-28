@@ -1,6 +1,6 @@
 package engineering.bean;
 
-import java.sql.Date;
+
 import java.sql.Time;
 
 public class TimeSlotBean {
@@ -10,12 +10,6 @@ public class TimeSlotBean {
 
     public TimeSlotBean(){}
 
-    public TimeSlotBean(Time fromTime, Time toTime, String date){
-        this.fromTime= fromTime;
-        this.toTime= toTime;
-
-
-    }
 
     public Time getFromTime() {
         return fromTime;

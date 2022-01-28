@@ -45,7 +45,7 @@ public class SaloonListCellFactory extends ListCell<SaloonBean> {
                     nameSaloonItem = (Label) parentNode.lookup("#"+NAME_LABEL);
                     Label indexSaloonItem = (Label) parentNode.lookup("#"+SLOT_INDEX);
                     placeSaloonItem = (Label) parentNode.lookup("#"+ PLACE_LABEL);
-                    indexSaloonItem.setText("slot index: "+ item.getIndex());
+                    indexSaloonItem.setText("slot index: "+ Integer.toString(this.getIndex()));
 
                 }
 

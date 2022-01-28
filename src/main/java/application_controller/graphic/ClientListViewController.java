@@ -18,15 +18,10 @@ public class ClientListViewController {
     private ListView<SaloonBean> saloonListView;
 
 
-    private boolean firstView;
-    private List<SaloonBean> saloonBeanList;
-
-
 
     public void injectSaloonList(List<SaloonBean> saloonBeanList) {
-        firstView=true;
+        boolean firstView=true;
         saloonListView.setCellFactory(param -> new SaloonListCellFactory(firstView));
-        this.saloonBeanList = saloonBeanList;
         saloonListView.setItems(FXCollections.observableArrayList(saloonBeanList));
     }
 }

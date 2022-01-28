@@ -6,7 +6,6 @@ import java.time.LocalTime;
 
 public class SaloonBean {
 
-    public int index;
     private String name;
     private String address;
     private String phone;
@@ -211,17 +210,6 @@ public class SaloonBean {
 
     }
 
-    public int getIndex() {
-
-        return index;
-
-    }
-
-    public void setIndex(int index) {
-
-        this.index = index;
-
-    }
 
     public Weekdays[] getClosedDayOfWeekInfo() {
 

@@ -60,23 +60,14 @@ public class ClientSearchSaloon {
                 saloonBeanList = bookingController.searchByCitySaloon(saloonBean);
 
 
-                int i = 0;
-                for (SaloonBean saloonBean : saloonBeanList) {
-                    saloonBean.setIndex(i);
-                    i++;
-                    System.out.println(saloonBean.getIndex());
-                    System.out.println(saloonBean.getCity());
-                    System.out.println(saloonBean.getName());
-
-                }
                 saloonListView.getItems().clear();
                 saloonListView.setItems(FXCollections.observableList(saloonBeanList));
                 return;
 
-            } else if (command.matches("select [0-9]+")) { //stringa composta da numeri  da 0 a 9 e almeno un carattere
-                String index = command.replace("select ", "");
-                int in = Integer.parseInt(index);
-                verifyValidIndex(in);
+            } else if (command.matches("select [0-9]+")) {
+                //String index = command.replace("select ", "");
+                //int in = Integer.parseInt(index);
+                //verifyValidIndex(in);
 
                 ClientBookingDateHourGraphicContr clientBookingDateHourGraphicContr = (ClientBookingDateHourGraphicContr) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_DATE_HOUR);
                 clientBookingDateHourGraphicContr.InjectSaloonInfo(saloonBeanInfo);
@@ -96,11 +87,10 @@ public class ClientSearchSaloon {
         commandLine.setStyle("-fx-border-color: red");
     }
 
-    private void verifyValidIndex(int index) throws SaloonNotFoundException {
+    /*private void verifyValidIndex(int index) throws SaloonNotFoundException {
         boolean flag = false;
         for (SaloonBean saloonBean : saloonListView.getItems()) {
-            int i = saloonBean.getIndex();
-            if (index == i) {
+            if (index == saloonListView.getItems().) {
                 flag = true;
                 saloonBeanInfo = new SaloonBean();
                 saloonBeanInfo.setName(saloonBean.getName());
@@ -113,5 +103,5 @@ public class ClientSearchSaloon {
         if (!flag) {
             throw new SaloonNotFoundException("slot index non valido");
         }
-    }
+    }*/
 }

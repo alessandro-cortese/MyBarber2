@@ -244,16 +244,13 @@ public class SaloonDAO {
             ResultSet resultSet = Queries.checkDateClosed(statement,saloonName);
             if (resultSet.first())
                 day = resultSet.getString(DAY_CLOSED);
-                System.out.println("giorno recuperato dal db"+day);
-                System.out.println("confrontare col giorno: " +date);
 
-            if ( day != null) {
-                if (day.compareTo(date) == 0)
-                    flag = true;
+            if ( (day != null) && (day.compareTo(date) == 0)) {
+                flag = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return flag; //se il giorno inserito è presente in qualche tupla del SaloonDay allora non è possibile prenotare, quindi ritona true
+        return flag;
     }
 }
