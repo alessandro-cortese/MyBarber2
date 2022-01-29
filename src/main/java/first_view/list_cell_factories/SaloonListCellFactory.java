@@ -40,7 +40,7 @@ public class SaloonListCellFactory extends ListCell<SaloonBean> {
                     placeSaloonItem = (Label) parentNode.lookup("#" + PLACE_LABEL_ID);
 
                 }
-                if(parentNode == null && !view){
+                if(parentNode == null){
                     parentNode = new FXMLLoader(getClass().getClassLoader().getResource(LIST_ITEM_SALOON_2V)).load();
                     nameSaloonItem = (Label) parentNode.lookup("#"+NAME_LABEL);
                     Label indexSaloonItem = (Label) parentNode.lookup("#"+SLOT_INDEX);
@@ -50,7 +50,6 @@ public class SaloonListCellFactory extends ListCell<SaloonBean> {
                 }
 
                 nameSaloonItem.setText(item.getName());
-                System.out.println(item.getCity()+"ewe");
                 placeSaloonItem.setText(item.getAddress() + item.getCity());
                 setGraphic(parentNode);
 

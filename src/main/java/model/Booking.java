@@ -34,4 +34,35 @@ public class Booking{
         this.dateBooking=dateBooking;
     }
 
+    public Customer getCustomer() {
+        return customer;
     }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public Saloon getSaloon() {
+        return saloon;
+    }
+
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setSaloon(Saloon saloon) {
+        this.saloon = saloon;
+    }
+
+    public void setTimeSlot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
+}

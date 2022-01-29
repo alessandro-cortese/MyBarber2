@@ -53,7 +53,6 @@ public class ClientBookingDateHourGraphicContr{
 
     private SaloonBean saloonBean;
     private List<TimeSlotBean> timeSlotSaloon;
-    private List<TimeSlotBean> timeSlotList;
     private String index;
     private TimeSlotBean timeSlotInfo;
     private String date;
@@ -69,13 +68,12 @@ public class ClientBookingDateHourGraphicContr{
                 ScreenChanger.getInstance().onBack(event);
                 return;
             } else if (command.matches("set date \\d{4}-\\d{2}-\\d{2}")) {
-                String date = command.replace("set date ", "");
-                dateField.setText(date);
+                String dateB = command.replace("set date ", "");
+                dateField.setText(dateB);
                 return;
             } else if (command.matches("select slot time [0-9]+")) {
                 index = command.replace("select slot time ", "");
                 int in = Integer.parseInt(index);
-                System.out.println(in);
                 verifyIndexSlotTime(in);
                 slotTimeField.setText(index);
                 return;
@@ -129,12 +127,12 @@ public class ClientBookingDateHourGraphicContr{
         saloonBean.setAddress(saloonBeanInfo.getAddress());
         saloonBean.setPhone(saloonBeanInfo.getPhone());
 
-        hourListView.setCellFactory(param -> new SaloonTimeSlotsListCellFactory());
-        SaloonBean saloonBean = new SaloonBean(saloonBeanInfo.getName());
+        hourListView.setCellFactory(param -> new SaloonTimeSlotsListCellFactory(false));
+        SaloonBean saloonBean2 = new SaloonBean(saloonBeanInfo.getName());
         saloonName.setText(saloonBeanInfo.getName());
 
         BookingController bookingController = new BookingController();
-        timeSlotSaloon = bookingController.searchTimeSlots(saloonBean);//FAR RITORNARE PURE GLI I SEAT TIME
+        timeSlotSaloon = bookingController.searchTimeSlots(saloonBean2);
 
         hourListView.setItems(FXCollections.observableList(timeSlotSaloon));
 

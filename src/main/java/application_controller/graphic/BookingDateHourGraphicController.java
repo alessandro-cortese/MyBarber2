@@ -97,7 +97,7 @@ public class BookingDateHourGraphicController {
         }
 
         public void injectSaloonIntoDateHour() {
-                timeSlotListView.setCellFactory(param -> new SaloonTimeSlotsListCellFactory());
+                timeSlotListView.setCellFactory(param -> new SaloonTimeSlotsListCellFactory(true));
 
                 searchTimeSlots();
 

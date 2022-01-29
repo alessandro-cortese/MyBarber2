@@ -24,7 +24,9 @@ public class BookedGraphicController{
 
         @FXML
         private ListView<ServiceBean> serviceSelectedListView;
-
+        public BookedGraphicController(){
+            serviceSelectedListView = new ListView<>();
+        }
 
     @FXML
         void onBookedButton(ActionEvent event) {
