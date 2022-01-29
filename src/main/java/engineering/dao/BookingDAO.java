@@ -10,9 +10,11 @@ public class BookingDAO {
 
     public boolean insertBooking(String userEmail, String nameSaloon, String[] services, Time fromTime, Time toTime, Date date) {
         boolean flag = false;
+        Statement statement = null;
         Connection conn = Connector.getConnectorInstance().getConnection();
+
         try {
-            Statement statement = conn.createStatement();
+            statement = conn.createStatement();
             int i=0;
             while(i< services.length  ) {
                 flag = Queries.insertBookingInfo(statement, userEmail, nameSaloon, services[i], fromTime, toTime, date);
@@ -22,6 +24,14 @@ public class BookingDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         return flag;
     }
 }

@@ -21,7 +21,7 @@ public class ScheduleTime {
     public ScheduleTime(Saloon saloonTimeSlots){
         timeSlotList = new ArrayList<TimeSlot>();
         timeOpen = saloonTimeSlots.getOpeningMorningTime();
-        timeOpenAfternoon = saloonTimeSlots.getOpeningAfternoonTime();
+        timeOpenAfternoon = saloonTimeSlots.getCloseAfternoonTime();
         seatNumber = saloonTimeSlots.getSeatNumber();
 
 
@@ -33,8 +33,11 @@ public class ScheduleTime {
 
         public List<TimeSlot> CreateSlotTime() {
 
-            for (int i = 0; i < slotTimeMorning; i++) {
+            for (int i = 0; i < slotTimeMorning + slotTimeAfternoon; i++) {
                 timeSlot = new TimeSlot();
+                if(i == slotTimeMorning){
+                    timeOpen.setTime(timeOpenAfternoon.getTime());
+                }
                 long in = timeOpen.getTime();
                 timeOpen = new Time(in);
                 timeSlot.setFromTime(timeOpen);
@@ -51,26 +54,8 @@ public class ScheduleTime {
                 timeSlotList.add(timeSlot);
 
             }
-
-
-            for (int i = slotTimeMorning;  i < slotTimeAfternoon; i++) {
-                timeSlot = new TimeSlot();
-                long in = timeOpenAfternoon.getTime();
-                timeOpenAfternoon = new Time(in);
-                timeSlot.setFromTime(timeOpenAfternoon);
-
-                int minute = intervalSlotTime.getMinute();
-                int millisec = minute * 60000;
-
-                timeOpenAfternoon.setTime(timeOpenAfternoon.getTime());
-                long i2 = timeOpenAfternoon.getTime() + millisec;
-                timeOpenAfternoon = new Time(i2);
-                timeSlot.setToTime(timeOpenAfternoon);
-                timeSlot.setSeatAvailable(seatNumber);
-
-                timeSlotList.add(timeSlot);
-            }
             return timeSlotList;
+
         }
 
 }

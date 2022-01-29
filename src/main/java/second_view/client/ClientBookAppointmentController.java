@@ -32,7 +32,6 @@ public class ClientBookAppointmentController {
     private boolean secondView;
     private List<ServiceBean> servicesBeanSelected;
 
-
     @FXML
     public void onCommand(ActionEvent event) throws IOException, InvalidIndexSelected {
         String commandText = commandLine.getText() ;

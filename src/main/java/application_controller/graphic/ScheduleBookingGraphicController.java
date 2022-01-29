@@ -65,25 +65,27 @@ public class ScheduleBookingGraphicController{
 
     @FXML
     private  Label servicePriceLabel;
-
-    private static List<ServiceBean> serviceListSelected;
-    private List<ServiceBean> serviceListSelectedItem;
+    private List<ServiceBean> serviceListSelected;
 
     public ScheduleBookingGraphicController(){
-        this.serviceListSelected = new ArrayList<>();
         saloonInfo = new SaloonBean();
         timeSlotInfo = new TimeSlotBean();
-        serviceListSelectedItem = new ArrayList<>();
-        serviceListSelected = serviceListSelectedItem;
+        serviceListSelected = new ArrayList<>();
+
     }
+
+
+
+
     @FXML
     void selectServiceOnListView(MouseEvent event) throws InsertNegativePriceException {
         ServiceBean service = new ServiceBean();
 
         service.setNameInfo(serviceNameLabel.getText());
         service.setPriceInfo(Double.parseDouble(servicePriceLabel.getText()));
-        this.serviceListSelectedItem.add(service);
-        System.out.println("service added");
+        serviceListSelected.add(service);
+
+
 
 
     }
@@ -97,8 +99,8 @@ public class ScheduleBookingGraphicController{
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
         BookedGraphicController bookedGraphicController = fxmlLoaderNode.getController();
-        bookedGraphicController.injectServicesList(this.serviceListSelected);
-        System.out.println(this.serviceListSelected.size());
+        bookedGraphicController.injectServicesList(serviceListView.getSelectionModel().getSelectedItems());
+
         BookingController bookingController = new BookingController();
 
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
@@ -128,6 +130,7 @@ public class ScheduleBookingGraphicController{
 
 
     public void displaySaloon(SaloonBean saloonBean, TimeSlotBean timeSlot, LocalDate date) {
+
 
         this.saloonInfo.setName(saloonBean.getName());
         this.saloonInfo.setAddress(saloonBean.getAddress());

@@ -48,7 +48,7 @@ public class BookingDateHourGraphicController {
         private ImageView saloonImage;
 
         @FXML
-        private ListView timeSlotListView;
+        private ListView<TimeSlotBean> timeSlotListView;
         @FXML
         private Label hourLabel;
 
@@ -63,7 +63,9 @@ public class BookingDateHourGraphicController {
 
         private SaloonBean timeSlotSaloonInfo;
         private LocalDate date;
-
+        public BookingDateHourGraphicController(){
+                timeSlotListView = new ListView<TimeSlotBean>();
+        }
 
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException, ServiceNotFoundException {
@@ -90,6 +92,7 @@ public class BookingDateHourGraphicController {
 
         public void display(SaloonBean saloonBean) {
                 timeSlotSaloonInfo = new SaloonBean();
+
                 this.timeSlotSaloonInfo.setName(saloonBean.getName());
                 this.timeSlotSaloonInfo.setCity(saloonBean.getCity());
                 this.timeSlotSaloonInfo.setPhone(saloonBean.getPhone());
@@ -115,9 +118,7 @@ public class BookingDateHourGraphicController {
 
         @FXML
         public void slotTimeSelected(){
-                int i= timeSlotListView.getSelectionModel().getSelectedIndex();
-                timeSlotBean = timeSlotSaloon.get(i);
-
+                timeSlotBean = timeSlotListView.getSelectionModel().getSelectedItem();
         }
 
 }

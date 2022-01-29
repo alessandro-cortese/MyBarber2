@@ -17,6 +17,9 @@ public class ClientListViewController {
     @FXML
     private ListView<SaloonBean> saloonListView;
 
+    public  ClientListViewController(){
+        saloonListView = new ListView<>();
+    }
 
 
     public void injectSaloonList(List<SaloonBean> saloonBeanList) {
