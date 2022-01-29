@@ -47,10 +47,12 @@ public class CredentialsPicker extends Dialog<UserBean> {
         String email = emailField.getText() ;
         String password = passwordField.getText() ;
         AccessInfoBean accessInfoBean = new AccessInfoBean(email,password) ;
-        UserBean loggedUser = null ;
+        UserBean loggedUser;
         try {
             loggedUser = loginController.verifyUser(accessInfoBean);
-        } catch (NotExistentUserException ignored) {}
+        } catch (NotExistentUserException ignored) {
+            loggedUser = null;
+        }
         return loggedUser ;
     }
 

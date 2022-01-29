@@ -72,7 +72,7 @@ public class BookingController {
             e.printStackTrace();
 
         }
-        List<TimeSlot> saloonTimeSlots= new ScheduleTime(saloon).CreateSlotTime();
+        List<TimeSlot> saloonTimeSlots= new ScheduleTime(saloon).createSlotTime();
         saloonBeanTimeSlots = new ArrayList<>();
         for (TimeSlot timeSlot : saloonTimeSlots){
             TimeSlotBean timeSlotBean = new TimeSlotBean();

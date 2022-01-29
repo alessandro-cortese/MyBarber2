@@ -36,7 +36,6 @@ public class AddServiceBoundarySendEmail implements Observer {
             e.printStackTrace();
         }
 
-
     }
 
     public void setUserBeans(List<UserBean> userBeans) {

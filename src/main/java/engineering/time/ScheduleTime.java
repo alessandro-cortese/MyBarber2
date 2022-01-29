@@ -19,7 +19,7 @@ public class ScheduleTime {
     TimeSlot timeSlot;
 
     public ScheduleTime(Saloon saloonTimeSlots){
-        timeSlotList = new ArrayList<TimeSlot>();
+        timeSlotList = new ArrayList<>();
         timeOpen = saloonTimeSlots.getOpeningMorningTime();
         timeOpenAfternoon = saloonTimeSlots.getCloseAfternoonTime();
         seatNumber = saloonTimeSlots.getSeatNumber();
@@ -31,7 +31,7 @@ public class ScheduleTime {
 
     }
 
-        public List<TimeSlot> CreateSlotTime() {
+        public List<TimeSlot> createSlotTime() {
 
             for (int i = 0; i < slotTimeMorning + slotTimeAfternoon; i++) {
                 timeSlot = new TimeSlot();

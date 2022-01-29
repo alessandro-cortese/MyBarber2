@@ -64,7 +64,7 @@ public class BookingDateHourGraphicController {
         private SaloonBean timeSlotSaloonInfo;
         private LocalDate date;
         public BookingDateHourGraphicController(){
-                timeSlotListView = new ListView<TimeSlotBean>();
+                timeSlotListView = new ListView<>();
         }
 
         @FXML

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class BuyProductEMailSystemBoundary {
 
-    private final static String VENDOR_NOTIFY_FILE_NAME = "vendorNotifyFile" ;
+    private static final String VENDOR_NOTIFY_FILE_NAME = "vendorNotifyFile" ;
 
     public void notifyVendors(VendorOrderBean vendorOrderBean) {
         sendEmail(vendorOrderBean);

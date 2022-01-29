@@ -42,7 +42,7 @@ public class BackController {
 
     public void pushPrevScene(Scene prevSceneName) {
         /*
-            1. Invocata quando c'è il cambio schermata da una Scena verso l'altra;
+            1. Invocata quando c'è il cambio schermata da una Scena verso l'altra
             2. Il controller della schermata attuale aggiunge la Scena e naviga verso la successiva
         */
 

@@ -12,7 +12,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -28,7 +27,6 @@ public class ClientSearchSaloon {
     @FXML
     private Label saloonCityLabel;
 
-    private SaloonBean saloonBean;
     private List<SaloonBean> saloonBeanList;
     private SaloonBean saloonBeanInfo;
 
@@ -53,7 +51,7 @@ public class ClientSearchSaloon {
                 saloonListView.setCellFactory(param -> new SaloonListCellFactory(false));
 
                 String saloonCity = command.replace("search city ", "");
-                saloonBean = new SaloonBean(false, saloonCity);
+                SaloonBean saloonBean = new SaloonBean(false, saloonCity);
                 BookingController bookingController = new BookingController();
 
                 saloonBeanList = bookingController.searchByCitySaloon(saloonBean);
@@ -69,20 +67,19 @@ public class ClientSearchSaloon {
                 verifyValidIndex(in);
 
                 ClientBookingDateHourGraphicContr clientBookingDateHourGraphicContr = (ClientBookingDateHourGraphicContr) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_DATE_HOUR);
-                clientBookingDateHourGraphicContr.InjectSaloonInfo(saloonBeanInfo);
+                clientBookingDateHourGraphicContr.injectSaloonInfo(saloonBeanInfo);
                 return;
 
             } else if (command.compareTo("back") == 0) {
                 ScreenChanger.getInstance().onBack(event);
                 return;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (SaloonNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         commandLine.setStyle("-fx-border-color: red");
     }
 

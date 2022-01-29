@@ -28,7 +28,6 @@ public class ScreenChanger {
     public static final String CLIENT_SEARCH_SALOON_SCREEN = "second_view/client/client_search_saloon.fxml" ;
     public static final String CLIENT_BOOK_APPOINTMENT_SCREEN = "second_view/client/client_book_appointment.fxml" ;
     public static final String CLIENT_BOOK_DATE_HOUR ="second_view/client/client_book_DateHour.fxml";
-    public static final String CLIENT_BOOK_TOTAL_PRICE = "second_view/client/client_totalPrice.fxml";
     public static final String BARBER_MANAGE_SALOON_SCREEN_NAME = "second_view/barber/barber_manage_saloon.fxml";
     public static final String CLIENT_COMPLETE_ORDER_SCREEN = "second_view/client/client_complete_order.fxml" ;
     public static final String CLIENT_FIDELITY_CARD_SCREEN = "second_view/client/client_fidelity_card.fxml" ;
