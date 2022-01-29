@@ -21,7 +21,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
-
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -59,27 +58,35 @@ public class ScheduleBookingGraphicController{
     private static final String CLIENT_BOOKED_SCREEN_NAME = "first_view/client/client_booked.fxml";
     private static final String CLIENT_SERVICE_ITEM ="first_view/list_item/client_service_item.fxml";
     private SaloonBean saloonInfo;
-
     private TimeSlotBean timeSlotInfo;
     private LocalDate dateBooking;
-
-
     @FXML
     private Label serviceNameLabel;
 
     @FXML
     private  Label servicePriceLabel;
+    private List<ServiceBean> serviceListSelected;
 
-    private static List<ServiceBean> serviceListSelected;
+    public ScheduleBookingGraphicController(){
+        saloonInfo = new SaloonBean();
+        timeSlotInfo = new TimeSlotBean();
+        serviceListSelected = new ArrayList<>();
+
+    }
+
+
 
 
     @FXML
     void selectServiceOnListView(MouseEvent event) throws InsertNegativePriceException {
         ServiceBean service = new ServiceBean();
-        serviceListSelected = new ArrayList<>();
+
         service.setNameInfo(serviceNameLabel.getText());
         service.setPriceInfo(Double.parseDouble(servicePriceLabel.getText()));
         serviceListSelected.add(service);
+
+
+
 
     }
 
@@ -92,7 +99,8 @@ public class ScheduleBookingGraphicController{
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
         BookedGraphicController bookedGraphicController = fxmlLoaderNode.getController();
-        bookedGraphicController.injectServicesList(serviceListSelected);
+        bookedGraphicController.injectServicesList(serviceListView.getSelectionModel().getSelectedItems());
+
         BookingController bookingController = new BookingController();
 
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
@@ -122,8 +130,8 @@ public class ScheduleBookingGraphicController{
 
 
     public void displaySaloon(SaloonBean saloonBean, TimeSlotBean timeSlot, LocalDate date) {
-        saloonInfo = new SaloonBean();
-        timeSlotInfo = new TimeSlotBean();
+
+
         this.saloonInfo.setName(saloonBean.getName());
         this.saloonInfo.setAddress(saloonBean.getAddress());
         this.saloonInfo.setCity(saloonBean.getCity());

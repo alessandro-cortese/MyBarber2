@@ -30,9 +30,7 @@ public class ClientBookAppointmentController {
     
     private List<ServiceBean> serviceBeanList;
     private boolean secondView;
-    private double totalPrice = 0.0;
     private List<ServiceBean> servicesBeanSelected;
-
 
     @FXML
     public void onCommand(ActionEvent event) throws IOException, InvalidIndexSelected {

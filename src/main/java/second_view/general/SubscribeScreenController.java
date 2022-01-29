@@ -87,17 +87,17 @@ public class SubscribeScreenController {
     }
 
     private UserBean retrieveInfo() throws InvalidCredentialsException {
-        UserBean userBean = new UserBean();
-        userBean.setName(nameField.getText());
-        userBean.setSurname(surnameField.getText());
-        userBean.setUserType(type);
-        userBean.setUserEmail(subscribeEmailField.getText());
-        userBean.setPass(subscribePasswordField.getText());
+        UserBean userBeanInfo = new UserBean();
+        userBeanInfo.setName(nameField.getText());
+        userBeanInfo.setSurname(surnameField.getText());
+        userBeanInfo.setUserType(type);
+        userBeanInfo.setUserEmail(subscribeEmailField.getText());
+        userBeanInfo.setPass(subscribePasswordField.getText());
 
         if(nameField.getText().isEmpty() || userTypeField.getText().isEmpty() || subscribePasswordField.getText().isEmpty() || surnameField.getText().isEmpty() || subscribeEmailField.getText().isEmpty()) {
             throw new InvalidCredentialsException("indicare valori validi nei campi!");
         }
-        return userBean;
+        return userBeanInfo;
     }
 
     private boolean setCommand(String insertedCommand) {
@@ -127,13 +127,7 @@ public class SubscribeScreenController {
     private boolean registerCommand(String command) {
         String registerString = "register" ;
         boolean handled = false ;
-        if (command.compareTo(registerString) == 0) {
-            handled = true ;
-        }
-        else if (command.compareTo(registerString + " google") == 0) {
-            handled = true ;
-        }
-        else if (command.compareTo(registerString + " facebook") == 0) {
+        if ((command.compareTo(registerString) == 0) || (command.compareTo(registerString + " google") == 0 || (command.compareTo(registerString + " facebook") == 0)) ) {
             handled = true ;
         }
         return handled;

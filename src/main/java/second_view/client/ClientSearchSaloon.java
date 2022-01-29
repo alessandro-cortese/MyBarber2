@@ -53,7 +53,6 @@ public class ClientSearchSaloon {
                 saloonListView.setCellFactory(param -> new SaloonListCellFactory(false));
 
                 String saloonCity = command.replace("search city ", "");
-                System.out.println(saloonCity);
                 saloonBean = new SaloonBean(false, saloonCity);
                 BookingController bookingController = new BookingController();
 
@@ -65,9 +64,9 @@ public class ClientSearchSaloon {
                 return;
 
             } else if (command.matches("select [0-9]+")) {
-                //String index = command.replace("select ", "");
-                //int in = Integer.parseInt(index);
-                //verifyValidIndex(in);
+                String index = command.replace("select ", "");
+                int in = Integer.parseInt(index);
+                verifyValidIndex(in);
 
                 ClientBookingDateHourGraphicContr clientBookingDateHourGraphicContr = (ClientBookingDateHourGraphicContr) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_DATE_HOUR);
                 clientBookingDateHourGraphicContr.InjectSaloonInfo(saloonBeanInfo);
@@ -87,10 +86,10 @@ public class ClientSearchSaloon {
         commandLine.setStyle("-fx-border-color: red");
     }
 
-    /*private void verifyValidIndex(int index) throws SaloonNotFoundException {
+    private void verifyValidIndex(int index) throws SaloonNotFoundException {
         boolean flag = false;
         for (SaloonBean saloonBean : saloonListView.getItems()) {
-            if (index == saloonListView.getItems().) {
+            if (index == saloonBeanList.indexOf(saloonBean)) {
                 flag = true;
                 saloonBeanInfo = new SaloonBean();
                 saloonBeanInfo.setName(saloonBean.getName());
@@ -103,5 +102,5 @@ public class ClientSearchSaloon {
         if (!flag) {
             throw new SaloonNotFoundException("slot index non valido");
         }
-    }*/
+    }
 }

@@ -22,7 +22,7 @@ public class SaloonTimeSlotsListCellFactory  extends ListCell<TimeSlotBean> {
     private Parent parentNode = null ;
     private boolean view;
 
-    public void SaloonTimeSlotsListCellFactory(boolean view){
+    public SaloonTimeSlotsListCellFactory(boolean view){
         this.view=view;
     }
 
