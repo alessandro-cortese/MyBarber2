@@ -53,7 +53,6 @@ public class ClientSearchSaloon {
                 saloonListView.setCellFactory(param -> new SaloonListCellFactory(false));
 
                 String saloonCity = command.replace("search city ", "");
-                System.out.println(saloonCity);
                 saloonBean = new SaloonBean(false, saloonCity);
                 BookingController bookingController = new BookingController();
 
