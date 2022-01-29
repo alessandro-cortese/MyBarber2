@@ -126,18 +126,18 @@ public class BuyProductController {
         cartFileSaver.deleteCartFromFile() ;
 
         //AGGIORNAMENTO PUNTEGGIO CUSTOMER
-        UserDAO userDAO = new UserDAO() ;
+        CustomerDAO customerDAO = new CustomerDAO() ;
         Double cartPrice = cart.getPrice() ;
         Integer orderPoints = (int) Math.round(cartPrice) ;
         Integer finalPoints;
         try {
-            finalPoints = Math.addExact(customer.getCardPoints(), orderPoints) ;
+            finalPoints = Math.addExact(this.customer.getCardPoints(), orderPoints) ;
         }
         catch (ArithmeticException arithmeticException) {
             finalPoints = Integer.MAX_VALUE ;
         }
-        customer.setCardPoints(finalPoints);
-        userDAO.updateCustomerPoints(customer);
+        this.customer.setCardPoints(finalPoints);
+        customerDAO.updateCustomerPoints(this.customer);
 
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
         paypalBoundary.pay(new OrderTotalBean(couponApplier.getFinalPrice()));
@@ -166,8 +166,8 @@ public class BuyProductController {
     public void loadCustomer(UserBean userBean) throws NotExistentUserException {
         if (userBean == null) throw new NotExistentUserException() ;
 
-        UserDAO userDAO = new UserDAO() ;
-        customer = userDAO.loadCustomerByEmail(userBean.getUserEmail()) ;
+        CustomerDAO customerDAO = new CustomerDAO() ;
+        customer = customerDAO.loadCustomerByEmail(userBean.getUserEmail()) ;
         cartFileSaver = new CartFileSaver(customer.getEmail()) ;
 
         if (cart != null) cartFileSaver.saveCartInFile(cart);

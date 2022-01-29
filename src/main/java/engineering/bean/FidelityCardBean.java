@@ -9,10 +9,12 @@ public class FidelityCardBean {
 
     private Integer pointsSale ;
     private List<CouponBean> couponBeans ;
+    private String owner ;
 
-    public FidelityCardBean(Integer pointsSale, List<CouponBean> couponBeans) {
+    public FidelityCardBean(Integer pointsSale, List<CouponBean> couponBeans, String owner) {
         setPointsSale(pointsSale);
         setCouponBeans(couponBeans);
+        setOwner(owner);
     }
 
     public Integer getPointsSale() {
@@ -29,5 +31,13 @@ public class FidelityCardBean {
 
     public void setCouponBeans(List<CouponBean> couponBeans) {
         this.couponBeans = couponBeans;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

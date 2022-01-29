@@ -1,6 +1,7 @@
 package engineering.dao;
 
 import engineering.dao.queries.Queries;
+import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
 import model.Customer;
 import model.User;
@@ -84,7 +85,12 @@ public class OrderDAO {
         LocalDate orderDate = resultSet.getDate(ORDER_DATE_LAB).toLocalDate() ;
 
         CustomerDAO customerDAO = new CustomerDAO() ;
-        Customer customer = customerDAO.loadCustomerByEmail(ownerEmail);
+        Customer customer = null;
+        try {
+            customer = customerDAO.loadCustomerByEmail(ownerEmail);
+        } catch (NotExistentUserException e) {
+            e.printStackTrace();
+        }
         return new Order(orderCode, orderAddress, orderTelephone, customer, orderDate) ;
     }
 }

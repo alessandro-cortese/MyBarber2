@@ -1,6 +1,7 @@
 package engineering.dao;
 
 import engineering.dao.queries.Queries;
+import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
 import model.Customer;
 import model.User;
@@ -37,20 +38,15 @@ public class CustomerDAO {
     }
 
     public List<Customer> loadCustomerFromFavoriteSaloon(Integer favoriteSaloonId) {
-
         List<Customer> customers = new ArrayList<>();
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = Queries.loadCustomerFromSaloon(statement, favoriteSaloonId)) {
 
-
             while (resultSet.next()) {
-
                 customers.add(createCustomer(resultSet));
-
             }
-
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -69,7 +65,6 @@ public class CustomerDAO {
         Integer pointsCard = resultSet.getInt(CUSTOMER_COL_CARD_POINTS);
 
         return new Customer(email, password, name, surname, phone, pointsCard);
-
     }
 
 
@@ -85,21 +80,35 @@ public class CustomerDAO {
         }
     }
 
-    public Customer loadCustomerByEmail(String email) {
+
+    public Customer loadCustomerByEmail(String userEmail) throws NotExistentUserException {
         Connection connection = Connector.getConnectorInstance().getConnection();
         Customer customer = null ;
-        try(
-                Statement statement = connection.createStatement() ;
-                ResultSet resultSet = Queries.selectCustomerByEmail(statement, email) ;
-                )
+        try(Statement statement = connection.createStatement() ;
+            ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail)
+        )
         {
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 customer = createCustomer(resultSet) ;
+            }
+            else {
+                throw new NotExistentUserException("NON ESISTE UN CLIENTE CON LE CREDENZIALI INDICATE!!") ;
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
 
         return customer ;
+    }
+
+    public void updateCustomerPoints(Customer customer) {
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement() ;) {
+            String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customer.getCardPoints(), customer.getEmail()) ;
+            statement.executeUpdate(update) ;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 }

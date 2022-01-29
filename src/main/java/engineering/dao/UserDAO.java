@@ -63,36 +63,9 @@ public class UserDAO {
         return new Customer(customerEmail, null, customerName, customerSurname, customerPoints) ;
     }
 
-    public Customer loadCustomerByEmail(String userEmail) throws NotExistentUserException{
-        Connection connection = Connector.getConnectorInstance().getConnection();
-        Customer customer = null ;
-        try(Statement statement = connection.createStatement() ;
-            ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail)
-        )
-        {
-            if (resultSet.next()) {
-                customer = createCustomer(resultSet) ;
-            }
-            else {
-                throw new NotExistentUserException("NON ESISTE UN CLIENTE CON LE CREDENZIALI INDICATE!!") ;
-            }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
 
-        return customer ;
-    }
 
-    public void updateCustomerPoints(Customer customer) {
-        Connection connection = Connector.getConnectorInstance().getConnection();
 
-        try(Statement statement = connection.createStatement() ;) {
-            String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customer.getCardPoints(), customer.getEmail()) ;
-            statement.executeUpdate(update) ;
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-    }
 
 
 }

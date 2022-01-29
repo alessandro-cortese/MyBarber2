@@ -10,6 +10,8 @@ import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CouponCellFactory;
 import first_view.list_cell_factories.CouponCostListCellFactory;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalTime;
@@ -41,36 +44,28 @@ public class ClientFidelityCardController implements Initializable {
     private final ManageCouponController manageCouponController ;
 
     public ClientFidelityCardController() {
-        manageCouponController = new ManageCouponController() ;
+        UserBean loggedUser = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
+        manageCouponController = new ManageCouponController(loggedUser) ;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         couponListView.setCellFactory(param -> new CouponCellFactory(FIRST_VIEW));
-
         couponCostListView.setCellFactory(param -> new CouponCostListCellFactory(FIRST_VIEW));
 
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser() ;
-        if (userBean != null) {
-            userNameLabel.setText("eMail " + userBean.getUserEmail());
-            FidelityCardBean fidelityCardBean = null;
-            try {
-                fidelityCardBean = manageCouponController.showFidelityCard(userBean);
-                updateView(fidelityCardBean) ;
-            } catch (NotExistentUserException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-                alert.showAndWait() ;
-            }
-
-        }
         generateCouponButton.setDisable(userBean == null);
+
         List<CouponBean> couponCosts = manageCouponController.showCouponCosts() ;
         couponCostListView.setItems(FXCollections.observableList(couponCosts));
+
+        viewFidelityCard();
     }
 
     private void updateView(FidelityCardBean fidelityCardBean) {
         couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));
         pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale() );
+        userNameLabel.setText("eMail " + fidelityCardBean.getOwner());
     }
 
     @FXML
@@ -80,6 +75,8 @@ public class ClientFidelityCardController implements Initializable {
         if (eventSource == generateCouponButton) {
             getNewCoupon();
         }
+
+
 
     }
 
@@ -96,5 +93,15 @@ public class ClientFidelityCardController implements Initializable {
         }
     }
 
+
+    public void viewFidelityCard() {
+        try {
+            FidelityCardBean fidelityCardBean = manageCouponController.showFidelityCard() ;
+            updateView(fidelityCardBean);
+        } catch (NotExistentUserException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage()) ;
+            alert.showAndWait() ;
+        }
+    }
 
 }

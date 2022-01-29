@@ -38,24 +38,20 @@ public class ClientFidelityCardGUIController implements Initializable {
     private final ManageCouponController manageCouponController ;
 
     public ClientFidelityCardGUIController() {
-        manageCouponController = new ManageCouponController() ;
+        UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
+        manageCouponController = new ManageCouponController(loggedUser) ;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
-        try {
-            viewFidelityCard(loggedUser) ;
-        } catch (NotExistentUserException ignored) {
-        }
 
         couponListView.setCellFactory(param -> new CouponCellFactory(SECOND_VIEW));
-
         couponCostListView.setCellFactory(param -> new CouponCostListCellFactory(SECOND_VIEW)) ;
 
         List<CouponBean> couponBeanList = manageCouponController.showCouponCosts() ;
         couponCostListView.setItems(FXCollections.observableList(couponBeanList));
 
+        viewFidelityCard() ;
     }
 
 
@@ -91,20 +87,24 @@ public class ClientFidelityCardGUIController implements Initializable {
             alert.showAndWait() ;
         }
         catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "INDICE INDICATO NON VALIDO") ;
+            Alert alert = new Alert(Alert.AlertType.WARNING, "INDICE INDICATO NON VALIDO") ;
             alert.showAndWait() ;
         }
     }
 
-    private void viewFidelityCard(UserBean loggedUser) throws NotExistentUserException {
-        FidelityCardBean fidelityCardBean = manageCouponController.showFidelityCard(loggedUser) ;
-        updateView(fidelityCardBean);
+    private void viewFidelityCard() {
+        try {
+            FidelityCardBean fidelityCardBean = manageCouponController.showFidelityCard();
+            updateView(fidelityCardBean);
+        } catch (NotExistentUserException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage()) ;
+            alert.showAndWait() ;
+        }
     }
 
     private void updateView(FidelityCardBean fidelityCardBean) {
-        UserBean loggedUser = ScreenChanger.getInstance().getLoggedUser();
         pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale());
-        userEmailLabel.setText("eMail " + loggedUser.getUserEmail());
+        userEmailLabel.setText("eMail " + fidelityCardBean.getOwner());
         couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));
     }
 }
