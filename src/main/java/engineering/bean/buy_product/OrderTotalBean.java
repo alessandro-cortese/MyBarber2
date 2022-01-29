@@ -32,8 +32,8 @@ public class OrderTotalBean {
         return couponCodes;
     }
 
-    public ArrayList<String> getExternalCouponCodes() {
-        ArrayList<String> externalCouponCodes = new ArrayList<>() ;
+    public List<String> getExternalCouponCodes() {
+        List<String> externalCouponCodes = new ArrayList<>() ;
         for (Integer code : couponCodes) {
             externalCouponCodes.add(Integer.toString(code)) ;
         }

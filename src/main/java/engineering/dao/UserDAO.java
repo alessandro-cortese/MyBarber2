@@ -54,18 +54,4 @@ public class UserDAO {
         return userType ;
     }
 
-    private Customer createCustomer(ResultSet customerResultSet) throws SQLException {
-        String customerEmail = customerResultSet.getString(CUSTOMER_EMAIL_COL_LABEL) ;
-        String customerName = customerResultSet.getString(NAME_COL_LABEL) ;
-        String customerSurname = customerResultSet.getString(SURNAME_COL_LABEL) ;
-        Integer customerPoints = customerResultSet.getInt(CUSTOMER_POINTS_COL_LABEL) ;
-
-        return new Customer(customerEmail, null, customerName, customerSurname, customerPoints) ;
-    }
-
-
-
-
-
-
 }
