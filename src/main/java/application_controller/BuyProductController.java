@@ -110,7 +110,6 @@ public class BuyProductController {
         //IMPOSTIO INFORMAZIONI DI ORDER
         order.setAddress(orderInfoBean.getAddressInfo());
         order.setTelephone(orderInfoBean.getTelephoneInfo());
-        order.setPaymentOption(orderInfoBean.getPaymentOptionInfo());
         order.setDate(LocalDate.now());
         order.setFinalPrice(couponApplier.getFinalPrice());
         order.setOrderOwner(customer);
@@ -130,7 +129,14 @@ public class BuyProductController {
         UserDAO userDAO = new UserDAO() ;
         Double cartPrice = cart.getPrice() ;
         Integer orderPoints = (int) Math.round(cartPrice) ;
-        customer.setCardPoints(customer.getCardPoints() + orderPoints);
+        Integer finalPoints;
+        try {
+            finalPoints = Math.addExact(customer.getCardPoints(), orderPoints) ;
+        }
+        catch (ArithmeticException arithmeticException) {
+            finalPoints = Integer.MAX_VALUE ;
+        }
+        customer.setCardPoints(finalPoints);
         userDAO.updateCustomerPoints(customer);
 
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
@@ -165,6 +171,14 @@ public class BuyProductController {
         cartFileSaver = new CartFileSaver(customer.getEmail()) ;
 
         if (cart != null) cartFileSaver.saveCartInFile(cart);
+    }
+
+    public CartBean changeProductQuantity(CartRowBean cartRowBean, Integer changer) {
+        ProductBean productBean = new ProductBean(cartRowBean.getIsbn()) ;
+        if (changer > 0) {
+            return insertProductToCart(productBean) ;
+        }
+        else return removeProductFromCart(productBean) ;
     }
 
 }

@@ -34,28 +34,15 @@
             <VBox alignment="CENTER" spacing="15.0">
                <children>
                   <Label text="Concludi Ordine" />
-                  <HBox spacing="25.0">
-                     <children>
-                        <Button fx:id="payWithPaypalButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="175.0" text="Paga con Paypal">
-                           <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../images/paypal_logo.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="payWithGooglePayButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="175.0" text="Paga con GooglePay">
-                           <graphic>
-                              <ImageView fitHeight="126.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../images/google_pay_logo.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
+                  <Button fx:id="payWithPaypalButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" text="Paga con Paypal">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../images/paypal_logo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
          </children>

@@ -5,6 +5,7 @@ import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
 import engineering.bean.buy_product.OrderInfoBean;
 import engineering.bean.buy_product.OrderTotalBean;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.exception.NotExistentUserException;
@@ -58,7 +59,7 @@ public class ClientCompleteOrderController implements Initializable {
             addressTextField.setText(commandInput);
             return ;
         }
-        else if (command.matches("set telephone [0-9]{10}")) {
+        else if (command.matches("set telephone .*")) {
             String commandInput = command.replace("set telephone ", "") ;
             telephoneTextField.setText(commandInput);
             return ;
@@ -76,10 +77,15 @@ public class ClientCompleteOrderController implements Initializable {
             else {
                 try {
                     if (ScreenChanger.getInstance().getLoggedUser() == null) login() ;
-                    buy();
+                    OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText()) ;
+                    buy(orderInfoBean);
                     ScreenChanger.getInstance().goToHome(event);
                 }
-                catch (NotExistentUserException ignored) {}
+                catch (NotExistentUserException | IncorrectFormatException exception) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage());
+                    alert.showAndWait();
+                }
+
             }
             return ;
         }
@@ -90,18 +96,11 @@ public class ClientCompleteOrderController implements Initializable {
     private void login() throws IOException, NotExistentUserException {
         CredentialsPicker credentialsPicker = new CredentialsPicker() ;
         UserBean userBean = credentialsPicker.doLogin() ;
-        try {
-            buyProductController.loadCustomer(userBean);
-            ScreenChanger.getInstance().setLoggedUser(userBean);
-        } catch (NotExistentUserException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-            throw e;
-        }
+        buyProductController.loadCustomer(userBean);
+        ScreenChanger.getInstance().setLoggedUser(userBean);
     }
 
-    private void buy() {
-        OrderInfoBean orderInfoBean = new OrderInfoBean(addressTextField.getText(), telephoneTextField.getText(), "paypal") ;
+    private void buy(OrderInfoBean orderInfoBean) {
         buyProductController.completeOrder(orderInfoBean);
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "ORDINE ESEGUITO CON SUCCESSO") ;
         alert.showAndWait() ;

@@ -5,6 +5,7 @@ import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
 import engineering.dao.CouponDAO;
 import engineering.dao.UserDAO;
+import engineering.exception.CardPointsException;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NotExistentUserException;
 import javafx.util.Pair;
@@ -12,6 +13,7 @@ import model.Customer;
 import model.buy_product.containers.CouponContainer;
 import model.buy_product.coupon.Coupon;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -76,10 +78,11 @@ public class ManageCouponController {
         return new FidelityCardBean(cardPoints, couponBeans) ;
     }
 
-    public FidelityCardBean generateNewCoupon(CouponBean couponBean) throws InvalidCouponException, NotExistentUserException {
+    public FidelityCardBean generateNewCoupon(CouponBean couponBean) throws NotExistentUserException, CardPointsException {
         if (customer == null) {
             throw new NotExistentUserException("ACCESSO NON EFFETTUATO!!") ;
         }
+
 
         Double couponValue = couponBean.getCouponDiscount() ;
         Integer couponCost = couponBean.getCouponPointsPrice() ;
@@ -89,7 +92,7 @@ public class ManageCouponController {
             updateCustomer(couponCost) ;
         }
         else {
-            throw new InvalidCouponException("PUNTI NON SUFFICIENTI PER GENERARE IL COUPON!!") ;
+            throw new CardPointsException("PUNTI NON SUFFICIENTI PER GENERARE IL COUPON!!") ;
         }
 
         return createFidelityCardBean();

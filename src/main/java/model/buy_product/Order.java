@@ -12,7 +12,6 @@ public class Order {
 
     private String address ;
     private String telephone ;
-    private String paymentOption ;
     private Customer orderOwner ;
     private LocalDate date ;
     private Double finalPrice ;
@@ -25,7 +24,7 @@ public class Order {
     public Order(Integer orderCode, String address, String telephone, Customer orderOwner, LocalDate date) {
         setOrderCode(orderCode);
         setAddress(address);
-        setAddress(telephone);
+        setTelephone(telephone);
         setOrderOwner(orderOwner);
         setDate(date);
     }
@@ -45,14 +44,6 @@ public class Order {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public String getPaymentOption() {
-        return paymentOption;
-    }
-
-    public void setPaymentOption(String paymentOption) {
-        this.paymentOption = paymentOption;
     }
 
     public LocalDate getDate() {

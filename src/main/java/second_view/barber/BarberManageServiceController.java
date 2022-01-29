@@ -48,7 +48,7 @@ public class BarberManageServiceController implements Initializable {
         }
 
 
-        manageServiceListView.setCellFactory(param-> new ServiceListCellFactory(true));
+        manageServiceListView.setCellFactory(param-> new ServiceListCellFactory(null, true));
 
         manageServiceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             assert newValue != null;

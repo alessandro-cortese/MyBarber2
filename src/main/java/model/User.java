@@ -13,9 +13,8 @@ public abstract class User {
         this.surname = surname;
     }
 
-    protected User() {
+    protected User() {}
 
-    }
 
     public void setName(String name){
         this.name = name;

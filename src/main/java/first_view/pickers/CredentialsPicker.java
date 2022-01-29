@@ -41,7 +41,6 @@ public class CredentialsPicker extends Dialog<UserBean> {
             return loggedUser ;
         });
 
-
     }
 
     private UserBean login() {
@@ -51,17 +50,14 @@ public class CredentialsPicker extends Dialog<UserBean> {
         UserBean loggedUser = null ;
         try {
             loggedUser = loginController.verifyUser(accessInfoBean);
-        } catch (NotExistentUserException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
-            alert.showAndWait() ;
-        }
+        } catch (NotExistentUserException ignored) {}
         return loggedUser ;
     }
 
 
     public UserBean doLogin() throws NotExistentUserException {
         this.showAndWait() ;
-        if (this.getResult() == null) throw new NotExistentUserException() ;
+        if (this.getResult() == null) throw new NotExistentUserException("L'UTENTE INDICATO NON ESISTENTE") ;
         else return this.getResult() ;
     }
 }

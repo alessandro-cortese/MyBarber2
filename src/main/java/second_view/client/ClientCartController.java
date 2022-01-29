@@ -78,10 +78,11 @@ public class ClientCartController implements Initializable {
                 return;
             }
         }
-        else if (command.compareTo("complete") == 0) {
+        else if (command.compareTo("complete") == 0 && cartListView.getItems().size() != 0) {
             ClientCompleteOrderController completeOrderController = (ClientCompleteOrderController) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_COMPLETE_ORDER_SCREEN);
-            completeOrderController.setApplicationController(buyProductController) ;
+            completeOrderController.setApplicationController(buyProductController);
             return ;
+
         }
 
         commandLine.setStyle("-fx-border-color: red");
@@ -89,15 +90,13 @@ public class ClientCartController implements Initializable {
 
     private void removeProduct(Integer inputIndex) {
         CartRowBean cartRowBean = cartListView.getItems().get(inputIndex) ;
-        buyProductController.removeProductFromCart(new ProductBean(cartRowBean.getIsbn()));
+        buyProductController.changeProductQuantity(cartRowBean, -1) ;
         updateView();
     }
 
     private void addProduct(Integer index) {
-        ObservableList<CartRowBean> cartRowBeans = cartListView.getItems() ;
-        CartRowBean cartRowBean = cartRowBeans.get(index) ;
-        ProductBean productBean = new ProductBean(cartRowBean.getIsbn()) ;
-        buyProductController.insertProductToCart(productBean);
+        CartRowBean cartRowBean = cartListView.getItems().get(index) ;
+        buyProductController.changeProductQuantity(cartRowBean, +1);
         updateView();
     }
 

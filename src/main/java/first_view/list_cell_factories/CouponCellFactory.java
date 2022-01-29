@@ -10,6 +10,7 @@ import javafx.scene.control.ListCell;
 import java.io.IOException;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
+import static first_view.list_cell_factories.BuyProductListCellFactory.FIRST_VIEW;
 
 public class CouponCellFactory extends ListCell<CouponBean> {
 
@@ -19,6 +20,11 @@ public class CouponCellFactory extends ListCell<CouponBean> {
 
     private Parent parentNode = null ;
 
+    private final Integer caller ;
+
+    public CouponCellFactory(Integer caller) {
+        this.caller = caller ;
+    }
 
     @Override
     protected void updateItem(CouponBean item, boolean empty) {
@@ -37,7 +43,13 @@ public class CouponCellFactory extends ListCell<CouponBean> {
                 else discountSymbol = "%" ;
                 couponDiscountLabel.setText("Sconto: " + (item.getCouponDiscount()) + discountSymbol);
 
-                setGraphic(parentNode);
+                if (caller.equals(FIRST_VIEW)) {
+                    setGraphic(parentNode);
+                }
+                else {
+                    setText(String.format("SCONTO: -%1$4.2f\t\t%2$1s\t\tCODICE: %3$4s", item.getCouponDiscount(), (item.getExternalCouponType().compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getExternalCouponCode()));
+                    setStyle("-fx-font-size: 14 ; -fx-alignment: center");
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -45,6 +57,7 @@ public class CouponCellFactory extends ListCell<CouponBean> {
         }
         else {
             setGraphic(null);
+            setText(null);
         }
     }
 }

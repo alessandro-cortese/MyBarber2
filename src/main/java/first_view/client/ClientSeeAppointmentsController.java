@@ -55,9 +55,4 @@ public class ClientSeeAppointmentsController implements Initializable {
         goToSaloonButton.setDisable(!isActive);
     }
 
-    @FXML
-    private void onListItemSelected(MouseEvent event) {
-
-    }
-
 }

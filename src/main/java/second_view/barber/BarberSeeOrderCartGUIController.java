@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
@@ -19,6 +20,9 @@ import java.util.ResourceBundle;
 public class BarberSeeOrderCartGUIController implements Initializable {
 
     @FXML private ListView<CartRowBean> orderCartListView ;
+    @FXML private Label addressLabel ;
+    @FXML private Label telephoneLabel ;
+    @FXML private Label orderOwnerLabel ;
     @FXML private TextField commandLine ;
 
     private VendorOrderBean vendorOrderBean ;
@@ -60,5 +64,8 @@ public class BarberSeeOrderCartGUIController implements Initializable {
     private void viewCart() {
         List<CartRowBean> cartRowBeanList = barberManageOrderController.showOrderCart(vendorOrderBean) ;
         orderCartListView.setItems(FXCollections.observableList(cartRowBeanList));
+        addressLabel.setText(vendorOrderBean.getAddress());
+        telephoneLabel.setText(vendorOrderBean.getTelephone());
+        orderOwnerLabel.setText(vendorOrderBean.getOrderOwner());
     }
 }

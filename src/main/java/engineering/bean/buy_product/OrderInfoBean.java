@@ -1,15 +1,15 @@
 package engineering.bean.buy_product;
 
+import engineering.exception.IncorrectFormatException;
+
 public class OrderInfoBean {
 
     private String addressInfo;
     private String telephoneInfo;
-    private String paymentOptionInfo;
 
-    public OrderInfoBean(String address, String telephone, String paymentOption) {
+    public OrderInfoBean(String address, String telephone) throws IncorrectFormatException {
         setAddressInfo(address);
         setTelephoneInfo(telephone);
-        setPaymentOptionInfo(paymentOption);
     }
 
     public String getAddressInfo() {
@@ -24,15 +24,8 @@ public class OrderInfoBean {
         return telephoneInfo;
     }
 
-    public void setTelephoneInfo(String telephoneInfo) {
-        this.telephoneInfo = telephoneInfo;
-    }
-
-    public String getPaymentOptionInfo() {
-        return paymentOptionInfo;
-    }
-
-    public void setPaymentOptionInfo(String paymentOptionInfo) {
-        this.paymentOptionInfo = paymentOptionInfo;
+    public void setTelephoneInfo(String telephoneInfo) throws IncorrectFormatException {
+        if (!telephoneInfo.matches("[0-9]{10}")) throw new IncorrectFormatException("FORMATO NUMERO DI TELEFONO NON VALIDO") ;
+        this.telephoneInfo = telephoneInfo ;
     }
 }
