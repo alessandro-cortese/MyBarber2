@@ -1,6 +1,6 @@
 package second_view.barber;
 
-import application_controller.AddProductController;
+import application_controller.ManageProductController;
 import engineering.bean.UserBean;
 import engineering.bean.buy_product.ProductBean;
 import engineering.exception.DuplicatedProductException;
@@ -39,7 +39,7 @@ public class BarberAddProductController {
     public void onCommand(ActionEvent event) {
 
         String addProductCommand = addProductCommandLine.getText();
-        AddProductController addProductController;
+        ManageProductController addProductController;
         addProductCommandLine.setText("");
         addProductCommandLine.setStyle(null);
         addProductExceptionLabelSecondView.setText("");
@@ -61,7 +61,7 @@ public class BarberAddProductController {
 
             ProductBean productBean = new ProductBean(-1, nameAddProductField.getText(), descriptionAddProductField.getText(), Double.parseDouble(addProductPriceField.getText()));
             UserBean userBean = ScreenChanger.getInstance().getLoggedUser();
-            addProductController = new AddProductController();
+            addProductController = new ManageProductController();
 
             try {
 

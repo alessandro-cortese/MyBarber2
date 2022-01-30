@@ -12,6 +12,7 @@ import java.util.List;
 
 public class ServiceDAO {
 
+    private static final String SERVICE_ID_COL_NAME = "id";
     private static final String SERVICE_NAME_COL_NAME = "name";
     private static final String SERVICE_DESCRIPTION_COL_NAME = "description";
     private static final String SERVICE_PRICE_COL_NAME = "price";
@@ -55,6 +56,43 @@ public class ServiceDAO {
 
     }
 
+    public int loadServiceId(String serviceName, String barberEmail) {
+
+        int key = 0;
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.loadServiceId(statement, serviceName, barberEmail)){
+
+            if(resultSet.next()) {
+
+                key = resultSet.getInt(SERVICE_ID_COL_NAME);
+
+            }
+
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+        return key;
+
+    }
+
+    public void deleteService(int serviceId, String barberEmail){
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try (Statement statement = connection.createStatement()){
+
+            Queries.deleteService(statement, serviceId, barberEmail);
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+    }
+
     public void insertServiceProduct(Integer serviceId, Integer productId) {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
@@ -72,6 +110,19 @@ public class ServiceDAO {
 
     }
 
+    public void deleteServiceProduct(int serviceId, int productId) {
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement()) {
+
+            Queries.deleteServiceProduct(statement, serviceId, productId);
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+    }
 
     public ServiceCatalogue loadAllService(String barberEmail) {
 

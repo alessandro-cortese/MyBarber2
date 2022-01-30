@@ -121,6 +121,11 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
+    public static ResultSet loadServiceId(Statement statement, String serviceName, String barberEmail) throws SQLException {
+        String query = String.format("SELECT id FROM Service WHERE name = '%s' AND barber = '%s' ;", serviceName, barberEmail);
+        return statement.executeQuery(query);
+    }
+
     public static ResultSet selectServices(Statement statement, String saloonName) throws SQLException {
         String sql = String.format("SELECT SE.name,SE.description, SE.price FROM Saloon S, Barber B, Service SE WHERE S.barber = B.emailUser AND B.emailUser = SE.barber AND S.name = '%s'; ",saloonName);
         return  statement.executeQuery(sql);
@@ -131,6 +136,17 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         String query = String.format("SELECT * FROM Service WHERE barber = '%s';", barberEmail);
         return statement.executeQuery(query);
     }
+
+    public static int deleteService(Statement statement, int serviceKey, String barberEmail) throws SQLException {
+        String update = String.format("DELETE FROM Service WHERE id = %d AND barber = '%s';", serviceKey, barberEmail);
+        return statement.executeUpdate(update);
+    }
+
+    public static int deleteServiceProduct(Statement statement, int serviceId, int productId) throws SQLException {
+        String update = String.format("DELETE FROM ServiceProduct WHERE idService = %d AND idProduct = %d ;", serviceId, productId);
+        return statement.executeUpdate(update);
+    }
+
 
     //-+-+-+-+-+-+-+-+-+-+- User -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet selectUserByCredentials(Statement statement, String userEmail, String password) throws SQLException {

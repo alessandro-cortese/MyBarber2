@@ -11,7 +11,7 @@ import model.buy_product.containers.ProductCatalog;
 import java.util.List;
 import java.util.Objects;
 
-public class AddProductController {
+public class ManageProductController {
 
     public void addProduct(ProductBean productBean, UserBean userBean) throws DuplicatedProductException, InvalidInsertProductException {
 

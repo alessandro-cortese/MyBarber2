@@ -1,5 +1,6 @@
 package first_view.barber;
 
+import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
 import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ public class BarberConfirmDeleteServiceController {
     @FXML private TextField nameOfServiceToDeleteTextField;
     @FXML private Button deleteConfirmButton;
 
+    private ServiceBean serviceBeanToDelete;
+
 
     @FXML
     public void onButtonClicked(ActionEvent event) throws IOException {
@@ -26,12 +29,19 @@ public class BarberConfirmDeleteServiceController {
 
         if(deleteEvent == deleteConfirmButton) {
 
+            ManageServiceController manageServiceController = new ManageServiceController();
+            manageServiceController.setUserBean(InternalBackController.getInternalBackControllerInstance().getLoggedUser());
+
+            manageServiceController.deleteService(serviceBeanToDelete);
+
             InternalBackController.getInternalBackControllerInstance().backToHome(deleteEvent);
         }
 
     }
 
     public void displayServiceToDelete(ServiceBean serviceBean) {
+
+        this.serviceBeanToDelete = serviceBean;
 
         nameDeleteServiceTextField.setText(serviceBean.getNameInfo());
         priceDeleteServiceTextField.setText(Double.toString(serviceBean.getPriceInfo()));

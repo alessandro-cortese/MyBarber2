@@ -34,11 +34,17 @@ public class BarberManageServiceController implements Initializable {
     private static final String OVERWRITE_NAME_OF_USED_PRODUCT_COMMAND = "overwrite name of used product";
 
     private List<ServiceBean> serviceBeanList;
+    ManageServiceController manageServiceController;
+
+    public BarberManageServiceController() {
+
+        manageServiceController = new ManageServiceController();
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
 
-        ManageServiceController manageServiceController = new ManageServiceController();
         manageServiceController.setUserBean(ScreenChanger.getInstance().getLoggedUser());
 
         try{
@@ -88,7 +94,24 @@ public class BarberManageServiceController implements Initializable {
         else if(manageServiceCommandLineLocal.compareTo("modify") == 0){
             return;
         }
-        else if(manageServiceCommandLineLocal.compareTo("delete") == 0) {
+        else if(manageServiceCommandLineLocal.startsWith("delete")) {
+
+            String serviceNameToDelete = manageServiceCommandLineLocal.replace("delete" + " ", "");
+
+
+            for(ServiceBean serviceBean : serviceBeanList) {
+
+                if(serviceBean.getNameInfo().equals(serviceNameToDelete)) {
+
+                    manageServiceController.deleteService(serviceBean);
+                    break;
+
+                }
+
+            }
+
+
+            ScreenChanger.getInstance().goToHome(event);
             return;
         }
 

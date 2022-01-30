@@ -7,12 +7,12 @@ import engineering.pattern.observer.Observer;
 import java.io.*;
 import java.util.List;
 
-public class AddServiceBoundarySendEmail implements Observer {
+public class ManageServiceBoundarySendEmail implements Observer {
 
     private ServiceBean serviceBean;
     private List<UserBean> userBeans;
 
-    public AddServiceBoundarySendEmail(ServiceBean serviceBean){
+    public ManageServiceBoundarySendEmail(ServiceBean serviceBean){
 
         this.serviceBean = serviceBean;
 
