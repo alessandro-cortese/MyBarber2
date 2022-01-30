@@ -9,8 +9,6 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
-
 public class EmailGraphicController {
     private EmailGraphicController() {
         throw new IllegalStateException("Utility class");
@@ -46,10 +44,7 @@ public class EmailGraphicController {
         try{
 
             mex.setFrom(new InternetAddress(myEmail));
-
             mex.setRecipient(Message.RecipientType.TO, new InternetAddress(myEmail));
-
-
 
         } catch (MessagingException e) {
             e.printStackTrace();

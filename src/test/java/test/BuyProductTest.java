@@ -1,3 +1,5 @@
+package test;
+
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.pattern.decorator.Priceable;
@@ -36,7 +38,6 @@ public class BuyProductTest {
         for (Pair<Integer,Double> rowPair : PRODUCT_QUANTITY_PRICE) {
             testPrice = testPrice + rowPair.getKey() * rowPair.getValue() ;
         }
-        System.out.printf("%f %f%n", testPrice, cartPrice);
 
         assertEquals(testPrice, cartPrice, TEST_DELTA) ;
     }
@@ -62,7 +63,6 @@ public class BuyProductTest {
             else testPrice = testPrice * (1 - couponPair.getKey() / 100.0) ;
         }
 
-        System.out.printf("%f %f%n", applierPrice, testPrice);
         //We attend that values are not equals: by system rule, we apply first subtraction coupon then percentage; here are applied in reverse
         assertNotEquals(testPrice, applierPrice, TEST_DELTA);
     }
@@ -72,14 +72,14 @@ public class BuyProductTest {
         Priceable testPriceable = createTestCart() ;
         CouponApplier couponApplier = new CouponApplier(testPriceable) ;
 
-        Coupon coupon_1 = new SubtractionCoupon(0, 10000.0) ;
-        assertThrows(NegativePriceException.class, () -> couponApplier.applyCoupon(coupon_1)) ;
+        Coupon coupon1 = new SubtractionCoupon(0, 10000.0) ;
+        assertThrows(NegativePriceException.class, () -> couponApplier.applyCoupon(coupon1)) ;
 
-        Coupon coupon_2 = new SubtractionCoupon(1, 15.0) ;
-        assertDoesNotThrow(() -> couponApplier.applyCoupon(coupon_2));
+        Coupon coupon2 = new SubtractionCoupon(1, 15.0) ;
+        assertDoesNotThrow(() -> couponApplier.applyCoupon(coupon2));
 
-        Coupon coupon_3 = new SubtractionCoupon(1, 23.0) ;
-        assertThrows(InvalidCouponException.class, () -> couponApplier.applyCoupon(coupon_3)) ;
+        Coupon coupon3 = new SubtractionCoupon(1, 23.0) ;
+        assertThrows(InvalidCouponException.class, () -> couponApplier.applyCoupon(coupon3)) ;
     }
 
 

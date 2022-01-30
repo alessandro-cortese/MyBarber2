@@ -22,7 +22,6 @@ public class SubscribeScreenController {
     @FXML private TextField subscribeEmailField ;
     @FXML private PasswordField subscribePasswordField ;
     @FXML private TextField userTypeField ;
-    private UserBean userBean;
 
 
     private Map<String, TextField> textFieldMap ;
@@ -63,6 +62,7 @@ public class SubscribeScreenController {
                 ScreenChanger.getInstance().changeScreen(event,ScreenChanger.CLIENT_HOME_SCREEN);
             }
 
+            UserBean userBean;
             try {
 
                  userBean = retrieveInfo();

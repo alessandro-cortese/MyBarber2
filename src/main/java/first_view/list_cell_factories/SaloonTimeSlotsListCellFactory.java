@@ -40,6 +40,7 @@ public class SaloonTimeSlotsListCellFactory  extends ListCell<TimeSlotBean> {
                     index.setText("slot index: "+Integer.toString(this.getIndex()));
                 }
 
+                assert parentNode != null;
                 Label initTime = (Label) parentNode.lookup("#" + INIT_TIME) ;
                 Label finalTime = (Label) parentNode.lookup("#" + FINAL_TIME) ;
                 Label seatNumber = (Label)parentNode.lookup("#" + SEAT_NUMBER);

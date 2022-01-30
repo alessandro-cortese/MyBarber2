@@ -27,9 +27,7 @@ public class ClientBookAppointmentController {
     @FXML private TextField dateText;
     @FXML private TextField saloonName;
     @FXML private TextField hourText;
-    
-    private List<ServiceBean> serviceBeanList;
-    private boolean secondView;
+
     private List<ServiceBean> servicesBeanSelected;
 
     @FXML
@@ -89,21 +87,16 @@ public class ClientBookAppointmentController {
     }
 
     public void injectDateHourSaloonInfo(TimeSlotBean timeSlotInfo, SaloonBean saloonBean, String date) throws ServiceNotFoundException {
-        secondView= true;
+
         servicesBeanSelected = new ArrayList<>();
-        serviceListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,secondView));
-        serviceSelectedListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,secondView));
+        serviceListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,true));
+        serviceSelectedListView.setCellFactory(param -> new ServiceListCellFactory(CLIENT_SERVICE_ITEM,true));
         dateText.setText(date);
         hourText.setText(timeSlotInfo.getFromTime()+" - "+timeSlotInfo.getToTime());
         saloonName.setText(saloonBean.getName());
         BookingController bookingController = new BookingController();
-        serviceBeanList = bookingController.searchServices(saloonBean);
+        List<ServiceBean> serviceBeanList = bookingController.searchServices(saloonBean);
         serviceListView.setItems(FXCollections.observableList(serviceBeanList));
-
-
-
-
-
 
     }
 }
