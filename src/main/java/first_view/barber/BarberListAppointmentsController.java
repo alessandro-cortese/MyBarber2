@@ -1,37 +1,48 @@
 package first_view.barber;
 
-import first_view.ObservableListNode;
+import application_controller.BarberSeeAppointmentsController;
+import engineering.bean.BookingBean;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.sql.Date;
+import java.util.List;
 
-public class BarberListAppointmentsController implements Initializable {
+public class BarberListAppointmentsController {
 
     @FXML private ListView<Node> appointmentsListView;
+    @FXML private TextField saloonText;
+    @FXML private Button confirmButton;
+    @FXML private DatePicker date;
 
     private static final String BARBER_APPOINTMENTS_LIST_ITEM = "first_view/list_item/barber_appointments_item.fxml";
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-        Node[] nodes = new Node[5];
-        for (int i = 0 ; i < nodes.length ; i++) {
-            try {
-                nodes[i] = (new FXMLLoader(getClass().getClassLoader().getResource(BARBER_APPOINTMENTS_LIST_ITEM))).load() ;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        ObservableListNode barberCenterObservableListNode = new ObservableListNode(nodes);
-        appointmentsListView.setItems(barberCenterObservableListNode);
+
+
+    @FXML
+    public void onConfirm(ActionEvent event){
+        String saloonName = saloonText.getText();
+        Date dateBook = Date.valueOf(date.getValue());
+        BookingBean bookingBean = new BookingBean(saloonName,dateBook);
+        BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
+        List<BookingBean> bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
+
+        appointmentsListView.setItems(FXCollections.observableList(bookingBeanList));
+
+
+
 
     }
+
+
+
 
 }
 

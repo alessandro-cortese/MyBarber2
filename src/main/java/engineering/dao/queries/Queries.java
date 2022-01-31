@@ -178,10 +178,19 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return  statement.execute(sql);
     }
 
-
+    //-+-+-+-+-+-+-+-+-+-+- Booking -+-+-+-+-+-+-+-+-+-+-//
     public static boolean insertBookingInfo(Statement statement, String userEmail, String nameSaloon, String service, Time fromTime, Time toTime,Date date) throws SQLException {
         String sql=String.format("INSERT INTO Booking(dateBooking,fromTime,toTime,customer,Saloon,service) values('%s','%s','%s','%s','%s','%s');",date,fromTime,toTime,userEmail,nameSaloon,service);
         return statement.execute(sql);
     }
 
+    public static ResultSet selectBooking(Statement statement,String saloonName, Date date) throws SQLException {
+        String sql = String.format("SELECT C.name, C.surname, B.fromTime, B.toTime FROM Customer C, Booking B, Saloon S WHERE C.userEmail = B.customer AND B.Saloon = S.name AND S.name ='%s' AND B.dateBooking ='%s';", saloonName, date);
+        return statement.executeQuery(sql);
+    }
+
+    public static ResultSet selectDateBooking(Statement statement, Date date) throws SQLException {
+        String sql = String.format("SELECT dateBooking FROM Booking WHERE dateBooking ='%s';", date);
+        return statement.executeQuery(sql);
+    }
 }

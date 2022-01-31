@@ -1,9 +1,9 @@
 package model;
 
-import engineering.container.ServiceCatalogue;
 import engineering.time.TimeSlot;
-import java.sql.Time;
-import java.util.Date;
+
+import java.sql.Date;
+
 import java.util.List;
 
 public class Booking{
@@ -27,7 +27,14 @@ public class Booking{
 
     }
 
-    public Date getDateBooking() {
+    public Booking(Customer customer, TimeSlot timeSlot) {
+        this.customer = customer;
+        this.timeSlot = timeSlot;
+        this.saloon = null;
+        this.services = null;
+    }
+
+    public java.sql.Date getDateBooking() {
         return dateBooking;
     }
     public  void setDateBooking(Date dateBooking){
