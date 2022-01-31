@@ -1,6 +1,6 @@
 package first_view.barber;
 
-import application_controller.AddProductController;
+import application_controller.ManageProductController;
 import engineering.bean.UserBean;
 import engineering.bean.buy_product.ProductBean;
 import engineering.exception.DuplicatedProductException;
@@ -38,7 +38,7 @@ public class BarberAddProductController {
 
         exceptionAddProductLabel.setText("");
         Node sourceNodeAddProduct = (Node) event.getSource();
-        AddProductController addProductController = new AddProductController();
+        ManageProductController addProductController = new ManageProductController();
         UserBean userBean = InternalBackController.getInternalBackControllerInstance().getLoggedUser();
 
         if(sourceNodeAddProduct == continueButtonAddProduct) {

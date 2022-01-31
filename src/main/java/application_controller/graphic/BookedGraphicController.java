@@ -28,7 +28,7 @@ public class BookedGraphicController{
             serviceSelectedListView = new ListView<>();
         }
 
-    @FXML
+        @FXML
         void onBookedButton(ActionEvent event) {
             InternalBackController.getInternalBackControllerInstance().backToHome((Node) event.getSource());
 

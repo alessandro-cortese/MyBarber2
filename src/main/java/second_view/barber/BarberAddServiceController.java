@@ -1,6 +1,6 @@
 package second_view.barber;
 
-import application_controller.AddServiceController;
+import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
 import engineering.exception.DuplicatedServiceException;
 import engineering.exception.InsertNegativePriceException;
@@ -69,8 +69,9 @@ public class BarberAddServiceController {
             try {
 
                 ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
-                AddServiceController addServiceController = new AddServiceController();
-                addServiceController.addService(serviceBean, ScreenChanger.getInstance().getLoggedUser());
+
+                ManageServiceController manageServiceController = new ManageServiceController();
+                manageServiceController.addService(serviceBean, ScreenChanger.getInstance().getLoggedUser());
 
             } catch (DuplicatedServiceException e) {
 
