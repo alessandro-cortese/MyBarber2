@@ -1,8 +1,10 @@
 package application_controller.graphic;
 
 import application_controller.BookingController;
+import engineering.bean.BookingBean;
 import engineering.bean.SaloonBean;
 import engineering.bean.TimeSlotBean;
+import engineering.exception.SaloonNotFoundException;
 import engineering.exception.ServiceNotFoundException;
 import engineering.time.TimeSlot;
 import first_view.list_cell_factories.SaloonTimeSlotsListCellFactory;
@@ -17,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -85,7 +88,27 @@ public class BookingDateHourGraphicController {
         @FXML
         public void confirmHour(ActionEvent event) {
                 date = dateBooking.getValue();
+                String date1 = String.valueOf(date);
+                if(date1.isEmpty())
+                        try {
+                                throw new SaloonNotFoundException("Inserire la data! ");
+                        } catch (SaloonNotFoundException e) {
+                                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                                alert.showAndWait();
+                                return;
+                        }
 
+                Date dateBook = Date.valueOf(date);
+
+                BookingController bookingController = new BookingController();
+                BookingBean bookingBean = new BookingBean(timeSlotSaloonInfo.getName(), dateBook);
+
+                try {
+                        bookingController.checkDateHour(bookingBean);
+                } catch (SaloonNotFoundException e) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                        alert.showAndWait();
+                }
         }
 
 
