@@ -147,7 +147,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeUpdate(update);
     }
 
-
     //-+-+-+-+-+-+-+-+-+-+- User -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet selectUserByCredentials(Statement statement, String userEmail, String password) throws SQLException {
         String query = String.format("SELECT * FROM User WHERE email = '%s' AND pass = '%s' ;", userEmail, password) ;
