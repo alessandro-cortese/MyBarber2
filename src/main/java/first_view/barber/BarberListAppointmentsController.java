@@ -33,10 +33,7 @@ public class BarberListAppointmentsController {
         BookingBean bookingBean = new BookingBean(saloonName,dateBook);
         BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
         List<BookingBean> bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
-
         appointmentsListView.setItems(FXCollections.observableList(bookingBeanList));
-
-
 
 
     }

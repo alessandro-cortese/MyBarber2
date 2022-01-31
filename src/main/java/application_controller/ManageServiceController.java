@@ -160,11 +160,59 @@ public class ManageServiceController {
 
     }
 
-    private boolean controlDuplicatedService(Service localService, Service service) {
-        return Objects.equals(localService.getServiceName(), service.getServiceName()) && Objects.equals(localService.getServiceDescription(), service.getServiceDescription()) &&
-                Objects.equals(localService.getServicePrice(), service.getServicePrice());
+    public void modifyService(ServiceBean oldService, ServiceBean updateService, String barberEmail) {
+
+        ServiceDAO serviceDAO = new ServiceDAO();
+        ProductDAO productDAO = new ProductDAO();
+        Product product;
+        int serviceKey;
+        boolean modify;
+
+        serviceKey = serviceDAO.loadServiceId(oldService.getNameInfo(), barberEmail);
+
+        modify = !this.controlDuplicatedService(oldService, updateService);
+
+        if(modify) {
+
+            serviceDAO.updateService(serviceKey, updateService.getNameInfo(), updateService.getDescriptionInfo(), updateService.getPriceInfo());
+
+        }
+
+        if(oldService.getNameOfUsedProductInfo() != null && updateService.getNameOfUsedProductInfo() == null && modify) {
+
+            try {
+
+                product = productDAO.loadProductByName(oldService.getNameOfUsedProductInfo(), barberEmail);
+                serviceDAO.deleteServiceProduct(serviceKey, product.getIsbn());
+
+            } catch (ProductNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else if(oldService.getNameOfUsedProductInfo() == null && updateService.getNameOfUsedProductInfo() != null && modify) {
+
+            try {
+
+                product = productDAO.loadProductByName(updateService.getNameOfUsedProductInfo(), barberEmail);
+                serviceDAO.insertServiceProduct(serviceKey, product.getIsbn());
+
+            } catch (ProductNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
+    private boolean controlDuplicatedService(Service localService, Service service) {
+        return Objects.equals(localService.getServiceName(), service.getServiceName()) && Objects.equals(localService.getServiceDescription(), service.getServiceDescription()) &&
+                Objects.equals(localService.getServicePrice(), service.getServicePrice()) && Objects.equals(localService.getServiceUsedProduct(), service.getServiceUsedProduct());
+    }
+
+    private boolean controlDuplicatedService(ServiceBean localService, ServiceBean service) {
+        return Objects.equals(localService.getNameInfo(), service.getNameInfo()) && Objects.equals(localService.getDescriptionInfo(), service.getDescriptionInfo()) &&
+                Objects.equals(localService.getPriceInfo(), service.getPriceInfo()) && Objects.equals(localService.getNameOfUsedProductInfo(), service.getNameOfUsedProductInfo());
+    }
 
     public void setUserBean(UserBean userBean) {
 

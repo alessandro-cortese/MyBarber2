@@ -97,7 +97,7 @@ public class ServiceDAO {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT SserviceProduct(idService, idProduct) VALUES(?, ?)")) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT ServiceProduct(idService, idProduct) VALUES(?, ?)")) {
 
             preparedStatement.setInt(1, serviceId);
             preparedStatement.setInt(2, productId);
@@ -194,6 +194,25 @@ public class ServiceDAO {
         }
 
         return serviceList;
+    }
+
+    public void updateService(int serviceKey, String serviceName, String serviceDescription, Double servicePrice) {
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Service SET name = ?, description = ?, price = ? WHERE id = ?")) {
+
+            preparedStatement.setString(1, serviceName);
+            preparedStatement.setString(2, serviceDescription);
+            preparedStatement.setDouble(3, servicePrice);
+            preparedStatement.setInt(4, serviceKey);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
     }
 
     private Service createServiceCustomer(ResultSet resultSet) throws SQLException {
