@@ -3,13 +3,11 @@ package engineering.dao;
 import engineering.dao.queries.Queries;
 import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
+import javafx.scene.control.Alert;
 import model.Customer;
 import model.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +73,11 @@ public class CustomerDAO {
             Queries.insertIntoUser(statement,customer.getEmail(),customer.getPass(),CUSTOMER);
             Queries.insertIntoCustomer(statement, customer.getName(), customer.getSurname(), customer.getEmail());
 
-        } catch (SQLException e) {// converti ecc
+        }catch (SQLIntegrityConstraintViolationException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "utente già esistente");
+            alert.showAndWait();
+            return;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

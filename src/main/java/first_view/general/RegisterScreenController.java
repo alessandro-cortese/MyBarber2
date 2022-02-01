@@ -71,15 +71,14 @@ public class RegisterScreenController {
 
         try {
             userBean = retrieveInfo();
+            RegisterController registerController = new RegisterController();
+            registerController.register(userBean);
+
         } catch (InvalidCredentialsException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
             return;
         }
-
-        RegisterController registerController = new RegisterController();
-        registerController.register(userBean);
-
 
 
     }

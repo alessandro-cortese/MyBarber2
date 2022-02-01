@@ -2,13 +2,11 @@ package engineering.dao;
 
 import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
+import javafx.scene.control.Alert;
 import model.Barber;
 import model.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class BarberDAO {
 
@@ -25,7 +23,12 @@ public class BarberDAO {
             Queries.insertIntoUser(statement,barber.getEmail(),barber.getPass(),BARBER);
             Queries.insertIntoBarber(statement, barber.getName(), barber.getSurname(), barber.getEmail());
 
-        } catch (SQLException e) {// fare conversione dell'eccezione
+        }catch (SQLIntegrityConstraintViolationException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "utente già esistente");
+            alert.showAndWait();
+            return;
+        }
+        catch (SQLException e) {
             e.printStackTrace();
 
         }
