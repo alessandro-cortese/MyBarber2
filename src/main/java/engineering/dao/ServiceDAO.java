@@ -12,21 +12,12 @@ import java.util.List;
 
 public class ServiceDAO {
 
+    private static final String SERVICE_ID_COL_NAME = "id";
     private static final String SERVICE_NAME_COL_NAME = "name";
     private static final String SERVICE_DESCRIPTION_COL_NAME = "description";
     private static final String SERVICE_PRICE_COL_NAME = "price";
 
     private List<Service> serviceList;
-
-    public ServiceCatalogue loadServices() {
-
-        ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
-        serviceCatalogue.addService("Taglio", "Taglio dei capelli", 10.0D, null);
-        serviceCatalogue.addService("Taglio della barba", "Taglio della barba", 7.00D, null);
-
-        return serviceCatalogue;
-
-    }
 
     public int insertService(Service service, String barberEmail){
 
@@ -55,11 +46,48 @@ public class ServiceDAO {
 
     }
 
+    public int loadServiceId(String serviceName, String barberEmail) {
+
+        int key = 0;
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.loadServiceId(statement, serviceName, barberEmail)){
+
+            if(resultSet.next()) {
+
+                key = resultSet.getInt(SERVICE_ID_COL_NAME);
+
+            }
+
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+        return key;
+
+    }
+
+    public void deleteService(int serviceId, String barberEmail){
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try (Statement statement = connection.createStatement()){
+
+            Queries.deleteService(statement, serviceId, barberEmail);
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+    }
+
     public void insertServiceProduct(Integer serviceId, Integer productId) {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT SserviceProduct(idService, idProduct) VALUES(?, ?)")) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT ServiceProduct(idService, idProduct) VALUES(?, ?)")) {
 
             preparedStatement.setInt(1, serviceId);
             preparedStatement.setInt(2, productId);
@@ -72,6 +100,19 @@ public class ServiceDAO {
 
     }
 
+    public void deleteServiceProduct(int serviceId, int productId) {
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(Statement statement = connection.createStatement()) {
+
+            Queries.deleteServiceProduct(statement, serviceId, productId);
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+    }
 
     public ServiceCatalogue loadAllService(String barberEmail) {
 
@@ -143,6 +184,25 @@ public class ServiceDAO {
         }
 
         return serviceList;
+    }
+
+    public void updateService(int serviceKey, String serviceName, String serviceDescription, Double servicePrice) {
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Service SET name = ?, description = ?, price = ? WHERE id = ?")) {
+
+            preparedStatement.setString(1, serviceName);
+            preparedStatement.setString(2, serviceDescription);
+            preparedStatement.setDouble(3, servicePrice);
+            preparedStatement.setInt(4, serviceKey);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
     }
 
     private Service createServiceCustomer(ResultSet resultSet) throws SQLException {

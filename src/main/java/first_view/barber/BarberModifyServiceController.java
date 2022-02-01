@@ -1,6 +1,8 @@
 package first_view.barber;
 
+import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
+import engineering.exception.InsertNegativePriceException;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;
@@ -29,11 +31,16 @@ public class BarberModifyServiceController {
     private static final String BARBER_DELETE_SERVICE_SCREEN_NAME = "first_view/barber/barber_confirm_delete_service.fxml" ;
 
     @FXML
-    public void onButtonClicked(ActionEvent event) throws IOException {
+    public void onButtonClicked(ActionEvent event) throws IOException, InsertNegativePriceException {
         Button sourceButton = (Button) event.getSource();
 
         if(sourceButton == saveChangesButton && nameModifyServiceTextField.getText() != null && isNumeric(modifyServicePriceTextField.getText())
                 && descriptionTextFieldModifyService.getText() != null) {
+
+            ServiceBean updateServiceBean = new ServiceBean(nameModifyServiceTextField.getText(), descriptionTextFieldModifyService.getText(), modifyServiceNameOfUsedProductTextField.getText(), Double.parseDouble(modifyServicePriceTextField.getText()));
+            
+            ManageServiceController manageServiceController = new ManageServiceController();
+            manageServiceController.modifyService(serviceBean, updateServiceBean, InternalBackController.getInternalBackControllerInstance().getLoggedUser().getUserEmail());
 
             InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
 

@@ -112,9 +112,9 @@ public class ProductDAO {
         try(Statement statement = connection.createStatement();
             ResultSet resultSet = Queries.loadProductIdFromServiceProduct(statement, serviceId)){
 
-            resultSet.next();
-            if(resultSet.first()){
-                productId = resultSet.getInt(1);
+
+            if(resultSet.next()){
+                productId = resultSet.getInt("idProduct");
             }
 
         }

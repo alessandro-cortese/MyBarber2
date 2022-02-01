@@ -41,6 +41,10 @@ public class Customer extends User implements Serializable {
         setPhone("");
     }
 
+    public Customer(String cName, String cSurname) {
+        super(cName,cSurname);
+    }
+
 
     public String getPhone() {
 

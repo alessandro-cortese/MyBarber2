@@ -3,10 +3,17 @@ package engineering.time;
 import java.sql.Time;
 
 
-public class TimeSlot {//***************************CLASSE DI INGEGNERIZZAZIONE NON FACENTE PARTE DEL DOMINIO
-    private int seatAvailable; //posti disponibili
-    private Time fromTime;     //orario inizio timeSlot
-    private Time toTime;       //orario fine timeSlot
+public class TimeSlot {
+    private int seatAvailable;
+    private Time fromTime;
+    private Time toTime;
+
+    public TimeSlot(){}
+
+    public TimeSlot(Time toTime, Time fromTime) {
+        this.toTime = toTime;
+        this.fromTime = fromTime;
+    }
 
 
     public int getSeatAvailable() {

@@ -1,6 +1,6 @@
 package first_view.barber;
 
-import application_controller.AddServiceController;
+import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
 import engineering.bean.UserBean;
 import engineering.exception.DuplicatedServiceException;
@@ -40,11 +40,12 @@ public class BarberConfirmAddServiceController {
         goToHome = true;
 
         if(sourceNode == saveConfirmButton && serviceBean != null && (serviceBean.getNameInfo() != null && serviceBean.getNameOfUsedProductInfo() != null && serviceBean.getPriceInfo() != null)) {
-            AddServiceController addServiceController = new AddServiceController();
+
+            ManageServiceController manageServiceController = new ManageServiceController();
+
             try {
 
-                addServiceController.addService(serviceBean, userBean);
-
+                manageServiceController.addService(serviceBean,userBean);
 
             }catch (DuplicatedServiceException e){
 

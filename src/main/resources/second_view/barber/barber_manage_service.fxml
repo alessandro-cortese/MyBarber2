@@ -24,7 +24,7 @@
                   </Label>
                   <ScrollPane prefHeight="261.0" prefWidth="306.0">
                      <content>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- select service &lt;name of service&gt;&#10;- overwrite name &lt;new name&gt;&#10;- overwrite price &lt;new price&gt;&#10;- overwrite description &lt;new description&gt;&#10;- overwrite name of used product &lt;new name&gt;&#10;- delete&#10;- modify &#10;- back">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- modify service &lt;name of service to modify&gt;&#10;- delete &lt;name of service to delete&gt;&#10;- modify &#10;- back">
                            <font>
                               <Font size="14.0" />
                            </font>

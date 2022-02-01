@@ -35,6 +35,7 @@ public class ScreenChanger {
     public static final String BARBER_SEE_ORDER_SCREEN = "second_view/barber/barber_see_order.fxml" ;
     public static final String BARBER_SEE_CART_ORDER_SCREEN = "second_view/barber/barber_see_order_cart.fxml" ;
     public static final String BARBER_ADD_PRODUCT_SCREEN_NAME = "second_view/barber/barber_add_product.fxml";
+    public static final String BARBER_MODIFY_SERVICE_SCREEN_NAME = "second_view/barber/barber_modify_service.fxml";
 
     ArrayList<Scene> backSceneStack ;
 

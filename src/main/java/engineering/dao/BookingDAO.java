@@ -1,10 +1,17 @@
 package engineering.dao;
 
 import engineering.dao.queries.Queries;
+import engineering.exception.BookingNotFoundExcption;
+import engineering.exception.SaloonNotFoundException;
 import engineering.pattern.Connector;
+import engineering.time.TimeSlot;
+import javafx.scene.control.Alert;
+import model.Booking;
+import model.Customer;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.List;
 
 public class BookingDAO {
 
@@ -24,5 +31,51 @@ public class BookingDAO {
         }
 
         return flag;
+    }
+
+    public List<Booking> retrieveBookingList(String saloonName, Date date) {
+        Connection conn = Connector.getConnectorInstance().getConnection();
+        List<Booking> bookingList = null;
+
+        try(Statement statement = conn.createStatement()){
+
+            ResultSet resultSetSaloon = Queries.selectSaloonByName(statement, saloonName);
+            if(!resultSetSaloon.first()){
+                throw new SaloonNotFoundException("Il salone cercato non è presente in nessuna prenotazione!");
+            }
+
+            ResultSet resultSetDate = Queries.selectDateBooking(statement, date);
+            if(!resultSetDate.first()){
+                throw new BookingNotFoundExcption("la data selezionata non ha nessuna prenotazione presente!");
+            }
+
+
+
+            ResultSet resultSet = Queries.selectBooking(statement, saloonName, date);
+
+            while (resultSet.next()){
+                String Cname = resultSet.getString("name");
+                String Csurname = resultSet.getString("surname");
+                Time toTime = resultSet.getTime("toTime");
+                Time fromTime = resultSet.getTime("fromTime");
+                Customer customer = new Customer(Cname, Csurname);
+                TimeSlot timeSlot = new TimeSlot(toTime,fromTime);
+                Booking booking = new Booking(customer,timeSlot);
+                bookingList.add(booking);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (SaloonNotFoundException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
+            alert.showAndWait();
+            return null;
+        } catch (BookingNotFoundExcption e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
+            alert.showAndWait();
+            return null;
+        }
+
+        return bookingList;
     }
 }

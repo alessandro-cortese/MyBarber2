@@ -121,6 +121,11 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
+    public static ResultSet loadServiceId(Statement statement, String serviceName, String barberEmail) throws SQLException {
+        String query = String.format("SELECT id FROM Service WHERE name = '%s' AND barber = '%s' ;", serviceName, barberEmail);
+        return statement.executeQuery(query);
+    }
+
     public static ResultSet selectServices(Statement statement, String saloonName) throws SQLException {
         String sql = String.format("SELECT SE.name,SE.description, SE.price FROM Saloon S, Barber B, Service SE WHERE S.barber = B.emailUser AND B.emailUser = SE.barber AND S.name = '%s'; ",saloonName);
         return  statement.executeQuery(sql);
@@ -130,6 +135,16 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     public static ResultSet loadServicesByBarberEmail(Statement statement, String barberEmail) throws SQLException {
         String query = String.format("SELECT * FROM Service WHERE barber = '%s';", barberEmail);
         return statement.executeQuery(query);
+    }
+
+    public static int deleteService(Statement statement, int serviceKey, String barberEmail) throws SQLException {
+        String update = String.format("DELETE FROM Service WHERE id = %d AND barber = '%s';", serviceKey, barberEmail);
+        return statement.executeUpdate(update);
+    }
+
+    public static int deleteServiceProduct(Statement statement, int serviceId, int productId) throws SQLException {
+        String update = String.format("DELETE FROM ServiceProduct WHERE idService = %d AND idProduct = %d ;", serviceId, productId);
+        return statement.executeUpdate(update);
     }
 
     //-+-+-+-+-+-+-+-+-+-+- User -+-+-+-+-+-+-+-+-+-+-//
@@ -178,10 +193,19 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return  statement.execute(sql);
     }
 
-
+    //-+-+-+-+-+-+-+-+-+-+- Booking -+-+-+-+-+-+-+-+-+-+-//
     public static boolean insertBookingInfo(Statement statement, String userEmail, String nameSaloon, String service, Time fromTime, Time toTime,Date date) throws SQLException {
         String sql=String.format("INSERT INTO Booking(dateBooking,fromTime,toTime,customer,Saloon,service) values('%s','%s','%s','%s','%s','%s');",date,fromTime,toTime,userEmail,nameSaloon,service);
         return statement.execute(sql);
     }
 
+    public static ResultSet selectBooking(Statement statement,String saloonName, Date date) throws SQLException {
+        String sql = String.format("SELECT C.name, C.surname, B.fromTime, B.toTime FROM Customer C, Booking B, Saloon S WHERE C.userEmail = B.customer AND B.Saloon = S.name AND S.name ='%s' AND B.dateBooking ='%s';", saloonName, date);
+        return statement.executeQuery(sql);
+    }
+
+    public static ResultSet selectDateBooking(Statement statement, Date date) throws SQLException {
+        String sql = String.format("SELECT dateBooking FROM Booking WHERE dateBooking ='%s';", date);
+        return statement.executeQuery(sql);
+    }
 }
