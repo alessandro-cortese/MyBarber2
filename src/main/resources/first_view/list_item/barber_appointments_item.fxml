@@ -20,13 +20,13 @@
             <HBox layoutX="10.0" layoutY="30.0" prefHeight="34.0" prefWidth="157.0">
                <children>
                   <Label prefHeight="34.0" prefWidth="95.0" text="Nome:" />
-                  <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="266.0" text="&lt;&lt;Nome Cliente&gt;&gt;" />
+                  <Label fx:id="nameLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="266.0" text="&lt;&lt;Nome Cliente&gt;&gt;" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="30.0" prefHeight="34.0" prefWidth="157.0">
                <children>
                   <Label prefHeight="34.0" prefWidth="110.0" text="Cognome:" />
-                  <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="235.0" text="&lt;&lt;Cognome Cliente&gt;&gt;" />
+                  <Label fx:id="surnameLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="235.0" text="&lt;&lt;Cognome Cliente&gt;&gt;" />
                </children>
             </HBox>
             <HBox prefHeight="29.0" prefWidth="234.0">
@@ -41,6 +41,7 @@
                   <Label fx:id="toTimeLabel" prefHeight="16.0" prefWidth="95.0" text="Label" />
                </children>
             </HBox>
+            <Label fx:id="indexLabel" prefHeight="16.0" prefWidth="257.0" />
          </children>
          <padding>
             <Insets bottom="20.0" top="20.0" />
