@@ -19,16 +19,6 @@ public class ServiceDAO {
 
     private List<Service> serviceList;
 
-    public ServiceCatalogue loadServices() {
-
-        ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
-        serviceCatalogue.addService("Taglio", "Taglio dei capelli", 10.0D, null);
-        serviceCatalogue.addService("Taglio della barba", "Taglio della barba", 7.00D, null);
-
-        return serviceCatalogue;
-
-    }
-
     public int insertService(Service service, String barberEmail){
 
         int newKeys = -1;

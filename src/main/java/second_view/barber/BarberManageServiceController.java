@@ -12,6 +12,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -28,13 +29,10 @@ public class BarberManageServiceController implements Initializable {
     @FXML private TextField manageServiceSlotIndexTextField;
     @FXML private ListView<ServiceBean> manageServiceListView;
 
-    private static final String OVERWRITE_NAME_COMMAND = "overwrite name";
-    private static final String OVERWRITE_PRICE_COMMAND = "overwrite price";
-    private static final String OVERWRITE_DESCRIPTION_COMMAND = "overwrite description";
-    private static final String OVERWRITE_NAME_OF_USED_PRODUCT_COMMAND = "overwrite name of used product";
+
 
     private List<ServiceBean> serviceBeanList;
-    ManageServiceController manageServiceController;
+    private ManageServiceController manageServiceController;
 
     public BarberManageServiceController() {
 
@@ -71,7 +69,7 @@ public class BarberManageServiceController implements Initializable {
 
 
     @FXML
-    public void onCommand(ActionEvent event) {
+    public void onCommand(ActionEvent event) throws IOException {
 
         String manageServiceCommandLineLocal = manageServiceCommandLine.getText();
         manageServiceCommandLine.setText("");
@@ -81,18 +79,25 @@ public class BarberManageServiceController implements Initializable {
             ScreenChanger.getInstance().onBack(event);
             return ;
         }
-        else if(manageServiceCommandLineLocal.startsWith("select service")) {
-            String nameOfSelectedService = manageServiceCommandLineLocal.replace("select service" + " ", "");
-            manageServiceNameTextField.setText(nameOfSelectedService);
-            return ;
-        }
-        else if(manageServiceCommandLineLocal.startsWith("overwrite")) {
-            if(overwriteHandler(manageServiceCommandLineLocal)) {
-                return ;
+        else if(manageServiceCommandLineLocal.startsWith("modify service")){
+
+            String nameOfServiceToModify = manageServiceCommandLineLocal.replace("modify service" + " ", "");
+            ServiceBean serviceBeanToModify = null;
+            for(ServiceBean serviceBean : serviceBeanList) {
+
+                if(serviceBean.getNameInfo().compareTo(nameOfServiceToModify) == 0) {
+                    serviceBeanToModify = serviceBean;
+                    break;
+                }
+
             }
-        }
-        else if(manageServiceCommandLineLocal.compareTo("modify") == 0){
+
+            assert serviceBeanToModify != null;
+            BarberModifyServiceController barberModifyServiceController = (BarberModifyServiceController) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_MODIFY_SERVICE_SCREEN_NAME);
+            barberModifyServiceController.setServiceBeanToModify(serviceBeanToModify);
+
             return;
+
         }
         else if(manageServiceCommandLineLocal.startsWith("delete")) {
 
@@ -110,7 +115,6 @@ public class BarberManageServiceController implements Initializable {
 
             }
 
-
             ScreenChanger.getInstance().goToHome(event);
             return;
         }
@@ -118,37 +122,5 @@ public class BarberManageServiceController implements Initializable {
         manageServiceCommandLine.setStyle("-fx-border-color: red");
     }
 
-    private boolean overwriteHandler(String command) {
-
-        boolean flag = false;
-        String newManageServiceField;
-
-        if(command.startsWith(OVERWRITE_NAME_COMMAND)) {
-
-            newManageServiceField = command.replace(OVERWRITE_NAME_COMMAND + " ", "");
-            manageServiceNameTextField.setText(newManageServiceField);
-            flag = true;
-
-        }
-        else if(command.startsWith(OVERWRITE_PRICE_COMMAND)) {
-            newManageServiceField = command.replace(OVERWRITE_PRICE_COMMAND + " ", "");
-            if(isNumeric(newManageServiceField)) {
-                manageServicePriceTextField.setText(newManageServiceField);
-                flag = true;
-            }
-        }
-        else if(command.startsWith(OVERWRITE_DESCRIPTION_COMMAND)) {
-            newManageServiceField = command.replace(OVERWRITE_DESCRIPTION_COMMAND + " ", "");
-            manageServiceDescriptionTextField.setText(newManageServiceField);
-            flag = true;
-        }
-        else if(command.startsWith(OVERWRITE_NAME_OF_USED_PRODUCT_COMMAND)) {
-            newManageServiceField = command.replace(OVERWRITE_NAME_OF_USED_PRODUCT_COMMAND + " ", "");
-            manageServiceNameOfUsedProductTextField.setText(newManageServiceField);
-            flag = true;
-        }
-
-        return flag;
-    }
 
 }

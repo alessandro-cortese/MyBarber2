@@ -114,7 +114,7 @@ public class ProductDAO {
 
 
             if(resultSet.next()){
-                productId = resultSet.getInt(1);
+                productId = resultSet.getInt("idProduct");
             }
 
         }

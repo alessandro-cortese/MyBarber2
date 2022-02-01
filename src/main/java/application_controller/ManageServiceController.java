@@ -35,11 +35,10 @@ public class ManageServiceController {
 
         for (Service service : services){
 
-            if(service.getServiceUsedProduct() == null){
-                nameOfUsedProduct = "";
-            }
-            else {
+            if (service.getServiceUsedProduct() != null) {
                 nameOfUsedProduct = service.getServiceUsedProduct().getName();
+            } else {
+                nameOfUsedProduct = "";
             }
 
             serviceBeanList.add(new ServiceBean(service.getServiceName(), service.getServiceDescription(), nameOfUsedProduct, service.getServicePrice()));
@@ -178,8 +177,7 @@ public class ManageServiceController {
 
         }
 
-        if(oldService.getNameOfUsedProductInfo() != null && updateService.getNameOfUsedProductInfo() == null && modify) {
-
+        if(oldService.getNameOfUsedProductInfo().compareTo("") != 0 && updateService.getNameOfUsedProductInfo().compareTo("") == 0 && modify) {
             try {
 
                 product = productDAO.loadProductByName(oldService.getNameOfUsedProductInfo(), barberEmail);
@@ -190,7 +188,7 @@ public class ManageServiceController {
             }
 
         }
-        else if(oldService.getNameOfUsedProductInfo() == null && updateService.getNameOfUsedProductInfo() != null && modify) {
+        else if(oldService.getNameOfUsedProductInfo().compareTo("") == 0 && updateService.getNameOfUsedProductInfo().compareTo("") != 0 && modify) {
 
             try {
 
