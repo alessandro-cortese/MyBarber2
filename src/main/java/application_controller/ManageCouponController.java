@@ -5,7 +5,6 @@ import engineering.bean.UserBean;
 import engineering.bean.buy_product.CouponBean;
 import engineering.dao.CouponDAO;
 import engineering.dao.CustomerDAO;
-import engineering.dao.UserDAO;
 import engineering.exception.CardPointsException;
 import engineering.exception.NotExistentUserException;
 import model.Customer;
@@ -66,7 +65,7 @@ public class ManageCouponController {
     public FidelityCardBean showFidelityCard() throws NotExistentUserException {
         if (customer == null) throw new NotExistentUserException("ACCESSO NON EFFETTUATO!!") ;
 
-        return createFidelityCardBean();
+        return createFidelityCardBean() ;
     }
 
 

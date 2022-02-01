@@ -3,11 +3,8 @@ package application_controller;
 import engineering.bean.UserBean;
 import engineering.dao.BarberDAO;
 import engineering.dao.CustomerDAO;
-import engineering.dao.UserDAO;
 import engineering.pattern.factory.Factory;
 import first_view.general.InternalBackController;
-import model.Barber;
-import model.Customer;
 import model.User;
 
 public class RegisterController {
