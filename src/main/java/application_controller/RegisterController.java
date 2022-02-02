@@ -42,7 +42,7 @@ public class RegisterController {
             customerDAO.insertCustomer(customer);
         }
 
-        InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBean);
+        InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBean); // TODO mettere nel grafico
     }
 
     private boolean isValidEmailAddress(String email) {

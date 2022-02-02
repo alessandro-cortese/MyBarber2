@@ -73,7 +73,7 @@ public class RegisterScreenController {
             alert.showAndWait();
             return;
         }
-        
+
         if (sourceNode.getId().equals("registerButton"))
             onRegisterButtonClicked(sourceNode) ;
         if(sourceNode.getId().equals(googleButton))

@@ -105,6 +105,9 @@ public class BookingDateHourGraphicController {
 
                 try {
                         bookingController.checkDateHour(bookingBean);
+                        String message = "conferma effettuta";
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+                        alert.showAndWait();
                 } catch (SaloonNotFoundException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                         alert.showAndWait();

@@ -142,9 +142,7 @@ public class BookingController {
             String mess="data non disponibile, il Salone è chiuso!";
             throw new SaloonNotFoundException(mess);
         }
-            String message = "conferma effettuta";
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
-            alert.showAndWait();
+
 
         return result;
     }
