@@ -50,7 +50,7 @@
          <children>
             <HBox prefHeight="64.0" prefWidth="900.0" spacing="20.0">
                <children>
-                  <Label fx:id="saloonNameLabel" prefHeight="64.0" prefWidth="236.0" text="Nome Salone">
+                  <Label fx:id="saloonNameLabel" prefHeight="64.0" prefWidth="236.0" styleClass="title_label" stylesheets="@../DesktopCSS.css" text="Nome Salone">
                      <HBox.margin>
                         <Insets left="50.0" top="40.0" />
                      </HBox.margin>

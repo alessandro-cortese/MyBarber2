@@ -1,4 +1,4 @@
-.button{
+.custom_button{
     -fx-background-color: black;
     font-family: Montserrat, serif;
     font-style: normal;
@@ -9,4 +9,34 @@
     text-align: center;
 
     color: #000000;
+}
+
+.normal_label {
+    -fx-font-family: System;
+    -fx-font-size: 22;
+}
+
+.title_label {
+    -fx-font-family: System;
+    -fx-font-weight: Bold;
+    -fx-font-size: 34;
+    -fx-padding : 0 0 0 50;
+}
+
+.subtitle_label {
+    -fx-font-family: System;
+    -fx-font-weight: Bold;
+    -fx-font-size: 26;
+}
+
+.internal_pane {
+    -fx-background-color: #E1E9F3;
+    -fx-pref-width: 1250;
+    -fx-pref-height: 650;
+}
+
+.menu_pane {
+    -fx-background-color: #E1E9F3;
+    -fx-pref-width: 1250;
+    -fx-pref-height: 775;
 }

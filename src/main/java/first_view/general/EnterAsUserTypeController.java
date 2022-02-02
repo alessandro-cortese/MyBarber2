@@ -17,14 +17,14 @@ public class EnterAsUserTypeController {
 
     public void enterAsUser(int userType, Scene mainScene) throws IOException {
         BorderPane container = (BorderPane) mainScene.getRoot() ;
-        String mainScreen ;
+        String mainScreen = null;
         if (userType == CLIENT_TYPE) {
             mainScreen = CLIENT_HOME_SCREEN ;
         }
-        else {
+        else if (userType == BARBER_TYPE){
             mainScreen = BARBER_HOME_SCREEN ;
         }
-        if (container != null) {
+        if (container != null && mainScreen != null) {
             FXMLLoader userHomeScreen = new FXMLLoader(getClass().getClassLoader().getResource(mainScreen)) ;
             container.setCenter(userHomeScreen.load());
         }
