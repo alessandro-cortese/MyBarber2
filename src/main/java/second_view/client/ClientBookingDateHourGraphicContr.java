@@ -86,6 +86,9 @@ public class ClientBookingDateHourGraphicContr{
                 BookingBean bookingBean = new BookingBean(saloonBean.getName(), dateBook);
 
                 bookingController.checkDateHour(bookingBean);
+                String message = "conferma effettuta";
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+                alert.showAndWait();
                 return;
             } else if (command.compareTo("continue booking") == 0) {
                 ClientBookAppointmentController clientBookAppointmentController = (ClientBookAppointmentController) ScreenChanger.getInstance().changeScreen(event, ScreenChanger.CLIENT_BOOK_APPOINTMENT_SCREEN);

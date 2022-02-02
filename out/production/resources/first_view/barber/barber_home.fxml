@@ -14,7 +14,7 @@
          <children>
             <AnchorPane prefHeight="526.0" prefWidth="596.0" style="-fx-border-color: black; -fx-background-color: white; -fx-border-radius: 20;">
                <children>
-                  <Label layoutX="43.0" layoutY="37.0" prefHeight="23.0" prefWidth="143.0" text="Aggiungi Centro">
+                  <Label layoutX="43.0" layoutY="37.0" prefHeight="23.0" text="Aggiungi Centro">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -44,7 +44,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="458.0" prefWidth="596.0" style="-fx-border-color: black; -fx-background-color: white; -fx-border-radius: 20;">
                <children>
-                  <Label layoutX="43.0" layoutY="37.0" prefHeight="27.0" prefWidth="178.0" text="Aggiungi Prodotto">
+                  <Label layoutX="43.0" layoutY="37.0" prefHeight="27.0" text="Aggiungi Prodotto">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
