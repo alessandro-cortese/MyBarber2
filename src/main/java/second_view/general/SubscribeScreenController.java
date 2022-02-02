@@ -44,6 +44,19 @@ public class SubscribeScreenController {
         subscribeCommandLine.setStyle(null);
         subscribeCommandLine.setText("");
 
+        UserBean userBean;
+        try {
+
+            userBean = retrieveInfo();
+            RegisterController registerController = new RegisterController();
+            registerController.register(userBean);
+
+        }catch (InvalidCredentialsException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+            return;
+        }
+
         if (commandText.startsWith("set") && setCommand(commandText)) {
             return;
         }
@@ -51,7 +64,6 @@ public class SubscribeScreenController {
             return ;
         }
         else if (commandText.startsWith("register") && registerCommand(commandText)) {
-
 
             if (userTypeField.getText().compareTo("B") == 0) {
                 type=1;
@@ -62,18 +74,7 @@ public class SubscribeScreenController {
                 ScreenChanger.getInstance().changeScreen(event,ScreenChanger.CLIENT_HOME_SCREEN);
             }
 
-            UserBean userBean;
-            try {
 
-                userBean = retrieveInfo();
-                RegisterController registerController = new RegisterController();
-                registerController.register(userBean);
-
-            }catch (InvalidCredentialsException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-                alert.showAndWait();
-                return;
-            }
             return;
 
         }
@@ -95,6 +96,7 @@ public class SubscribeScreenController {
 
         if(nameField.getText().isEmpty() || userTypeField.getText().isEmpty() || subscribePasswordField.getText().isEmpty() || surnameField.getText().isEmpty() || subscribeEmailField.getText().isEmpty()) {
             throw new InvalidCredentialsException("indicare valori validi nei campi!");
+
         }
         return userBeanInfo;
     }

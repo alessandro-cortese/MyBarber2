@@ -62,12 +62,6 @@ public class RegisterScreenController {
     public void onButtonClicked(ActionEvent event) throws  IOException {
         Node sourceNode = (Node)event.getSource() ;
         UserBean userBean;
-        if (sourceNode.getId().equals("registerButton"))
-            onRegisterButtonClicked(sourceNode) ;
-        if(sourceNode.getId().equals(googleButton))
-            return;
-        if(sourceNode.getId().equals(facebookButton))
-            return;
 
         try {
             userBean = retrieveInfo();
@@ -79,6 +73,15 @@ public class RegisterScreenController {
             alert.showAndWait();
             return;
         }
+        
+        if (sourceNode.getId().equals("registerButton"))
+            onRegisterButtonClicked(sourceNode) ;
+        if(sourceNode.getId().equals(googleButton))
+            return;
+        if(sourceNode.getId().equals(facebookButton))
+            return;
+
+
 
 
     }
