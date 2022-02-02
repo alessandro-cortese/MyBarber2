@@ -17,7 +17,7 @@ public abstract class User implements Serializable {
 
     protected User() {}
 
-    public User(String cName, String cSurname) {
+    protected User(String cName, String cSurname) {
         this.name = cName;
         this.surname = cSurname;
     }

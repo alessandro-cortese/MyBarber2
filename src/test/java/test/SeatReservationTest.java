@@ -2,6 +2,8 @@ package test;
 
 import application_controller.BarberSeeAppointmentsController;
 import engineering.bean.BookingBean;
+import engineering.exception.BookingNotFoundExcption;
+import engineering.exception.SaloonNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -11,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SeatReservationTest {
 
     @Test
-    public void checkBooking(){
+    public void checkBooking() throws SaloonNotFoundException, BookingNotFoundExcption {
 
         String dateBooking = "2020-11-11";
         BookingBean bookingBean = new BookingBean();

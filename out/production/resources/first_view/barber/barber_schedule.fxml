@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1289.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberScheduleTimeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1289.0" style="-fx-background-color: #9BACC0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberScheduleTimeController">
    <children>
       <Label layoutX="100.0" layoutY="25.0" prefHeight="39.0" text="Modifica Orari">
          <font>
-            <Font name="System Bold" size="32.0" />
+            <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <Button fx:id="saveButton" layoutX="1078.0" layoutY="633.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="44.0" prefWidth="131.0" stylesheets="@../DesktopCSS.css" text="Salva">
+      <Button fx:id="saveButton" layoutX="1078.0" layoutY="633.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="44.0" prefWidth="131.0" style="-fx-text-fill: BLACK; -fx-background-color: #C0AE9B; -fx-background-radius: 40;" text="Salva">
          <font>
             <Font size="18.0" />
          </font>

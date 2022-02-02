@@ -26,7 +26,6 @@ public class BarberDAO {
         }catch (SQLIntegrityConstraintViolationException e){
             Alert alert = new Alert(Alert.AlertType.ERROR, "utente già esistente");
             alert.showAndWait();
-            return;
         }
         catch (SQLException e) {
             e.printStackTrace();

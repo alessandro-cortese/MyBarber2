@@ -33,7 +33,7 @@ public class BookingDAO {
         return flag;
     }
 
-    public List<Booking> retrieveBookingList(String saloonName, Date date) {
+    public List<Booking> retrieveBookingList(String saloonName, Date date) throws SaloonNotFoundException, BookingNotFoundExcption {
         Connection conn = Connector.getConnectorInstance().getConnection();
         List<Booking> bookingList = null;
 
@@ -54,11 +54,11 @@ public class BookingDAO {
             ResultSet resultSet = Queries.selectBooking(statement, saloonName, date);
 
             while (resultSet.next()){
-                String Cname = resultSet.getString("name");
-                String Csurname = resultSet.getString("surname");
+                String cName = resultSet.getString("name");
+                String cSurname = resultSet.getString("surname");
                 Time toTime = resultSet.getTime("toTime");
                 Time fromTime = resultSet.getTime("fromTime");
-                Customer customer = new Customer(Cname, Csurname);
+                Customer customer = new Customer(cName, cSurname);
                 TimeSlot timeSlot = new TimeSlot(toTime,fromTime);
                 Booking booking = new Booking(customer,timeSlot);
                 bookingList.add(booking);
@@ -66,14 +66,6 @@ public class BookingDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (SaloonNotFoundException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
-            alert.showAndWait();
-            return null;
-        } catch (BookingNotFoundExcption e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
-            alert.showAndWait();
-            return null;
         }
 
         return bookingList;

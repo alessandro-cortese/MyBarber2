@@ -54,7 +54,6 @@ public class SubscribeScreenController {
         }catch (InvalidCredentialsException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
-            return;
         }
 
         if (commandText.startsWith("set") && setCommand(commandText)) {
