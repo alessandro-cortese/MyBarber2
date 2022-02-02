@@ -11,49 +11,40 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberAddProductController">
+<AnchorPane prefHeight="700.0" prefWidth="1280.0" styleClass="internal_pane" stylesheets="@../DesktopCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberAddProductController">
    <children>
-      <HBox layoutX="68.0" layoutY="46.0" prefHeight="501.0" prefWidth="1146.0" spacing="10.0">
+      <HBox alignment="CENTER" layoutX="51.0" layoutY="169.0" prefWidth="1146.0" spacing="50.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="525.0" prefWidth="388.0" spacing="30.0">
+            <ImageView fitHeight="255.0" fitWidth="254.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/barber_chain_logo.jpeg" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="388.0" spacing="15.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="390.0" text="Aggingi un Prodotto">
-                     <font>
-                        <Font size="32.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="282.0" fitWidth="275.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../images/barber_chain_logo.jpeg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="525.0" prefWidth="388.0" spacing="15.0">
-               <children>
-                  <Label prefHeight="39.0" prefWidth="390.0" text="Nuovo Prodotto">
+                  <Label prefHeight="39.0" prefWidth="390.0" styleClass="subtitle_label" stylesheets="@../DesktopCSS.css" text="Nuovo Prodotto">
                      <font>
                         <Font size="28.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="388.0">
                      <children>
-                        <Label prefHeight="23.0" prefWidth="200.0" text="Nome*:">
+                        <Label prefHeight="23.0" prefWidth="200.0" styleClass="normal_label" text="Nome*:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nameAddProductTextField" prefHeight="26.0" prefWidth="261.0" />
+                        <TextField fx:id="nameAddProductTextField" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="173.0" prefHeight="64.0" prefWidth="388.0">
                      <children>
-                        <Label prefHeight="23.0" prefWidth="200.0" text="Prezzo*:">
+                        <Label prefHeight="23.0" prefWidth="200.0" styleClass="normal_label" text="Prezzo*:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="priceTextField" editable="false" onMouseClicked="#onPricePicked" prefHeight="26.0" prefWidth="261.0">
+                        <TextField fx:id="priceTextField" editable="false" onMouseClicked="#onPricePicked" prefWidth="261.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -62,12 +53,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="79.0" prefHeight="64.0" prefWidth="388.0">
                      <children>
-                        <Label prefHeight="23.0" prefWidth="200.0" text="Descrizione*:">
+                        <Label prefHeight="23.0" prefWidth="200.0" styleClass="normal_label" text="Descrizione*:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="descriptionTextFiledAddProduct" prefHeight="26.0" prefWidth="261.0" />
+                        <TextField fx:id="descriptionTextFiledAddProduct" prefWidth="261.0" />
                      </children>
                   </HBox>
                   <Label text="*: Campo Obbligatorio">
@@ -77,7 +68,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="408.0" layoutY="10.0" prefHeight="525.0" prefWidth="388.0" spacing="30.0">
+            <VBox alignment="CENTER" layoutX="408.0" layoutY="10.0" prefWidth="388.0" spacing="30.0">
                <children>
                   <ImageView fitHeight="191.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -93,7 +84,7 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="continueButtonAddProduct" layoutX="1044.0" layoutY="606.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="35.0" prefWidth="97.0" text="Continua">
+      <Button fx:id="continueButtonAddProduct" layoutX="1043.0" layoutY="587.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Continua">
          <font>
             <Font size="18.0" />
          </font>
@@ -101,6 +92,11 @@
       <Label fx:id="exceptionAddProductLabel" layoutX="338.0" layoutY="547.0" prefHeight="34.0" prefWidth="605.0">
          <font>
             <Font size="28.0" />
+         </font>
+      </Label>
+      <Label prefHeight="39.0" prefWidth="390.0" styleClass="title_label" stylesheets="@../DesktopCSS.css" text="Aggingi un Prodotto">
+         <font>
+            <Font size="32.0" />
          </font>
       </Label>
    </children>

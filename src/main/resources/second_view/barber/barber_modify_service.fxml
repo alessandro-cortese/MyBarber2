@@ -10,18 +10,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="second_view.barber.BarberModifyServiceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="panel" stylesheets="@../fake_terminal_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="second_view.barber.BarberModifyServiceController">
    <children>
-      <VBox layoutX="36.0" layoutY="28.0" spacing="25.0">
+      <VBox layoutX="35.0" layoutY="78.0" spacing="25.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="342.0" prefWidth="306.0" spacing="10.0">
+            <VBox alignment="TOP_CENTER" prefHeight="342.0" prefWidth="297.0" spacing="10.0">
                <children>
-                  <Label text="Menu">
+                  <Label styleClass="title_label" text="Modify Service">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ScrollPane prefHeight="261.0" prefWidth="306.0">
+                  <ScrollPane prefHeight="262.0" prefWidth="319.0">
                      <content>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- overwrite name &lt;new name&gt;&#10;- overwrite description &lt;new description&gt;&#10;- overwrite price &lt;new price&gt;&#10;- overwrite product &lt;new name of used product&gt;&#10;- modify &#10;- back">
                            <font>
@@ -36,7 +36,7 @@
             <Button fx:id="enterButton" defaultButton="true" mnemonicParsing="false" onAction="#onCommand" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: transparent;" />
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="503.0" layoutY="160.0" prefHeight="180.0" prefWidth="364.0" spacing="10.0">
+      <VBox alignment="TOP_CENTER" layoutX="485.0" layoutY="210.0" prefHeight="180.0" prefWidth="364.0" spacing="10.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="364.0">
                <children>

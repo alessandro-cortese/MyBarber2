@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1289.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberScheduleTimeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1289.0" styleClass="internal_pane" stylesheets="@../DesktopCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.barber.BarberScheduleTimeController">
    <children>
-      <Label layoutX="100.0" layoutY="25.0" prefHeight="39.0" text="Modifica Orari">
+      <Label prefHeight="39.0" styleClass="title_label" text="Modifica Orari">
          <font>
-            <Font name="System Bold" size="32.0" />
+            <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <Button fx:id="saveButton" layoutX="1078.0" layoutY="633.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="44.0" prefWidth="131.0" stylesheets="@../DesktopCSS.css" text="Salva">
+      <Button fx:id="saveButton" layoutX="996.0" layoutY="578.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Salva">
          <font>
             <Font size="18.0" />
          </font>
@@ -26,7 +26,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <HBox layoutX="179.0" layoutY="126.0" prefHeight="458.0" prefWidth="1082.0">
+      <HBox layoutX="51.0" layoutY="96.0" prefHeight="458.0" prefWidth="1146.0" spacing="50.0">
          <children>
             <VBox alignment="CENTER" prefHeight="458.0" prefWidth="284.0">
                <children>
@@ -42,7 +42,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="49.0" prefWidth="628.0">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="400.0" text="Orario Apertura Mattina:">
+                        <Label prefHeight="30.0" prefWidth="400.0" styleClass="normal_label" text="Orario Apertura Mattina:">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -56,7 +56,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="49.0" prefWidth="628.0">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="400.0" text="Orario Chiusura Mattina:">
+                        <Label prefHeight="30.0" prefWidth="400.0" styleClass="normal_label" text="Orario Chiusura Mattina:">
                            <font>
                               <Font name="Z003-MediumItalic" size="22.0" />
                            </font>
@@ -70,7 +70,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="59.0" prefHeight="49.0" prefWidth="628.0">
                      <children>
-                        <Label lineSpacing="100.0" prefHeight="30.0" prefWidth="400.0" text="Orario Apertura Pomeriggio:">
+                        <Label lineSpacing="100.0" prefHeight="30.0" prefWidth="400.0" styleClass="normal_label" text="Orario Apertura Pomeriggio:">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -84,7 +84,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="108.0" prefHeight="49.0" prefWidth="628.0">
                      <children>
-                        <Label lineSpacing="100.0" prefHeight="30.0" prefWidth="400.0" text="Orario Chiusura Pomeriggio:">
+                        <Label lineSpacing="100.0" prefHeight="30.0" prefWidth="400.0" styleClass="normal_label" text="Orario Chiusura Pomeriggio:">
                            <font>
                               <Font size="22.0" />
                            </font>

@@ -24,7 +24,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="homeButton" mnemonicParsing="false" onAction="#onButtonClicked" style="-fx-background-color: white;">
+            <Button fx:id="homeButton" mnemonicParsing="false" onAction="#onButtonClicked" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="70.0" fitWidth="395.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -40,28 +40,14 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Gestisci Appuntamento">
                   <items>
-                    <MenuItem fx:id="takeAppointmentItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Prenota Appuntamento" />
                         <MenuItem fx:id="seeAppointmentsItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Vedi i tuoi appuntramenti" />
+                    <MenuItem fx:id="takeAppointmentItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Prenota Appuntamento" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Prodotti">
                   <items>
-                    <MenuItem fx:id="buyProductItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Compra Prodotto">
-                           <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../images/buy_product_icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></MenuItem>
-                        <MenuItem fx:id="clientCartItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Carrello">
-                           <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../images/shopping_cart_icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></MenuItem>
+                    <MenuItem fx:id="buyProductItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Compra Prodotto" />
+                        <MenuItem fx:id="clientCartItem" mnemonicParsing="false" onAction="#onMenuItemSelected" text="Carrello" />
                         <MenuItem mnemonicParsing="false" text="Storico Acquisti" />
                   </items>
                 </Menu>
@@ -76,7 +62,7 @@
                   </Menu>
               </menus>
             </MenuBar>
-            <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#onButtonClicked" text="Exit" />
+            <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#onButtonClicked" style="-fx-background-color: transparent;" text="Exit" />
          </children>
          <padding>
             <Insets bottom="5.0" left="10.0" right="25.0" top="5.0" />

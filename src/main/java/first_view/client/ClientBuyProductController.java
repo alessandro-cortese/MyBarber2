@@ -22,6 +22,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
+
 public class ClientBuyProductController implements Initializable {
 
     @FXML private ListView<ProductBean> buyProductListView ;
@@ -49,7 +51,7 @@ public class ClientBuyProductController implements Initializable {
 
         buyProductListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             productNameLabel.setText((newValue == null) ? "" : newValue.getBeanName());
-            productPriceLabel.setText((newValue == null) ? "" : Double.toString(newValue.getBeanPrice()));
+            productPriceLabel.setText((newValue == null) ? "" : EURO_SYMBOL + newValue.getBeanPrice());
             productDescriptionLabel.setText((newValue == null) ? "" : newValue.getBeanDescription());
 
             addToCartButton.setDisable(newValue == null);

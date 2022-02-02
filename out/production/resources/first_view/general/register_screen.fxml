@@ -12,9 +12,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.general.RegisterScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #e1e9f3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.general.RegisterScreenController">
    <children>
       <VBox alignment="CENTER" layoutX="479.0" layoutY="44.0" spacing="30.0">
          <children>
@@ -70,7 +69,7 @@
                   <RadioButton fx:id="barberTypeRadioButton" mnemonicParsing="false" text="Barbiere" toggleGroup="$userTypeRadioGroup" />
                </children>
             </HBox>
-            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" text="Registrati">
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #dbccc0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" text="Registrati">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -78,7 +77,7 @@
             <VBox alignment="CENTER" spacing="10.0">
                <children>
                   <Label text="Oppure" />
-                  <Button fx:id="googleButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" text="       Accedi con Google">
+                  <Button fx:id="googleButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #dbccc0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" text="       Accedi con Google">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,7 +89,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="facebookButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" text="   Accedi con Facebook">
+                  <Button fx:id="facebookButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #dbccc0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" text="   Accedi con Facebook">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -103,13 +102,12 @@
             </VBox>
          </children>
       </VBox>
-      <Text layoutX="68.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ragionare su utilizzo di due bottoni di Registrazione anzichè di unico bottone" />
       <ImageView fitHeight="436.0" fitWidth="439.0" layoutX="14.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../images/AppLogo.png" />
          </image>
       </ImageView>
-      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBackClicked" style="-fx-background-color: white;">
+      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBackClicked" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -15,12 +15,12 @@
          <children>
             <VBox alignment="CENTER" prefHeight="555.0" prefWidth="378.0" spacing="25.0" style="-fx-border-color: black; -fx-border-radius: 25;">
                <children>
-                  <Label alignment="BOTTOM_CENTER" contentDisplay="RIGHT" prefHeight="79.0" prefWidth="377.0" text="Prenota un &#10;Appuntamento" textAlignment="CENTER">
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="RIGHT" prefHeight="79.0" prefWidth="377.0" styleClass="subtitle_label" text="Prenota un &#10;Appuntamento" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="144.0" prefWidth="393.0" text="prenota un taglio nei saloni &#10;della tua zona oppure cerca &#10;in base al servizio disponibile!&#10;&#10;" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="144.0" prefWidth="393.0" styleClass="normal_label" text="Prenota un taglio nei saloni &#10;della tua città oppure cerca&#10;il tuo salone di fiducia&#10;&#10;" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
@@ -36,12 +36,12 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="568.0" prefWidth="279.0" spacing="25.0" style="-fx-border-color: black; -fx-border-radius: 25;">
                <children>
-                  <Label alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="388.0" text="Carte Fedeltà">
+                  <Label alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="388.0" styleClass="subtitle_label" text="Carte Fedeltà">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="166.0" prefWidth="339.0" text="Vedi le tue carte fedeltà&#10;presso i centri salone &#10;di fiducia!&#10;">
+                  <Label alignment="CENTER" prefHeight="166.0" prefWidth="339.0" styleClass="normal_label" text="Raccogli i punti facendo&#10;acquisti o prenotando&#10;appuntamenti e ottieni&#10;sconti&#10;" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
@@ -54,12 +54,12 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="625.0" prefWidth="337.0" spacing="25.0" style="-fx-border-color: black; -fx-border-radius: 25;">
                <children>
-                  <Label alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="388.0" text="Compra un Prodotto">
+                  <Label alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="388.0" styleClass="subtitle_label" text="Compra un Prodotto">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="153.0" prefWidth="425.0" text="Entra nella sezione &#10;Prodotti e scopri &#10;tutte le offerte per te!">
+                  <Label alignment="CENTER" prefHeight="153.0" prefWidth="425.0" styleClass="normal_label" text="Entra nella sezione &#10;prodotti e acquista i tuoi&#10;prodotti preferiti" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font></Label>

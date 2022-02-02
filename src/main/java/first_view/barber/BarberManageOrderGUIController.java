@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -28,11 +29,11 @@ import static first_view.list_cell_factories.BuyProductListCellFactory.FIRST_VIE
 
 public class BarberManageOrderGUIController implements Initializable {
 
-    @FXML private Label orderAddressLabel;
+    @FXML private TextField orderAddressLabel;
     @FXML private ListView<CartRowBean> orderCartListView;
     @FXML private ListView<VendorOrderBean> orderListView;
-    @FXML private Label orderOwnerLabel;
-    @FXML private Label orderTelephoneLabel;
+    @FXML private TextField orderOwnerLabel;
+    @FXML private TextField orderTelephoneLabel;
 
     private final BarberManageOrderController barberManageOrderController ;
 

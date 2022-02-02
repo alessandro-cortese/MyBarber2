@@ -43,7 +43,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.general.LoginScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #E1E9F3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first_view.general.LoginScreenController">
    <children>
       <ImageView fitHeight="240.0" fitWidth="305.0" layoutX="298.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -72,8 +72,8 @@
                   </VBox>
                   <VBox alignment="CENTER" spacing="15.0">
                      <children>
-                        <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="24.0" prefWidth="181.0" text="Accedi" />
-                        <Button fx:id="continueWithoutAccessButton" mnemonicParsing="false" onAction="#onButtonClicked" text="Continua senza Accedere" />
+                        <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="24.0" style="-fx-background-color: #dbccc0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" text="Accedi" />
+                        <Button fx:id="continueWithoutAccessButton" mnemonicParsing="false" onAction="#onButtonClicked" style="-fx-background-color: #dbccc0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" text="Continua senza Accedere" />
                      </children>
                   </VBox>
                </children>
@@ -85,12 +85,12 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Button id="registerButton" fx:id="registerButton" mnemonicParsing="false" onAction="#onButtonClicked" prefWidth="150.0" text="Iscriviti" />
+                  <Button id="registerButton" fx:id="registerButton" mnemonicParsing="false" onAction="#onButtonClicked" style="-fx-background-color: #dbccc0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" text="Iscriviti" />
                </children>
             </VBox>
          </children>
       </VBox>
-      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBackClicked" style="-fx-background-color: white;">
+      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBackClicked" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
