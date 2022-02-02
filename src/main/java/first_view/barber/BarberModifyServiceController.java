@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -25,25 +26,34 @@ public class BarberModifyServiceController {
     @FXML private TextField modifyServiceNameOfUsedProductTextField;
     @FXML private Button saveChangesButton;
     @FXML private Button deleteServiceButton;
+    @FXML private Label modifyServiceExceptionLabelFirstView;
 
     private ServiceBean serviceBean;
 
     private static final String BARBER_DELETE_SERVICE_SCREEN_NAME = "first_view/barber/barber_confirm_delete_service.fxml" ;
 
     @FXML
-    public void onButtonClicked(ActionEvent event) throws IOException, InsertNegativePriceException {
+    public void onButtonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
+        boolean flag = true;
 
         if(sourceButton == saveChangesButton && nameModifyServiceTextField.getText() != null && isNumeric(modifyServicePriceTextField.getText())
                 && descriptionTextFieldModifyService.getText() != null) {
 
-            ServiceBean updateServiceBean = new ServiceBean(nameModifyServiceTextField.getText(), descriptionTextFieldModifyService.getText(), modifyServiceNameOfUsedProductTextField.getText(), Double.parseDouble(modifyServicePriceTextField.getText()));
-            
-            ManageServiceController manageServiceController = new ManageServiceController();
-            manageServiceController.modifyService(serviceBean, updateServiceBean, InternalBackController.getInternalBackControllerInstance().getLoggedUser().getUserEmail());
+            ServiceBean updateServiceBean = null;
+            try {
+                updateServiceBean = new ServiceBean(nameModifyServiceTextField.getText(), descriptionTextFieldModifyService.getText(), modifyServiceNameOfUsedProductTextField.getText(), Double.parseDouble(modifyServicePriceTextField.getText()));
+            } catch (InsertNegativePriceException e) {
+                modifyServiceExceptionLabelFirstView.setText("Prezzo inserito non valido!");
+                flag = false;
+            }
 
-            InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
+            if(flag) {
+                ManageServiceController manageServiceController = new ManageServiceController();
+                manageServiceController.modifyService(serviceBean, updateServiceBean, InternalBackController.getInternalBackControllerInstance().getLoggedUser().getUserEmail());
 
+                InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
+            }
         }
         else if(sourceButton == deleteServiceButton) {
 

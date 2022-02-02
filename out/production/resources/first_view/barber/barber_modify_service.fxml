@@ -80,6 +80,11 @@
                         <TextField fx:id="modifyServiceNameOfUsedProductTextField" prefHeight="26.0" prefWidth="257.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="modifyServiceExceptionLabelFirstView" prefHeight="43.0" prefWidth="376.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="408.0" layoutY="10.0" prefHeight="525.0" prefWidth="388.0" spacing="30.0">
