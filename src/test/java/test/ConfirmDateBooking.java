@@ -9,7 +9,7 @@ import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class confirmDateBooking {
+public class ConfirmDateBooking {
     @Test
     public void checkDate() throws SaloonNotFoundException {
         String saloonName ="TagliaX";

@@ -2,6 +2,8 @@ package application_controller;
 
 import engineering.bean.BookingBean;
 import engineering.dao.BookingDAO;
+import engineering.exception.BookingNotFoundExcption;
+import engineering.exception.SaloonNotFoundException;
 import model.Booking;
 
 import java.sql.Date;
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class BarberSeeAppointmentsController {
 
-    public List<BookingBean> retrieveAppointment(BookingBean bookingBean) {
+    public List<BookingBean> retrieveAppointment(BookingBean bookingBean) throws SaloonNotFoundException, BookingNotFoundExcption {
         String saloonName = bookingBean.getSaloonName();
         Date date = Date.valueOf(bookingBean.getDate());
         List<BookingBean> bookingBeanList = new ArrayList<>();

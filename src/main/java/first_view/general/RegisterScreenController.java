@@ -71,7 +71,6 @@ public class RegisterScreenController {
         } catch (InvalidCredentialsException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
-            return;
         }
 
         if (sourceNode.getId().equals("registerButton"))
@@ -80,9 +79,6 @@ public class RegisterScreenController {
             return;
         if(sourceNode.getId().equals(facebookButton))
             return;
-
-
-
 
     }
 
