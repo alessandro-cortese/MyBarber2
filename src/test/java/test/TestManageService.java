@@ -7,15 +7,11 @@ import engineering.container.ServiceCatalogue;
 import engineering.exception.DuplicatedServiceException;
 import engineering.exception.InsertNegativePriceException;
 import model.Service;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import model.User;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestManageService {
     /*@author Testing:  Alessandro Cortese
@@ -23,6 +19,8 @@ public class TestManageService {
     */
 
     private static final String SERVICE_TEST_NAME = "Taglio";
+    private static final String SERVICE_TEST_DESCRIPTION = "Taglio dei capelli";
+    private static final String BARBER_EMAIL_TEST = "barber";
 
     private ServiceBean firstServiceBean;
     private ServiceBean secondServiceBean;
@@ -48,7 +46,15 @@ public class TestManageService {
     @Test
     public void addServiceTest(){
 
-        UserBean barber = new UserBean("barber");
+        /*
+
+          All'interno del database esiste l'utente con email 'barber',
+          l'intento del test è quello di controllare se il nuovo servizio
+          venga effettivamente inserito.
+
+         */
+
+        UserBean barber = new UserBean(BARBER_EMAIL_TEST);
         boolean flag = true;
         ManageServiceController manageServiceController = new ManageServiceController();
         ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
@@ -84,7 +90,15 @@ public class TestManageService {
     @Test
     public void modifyServiceTest() {
 
-        UserBean barber = new UserBean("barber");
+        /*
+
+            All'interno del database esiste l'utente con email 'barber',
+            l'intento del test è verificare che servizio venga effettivamente
+            modificato.
+
+         */
+
+        UserBean barber = new UserBean(BARBER_EMAIL_TEST);
         boolean flag = true;
         boolean modifiedServiceFlag = true;
         ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
@@ -126,7 +140,17 @@ public class TestManageService {
     @Test
     public void deleteServiceTest(){
 
-        UserBean userBean = new UserBean("barber");
+        /*
+
+            All'interno del database esiste l'utente con email 'barber',
+            l'intento del test è di verificare che se venisse chiesto di
+            elimnare un servizio, tale servizio venga effettivamente
+            eliminato.
+
+         */
+
+
+        UserBean userBean = new UserBean(BARBER_EMAIL_TEST);
         boolean flag = true;
         ManageServiceController manageServiceController = new ManageServiceController();
         ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
@@ -138,7 +162,7 @@ public class TestManageService {
         }
 
         List<Service> services;
-        Service deletedService = new Service(SERVICE_TEST_NAME, "Taglio dei capelli", 10.0);
+        Service deletedService = new Service(SERVICE_TEST_NAME, SERVICE_TEST_DESCRIPTION, 10.0);
 
         manageServiceController.deleteService(secondServiceBean, userBean);
 
@@ -158,8 +182,8 @@ public class TestManageService {
 
     private void createServiceBean() throws InsertNegativePriceException {
 
-        firstServiceBean = new ServiceBean(SERVICE_TEST_NAME, "Taglio dei capelli", "", 10.0);
-        secondServiceBean = new ServiceBean(SERVICE_TEST_NAME, "Taglio dei capelli", "", 10.0);
+        firstServiceBean = new ServiceBean(SERVICE_TEST_NAME, SERVICE_TEST_DESCRIPTION, "", 10.0);
+        secondServiceBean = new ServiceBean(SERVICE_TEST_NAME, SERVICE_TEST_DESCRIPTION, "", 10.0);
 
     }
 
