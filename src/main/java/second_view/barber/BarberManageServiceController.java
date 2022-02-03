@@ -108,7 +108,7 @@ public class BarberManageServiceController implements Initializable {
 
                 if(serviceBean.getNameInfo().equals(serviceNameToDelete)) {
 
-                    manageServiceController.deleteService(serviceBean);
+                    manageServiceController.deleteService(serviceBean, ScreenChanger.getInstance().getLoggedUser());
                     break;
 
                 }

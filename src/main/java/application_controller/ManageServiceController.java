@@ -49,7 +49,7 @@ public class ManageServiceController {
 
     }
 
-    public void deleteService(ServiceBean serviceBeanToDelete) {
+    public void deleteService(ServiceBean serviceBeanToDelete, UserBean userBean) {
 
         ServiceDAO serviceDAO = new ServiceDAO();
         ProductDAO productDAO;
@@ -93,7 +93,7 @@ public class ManageServiceController {
 
         int serviceKey;
 
-        ManageServiceBoundarySendEmail addServiceBoundarySendEmail = new ManageServiceBoundarySendEmail(serviceBean);
+        ManageServiceBoundarySendEmail addServiceBoundarySendEmail = new ManageServiceBoundarySendEmail(serviceBean, userBean.getUserEmail());
         ServiceCatalogue serviceCatalogue;
 
         SaloonDAO saloonDAO = new SaloonDAO();
@@ -200,15 +200,27 @@ public class ManageServiceController {
                 e.printStackTrace();
             }
         }
+        else if(oldService.getNameOfUsedProductInfo().compareTo(updateService.getNameOfUsedProductInfo()) != 0) {
+
+            try {
+
+                product = productDAO.loadProductByName(updateService.getNameOfUsedProductInfo(), barberEmail);
+                serviceDAO.insertServiceProduct(serviceKey, product.getIsbn());
+
+            } catch (ProductNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
 
     }
 
-    private boolean controlDuplicatedService(Service localService, Service service) {
+    public boolean controlDuplicatedService(Service localService, Service service) {
         return Objects.equals(localService.getServiceName(), service.getServiceName()) && Objects.equals(localService.getServiceDescription(), service.getServiceDescription()) &&
                 Objects.equals(localService.getServicePrice(), service.getServicePrice()) && Objects.equals(localService.getServiceUsedProduct(), service.getServiceUsedProduct());
     }
 
-    private boolean controlDuplicatedService(ServiceBean localService, ServiceBean service) {
+    public boolean controlDuplicatedService(ServiceBean localService, ServiceBean service) {
         return Objects.equals(localService.getNameInfo(), service.getNameInfo()) && Objects.equals(localService.getDescriptionInfo(), service.getDescriptionInfo()) &&
                 Objects.equals(localService.getPriceInfo(), service.getPriceInfo()) && Objects.equals(localService.getNameOfUsedProductInfo(), service.getNameOfUsedProductInfo());
     }

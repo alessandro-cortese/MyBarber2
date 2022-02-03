@@ -10,11 +10,13 @@ import java.util.List;
 public class ManageServiceBoundarySendEmail implements Observer {
 
     private ServiceBean serviceBean;
+    private String barberEmail;
     private List<UserBean> userBeans;
 
-    public ManageServiceBoundarySendEmail(ServiceBean serviceBean){
+    public ManageServiceBoundarySendEmail(ServiceBean serviceBean, String barberEmail){
 
         this.serviceBean = serviceBean;
+        this.barberEmail = barberEmail;
 
     }
 
@@ -23,7 +25,10 @@ public class ManageServiceBoundarySendEmail implements Observer {
 
         try(PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter( "EmailAddressFile.txt")))){
 
+            printWriter.println(barberEmail);
+            printWriter.println("");
             printWriter.println(serviceBean.getNameInfo());
+            printWriter.println("");
 
             for(UserBean userBean : userBeans) {
 

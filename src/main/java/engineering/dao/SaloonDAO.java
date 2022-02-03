@@ -188,7 +188,7 @@ public class SaloonDAO {
         try(Statement statement = connection.createStatement();
             ResultSet resultSet = Queries.loadAllSaloon(statement, barberEmail)) {
 
-            if (resultSet.isFirst()) {
+            if (resultSet.next()) {
 
                 saloonId = resultSet.getInt(SALOON_NAME_ID);
 

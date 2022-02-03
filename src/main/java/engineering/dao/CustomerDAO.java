@@ -42,6 +42,7 @@ public class CustomerDAO {
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = Queries.loadCustomerFromSaloon(statement, favoriteSaloonId)) {
 
+
             while (resultSet.next()) {
                 customers.add(createCustomer(resultSet));
             }

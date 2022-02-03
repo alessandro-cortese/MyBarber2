@@ -32,7 +32,7 @@ public class BarberConfirmDeleteServiceController {
             ManageServiceController manageServiceController = new ManageServiceController();
             manageServiceController.setUserBean(InternalBackController.getInternalBackControllerInstance().getLoggedUser());
 
-            manageServiceController.deleteService(serviceBeanToDelete);
+            manageServiceController.deleteService(serviceBeanToDelete, InternalBackController.getInternalBackControllerInstance().getLoggedUser());
 
             InternalBackController.getInternalBackControllerInstance().backToHome(deleteEvent);
         }
