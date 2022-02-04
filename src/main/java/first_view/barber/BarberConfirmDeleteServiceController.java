@@ -30,7 +30,6 @@ public class BarberConfirmDeleteServiceController {
         if(deleteEvent == deleteConfirmButton) {
 
             ManageServiceController manageServiceController = new ManageServiceController();
-            manageServiceController.setUserBean(InternalBackController.getInternalBackControllerInstance().getLoggedUser());
 
             manageServiceController.deleteService(serviceBeanToDelete, InternalBackController.getInternalBackControllerInstance().getLoggedUser());
 

@@ -68,7 +68,7 @@ public class BarberModifyServiceController {
             }
 
             if(go){
-                manageServiceController.modifyService(serviceBeanToModify, updateServiceBean, ScreenChanger.getInstance().getLoggedUser().getUserEmail());
+                manageServiceController.modifyService(serviceBeanToModify, updateServiceBean, ScreenChanger.getInstance().getLoggedUser());
                 ScreenChanger.getInstance().goToHome(event);
             }
 

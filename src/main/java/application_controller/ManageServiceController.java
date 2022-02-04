@@ -23,10 +23,8 @@ import java.util.Objects;
 
 public class ManageServiceController {
 
-    private UserBean userBean;
 
-
-    public List<ServiceBean> getAllService() throws InsertNegativePriceException {
+    public List<ServiceBean> getAllService(UserBean userBean) throws InsertNegativePriceException {
 
         ServiceDAO serviceDAO = new ServiceDAO();
         ServiceCatalogue catalogueService = serviceDAO.loadAllService(userBean.getUserEmail());
@@ -160,7 +158,7 @@ public class ManageServiceController {
 
     }
 
-    public void modifyService(ServiceBean oldService, ServiceBean updateService, String barberEmail) {
+    public void modifyService(ServiceBean oldService, ServiceBean updateService, UserBean userBean) {
 
         ServiceDAO serviceDAO = new ServiceDAO();
         ProductDAO productDAO = new ProductDAO();
@@ -168,7 +166,7 @@ public class ManageServiceController {
         int serviceKey;
         boolean modify;
 
-        serviceKey = serviceDAO.loadServiceId(oldService.getNameInfo(), barberEmail);
+        serviceKey = serviceDAO.loadServiceId(oldService.getNameInfo(), userBean.getUserEmail());
 
         modify = !this.controlDuplicatedService(oldService, updateService);
 
@@ -181,7 +179,7 @@ public class ManageServiceController {
         if(oldService.getNameOfUsedProductInfo().compareTo("") != 0 && updateService.getNameOfUsedProductInfo().compareTo("") == 0 && modify) {
             try {
 
-                product = productDAO.loadProductByName(oldService.getNameOfUsedProductInfo(), barberEmail);
+                product = productDAO.loadProductByName(oldService.getNameOfUsedProductInfo(), userBean.getUserEmail());
                 serviceDAO.deleteServiceProduct(serviceKey, product.getIsbn());
 
             } catch (ProductNotFoundException e) {
@@ -193,7 +191,7 @@ public class ManageServiceController {
 
             try {
 
-                product = productDAO.loadProductByName(updateService.getNameOfUsedProductInfo(), barberEmail);
+                product = productDAO.loadProductByName(updateService.getNameOfUsedProductInfo(), userBean.getUserEmail());
                 serviceDAO.insertServiceProduct(serviceKey, product.getIsbn());
 
             } catch (ProductNotFoundException e) {
@@ -204,7 +202,7 @@ public class ManageServiceController {
 
             try {
 
-                product = productDAO.loadProductByName(updateService.getNameOfUsedProductInfo(), barberEmail);
+                product = productDAO.loadProductByName(updateService.getNameOfUsedProductInfo(), userBean.getUserEmail());
                 serviceDAO.insertServiceProduct(serviceKey, product.getIsbn());
 
             } catch (ProductNotFoundException e) {
@@ -223,12 +221,6 @@ public class ManageServiceController {
     public boolean controlDuplicatedService(ServiceBean localService, ServiceBean service) {
         return Objects.equals(localService.getNameInfo(), service.getNameInfo()) && Objects.equals(localService.getDescriptionInfo(), service.getDescriptionInfo()) &&
                 Objects.equals(localService.getPriceInfo(), service.getPriceInfo()) && Objects.equals(localService.getNameOfUsedProductInfo(), service.getNameOfUsedProductInfo());
-    }
-
-    public void setUserBean(UserBean userBean) {
-
-        this.userBean = userBean;
-
     }
 
 }

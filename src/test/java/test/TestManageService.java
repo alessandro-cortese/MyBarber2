@@ -163,7 +163,7 @@ public class TestManageService {
             flag = false;
         }
 
-        manageServiceController.modifyService(firstServiceBean, secondServiceBean, barber.getUserEmail());
+        manageServiceController.modifyService(firstServiceBean, secondServiceBean, barber);
 
         services = serviceCatalogue.getServices();
 

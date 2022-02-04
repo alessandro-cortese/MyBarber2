@@ -50,7 +50,7 @@ public class BarberModifyServiceController {
 
             if(flag) {
                 ManageServiceController manageServiceController = new ManageServiceController();
-                manageServiceController.modifyService(serviceBean, updateServiceBean, InternalBackController.getInternalBackControllerInstance().getLoggedUser().getUserEmail());
+                manageServiceController.modifyService(serviceBean, updateServiceBean, InternalBackController.getInternalBackControllerInstance().getLoggedUser());
 
                 InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
             }

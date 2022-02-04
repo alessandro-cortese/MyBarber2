@@ -43,10 +43,8 @@ public class BarberManageServiceController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources){
 
-        manageServiceController.setUserBean(ScreenChanger.getInstance().getLoggedUser());
-
         try{
-            serviceBeanList = manageServiceController.getAllService();
+            serviceBeanList = manageServiceController.getAllService(ScreenChanger.getInstance().getLoggedUser());
         } catch (InsertNegativePriceException e) {
             e.printStackTrace();
         }
