@@ -41,7 +41,7 @@ public class BookingBean {
         this.toTime = toTime;
     }
 
-    public void setDate(String date) {
+    public void setClosedDate(String date) {
         this.closedDate = date;
     }
 
