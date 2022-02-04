@@ -7,9 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 
-import static engineering.other_classes.LocalTimeVerify.isLocalTime;
 import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberAddNewSaloonController {
@@ -184,4 +184,16 @@ public class BarberAddNewSaloonController {
 
     }
 
+    private LocalTime isLocalTime(String[] times) {
+
+        try {
+            return LocalTime.of(Integer.parseInt(times[0]), Integer.parseInt(times[1]));
+
+        } catch (DateTimeException e) {
+
+            return null;
+
+        }
+
+    }
 }
