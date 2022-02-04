@@ -75,11 +75,8 @@ public class RegisterScreenController {
 
         if (sourceNode.getId().equals("registerButton"))
             onRegisterButtonClicked(sourceNode) ;
-        if(sourceNode.getId().equals(googleButton))
+        if((sourceNode.getId().equals(googleButton)) || (sourceNode.getId().equals(facebookButton)))
             return;
-        if(sourceNode.getId().equals(facebookButton))
-            return;
-
     }
 
     private UserBean retrieveInfo() throws InvalidCredentialsException {

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SeatReservationTest {
+public class TestBarberSeeAppointmentController {
 
     @Test
     public void checkBooking() throws SaloonNotFoundException, BookingNotFoundExcption {

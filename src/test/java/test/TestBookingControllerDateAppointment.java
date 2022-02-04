@@ -9,7 +9,7 @@ import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ConfirmDateBooking {
+public class TestBookingControllerDateAppointment {
     @Test
     public void checkDate() throws SaloonNotFoundException {
         String saloonName ="TagliaX";
@@ -18,7 +18,7 @@ public class ConfirmDateBooking {
         BookingBean bookingBean = new BookingBean(saloonName,date);
         BookingController bookingController = new BookingController();
         boolean flag = bookingController.checkDateHour(bookingBean);
-        assertEquals(true,flag);
+        assertEquals(true,flag); //TODO fare il test con un'altra classe, magari con più metodi di test che ne afferiscono
 
     }
 }

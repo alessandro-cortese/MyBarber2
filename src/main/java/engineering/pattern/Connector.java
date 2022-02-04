@@ -10,7 +10,7 @@ public class Connector {
         private Connection connection ;
         private static Connector myConnector ;
 
-        protected Connector()  {
+        private Connector()  {
 
             try(FileInputStream fileInputStream = new FileInputStream("src/main/java/engineering/dao/db_configuration.properties")) {
 
