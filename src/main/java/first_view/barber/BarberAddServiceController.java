@@ -51,16 +51,12 @@ public class BarberAddServiceController {
 
                 barberConfirmAddServiceController.display(serviceBean);
 
-            }catch (InsertNegativePriceException e) {
-                exceptionAddServiceLabel.setText("Insert Price is negative!");
-            }catch (NumberFormatException e){
-                exceptionAddServiceLabel.setText("Null Insert Field!");
+            }catch (InsertNegativePriceException | NumberFormatException e) {
+                exceptionAddServiceLabel.setText("Prezzo inserito non valido!");
             }
 
         }
     }
-
-
 
     @FXML
     public void onPricePicked(MouseEvent event) throws IOException {
