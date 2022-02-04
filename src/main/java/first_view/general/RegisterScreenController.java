@@ -75,8 +75,6 @@ public class RegisterScreenController {
 
         if (sourceNode.getId().equals("registerButton"))
             onRegisterButtonClicked(sourceNode) ;
-        if((sourceNode.getId().equals(googleButton)) || (sourceNode.getId().equals(facebookButton)))
-            return;
     }
 
     private UserBean retrieveInfo() throws InvalidCredentialsException {
@@ -89,7 +87,7 @@ public class RegisterScreenController {
 
         if(emailText.getText().isEmpty() || nameText.getText().isEmpty() || passText.getText().isEmpty() || surnameText.getText().isEmpty())
             throw new InvalidCredentialsException("indicare valori validi nei campi!");
-
+        InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBeanInfo);
         return  userBeanInfo;
     }
 

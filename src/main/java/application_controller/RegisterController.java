@@ -25,10 +25,6 @@ public class RegisterController {
         String name = userBean.getName();
         String surname = userBean.getSurname();
         String email = userBean.getUserEmail();
-        boolean flag = isValidEmailAddress(email);
-        if(!flag){
-            throw new InvalidCredentialsException("email non idonea");
-        }
         String pass = userBean.getPass();
         if(type == 1) {
             barber = factory.createBarber(name, surname, email, pass);
@@ -41,16 +37,8 @@ public class RegisterController {
             CustomerDAO customerDAO = new CustomerDAO();
             customerDAO.insertCustomer(customer);
         }
-
-        InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBean); // TODO mettere nel grafico
     }
 
-    private boolean isValidEmailAddress(String email) {
-        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-        java.util.regex.Matcher m = p.matcher(email);
-        return m.matches();
-    }
 
 
 }
