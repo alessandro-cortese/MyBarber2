@@ -18,7 +18,7 @@ public class TestBookingControllerDateAppointment {
         BookingBean bookingBean = new BookingBean(saloonName,date);
         BookingController bookingController = new BookingController();
         boolean flag = bookingController.checkDateHour(bookingBean);
-        assertEquals(true,flag); //TODO fare il test con un'altra classe, magari con più metodi di test che ne afferiscono
+        assertEquals(true,flag);
 
     }
 }

@@ -11,6 +11,7 @@ import model.Customer;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookingDAO {
@@ -35,9 +36,9 @@ public class BookingDAO {
 
     public List<Booking> retrieveBookingList(String saloonName, Date date) throws SaloonNotFoundException, BookingNotFoundExcption {
         Connection conn = Connector.getConnectorInstance().getConnection();
-        List<Booking> bookingList = null;
+        List<Booking> bookingList= new ArrayList<>();
 
-        try(Statement statement = conn.createStatement()){
+        try(Statement statement = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)){
 
             ResultSet resultSetSaloon = Queries.selectSaloonByName(statement, saloonName);
             if(!resultSetSaloon.first()){

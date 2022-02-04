@@ -137,7 +137,7 @@ public class BookingController {
 
     public boolean checkDateHour(BookingBean bookingBean) throws  SaloonNotFoundException {
         SaloonDAO saloonDAO = new SaloonDAO();
-        boolean result = saloonDAO.checkDateSaloon(bookingBean.getSaloonName() ,bookingBean.getDate());
+        boolean result = saloonDAO.checkDateSaloon(bookingBean.getSaloonName() , String.valueOf(bookingBean.getDate()));
         if (result){
             String mess="data non disponibile, il Salone è chiuso!";
             throw new SaloonNotFoundException(mess);

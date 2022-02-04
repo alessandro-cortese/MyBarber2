@@ -1,6 +1,5 @@
 package engineering.pattern.factory;
 
-import engineering.bean.UserBean;
 import model.Barber;
 import model.Customer;
 import model.User;
