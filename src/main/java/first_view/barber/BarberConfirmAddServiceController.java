@@ -4,6 +4,7 @@ import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
 import engineering.bean.UserBean;
 import engineering.exception.DuplicatedServiceException;
+import engineering.exception.InsertNegativePriceException;
 import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,7 +50,12 @@ public class BarberConfirmAddServiceController {
 
             }catch (DuplicatedServiceException e){
 
-                errorLabelConfirmAddService.setText("Servizio già esistente!");
+                errorLabelConfirmAddService.setText("This service already exist!");
+                goToHome = false;
+
+            } catch (InsertNegativePriceException exception) {
+
+                errorLabelConfirmAddService.setText("Insert price is negative!");
                 goToHome = false;
 
             }
@@ -57,7 +63,7 @@ public class BarberConfirmAddServiceController {
         }
         else {
 
-            errorLabelConfirmAddService.setText("Campi insertiti non validi!");
+            errorLabelConfirmAddService.setText("Invalid insert field!");
             return;
 
         }

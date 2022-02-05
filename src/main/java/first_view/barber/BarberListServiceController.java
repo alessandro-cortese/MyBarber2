@@ -2,6 +2,7 @@ package first_view.barber;
 
 import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.ServiceListCellFactory;
@@ -42,7 +43,7 @@ public class BarberListServiceController implements Initializable {
 
         try {
             beanList = manageServiceController.getAllService(InternalBackController.getInternalBackControllerInstance().getLoggedUser());
-        } catch (InsertNegativePriceException e) {
+        } catch (IncorrectFormatException e) {
             e.printStackTrace();
         }
 
@@ -79,7 +80,7 @@ public class BarberListServiceController implements Initializable {
             String localNameOfUsedProduct = (nameOfProductTextField.getText() == null ? "" : nameOfProductTextField.getText());
 
             ServiceBean localServiceBean = new ServiceBean(nameServiceTextField.getText(),
-                    descriptionServiceTextField.getText(), localNameOfUsedProduct, Double.parseDouble(priceServiceTextField.getText()));
+                    descriptionServiceTextField.getText(), localNameOfUsedProduct, priceServiceTextField.getText());
 
 
             BarberModifyServiceController barberModifyServiceController = fxmlLoader.getController();

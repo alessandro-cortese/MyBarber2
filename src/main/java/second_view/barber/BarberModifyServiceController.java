@@ -2,6 +2,7 @@ package second_view.barber;
 
 import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
 
-import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberModifyServiceController {
 
@@ -54,21 +54,28 @@ public class BarberModifyServiceController {
 
             boolean go = true;
             ManageServiceController manageServiceController = new ManageServiceController();
-            ServiceBean updateServiceBean = null;
+            ServiceBean updateServiceBean;
 
             try {
 
-                updateServiceBean = new ServiceBean(modifyServiceNameTextField.getText(), modifyServiceDescriptionTextField.getText(), modifyServiceNameOfUsedProductTextField.getText(), Double.parseDouble(modifyServicePriceTextField.getText()));
+                updateServiceBean = new ServiceBean(modifyServiceNameTextField.getText(), modifyServiceDescriptionTextField.getText(), modifyServiceNameOfUsedProductTextField.getText(), modifyServicePriceTextField.getText());
+                manageServiceController.modifyService(serviceBeanToModify, updateServiceBean, ScreenChanger.getInstance().getLoggedUser());
 
-            } catch (InsertNegativePriceException e) {
+            } catch (IncorrectFormatException e) {
+
+                modifyServiceExceptionLabel.setText("Incorrect insert price!");
+                modifyServicePriceTextField.setText("");
+                go = false;
+
+            } catch (InsertNegativePriceException exception) {
 
                 modifyServiceExceptionLabel.setText("Insert price is negative!");
+                modifyServicePriceTextField.setText("");
                 go = false;
 
             }
 
             if(go){
-                manageServiceController.modifyService(serviceBeanToModify, updateServiceBean, ScreenChanger.getInstance().getLoggedUser());
                 ScreenChanger.getInstance().goToHome(event);
             }
 
@@ -100,13 +107,8 @@ public class BarberModifyServiceController {
         }
         else if(modifyService.startsWith(OVERWRITE_PRICE_COMMAND)){
             newField = modifyService.replace(OVERWRITE_PRICE_COMMAND + " ", "");
-            if(isNumeric(newField)) {
-                modifyServicePriceTextField.setText(newField);
-                flag = true;
-            }
-            else {
-                modifyServiceExceptionLabel.setText("Invalid insert price!");
-            }
+            modifyServicePriceTextField.setText(newField);
+            flag = true;
         }
         else if(modifyService.startsWith(OVERWRITE_DESCRIPTION_COMMAND)) {
             newField = modifyService.replace(OVERWRITE_DESCRIPTION_COMMAND + " ", "");

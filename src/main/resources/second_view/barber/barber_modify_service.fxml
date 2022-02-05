@@ -62,7 +62,7 @@
                   <TextField fx:id="modifyServiceNameOfUsedProductTextField" editable="false" prefWidth="200.0" />
                </children>
             </HBox>
-            <Label fx:id="modifyServiceExceptionLabel" prefHeight="17.0" prefWidth="367.0" />
+            <Label fx:id="modifyServiceExceptionLabel" prefHeight="18.0" prefWidth="353.0" />
          </children>
       </VBox>
    </children>
