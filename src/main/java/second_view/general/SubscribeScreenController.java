@@ -2,6 +2,7 @@ package second_view.general;
 
 import application_controller.RegisterController;
 import engineering.bean.UserBean;
+import engineering.exception.DuplicatedUserException;
 import engineering.exception.InvalidCredentialsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,6 +55,11 @@ public class SubscribeScreenController {
         }catch (InvalidCredentialsException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
+            return;
+        } catch (DuplicatedUserException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+            return;
         }
 
         if (commandText.startsWith("set") && setCommand(commandText)) {

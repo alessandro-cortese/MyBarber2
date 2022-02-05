@@ -2,6 +2,7 @@ package first_view.general;
 
 import application_controller.RegisterController;
 import engineering.bean.UserBean;
+import engineering.exception.DuplicatedUserException;
 import engineering.exception.InvalidCredentialsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,6 +72,11 @@ public class RegisterScreenController {
         } catch (InvalidCredentialsException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
+            return;
+        } catch (DuplicatedUserException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+            return;
         }
 
         if (sourceNode.getId().equals("registerButton"))

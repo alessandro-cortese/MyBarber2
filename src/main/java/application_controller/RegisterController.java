@@ -3,6 +3,7 @@ package application_controller;
 import engineering.bean.UserBean;
 import engineering.dao.BarberDAO;
 import engineering.dao.CustomerDAO;
+import engineering.exception.DuplicatedUserException;
 import engineering.exception.InvalidCredentialsException;
 import engineering.pattern.factory.Factory;
 import first_view.general.InternalBackController;
@@ -18,7 +19,7 @@ public class RegisterController {
 
     }
 
-    public void register(UserBean userBean) throws InvalidCredentialsException {
+    public void register(UserBean userBean) throws InvalidCredentialsException, DuplicatedUserException {
         User customer;
         User barber ;
         int type = userBean.getUserType();

@@ -1,13 +1,9 @@
 package engineering.bean;
 
-import model.Saloon;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class BookingBean {
