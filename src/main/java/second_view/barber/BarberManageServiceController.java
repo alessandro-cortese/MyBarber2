@@ -2,7 +2,7 @@ package second_view.barber;
 
 import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
-import engineering.exception.InsertNegativePriceException;
+import engineering.exception.IncorrectFormatException;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -11,13 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberManageServiceController implements Initializable {
 
@@ -45,7 +43,7 @@ public class BarberManageServiceController implements Initializable {
 
         try{
             serviceBeanList = manageServiceController.getAllService(ScreenChanger.getInstance().getLoggedUser());
-        } catch (InsertNegativePriceException e) {
+        } catch (IncorrectFormatException e) {
             e.printStackTrace();
         }
 
@@ -99,7 +97,7 @@ public class BarberManageServiceController implements Initializable {
         }
         else if(manageServiceCommandLineLocal.startsWith("delete")) {
 
-            String serviceNameToDelete = manageServiceCommandLineLocal.replace("delete" + " ", "");
+            String serviceNameToDelete = manageServiceCommandLineLocal.replace("delete ", "");
 
 
             for(ServiceBean serviceBean : serviceBeanList) {

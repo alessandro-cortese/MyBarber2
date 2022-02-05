@@ -10,6 +10,7 @@ import engineering.dao.ProductDAO;
 import engineering.dao.SaloonDAO;
 import engineering.dao.ServiceDAO;
 import engineering.exception.DuplicatedServiceException;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
 import engineering.exception.ProductNotFoundException;
 import model.Barber;
@@ -24,7 +25,7 @@ import java.util.Objects;
 public class ManageServiceController {
 
 
-    public List<ServiceBean> getAllService(UserBean userBean) throws InsertNegativePriceException {
+    public List<ServiceBean> getAllService(UserBean userBean) throws IncorrectFormatException {
 
         ServiceDAO serviceDAO = new ServiceDAO();
         ServiceCatalogue catalogueService = serviceDAO.loadAllService(userBean.getUserEmail());
@@ -40,7 +41,7 @@ public class ManageServiceController {
                 nameOfUsedProduct = "";
             }
 
-            serviceBeanList.add(new ServiceBean(service.getServiceName(), service.getServiceDescription(), nameOfUsedProduct, service.getServicePrice()));
+            serviceBeanList.add(new ServiceBean(service.getServiceName(), service.getServiceDescription(), nameOfUsedProduct, String.valueOf(service.getServicePrice())));
         }
 
         return serviceBeanList;
@@ -81,9 +82,11 @@ public class ManageServiceController {
 
     }
 
+    public void addService(ServiceBean serviceBean, UserBean userBean) throws DuplicatedServiceException, InsertNegativePriceException {
 
-    public void addService(ServiceBean serviceBean, UserBean userBean) throws DuplicatedServiceException {
-
+        if(serviceBean.getPriceInfo() <= 0.0) {
+            throw new InsertNegativePriceException();
+        }
 
         Product localProduct;
         Service newService;
@@ -158,7 +161,11 @@ public class ManageServiceController {
 
     }
 
-    public void modifyService(ServiceBean oldService, ServiceBean updateService, UserBean userBean) {
+    public void modifyService(ServiceBean oldService, ServiceBean updateService, UserBean userBean) throws InsertNegativePriceException {
+
+        if(updateService.getPriceInfo() <= 0.0) {
+            throw new InsertNegativePriceException();
+        }
 
         ServiceDAO serviceDAO = new ServiceDAO();
         ProductDAO productDAO = new ProductDAO();

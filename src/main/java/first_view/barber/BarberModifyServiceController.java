@@ -2,6 +2,7 @@ package first_view.barber;
 
 import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
@@ -13,10 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-
 import java.io.IOException;
 
-import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberModifyServiceController {
 
@@ -36,22 +35,30 @@ public class BarberModifyServiceController {
     public void onButtonClicked(ActionEvent event) throws IOException {
         Button sourceButton = (Button) event.getSource();
         boolean flag = true;
+        boolean continueFlag = true;
 
-        if(sourceButton == saveChangesButton && nameModifyServiceTextField.getText() != null && isNumeric(modifyServicePriceTextField.getText())
-                && descriptionTextFieldModifyService.getText() != null) {
+        if(sourceButton == saveChangesButton && nameModifyServiceTextField.getText() != null && modifyServicePriceTextField.getText() != null && descriptionTextFieldModifyService.getText() != null) {
 
             ServiceBean updateServiceBean = null;
             try {
-                updateServiceBean = new ServiceBean(nameModifyServiceTextField.getText(), descriptionTextFieldModifyService.getText(), modifyServiceNameOfUsedProductTextField.getText(), Double.parseDouble(modifyServicePriceTextField.getText()));
-            } catch (InsertNegativePriceException e) {
-                modifyServiceExceptionLabelFirstView.setText("Prezzo inserito non valido!");
+                updateServiceBean = new ServiceBean(nameModifyServiceTextField.getText(), descriptionTextFieldModifyService.getText(), modifyServiceNameOfUsedProductTextField.getText(), modifyServicePriceTextField.getText());
+            } catch (IncorrectFormatException e) {
+                modifyServiceExceptionLabelFirstView.setText("Invalid insert price!");
                 flag = false;
             }
 
             if(flag) {
                 ManageServiceController manageServiceController = new ManageServiceController();
-                manageServiceController.modifyService(serviceBean, updateServiceBean, InternalBackController.getInternalBackControllerInstance().getLoggedUser());
+                try {
+                    manageServiceController.modifyService(serviceBean, updateServiceBean, InternalBackController.getInternalBackControllerInstance().getLoggedUser());
+                } catch (InsertNegativePriceException e) {
+                    modifyServiceExceptionLabelFirstView.setText("Insert price is negative!");
+                    continueFlag = false;
+                }
 
+            }
+
+            if(continueFlag) {
                 InternalBackController.getInternalBackControllerInstance().backToHome(sourceButton);
             }
         }

@@ -3,18 +3,16 @@ package second_view.barber;
 import application_controller.ManageServiceController;
 import engineering.bean.ServiceBean;
 import engineering.exception.DuplicatedServiceException;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import second_view.general.ScreenChanger;
-
-
 import java.io.IOException;
 import java.util.Objects;
 
-import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberAddServiceController {
 
@@ -68,7 +66,7 @@ public class BarberAddServiceController {
 
             try {
 
-                ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), Double.parseDouble(addServicePriceField.getText()));
+                ServiceBean serviceBean = new ServiceBean(nameAddServiceField.getText(), descriptionAddServiceField.getText(), addServiceUsedProductNameField.getText(), addServicePriceField.getText());
 
                 ManageServiceController manageServiceController = new ManageServiceController();
                 manageServiceController.addService(serviceBean, ScreenChanger.getInstance().getLoggedUser());
@@ -78,11 +76,17 @@ public class BarberAddServiceController {
                 addServiceExceptionLabelSecondView.setText("This service already exist!");
                 goBackToHome = false;
 
-            } catch (InsertNegativePriceException e) {
+            } catch (IncorrectFormatException e) {
 
-                addServiceExceptionLabelSecondView.setText(e.getMessage());
+                addServiceExceptionLabelSecondView.setText("Invalid insert price!");
                 goBackToHome = false;
-                addServicePriceField.setText("Invalid correct price!");
+                addServicePriceField.setText("");
+
+            } catch (InsertNegativePriceException exception) {
+
+                addServiceExceptionLabelSecondView.setText("Insert negative price!");
+                goBackToHome = false;
+                addServicePriceField.setText("");
 
             }
 
@@ -135,7 +139,7 @@ public class BarberAddServiceController {
         }
         else if(insertCommand.startsWith(SET_PRICE_COMMAND)) {
             addServiceNewField = insertCommand.replace(SET_PRICE_COMMAND + " ", "") ;
-            if(addServiceNewField.compareTo(SET_PRICE_COMMAND) != 0 && isNumeric(addServiceNewField)){
+            if(addServiceNewField.compareTo(SET_PRICE_COMMAND) != 0){
                 addServicePriceField.setText(addServiceNewField);
                 flag =  true;
             }

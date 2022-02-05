@@ -1,5 +1,6 @@
 package engineering.bean;
 
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
 import engineering.exception.NegativePriceException;
 import engineering.pattern.observer.Subject;
@@ -14,7 +15,7 @@ public class ServiceBean extends Subject {
     public ServiceBean(){
     }
 
-    public ServiceBean (String name, String description, String nameOfUsedProduct, Double price) throws InsertNegativePriceException {
+    public ServiceBean (String name, String description, String nameOfUsedProduct, String price) throws IncorrectFormatException {
 
         super();
         this.setNameInfo(name);
@@ -48,21 +49,13 @@ public class ServiceBean extends Subject {
 
     }
 
-    public void setPriceInfo(Double priceInfo) throws InsertNegativePriceException {
+    public void setPriceInfo(String priceInfo) throws IncorrectFormatException {
 
         try {
-
-            if (controlPrice(priceInfo)) {
-
-                this.priceInfo = priceInfo;
-
-            }
-        }catch (NegativePriceException e){
-
-            this.priceInfo = -(priceInfo);
-            throw new InsertNegativePriceException("Insert Price is negative!");
+            this.priceInfo = Double.parseDouble(priceInfo);
+        }catch (NumberFormatException e) {
+            throw new IncorrectFormatException();
         }
-
     }
 
     public Double getPriceInfo() {
@@ -83,19 +76,6 @@ public class ServiceBean extends Subject {
 
     }
 
-    private boolean controlPrice(Double localPrice) throws NegativePriceException {
-
-        boolean flag = false;
-        if(localPrice <= 0.0D){
-            throw new NegativePriceException();
-        }
-        else if(localPrice > 0.0D) {
-            flag = true;
-        }
-
-        return flag;
-
-    }
 
     public void notifyChanges(){
 

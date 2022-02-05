@@ -5,6 +5,7 @@ import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
 import engineering.bean.TimeSlotBean;
 import engineering.bean.UserBean;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
 import engineering.exception.ServiceNotFoundException;
 import engineering.time.TimeSlot;
@@ -78,11 +79,11 @@ public class ScheduleBookingGraphicController{
 
 
     @FXML
-    void selectServiceOnListView(MouseEvent event) throws InsertNegativePriceException {
+    void selectServiceOnListView(MouseEvent event) throws IncorrectFormatException {
         ServiceBean service = new ServiceBean();
 
         service.setNameInfo(serviceNameLabel.getText());
-        service.setPriceInfo(Double.parseDouble(servicePriceLabel.getText()));
+        service.setPriceInfo(servicePriceLabel.getText());
         serviceListSelected.add(service);
 
 

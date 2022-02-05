@@ -1,7 +1,7 @@
 package first_view.barber;
 
 import engineering.bean.ServiceBean;
-import engineering.exception.InsertNegativePriceException;
+import engineering.exception.IncorrectFormatException;
 import first_view.general.InternalBackController;
 import first_view.pickers.PricePicker;
 import javafx.event.ActionEvent;
@@ -46,12 +46,12 @@ public class BarberAddServiceController {
                 ServiceBean serviceBean = new ServiceBean(nameAddServiceTextField.getText(),
                         descriptionTextFiledAddService.getText(),
                         nameOfUsedProductTextField.getText(),
-                        Double.parseDouble(priceTextField.getText()));
+                        priceTextField.getText());
 
 
                 barberConfirmAddServiceController.display(serviceBean);
 
-            }catch (InsertNegativePriceException | NumberFormatException e) {
+            }catch (IncorrectFormatException | NumberFormatException e) {
                 exceptionAddServiceLabel.setText("Prezzo inserito non valido!");
             }
 

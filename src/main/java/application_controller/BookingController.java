@@ -94,7 +94,7 @@ public class BookingController {
                 ServiceBean serviceBean = new ServiceBean();
                 serviceBean.setNameInfo(service.getServiceName());
                 serviceBean.setDescriptionInfo(service.getServiceDescription());
-                serviceBean.setPriceInfo(service.getServicePrice());
+                serviceBean.setPriceInfo(String.valueOf(service.getServicePrice()));
                 servicesBeanList.add(serviceBean);
             } catch (Exception e) {
                 throw new ServiceNotFoundException(e.getMessage());

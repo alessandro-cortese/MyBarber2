@@ -5,6 +5,7 @@ import engineering.bean.ServiceBean;
 import engineering.bean.UserBean;
 import engineering.container.ServiceCatalogue;
 import engineering.exception.DuplicatedServiceException;
+import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
 import model.Service;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ public class TestManageService {
         ManageServiceController manageServiceController = new ManageServiceController();
         try {
             this.createServiceBean();
-        } catch (InsertNegativePriceException e) {
+        } catch (IncorrectFormatException e) {
             serviceBeanFlag = false;
         }
 
@@ -64,7 +65,7 @@ public class TestManageService {
 
         try{
             this.createServiceBean();
-        }catch(InsertNegativePriceException exception){
+        }catch(IncorrectFormatException exception){
             flag = false;
         }
 
@@ -106,14 +107,14 @@ public class TestManageService {
         List<Service> serviceList;
 
         try {
-            firstServiceBean = new ServiceBean(SERVICE_TEST_NAME, "Taglio della barba", "", 7.0);
-        } catch (InsertNegativePriceException e) {
+            firstServiceBean = new ServiceBean(SERVICE_TEST_NAME, "Taglio della barba", "", "7.0");
+        } catch (IncorrectFormatException e) {
             flag = false;
         }
 
         try {
             manageServiceController.addService(firstServiceBean, barber);
-        } catch (DuplicatedServiceException e) {
+        } catch (DuplicatedServiceException | InsertNegativePriceException e) {
             flag = false;
         }
 
@@ -149,7 +150,7 @@ public class TestManageService {
         List<Service> services;
         try {
             this.createServiceBean();
-        } catch (InsertNegativePriceException e) {
+        } catch (IncorrectFormatException e) {
             flag = false;
         }
         Service modifiedService = new Service(SERVICE_TEST_NAME, SERVICE_TEST_NEW_DESCRIPTION, 9.0);
@@ -157,13 +158,17 @@ public class TestManageService {
 
 
         try {
-            secondServiceBean.setPriceInfo(9.0);
+            secondServiceBean.setPriceInfo("9.0");
             secondServiceBean.setDescriptionInfo(SERVICE_TEST_NEW_DESCRIPTION);
-        } catch (InsertNegativePriceException e) {
+        } catch (IncorrectFormatException e) {
             flag = false;
         }
 
-        manageServiceController.modifyService(firstServiceBean, secondServiceBean, barber);
+        try {
+            manageServiceController.modifyService(firstServiceBean, secondServiceBean, barber);
+        } catch (InsertNegativePriceException e) {
+            flag = false;
+        }
 
         services = serviceCatalogue.getServices();
 
@@ -182,10 +187,10 @@ public class TestManageService {
     }
 
 
-    private void createServiceBean() throws InsertNegativePriceException {
+    private void createServiceBean() throws IncorrectFormatException {
 
-        firstServiceBean = new ServiceBean(SERVICE_TEST_NAME, SERVICE_TEST_DESCRIPTION, "", 10.0);
-        secondServiceBean = new ServiceBean(SERVICE_TEST_NAME, SERVICE_TEST_DESCRIPTION, "", 10.0);
+        firstServiceBean = new ServiceBean(SERVICE_TEST_NAME, SERVICE_TEST_DESCRIPTION, "", "10.0");
+        secondServiceBean = new ServiceBean(SERVICE_TEST_NAME, SERVICE_TEST_DESCRIPTION, "", "10.0");
 
     }
 
