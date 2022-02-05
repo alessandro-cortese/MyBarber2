@@ -1,8 +1,8 @@
 package engineering.dao;
 
 import engineering.dao.queries.Queries;
+import engineering.exception.DuplicatedUserException;
 import engineering.pattern.Connector;
-import javafx.scene.control.Alert;
 import model.Barber;
 import model.User;
 
@@ -15,7 +15,7 @@ public class BarberDAO {
     private static final String BARBER_NAME_LAB = "name" ;
     private static final String BARBER_SURNAME_LAB = "surname" ;
 
-    public void insertBarber(User barber) {
+    public void insertBarber(User barber) throws DuplicatedUserException {
         Connection connection = Connector.getConnectorInstance().getConnection();
         try {
 
@@ -24,8 +24,7 @@ public class BarberDAO {
             Queries.insertIntoBarber(statement, barber.getName(), barber.getSurname(), barber.getEmail());
 
         }catch (SQLIntegrityConstraintViolationException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "utente già esistente");
-            alert.showAndWait();
+            throw new DuplicatedUserException(e.getMessage());
         }
         catch (SQLException e) {
             e.printStackTrace();

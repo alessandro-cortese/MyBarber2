@@ -2,6 +2,7 @@ package first_view.general;
 
 import application_controller.RegisterController;
 import engineering.bean.UserBean;
+import engineering.exception.DuplicatedUserException;
 import engineering.exception.InvalidCredentialsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,12 +72,15 @@ public class RegisterScreenController {
         } catch (InvalidCredentialsException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
+            return;
+        } catch (DuplicatedUserException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+            return;
         }
 
         if (sourceNode.getId().equals("registerButton"))
             onRegisterButtonClicked(sourceNode) ;
-        if((sourceNode.getId().equals(googleButton)) || (sourceNode.getId().equals(facebookButton)))
-            return;
     }
 
     private UserBean retrieveInfo() throws InvalidCredentialsException {
@@ -89,7 +93,7 @@ public class RegisterScreenController {
 
         if(emailText.getText().isEmpty() || nameText.getText().isEmpty() || passText.getText().isEmpty() || surnameText.getText().isEmpty())
             throw new InvalidCredentialsException("indicare valori validi nei campi!");
-
+        InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBeanInfo);
         return  userBeanInfo;
     }
 

@@ -1,6 +1,7 @@
 package engineering.dao;
 
 import engineering.dao.queries.Queries;
+import engineering.exception.DuplicatedUserException;
 import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
 import javafx.scene.control.Alert;
@@ -67,7 +68,7 @@ public class CustomerDAO {
     }
 
 
-    public void insertCustomer(User customer) {
+    public void insertCustomer(User customer) throws DuplicatedUserException {
         Connection connection = Connector.getConnectorInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
@@ -75,8 +76,7 @@ public class CustomerDAO {
             Queries.insertIntoCustomer(statement, customer.getName(), customer.getSurname(), customer.getEmail());
 
         }catch (SQLIntegrityConstraintViolationException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "utente già esistente");
-            alert.showAndWait();
+            throw new DuplicatedUserException(e.getMessage());
         } catch (SQLException e) {
             e.printStackTrace();
         }

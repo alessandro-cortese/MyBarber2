@@ -1,7 +1,6 @@
 package first_view.barber;
 
 import engineering.bean.SaloonBean;
-import engineering.other_classes.ConvertTime;
 import first_view.general.InternalBackController;
 import first_view.pickers.TimePicker;
 import javafx.event.ActionEvent;
@@ -69,7 +68,7 @@ public class BarberScheduleTimeController {
         for (int i = 0; i < localTime.length; i++) {
             for (int j = 0; j < localTime[i].length - 1; j++){
                 minutes = ((localTime[i][j + 1].getHour() * 60) + localTime[i][j + 1].getMinute()) - ((localTime[i][j].getHour() * 60) + localTime[i][j].getMinute());
-                numberOfSlot[i] = minutes / ConvertTime.convertTime(saloonBean.getSlotTime().toString());
+                numberOfSlot[i] = minutes / convertTime(saloonBean.getSlotTime().toString());
             }
         }
 
@@ -120,6 +119,16 @@ public class BarberScheduleTimeController {
             }
         }
 
+
+    }
+
+
+    private int convertTime(String time) {
+        String[] stringsTime = time.split(":");
+        int hours = Integer.parseInt(stringsTime[0]);
+        int minutes = Integer.parseInt(stringsTime[1]);
+
+        return (hours * 60) + minutes;
 
     }
 

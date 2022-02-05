@@ -1,30 +1,40 @@
 package second_view.barber;
 
+import application_controller.BarberSeeAppointmentsController;
+import engineering.bean.BookingBean;
+import engineering.exception.BookingNotFoundExcption;
+import engineering.exception.SaloonNotFoundException;
+import first_view.list_cell_factories.BarberAppointmentsListCellFactory;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import second_view.general.ScreenChanger;
 
+import java.sql.Date;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.List;
 
-import static engineering.other_classes.NumericVerify.isNumeric;
 
 public class BarberViewAppointmentsController {
 
     private static final String SELECT_DATE_COMMAND = "select date";
     private static final String SELECT_SALOON_COMMAND = "select saloon";
-    private static final String SELECT_SLOT_COMMAND = "select slot";
-
+    private  BookingBean bookingBean;
+    private  String viewAppointmentsField;
     @FXML private TextField viewAppointmentsCommandLine;
     @FXML private TextField saloonNameFieldViewAppointments;
     @FXML private TextField slotIndexFieldViewAppointments;
     @FXML private TextField dateTextField;
-    @FXML private Label errorLabel;
+    @FXML private ListView<BookingBean> appointmentListView;
+
 
     private DatePicker datePickerViewAppointments;
+
+    public BarberViewAppointmentsController(){
+        bookingBean = new BookingBean();
+    }
 
     @FXML
     public void onCommand(ActionEvent event) {
@@ -42,14 +52,24 @@ public class BarberViewAppointmentsController {
             if(selectCommand(viewAppointmentsCommand))
                 return ;
         }
-        else if(viewAppointmentsCommand.startsWith("delete")) {
 
-            int slotIndex = Integer.parseInt(viewAppointmentsCommand.replace("delete" + " ", ""));
-            slotIndexFieldViewAppointments.setStyle(String.valueOf(slotIndex));
-            return ;
+        else if(viewAppointmentsCommand.compareTo("confirm") == 0) {
+            appointmentListView.setCellFactory(param -> new BarberAppointmentsListCellFactory(true));
+            BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
+            List<BookingBean> bookingBeanList;
+            try {
+                bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
+            } catch (SaloonNotFoundException e) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
+                alert.showAndWait();
+                return;
+            } catch (BookingNotFoundExcption e) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
+                alert.showAndWait();
+                return;
+            }
+            appointmentListView.setItems(FXCollections.observableList(bookingBeanList));
 
-        }
-        else if(viewAppointmentsCommand.compareTo("view") == 0) {
 
             return ;
 
@@ -62,13 +82,16 @@ public class BarberViewAppointmentsController {
 
     private boolean selectCommand(String insertCommand){
 
-        String viewAppointmentsField;
+
         boolean handled = false;
 
         if(insertCommand.startsWith(SELECT_SALOON_COMMAND)) {
 
             viewAppointmentsField = insertCommand.replace(SELECT_SALOON_COMMAND + " ", "");
             saloonNameFieldViewAppointments.setText(viewAppointmentsField);
+            bookingBean.setSaloonName(viewAppointmentsField);
+
+
             handled = true;
 
         }
@@ -80,15 +103,7 @@ public class BarberViewAppointmentsController {
                 handled = true;
                 LocalDate date = datePickerViewAppointments.getValue();
                 dateTextField.setText(date.toString());
-            }
-
-        }
-        else if (insertCommand.startsWith(SELECT_SLOT_COMMAND)) {
-
-            viewAppointmentsField = insertCommand.replace(SELECT_SLOT_COMMAND + " ", "");
-            if (isNumeric(viewAppointmentsField)) {
-                slotIndexFieldViewAppointments.setText(viewAppointmentsField);
-                handled = true;
+                bookingBean.setDate(Date.valueOf(date));
             }
 
         }
@@ -107,11 +122,10 @@ public class BarberViewAppointmentsController {
 
             datePickerViewAppointments.setValue(LocalDate.of(Integer.parseInt(valueOfInsertDate[0]), Integer.parseInt(valueOfInsertDate[1]), Integer.parseInt(valueOfInsertDate[2])));
             dateHandled = true;
-            errorLabel.setText("");
 
         }catch (DateTimeException e){
-
-            errorLabel.setText("Invalid entered Date!");
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Invalid entered Date!" );
+            alert.showAndWait();
 
         }
 

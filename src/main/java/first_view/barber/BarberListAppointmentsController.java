@@ -32,9 +32,9 @@ public class BarberListAppointmentsController {
 
         String saloonName = saloonText.getText();
         Date dateBook = Date.valueOf(date.getValue());
-        BookingBean bookingBean = new BookingBean(saloonName,dateBook);
+        BookingBean bookingBean = new BookingBean(dateBook,saloonName);
         BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
-        List<BookingBean> bookingBeanList = null;
+        List<BookingBean> bookingBeanList;
         try {
             bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
         } catch (SaloonNotFoundException e) {
