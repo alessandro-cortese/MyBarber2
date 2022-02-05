@@ -69,18 +69,14 @@ public class RegisterScreenController {
             RegisterController registerController = new RegisterController();
             registerController.register(userBean);
 
-        } catch (InvalidCredentialsException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-            return;
-        } catch (DuplicatedUserException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-            return;
-        }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registrazione Eseguita Correttamente!!") ;
+            alert.showAndWait() ;
+            BackController.getInstance().onBackClick(sourceNode);
 
-        if (sourceNode.getId().equals("registerButton"))
-            onRegisterButtonClicked(sourceNode) ;
+        } catch (InvalidCredentialsException | DuplicatedUserException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
     }
 
     private UserBean retrieveInfo() throws InvalidCredentialsException {
@@ -92,26 +88,9 @@ public class RegisterScreenController {
         userBeanInfo.setUserType(userType);
 
         if(emailText.getText().isEmpty() || nameText.getText().isEmpty() || passText.getText().isEmpty() || surnameText.getText().isEmpty())
-            throw new InvalidCredentialsException("indicare valori validi nei campi!");
-        InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBeanInfo);
-        return  userBeanInfo;
-    }
-
-    private void onRegisterButtonClicked(Node sourceNode) throws IOException {
-        BackController.getInstance().pushPrevScene(sourceNode.getScene());
-
-        //Vedo tipo di utente selezionato in base al RadioButton
-        userType = clientTypeRadioButton.isSelected() ? CLIENT_TYPE : BARBER_TYPE ;
-        String nextSceneName = clientTypeRadioButton.isSelected() ? CLIENT_MENU_SCREEN_NAME : BARBER_MENU_SCREEN_NAME ;
-
-        //Scelgo prossima scena e la imposto nello Stage
-        FXMLLoader root = new FXMLLoader(getClass().getClassLoader().getResource(nextSceneName));
-        Stage stage = (Stage) (sourceNode).getScene().getWindow();
-        Scene scene = new Scene(root.load());
-
-        //Carico la HomeCorretta nella VBox del MenuScreen
-        (new EnterAsUserTypeController()).enterAsUser(userType, scene);
-        stage.setScene(scene) ;
+            throw new InvalidCredentialsException("Indicare Valori Validi Nei Campi!");
+        //InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBeanInfo);
+        return userBeanInfo;
     }
 
 }

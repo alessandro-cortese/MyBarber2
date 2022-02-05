@@ -24,7 +24,7 @@
                   </Label>
                   <ScrollPane prefHeight="261.0" prefWidth="306.0">
                      <content>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- select saloon &lt;name of saloon &gt;&#10;- select date &lt;yyyy-mm-gg&gt;&#10;- select slot &lt;index of slot&gt;&#10;- confirm&#10;- back&#10;">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- select saloon &lt;name of saloon &gt;&#10;- select date &lt;yyyy-mm-gg&gt;&#10;- confirm&#10;- back&#10;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -52,12 +52,7 @@
                   <TextField fx:id="dateTextField" editable="false" prefWidth="200.0" />
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="353.0" prefHeight="26.0" prefWidth="364.0">
-               <children>
-                  <Label prefWidth="150.0" text="Slot Index" />
-                  <TextField fx:id="slotIndexFieldViewAppointments" editable="false" prefWidth="200.0" />
-               </children>
-            </HBox>
+            <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="353.0" prefHeight="26.0" prefWidth="364.0" />
             <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="267.0" textAlignment="CENTER" />
          </children>
       </VBox>

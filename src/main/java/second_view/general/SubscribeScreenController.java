@@ -45,23 +45,6 @@ public class SubscribeScreenController {
         subscribeCommandLine.setStyle(null);
         subscribeCommandLine.setText("");
 
-        UserBean userBean;
-        try {
-
-            userBean = retrieveInfo();
-            RegisterController registerController = new RegisterController();
-            registerController.register(userBean);
-
-        }catch (InvalidCredentialsException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-            return;
-        } catch (DuplicatedUserException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-            return;
-        }
-
         if (commandText.startsWith("set") && setCommand(commandText)) {
             return;
         }
@@ -70,15 +53,23 @@ public class SubscribeScreenController {
         }
         else if (commandText.startsWith("register") && registerCommand(commandText)) {
 
-            if (userTypeField.getText().compareTo("B") == 0) {
-                type=1;
-                ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_HOME_SCREEN);
-            }
-            if(userTypeField.getText().compareTo("C")==0){
-                type =0;
-                ScreenChanger.getInstance().changeScreen(event,ScreenChanger.CLIENT_HOME_SCREEN);
-            }
+            if (userTypeField.getText().compareTo("B") == 0) type=1;
+            else if(userTypeField.getText().compareTo("C")==0) type =0;
 
+            UserBean userBean;
+            try {
+                userBean = retrieveInfo();
+                RegisterController registerController = new RegisterController();
+                registerController.register(userBean);
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Correctly Subscribed!!") ;
+                alert.showAndWait() ;
+                ScreenChanger.getInstance().onBack(event);
+
+            }catch (InvalidCredentialsException | DuplicatedUserException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
 
             return;
 
@@ -100,7 +91,7 @@ public class SubscribeScreenController {
         userBeanInfo.setPass(subscribePasswordField.getText());
 
         if(nameField.getText().isEmpty() || userTypeField.getText().isEmpty() || subscribePasswordField.getText().isEmpty() || surnameField.getText().isEmpty() || subscribeEmailField.getText().isEmpty()) {
-            throw new InvalidCredentialsException("indicare valori validi nei campi!");
+            throw new InvalidCredentialsException("Set Valid Info!!");
 
         }
         return userBeanInfo;
