@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
+import static first_view.list_cell_factories.BuyProductListCellFactory.SECOND_VIEW;
 
 public class ClientCompleteOrderController implements Initializable {
 
@@ -39,7 +40,7 @@ public class ClientCompleteOrderController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        couponListView.setCellFactory(param -> new CouponCodeCellFactory());
+        couponListView.setCellFactory(param -> new CouponCodeCellFactory(SECOND_VIEW));
     }
 
 
@@ -71,7 +72,7 @@ public class ClientCompleteOrderController implements Initializable {
         }
         else if (command.compareTo("buy") == 0) {
             if (telephoneTextField.getText().isEmpty() || addressTextField.getText().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Completare tutti i Campi") ;
+                Alert alert = new Alert(Alert.AlertType.WARNING, "COMPLETE ALL ORDER INFORMATIONS") ;
                 alert.showAndWait() ;
             }
             else {
@@ -102,7 +103,7 @@ public class ClientCompleteOrderController implements Initializable {
 
     private void buy(OrderInfoBean orderInfoBean) {
         buyProductController.completeOrder(orderInfoBean);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "ORDINE ESEGUITO CON SUCCESSO") ;
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "ORDER CORRECTLY EXECUTED") ;
         alert.showAndWait() ;
     }
 
@@ -127,7 +128,7 @@ public class ClientCompleteOrderController implements Initializable {
 
     private void updateView(OrderTotalBean orderTotalBean) {
         couponListView.setItems(FXCollections.observableList(orderTotalBean.getExternalCouponCodes()));
-        orderTotalLabel.setText(String.format("Totale Ordine: %s %.2f" ,EURO_SYMBOL, orderTotalBean.getOrderTotal())) ;
+        orderTotalLabel.setText(String.format("Order Total: %s %.2f" ,EURO_SYMBOL, orderTotalBean.getOrderTotal())) ;
     }
 
 }

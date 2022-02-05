@@ -37,48 +37,36 @@
             <Button fx:id="enterButton" defaultButton="true" mnemonicParsing="false" onAction="#onCommand" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: transparent;" />
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutX="558.0" layoutY="426.0" spacing="25.0">
+      <VBox alignment="CENTER" layoutX="445.0" layoutY="425.0" prefHeight="131.0" prefWidth="410.0" spacing="25.0">
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <Label prefWidth="150.0" text="Indirizzo">
+                  <Label prefWidth="150.0" text="Address">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="addressLabel">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="addressLabel" editable="false" prefWidth="250.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Label prefWidth="150.0" text="Telefono">
+                  <Label prefWidth="150.0" text="Telephone">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="telephoneLabel">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="telephoneLabel" editable="false" prefWidth="250.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Label prefWidth="150.0" text="Committente">
+                  <Label prefWidth="150.0" text="Owner">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="orderOwnerLabel">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="orderOwnerLabel" editable="false" prefWidth="250.0" />
                </children>
             </HBox>
          </children>

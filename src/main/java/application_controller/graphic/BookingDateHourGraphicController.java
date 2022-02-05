@@ -7,6 +7,7 @@ import engineering.bean.TimeSlotBean;
 import engineering.exception.SaloonNotFoundException;
 import engineering.exception.ServiceNotFoundException;
 import engineering.time.TimeSlot;
+import first_view.general.InternalBackController;
 import first_view.list_cell_factories.SaloonTimeSlotsListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -73,11 +74,14 @@ public class BookingDateHourGraphicController {
         @FXML
         void onButtonClicked(ActionEvent event) throws IOException, ServiceNotFoundException {
                 Button sourceButton = (Button) event.getSource();
+                InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
                 FXMLLoader fxmlLoaderNode = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_SALOON_CENTER_SCREEN_NAME));
                 Parent newCenterNode = fxmlLoaderNode.load();
                 Scene myScene = sourceButton.getScene();
                 BorderPane borderPane = (BorderPane) myScene.getRoot();
                 borderPane.setCenter(newCenterNode);
+
+
                 ScheduleBookingGraphicController scheduleBookingGraphicController = fxmlLoaderNode.getController();
 
                 scheduleBookingGraphicController.displaySaloon(timeSlotSaloonInfo, timeSlotBean,date );

@@ -94,7 +94,7 @@ public class CustomerDAO {
                 customer = createCustomer(resultSet) ;
             }
             else {
-                throw new NotExistentUserException("NON ESISTE UN CLIENTE CON LE CREDENZIALI INDICATE!!") ;
+                throw new NotExistentUserException("NOT EXISTENT CUSTOMER WITH THIS CREDENTIALS") ;
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();

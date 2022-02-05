@@ -40,7 +40,7 @@
          <children>
             <VBox spacing="5.0">
                <children>
-                  <Label text="Costi dei Coupon">
+                  <Label text="Coupon Costs">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -50,7 +50,7 @@
             </VBox>
             <VBox spacing="5.0">
                <children>
-                  <Label text="Coupon Generati">
+                  <Label text="Generated Coupons">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -62,7 +62,7 @@
       </VBox>
       <VBox alignment="CENTER" layoutX="511.0" layoutY="53.0" spacing="25.0">
          <children>
-            <Label fx:id="pointsSaleLabel" text="Totale Punti">
+            <Label fx:id="pointsSaleLabel" text="Total Points">
                <font>
                   <Font size="14.0" />
                </font>

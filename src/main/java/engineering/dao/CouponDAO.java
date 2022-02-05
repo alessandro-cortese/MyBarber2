@@ -35,7 +35,7 @@ public class CouponDAO {
                 coupon = createCoupon(resultSet) ;
             }
             else {
-                throw  new InvalidCouponException("ERRORE: COUPON NON VALIDO") ;
+                throw  new InvalidCouponException("ERROR: NOT VALID COUPON") ;
             }
         }
         catch (SQLException sqlException) {
@@ -100,7 +100,7 @@ public class CouponDAO {
         try(PreparedStatement statement = connection.prepareStatement("INSERT Coupon(couponType, discount, customer) VALUES(?,?,?) ;", Statement.RETURN_GENERATED_KEYS);) {
 
             String dbCouponType;
-            if (couponType == SUBTRACTION_TYPE) {
+            if (couponType.equals(SUBTRACTION_TYPE)) {
                 dbCouponType = COUPON_SUBTRACTION_DB_ENUM;
             }
             else {
@@ -116,7 +116,7 @@ public class CouponDAO {
 
             while (generatedKeys.next()) {
                 Integer newCouponCode = generatedKeys.getInt(1) ;
-                if (couponType == SUBTRACTION_TYPE) newCoupon = new SubtractionCoupon(newCouponCode, couponValue) ;
+                if (couponType.equals(SUBTRACTION_TYPE)) newCoupon = new SubtractionCoupon(newCouponCode, couponValue) ;
                 else newCoupon = new PercentageCoupon(newCouponCode, couponValue) ;
             }
 

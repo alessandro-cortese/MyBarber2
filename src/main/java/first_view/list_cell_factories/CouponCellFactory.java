@@ -36,18 +36,20 @@ public class CouponCellFactory extends ListCell<CouponBean> {
 
                 Label couponCodeLabel = (Label) parentNode.lookup("#" + COUPON_CODE_LABEL_ID) ;
                 Label couponDiscountLabel = (Label) parentNode.lookup("#" + COUPON_DISCOUNT_LABEL_ID) ;
-                couponCodeLabel.setText("Codice: " + item.getExternalCouponCode());
+                String codeString = (caller.equals(FIRST_VIEW)) ? "Codice: " : "Code: " ;
+                couponCodeLabel.setText(codeString + item.getExternalCouponCode());
 
                 String discountSymbol = "" ;
                 if (item.getExternalCouponType().compareTo("subtraction") == 0) discountSymbol = EURO_SYMBOL ;
                 else discountSymbol = "%" ;
-                couponDiscountLabel.setText("Sconto: " + (item.getCouponDiscount()) + discountSymbol);
+                String discountString = (caller.equals(FIRST_VIEW)) ? "Sconto: " : "Discount: " ;
+                couponDiscountLabel.setText(discountString + (item.getCouponDiscount()) + discountSymbol);
 
                 if (caller.equals(FIRST_VIEW)) {
                     setGraphic(parentNode);
                 }
                 else {
-                    setText(String.format("SCONTO: -%1$4.2f\t\t%2$1s\t\tCODICE: %3$4s", item.getCouponDiscount(), (item.getExternalCouponType().compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getExternalCouponCode()));
+                    setText(String.format("Discount: -%1$4.2f\t\t%2$1s\t\tCode: %3$4s", item.getCouponDiscount(), (item.getExternalCouponType().compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getExternalCouponCode()));
                     setStyle("-fx-font-size: 14 ; -fx-alignment: center");
                 }
 

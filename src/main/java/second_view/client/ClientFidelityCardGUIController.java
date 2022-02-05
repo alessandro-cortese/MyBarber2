@@ -87,7 +87,7 @@ public class ClientFidelityCardGUIController implements Initializable {
             alert.showAndWait() ;
         }
         catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "INDICE INDICATO NON VALIDO") ;
+            Alert alert = new Alert(Alert.AlertType.WARNING, "NOT VALID INDEX") ;
             alert.showAndWait() ;
         }
     }
@@ -103,7 +103,7 @@ public class ClientFidelityCardGUIController implements Initializable {
     }
 
     private void updateView(FidelityCardBean fidelityCardBean) {
-        pointsSaleLabel.setText("Totale Punti " + fidelityCardBean.getPointsSale());
+        pointsSaleLabel.setText("Total Points " + fidelityCardBean.getPointsSale());
         userEmailLabel.setText("eMail " + fidelityCardBean.getOwner());
         couponListView.setItems(FXCollections.observableList(fidelityCardBean.getCouponBeans()));
     }

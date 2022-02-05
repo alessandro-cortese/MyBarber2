@@ -22,13 +22,11 @@ public class BarberHomeController {
         barberHomeCommandLine.setText("");
         barberHomeCommandLine.setStyle(null);
 
-        if (commandLine.compareTo("back") == 0 ) {
+        if (commandLine.compareTo("exit") == 0 ) {
             ScreenChanger.getInstance().onBack(event) ;
             return ;
         }
-        else if (commandLine.compareTo("logout") == 0) {
-            return ;
-        }
+
         else if (commandLine.compareTo("userarea") == 0) {
             ScreenChanger.getInstance().changeScreen(event, ScreenChanger.BARBER_USER_AREA_SCREEN);
             return ;

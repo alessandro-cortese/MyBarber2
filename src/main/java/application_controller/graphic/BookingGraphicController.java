@@ -3,6 +3,7 @@ package application_controller.graphic;
 import application_controller.BookingController;
 import engineering.bean.SaloonBean;
 import engineering.exception.SaloonNotFoundException;
+import first_view.general.InternalBackController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +52,8 @@ public class BookingGraphicController{
         fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(CLIENT_TAKE_SALOON_LIST_SCREEN_NAME));
         String saloonCity = searchCity.getText();
 
+        InternalBackController.getInternalBackControllerInstance().onNextScreen(sourceButton);
+
         newCenterNode = fxmlLoader.load();
         Scene myScene = sourceButton.getScene();
         BorderPane borderPane = (BorderPane) myScene.getRoot();
@@ -76,6 +79,8 @@ public class BookingGraphicController{
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         newCenterNode = fxmlLoader.load();
         borderPane.setCenter(newCenterNode);
+
+
 
         if(sourceButton == saloonNextButton){
 

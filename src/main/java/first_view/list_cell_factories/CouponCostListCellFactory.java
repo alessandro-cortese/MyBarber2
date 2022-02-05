@@ -25,7 +25,7 @@ public class CouponCostListCellFactory extends ListCell<CouponBean> {
                 size = 16 ;
             }
             else {
-                setText(String.format("INDEX: %1$4d\tSCONTO: -%2$4.2f\t\t%3$1s\t\tCOSTO IN PUNTI: %4$3d", this.getIndex() , item.getCouponDiscount(), (item.getExternalCouponType().compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getCouponPointsPrice()));
+                setText(String.format("INDEX: %1$4d\tDISCOUNT: -%2$4.2f\t\t%3$1s\t\tCOST: %4$3d", this.getIndex() , item.getCouponDiscount(), (item.getExternalCouponType().compareTo("subtraction") == 0) ? EURO_SYMBOL : "%", item.getCouponPointsPrice()));
                 size = 12 ;
             }
             setStyle(String.format("-fx-font-size: %d ; -fx-alignment: center", size));

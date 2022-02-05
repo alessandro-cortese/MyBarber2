@@ -58,7 +58,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Label fx:id="productDescriptionLabel" alignment="TOP_LEFT" prefHeight="178.0" prefWidth="749.0" styleClass="normal_label" text="&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut&#10;labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris &#10;nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit &#10;esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in &#10;culpa qui officia deserunt mollit anim id est laborum.&quot;&#10;" textOverrun="CLIP" wrapText="true">
+            <Label fx:id="productDescriptionLabel" alignment="TOP_LEFT" prefHeight="178.0" prefWidth="749.0" styleClass="normal_label" text="&#10;" textOverrun="CLIP" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>

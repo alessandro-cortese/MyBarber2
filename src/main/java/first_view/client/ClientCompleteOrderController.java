@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static first_view.list_cell_factories.BuyProductListCellFactory.FIRST_VIEW;
+
 public class ClientCompleteOrderController implements Initializable {
 
     @FXML private Button addCouponButton ;
@@ -38,7 +40,7 @@ public class ClientCompleteOrderController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        couponListView.setCellFactory(param -> new CouponCodeCellFactory());
+        couponListView.setCellFactory(param -> new CouponCodeCellFactory(FIRST_VIEW));
     }
 
 

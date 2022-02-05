@@ -38,5 +38,5 @@ module it.barbergroup {
     exports application_controller;
     opens application_controller to javafx.fxml;
 
-
+    exports start to javafx.graphics ;
 }

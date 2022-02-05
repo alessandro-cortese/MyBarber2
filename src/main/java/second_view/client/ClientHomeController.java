@@ -19,7 +19,7 @@ public class ClientHomeController {
         commandLine.setText("");
         String appointmentString = "appointment" ;
         String productString = "product" ;
-        if (command.compareTo("back") == 0 || command.compareTo("logout") == 0) {
+        if (command.compareTo("exit") == 0) {
             ScreenChanger.getInstance().onBack(event);
             return ;
         }

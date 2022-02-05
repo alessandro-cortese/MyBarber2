@@ -9,6 +9,7 @@ import javafx.scene.control.ListCell;
 import java.io.IOException;
 import java.util.Map;
 
+import static first_view.list_cell_factories.BuyProductListCellFactory.FIRST_VIEW;
 import static first_view.list_cell_factories.BuyProductListCellFactory.SECOND_VIEW;
 
 public class BarberOrderListCellFactory extends ListCell<VendorOrderBean> {
@@ -42,13 +43,17 @@ public class BarberOrderListCellFactory extends ListCell<VendorOrderBean> {
 
                 Map<String, Integer> dateMap = item.getExternalDate() ;
                 String stringDate = String.format("%d - %d - %d", dateMap.get(VendorOrderBean.VENDOR_ORDER_YEAR_KEY), dateMap.get(VendorOrderBean.VENDOR_ORDER_MONTH_KEY), dateMap.get(VendorOrderBean.VENDOR_ORDER_DAY_KEY)) ;
-
+                if (caller.equals(FIRST_VIEW)) stringDate = "Data : " + stringDate ;
+                else stringDate = "Date : " + stringDate ;
                 dateLabel.setText(stringDate);
-                orderLabel.setText(item.getExternalOrderCode());
-                if (caller == SECOND_VIEW) {
+
+                String orderCodeString = (caller.equals(FIRST_VIEW)) ? "Codice : " : "Code : "  ;
+                orderLabel.setText(orderCodeString + item.getExternalOrderCode());
+                if (caller.equals(SECOND_VIEW)) {
                     itemIndexLabel.setText("Index: " + this.getIndex());
                 }
                 setGraphic(parentNode);
+                setStyle("-fx-alignment: center");
 
             } catch (IOException e) {
                 e.printStackTrace();

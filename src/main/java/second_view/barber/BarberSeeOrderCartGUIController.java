@@ -20,9 +20,9 @@ import java.util.ResourceBundle;
 public class BarberSeeOrderCartGUIController implements Initializable {
 
     @FXML private ListView<CartRowBean> orderCartListView ;
-    @FXML private Label addressLabel ;
-    @FXML private Label telephoneLabel ;
-    @FXML private Label orderOwnerLabel ;
+    @FXML private TextField addressLabel ;
+    @FXML private TextField telephoneLabel ;
+    @FXML private TextField orderOwnerLabel ;
     @FXML private TextField commandLine ;
 
     private VendorOrderBean vendorOrderBean ;

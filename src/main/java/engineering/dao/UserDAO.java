@@ -37,7 +37,7 @@ public class UserDAO {
                 }
             }
             else {
-                throw new NotExistentUserException("UTENTE INDICATO NON ESISTE!!") ;
+                throw new NotExistentUserException("NOT EXISTENT USER!!") ;
             }
 
         } catch (SQLException sqlException) {
