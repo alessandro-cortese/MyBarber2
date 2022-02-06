@@ -29,19 +29,20 @@ public class BarberListAppointmentsController {
     @FXML
     public void onConfirm(ActionEvent event){
         appointmentsListView.setCellFactory(param -> new BarberAppointmentsListCellFactory(false));
-
+        List<BookingBean> bookingBeanList;
+        BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
         String saloonName = saloonText.getText();
         Date dateBook = Date.valueOf(date.getValue());
         BookingBean bookingBean = new BookingBean(dateBook,saloonName);
-        BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
-        List<BookingBean> bookingBeanList;
+
+
         try {
             bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
-        } catch (SaloonNotFoundException e) {
-            showException(e.getMessage());
+        } catch (BookingNotFoundExcption  e) {
             return;
-        } catch (BookingNotFoundExcption e) {
-            showException(e.getMessage());
+        } catch (SaloonNotFoundException ex) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, ex.getMessage());
+            alert.showAndWait();
             return;
         }
         appointmentsListView.setItems(FXCollections.observableList(bookingBeanList));
