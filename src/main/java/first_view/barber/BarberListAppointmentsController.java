@@ -38,19 +38,18 @@ public class BarberListAppointmentsController {
         try {
             bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
         } catch (SaloonNotFoundException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
-            alert.showAndWait();
+            showException(e.getMessage());
             return;
         } catch (BookingNotFoundExcption e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
-            alert.showAndWait();
+            showException(e.getMessage());
             return;
         }
         appointmentsListView.setItems(FXCollections.observableList(bookingBeanList));
 
-
-
-
+    }
+    private void showException(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING, message);
+        alert.showAndWait();
     }
 
 

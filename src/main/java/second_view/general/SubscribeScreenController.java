@@ -62,9 +62,10 @@ public class SubscribeScreenController {
                 RegisterController registerController = new RegisterController();
                 registerController.register(userBean);
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Correctly Subscribed!!") ;
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Correctly Subscribed!!") ;
                 alert.showAndWait() ;
                 ScreenChanger.getInstance().onBack(event);
+                ScreenChanger.getInstance().setLoggedUser(userBean);
 
             }catch (InvalidCredentialsException | DuplicatedUserException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());

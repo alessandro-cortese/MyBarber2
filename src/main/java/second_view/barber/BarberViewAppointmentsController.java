@@ -22,10 +22,9 @@ public class BarberViewAppointmentsController {
     private static final String SELECT_DATE_COMMAND = "select date";
     private static final String SELECT_SALOON_COMMAND = "select saloon";
     private  BookingBean bookingBean;
-    private  String viewAppointmentsField;
+
     @FXML private TextField viewAppointmentsCommandLine;
     @FXML private TextField saloonNameFieldViewAppointments;
-    @FXML private TextField slotIndexFieldViewAppointments;
     @FXML private TextField dateTextField;
     @FXML private ListView<BookingBean> appointmentListView;
 
@@ -60,12 +59,11 @@ public class BarberViewAppointmentsController {
             try {
                 bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
             } catch (SaloonNotFoundException e) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
-                alert.showAndWait();
+                showException(e.getMessage());
                 return;
             } catch (BookingNotFoundExcption e) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
-                alert.showAndWait();
+                showException(e.getMessage());
+
                 return;
             }
             appointmentListView.setItems(FXCollections.observableList(bookingBeanList));
@@ -79,9 +77,15 @@ public class BarberViewAppointmentsController {
 
     }
 
+    private void showException(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING, message);
+        alert.showAndWait();
+    }
+
 
     private boolean selectCommand(String insertCommand){
 
+        String viewAppointmentsField;
 
         boolean handled = false;
 
