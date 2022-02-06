@@ -47,7 +47,7 @@ public class LoginScreenController {
 
         if (eventSource == loginButton) {
             if (emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Completare tutti i campi prima di continuare") ;
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Complete the field before!") ;
                 alert.showAndWait() ;
                 return ;
             }

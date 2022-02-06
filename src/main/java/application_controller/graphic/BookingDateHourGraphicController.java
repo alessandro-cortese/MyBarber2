@@ -95,7 +95,7 @@ public class BookingDateHourGraphicController {
                 String date1 = String.valueOf(date);
                 if(date1.isEmpty())
                         try {
-                                throw new SaloonNotFoundException("Inserire la data! ");
+                                throw new SaloonNotFoundException("Insert a valid date!");
                         } catch (SaloonNotFoundException e) {
                                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                                 alert.showAndWait();
@@ -109,7 +109,7 @@ public class BookingDateHourGraphicController {
 
                 try {
                         bookingController.checkDateHour(bookingBean);
-                        String message = "conferma effettuta";
+                        String message = "confirmed";
                         Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
                         alert.showAndWait();
                 } catch (SaloonNotFoundException e) {

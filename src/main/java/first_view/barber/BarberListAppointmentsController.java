@@ -8,7 +8,6 @@ import first_view.list_cell_factories.BarberAppointmentsListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.sql.Date;

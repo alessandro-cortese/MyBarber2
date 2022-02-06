@@ -69,7 +69,7 @@ public class RegisterScreenController {
             RegisterController registerController = new RegisterController();
             registerController.register(userBean);
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registrazione Eseguita Correttamente!!") ;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "registration successful") ;
             alert.showAndWait() ;
             BackController.getInstance().onBackClick(sourceNode);
 
@@ -88,7 +88,7 @@ public class RegisterScreenController {
         userBeanInfo.setUserType(userType);
 
         if(emailText.getText().isEmpty() || nameText.getText().isEmpty() || passText.getText().isEmpty() || surnameText.getText().isEmpty())
-            throw new InvalidCredentialsException("Indicare Valori Validi Nei Campi!");
+            throw new InvalidCredentialsException("Fields not valid!");
         InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBeanInfo);
         return userBeanInfo;
     }
