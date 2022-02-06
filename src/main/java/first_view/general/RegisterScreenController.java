@@ -89,7 +89,7 @@ public class RegisterScreenController {
 
         if(emailText.getText().isEmpty() || nameText.getText().isEmpty() || passText.getText().isEmpty() || surnameText.getText().isEmpty())
             throw new InvalidCredentialsException("Indicare Valori Validi Nei Campi!");
-        //InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBeanInfo);
+        InternalBackController.getInternalBackControllerInstance().setLoggedUser(userBeanInfo);
         return userBeanInfo;
     }
 

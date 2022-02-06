@@ -36,7 +36,7 @@ public class ScheduleTime {
             for (int i = 0; i < slotTimeMorning + slotTimeAfternoon; i++) {
                 timeSlot = new TimeSlot();
                 if(i == slotTimeMorning){
-                    timeOpen.setTime(timeOpenAfternoon.getTime());
+                    timeOpen = new Time(timeOpenAfternoon.getTime());
                 }
                 long in = timeOpen.getTime();
                 timeOpen = new Time(in);

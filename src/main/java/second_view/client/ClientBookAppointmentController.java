@@ -4,8 +4,10 @@ import application_controller.BookingController;
 import engineering.bean.SaloonBean;
 import engineering.bean.ServiceBean;
 import engineering.bean.TimeSlotBean;
+import engineering.bean.UserBean;
 import engineering.exception.InvalidIndexSelected;
 import engineering.exception.ServiceNotFoundException;
+import first_view.general.InternalBackController;
 import first_view.list_cell_factories.ServiceListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -14,6 +16,7 @@ import javafx.scene.control.*;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,10 @@ public class ClientBookAppointmentController {
     @FXML private TextField hourText;
 
     private List<ServiceBean> servicesBeanSelected;
+    private List<ServiceBean> serviceBeanList;
+    private SaloonBean saloonInfo;
+    private TimeSlotBean timeSlotInfo;
+    private String dateBooking;
 
     @FXML
     public void onCommand(ActionEvent event) throws IOException, InvalidIndexSelected {
@@ -55,12 +62,15 @@ public class ClientBookAppointmentController {
             return ;
         }
         else if (commandText.compareTo("book") == 0) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Prenotazione avvenuta con successo! controlla l'email che ti abbiamo spedito!\nVerrai rimandato alla home" );
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,"Prenotazione avvenuta con successo! controlla l'email che ti abbiamo spedito!\nVerrai rimandato alla home" );
             alert.showAndWait();
-            ButtonType buttonType =alert.getResult();
-            String result =buttonType.getText();
-            if(result.compareTo("OK")==0)
-                ScreenChanger.getInstance().goToHome(event);
+            ScreenChanger.getInstance().goToHome(event);
+
+            BookingController bookingController = new BookingController();
+            UserBean userBean = ScreenChanger.getInstance().getLoggedUser();
+
+            Date date = Date.valueOf(dateBooking);
+            bookingController.saveBooking(serviceBeanList,saloonInfo,userBean,timeSlotInfo,date);
             return;
         }
         else if (commandText.compareTo("back") == 0) {
@@ -94,8 +104,11 @@ public class ClientBookAppointmentController {
         dateText.setText(date);
         hourText.setText(timeSlotInfo.getFromTime()+" - "+timeSlotInfo.getToTime());
         saloonName.setText(saloonBean.getName());
+        this.saloonInfo = saloonBean;
+        this.timeSlotInfo = timeSlotInfo;
+        this.dateBooking = date;
         BookingController bookingController = new BookingController();
-        List<ServiceBean> serviceBeanList = bookingController.searchServices(saloonBean);
+        serviceBeanList = bookingController.searchServices(saloonBean);
         serviceListView.setItems(FXCollections.observableList(serviceBeanList));
 
     }

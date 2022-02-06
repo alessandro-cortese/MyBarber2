@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="132.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="132.0" prefWidth="198.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="409.0" spacing="20.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="127.0" spacing="10.0">
+            <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="227.0" spacing="10.0">
                <children>
-                  <Label fx:id="productNameLabel" text="slot index: ">
+                  <Label fx:id="productNameLabel" prefHeight="21.0" prefWidth="165.0" text="slot index: ">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="16.0" prefWidth="236.0" spacing="10.0">
+                  <HBox alignment="CENTER" prefHeight="16.0" prefWidth="192.0" spacing="10.0">
                      <children>
                         <Label fx:id="productPriceLabel" text="inizio" />
                         <Label fx:id="productRowQuantity" text="-" />
-                        <Label fx:id="productRowQuantity1" layoutX="162.0" layoutY="10.0" text="fine" />
+                        <Label fx:id="productRowQuantity1" layoutX="162.0" layoutY="10.0" prefHeight="16.0" prefWidth="96.0" text="fine" />
                      </children>
                   </HBox>
                   <Label fx:id="cartRowIndexLabel" />
