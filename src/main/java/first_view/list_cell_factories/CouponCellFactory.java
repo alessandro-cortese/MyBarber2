@@ -21,9 +21,13 @@ public class CouponCellFactory extends ListCell<CouponBean> {
     private Parent parentNode = null ;
 
     private final Integer caller ;
+    private String codeString ;
+    private String discountString ;
 
     public CouponCellFactory(Integer caller) {
         this.caller = caller ;
+        codeString = (caller.equals(FIRST_VIEW)) ? "Codice: " : "Code: " ;
+        discountString = (caller.equals(FIRST_VIEW)) ? "Sconto: " : "Discount: " ;
     }
 
     @Override
@@ -36,13 +40,13 @@ public class CouponCellFactory extends ListCell<CouponBean> {
 
                 Label couponCodeLabel = (Label) parentNode.lookup("#" + COUPON_CODE_LABEL_ID) ;
                 Label couponDiscountLabel = (Label) parentNode.lookup("#" + COUPON_DISCOUNT_LABEL_ID) ;
-                String codeString = (caller.equals(FIRST_VIEW)) ? "Codice: " : "Code: " ;
+
                 couponCodeLabel.setText(codeString + item.getExternalCouponCode());
 
                 String discountSymbol = "" ;
                 if (item.getExternalCouponType().compareTo("subtraction") == 0) discountSymbol = EURO_SYMBOL ;
                 else discountSymbol = "%" ;
-                String discountString = (caller.equals(FIRST_VIEW)) ? "Sconto: " : "Discount: " ;
+
                 couponDiscountLabel.setText(discountString + (item.getCouponDiscount()) + discountSymbol);
 
                 if (caller.equals(FIRST_VIEW)) {
