@@ -39,6 +39,7 @@ public class BarberListAppointmentsController {
         try {
             bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
         } catch (BookingNotFoundExcption  e) {
+            showException(e.getMessage());
             return;
         } catch (SaloonNotFoundException ex) {
             Alert alert = new Alert(Alert.AlertType.WARNING, ex.getMessage());
