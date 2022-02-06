@@ -1,5 +1,6 @@
-barber
+Barber mail address:    barber
 
-Taglio
+New service added:   Shampoo
 
+Send to customers' mail address:
 customer

@@ -25,9 +25,13 @@ public class ManageServiceBoundarySendEmail implements Observer {
 
         try(PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter( "EmailAddressFile.txt")))){
 
+            printWriter.print("Barber mail address:    ");
             printWriter.println(barberEmail);
             printWriter.println("");
+            printWriter.print("New service added:   ");
             printWriter.println(serviceBean.getNameInfo());
+            printWriter.println("");
+            printWriter.println("Send to customers' mail address:");
             printWriter.println("");
 
             for(UserBean userBean : userBeans) {
