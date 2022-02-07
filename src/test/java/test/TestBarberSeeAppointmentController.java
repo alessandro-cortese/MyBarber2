@@ -6,6 +6,7 @@ import engineering.exception.BookingNotFoundExcption;
 import engineering.exception.SaloonNotFoundException;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +18,8 @@ public class TestBarberSeeAppointmentController {
 
         String dateBooking = "2020-11-11";
         BookingBean bookingBean = new BookingBean();
-        bookingBean.setDate(dateBooking);
+        Date date = Date.valueOf(dateBooking);
+        bookingBean.setDate(date);
         BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
         List<BookingBean> bookingBeanList = barberSeeAppointmentsController.retrieveAppointment(bookingBean);
         String saloon = bookingBeanList.get(0).getSaloonName();
