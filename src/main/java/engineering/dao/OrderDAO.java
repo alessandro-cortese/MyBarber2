@@ -4,17 +4,13 @@ import engineering.dao.queries.Queries;
 import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
 import model.Customer;
-import model.User;
-import model.buy_product.Cart;
 import model.buy_product.CartRow;
 import model.buy_product.Order;
 
-import java.io.FileInputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class OrderDAO {
 
@@ -66,7 +62,7 @@ public class OrderDAO {
             CartDAO cartDAO = new CartDAO() ;
             while (resultSet.next()) {
                 Order order = createOrder(resultSet) ;
-                List<CartRow> cartRows = cartDAO.loadCartByOrderCode(order.getOrderCode()) ;
+                List<CartRow> cartRows = cartDAO.loadCartByOrderCodeAndVendor(order.getOrderCode(), vendor) ;
                 order.setCartRows(cartRows);
                 orderList.add(order) ;
             }

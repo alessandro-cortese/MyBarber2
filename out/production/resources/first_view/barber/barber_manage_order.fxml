@@ -22,7 +22,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="orderAddressLabel" prefWidth="250.0" />
+                  <TextField fx:id="orderAddressLabel" editable="false" prefWidth="250.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER">
@@ -32,7 +32,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="orderTelephoneLabel" alignment="TOP_LEFT" prefWidth="250.0" />
+                  <TextField fx:id="orderTelephoneLabel" alignment="TOP_LEFT" editable="false" prefWidth="250.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER">
@@ -42,7 +42,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="orderOwnerLabel" prefWidth="250.0" />
+                  <TextField fx:id="orderOwnerLabel" editable="false" prefWidth="250.0" />
                </children>
             </HBox>
          </children>

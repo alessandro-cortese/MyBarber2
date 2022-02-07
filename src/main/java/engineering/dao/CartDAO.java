@@ -25,17 +25,15 @@ public class CartDAO {
                 statement.setInt(2, orderKey);
                 statement.setInt(3, cartRow.getQuantity());
 
-                statement.addBatch();
+                statement.executeUpdate() ;
             }
-
-            statement.executeBatch() ;
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
     }
 
-    public List<CartRow> loadCartByOrderCode(Integer orderCode) {
+    public List<CartRow> loadCartByOrderCodeAndVendor(Integer orderCode, String vendor) {
 
         Connection connection = Connector.getConnectorInstance().getConnection();
         List<CartRow> cartRowList = new ArrayList<>() ;
@@ -50,9 +48,10 @@ public class CartDAO {
                 Integer productQuantity = resultSet.getInt(PRODUCT_QUANTITY_LAB) ;
 
                 Product product = productDAO.loadProductByIsbn(productId) ;
-                CartRow cartRow = new CartRow(product, productQuantity) ;
-
-                cartRowList.add(cartRow) ;
+                if (product.getVendorEmail().equals(vendor)) {
+                    CartRow cartRow = new CartRow(product, productQuantity);
+                    cartRowList.add(cartRow);
+                }
             }
         }
         catch (SQLException sqlException) {

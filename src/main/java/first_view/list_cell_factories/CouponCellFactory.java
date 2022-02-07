@@ -21,8 +21,8 @@ public class CouponCellFactory extends ListCell<CouponBean> {
     private Parent parentNode = null ;
 
     private final Integer caller ;
-    private String codeString ;
-    private String discountString ;
+    private final String codeString ;
+    private final String discountString ;
 
     public CouponCellFactory(Integer caller) {
         this.caller = caller ;
