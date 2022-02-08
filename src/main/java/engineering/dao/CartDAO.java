@@ -34,7 +34,7 @@ public class CartDAO {
     }
 
     public List<CartRow> loadCartByOrderCodeAndVendor(Integer orderCode, String vendor) {
-
+        // Retrieve info of brought product for a specific Order and Vendor
         Connection connection = Connector.getConnectorInstance().getConnection();
         List<CartRow> cartRowList = new ArrayList<>() ;
         try(

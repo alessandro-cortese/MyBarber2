@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
+    // This class represents a completed Order in the system
 
     private Integer orderCode ;
 

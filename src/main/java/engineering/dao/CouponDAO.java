@@ -86,6 +86,7 @@ public class CouponDAO {
     }
 
     public void invalidateAllCoupon(CouponContainer couponContainer) {
+        // Deletes all the coupon in a coupon container
         for (int i = 0 ; i < couponContainer.getSize() ; i++) {
             if (couponContainer.getCouponByIndex(i) != null) {
                 invalidateCoupon(couponContainer.getCouponByIndex(i));

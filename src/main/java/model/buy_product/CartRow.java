@@ -3,6 +3,10 @@ package model.buy_product;
 import java.io.Serializable;
 
 public class CartRow implements Serializable {
+    /*
+        This class represents a brought product with its quantity. Its responsibility is to encapsulate product and
+        quantity in order to calculate total price
+     */
 
     private Product product ;
     private Integer quantity ;

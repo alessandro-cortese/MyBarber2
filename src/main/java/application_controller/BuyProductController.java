@@ -27,20 +27,20 @@ import java.util.List;
 
 public class BuyProductController {
 
-    private final CouponDAO couponDAO ;
     private final ProductCatalog productCatalog ;
     private Cart cart ;
     private Customer customer;
-    private CartFileSaver cartFileSaver ;
     private final CouponApplier couponApplier ;
+
+    private CartFileSaver cartFileSaver ;
 
 
     public BuyProductController(UserBean loggedUserBean) {
         ProductDAO productDAO = new ProductDAO();
-        couponDAO = new CouponDAO() ;
         productCatalog = productDAO.loadAllProducts() ;
 
         try {
+            //If the user is logged we check if there is a previous cart saved
             loadCustomer(loggedUserBean);
             cart = cartFileSaver.loadCartFromFile() ;
         } catch (NotExistentUserException e) {
@@ -65,6 +65,7 @@ public class BuyProductController {
     }
 
     public CartBean insertProductToCart(ProductBean productBean) {
+        // We retrieve the Product from product catalog using ISBN and then add it to cart
         Product product = productCatalog.getProductByIsbn(productBean.getBeanIsbn()) ;
         cart.insertProduct(product);
         if (customer != null) cartFileSaver.saveCartInFile(cart);
@@ -98,6 +99,8 @@ public class BuyProductController {
     }
 
     public OrderTotalBean applyCoupon(CouponBean couponBean) throws InvalidCouponException, NegativePriceException {
+        //Load coupon from DB and then apply it to the cart price with the CouponApplier instance
+        CouponDAO couponDAO = new CouponDAO() ;
         Coupon myCoupon = couponDAO.loadCouponByCode(couponBean.getCouponCode());
         couponApplier.applyCoupon(myCoupon);
         Double cartPrice = cart.getPrice() ;
@@ -106,8 +109,8 @@ public class BuyProductController {
     }
 
     public void completeOrder(OrderInfoBean orderInfoBean) {
+        //Create and set Order Info; then save it in DB
         Order order = new Order() ;
-        //IMPOSTIO INFORMAZIONI DI ORDER
         order.setAddress(orderInfoBean.getAddressInfo());
         order.setTelephone(orderInfoBean.getTelephoneInfo());
         order.setDate(LocalDate.now());
@@ -115,30 +118,31 @@ public class BuyProductController {
         order.setOrderOwner(customer);
         order.setCartRows(cart.getCartRowArrayList());
 
-        //SALVATAGGIO ORDER
         OrderDAO orderDAO = new OrderDAO() ;
         orderDAO.saveOrder(order);
 
-        //INVALIDO TUTTI I COUPON UTILIZZATI
+        //Invalidate of all used coupons
+        CouponDAO couponDAO = new CouponDAO() ;
         couponDAO.invalidateAllCoupon(couponApplier.getCouponContainer());
 
-        //Cancellazione del carrello provvisorio
+        //Delete of partial cart: the order is completed so there is no need to maintain it
         cartFileSaver.deleteCartFromFile() ;
 
-        //AGGIORNAMENTO PUNTEGGIO CUSTOMER
+        //Update customer points in DB
         CustomerDAO customerDAO = new CustomerDAO() ;
         Double cartPrice = cart.getPrice() ;
         Integer orderPoints = (int) Math.round(cartPrice) ;
         Integer finalPoints;
         try {
-            finalPoints = Math.addExact(this.customer.getCardPoints(), orderPoints) ;
+            finalPoints = Math.addExact(customer.getCardPoints(), orderPoints) ;
         }
         catch (ArithmeticException arithmeticException) {
             finalPoints = Integer.MAX_VALUE ;
         }
-        this.customer.setCardPoints(finalPoints);
-        customerDAO.updateCustomerPoints(this.customer);
+        customer.setCardPoints(finalPoints);
+        customerDAO.updateCustomerPoints(customer);
 
+        // Send notifications to Vendors and contact Payment System
         BuyProductPaypalBoundary paypalBoundary = new BuyProductPaypalBoundary() ;
         paypalBoundary.pay(new OrderTotalBean(couponApplier.getFinalPrice()));
 

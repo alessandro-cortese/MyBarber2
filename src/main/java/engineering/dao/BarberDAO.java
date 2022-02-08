@@ -17,9 +17,8 @@ public class BarberDAO {
 
     public void insertBarber(User barber) throws DuplicatedUserException {
         Connection connection = Connector.getConnectorInstance().getConnection();
-        try {
-
-            Statement statement = connection.createStatement();
+        try(
+            Statement statement = connection.createStatement();) {
             Queries.insertIntoUser(statement,barber.getEmail(),barber.getPass(),BARBER);
             Queries.insertIntoBarber(statement, barber.getName(), barber.getSurname(), barber.getEmail());
 

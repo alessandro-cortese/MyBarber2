@@ -21,18 +21,14 @@ import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
 
 public class ManageCouponController {
 
-    private final CouponDAO couponDAO ;
     private CouponContainer couponContainer ;
-    private final CustomerDAO customerDAO ;
-
     private Customer customer ;
-
     private final List<CouponBean> couponCosts ;
 
 
     public ManageCouponController(UserBean loggedUser) {
-        couponDAO = new CouponDAO() ;
-        customerDAO = new CustomerDAO();
+        CouponDAO couponDAO = new CouponDAO() ;
+        CustomerDAO customerDAO = new CustomerDAO() ;
         try {
             if (loggedUser == null) throw new NotExistentUserException() ;
 
@@ -63,7 +59,7 @@ public class ManageCouponController {
 
 
     public FidelityCardBean showFidelityCard() throws NotExistentUserException {
-        if (customer == null) throw new NotExistentUserException("ACCESSO NON EFFETTUATO!!") ;
+        if (customer == null) throw new NotExistentUserException("NOT DONE ACCESS!!") ;
 
         return createFidelityCardBean() ;
     }
@@ -71,7 +67,7 @@ public class ManageCouponController {
 
     public FidelityCardBean generateNewCoupon(CouponBean couponBean) throws NotExistentUserException, CardPointsException {
         if (customer == null) {
-            throw new NotExistentUserException("ACCESSO NON EFFETTUATO!!") ;
+            throw new NotExistentUserException("NOT DONE ACCESS!!") ;
         }
 
         Double couponValue = couponBean.getCouponDiscount() ;
@@ -82,7 +78,7 @@ public class ManageCouponController {
             updateCustomer(couponCost) ;
         }
         else {
-            throw new CardPointsException("PUNTI NON SUFFICIENTI PER GENERARE IL COUPON!!") ;
+            throw new CardPointsException("NOT ENOUGH POINTS TO GENERATE NEW COUPON!!") ;
         }
 
         return createFidelityCardBean();
@@ -90,11 +86,13 @@ public class ManageCouponController {
 
     private void updateCustomer(Integer couponCost) {
         customer.setCardPoints(customer.getCardPoints() - couponCost);
+        CustomerDAO customerDAO = new CustomerDAO() ;
         customerDAO.updateCustomerPoints(customer) ;
     }
 
 
     private void createNewCoupon(Integer couponType, Double couponValue) {
+        CouponDAO couponDAO = new CouponDAO() ;
         Coupon newCoupon = couponDAO.addNewCoupon(couponType, couponValue, customer.getEmail()) ;
         if (newCoupon != null) {
             couponContainer.addCoupon(newCoupon) ;

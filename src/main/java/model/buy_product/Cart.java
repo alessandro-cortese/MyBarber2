@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Cart implements Priceable, Serializable {
+    /*
+        This class has been built with the aim of manage a list of cart rows and take away responsibility of add/remove
+        product from the application controller.
+        It realizes Priceable interface as concrete component of Decorator Pattern.
+     */
 
     private final ArrayList<CartRow> cartRowArrayList ;
 
@@ -49,6 +54,7 @@ public class Cart implements Priceable, Serializable {
     }
 
     public ArrayList<String> getVendorsInfo() {
+        //Return list of vendors' email addresses in order to make the controller send emails to vendors
         ArrayList<String> vendorsInfo = new ArrayList<>() ;
         for (CartRow cartRow : cartRowArrayList) {
             if (!vendorsInfo.contains(cartRow.getProductVendor())) {

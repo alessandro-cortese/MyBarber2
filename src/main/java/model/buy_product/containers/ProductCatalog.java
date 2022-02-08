@@ -9,6 +9,10 @@ import java.util.Objects;
 import javax.annotation.Nullable;
 
 public class ProductCatalog {
+    /*
+        Engineering class built to manage a list of products and take responsibility of iterate or search away from
+        other classes that have a list of product
+     */
 
     private final List<Product> productArrayList ;
 

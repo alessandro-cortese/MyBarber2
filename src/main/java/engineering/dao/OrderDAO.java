@@ -41,7 +41,7 @@ public class OrderDAO {
                 }
             }
 
-            //Salvataggio del Carrello(varie righe di prodotti) relativo a questo ordine
+            // Save cart of this order
             CartDAO cartDAO = new CartDAO() ;
             cartDAO.saveCart(order.getCartRows(), order.getOrderCode());
 

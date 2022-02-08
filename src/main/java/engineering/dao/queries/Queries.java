@@ -169,16 +169,19 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
     }
 
     //-+-+-+-+-+-+-+-+-+-+- Customer -+-+-+-+-+-+-+-+-+-+-//
-
     public static  ResultSet loadCustomerFromSaloon(Statement statement, Integer favoriteSaloonId) throws SQLException {
         String query = String.format("SELECT C.* FROM Customer C JOIN favorite F ON C.userEmail = F.customer WHERE F.saloon = '%d';", favoriteSaloonId);
         return statement.executeQuery(query);
     }
 
     public static boolean insertIntoCustomer(Statement statement, String name, String surname, String email) throws SQLException {
-
         String sql = String.format("INSERT INTO Customer values('%s','%s','%s','%s','%d');",email,name,surname,PHONE,CARDPOINTS);
         return statement.execute(sql);
+    }
+
+    public static void updateCustomerCardPoints(Statement statement, String customerEmail, Integer customerCardPoints) throws SQLException {
+        String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customerCardPoints, customerEmail) ;
+        statement.executeUpdate(update) ;
     }
 
     //-+-+-+-+-+-+-+-+-+-+- SaloonDay -+-+-+-+-+-+-+-+-+-+-//

@@ -22,7 +22,7 @@ public class CartFileSaver {
                 ) {
             cart = (Cart) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException exception) {
-            //Se il file che contiene il carrello non viene trovato, si ritorna direttamente una nuova istanza di carrello
+            //If the file doesn't contain a previous cart, then is given back a new Cart instance
         }
         return cart ;
     }
@@ -34,7 +34,7 @@ public class CartFileSaver {
         ) {
             objectOutputStream.writeObject(cart);
         } catch (IOException ignored) {
-            //Se il file non viene trovato il carrello non viene salvato
+            //If the file isn't found, then the previous Cart isn't saved
         }
     }
 

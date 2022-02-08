@@ -3,8 +3,17 @@ package model.buy_product.coupon;
 import engineering.pattern.decorator.Priceable;
 
 public abstract class Coupon implements Priceable, Comparable<Coupon> {
+    /*
+        Abstract class that represent the Coupon entity and the Abstract Decorator in decorator Pattern.
+        This class implements Priceable with the aim of implement decorator pattern: is not given a method to getPrice
+        operation as pattern says .
+        The Comparable interface is realized with the aim of make that same coupons applied in different order give
+        the same result with the application of decorator pattern. Coupons are sorted based on type and price: we have
+        first Subtraction type coupons and then Percentage; with parity of type, they are sorted with crescent discount
+     */
 
     private Integer couponCode ;
+    // This represents the aggregated compont of decorator pattern
     private Priceable appliedPrice ;
     private Double couponDiscount ;
     private Integer couponType ;
@@ -32,6 +41,7 @@ public abstract class Coupon implements Priceable, Comparable<Coupon> {
     }
 
     public void setAppliedPrice(Priceable appliedPrice) {
+        //This operation allows to set the Priceable on which the coupon must be applied
         this.appliedPrice = appliedPrice;
     }
 

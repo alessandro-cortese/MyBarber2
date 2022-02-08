@@ -1,6 +1,10 @@
 package model.buy_product.coupon;
 
 public class PercentageCoupon extends Coupon{
+    /*
+        Represents one of the Concrete Decorator of pattern: it applied its decoration by subtraction of percentage
+        of its discount
+     */
 
     public PercentageCoupon(Integer couponCode, Double couponDiscount) {
         super(couponCode, couponDiscount, PERCENTAGE_TYPE) ;

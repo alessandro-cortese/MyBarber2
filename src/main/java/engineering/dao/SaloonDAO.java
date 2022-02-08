@@ -239,9 +239,8 @@ public class SaloonDAO {
         Connection connection = Connector.getConnectorInstance().getConnection();
         boolean flag= false;
         String day = null;
-        try {
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            ResultSet resultSet = Queries.checkDateClosed(statement,saloonName);
+        try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            ResultSet resultSet = Queries.checkDateClosed(statement,saloonName);) {
             if (resultSet.first())
                 day = resultSet.getString(DAY_CLOSED);
 

@@ -24,9 +24,9 @@ public class CustomerDAO {
     public Customer retrieveInfoCustomer(String userEmail) {
         Customer customer = null;
         Connection connection = Connector.getConnectorInstance().getConnection();
-        try {Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail);) {
 
-            ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail);
             while (resultSet.next()) {
                 customer = createCustomer(resultSet);
             }
@@ -42,7 +42,6 @@ public class CustomerDAO {
 
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = Queries.loadCustomerFromSaloon(statement, favoriteSaloonId)) {
-
 
             while (resultSet.next()) {
                 customers.add(createCustomer(resultSet));
@@ -70,8 +69,8 @@ public class CustomerDAO {
 
     public void insertCustomer(User customer) throws DuplicatedUserException {
         Connection connection = Connector.getConnectorInstance().getConnection();
-        try {
-            Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement();) {
+
             Queries.insertIntoUser(statement,customer.getEmail(),customer.getPass(),CUSTOMER);
             Queries.insertIntoCustomer(statement, customer.getName(), customer.getSurname(), customer.getEmail());
 
@@ -84,22 +83,10 @@ public class CustomerDAO {
 
 
     public Customer loadCustomerByEmail(String userEmail) throws NotExistentUserException {
-        Connection connection = Connector.getConnectorInstance().getConnection();
-        Customer customer = null ;
-        try(Statement statement = connection.createStatement() ;
-            ResultSet resultSet = Queries.selectCustomerByEmail(statement, userEmail)
-        )
-        {
-            if (resultSet.next()) {
-                customer = createCustomer(resultSet) ;
-            }
-            else {
-                throw new NotExistentUserException("NOT EXISTENT CUSTOMER WITH THIS CREDENTIALS") ;
-            }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+        Customer customer = retrieveInfoCustomer(userEmail) ;
+        if (customer == null) {
+            throw new NotExistentUserException("NOT EXISTENT USER WITH THIS CREDENTIALS!!") ;
         }
-
         return customer ;
     }
 
@@ -107,8 +94,7 @@ public class CustomerDAO {
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         try(Statement statement = connection.createStatement() ;) {
-            String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customer.getCardPoints(), customer.getEmail()) ;
-            statement.executeUpdate(update) ;
+            Queries.updateCustomerCardPoints(statement, customer.getEmail(), customer.getCardPoints());
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }

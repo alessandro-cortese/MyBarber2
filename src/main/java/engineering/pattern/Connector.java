@@ -13,7 +13,7 @@ public class Connector {
         private Connector()  {
 
             try(FileInputStream fileInputStream = new FileInputStream("src/main/java/engineering/dao/db_configuration.properties")) {
-
+                // Load DB Connection info from Properties file
                 Properties prop = new Properties() ;
                 prop.load(fileInputStream);
                 String driver = prop.getProperty("jdbcDriver") ;

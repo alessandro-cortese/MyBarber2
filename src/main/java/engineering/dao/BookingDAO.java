@@ -38,9 +38,9 @@ public class BookingDAO {
         Connection conn = Connector.getConnectorInstance().getConnection();
         List<Booking> bookingList= new ArrayList<>();
 
-        try(Statement statement = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)){
+        try(Statement statement = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            ResultSet resultSetSaloon = Queries.selectSaloonByName(statement, saloonName);){
 
-            ResultSet resultSetSaloon = Queries.selectSaloonByName(statement, saloonName);
             if(!resultSetSaloon.first()){
                 throw new SaloonNotFoundException("Il salone cercato non è presente in nessuna prenotazione!");
             }
