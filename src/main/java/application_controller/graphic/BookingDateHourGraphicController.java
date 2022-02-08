@@ -87,11 +87,16 @@ public class BookingDateHourGraphicController {
                 scheduleBookingGraphicController.displaySaloon(timeSlotSaloonInfo, timeSlotBean,date );
                 scheduleBookingGraphicController.injectServiceSaloon();
         }
-
+        
 
         @FXML
         public void confirmHour(ActionEvent event) {
                 date = dateBooking.getValue();
+                if(date == null){
+                        Alert alert= new Alert(Alert.AlertType.ERROR,"insert a valid date!");
+                        alert.showAndWait();
+                        return;
+                }
                 String date1 = String.valueOf(date);
                 if(date1.isEmpty())
                         try {
