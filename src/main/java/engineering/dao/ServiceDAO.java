@@ -114,7 +114,7 @@ public class ServiceDAO {
 
     }
 
-    public ServiceCatalogue loadAllService(String barberEmail) {
+    public ServiceCatalogue loadAllServiceByBarber(String barberEmail) {
 
         ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
         List<Service> services = new ArrayList<>();

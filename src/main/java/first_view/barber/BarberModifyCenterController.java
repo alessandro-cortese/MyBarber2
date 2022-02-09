@@ -80,6 +80,8 @@ public class BarberModifyCenterController implements Initializable {
         String[] weekdays = {"Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"};
         closedDaysChoiceBox.getItems().addAll(weekdays);
 
+        continueButton.setDisable(false);
+        continueButton.setVisible(false);
     }
 
 }

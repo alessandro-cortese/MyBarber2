@@ -31,10 +31,6 @@ public class BarberMenuController {
     @FXML private Button logoutButton ;
     @FXML private Button homeButton ;
 
-
-
-    private static final String BARBER_CENTER_SCREEN_NAME = "first_view/barber/barber_modify_center.fxml";
-    private static final String BARBER_CENTERS_SCREEN_NAME = "first_view/barber/barber_centers.fxml";
     private static final String ADD_SERVICE_BARBER_SCREEN_NAME = "first_view/barber/barber_add_service.fxml";
     private static final String USER_AREA_SCREEN_NAME = "first_view/general/user_area.fxml";
     private static final String BARBER_MANAGE_PRODUCT_SCREEN_NAME = "first_view/barber/barber_manage_products.fxml";
@@ -67,18 +63,11 @@ public class BarberMenuController {
         String newCenterNodeResName ;
         InternalBackController.getInternalBackControllerInstance().onNextScreen(barberBorderPane);
 
-
-        if (sourceItem == addCenterItem) {
-            newCenterNodeResName = BARBER_CENTER_SCREEN_NAME;
-        }
-        else if (sourceItem == userAreaItem) {
+        if (sourceItem == userAreaItem) {
             newCenterNodeResName = USER_AREA_SCREEN_NAME;
         }
         else if (sourceItem == manageProductsItem) {
             newCenterNodeResName = BARBER_MANAGE_PRODUCT_SCREEN_NAME;
-        }
-        else if (sourceItem == barberCenterItem){
-            newCenterNodeResName = BARBER_CENTERS_SCREEN_NAME;
         }
         else if (sourceItem == addServiceItem){
             newCenterNodeResName = ADD_SERVICE_BARBER_SCREEN_NAME;

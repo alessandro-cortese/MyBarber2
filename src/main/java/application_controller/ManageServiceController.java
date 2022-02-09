@@ -28,7 +28,7 @@ public class ManageServiceController {
     public List<ServiceBean> getAllService(UserBean userBean) throws IncorrectFormatException {
 
         ServiceDAO serviceDAO = new ServiceDAO();
-        ServiceCatalogue catalogueService = serviceDAO.loadAllService(userBean.getUserEmail());
+        ServiceCatalogue catalogueService = serviceDAO.loadAllServiceByBarber(userBean.getUserEmail());
         List<Service> services = catalogueService.getServices();
         String nameOfUsedProduct;
         ArrayList<ServiceBean> serviceBeanList = new ArrayList<>();
@@ -108,7 +108,7 @@ public class ManageServiceController {
         List<Customer> customers;
 
         customers = customerDAO.loadCustomerFromFavoriteSaloon(saloonId);
-        serviceCatalogue = serviceDAO.loadAllService(userBean.getUserEmail());
+        serviceCatalogue = serviceDAO.loadAllServiceByBarber(userBean.getUserEmail());
 
         try{
 
