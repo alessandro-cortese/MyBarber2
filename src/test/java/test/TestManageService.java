@@ -28,24 +28,6 @@ public class TestManageService {
     private ServiceBean secondServiceBean;
 
     @Test
-    public void duplicatedServiceTest() {
-
-        boolean flag;
-        boolean serviceBeanFlag = true;
-        ManageServiceController manageServiceController = new ManageServiceController();
-        try {
-            this.createServiceBean();
-        } catch (IncorrectFormatException e) {
-            serviceBeanFlag = false;
-        }
-
-        flag = manageServiceController.controlDuplicatedService(firstServiceBean, secondServiceBean);
-
-        assertTrue(flag);
-        assertTrue(serviceBeanFlag);
-    }
-
-    @Test
     public void testDeleteService(){
 
         /*

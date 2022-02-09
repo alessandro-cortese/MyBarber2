@@ -62,7 +62,7 @@ public class ManageServiceController {
             productDAO = new ProductDAO();
 
             try {
-                
+
                 product = productDAO.loadProductByName(serviceBeanToDelete.getNameOfUsedProductInfo(), barber.getEmail());
 
 
@@ -172,7 +172,7 @@ public class ManageServiceController {
         ServiceDAO serviceDAO = new ServiceDAO();
         ProductDAO productDAO = new ProductDAO();
         BarberDAO barberDAO = new BarberDAO();
-        Product product = null;
+        Product product;
         int serviceKey;
         boolean modify;
 
@@ -217,15 +217,15 @@ public class ManageServiceController {
         }
         else if(oldServiceBean.getNameOfUsedProductInfo().compareTo(updateServiceBean.getNameOfUsedProductInfo()) != 0) {
 
-            this.updateServiceProduct(product, productDAO, serviceDAO, serviceKey, updateServiceBean, barber);
+            this.updateServiceProduct(productDAO, serviceDAO, serviceKey, updateServiceBean, barber);
            
         }
 
     }
     
-    private void updateServiceProduct(Product product, ProductDAO productDAO, ServiceDAO serviceDAO, int serviceKey, ServiceBean serviceBean, Barber barber){
+    private void updateServiceProduct(ProductDAO productDAO, ServiceDAO serviceDAO, int serviceKey, ServiceBean serviceBean, Barber barber){
 
-        Product localProduct = product;
+        Product localProduct;
 
         try {
 
@@ -239,10 +239,7 @@ public class ManageServiceController {
             serviceDAO.updateServiceProduct(serviceKey, localProduct.getIsbn());
         }
 
-
-
     }
-    
 
     private void controlServiceBean(ServiceBean serviceBean) throws InsertNegativePriceException {
 
@@ -252,12 +249,12 @@ public class ManageServiceController {
 
     }
 
-    public boolean controlDuplicatedService(Service localService, Service service) {
+    private boolean controlDuplicatedService(Service localService, Service service) {
         return Objects.equals(localService.getServiceName(), service.getServiceName()) && Objects.equals(localService.getServiceDescription(), service.getServiceDescription()) &&
                 Objects.equals(localService.getServicePrice(), service.getServicePrice()) && Objects.equals(localService.getServiceUsedProduct(), service.getServiceUsedProduct());
     }
 
-    public boolean controlDuplicatedService(ServiceBean localService, ServiceBean service) {
+    private boolean controlDuplicatedService(ServiceBean localService, ServiceBean service) {
         return Objects.equals(localService.getNameInfo(), service.getNameInfo()) && Objects.equals(localService.getDescriptionInfo(), service.getDescriptionInfo()) &&
                 Objects.equals(localService.getPriceInfo(), service.getPriceInfo()) && Objects.equals(localService.getNameOfUsedProductInfo(), service.getNameOfUsedProductInfo());
     }
