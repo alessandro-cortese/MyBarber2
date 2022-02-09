@@ -5,10 +5,7 @@ import boundary.ManageServiceBoundarySendEmail;
 import engineering.bean.ServiceBean;
 import engineering.bean.UserBean;
 import engineering.container.ServiceCatalogue;
-import engineering.dao.CustomerDAO;
-import engineering.dao.ProductDAO;
-import engineering.dao.SaloonDAO;
-import engineering.dao.ServiceDAO;
+import engineering.dao.*;
 import engineering.exception.DuplicatedServiceException;
 import engineering.exception.IncorrectFormatException;
 import engineering.exception.InsertNegativePriceException;
@@ -28,7 +25,9 @@ public class ManageServiceController {
     public List<ServiceBean> getAllService(UserBean userBean) throws IncorrectFormatException {
 
         ServiceDAO serviceDAO = new ServiceDAO();
-        ServiceCatalogue catalogueService = serviceDAO.loadAllServiceByBarber(userBean.getUserEmail());
+        BarberDAO barberDAO = new BarberDAO();
+        Barber barber = barberDAO.loadBarber(userBean.getUserEmail());
+        ServiceCatalogue catalogueService = serviceDAO.loadAllServiceByBarber(barber.getEmail());
         List<Service> services = catalogueService.getServices();
         String nameOfUsedProduct;
         ArrayList<ServiceBean> serviceBeanList = new ArrayList<>();
@@ -52,15 +51,20 @@ public class ManageServiceController {
 
         ServiceDAO serviceDAO = new ServiceDAO();
         ProductDAO productDAO;
-        int serviceKey = 0;
+        BarberDAO barberDAO = new BarberDAO();
+        int serviceKey;
         Product product = null;
+
+        Barber barber = barberDAO.loadBarber(userBean.getUserEmail());
 
         if(!serviceBeanToDelete.getNameOfUsedProductInfo().equals("")) {
 
             productDAO = new ProductDAO();
-            try {
 
-                product = productDAO.loadProductByName(serviceBeanToDelete.getNameOfUsedProductInfo(), userBean.getUserEmail());
+            try {
+                
+                product = productDAO.loadProductByName(serviceBeanToDelete.getNameOfUsedProductInfo(), barber.getEmail());
+
 
             } catch (ProductNotFoundException e) {
 
@@ -70,7 +74,7 @@ public class ManageServiceController {
 
         }
 
-        serviceKey = serviceDAO.loadServiceId(serviceBeanToDelete.getNameInfo(), userBean.getUserEmail());
+        serviceKey = serviceDAO.loadServiceId(serviceBeanToDelete.getNameInfo(), barber.getEmail());
 
         if(product != null) {
 
@@ -78,29 +82,29 @@ public class ManageServiceController {
 
         }
 
-        serviceDAO.deleteService(serviceKey, userBean.getUserEmail());
+        serviceDAO.deleteService(serviceKey, barber.getEmail());
 
     }
 
     public void addService(ServiceBean serviceBean, UserBean userBean) throws DuplicatedServiceException, InsertNegativePriceException {
 
-        if(serviceBean.getPriceInfo() <= 0.0) {
-            throw new InsertNegativePriceException();
-        }
+        SaloonDAO saloonDAO = new SaloonDAO();
+        CustomerDAO customerDAO = new CustomerDAO();
+        ProductDAO productDAO = new ProductDAO();
+        ServiceDAO serviceDAO = new ServiceDAO();
+        BarberDAO barberDAO = new BarberDAO();
+
+        this.controlServiceBean(serviceBean);
 
         Product localProduct;
         Service newService;
-        Barber barber = new Barber(userBean.getUserEmail(), userBean.getPass(), userBean.getName(), userBean.getSurname());
+        Barber barber = barberDAO.loadBarber(userBean.getUserEmail());
 
         int serviceKey;
 
         ManageServiceBoundarySendEmail addServiceBoundarySendEmail = new ManageServiceBoundarySendEmail(serviceBean, userBean.getUserEmail());
         ServiceCatalogue serviceCatalogue;
 
-        SaloonDAO saloonDAO = new SaloonDAO();
-        CustomerDAO customerDAO = new CustomerDAO();
-        ProductDAO productDAO = new ProductDAO();
-        ServiceDAO serviceDAO = new ServiceDAO();
 
         Integer saloonId = saloonDAO.loadIdOfSaloon(userBean.getUserEmail());
 
@@ -108,11 +112,11 @@ public class ManageServiceController {
         List<Customer> customers;
 
         customers = customerDAO.loadCustomerFromFavoriteSaloon(saloonId);
-        serviceCatalogue = serviceDAO.loadAllServiceByBarber(userBean.getUserEmail());
+        serviceCatalogue = serviceDAO.loadAllServiceByBarber(barber.getEmail());
 
         try{
 
-            localProduct = productDAO.loadProductByName(serviceBean.getNameInfo(), userBean.getUserEmail());
+            localProduct = productDAO.loadProductByName(serviceBean.getNameOfUsedProductInfo(), barber.getEmail());
 
         }catch (ProductNotFoundException e){
 
@@ -142,7 +146,7 @@ public class ManageServiceController {
 
         }
 
-        serviceKey = serviceDAO.insertService(newService, userBean.getUserEmail()) ;
+        serviceKey = serviceDAO.insertService(newService, barber.getEmail()) ;
 
         if(!(serviceBean.getNameOfUsedProductInfo().equals("")) && localProduct != null) {
 
@@ -161,32 +165,34 @@ public class ManageServiceController {
 
     }
 
-    public void modifyService(ServiceBean oldService, ServiceBean updateService, UserBean userBean) throws InsertNegativePriceException {
+    public void modifyService(ServiceBean oldServiceBean, ServiceBean updateServiceBean, UserBean userBean) throws InsertNegativePriceException {
 
-        if(updateService.getPriceInfo() <= 0.0) {
-            throw new InsertNegativePriceException();
-        }
+        this.controlServiceBean(updateServiceBean);
 
         ServiceDAO serviceDAO = new ServiceDAO();
         ProductDAO productDAO = new ProductDAO();
-        Product product;
+        BarberDAO barberDAO = new BarberDAO();
+        Product product = null;
         int serviceKey;
         boolean modify;
 
-        serviceKey = serviceDAO.loadServiceId(oldService.getNameInfo(), userBean.getUserEmail());
+        Barber barber = barberDAO.loadBarber(userBean.getUserEmail());
+        serviceKey = serviceDAO.loadServiceId(oldServiceBean.getNameInfo(), barber.getEmail());
 
-        modify = !this.controlDuplicatedService(oldService, updateService);
 
+        modify = !this.controlDuplicatedService(oldServiceBean, updateServiceBean);
+
+        
         if(modify) {
 
-            serviceDAO.updateService(serviceKey, updateService.getNameInfo(), updateService.getDescriptionInfo(), updateService.getPriceInfo());
+            serviceDAO.updateService(serviceKey, updateServiceBean.getNameInfo(), updateServiceBean.getDescriptionInfo(), updateServiceBean.getPriceInfo());
 
         }
 
-        if(oldService.getNameOfUsedProductInfo().compareTo("") != 0 && updateService.getNameOfUsedProductInfo().compareTo("") == 0 && modify) {
+        if(oldServiceBean.getNameOfUsedProductInfo().compareTo("") != 0 && updateServiceBean.getNameOfUsedProductInfo().compareTo("") == 0 && modify) {
             try {
 
-                product = productDAO.loadProductByName(oldService.getNameOfUsedProductInfo(), userBean.getUserEmail());
+                product = productDAO.loadProductByName(oldServiceBean.getNameOfUsedProductInfo(), barber.getEmail());
                 serviceDAO.deleteServiceProduct(serviceKey, product.getIsbn());
 
             } catch (ProductNotFoundException e) {
@@ -194,28 +200,54 @@ public class ManageServiceController {
             }
 
         }
-        else if(oldService.getNameOfUsedProductInfo().compareTo("") == 0 && updateService.getNameOfUsedProductInfo().compareTo("") != 0 && modify) {
+        else if(oldServiceBean.getNameOfUsedProductInfo().compareTo("") == 0 && updateServiceBean.getNameOfUsedProductInfo().compareTo("") != 0 && modify) {
 
             try {
 
-                product = productDAO.loadProductByName(updateService.getNameOfUsedProductInfo(), userBean.getUserEmail());
-                serviceDAO.insertServiceProduct(serviceKey, product.getIsbn());
+                product = productDAO.loadProductByName(updateServiceBean.getNameOfUsedProductInfo(), barber.getEmail());
 
             } catch (ProductNotFoundException e) {
-                e.printStackTrace();
+                product = null;
             }
+
+            if(product != null) {
+                serviceDAO.insertServiceProduct(serviceKey, product.getIsbn());
+            }
+
         }
-        else if(oldService.getNameOfUsedProductInfo().compareTo(updateService.getNameOfUsedProductInfo()) != 0) {
+        else if(oldServiceBean.getNameOfUsedProductInfo().compareTo(updateServiceBean.getNameOfUsedProductInfo()) != 0) {
 
-            try {
+            this.updateServiceProduct(product, productDAO, serviceDAO, serviceKey, updateServiceBean, barber);
+           
+        }
 
-                product = productDAO.loadProductByName(updateService.getNameOfUsedProductInfo(), userBean.getUserEmail());
-                serviceDAO.insertServiceProduct(serviceKey, product.getIsbn());
+    }
+    
+    private void updateServiceProduct(Product product, ProductDAO productDAO, ServiceDAO serviceDAO, int serviceKey, ServiceBean serviceBean, Barber barber){
 
-            } catch (ProductNotFoundException e) {
-                e.printStackTrace();
-            }
+        Product localProduct = product;
 
+        try {
+
+            localProduct = productDAO.loadProductByName(serviceBean.getNameOfUsedProductInfo(), barber.getEmail());
+
+        } catch (ProductNotFoundException e) {
+            localProduct = null;
+        }
+
+        if(localProduct != null) {
+            serviceDAO.updateServiceProduct(serviceKey, localProduct.getIsbn());
+        }
+
+
+
+    }
+    
+
+    private void controlServiceBean(ServiceBean serviceBean) throws InsertNegativePriceException {
+
+        if(serviceBean.getPriceInfo() <= 0.0){
+            throw new InsertNegativePriceException();
         }
 
     }

@@ -88,15 +88,19 @@ public class ProductDAO {
         Product product = null;
         Connection connection = Connector.getConnectorInstance().getConnection();
         try (Statement statement = connection.createStatement() ;
-             ResultSet resultSet = Queries.loadProductByName(statement, name, barberEmail) )
-        {
-            resultSet.next();
-            if (resultSet.isFirst()) {
+             ResultSet resultSet = Queries.loadProductByName(statement, name, barberEmail) ) {
+
+            if (resultSet.next()) {
+
                 product = createProduct(resultSet) ;
+
             }
             else{
+
                 throw new ProductNotFoundException();
+
             }
+
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();

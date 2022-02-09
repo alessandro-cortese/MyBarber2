@@ -69,13 +69,13 @@ public class ServiceDAO {
 
     }
 
-    public void deleteService(int serviceId, String barberEmail){
+    public void deleteService(int serviceKey, String barberEmail){
 
         Connection connection = Connector.getConnectorInstance().getConnection();
 
         try (Statement statement = connection.createStatement()){
 
-            Queries.deleteService(statement, serviceId, barberEmail);
+            Queries.deleteService(statement, serviceKey, barberEmail);
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -112,6 +112,28 @@ public class ServiceDAO {
             sqlException.printStackTrace();
         }
 
+    }
+
+    public Service loadServiceByNameAndBarber(String serviceName, String barberEmail) {
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+        Service service = null;
+
+        try(Statement statement = connection.createStatement();
+            ResultSet resultSet = Queries.loadServiceByNameAndBarberEmail(statement, serviceName, barberEmail)) {
+
+            if(resultSet.next()) {
+
+                service = this.createService(resultSet);
+
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+
+        return service;
     }
 
     public ServiceCatalogue loadAllServiceByBarber(String barberEmail) {
@@ -196,6 +218,23 @@ public class ServiceDAO {
             preparedStatement.setString(2, serviceDescription);
             preparedStatement.setDouble(3, servicePrice);
             preparedStatement.setInt(4, serviceKey);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+    }
+
+    public void updateServiceProduct(int serviceKey, int productKey) {
+
+        Connection connection = Connector.getConnectorInstance().getConnection();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ServiceProduct SET idProduct = ? WHERE idService = ?;")) {
+
+            preparedStatement.setInt(1, productKey);
+            preparedStatement.setInt( 2, serviceKey);
 
             preparedStatement.executeUpdate();
 

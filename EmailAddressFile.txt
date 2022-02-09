@@ -3,4 +3,9 @@ Barber mail address:    barber
 New service added:   Shampoo
 
 Send to customers' mail address:
+
 customer
+emily_bronte@gmail.com
+mary_shelley@gmail.com
+oscar_wilde@gmail.com
+umberto_eco@gmail.com

@@ -116,8 +116,8 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
 
 
     //-+-+-+-+-+-+-+-+-+-+- Service -+-+-+-+-+-+-+-+-+-+-//
-    public static ResultSet loadServiceByName(Statement statement, String serviceName) throws SQLException {
-        String query = String.format("SELECT * FROM Service WHERE name = '%s';", serviceName);
+    public static ResultSet loadServiceByNameAndBarberEmail(Statement statement, String serviceName, String barberEmail) throws SQLException {
+        String query = String.format("SELECT * FROM Service WHERE name = '%s' AND barber = '%s';", serviceName, barberEmail);
         return statement.executeQuery(query);
     }
 
@@ -137,9 +137,9 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         return statement.executeQuery(query);
     }
 
-    public static int deleteService(Statement statement, int serviceKey, String barberEmail) throws SQLException {
+    public static void deleteService(Statement statement, int serviceKey, String barberEmail) throws SQLException {
         String update = String.format("DELETE FROM Service WHERE id = %d AND barber = '%s';", serviceKey, barberEmail);
-        return statement.executeUpdate(update);
+        statement.execute(update);
     }
 
     public static int deleteServiceProduct(Statement statement, int serviceId, int productId) throws SQLException {
@@ -183,7 +183,6 @@ public class Queries { //qui vanno messe tutte le query per essere più compatti
         String update = String.format("UPDATE Customer SET cardPoints = %d WHERE userEmail = '%s' ;", customerCardPoints, customerEmail) ;
         statement.executeUpdate(update) ;
     }
-
     //-+-+-+-+-+-+-+-+-+-+- SaloonDay -+-+-+-+-+-+-+-+-+-+-//
     public static ResultSet checkDateClosed(Statement statement,String saloonName) throws SQLException {
         String sql = String.format("SELECT dayClosed FROM Saloon join SaloonDay on Saloon.id = SaloonDay.Saloon WHERE name = '%s';",saloonName);
