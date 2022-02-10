@@ -16,7 +16,6 @@ public class BarberAppointmentsListCellFactory extends ListCell<BookingBean> {
     private static final String SURNAME_LABEL = "surnameLabel";
     private static final String TO_TIME_LABEL = "toTimeLabel";
     private static final String FROM_TIME_LABEL = "fromTimeLabel";
-    private static final String SLOT_INDEX ="indexLabel" ;
     Parent parentNode = null;
     
 
