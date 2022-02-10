@@ -131,8 +131,6 @@ public class ManageServiceController {
 
         }
 
-        serviceBean.attach(addServiceBoundarySendEmail);
-
         newService = new Service(serviceBean.getNameInfo(), serviceBean.getDescriptionInfo(), serviceBean.getPriceInfo(), localProduct);
         newService.setBarber(barber);
 

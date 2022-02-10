@@ -1,6 +1,6 @@
 Barber mail address:    barber
 
-New service added:   Shampoo
+New service added:   Taglio
 
 Send to customers' mail address:
 

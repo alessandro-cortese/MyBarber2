@@ -16,6 +16,7 @@ public class ManageServiceBoundarySendEmail implements Observer {
     public ManageServiceBoundarySendEmail(ServiceBean serviceBean, String barberEmail){
 
         this.serviceBean = serviceBean;
+        this.serviceBean.attach(this);
         this.barberEmail = barberEmail;
 
     }
