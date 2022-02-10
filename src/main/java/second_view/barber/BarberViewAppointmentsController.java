@@ -53,7 +53,7 @@ public class BarberViewAppointmentsController {
         }
 
         else if(viewAppointmentsCommand.compareTo("confirm") == 0) {
-            appointmentListView.setCellFactory(param -> new BarberAppointmentsListCellFactory(true));
+            appointmentListView.setCellFactory(param -> new BarberAppointmentsListCellFactory());
             BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
             List<BookingBean> bookingBeanList;
             try {
@@ -66,6 +66,7 @@ public class BarberViewAppointmentsController {
 
                 return;
             }
+
             appointmentListView.setItems(FXCollections.observableList(bookingBeanList));
 
 

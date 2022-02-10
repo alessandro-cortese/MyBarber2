@@ -17,12 +17,10 @@ public class BarberAppointmentsListCellFactory extends ListCell<BookingBean> {
     private static final String TO_TIME_LABEL = "toTimeLabel";
     private static final String FROM_TIME_LABEL = "fromTimeLabel";
     private static final String SLOT_INDEX ="indexLabel" ;
-    private final boolean view;
     Parent parentNode = null;
     
-    public BarberAppointmentsListCellFactory(boolean view){
-        this.view = view;
-    }
+
+
 
     @Override
     protected void updateItem(BookingBean item, boolean empty) {
@@ -39,11 +37,7 @@ public class BarberAppointmentsListCellFactory extends ListCell<BookingBean> {
             surnameLabel.setText(item.getSurnameCustomer());
             toTimeLabel.setText(String.valueOf(item.getToTime()));
             fromTimeLabel.setText(String.valueOf(item.getFromTime()));
-            
-            if(view){
-                Label index = (Label) parentNode.lookup("#"+ SLOT_INDEX);
-                index.setText("slot index: "+ Integer.toString(this.getIndex()));
-            }
+
             
             setGraphic(parentNode);
 

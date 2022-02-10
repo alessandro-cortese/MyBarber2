@@ -19,20 +19,20 @@
          <children>
             <HBox layoutX="10.0" layoutY="30.0" prefHeight="34.0" prefWidth="157.0">
                <children>
-                  <Label prefHeight="34.0" prefWidth="95.0" text="Nome:" />
+                  <Label prefHeight="29.0" prefWidth="115.0" text="Nome:" />
                   <Label fx:id="nameLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="266.0" text="&lt;&lt;Nome Cliente&gt;&gt;" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="30.0" prefHeight="34.0" prefWidth="157.0">
                <children>
-                  <Label prefHeight="34.0" prefWidth="110.0" text="Cognome:" />
+                  <Label prefHeight="29.0" prefWidth="133.0" text="Cognome:" />
                   <Label fx:id="surnameLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="235.0" text="&lt;&lt;Cognome Cliente&gt;&gt;" />
                </children>
             </HBox>
             <HBox prefHeight="29.0" prefWidth="234.0">
                <children>
                   <Label prefHeight="16.0" prefWidth="74.0" text="Slot time" />
-                  <Label fx:id="fromTimeLabel" prefHeight="16.0" prefWidth="49.0" text="Label" />
+                  <Label fx:id="fromTimeLabel" prefHeight="16.0" prefWidth="84.0" text="Label" />
                   <Label prefHeight="16.0" prefWidth="14.0" text="-">
                      <font>
                         <Font size="15.0" />

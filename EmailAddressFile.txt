@@ -1,11 +1,6 @@
-Barber mail address:    barber
+Barber mail address:    jack_london@gmail.com
 
-New service added:   Taglio
+New service added:   barba
 
 Send to customers' mail address:
 
-customer
-emily_bronte@gmail.com
-mary_shelley@gmail.com
-oscar_wilde@gmail.com
-umberto_eco@gmail.com

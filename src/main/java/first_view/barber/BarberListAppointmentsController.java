@@ -27,7 +27,7 @@ public class BarberListAppointmentsController {
 
     @FXML
     public void onConfirm(ActionEvent event){
-        appointmentsListView.setCellFactory(param -> new BarberAppointmentsListCellFactory(false));
+        appointmentsListView.setCellFactory(param -> new BarberAppointmentsListCellFactory());
         List<BookingBean> bookingBeanList;
         BarberSeeAppointmentsController barberSeeAppointmentsController = new BarberSeeAppointmentsController();
         String saloonName = saloonText.getText();

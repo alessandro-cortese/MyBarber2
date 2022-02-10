@@ -32,13 +32,14 @@ public class BookingController {
         List<Saloon> listSaloon = saloonDAO.retrieveByCityName(saloonCity);
 
         for (Saloon saloonItem: listSaloon){
-            saloonBean.setName(saloonItem.getName());
-            saloonBean.setAddress(saloonItem.getAddress());
-            saloonBean.setCity(saloonItem.getCity());
-            saloonBean.setPhone(saloonItem.getPhone());
-            saloonBean.setSeatNumber(saloonItem.getSeatNumber());
-            saloonBean.setSlotTime(saloonItem.getSlotTime());
-            saloonBeanList.add(saloonBean);
+            SaloonBean saloonBean2 = new SaloonBean();
+            saloonBean2.setName(saloonItem.getName());
+            saloonBean2.setAddress(saloonItem.getAddress());
+            saloonBean2.setCity(saloonItem.getCity());
+            saloonBean2.setPhone(saloonItem.getPhone());
+            saloonBean2.setSeatNumber(saloonItem.getSeatNumber());
+            saloonBean2.setSlotTime(saloonItem.getSlotTime());
+            saloonBeanList.add(saloonBean2);
         }
         return saloonBeanList;
     }

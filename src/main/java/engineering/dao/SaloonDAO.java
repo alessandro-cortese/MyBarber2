@@ -99,13 +99,14 @@ public class SaloonDAO {
         Connection connection = Connector.getConnectorInstance().getConnection();
         ArrayList<Saloon> saloons = new ArrayList<>();
 
-        try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.TYPE_SCROLL_INSENSITIVE);
+        try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             ResultSet resultSet = Queries.loadSaloonByName(statement, saloonCity)){
             if (!resultSet.first() ) {
                 String message ="nessun salone disponibile, riprova un'altra citta";
                 throw new SaloonNotFoundException(message);
             }
-            resultSet.beforeFirst();// return on the previous row
+
+            resultSet.beforeFirst();
             while(resultSet.next()){
 
                 Saloon saloon = createSaloon(resultSet);
@@ -166,7 +167,7 @@ public class SaloonDAO {
                 numberSlotTime[0] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_MORNING_COL);
                 numberSlotTime[1] = resultSet.getInt(SALOON_NUMBER_SLOT_TIME_AFTERNOON_COL);
                 int seatNumber = resultSet.getInt(SALOON_SEAT_NUMBER_COL);
-                saloon = new Saloon(saloonName, times, intervalSlotTime, numberSlotTime,seatNumber);
+                saloon = new   Saloon(saloonName, times, intervalSlotTime, numberSlotTime,seatNumber);
 
             }
 
@@ -203,7 +204,7 @@ public class SaloonDAO {
         return saloonId;
     }
 
-    private Saloon createSaloon(ResultSet resultSet) throws SQLException {
+    public Saloon createSaloon(ResultSet resultSet) throws SQLException {
 
         Integer[] numberOfSlots = new Integer[2];
         String[] cityAndAddress = new String[2];
