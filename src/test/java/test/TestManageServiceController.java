@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestManageService {
+public class TestManageServiceController {
     /*@author Testing:  Alessandro Cortese
                         Matricola 0267355
     */
@@ -71,7 +71,7 @@ public class TestManageService {
     }
 
     @Test
-    public void addServiceTest(){
+    public void testAddService(){
 
         /*
 
@@ -115,7 +115,7 @@ public class TestManageService {
     }
 
     @Test
-    public void modifyServiceTest() {
+    public void testModifyService() {
 
         /*
 
@@ -126,14 +126,13 @@ public class TestManageService {
          */
 
         UserBean barber = new UserBean(BARBER_EMAIL_TEST);
-        boolean flag = true;
         boolean modifiedServiceFlag = true;
         ServiceCatalogue serviceCatalogue = new ServiceCatalogue();
         List<Service> services;
         try {
             this.createServiceBean();
         } catch (IncorrectFormatException e) {
-            flag = false;
+            modifiedServiceFlag = false;
         }
         Service modifiedService = new Service(SERVICE_TEST_NAME, SERVICE_TEST_NEW_DESCRIPTION, 9.0);
         ManageServiceController manageServiceController = new ManageServiceController();
@@ -143,13 +142,13 @@ public class TestManageService {
             secondServiceBean.setPriceInfo("9.0");
             secondServiceBean.setDescriptionInfo(SERVICE_TEST_NEW_DESCRIPTION);
         } catch (IncorrectFormatException e) {
-            flag = false;
+            modifiedServiceFlag = false;
         }
 
         try {
             manageServiceController.modifyService(firstServiceBean, secondServiceBean, barber);
         } catch (InsertNegativePriceException e) {
-            flag = false;
+            modifiedServiceFlag = false;
         }
 
         services = serviceCatalogue.getServices();
@@ -164,7 +163,6 @@ public class TestManageService {
 
         }
 
-        assertTrue(flag);
         assertTrue(modifiedServiceFlag);
     }
 
