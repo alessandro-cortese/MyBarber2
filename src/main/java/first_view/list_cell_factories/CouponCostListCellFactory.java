@@ -1,7 +1,6 @@
 package first_view.list_cell_factories;
 
-import engineering.bean.buy_product.CouponBean;
-import javafx.scene.Parent;
+import engineering.bean.CouponBean;
 import javafx.scene.control.ListCell;
 
 import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;

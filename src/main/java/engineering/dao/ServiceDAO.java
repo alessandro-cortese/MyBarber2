@@ -1,10 +1,9 @@
 package engineering.dao;
 
 import engineering.container.ServiceCatalogue;
-import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
 import model.Service;
-import model.buy_product.Product;
+import model.Product;
 
 import java.sql.*;
 import java.util.ArrayList;

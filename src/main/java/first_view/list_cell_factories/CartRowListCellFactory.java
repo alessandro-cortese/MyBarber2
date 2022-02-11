@@ -1,6 +1,6 @@
 package first_view.list_cell_factories;
 
-import engineering.bean.buy_product.CartRowBean;
+import engineering.bean.CartRowBean;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;

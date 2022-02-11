@@ -1,11 +1,10 @@
 package engineering.dao;
 
-import engineering.dao.queries.Queries;
 import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
 import model.Customer;
-import model.buy_product.CartRow;
-import model.buy_product.Order;
+import model.CartRow;
+import model.Order;
 
 import java.sql.*;
 import java.time.LocalDate;

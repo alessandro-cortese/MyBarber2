@@ -1,8 +1,5 @@
 package engineering.bean;
 
-import engineering.bean.buy_product.CouponBean;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class FidelityCardBean {

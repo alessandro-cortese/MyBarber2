@@ -2,11 +2,8 @@ package first_view.client;
 
 import application_controller.BuyProductController;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.CartBean;
-import engineering.bean.buy_product.CartRowBean;
-import engineering.bean.buy_product.ProductBean;
-import engineering.dao.CartFileSaver;
-import engineering.exception.NotExistentUserException;
+import engineering.bean.CartBean;
+import engineering.bean.CartRowBean;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CartRowListCellFactory;
 import javafx.collections.FXCollections;

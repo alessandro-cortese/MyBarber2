@@ -1,7 +1,5 @@
 package model;
 
-import model.buy_product.Product;
-
 public class Service {
 
     private String serviceName;

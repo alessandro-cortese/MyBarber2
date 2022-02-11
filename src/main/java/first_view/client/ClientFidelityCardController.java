@@ -3,31 +3,23 @@ package first_view.client;
 import application_controller.ManageCouponController;
 import engineering.bean.FidelityCardBean;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.CouponBean;
+import engineering.bean.CouponBean;
 import engineering.exception.CardPointsException;
-import engineering.exception.InvalidCouponException;
 import engineering.exception.NotExistentUserException;
 import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CouponCellFactory;
 import first_view.list_cell_factories.CouponCostListCellFactory;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 import java.net.URL;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
-import static first_view.list_cell_factories.BuyProductListCellFactory.EURO_SYMBOL;
 import static first_view.list_cell_factories.BuyProductListCellFactory.FIRST_VIEW;
 
 public class ClientFidelityCardController implements Initializable {

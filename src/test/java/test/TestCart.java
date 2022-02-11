@@ -1,8 +1,8 @@
 package test;
 
 import javafx.util.Pair;
-import model.buy_product.Cart;
-import model.buy_product.Product;
+import model.Cart;
+import model.Product;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

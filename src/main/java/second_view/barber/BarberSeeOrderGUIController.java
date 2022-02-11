@@ -2,17 +2,15 @@ package second_view.barber;
 
 import application_controller.BarberManageOrderController;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.VendorOrderBean;
+import engineering.bean.VendorOrderBean;
 import first_view.list_cell_factories.BarberOrderListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.util.Callback;
 import second_view.general.ScreenChanger;
 
 import java.io.IOException;

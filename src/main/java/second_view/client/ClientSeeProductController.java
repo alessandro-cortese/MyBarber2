@@ -1,7 +1,7 @@
 package second_view.client;
 
 import application_controller.BuyProductController;
-import engineering.bean.buy_product.ProductBean;
+import engineering.bean.ProductBean;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import second_view.general.ScreenChanger;

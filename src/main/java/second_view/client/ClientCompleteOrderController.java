@@ -2,14 +2,13 @@ package second_view.client;
 
 import application_controller.BuyProductController;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.CouponBean;
-import engineering.bean.buy_product.OrderInfoBean;
-import engineering.bean.buy_product.OrderTotalBean;
+import engineering.bean.CouponBean;
+import engineering.bean.OrderInfoBean;
+import engineering.bean.OrderTotalBean;
 import engineering.exception.IncorrectFormatException;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.exception.NotExistentUserException;
-import first_view.general.InternalBackController;
 import first_view.list_cell_factories.CouponCodeCellFactory;
 import first_view.pickers.CredentialsPicker;
 import javafx.collections.FXCollections;

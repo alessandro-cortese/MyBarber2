@@ -1,11 +1,10 @@
 package first_view.list_cell_factories;
 
-import engineering.bean.buy_product.ProductBean;
+import engineering.bean.ProductBean;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.util.Objects;

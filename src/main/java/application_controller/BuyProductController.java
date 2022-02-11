@@ -1,22 +1,20 @@
 package application_controller;
 
-import boundary.buy_product.BuyProductEMailSystemBoundary;
-import boundary.buy_product.BuyProductPaypalBoundary;
-import engineering.bean.AccessInfoBean;
-import engineering.bean.UserBean;
-import engineering.bean.buy_product.*;
+import boundary.BuyProductEMailSystemBoundary;
+import boundary.BuyProductPaypalBoundary;
+import engineering.bean.*;
 import engineering.dao.*;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.exception.NotExistentUserException;
 import model.Customer;
-import model.buy_product.Cart;
-import model.buy_product.CartRow;
-import model.buy_product.Order;
-import model.buy_product.Product;
-import model.buy_product.containers.ProductCatalog;
-import model.buy_product.coupon.Coupon;
-import model.buy_product.coupon.CouponApplier;
+import model.Cart;
+import model.CartRow;
+import model.Order;
+import model.Product;
+import engineering.container.ProductCatalog;
+import model.Coupon;
+import model.CouponApplier;
 
 import java.time.Instant;
 import java.time.LocalDate;

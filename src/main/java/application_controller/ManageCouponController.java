@@ -2,22 +2,22 @@ package application_controller;
 
 import engineering.bean.FidelityCardBean;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.CouponBean;
+import engineering.bean.CouponBean;
 import engineering.dao.CouponDAO;
 import engineering.dao.CustomerDAO;
 import engineering.exception.CardPointsException;
 import engineering.exception.NotExistentUserException;
 import model.Customer;
-import model.buy_product.containers.CouponContainer;
-import model.buy_product.coupon.Coupon;
+import engineering.container.CouponContainer;
+import model.Coupon;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import static model.buy_product.coupon.Coupon.PERCENTAGE_TYPE;
-import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
+import static model.Coupon.PERCENTAGE_TYPE;
+import static model.Coupon.SUBTRACTION_TYPE;
 
 public class ManageCouponController {
 

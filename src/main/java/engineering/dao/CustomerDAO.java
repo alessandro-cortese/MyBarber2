@@ -1,10 +1,8 @@
 package engineering.dao;
 
-import engineering.dao.queries.Queries;
 import engineering.exception.DuplicatedUserException;
 import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
-import javafx.scene.control.Alert;
 import model.Customer;
 import model.User;
 

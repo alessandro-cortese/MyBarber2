@@ -1,13 +1,13 @@
 package application_controller;
 
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.ProductBean;
+import engineering.bean.ProductBean;
 import engineering.dao.ProductDAO;
 import engineering.exception.DuplicatedProductException;
 import engineering.exception.InvalidInsertProductException;
 import model.Barber;
-import model.buy_product.Product;
-import model.buy_product.containers.ProductCatalog;
+import model.Product;
+import engineering.container.ProductCatalog;
 import java.util.List;
 import java.util.Objects;
 

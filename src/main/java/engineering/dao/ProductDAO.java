@@ -1,11 +1,10 @@
 package engineering.dao;
 
-import engineering.dao.queries.Queries;
 import engineering.exception.ProductNotFoundException;
 import engineering.pattern.Connector;
 import model.Barber;
-import model.buy_product.Product;
-import model.buy_product.containers.ProductCatalog;
+import model.Product;
+import engineering.container.ProductCatalog;
 
 import java.sql.*;
 import java.util.ArrayList;

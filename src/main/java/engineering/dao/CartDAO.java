@@ -1,9 +1,8 @@
 package engineering.dao;
 
-import engineering.dao.queries.Queries;
 import engineering.pattern.Connector;
-import model.buy_product.CartRow;
-import model.buy_product.Product;
+import model.CartRow;
+import model.Product;
 
 import java.sql.*;
 import java.util.ArrayList;

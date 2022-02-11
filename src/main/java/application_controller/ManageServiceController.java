@@ -13,7 +13,7 @@ import engineering.exception.ProductNotFoundException;
 import model.Barber;
 import model.Customer;
 import model.Service;
-import model.buy_product.Product;
+import model.Product;
 
 import java.util.ArrayList;
 import java.util.List;

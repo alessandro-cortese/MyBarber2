@@ -1,8 +1,6 @@
 package engineering.dao;
 
-import engineering.bean.UserBean;
 import engineering.container.SaloonCatalogue;
-import engineering.dao.queries.Queries;
 import engineering.exception.SaloonNotFoundException;
 import engineering.pattern.Connector;
 import model.Saloon;

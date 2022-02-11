@@ -1,6 +1,5 @@
 package engineering.dao;
 
-import engineering.dao.queries.Queries;
 import engineering.exception.DuplicatedUserException;
 import engineering.pattern.Connector;
 import model.Barber;

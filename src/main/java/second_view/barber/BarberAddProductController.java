@@ -2,7 +2,7 @@ package second_view.barber;
 
 import application_controller.ManageProductController;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.ProductBean;
+import engineering.bean.ProductBean;
 import engineering.exception.DuplicatedProductException;
 import engineering.exception.InvalidInsertProductException;
 import javafx.event.ActionEvent;

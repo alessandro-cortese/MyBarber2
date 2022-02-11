@@ -1,9 +1,7 @@
 package engineering.dao;
 
-import engineering.dao.queries.Queries;
 import engineering.exception.NotExistentUserException;
 import engineering.pattern.Connector;
-import model.Customer;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

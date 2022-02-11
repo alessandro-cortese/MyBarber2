@@ -1,15 +1,14 @@
 package application_controller;
 
-import boundary.buy_product.BarberManageOrderEMailSystemBoundary;
+import boundary.BarberManageOrderEMailSystemBoundary;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.CartRowBean;
-import engineering.bean.buy_product.VendorOrderBean;
+import engineering.bean.CartRowBean;
+import engineering.bean.VendorOrderBean;
 import engineering.dao.BarberDAO;
 import engineering.dao.OrderDAO;
-import engineering.dao.UserDAO;
 import model.User;
-import model.buy_product.CartRow;
-import model.buy_product.Order;
+import model.CartRow;
+import model.Order;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

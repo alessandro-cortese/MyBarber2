@@ -1,16 +1,13 @@
 package engineering.dao;
 
-import engineering.dao.queries.Queries;
 import engineering.exception.BookingNotFoundExcption;
 import engineering.exception.SaloonNotFoundException;
 import engineering.pattern.Connector;
 import engineering.time.TimeSlot;
-import javafx.scene.control.Alert;
 import model.Booking;
 import model.Customer;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

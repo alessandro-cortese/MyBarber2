@@ -2,9 +2,9 @@ package first_view.client;
 
 import application_controller.BuyProductController;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.CouponBean;
-import engineering.bean.buy_product.OrderInfoBean;
-import engineering.bean.buy_product.OrderTotalBean;
+import engineering.bean.CouponBean;
+import engineering.bean.OrderInfoBean;
+import engineering.bean.OrderTotalBean;
 import engineering.exception.IncorrectFormatException;
 import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;

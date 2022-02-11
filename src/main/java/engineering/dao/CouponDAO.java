@@ -1,18 +1,17 @@
 package engineering.dao;
 
-import engineering.dao.queries.Queries;
 import engineering.exception.InvalidCouponException;
 import engineering.pattern.Connector;
-import model.buy_product.coupon.Coupon;
-import model.buy_product.containers.CouponContainer;
-import model.buy_product.coupon.PercentageCoupon;
-import model.buy_product.coupon.SubtractionCoupon;
+import model.Coupon;
+import engineering.container.CouponContainer;
+import model.PercentageCoupon;
+import model.SubtractionCoupon;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
+import static model.Coupon.SUBTRACTION_TYPE;
 
 public class CouponDAO {
 

@@ -2,13 +2,11 @@ package second_view.client;
 
 import application_controller.BuyProductController;
 import engineering.bean.UserBean;
-import engineering.bean.buy_product.ProductBean;
-import engineering.bean.buy_product.ProductSearchInfoBean;
-import engineering.exception.NotExistentUserException;
+import engineering.bean.ProductBean;
+import engineering.bean.ProductSearchInfoBean;
 import first_view.list_cell_factories.BuyProductListCellFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import second_view.general.ScreenChanger;
 import javafx.event.ActionEvent;

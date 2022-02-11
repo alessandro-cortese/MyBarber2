@@ -4,16 +4,16 @@ import engineering.exception.InvalidCouponException;
 import engineering.exception.NegativePriceException;
 import engineering.pattern.decorator.Priceable;
 import javafx.util.Pair;
-import model.buy_product.coupon.Coupon;
-import model.buy_product.coupon.CouponApplier;
-import model.buy_product.coupon.PercentageCoupon;
-import model.buy_product.coupon.SubtractionCoupon;
+import model.Coupon;
+import model.CouponApplier;
+import model.PercentageCoupon;
+import model.SubtractionCoupon;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static model.buy_product.coupon.Coupon.PERCENTAGE_TYPE;
-import static model.buy_product.coupon.Coupon.SUBTRACTION_TYPE;
+import static model.Coupon.PERCENTAGE_TYPE;
+import static model.Coupon.SUBTRACTION_TYPE;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
