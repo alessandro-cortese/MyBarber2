@@ -1,13 +1,11 @@
 package model.buy_product;
 
 import engineering.pattern.decorator.Priceable;
-import engineering.pattern.observer.Subject;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Cart implements Priceable, Serializable {
     /*

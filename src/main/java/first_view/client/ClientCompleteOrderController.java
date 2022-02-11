@@ -115,7 +115,7 @@ public class ClientCompleteOrderController implements Initializable {
 
     private void buy(OrderInfoBean orderInfoBean) {
         buyProductController.completeOrder(orderInfoBean);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Il tuo ordine è stato completato correttamente") ;
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Il tuo ordine è stato completato correttamente") ;
         alert.showAndWait() ;
     }
 

@@ -1,13 +1,7 @@
 package engineering.bean.buy_product;
 
-import engineering.pattern.observer.Observer;
-import model.buy_product.Cart;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static model.buy_product.Cart.*;
 
 public class CartBean {
 
