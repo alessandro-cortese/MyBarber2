@@ -135,7 +135,7 @@
                   <Font size="19.0" />
                </font>
             </Label>
-            <ListView fx:id="serviceListView" prefHeight="347.0" prefWidth="312.0" />
+            <ListView fx:id="serviceListView" onMouseClicked="#selectServiceOnListView" prefHeight="347.0" prefWidth="312.0" />
             <Button fx:id="bookedButton" mnemonicParsing="false" onAction="#onButtonSaloonClicked" prefHeight="35.0" prefWidth="250.0" text="Vai al riepilogo" textFill="WHITE" />
          </children>
       </VBox>

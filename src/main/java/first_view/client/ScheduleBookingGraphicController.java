@@ -35,7 +35,7 @@ public class ScheduleBookingGraphicController{
     private ImageView saloonImage;
 
     @FXML
-    private ListView serviceListView;
+    private ListView<ServiceBean> serviceListView;
     @FXML
     private Label dateLabel;
 
@@ -64,12 +64,14 @@ public class ScheduleBookingGraphicController{
 
     @FXML
     private  Label servicePriceLabel;
+    private List<ServiceBean> serviceBeans;
     private List<ServiceBean> serviceListSelected;
 
     public ScheduleBookingGraphicController(){
         saloonInfo = new SaloonBean();
         timeSlotInfo = new TimeSlotBean();
         serviceListSelected = new ArrayList<>();
+        serviceBeans = new ArrayList<>();
 
     }
 
@@ -78,15 +80,7 @@ public class ScheduleBookingGraphicController{
 
     @FXML
     void selectServiceOnListView(MouseEvent event) throws IncorrectFormatException {
-        ServiceBean service = new ServiceBean();
-
-        service.setNameInfo(serviceNameLabel.getText());
-        service.setPriceInfo(servicePriceLabel.getText());
-        serviceListSelected.add(service);
-
-
-
-
+      serviceBeans.add(serviceListView.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -98,7 +92,7 @@ public class ScheduleBookingGraphicController{
         BorderPane borderPane = (BorderPane) myScene.getRoot();
         borderPane.setCenter(newCenterNode);
         BookedGraphicController bookedGraphicController = fxmlLoaderNode.getController();
-        bookedGraphicController.injectServicesList(serviceListView.getSelectionModel().getSelectedItems());
+        bookedGraphicController.injectServicesList(serviceBeans);
 
         BookingController bookingController = new BookingController();
 
