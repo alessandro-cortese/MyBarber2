@@ -5,6 +5,9 @@ import engineering.bean.SaloonBean;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+/*@author Testing:  Roberto Fardella
+                        Matricola 0266759
+    */
 
 public class TestBookingControllerSearchSaloon {
     @Test

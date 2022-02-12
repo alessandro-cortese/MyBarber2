@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+/*@author Testing:  Roberto Fardella
+                        Matricola 0266759
+    */
 public class TestBookingControllerDateAppointment {
     @Test
     public void checkDate() throws SaloonNotFoundException {
