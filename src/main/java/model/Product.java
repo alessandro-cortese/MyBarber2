@@ -77,4 +77,9 @@ public class Product implements Serializable {
         else result = false ;
         return result ;
     }
+
+    @Override
+    public int hashCode(){
+        return super.hashCode();
+    }
 }
